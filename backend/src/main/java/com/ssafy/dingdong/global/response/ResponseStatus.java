@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ResponseStatus {
     /* 공통 */
-    RESPONSE_SUCCESS("200", "요청에 성공했습니다.");
+    RESPONSE_SUCCESS(ResponseStatusCode.SUCCESS, "요청에 성공했습니다.");
 
-    private final String code;
+    private final ResponseStatusCode code;
     private final String message;
 }
