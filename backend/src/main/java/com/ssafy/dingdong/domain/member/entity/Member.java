@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Log4j
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
