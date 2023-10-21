@@ -19,7 +19,7 @@ public class LetterServiceImpl implements LetterService {
 
     @Override
     public List<LetterResponseDto> getLetterList(String memberId) {
-        List<LetterResponseDto> result = letterRepository.findAllByMemberId(memberId)
+        List<LetterResponseDto> result = letterRepository.findAllByLetterTo(memberId)
                 .orElseThrow(() -> new CustomException(ExceptionStatus.LETTER_FOUND_EXCEPTION));
 
         return result;

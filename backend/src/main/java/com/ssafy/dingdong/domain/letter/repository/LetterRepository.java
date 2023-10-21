@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface LetterRepository extends JpaRepository<Letter, Long> {
-    Optional<List<LetterResponseDto>> findAllByMemberId(String memberId);
+    Optional<List<LetterResponseDto>> findAllByLetterTo(String memberId);
 }
