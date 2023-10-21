@@ -1,8 +1,15 @@
 package com.ssafy.dingdong.domain.member.repository;
 
+import java.util.Optional;
+
 import com.ssafy.dingdong.domain.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface MemberRepository extends JpaRepository<Member, Long> {
+@Repository
+public interface MemberRepository extends JpaRepository<Member, String> {
 
+	Optional<Member> findById(String memberId);
+
+	Optional<Member> findByEmail(String email);
 }

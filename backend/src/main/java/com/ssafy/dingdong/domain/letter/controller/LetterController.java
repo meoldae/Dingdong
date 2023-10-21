@@ -8,6 +8,9 @@ import com.ssafy.dingdong.global.response.ResponseService;
 import com.ssafy.dingdong.global.response.ResponseStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,11 +29,12 @@ public class LetterController implements LetterSwagger {
 
     @Override
     @GetMapping
-    public DataResponse getLetterList(Authentication authentication) {
+    public DataResponse getLetterList(Authentication authentication,
+                                      @PageableDefault(size = 20) Pageable pageable) {
 //        String memberId = authentication.getName();
         log.info("OK");
         String memberId = "eb7c4309-5724-4ef6-9be2-d59b5b5675d8";
-        List<LetterResponseDto> result = letterService.getLetterList(memberId);
+        Page<LetterResponseDto> result = letterService.getLetterList(memberId, pageable);
 
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, result);
     }

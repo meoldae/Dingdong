@@ -5,8 +5,8 @@ import java.util.UUID;
 
 public record LetterResponseDto(Integer anonymousFlag,
                                 String description,
-                                UUID letterFrom,
-                                UUID letterTo,
+                                String letterFrom,
+                                String letterTo,
                                 String stampImgUrl,
                                 String stampDescription,
                                 LocalDateTime createTime) {}

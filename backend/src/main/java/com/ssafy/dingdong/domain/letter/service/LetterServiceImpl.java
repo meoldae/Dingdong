@@ -6,8 +6,9 @@ import com.ssafy.dingdong.global.exception.CustomException;
 import com.ssafy.dingdong.global.exception.ExceptionStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Log4j2
@@ -18,9 +19,8 @@ public class LetterServiceImpl implements LetterService {
     private final LetterRepository letterRepository;
 
     @Override
-    public List<LetterResponseDto> getLetterList(String memberId) {
-        List<LetterResponseDto> result = letterRepository.findAllByLetterTo(memberId)
-                .orElseThrow(() -> new CustomException(ExceptionStatus.LETTER_FOUND_EXCEPTION));
+    public Page<LetterResponseDto> getLetterList(String memberId, Pageable pageable) {
+        Page<LetterResponseDto> result = letterRepository.findAllByLetterTo(memberId, pageable);
 
         return result;
     }

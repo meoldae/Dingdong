@@ -38,6 +38,12 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.amqp:spring-rabbit-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+	// [23.10.21] JJY Bean Validator 추가
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// [23.10.21] JJY JWT 의존성 추가
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 }
 
 tasks.named('test') {

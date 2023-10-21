@@ -14,6 +14,8 @@ public class Letter {
     private Long id;
 
     private Integer anonymousFlag;
+
+    private String title;
     private String description;
     private String letterFrom;
     private String letterTo;
