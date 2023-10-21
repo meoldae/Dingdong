@@ -15,14 +15,12 @@ public class Letter {
 
     private Integer anonymousFlag;
     private String description;
-    private UUID from;
-    private UUID to;
+    private UUID letterFrom;
+    private UUID letterTo;
 
     @OneToOne
     @JoinColumn(name = "stamp_id")
     private Stamp stamp;
-
-    private Integer stampId;
     private LocalDateTime createTime;
 
     @PrePersist
