@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CommonResponse {
 
-	private ResponseStatusCode code;
+	private String code;
 	private String message;
 
 }

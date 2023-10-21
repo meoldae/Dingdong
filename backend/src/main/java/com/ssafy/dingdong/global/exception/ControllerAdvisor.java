@@ -14,7 +14,7 @@ public class ControllerAdvisor {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public CommonResponse customExceptionHandler(CustomException e){
 		CommonResponse response = new CommonResponse();
-		response.setCode(e.getExceptionStatus().getCode());
+		response.setCode(e.getExceptionStatus().getCode().getCode());
 		response.setMessage(e.getExceptionStatus().getMessage());
 		return response;
 	}
@@ -23,7 +23,7 @@ public class ControllerAdvisor {
 	@ExceptionHandler(Exception.class)
 	public CommonResponse exceptionHandler(Exception e) {
 		CommonResponse response = new CommonResponse();
-		response.setCode(ExceptionStatus.EXCEPTION.getCode());
+		response.setCode(ExceptionStatus.EXCEPTION.getCode().getCode());
 		response.setMessage(ExceptionStatus.EXCEPTION.getMessage());
 		return response;
 	}
