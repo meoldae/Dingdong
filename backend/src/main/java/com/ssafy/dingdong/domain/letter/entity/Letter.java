@@ -15,8 +15,8 @@ public class Letter {
 
     private Integer anonymousFlag;
     private String description;
-    private UUID letterFrom;
-    private UUID letterTo;
+    private String letterFrom;
+    private String letterTo;
 
     @OneToOne
     @JoinColumn(name = "stamp_id")
