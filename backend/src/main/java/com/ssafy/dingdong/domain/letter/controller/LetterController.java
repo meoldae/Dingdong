@@ -1,9 +1,11 @@
 package com.ssafy.dingdong.domain.letter.controller;
 
+import com.ssafy.dingdong.domain.letter.dto.request.LetterRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterListResponseDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterResponseDto;
 import com.ssafy.dingdong.domain.letter.entity.Letter;
 import com.ssafy.dingdong.domain.letter.service.LetterService;
+import com.ssafy.dingdong.global.response.CommonResponse;
 import com.ssafy.dingdong.global.response.DataResponse;
 import com.ssafy.dingdong.global.response.ResponseService;
 import com.ssafy.dingdong.global.response.ResponseStatus;
@@ -13,10 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -50,6 +49,12 @@ public class LetterController implements LetterSwagger {
 
         LetterResponseDto result = letterService.getLetterDetail(memberId, letterId);
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, result);
+    }
+
+    @Override
+    @PostMapping
+    public CommonResponse sendLetter(@RequestBody LetterRequestDto requestDto) {
+        return null;
     }
 
 
