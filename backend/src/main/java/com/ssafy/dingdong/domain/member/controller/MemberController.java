@@ -28,8 +28,8 @@ public class MemberController implements MemberSwaggerController {
 	private final MemberService memberService;
 
 	@Override
-	public DataResponse createMember(@Validated @RequestBody MemberSignUpDto memberLoginDto, HttpServletRequest response) {
-		MemberMainDto member = memberService.createMember(memberLoginDto);
+	public DataResponse createMember(@Validated @RequestBody MemberSignUpDto memberSignUpDto, HttpServletRequest response) {
+		MemberMainDto member = memberService.createMember(memberSignUpDto);
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
 	}
 
@@ -40,7 +40,7 @@ public class MemberController implements MemberSwaggerController {
 	}
 
 	@Override
-	public DataResponse getMember(@Validated @PathVariable String memberId) {
+	public DataResponse getMember(@PathVariable String memberId) {
 		MemberMainDto member = memberService.getMemberById(memberId);
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
 	}
