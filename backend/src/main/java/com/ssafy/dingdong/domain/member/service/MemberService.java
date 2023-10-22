@@ -8,4 +8,8 @@ public interface MemberService {
 	MemberMainDto createMember(MemberSignUpDto memberLoginDto);
 
 	MemberMainDto getMemberById(String memberId);
+
+	void createSession(String memberId);
+
+	void deleteSession(String memberId);
 }

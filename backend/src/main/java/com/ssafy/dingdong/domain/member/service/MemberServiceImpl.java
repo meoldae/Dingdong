@@ -36,4 +36,18 @@ public class MemberServiceImpl implements MemberService {
 		);
 		return MemberMainDto.of(findMember);
 	}
+
+	@Override
+	public void createSession(String memberId) {
+		/**
+		 * Todo : Redis 활성화 세션 관리 로직
+		 */
+	}
+
+	@Override
+	public void deleteSession(String memberId) {
+		/**
+		 * Todo : Redis 세션 비활성화 로직
+		 */
+	}
 }
