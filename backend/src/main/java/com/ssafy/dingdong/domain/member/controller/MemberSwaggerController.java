@@ -25,6 +25,9 @@ public interface MemberSwaggerController {
 	@PostMapping("/signup")
 	DataResponse<MemberMainDto> createMember(@Validated @RequestBody MemberSignUpDto memberLoginDto, HttpServletRequest response);
 
+	@DeleteMapping("/logout")
+	CommonResponse logout(Authentication authentication);
+
 	@GetMapping
 	DataResponse<MemberMainDto> getMember(@Validated @PathVariable String memberId);
 

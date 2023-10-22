@@ -34,6 +34,12 @@ public class MemberController implements MemberSwaggerController {
 	}
 
 	@Override
+	public CommonResponse logout(Authentication authentication) {
+		memberService.logout(authentication.getName());
+		return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
+	}
+
+	@Override
 	public DataResponse getMember(@Validated @PathVariable String memberId) {
 		MemberMainDto member = memberService.getMemberById(memberId);
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);

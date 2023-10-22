@@ -12,4 +12,6 @@ public interface MemberService {
 	void createSession(String memberId);
 
 	void deleteSession(String memberId);
+
+	void logout(String memberId);
 }

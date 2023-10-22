@@ -50,4 +50,15 @@ public class MemberServiceImpl implements MemberService {
 		 * Todo : Redis 세션 비활성화 로직
 		 */
 	}
+
+	@Override
+	public void logout(String memberId) {
+		// 세션 비활성화
+		deleteSession(memberId);
+
+		/**
+		 * Todo : Redis 중복 로그인 처리를 위한 토큰 제거
+		 */
+
+	}
 }
