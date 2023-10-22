@@ -1,5 +1,6 @@
 package com.ssafy.dingdong.domain.letter.service;
 
+import com.ssafy.dingdong.domain.letter.dto.response.LetterListResponseDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterResponseDto;
 import com.ssafy.dingdong.domain.letter.repository.LetterRepository;
 import com.ssafy.dingdong.global.exception.CustomException;
@@ -19,8 +20,16 @@ public class LetterServiceImpl implements LetterService {
     private final LetterRepository letterRepository;
 
     @Override
-    public Page<LetterResponseDto> getLetterList(String memberId, Pageable pageable) {
-        Page<LetterResponseDto> result = letterRepository.findAllByLetterTo(memberId, pageable);
+    public Page<LetterListResponseDto> getLetterList(String memberId, Pageable pageable) {
+        Page<LetterListResponseDto> result = letterRepository.findAllByLetterTo(memberId, pageable);
+
+        return result;
+    }
+
+    @Override
+    public LetterResponseDto getLetterDetail(String memberId, Long letterId) {
+        LetterResponseDto result = letterRepository.findByLetterId(memberId, letterId)
+                .orElseThrow(() -> new CustomException(ExceptionStatus.LETTER_NOT_FOUND));
 
         return result;
     }

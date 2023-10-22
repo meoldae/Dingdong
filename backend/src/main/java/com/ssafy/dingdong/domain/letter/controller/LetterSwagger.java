@@ -8,4 +8,6 @@ import org.springframework.security.core.Authentication;
 public interface LetterSwagger {
 
     DataResponse getLetterList(Authentication authentication, Pageable pageable);
+
+    DataResponse getLetterDetail(Authentication authentication, Long letterId);
 }

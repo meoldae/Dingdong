@@ -1,5 +1,6 @@
 package com.ssafy.dingdong.domain.letter.controller;
 
+import com.ssafy.dingdong.domain.letter.dto.response.LetterListResponseDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterResponseDto;
 import com.ssafy.dingdong.domain.letter.entity.Letter;
 import com.ssafy.dingdong.domain.letter.service.LetterService;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,11 +34,24 @@ public class LetterController implements LetterSwagger {
     public DataResponse getLetterList(Authentication authentication,
                                       @PageableDefault(size = 20) Pageable pageable) {
 //        String memberId = authentication.getName();
-        log.info("OK");
         String memberId = "eb7c4309-5724-4ef6-9be2-d59b5b5675d8";
-        Page<LetterResponseDto> result = letterService.getLetterList(memberId, pageable);
+        Page<LetterListResponseDto> result = letterService.getLetterList(memberId, pageable);
 
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, result);
     }
+
+    @Override
+    @GetMapping("/{letterId}")
+    public DataResponse getLetterDetail(Authentication authentication,
+                                        @PathVariable Long letterId) {
+
+//        String memberId = authentication.getName();
+        String memberId = "eb7c4309-5724-4ef6-9be2-d59b5b5675d8";
+
+        LetterResponseDto result = letterService.getLetterDetail(memberId, letterId);
+        return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, result);
+    }
+
+
 }
 
