@@ -24,7 +24,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 		ObjectMapper objectMapper = new ObjectMapper();
 
 		CommonResponse commonResponse = new CommonResponse();
-		commonResponse.setCode(ExceptionStatus.TOKEN_EXPIRED.getCode());
+		commonResponse.setCode(ExceptionStatus.TOKEN_EXPIRED.getCode().getCode());
 		commonResponse.setMessage(ExceptionStatus.TOKEN_EXPIRED.getMessage());
 		objectMapper.writeValue(response.getWriter(), commonResponse);
 	}
