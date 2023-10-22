@@ -28,4 +28,12 @@ public class MemberServiceImpl implements MemberService {
 		findMember.signUp(memberLoginDto.nickname(), memberLoginDto.characterId());
 		return MemberMainDto.of(findMember);
 	}
+
+	@Override
+	public MemberMainDto getMemberById(String memberId) {
+		Member findMember = memberRepository.findById(memberId).orElseThrow(
+			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
+		);
+		return MemberMainDto.of(findMember);
+	}
 }

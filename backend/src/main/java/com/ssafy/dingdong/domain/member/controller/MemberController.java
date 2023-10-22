@@ -3,6 +3,7 @@ package com.ssafy.dingdong.domain.member.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,6 +28,12 @@ public class MemberController implements MemberSwaggerController {
 	@Override
 	public DataResponse createMember(@Validated @RequestBody MemberSignUpDto memberLoginDto, HttpServletRequest response) {
 		MemberMainDto member = memberService.createMember(memberLoginDto);
+		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
+	}
+
+	@Override
+	public DataResponse getMember(@Validated @PathVariable String memberId) {
+		MemberMainDto member = memberService.getMemberById(memberId);
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
 	}
 }
