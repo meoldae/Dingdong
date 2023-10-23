@@ -1,7 +1,7 @@
 import style from "./LoginPage.css"
 
 const LoginPage = () => {
-  return <>방 페이지</>
+  return <>로그인 페이지</>
 }
 
 export default LoginPage
