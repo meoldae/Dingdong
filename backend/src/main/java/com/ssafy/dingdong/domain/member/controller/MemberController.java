@@ -27,7 +27,7 @@ import lombok.extern.log4j.Log4j2;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/member")
-public class MemberController implements MemberSwaggerController {
+public class MemberController implements MemberSwagger {
 
 	private final ResponseService responseService;
 	private final MemberService memberService;

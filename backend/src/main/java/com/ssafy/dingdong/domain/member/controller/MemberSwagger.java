@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-public interface MemberSwaggerController {
+public interface MemberSwagger {
 
 	DataResponse<MemberMainDto> createMember(@Validated @RequestBody MemberSignUpDto memberSignUpDto, HttpServletRequest response);
 
