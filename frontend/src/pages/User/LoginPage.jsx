@@ -4,7 +4,6 @@ import style from "./LoginPage.css"
 // 통신
 import axios from "axios"
 import DefaultBtn from "../../components/Button/Default/DefaultBtn"
-import RoomBtn from "../../components/Button/Room/RoomBtn"
 
 const LoginPage = () => {
   const loginHandler = () => {
@@ -17,7 +16,6 @@ const LoginPage = () => {
     <div>
       <button onClick={loginHandler}>로그인</button>
       <DefaultBtn btnName="확인" />
-      <RoomBtn img="share" />
     </div>
   )
 }
