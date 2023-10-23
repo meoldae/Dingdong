@@ -1,7 +1,11 @@
-import style from "./DefaultBtn.css"
+import styles from "./DefaultBtn.module.css"
 
-const DefaultBtn = () => {
-  return <div>기본 버튼</div>
+const DefaultBtn = ({ btnName, onClick }) => {
+  return (
+    <div className={styles.ButtonContainer} onClick={onClick}>
+      <p>{btnName}</p>
+    </div>
+  )
 }
 
 export default DefaultBtn
