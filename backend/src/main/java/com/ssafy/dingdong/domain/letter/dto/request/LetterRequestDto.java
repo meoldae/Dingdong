@@ -1,6 +1,12 @@
 package com.ssafy.dingdong.domain.letter.dto.request;
 
-public record LetterRequestDto (String title,
-                                String description,
-                                Long stampId,
-                                String letterTo) {}
+import lombok.AllArgsConstructor;
+import lombok.Data;
+@Data
+@AllArgsConstructor
+public class LetterRequestDto {
+    private String title;
+    private String description;
+    private Long stampId;
+    private String letterTo;
+}

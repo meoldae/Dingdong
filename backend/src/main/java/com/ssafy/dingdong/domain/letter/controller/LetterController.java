@@ -18,7 +18,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Log4j2
 @RestController
@@ -44,8 +43,8 @@ public class LetterController implements LetterSwagger {
     @GetMapping("/{letterId}")
     public DataResponse getLetterDetail(Authentication authentication,
                                         @PathVariable Long letterId) {
-        String memberId = authentication.getName();
-
+//        String memberId = authentication.getName();
+        String memberId = "eb7c4309-5724-4ef6-9be2-d59b5b5675d8";
         LetterResponseDto result = letterService.getLetterDetail(memberId, letterId);
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, result);
     }

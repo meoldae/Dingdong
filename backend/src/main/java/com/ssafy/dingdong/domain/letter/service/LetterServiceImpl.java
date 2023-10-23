@@ -9,12 +9,12 @@ import com.ssafy.dingdong.domain.letter.repository.LetterRepository;
 import com.ssafy.dingdong.domain.letter.repository.StampRepository;
 import com.ssafy.dingdong.global.exception.CustomException;
 import com.ssafy.dingdong.global.exception.ExceptionStatus;
+import com.ssafy.dingdong.global.util.EncryptUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Log4j2
 @Service
@@ -23,6 +23,7 @@ public class LetterServiceImpl implements LetterService {
 
     private final LetterRepository letterRepository;
     private final StampRepository stampRepository;
+    private final EncryptUtils encryptUtils;
 
     @Override
     public Page<LetterListResponseDto> getLetterList(String memberId, Pageable pageable) {
@@ -36,6 +37,7 @@ public class LetterServiceImpl implements LetterService {
         LetterResponseDto result = letterRepository.findByLetterId(memberId, letterId)
                 .orElseThrow(() -> new CustomException(ExceptionStatus.LETTER_NOT_FOUND));
 
+        result.setDescription(encryptUtils.decrypt(result.getDescription()));
         updateReadLetter(letterId);
 
         return result;
@@ -43,18 +45,20 @@ public class LetterServiceImpl implements LetterService {
 
     @Override
     public void sendLetter(String memberId, LetterRequestDto requestDto) {
-        Stamp stamp = stampRepository.findById(requestDto.stampId())
+        Stamp stamp = stampRepository.findById(requestDto.getStampId())
                 .orElseThrow(() -> new CustomException(ExceptionStatus.NOT_FOUND_STAMP));
 
+        requestDto.setDescription(encryptUtils.encrypt(requestDto.getDescription()));
         Letter letter = Letter.build(requestDto, memberId,false, stamp, "");
         letterRepository.save(letter);
     }
 
     @Override
     public void sendGuestLetter(LetterRequestDto requestDto, String ipAddress, String memberId) {
-        Stamp stamp = stampRepository.findById(requestDto.stampId())
+        Stamp stamp = stampRepository.findById(requestDto.getStampId())
                 .orElseThrow(() -> new CustomException(ExceptionStatus.NOT_FOUND_STAMP));
 
+        requestDto.setDescription(encryptUtils.encrypt(requestDto.getDescription()));
         Letter letter = Letter.build(requestDto, memberId, true, stamp, ipAddress);
         letterRepository.save(letter);
     }
