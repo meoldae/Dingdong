@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script {
                     IMAGE_NAME_BE = "dingdong-springboot"
-                    APPLICATION_YML_PATH = "/usr/spring/resources/dev"
+                    APPLICATION_YML_PATH = "/usr/spring/resources"
                     CONTAINER_NAME_BE = "dingdong_be"
                     PROJECT_DIR_BE = "backend"
                 }
