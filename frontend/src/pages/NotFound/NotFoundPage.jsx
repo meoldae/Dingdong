@@ -1,4 +1,4 @@
-import style from "./NotFoundPage.css"
+// import style from "./NotFoundPage.css"
 
 const NotFoundPage = () => {
   return <>방 페이지</>
