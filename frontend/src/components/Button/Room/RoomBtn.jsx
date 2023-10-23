@@ -1,7 +1,11 @@
-import style from "./RoomBtn.css"
+import styles from "./RoomBtn.module.css"
 
-const RoomBtn = () => {
-  return <div>룸 버튼</div>
+const RoomBtn = ({ img, onClick }) => {
+  return (
+    <div className={styles.circle} onClick={onClick}>
+      <img src={`assets/icons/${img}.svg`} />
+    </div>
+  )
 }
 
 export default RoomBtn
