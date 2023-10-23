@@ -9,7 +9,7 @@ const LoginPage = () => {
   const loginHandler = () => {
     window.location.href = `https://${
       import.meta.env.VITE_SERVER_URL
-    }/api/oauth2/authorization/kakao`
+    }/oauth2/authorization/kakao`
   }
 
   return (
