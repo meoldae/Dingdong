@@ -6,6 +6,7 @@ import { Room } from "./Room";
 import { useGrid } from "./UseGrid";
 import { useRecoilState } from "recoil";
 import {
+  ItemRotateState,
   ItemsState,
   buildModeState,
   dragPositionState,
@@ -69,6 +70,7 @@ const Experience = () => {
   };
 
   const [items, setItems] = useRecoilState(ItemsState);
+  const [draggedItemRotation, setDraggedItemRotation] = useRecoilState( ItemRotateState);
 
   const onPlaneClicked = (e) => {
     if (!buildMode) {
@@ -84,6 +86,7 @@ const Experience = () => {
               return {
                 ...item,
                 gridPosition: vector3ToGrid(e.point),
+                rotation: draggedItemRotation,
               };
             }
             // 다른 항목은 그대로 반환
@@ -212,12 +215,12 @@ const Experience = () => {
               key={`${item.name}-${idx}`}
               item={item}
               onClick={() => {
-                setDraggedItem((prev) => {
-                  return prev === null ? idx : prev; // 조건에 따라 적절한 값을 반환
-                });
+                setDraggedItem((prev) => (prev === null ? idx : prev));
+                setDraggedItemRotation(item.rotation || 0);
               }}
               isDragging={draggedItem === idx}
               dragPosition={dragPosition}
+              dragRotation={draggedItemRotation}
               canDrop={canDrop}
             />
           ))
@@ -227,6 +230,7 @@ const Experience = () => {
       {/* <Room name={"room"}/> */}
       <mesh
         rotation-x={-Math.PI / 2}
+        // visible={false}
         position-y={-0.001}
         onClick={onPlaneClicked}
         onPointerMove={(e) => {

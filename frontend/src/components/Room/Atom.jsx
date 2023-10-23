@@ -67,3 +67,13 @@ export const ItemsState = atom({
   key:"ItemsState",
   default : map.item,
 })
+
+export const ItemRotateState = atom({
+  key: "ItemRotateState",
+  default : 0,
+})
+
+export const draggedItemRotationState = atom({
+  key:"draggedItemRotationState",
+  default: 0,
+})
