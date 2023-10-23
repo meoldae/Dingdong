@@ -5,7 +5,14 @@ import { useGrid } from "./UseGrid";
 import { useRecoilValue } from "recoil";
 import { buildModeState } from "./Atom";
 
-export const Item = ({ item, onClick, isDragging, dragPosition, canDrop,dragRotation }) => {
+export const Item = ({
+  item,
+  onClick,
+  isDragging,
+  dragPosition,
+  canDrop,
+  dragRotation,
+}) => {
   const { name, gridPosition, size, rotation: itemRotation } = item;
   const rotation = isDragging ? dragRotation : itemRotation;
 
@@ -29,9 +36,9 @@ export const Item = ({ item, onClick, isDragging, dragPosition, canDrop,dragRota
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}
     >
-      <primitive object={clone} rotation-y={((rotation || 0) * Math.PI) / 2} />
+      <primitive object={clone} rotation-y={((rotation) * Math.PI) / 2} />
       {isDragging && (
-        <mesh position-y={0.02}>
+        <mesh position-y={0.02} >
           <boxGeometry args={[width, 0, height]} />
           <meshBasicMaterial
             color={canDrop ? "green" : "red"}

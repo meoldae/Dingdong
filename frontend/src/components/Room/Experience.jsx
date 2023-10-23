@@ -13,6 +13,7 @@ import {
   draggedItemState,
 } from "./Atom";
 import { gsap } from "gsap";
+
 const Experience = () => {
   const [onFloor, setOnFloor] = useState(false);
   const [buildMode, setBuildMode] = useRecoilState(buildModeState);
@@ -21,56 +22,11 @@ const Experience = () => {
   const { vector3ToGrid, gridToVector3 } = useGrid();
   const [canDrop, setCanDrop] = useState(false);
 
-  const item = {
-    sofa: {
-      name: "sofa",
-      size: [1.44, 1.44],
-    },
-    carpet: {
-      name: "carpet",
-      size: [2.4, 2.4],
-    },
-    vase: {
-      name: "vase",
-      size: [0.48, 0.48],
-    },
-    bed: {
-      name: "bed",
-      size: [1.92, 2.4],
-    },
-  };
 
-  const map = {
-    size: [4.8, 4.8],
-    // gridDivision:2,
-    item: [
-      {
-        ...item.sofa,
-        gridPosition: [item.sofa.size[0], item.sofa.size[1]],
-        rotation: 1,
-      },
-      {
-        ...item.bed,
-        gridPosition: [item.bed.size[0], item.bed.size[1]],
-        rotation: 2,
-      },
-      {
-        ...item.vase,
-        gridPosition: [item.vase.size[0], item.vase.size[1]],
-        rotation: 1,
-      },
-      {
-        ...item.carpet,
-        gridPosition: [item.carpet.size[0], item.carpet.size[1]],
-        rotation: 1,
-        walkable: true,
-        wall: true,
-      },
-    ],
-  };
 
   const [items, setItems] = useRecoilState(ItemsState);
-  const [draggedItemRotation, setDraggedItemRotation] = useRecoilState( ItemRotateState);
+  const [draggedItemRotation, setDraggedItemRotation] =
+    useRecoilState(ItemRotateState);
 
   const onPlaneClicked = (e) => {
     if (!buildMode) {
@@ -105,19 +61,21 @@ const Experience = () => {
     const height =
       item.rotation === 1 || item.rotation === 3 ? item.size[0] : item.size[1];
     let droppable = true;
-
+    console.log(dragPosition[0],dragPosition[1])
     if (
       dragPosition[0] - width / 0.24 / 2 < 0 ||
-      dragPosition[0] + width / 0.24 / 2 > map.size[0] / 0.24
+      dragPosition[0] + width / 0.24 / 2 > 4.8 / 0.24
     ) {
       droppable = false;
+      console.log("1")
     }
 
     if (
       dragPosition[1] - height / 0.24 / 2 < 0 ||
-      dragPosition[1] + height / 0.24 / 2 > map.size[1] / 0.24
+      dragPosition[1] + height / 0.24 / 2 > 4.8 / 0.24
     ) {
       droppable = false;
+      console.log("2");
     }
     if (!item.walkable && !item.wall) {
       items.forEach((otherItem, idx) => {
@@ -151,6 +109,7 @@ const Experience = () => {
             otherItem.gridPosition[1] - otherWidth / 2
         ) {
           droppable = false;
+          console.log(3);
         }
       });
     }
@@ -177,7 +136,7 @@ const Experience = () => {
     if (buildMode) return;
 
     gsap.to(state.camera.position, {
-      duration: 0.5, 
+      duration: 0.5,
       x: 8,
       y: 8,
       z: 8,
@@ -220,7 +179,7 @@ const Experience = () => {
         : items.map((item, idx) => (
             <Item key={`${item.name}-${idx}`} item={item} />
           ))}
-      {/* <Room name={"room"}/> */}
+
 
       {/* 바닥 평면 */}
       <mesh
@@ -249,32 +208,51 @@ const Experience = () => {
       </mesh>
 
       {/* 왼쪽 평면 */}
-      <mesh
-      rotation-y={Math.PI/2}
-      position-x={-2.394}
+      <mesh 
+      rotation-y={Math.PI / 2} 
+      position-x={-2.394} 
       position-y={1.92}
-      >
-        <planeGeometry args={[4.8,3.84]}/>
-        <meshStandardMaterial color="#f0f0f0"/>
+      onPointerMove={(e)=>{
+      }}>
+        <planeGeometry args={[4.8, 3.84]} />
+        <meshStandardMaterial color="#f0f0f0" />
       </mesh>
 
       {/* 오른쪽 평면 */}
-      <mesh
-      position-z={-2.394}
+      <mesh 
+      position-z={-2.394} 
       position-y={1.92}
       >
-        <planeGeometry args={[4.8,3.84]}/>
-        <meshStandardMaterial color="#f0f0f0"/>
+        <planeGeometry args={[4.8, 3.84]} />
+        <meshStandardMaterial color="#f0f0f0" />
       </mesh>
       {buildMode && (
-        <Grid
-          infiniteGrid
-          fadeStrength={6}
-          sectionSize={2.4}
-          cellSize={0.24}
-          // rotation-y={Math.PI / 4}
-          // position-z={Math.sqrt(2) / 10}
-        />
+        <>
+          <Grid
+            infiniteGrid
+            fadeStrength={6}
+            sectionSize={2.4}
+            cellSize={0.24}
+            // rotation-y={Math.PI / 4}
+            // position-z={Math.sqrt(2) / 10}
+          />
+          <Grid
+            infiniteGrid
+            fadeStrength={6}
+            sectionSize={2.4}
+            cellSize={0.24}
+            position-z={-2.393}
+            rotation-x={Math.PI / 2}
+          />
+          <Grid
+            infiniteGrid
+            fadeStrength={6}
+            sectionSize={2.4}
+            cellSize={0.24}
+            position-x={-2.393}
+            rotation-z={-Math.PI / 2}
+          />
+        </>
       )}
     </>
   );

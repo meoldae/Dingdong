@@ -32,6 +32,7 @@ const item = {
     name: "bed",
     size: [1.92, 2.4],
   },
+  
 };
 
 const map = {
@@ -40,22 +41,22 @@ const map = {
   item: [
     {
       ...item.sofa,
-      gridPosition: [item.sofa.size[0], item.sofa.size[1]],
+      gridPosition: [3, 16],
       rotation: 1,
     },
     {
       ...item.bed,
-      gridPosition: [item.bed.size[0], item.bed.size[1]],
+      gridPosition: [4, 6],
       rotation: 2,
     },
     {
       ...item.vase,
-      gridPosition: [item.vase.size[0], item.vase.size[1]],
+      gridPosition: [19,19],
       rotation: 1,
     },
     {
       ...item.carpet,
-      gridPosition: [item.carpet.size[0], item.carpet.size[1]],
+      gridPosition: [10, 10],
       rotation: 1,
       walkable: true,
       wall: true,
@@ -71,9 +72,4 @@ export const ItemsState = atom({
 export const ItemRotateState = atom({
   key: "ItemRotateState",
   default : 0,
-})
-
-export const draggedItemRotationState = atom({
-  key:"draggedItemRotationState",
-  default: 0,
 })
