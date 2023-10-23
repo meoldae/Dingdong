@@ -1,6 +1,6 @@
-import styles from "./NeighborModal.module.css"
+import styles from "./NeighborAcceptModal.module.css"
 
-const NeighborModal = ({ content, okClick, cancelClick }) => {
+const NeighborAcceptModal = ({ content, okClick, cancelClick }) => {
   return (
     <div className={styles.Container}>
       <div className={styles.ContentContainer}>
@@ -28,4 +28,4 @@ const NeighborModal = ({ content, okClick, cancelClick }) => {
   )
 }
 
-export default NeighborModal
+export default NeighborAcceptModal
