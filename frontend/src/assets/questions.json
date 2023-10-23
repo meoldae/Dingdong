@@ -1,0 +1,155 @@
+[
+	{
+		"id": 1,
+		"option": "TF",
+		"question": "편지를 쓰려고 하는데 어떤 편지지를 살까?",
+		"answers": [
+			{
+				"id": 1,
+				"type": "T",
+				"content": "인기가 많은 편지지"
+			},
+			{
+				"id": 2,
+				"type": "F",
+				"content": "내 눈에 가장 예쁜 편지지"
+			}
+		]
+	},
+	{
+		"id": 2,
+		"option": "EI",
+		"question": "사고 싶은 편지지가 높은 곳에 있다면?",
+		"answers": [
+			{
+				"id": 1,
+				"type": "E",
+				"content": "직원에게 꺼내달라고 한다."
+			},
+			{
+				"id": 2,
+				"type": "I",
+				"content": "가까운 곳에 있는 다른 편지지를 산다."
+			}
+		]
+	},
+	{
+		"id": 3,
+		"option": "EI",
+		"question": "편지지에 어떤 그림이 있는 우표를 붙일까?",
+		"answers": [
+			{
+				"id": 1,
+				"type": "E",
+				"content": "밝은 햇살 아래에서 사람들과 함께하는 피크닉 장면"
+			},
+			{
+				"id": 2,
+				"type": "I",
+				"content": "조용한 창가에 놓인 커피와 책"
+			}
+		]
+	},
+	{
+		"id": 4,
+		"option": "NS",
+		"question": "편지에 어떤 내용을 적을까?",
+		"answers": [
+			{
+				"id": 1,
+				"type": "S",
+				"content": "최근 일상에 대한 이야기를 적는다."
+			},
+			{
+				"id": 2,
+				"type": "N",
+				"content": "미래에 대해 적는다."
+			}
+		]
+	},
+	{
+		"id": 5,
+		"option": "TF",
+		"question": "편지를 보내려고 할 때 당신은",
+		"answers": [
+			{
+				"id": 1,
+				"type": "T",
+				"content": "어떻게 편지가 잘 도착할 수 있을지 계획하고 조사한다."
+			},
+			{
+				"id": 2,
+				"type": "F",
+				"content": "받는 사람의 반응이나 감정을 상상하며 편지를 준비한다."
+			}
+		]
+	},
+	{
+		"id": 6,
+		"option": "TF",
+		"question": "힘들어하는 친구에게 편지를 쓰려고 한다.",
+		"answers": [
+			{
+				"id": 1,
+				"type": "T",
+				"content": "해결 방법과 조언을 적는다."
+			},
+			{
+				"id": 2,
+				"type": "F",
+				"content": "이해하고 위로하는 말을 쓴다."
+			}
+		]
+	},
+	{
+		"id": 7,
+		"option": "EI",
+		"question": "기다리던 편지를 받았다!",
+		"answers": [
+			{
+				"id": 1,
+				"type": "E",
+				"content": "주변 사람들과 함께 본다."
+			},
+			{
+				"id": 2,
+				"type": "I",
+				"content": "혼자 조용히 읽는다."
+			}
+		]
+	},
+	{
+		"id": 8,
+		"option": "NS",
+		"question": "생일 축하 편지지에 받은 우표가 맘에 든다!",
+		"answers": [
+			{
+				"id": 1,
+				"type": "S",
+				"content": "생일 파티하는 그림이 그려진 우표"
+			},
+			{
+				"id": 2,
+				"type": "F",
+				"content": "생일 케이크가 그려진 우표"
+			}
+		]
+	},
+	{
+		"id": 9,
+		"option": "NS",
+		"question": "편지를 받았을 때 가장 기억에 남는 것은?",
+		"answers": [
+			{
+				"id": 1,
+				"type": "S",
+				"content": "사진이나 구체적인 내용"
+			},
+			{
+				"id": 2,
+				"type": "P",
+				"content": "편지 속 감정이나 표현"
+			}
+		]
+	}
+]
