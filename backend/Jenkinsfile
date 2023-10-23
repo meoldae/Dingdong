@@ -15,10 +15,22 @@ pipeline {
         // 설정파일 참조
         stage("COPY Resources") {
             steps {
-                sh "cp -r ${APPLICATION_YML_PATH} ${PROJECT_DIR_BE}/src/main/resources"
+                sh "cp -r ${APPLICATION_YML_PATH} ${PROJECT_DIR_BE}/src/main"
             }
         }
 
+        stage("SonaQube Analyze") {
+            steps {
+                withSonarQubeEnv('SonarQube_Server') {
+                    sh """
+                    cd ${PROJECT_DIR_BE}
+                    chmod 777 ./gradlew
+                    ./gradlew sonarqube
+                    """
+                }
+            }
+        }
+        
         // 백엔드 프로젝트 빌드
         stage("BE Build") {
             // build
