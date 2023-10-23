@@ -1,12 +1,12 @@
 import { Environment, Grid, OrbitControls, useCursor } from "@react-three/drei";
 import { useEffect, useState, useRef } from "react";
-import { useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Item } from "./Item";
 import { Room } from "./Room";
 import { useGrid } from "./UseGrid";
 import { useRecoilState } from "recoil";
 import { buildModeState } from "./Atom";
-
+import { gsap } from "gsap";
 const Experience = () => {
   const [onFloor, setOnFloor] = useState(false);
   const [buildMode, setBuildMode] = useRecoilState(buildModeState);
@@ -158,6 +158,24 @@ const Experience = () => {
       }
     }
   }, [buildMode]);
+
+  const animateCameraPosition = () => {
+    // Ensure we don't animate if we're in build mode.
+    if (buildMode) return;
+
+    // Animate camera position to [8, 8, 8] using gsap.to method
+    gsap.to(state.camera.position, {
+      duration: 0.5, // Duration in seconds
+      x: 8,
+      y: 8,
+      z: 8,
+      // Ensures Three.js scene updates with camera movement
+      onUpdate: () => state.camera.updateProjectionMatrix(),
+    });
+    setTimeout(() => {
+      state.camera.position.set(8,8,8)
+    }, 50);
+  };
   return (
     <>
       <Environment preset="sunset" />
@@ -170,6 +188,7 @@ const Experience = () => {
         maxPolarAngle={Math.PI / 2}
         screenSpacePanning={false}
         enabled={!buildMode}
+        onEnd={animateCameraPosition}
       />
 
       {buildMode
