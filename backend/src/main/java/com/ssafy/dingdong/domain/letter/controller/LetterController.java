@@ -56,26 +56,21 @@ public class LetterController implements LetterSwagger {
     @PostMapping
     public CommonResponse sendAuthLetter(Authentication authentication,
                                      @RequestBody LetterRequestDto requestDto) {
-//        String memberId = authentication.getName();
-//        String ipAddress = "";
-          String memberId = "6b027c6e-0219-4f94-84a9-1a4bc0d23ef4";
-//        if (request != null) {
-//            ipAddress = request.getHeader("X-FORWARDED-FOR");
-//            if (ipAddress == null || "".equals(ipAddress)) {
-//                ipAddress = request.getRemoteAddr();
-//            }
-//        }
 
+        String memberId = "6b027c6e-0219-4f94-84a9-1a4bc0d23ef4";
         letterService.sendLetter(memberId, requestDto);
 
         return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
     }
 
     @Override
+    @PostMapping("/guest")
     public CommonResponse sendGuestLetter(@RequestBody LetterRequestDto requestDto,
                                           HttpServletRequest request) {
 
         String ipAddress = "";
+        String memberId = "f684f5ed-f8d0-4823-8b59-630d6a3cd5a1";
+
         if (request != null) {
             ipAddress = request.getHeader("X-FORWARDED-FOR");
             if (ipAddress == null || "".equals(ipAddress)) {
@@ -83,7 +78,8 @@ public class LetterController implements LetterSwagger {
             }
         }
 
-        return null;
+        letterService.sendGuestLetter(requestDto, ipAddress, memberId);
+        return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
     }
 
 

@@ -50,6 +50,15 @@ public class LetterServiceImpl implements LetterService {
         letterRepository.save(letter);
     }
 
+    @Override
+    public void sendGuestLetter(LetterRequestDto requestDto, String ipAddress, String memberId) {
+        Stamp stamp = stampRepository.findById(requestDto.stampId())
+                .orElseThrow(() -> new CustomException(ExceptionStatus.NOT_FOUND_STAMP));
+
+        Letter letter = Letter.build(requestDto, memberId, true, stamp, ipAddress);
+        letterRepository.save(letter);
+    }
+
     public void updateReadLetter(Long letterId) {
         letterRepository.updateIsReadById(letterId);
     }
