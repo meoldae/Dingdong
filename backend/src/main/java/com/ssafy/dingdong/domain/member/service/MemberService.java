@@ -13,5 +13,8 @@ public interface MemberService {
 
 	void deleteSession(String memberId);
 
+	void login(String memberId, String accessToken, String refreshToken);
+
 	void logout(String memberId);
+
 }

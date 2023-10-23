@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.ssafy.dingdong.domain.member.entity.Member;
 import com.ssafy.dingdong.domain.member.repository.MemberRepository;
+import com.ssafy.dingdong.domain.member.service.MemberService;
 import com.ssafy.dingdong.global.oauth.model.PrincipalUser;
 import com.ssafy.dingdong.global.oauth.model.ProviderUser;
 import com.ssafy.dingdong.global.util.CookieUtils;
@@ -27,9 +28,10 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class CustomOAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-	private static final String REDIRECT_ENDPOINT = "https://k9b203.p.ssafy.io";
+	private static final String REDIRECT_ENDPOINT = "https://ding-dong.kr";
 
 	private final MemberRepository memberRepository;
+	private final MemberService memberService;
 	private final JwtProvider jwtProvider;
 	private final CookieUtils cookieUtils;
 
@@ -54,12 +56,15 @@ public class CustomOAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSucc
 
 					Cookie cookie = cookieUtils.createCookie(refreshToken);
 					response.addCookie(cookie);
+
+					// AccessToken RefreshToken 저장
+					memberService.login(findMember.getMemberId().toString(), accessToken, refreshToken);
+
 					redirectUrl = REDIRECT_ENDPOINT + "/oauth2/redirect?token=" + accessToken;
 				}
 			},
 			// 비회원일 경우
 			() -> {
-				log.info("=== Social Login !! ===");
 				Member member = Member.builder()
 					.username(providerUser.getUsername())
 					.provider(providerUser.getProvider())
