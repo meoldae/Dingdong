@@ -15,7 +15,6 @@ const LoginPage = () => {
   return (
     <div>
       <button onClick={loginHandler}>로그인</button>
-      <DefaultBtn btnName="확인" />
     </div>
   )
 }
