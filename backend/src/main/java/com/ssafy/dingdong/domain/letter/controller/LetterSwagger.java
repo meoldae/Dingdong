@@ -6,6 +6,8 @@ import com.ssafy.dingdong.global.response.DataResponse;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 public interface LetterSwagger {
 
@@ -13,5 +15,6 @@ public interface LetterSwagger {
 
     DataResponse getLetterDetail(Authentication authentication, Long letterId);
 
-    CommonResponse sendLetter(LetterRequestDto requestDto);
+    CommonResponse sendAuthLetter(Authentication authentication, LetterRequestDto requestDto);
+    CommonResponse sendGuestLetter(LetterRequestDto requestDto, HttpServletRequest request);
 }

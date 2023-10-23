@@ -6,9 +6,11 @@ import com.ssafy.dingdong.domain.letter.entity.Letter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,4 +26,9 @@ public interface LetterRepository extends JpaRepository<Letter, Long> {
             "JOIN Stamp s ON l.stamp.id = s.id " +
             "WHERE l.letterTo = :memberId AND l.id = :letterId")
     Optional<LetterResponseDto> findByLetterId(String memberId, Long letterId);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Letter l SET l.isRead = true WHERE l.id = :letterId")
+    void updateIsReadById(Long letterId);
 }
