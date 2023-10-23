@@ -22,7 +22,7 @@ pipeline {
         // 소나큐브 빌드
          stage('SonarQube Analysis') {
             steps {                
-                dir("${PROJECT_DIR}"){
+                dir("${PROJECT_DIR_BE}"){
                     sh "chmod +x gradlew"
                     sh './gradlew sonar'
                 }
