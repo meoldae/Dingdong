@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 // 라우터
 import AppMain from "../pages/Main/MainPage"
 import AppRoom from "../pages/Room/RoomPage"
-import AppNotFound from "../pages/NotFound/NotFound"
+import AppNotFound from "../pages/NotFound/NotFoundPage"
 import AppLogin from "../pages/User/LoginPage"
 import AppSignUp from "../pages/User/SignUpPage"
 import AppUserSetting from "../pages/User/UserSettingPage"
