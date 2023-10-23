@@ -1,0 +1,39 @@
+@font-face {
+  font-family: Pretendard-Bold;
+  font-style: normal;
+  src: url("./Pretendard-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: Pretendard-SemiBold;
+  font-style: normal;
+  src: url("./Pretendard-SemiBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: Pretendard-Medium;
+  font-style: normal;
+  src: url("./Pretendard-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: Pretendard-Regular;
+  font-style: normal;
+  src: url("./Pretendard-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: HandWrite-UE;
+  font-style: normal;
+  src: url("./HandWrite-UE.ttf");
+}
+
+@font-face {
+  font-family: HandWrite-DaHaeng;
+  font-style: normal;
+  src: url("./HandWrite-DaHaeng.ttf");
+}
+
+body {
+  font-family: Pretendard-Medium;
+}
