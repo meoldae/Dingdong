@@ -54,6 +54,7 @@ public class LetterController implements LetterSwagger {
     @Override
     @PostMapping
     public CommonResponse sendLetter(@RequestBody LetterRequestDto requestDto) {
+
         return null;
     }
 

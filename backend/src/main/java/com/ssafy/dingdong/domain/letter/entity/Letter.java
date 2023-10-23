@@ -23,6 +23,9 @@ public class Letter {
     @OneToOne
     @JoinColumn(name = "stamp_id")
     private Stamp stamp;
+
+    @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
+    private Boolean isRead;
     private LocalDateTime createTime;
 
     @PrePersist

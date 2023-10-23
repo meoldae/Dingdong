@@ -31,6 +31,12 @@ public class LetterServiceImpl implements LetterService {
         LetterResponseDto result = letterRepository.findByLetterId(memberId, letterId)
                 .orElseThrow(() -> new CustomException(ExceptionStatus.LETTER_NOT_FOUND));
 
+        updateReadLetter(letterId);
+
         return result;
+    }
+
+    public void updateReadLetter(Long letterId) {
+        letterRepository.updateIsReadById(letterId);
     }
 }
