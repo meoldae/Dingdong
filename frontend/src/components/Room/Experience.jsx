@@ -5,13 +5,18 @@ import { Item } from "./Item";
 import { Room } from "./Room";
 import { useGrid } from "./UseGrid";
 import { useRecoilState } from "recoil";
-import { buildModeState } from "./Atom";
+import {
+  ItemsState,
+  buildModeState,
+  dragPositionState,
+  draggedItemState,
+} from "./Atom";
 import { gsap } from "gsap";
 const Experience = () => {
   const [onFloor, setOnFloor] = useState(false);
   const [buildMode, setBuildMode] = useRecoilState(buildModeState);
-  const [draggedItem, setDraggedItem] = useState(null);
-  const [dragPosition, setDraggPosition] = useState(null);
+  const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState);
+  const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState);
   const { vector3ToGrid, gridToVector3 } = useGrid();
   const [canDrop, setCanDrop] = useState(false);
 
@@ -63,17 +68,27 @@ const Experience = () => {
     ],
   };
 
-  const [items, setItems] = useState(map.item);
+  const [items, setItems] = useRecoilState(ItemsState);
+
   const onPlaneClicked = (e) => {
     if (!buildMode) {
       return;
     }
     if (draggedItem !== null) {
-      // console.log(e)
       if (canDrop) {
         setItems((prev) => {
-          const newItems = [...prev];
-          newItems[draggedItem].gridPosition = vector3ToGrid(e.point);
+          const newItems = prev.map((item, index) => {
+            // 드래그 중인 항목만 업데이트
+            if (index === draggedItem) {
+              // 새 오브젝트를 생성하고 gridPosition을 업데이트
+              return {
+                ...item,
+                gridPosition: vector3ToGrid(e.point),
+              };
+            }
+            // 다른 항목은 그대로 반환
+            return item;
+          });
           return newItems;
         });
       }
@@ -81,11 +96,10 @@ const Experience = () => {
     }
   };
   useEffect(() => {
-    if (!draggedItem) {
+    if (draggedItem === null) {
       return;
     }
     const item = items[draggedItem];
-    console.log(item);
     const width =
       item.rotation === 1 || item.rotation === 3 ? item.size[1] : item.size[0];
     const height =
@@ -151,6 +165,7 @@ const Experience = () => {
   useEffect(() => {
     if (buildMode) {
       state.camera.position.set(8, 8, 8);
+      state.camera.fov = 60;
       state.camera.lookAt(0, 0, 0);
       if (controls.current) {
         controls.current.target.set(0, 0, 0);
@@ -173,7 +188,7 @@ const Experience = () => {
       onUpdate: () => state.camera.updateProjectionMatrix(),
     });
     setTimeout(() => {
-      state.camera.position.set(8,8,8)
+      state.camera.position.set(8, 8, 8);
     }, 50);
   };
   return (
@@ -196,9 +211,11 @@ const Experience = () => {
             <Item
               key={`${item.name}-${idx}`}
               item={item}
-              onClick={() =>
-                setDraggedItem((prev) => (prev === null ? idx : prev))
-              }
+              onClick={() => {
+                setDraggedItem((prev) => {
+                  return prev === null ? idx : prev; // 조건에 따라 적절한 값을 반환
+                });
+              }}
               isDragging={draggedItem === idx}
               dragPosition={dragPosition}
               canDrop={canDrop}
@@ -231,14 +248,16 @@ const Experience = () => {
         <planeGeometry args={[4.8, 4.8]} />
         <meshStandardMaterial color="#f0f0f0" />
       </mesh>
-      <Grid
-        infiniteGrid
-        fadeStrength={6}
-        sectionSize={2.4}
-        cellSize={0.24}
-        // rotation-y={Math.PI / 4}
-        // position-z={Math.sqrt(2) / 10}
-      />
+      {buildMode && (
+        <Grid
+          infiniteGrid
+          fadeStrength={6}
+          sectionSize={2.4}
+          cellSize={0.24}
+          // rotation-y={Math.PI / 4}
+          // position-z={Math.sqrt(2) / 10}
+        />
+      )}
     </>
   );
 };

@@ -4,3 +4,11 @@
   z-index: 3;
   color: white;
 }
+
+#roationbtn{
+  position: absolute;
+  background-color: blue;
+  z-index: 3;
+  color: white;
+  left: 100px;
+}

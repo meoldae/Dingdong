@@ -3,7 +3,7 @@ import { SkeletonUtils } from "three-stdlib";
 import { useMemo, useState } from "react";
 import { useGrid } from "./UseGrid";
 import { useRecoilValue } from "recoil";
-import { buildModeState } from "./Atom";
+import {  buildModeState } from "./Atom";
 
 export const Item = ({ item, onClick, isDragging, dragPosition, canDrop }) => {
   const { name, gridPosition, size, rotation } = item;
@@ -15,7 +15,6 @@ export const Item = ({ item, onClick, isDragging, dragPosition, canDrop }) => {
   
   const [hover, setHover] = useState(false);
   const buildMode = useRecoilValue(buildModeState);
-
   useCursor(buildMode ? hover : undefined);
   return (
     <group
@@ -31,7 +30,7 @@ export const Item = ({ item, onClick, isDragging, dragPosition, canDrop }) => {
       <primitive object={clone} />
       {isDragging && (
         <mesh
-        position-y={0.05}>
+        position-y={0.02}>
           <boxGeometry
             args={[width , 0, height ]}
           />
