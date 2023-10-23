@@ -18,17 +18,6 @@ pipeline {
                 sh "cp -r ${APPLICATION_YML_PATH} ${PROJECT_DIR_BE}/src/main"
             }
         }
-
-        // SonarQube 
-        stage("SonarQube Analyze") {
-            steps {
-                script {
-                    withSonarQubeEnv(credentialsId: 'SONARQUBE_TOKEN', installationName:'SonarQube Scanner') {
-                        sh "./gradlew sonar"
-                    }
-                }
-            }
-        }
         
         // 백엔드 프로젝트 빌드
         stage("BE Build") {
