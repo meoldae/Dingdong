@@ -12,8 +12,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberRedisRepository {
 
-	private final String ACCESS_TOKEN = "accessToken";
-	private final String REFRESH_TOKEN = "refreshToken";
+	private final String ACCESS_TOKEN = "accessToken:";
+	private final String REFRESH_TOKEN = "refreshToken:";
 
 	private final RedisTemplate<String, Object> redisTemplate;
 	private ValueOperations<String, Object> valueOperations;
@@ -26,5 +26,11 @@ public class MemberRedisRepository {
 	public void saveToken(String memberId, String accessToken, String refreshToken) {
 		valueOperations.set(ACCESS_TOKEN + memberId, accessToken);
 		valueOperations.set(REFRESH_TOKEN + memberId, refreshToken);
+	}
+
+	public void deleteTokenByMemberId(String memberId) {
+		valueOperations.getAndDelete(ACCESS_TOKEN+memberId);
+		valueOperations.getAndDelete(REFRESH_TOKEN+memberId);
+
 	}
 }
