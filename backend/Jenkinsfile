@@ -1,0 +1,134 @@
+pipeline {
+    agent any
+    stages {
+        stage("Set Variable") {
+            steps {
+                script {
+                    IMAGE_NAME_BE = "dingdong-springboot"
+                    APPLICATION_YML_PATH = "/usr/spring/resources/dev"
+                    CONTAINER_NAME_BE = "dingdong_be"
+                    PROJECT_DIR_BE = "backend"
+                }
+            }
+        }
+
+        // 설정파일 참조
+        stage("COPY Resources") {
+            steps {
+                sh "cp ${APPLICATION_YML_PATH}/* ${PROJECT_DIR_BE}/src/main/resources"
+            }
+        }
+        post {
+            success {
+                echo 'Resources COPY Success !!'
+            }
+            failure {
+                echo 'Resources COPY Failed...'
+            }
+        }
+
+        // 백엔드 프로젝트 빌드
+        stage("BE Build") {
+            // build
+            steps{
+                sh """
+                cd ${PROJECT_DIR_BE}
+                chmod 777 ./gradlew
+                ls -al
+                pwd
+                ./gradlew clean build
+                """
+            }
+        }
+        post {
+            success {
+                echo 'BE Application Build Success !!'
+            }
+            failure {
+                echo 'BE Application Build Failed...'
+            }
+        }
+
+        // 컨테이너 클리닝
+        stage("Container Cleaning") {
+            steps{
+                sh "docker ps -q -f name=${CONTAINER_NAME_BE} | xargs --no-run-if-empty docker container stop"
+                sh "docker container ls -a -q -f name=${CONTAINER_NAME_BE} | xargs --no-run-if-empty docker rm"
+            }
+        }
+        post {
+            success {
+                echo 'BE Container Cleaning Success !!'
+            }
+            failure {
+                echo 'BE Container Cleaning Failed...'
+            }
+        }
+
+        // 이미지 삭제
+        stage("Image Cleaning") {
+            steps{
+                sh "docker images ${IMAGE_NAME_BE} -q | xargs -r docker rmi -f"
+            }
+        }
+        post {
+            success {
+                echo 'BE Image Cleaning Success !!'
+            }
+            failure {
+                echo 'BE Image Cleaning Failed...'
+            }
+        }
+
+        // 도커 이미지 빌드
+        stage("BE Image Build") {
+            steps {
+                dir("${PROJECT_DIR_BE}") {
+                    script {
+                        sh "docker build --no-cache -t ${IMAGE_NAME_BE} ."
+                    }
+                }
+            }
+        }
+        post {
+            success {
+                echo 'BE Image Build Success !!'
+            }
+            failure {
+                echo 'BE Image Build Failed...'
+            }
+        }
+
+        // 컨테이너 실행
+        stage("Be Container Run") {
+            steps {
+                script {
+                    sh "docker run -d -p 8080:8080 --name ${CONTAINER_NAME_BE} ${IMAGE_NAME_BE} -e TZ=Asia/Seoul"
+                }
+            }
+        }
+        post {
+            success {
+                echo 'BE Container Running !!'
+            }
+            failure {
+                echo 'BE Container Run Failed...'
+            }
+        }
+
+
+        // 미사용 리소스 전부 삭제
+        stage("Unused Resources Cleaning") {
+            steps {
+                script {
+                    sh "docker system prune -a"
+                }
+            }
+        }
+        post {
+            always {
+                echo 'Unused Resources Removed !!'
+            }
+        }
+    }
+}
