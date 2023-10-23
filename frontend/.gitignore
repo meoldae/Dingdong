@@ -25,3 +25,6 @@ dist-ssr
 
 # ENV
 .env
+
+# dev-dist
+dev-dist/
