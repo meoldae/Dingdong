@@ -1,5 +1,7 @@
 package com.ssafy.dingdong.domain.member.repository;
 
+import java.time.Duration;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.data.redis.core.RedisTemplate;
@@ -24,8 +26,11 @@ public class MemberRedisRepository {
 	}
 
 	public void saveToken(String memberId, String accessToken, String refreshToken) {
-		valueOperations.set(ACCESS_TOKEN + memberId, accessToken);
-		valueOperations.set(REFRESH_TOKEN + memberId, refreshToken);
+		Duration accessTokenExpiration = Duration.ofMinutes(30); // 30분
+		Duration refreshTokenExpiration = Duration.ofDays(7); // 1주일
+
+		valueOperations.set(ACCESS_TOKEN + memberId, accessToken, accessTokenExpiration);
+		valueOperations.set(REFRESH_TOKEN + memberId, refreshToken, refreshTokenExpiration);
 	}
 
 	public void deleteTokenByMemberId(String memberId) {
