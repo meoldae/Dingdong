@@ -10,22 +10,15 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-@RestController
-@RequestMapping("/member")
-public interface MemberSwaggerController {
+public interface MemberSwagger {
 
-	@PostMapping("/signup")
 	DataResponse<MemberMainDto> createMember(@Validated @RequestBody MemberSignUpDto memberSignUpDto, HttpServletRequest response);
 
-	@DeleteMapping("/logout")
 	CommonResponse logout(Authentication authentication);
 
-	@GetMapping("/{memberId}")
 	DataResponse<MemberMainDto> getMember(@PathVariable String memberId);
 
-	@GetMapping("/connect")
 	CommonResponse createSession(Authentication authentication);
 
-	@DeleteMapping("/disconnect")
 	CommonResponse deleteSession(Authentication authentication);
 }

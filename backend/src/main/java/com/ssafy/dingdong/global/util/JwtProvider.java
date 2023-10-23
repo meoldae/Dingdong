@@ -94,16 +94,15 @@ public class JwtProvider {
 		return (String)claims.get(name);
 	}
 
-	public Long getClaimFromExpirationToken(String expirationToken, String name) {
-
+	public String getClaimFromExpirationToken(String expirationToken, String name) {
 		try {
 			Claims claims = Jwts.parser()
 				.setSigningKey(SECRET_KEY.getBytes())
 				.parseClaimsJws(expirationToken)
 				.getBody();
-			return Long.parseLong((String)claims.get(name));
+			return (String)claims.get(name);
 		} catch (ExpiredJwtException e) {
-			return Long.parseLong((String)e.getClaims().get(name));
+			return (String)e.getClaims().get(name);
 		}
 	}
 
