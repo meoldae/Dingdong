@@ -40,10 +40,11 @@ public class Member {
     private Long characterId;
 
     @Builder
-    public Member(String provider, String email, LocalDateTime createTime){
+    public Member(String provider, String email, LocalDateTime createTime, String username){
         this.provider = provider;
         this.email = email;
         this.createTime = createTime;
+        this.username = username;
     }
 
     public void signUp(String nickname, Long characterId){
