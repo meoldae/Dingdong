@@ -61,6 +61,7 @@ public class CustomOAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSucc
 			() -> {
 				log.info("=== Social Login !! ===");
 				Member member = Member.builder()
+					.username(providerUser.getUsername())
 					.provider(providerUser.getProvider())
 					.email(providerUser.getEmail())
 					.createTime(LocalDateTime.now()).build();
