@@ -27,4 +27,4 @@ dist-ssr
 .env
 
 # dev-dist
-.dev-dist/*
+dev-dist/
