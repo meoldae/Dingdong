@@ -19,6 +19,17 @@ pipeline {
             }
         }
 
+        // 소나큐브 빌드
+         stage('SonarQube Analysis') {
+            steps {                
+                dir("${PROJECT_DIR}"){
+                    sh "chmod +x gradlew"
+                    sh './gradlew sonar'
+                }
+                
+            }
+        }
+
         // 백엔드 프로젝트 빌드
         stage("BE Build") {
             // build
