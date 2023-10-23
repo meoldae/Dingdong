@@ -2,8 +2,11 @@ import React, { useState, useRef, useEffect, useCallback } from "react"
 import { useFrame, useThree, useLoader } from "@react-three/fiber"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import * as THREE from "three"
+import { useSetRecoilState } from "recoil"
+import { modelPositionAtom } from "../../../atom/PlayerAtom"
 
-function Model({ setModelPosition }) {
+function Model() {
+  const setModelPosition = useSetRecoilState(modelPositionAtom)
   // 캐릭터 모델 참조
   const modelRef = useRef()
 
@@ -44,7 +47,6 @@ function Model({ setModelPosition }) {
   const [position, setPosition] = useState(new THREE.Vector3(0, 0, 0))
   // 목적지 위치(마우스 클릭)
   const [destination, setDestination] = useState(new THREE.Vector3(0, 0, 0))
-
   // 모델의 위치 및 애니메이션 업데이트
   useFrame((_, delta) => {
     if (mixerRef.current) {

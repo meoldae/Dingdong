@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei"
 import CustomCamera from "../../components/Default/CustomCamera"
 import DirectionalLight from "../../components/Default/DirectionLight"
 import Map from "../../components/Default/Map"
 import Model from "../../components/Item/PlayerItems/Model"
-import House from "../../components/Item/MainItems/House"
-import Spot from "../../components/Item/MainItems/Spot"
 import "./MainPage.css"
-function MainPage() {
+import Clover from "../../components/Item/MainItems/Clover"
+
+function TutorialPage() {
   return (
     <div id="canvas-container">
       <Canvas shadows>
@@ -29,11 +29,10 @@ function MainPage() {
 
         {/* 객체 */}
         <Model />
-        <Spot />
-        <House />
+        <Clover />
       </Canvas>
     </div>
   )
 }
 
-export default MainPage
+export default TutorialPage
