@@ -80,16 +80,13 @@ const Experience = () => {
       if (canDrop) {
         setItems((prev) => {
           const newItems = prev.map((item, index) => {
-            // 드래그 중인 항목만 업데이트
             if (index === draggedItem) {
-              // 새 오브젝트를 생성하고 gridPosition을 업데이트
               return {
                 ...item,
                 gridPosition: vector3ToGrid(e.point),
                 rotation: draggedItemRotation,
               };
             }
-            // 다른 항목은 그대로 반환
             return item;
           });
           return newItems;
@@ -109,7 +106,6 @@ const Experience = () => {
       item.rotation === 1 || item.rotation === 3 ? item.size[0] : item.size[1];
     let droppable = true;
 
-    // 이 부분은 내 asset 크기가 밖으로 나갈 때, 놓는걸 허락 안한다는 코드
     if (
       dragPosition[0] - width / 0.24 / 2 < 0 ||
       dragPosition[0] + width / 0.24 / 2 > map.size[0] / 0.24
@@ -178,16 +174,13 @@ const Experience = () => {
   }, [buildMode]);
 
   const animateCameraPosition = () => {
-    // Ensure we don't animate if we're in build mode.
     if (buildMode) return;
 
-    // Animate camera position to [8, 8, 8] using gsap.to method
     gsap.to(state.camera.position, {
-      duration: 0.5, // Duration in seconds
+      duration: 0.5, 
       x: 8,
       y: 8,
       z: 8,
-      // Ensures Three.js scene updates with camera movement
       onUpdate: () => state.camera.updateProjectionMatrix(),
     });
     setTimeout(() => {
@@ -228,6 +221,8 @@ const Experience = () => {
             <Item key={`${item.name}-${idx}`} item={item} />
           ))}
       {/* <Room name={"room"}/> */}
+
+      {/* 바닥 평면 */}
       <mesh
         rotation-x={-Math.PI / 2}
         // visible={false}
@@ -251,6 +246,25 @@ const Experience = () => {
       >
         <planeGeometry args={[4.8, 4.8]} />
         <meshStandardMaterial color="#f0f0f0" />
+      </mesh>
+
+      {/* 왼쪽 평면 */}
+      <mesh
+      rotation-y={Math.PI/2}
+      position-x={-2.394}
+      position-y={1.92}
+      >
+        <planeGeometry args={[4.8,3.84]}/>
+        <meshStandardMaterial color="#f0f0f0"/>
+      </mesh>
+
+      {/* 오른쪽 평면 */}
+      <mesh
+      position-z={-2.394}
+      position-y={1.92}
+      >
+        <planeGeometry args={[4.8,3.84]}/>
+        <meshStandardMaterial color="#f0f0f0"/>
       </mesh>
       {buildMode && (
         <Grid

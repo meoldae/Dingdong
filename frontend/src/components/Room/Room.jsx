@@ -9,6 +9,7 @@ export const Room = ({ name }) => {
       rotation-y={Math.PI / 4}
     position-z={-0.1}
     position-x={-0.1}
+    scale={[1,1.0105,1]}
     />
   );
 };
