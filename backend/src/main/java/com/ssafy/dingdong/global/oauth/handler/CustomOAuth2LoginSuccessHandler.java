@@ -57,7 +57,7 @@ public class CustomOAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSucc
 					Cookie cookie = cookieUtils.createCookie(refreshToken);
 					response.addCookie(cookie);
 
-					// AccessToken RefreshToken
+					// AccessToken RefreshToken 저장
 					memberService.login(findMember.getMemberId().toString(), accessToken, refreshToken);
 
 					redirectUrl = REDIRECT_ENDPOINT + "/oauth2/redirect?token=" + accessToken;
