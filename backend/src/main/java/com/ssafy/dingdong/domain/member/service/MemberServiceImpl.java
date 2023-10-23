@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.ssafy.dingdong.domain.member.dto.request.MemberSignUpDto;
 import com.ssafy.dingdong.domain.member.dto.response.MemberMainDto;
 import com.ssafy.dingdong.domain.member.entity.Member;
+import com.ssafy.dingdong.domain.member.repository.MemberRedisRepository;
 import com.ssafy.dingdong.domain.member.repository.MemberRepository;
 import com.ssafy.dingdong.global.exception.CustomException;
 import com.ssafy.dingdong.global.exception.ExceptionStatus;
@@ -18,7 +19,7 @@ import lombok.extern.log4j.Log4j2;
 public class MemberServiceImpl implements MemberService {
 
 	private final MemberRepository memberRepository;
-	// private final MemberRedisRepository memberRedisRepository;
+	private final MemberRedisRepository memberRedisRepository;
 
 	@Override
 	public MemberMainDto createMember(MemberSignUpDto memberLoginDto) {
@@ -53,7 +54,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void login(String memberId, String accessToken, String refreshToken) {
-		// memberRedisRepository.saveToken(memberId, accessToken, refreshToken);
+		memberRedisRepository.saveToken(memberId, accessToken, refreshToken);
 	}
 
 	@Override
