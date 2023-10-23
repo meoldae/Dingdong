@@ -28,4 +28,37 @@ public class MemberServiceImpl implements MemberService {
 		findMember.signUp(memberLoginDto.nickname(), memberLoginDto.characterId());
 		return MemberMainDto.of(findMember);
 	}
+
+	@Override
+	public MemberMainDto getMemberById(String memberId) {
+		Member findMember = memberRepository.findById(memberId).orElseThrow(
+			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
+		);
+		return MemberMainDto.of(findMember);
+	}
+
+	@Override
+	public void createSession(String memberId) {
+		/**
+		 * Todo : Redis 활성화 세션 관리 로직
+		 */
+	}
+
+	@Override
+	public void deleteSession(String memberId) {
+		/**
+		 * Todo : Redis 세션 비활성화 로직
+		 */
+	}
+
+	@Override
+	public void logout(String memberId) {
+		// 세션 비활성화
+		deleteSession(memberId);
+
+		/**
+		 * Todo : Redis 중복 로그인 처리를 위한 토큰 제거
+		 */
+
+	}
 }
