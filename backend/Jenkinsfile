@@ -18,6 +18,14 @@ pipeline {
                 sh "cp -r ${APPLICATION_YML_PATH} ${PROJECT_DIR_BE}/src/main"
             }
         }
+
+        stage("SonaQube Analyze") {
+            steps {
+                withSonarQubeEnv('SonarQube_Server') {
+                    sh './gradlew sonarqube'
+                }
+            }
+        }
         
         // 백엔드 프로젝트 빌드
         stage("BE Build") {
