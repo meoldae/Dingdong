@@ -1,8 +1,12 @@
 package com.ssafy.dingdong.domain.letter.service;
 
+import com.ssafy.dingdong.domain.letter.dto.request.LetterRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterListResponseDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterResponseDto;
+import com.ssafy.dingdong.domain.letter.entity.Letter;
+import com.ssafy.dingdong.domain.letter.entity.Stamp;
 import com.ssafy.dingdong.domain.letter.repository.LetterRepository;
+import com.ssafy.dingdong.domain.letter.repository.StampRepository;
 import com.ssafy.dingdong.global.exception.CustomException;
 import com.ssafy.dingdong.global.exception.ExceptionStatus;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +22,7 @@ import java.util.List;
 public class LetterServiceImpl implements LetterService {
 
     private final LetterRepository letterRepository;
+    private final StampRepository stampRepository;
 
     @Override
     public Page<LetterListResponseDto> getLetterList(String memberId, Pageable pageable) {
@@ -34,6 +39,15 @@ public class LetterServiceImpl implements LetterService {
         updateReadLetter(letterId);
 
         return result;
+    }
+
+    @Override
+    public void sendLetter(String memberId, LetterRequestDto requestDto) {
+        Stamp stamp = stampRepository.findById(requestDto.stampId())
+                .orElseThrow(() -> new CustomException(ExceptionStatus.NOT_FOUND_STAMP));
+
+        Letter letter = Letter.build(requestDto, memberId,false, stamp, "");
+        letterRepository.save(letter);
     }
 
     public void updateReadLetter(Long letterId) {

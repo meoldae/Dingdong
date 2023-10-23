@@ -17,6 +17,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Log4j2
@@ -53,7 +54,34 @@ public class LetterController implements LetterSwagger {
 
     @Override
     @PostMapping
-    public CommonResponse sendLetter(@RequestBody LetterRequestDto requestDto) {
+    public CommonResponse sendAuthLetter(Authentication authentication,
+                                     @RequestBody LetterRequestDto requestDto) {
+//        String memberId = authentication.getName();
+//        String ipAddress = "";
+          String memberId = "6b027c6e-0219-4f94-84a9-1a4bc0d23ef4";
+//        if (request != null) {
+//            ipAddress = request.getHeader("X-FORWARDED-FOR");
+//            if (ipAddress == null || "".equals(ipAddress)) {
+//                ipAddress = request.getRemoteAddr();
+//            }
+//        }
+
+        letterService.sendLetter(memberId, requestDto);
+
+        return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
+    }
+
+    @Override
+    public CommonResponse sendGuestLetter(@RequestBody LetterRequestDto requestDto,
+                                          HttpServletRequest request) {
+
+        String ipAddress = "";
+        if (request != null) {
+            ipAddress = request.getHeader("X-FORWARDED-FOR");
+            if (ipAddress == null || "".equals(ipAddress)) {
+                ipAddress = request.getRemoteAddr();
+            }
+        }
 
         return null;
     }
