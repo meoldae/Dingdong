@@ -59,12 +59,13 @@ public class CustomOAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSucc
 			},
 			// 비회원일 경우
 			() -> {
+				log.info("=== Social Login !! ===");
 				Member member = Member.builder()
 					.provider(providerUser.getProvider())
 					.email(providerUser.getEmail())
 					.createTime(LocalDateTime.now()).build();
 				memberRepository.save(member);
-				redirectUrl = REDIRECT_ENDPOINT + "/signup" + member.getMemberId();
+				redirectUrl = REDIRECT_ENDPOINT + "/signup?memberId=" + member.getMemberId();
 			}
 		);
 		getRedirectStrategy().sendRedirect(request, response, redirectUrl);
