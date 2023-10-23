@@ -1,7 +1,9 @@
-import { Canvas } from "@react-three/fiber"
-import "./App.css"
-function App() {
-  return <></>
-}
+import ReactDOM from "react-dom/client"
+import { RecoilRoot } from "recoil"
+import AppRouter from "./router/AppRouter.jsx"
 
-export default App
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <RecoilRoot>
+    <AppRouter />
+  </RecoilRoot>
+)
