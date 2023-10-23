@@ -1,9 +1,23 @@
-import { Canvas } from "@react-three/fiber"
+import { Canvas } from "@react-three/fiber";
 import Experience from "../../components/Room/Experience";
+import "./RoomPage.css";
+import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { buildModeState } from "../../components/Room/Atom";
 function RoomPage() {
+  const [editMode, setEditMode] = useRecoilState(buildModeState);
   return (
     <>
-      <Canvas shadows camera={{ position: [10, 10, 20], fov: 60 }}>
+      <div
+        id="button"
+        onClick={() => {
+          setEditMode(!editMode);
+        }}
+      >
+        {editMode&&<span>편집모드</span>}
+        {!editMode&&<span>관광모드</span>}
+      </div>
+      <Canvas shadows camera={{ position: [8, 8, 8], fov: 60 }}>
         <color attach="background" args={["#ececec"]} />
         <Experience />
       </Canvas>
