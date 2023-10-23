@@ -59,7 +59,6 @@ public class CustomOAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSucc
 			},
 			// 비회원일 경우
 			() -> {
-				log.info("=== Social Login !! ===");
 				Member member = Member.builder()
 					.username(providerUser.getUsername())
 					.provider(providerUser.getProvider())
