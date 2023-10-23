@@ -28,13 +28,13 @@ public class LetterController implements LetterSwagger {
 
     private final ResponseService responseService;
     private final LetterService letterService;
+    private static final String ANONYMOUS_UUID = "f684f5ed-f8d0-4823-8b59-630d6a3cd5a1";
 
     @Override
     @GetMapping
     public DataResponse getLetterList(Authentication authentication,
                                       @PageableDefault(size = 20) Pageable pageable) {
-//        String memberId = authentication.getName();
-        String memberId = "eb7c4309-5724-4ef6-9be2-d59b5b5675d8";
+        String memberId = authentication.getName();
         Page<LetterListResponseDto> result = letterService.getLetterList(memberId, pageable);
 
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, result);
@@ -44,9 +44,7 @@ public class LetterController implements LetterSwagger {
     @GetMapping("/{letterId}")
     public DataResponse getLetterDetail(Authentication authentication,
                                         @PathVariable Long letterId) {
-
-//        String memberId = authentication.getName();
-        String memberId = "eb7c4309-5724-4ef6-9be2-d59b5b5675d8";
+        String memberId = authentication.getName();
 
         LetterResponseDto result = letterService.getLetterDetail(memberId, letterId);
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, result);
@@ -69,7 +67,7 @@ public class LetterController implements LetterSwagger {
                                           HttpServletRequest request) {
 
         String ipAddress = "";
-        String memberId = "f684f5ed-f8d0-4823-8b59-630d6a3cd5a1";
+        String memberId = ANONYMOUS_UUID;
 
         if (request != null) {
             ipAddress = request.getHeader("X-FORWARDED-FOR");
