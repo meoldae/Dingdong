@@ -1,10 +1,9 @@
+import ReactDOM from "react-dom/client"
+import { RecoilRoot } from "recoil"
+import AppRouter from "./router/AppRouter.jsx"
 
-function App() {
-  return (
-    <>
-
-    </>
-  );
-}
-
-export default App;
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <RecoilRoot>
+    <AppRouter />
+  </RecoilRoot>
+)
