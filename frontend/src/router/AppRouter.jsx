@@ -8,6 +8,7 @@ import AppLogin from "../pages/User/LoginPage"
 import AppSignUp from "../pages/User/SignUpPage"
 import AppUserSetting from "../pages/User/UserSettingPage"
 import TutorialPage from "../pages/Main/TutorialPage"
+import CharacterPage from "../pages/Main/CharacterPage"
 
 const AppRouter = () => {
   return (
@@ -15,6 +16,7 @@ const AppRouter = () => {
       <Routes>
         <Route>
           <Route path="/" element={<AppMain />} />
+          <Route path="/character" element={<CharacterPage />} />
           <Route path="/tutorial" element={<TutorialPage />} />
           <Route path="/room" element={<AppRoom />} />
           <Route path="/login" element={<AppLogin />} />

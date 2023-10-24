@@ -1,6 +1,10 @@
-#root {
-  width: 100vw;
+.appWrapper {
+  max-width: 414px;
+  min-width: 400px;
   height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid black;
 }
 
 body {
