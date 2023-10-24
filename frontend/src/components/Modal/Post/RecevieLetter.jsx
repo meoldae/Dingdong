@@ -1,12 +1,12 @@
 import Card from "../../UI/Card"
-import styles from "./SendLetter.module.css"
+import styles from "./RecevieLetter.module.css"
 
-const SendLetter = () => {
+const RecevieLetter = () => {
   const cancelClick = () => {
     console.log("취소로직")
   }
   return (
-    <Card className={styles.sendLetterContainer}>
+    <Card className={styles.recevieLetterContainer}>
       <div className={styles.xmarkImg} onClick={cancelClick}>
         <img src="assets/icons/Pink_X-mark.png" alt="" />
       </div>
@@ -25,4 +25,4 @@ const SendLetter = () => {
   )
 }
 
-export default SendLetter
+export default RecevieLetter
