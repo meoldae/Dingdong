@@ -19,12 +19,11 @@ const Experience = () => {
   const [buildMode, setBuildMode] = useRecoilState(buildModeState);
   const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState);
   const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState);
-  const { vector3ToGrid, gridToVector3 } = useGrid();
+  const { vector3ToGrid, wallLeftVector3ToGrid } = useGrid();
   const [canDrop, setCanDrop] = useState(false);
   const [items, setItems] = useRecoilState(ItemsState);
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState);
-
 
   // 물체 클릭한 후에, 물체를 배치할 때 작동
   const onPlaneClicked = (e) => {
@@ -50,6 +49,29 @@ const Experience = () => {
       setDraggedItem(null);
     }
   };
+  const onLeftPlaneClicked = (e) => {
+    if (!buildMode) {
+      return;
+    }
+    if (draggedItem !== null) {
+      if (canDrop) {
+        setItems((prev) => {
+          const newItems = prev.map((item, index) => {
+            if (index === draggedItem) {
+              return {
+                ...item,
+                gridPosition: wallLeftVector3ToGrid(e.point),
+                rotation: draggedItemRotation,
+              };
+            }
+            return item;
+          });
+          return newItems;
+        });
+      }
+      setDraggedItem(null);
+    }
+  };
 
   // onPlaneClicked 이벤트에 예외처리
   useEffect(() => {
@@ -62,21 +84,38 @@ const Experience = () => {
     const height =
       item.rotation === 1 || item.rotation === 3 ? item.size[0] : item.size[2];
     let droppable = true;
-    console.log(width,height)
+    console.log(dragPosition);
+    console.log(height);
+    const thick = item.size[1];
     // 바닥 평면 넘어갔을 때 예외처리
-    if (
-      dragPosition[0] - width/2  < 0 ||
-      dragPosition[0] + width /2 > 4.8 / 0.24
-    ) {
-      droppable = false;
+    if (!item.wall) {
+      if (
+        dragPosition[0] - width / 2 < 0 ||
+        dragPosition[0] + width / 2 > 4.8 / 0.24
+      ) {
+        droppable = false;
+      }
+      if (
+        dragPosition[2] - height / 2 < 0 ||
+        dragPosition[2] + height / 2 > 4.8 / 0.24
+      ) {
+        droppable = false;
+      }
     }
-    if (
-      dragPosition[2] - height/2  < 0 ||
-      dragPosition[2] + height  /2> 4.8 / 0.24
-    ) {
-      droppable = false;
+    if (item.wall) {
+      if (
+        dragPosition[1] - thick / 2 < -1 ||
+        dragPosition[1] + thick / 2 > 16
+      ) {
+        droppable = false;
+      }
+      if (
+        dragPosition[2] - height / 2 < -1 ||
+        dragPosition[2] + height / 2 > 4.8 / 0.24
+      ) {
+        droppable = false;
+      }
     }
-
     // 바닥 겹칠 수 있는지, 벽면에 놓는건지 예외처리
     if (!item.walkable && !item.wall) {
       items.forEach((otherItem, idx) => {
@@ -84,28 +123,35 @@ const Experience = () => {
         if (idx === draggedItem) {
           return;
         }
-        // ignore wall & floor
-        if (otherItem.walkable || otherItem.wall) {
+        if (otherItem.walkable) {
           return;
+        }
+        // ignore wall & floor
+        if (otherItem.wall) {
+          const otehrThick = otherItem.size[1];
+          const otherHeight =
+            otherItem.rotation === 1 || otherItem.rotation === 3
+              ? otherItem.size[0]
+              : otherItem.size[2];
         }
         // 다른 물체 예외처리
         const otherWidth =
           otherItem.rotation === 1 || otherItem.rotation === 3
-            ? otherItem.size[2] 
-            : otherItem.size[0] ;
+            ? otherItem.size[2]
+            : otherItem.size[0];
         const otherHeight =
           otherItem.rotation === 1 || otherItem.rotation === 3
-            ? otherItem.size[0] 
-            : otherItem.size[2] ;
+            ? otherItem.size[0]
+            : otherItem.size[2];
         if (
-          dragPosition[0] + width /2 >
-            otherItem.gridPosition[0] - otherWidth /2 &&
-          dragPosition[0] - width /2 <
-            otherItem.gridPosition[0] + otherWidth /2 &&
-          dragPosition[2] - height/2  <
-            otherItem.gridPosition[2] + otherHeight/2  &&
-          dragPosition[2] + height/2  >
-            otherItem.gridPosition[2] - otherHeight /2
+          dragPosition[0] + width / 2 >
+            otherItem.gridPosition[0] - otherWidth / 2 &&
+          dragPosition[0] - width / 2 <
+            otherItem.gridPosition[0] + otherWidth / 2 &&
+          dragPosition[2] - height / 2 <
+            otherItem.gridPosition[2] + otherHeight / 2 &&
+          dragPosition[2] + height / 2 >
+            otherItem.gridPosition[2] - otherHeight / 2
         ) {
           droppable = false;
         }
@@ -113,7 +159,6 @@ const Experience = () => {
     }
     setCanDrop(droppable);
   }, [dragPosition, draggedItem, items]);
-
 
   // 카메라 관련 로직
   const controls = useRef();
@@ -159,7 +204,7 @@ const Experience = () => {
         minPolarAngle={0}
         maxPolarAngle={Math.PI / 2}
         screenSpacePanning={false}
-        enabled={!buildMode}
+        // enabled={!buildMode}
         onEnd={animateCameraPosition}
       />
 
@@ -176,12 +221,12 @@ const Experience = () => {
               dragPosition={dragPosition}
               dragRotation={draggedItemRotation}
               canDrop={canDrop}
+              wall={item.wall}
             />
           ))
         : items.map((item, idx) => (
-            <Item key={`${item.name}-${idx}`} item={item} />
+            <Item key={`${item.name}-${idx}`} item={item} wall={item.wall} />
           ))}
-
 
       {/* 바닥 평면 */}
       <mesh
@@ -210,21 +255,31 @@ const Experience = () => {
       </mesh>
 
       {/* 왼쪽 평면 */}
-      <mesh 
-      rotation-y={Math.PI / 2} 
-      position-x={-2.394} 
-      position-y={1.92}
-      onPointerMove={(e)=>{
-      }}>
+      <mesh
+        rotation-y={Math.PI / 2}
+        position-x={-2.394}
+        position-y={1.92}
+        onClick={onLeftPlaneClicked}
+        onPointerMove={(e) => {
+          if (!buildMode) {
+            return;
+          }
+          const newPosition = wallLeftVector3ToGrid(e.point);
+          if (
+            !dragPosition ||
+            newPosition[1] !== dragPosition[1] ||
+            newPosition[2] !== dragPosition[2]
+          ) {
+            setDraggPosition(newPosition);
+          }
+        }}
+      >
         <planeGeometry args={[4.8, 3.84]} />
         <meshStandardMaterial color="#f0f0f0" />
       </mesh>
 
       {/* 오른쪽 평면 */}
-      <mesh 
-      position-z={-2.394} 
-      position-y={1.92}
-      >
+      <mesh position-z={-2.394} position-y={1.92}>
         <planeGeometry args={[4.8, 3.84]} />
         <meshStandardMaterial color="#f0f0f0" />
       </mesh>

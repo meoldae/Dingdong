@@ -24,7 +24,7 @@ function RoomPage() {
     <div className="container">
     <Header/>
     <Share/>
-    <NeighborRequset/>
+    {/* <NeighborRequset/> */}
       <div
         className="button"
         onClick={() => {
@@ -51,7 +51,7 @@ function RoomPage() {
         <color attach="background" args={["skyblue"]} />
         <Experience />
       </Canvas>
-      <OtherFooter/>
+      {/* <OtherFooter/> */}
       <MyFooter/>
     </div>
   );

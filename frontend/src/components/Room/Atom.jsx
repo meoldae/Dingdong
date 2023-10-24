@@ -32,6 +32,10 @@ const item = {
     name: "bed",
     size: [8, 0, 10],
   },
+  clock: {
+    name: "clock",
+    size:[3,3,0],
+  }
 };
 
 const map = {
@@ -58,6 +62,13 @@ const map = {
       gridPosition: [10, 0, 10],
       rotation: 1,
       walkable: true,
+    },
+    {
+      ...item.clock,
+      gridPosition: [10, 2, 10],
+      rotation: 1,
+      walkable: true,
+      wall:true,
     },
   ],
 };
