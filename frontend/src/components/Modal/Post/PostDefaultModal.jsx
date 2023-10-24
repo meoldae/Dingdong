@@ -4,7 +4,7 @@ import styles from "./PostDefaultModal.module.css"
 const PostDefaultModal = (props) => {
   return (
     <Card className={styles.container}>
-      <div className={styles.xmarkImg}>
+      <div className={styles.xmarkImg} onClick={props.cancelClick}>
         <img src="assets/icons/Pink_X-mark.png" />
       </div>
       <div className={styles.containerTitle}>{props.PostDefaultTitle}</div>
