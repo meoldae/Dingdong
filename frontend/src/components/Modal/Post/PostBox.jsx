@@ -10,10 +10,25 @@ const PostBox = () => {
       PostDefaultTitle={"편지함"}
     >
       <div className={styles.letterBox}>
-        <Letter letterTitle={"제목"} />
-        <Letter letterTitle={"제목"} />
-        <Letter letterTitle={"제목"} />
-        <Letter letterTitle={"제목"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} />
       </div>
     </PostDefaultModal>
   )

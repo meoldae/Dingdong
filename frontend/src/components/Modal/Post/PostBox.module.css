@@ -1,4 +1,5 @@
 .postBoxContainer {
+  height: 280px;
   display: flex;
   justify-content: center;
   overflow: auto;
