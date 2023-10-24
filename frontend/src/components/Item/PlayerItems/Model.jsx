@@ -2,8 +2,13 @@ import React, { useState, useRef, useEffect, useCallback } from "react"
 import { useFrame, useThree, useLoader } from "@react-three/fiber"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import * as THREE from "three"
+import { useRecoilValue, useSetRecoilState } from "recoil"
+import { modelPositionAtom } from "../../../atom/PlayerAtom"
+import { isPickedAtom } from "../../../atom/TutorialAtom"
 
-function Model({ setModelPosition }) {
+function Model() {
+  const isPicked = useRecoilValue(isPickedAtom)
+  const setModelPosition = useSetRecoilState(modelPositionAtom)
   // 캐릭터 모델 참조
   const modelRef = useRef()
 
@@ -14,7 +19,7 @@ function Model({ setModelPosition }) {
   const actions = useRef([])
 
   // 모델 로드
-  const gltf = useLoader(GLTFLoader, "assets/models/f_1.glb")
+  const gltf = useLoader(GLTFLoader, "assets/models/f_7.glb")
 
   // 로드된 모델의 각 객체에 대하여 그림자 생성
   gltf.scene.traverse((child) => {
@@ -44,7 +49,6 @@ function Model({ setModelPosition }) {
   const [position, setPosition] = useState(new THREE.Vector3(0, 0, 0))
   // 목적지 위치(마우스 클릭)
   const [destination, setDestination] = useState(new THREE.Vector3(0, 0, 0))
-
   // 모델의 위치 및 애니메이션 업데이트
   useFrame((_, delta) => {
     if (mixerRef.current) {
@@ -54,8 +58,17 @@ function Model({ setModelPosition }) {
     if (modelRef.current) {
       const distance = position.distanceTo(destination)
 
+      if (isPicked) {
+        actions.current[1].stop()
+        actions.current[0].stop()
+        actions.current[5].play()
+        setDestination(position)
+      } else {
+        actions.current[5].stop()
+      }
+
       // 모델 이동
-      if (distance > 0.05) {
+      if (!isPicked && distance > 0.05) {
         // 목적지까지의 거리가 0.05보다 크면 이동
         actions.current[1].play()
         actions.current[0].stop()
@@ -70,7 +83,7 @@ function Model({ setModelPosition }) {
         position.z += Math.sin(angle) * speed
         setPosition(position.clone())
 
-        // 카메라 트렉킹을 위해 부모 요소로 현재 모델 위치 정보 전달
+        // 카메라 트렉킹을 위해 현재 모델 위치 정보 저장
         setModelPosition([
           position.clone().x,
           position.clone().y,
@@ -94,9 +107,12 @@ function Model({ setModelPosition }) {
     (e) => {
       const event = e.type.startsWith("touch") ? e.touches[0] : e
 
-      // 마우스나 터치 위치를 NDC (Normalized Device Coordinates)로 변환
-      mouse.current.x = (event.clientX / domElement.clientWidth) * 2 - 1
-      mouse.current.y = -(event.clientY / domElement.clientHeight) * 2 + 1
+      // Get canvas offsets
+      const rect = domElement.getBoundingClientRect()
+
+      // Adjust the mouse/touch position by considering the canvas offset and scaling
+      mouse.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+      mouse.current.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
 
       // 카메라와 마우스 및 터치 위치를 기반으로 레이캐스터를 설정
       raycaster.current.setFromCamera(mouse.current, camera)

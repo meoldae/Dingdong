@@ -1,3 +1,13 @@
 .ButtonContainer {
-  border: 1px solid black;
+  width: 280px;
+  height: 60px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ButtonContent {
+  font-family: Pretendard-Medium;
+  font-size: 24px;
 }

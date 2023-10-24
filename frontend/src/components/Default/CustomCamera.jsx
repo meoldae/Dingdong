@@ -1,8 +1,11 @@
 import React, { useEffect, useRef } from "react"
 import { useFrame, useThree } from "@react-three/fiber"
 import { OrthographicCamera } from "@react-three/drei"
+import { useRecoilValue } from "recoil"
+import { modelPositionAtom } from "../../atom/PlayerAtom"
 
-function CustomCamera({ modelPosition }) {
+function CustomCamera() {
+  const modelPosition = useRecoilValue(modelPositionAtom)
   // 카메라 참조
   const cameraRef = useRef()
 

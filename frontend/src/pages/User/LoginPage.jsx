@@ -1,9 +1,8 @@
 // 스타일
-import style from "./LoginPage.css"
+// import style from "./LoginPage.css"
 
 // 통신
 import axios from "axios"
-import DefaultBtn from "../../components/Button/Default/DefaultBtn"
 
 const LoginPage = () => {
   const loginHandler = () => {
@@ -15,7 +14,6 @@ const LoginPage = () => {
   return (
     <div>
       <button onClick={loginHandler}>로그인</button>
-      <DefaultBtn btnName="확인" />
     </div>
   )
 }
