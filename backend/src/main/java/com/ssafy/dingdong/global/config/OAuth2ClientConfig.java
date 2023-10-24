@@ -12,6 +12,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.ssafy.dingdong.domain.member.repository.MemberRedisRepository;
 import com.ssafy.dingdong.domain.member.repository.MemberRepository;
 import com.ssafy.dingdong.global.exception.CustomAuthenticationEntryPoint;
 import com.ssafy.dingdong.global.filter.CustomAuthenticationFilter;
@@ -34,6 +35,7 @@ public class OAuth2ClientConfig {
 
 	private final JwtProvider jwtProvider;
 	private final MemberRepository memberRepository;
+	private final MemberRedisRepository memberRedisRepository;
 
 	private final CustomOAuth2LoginFailureHandler customOAuth2LoginFailureHandler;
 	private final CustomOAuth2LoginSuccessHandler customOAuth2LoginSuccessHandler;
@@ -61,7 +63,7 @@ public class OAuth2ClientConfig {
 			.and()
 			.exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
 			.and()
-			.addFilterBefore(new CustomAuthenticationFilter(jwtProvider, memberRepository), UsernamePasswordAuthenticationFilter.class);
+			.addFilterBefore(new CustomAuthenticationFilter(jwtProvider, memberRepository, memberRedisRepository), UsernamePasswordAuthenticationFilter.class);
 
 		// OAuth
 		http
