@@ -84,6 +84,7 @@ public class JwtProvider {
 		Date expiration = claim.getExpiration();
 		log.info("=== Token Expiration : {} === ", expiration.toString());
 		log.info("=== Now : {} ===", new Date());
+
 		return expiration.before(new Date());
 	}
 

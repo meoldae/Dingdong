@@ -61,7 +61,7 @@ public class CustomAuthenticationFilter extends OncePerRequestFilter {
 					throw new CustomException(ExceptionStatus.LOGOUT);
 				}
 
-				Member findMember = memberRepository.findById(memberId).orElseThrow(
+				Member findMember = memberRepository.findByMemberId(memberId).orElseThrow(
 					() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
 				);
 
@@ -98,6 +98,7 @@ public class CustomAuthenticationFilter extends OncePerRequestFilter {
 
 	private boolean isDuplicate(String memberId, String accessToken) {
 		String olderAccessToken = memberRedisRepository.findByMemberId(memberId).orElse(TOKEN_DOES_NOT_EXIST);
+
 		// 액세스 토큰 X
 		if (TOKEN_DOES_NOT_EXIST.equals(olderAccessToken)) {
 			return false;
