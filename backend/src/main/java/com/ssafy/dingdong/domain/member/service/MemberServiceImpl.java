@@ -28,7 +28,7 @@ public class MemberServiceImpl implements MemberService {
 		Member findMember = memberRepository.findByMemberId(UUID.fromString(memberLoginDto.memberId())).orElseThrow(
 			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
 		);
-		findMember.signUp(memberLoginDto.nickname(), memberLoginDto.characterId());
+		findMember.signUp(memberLoginDto.nickname(), memberLoginDto.avatarId());
 		return MemberMainDto.of(findMember);
 	}
 
