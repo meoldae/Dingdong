@@ -23,7 +23,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberMainDto createMember(MemberSignUpDto memberLoginDto) {
-		Member findMember = memberRepository.findById(memberLoginDto.memberId()).orElseThrow(
+		Member findMember = memberRepository.findByMemberId(memberLoginDto.memberId()).orElseThrow(
 			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
 		);
 		findMember.signUp(memberLoginDto.nickname(), memberLoginDto.characterId());
@@ -32,7 +32,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberMainDto getMemberById(String memberId) {
-		Member findMember = memberRepository.findById(memberId).orElseThrow(
+		Member findMember = memberRepository.findByMemberId(memberId).orElseThrow(
 			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
 		);
 		return MemberMainDto.of(findMember);

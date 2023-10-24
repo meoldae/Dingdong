@@ -61,7 +61,7 @@ public class CustomAuthenticationFilter extends OncePerRequestFilter {
 					throw new CustomException(ExceptionStatus.LOGOUT);
 				}
 
-				Member findMember = memberRepository.findById(memberId).orElseThrow(
+				Member findMember = memberRepository.findByMemberId(memberId).orElseThrow(
 					() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
 				);
 

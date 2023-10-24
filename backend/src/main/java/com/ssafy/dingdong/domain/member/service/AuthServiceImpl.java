@@ -27,7 +27,7 @@ public class AuthServiceImpl implements AuthService{
 		// 만료 X
 		if (!jwtProvider.isExpired(refreshToken)) {
 			String memberId = jwtProvider.getClaimFromExpirationToken(accessToken, "memberId");
-			Member findMember = memberRepository.findById(memberId).orElseThrow(
+			Member findMember = memberRepository.findByMemberId(memberId).orElseThrow(
 				() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
 			);
 			String newAccessToken = jwtProvider.createAccessToken(findMember);
