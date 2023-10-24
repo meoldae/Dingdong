@@ -44,4 +44,10 @@ public class Neighbor {
 	public void connect(LocalDateTime connectTime){
 		this.connectTime = connectTime;
 	}
+
+	public void renewal(){
+		this.createTime = LocalDateTime.now();
+		this.connectTime = null;
+		this.cancelTime = null;
+	}
 }

@@ -33,4 +33,12 @@ public interface NeighborRepository extends JpaRepository<Neighbor, Long> {
 		 + "   FROM Neighbor n"
 		 + "  WHERE n.connectTime IS NOT NULL")
 	List findAllByMemberId(@Param("memberId") UUID memberId);
+
+	@Query(" SELECT n"
+		 + "   FROM Neighbor n "
+		 + "  WHERE "
+		 + "        ( n.applicantId = :applicantId AND n.acceptorId = :acceptorId)"
+	 	 + "     OR "
+		 + "        ( n.applicantId = :acceptorId AND n.acceptorId = :applicantId)")
+	Optional<Neighbor> isConnectByApplicantIdAndAcceptorId(UUID applicantId, UUID acceptorId);
 }
