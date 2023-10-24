@@ -25,6 +25,7 @@ const Experience = () => {
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState);
 
+  const [check, useCheck] = useState(false);
   // 물체 클릭한 후에, 물체를 배치할 때 작동
   const onPlaneClicked = (e) => {
     if (!buildMode) {
@@ -80,12 +81,10 @@ const Experience = () => {
     }
     const item = items[draggedItem];
     const width =
-      item.rotation === 1 || item.rotation === 3 ? item.size[2] : item.size[0];
+      draggedItemRotation  === 1 || draggedItemRotation  === 3 ? item.size[2] : item.size[0];
     const height =
-      item.rotation === 1 || item.rotation === 3 ? item.size[0] : item.size[2];
+      draggedItemRotation  === 1 || draggedItemRotation  === 3 ? item.size[0] : item.size[2];
     let droppable = true;
-    console.log(dragPosition);
-    console.log(height);
     const thick = item.size[1];
     // 바닥 평면 넘어갔을 때 예외처리
     if (!item.wall) {
