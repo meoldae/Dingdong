@@ -89,7 +89,7 @@ public class CustomAuthenticationFilter extends OncePerRequestFilter {
 			request.setAttribute(TOKEN_EXCEPTION_KEY, TOKEN_ILLEGAL);
 		} catch (CustomException e) {
 			log.info("커스텀 예외");
-			request.setAttribute(TOKEN_EXCEPTION_KEY, CUSTOM_EXCEPTION);
+			request.setAttribute(TOKEN_EXCEPTION_KEY, e.getExceptionStatus().getMessage());
 		} catch (Exception e) {
 			request.setAttribute(TOKEN_EXCEPTION_KEY, TOKEN_INVALID);
 		}
