@@ -11,7 +11,7 @@ public record MemberSignUpDto(
 	@Length(min = 2, max = 8, message = "닉네임은 2 ~ 8 글자 사이입니다.")
 	String nickname,
 	@NotNull(message = "캐릭터는 필수 선택항목입니다.")
-	Long characterId
+	Long avatarId
 ) {
 
 }
