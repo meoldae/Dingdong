@@ -2,7 +2,6 @@ package com.ssafy.dingdong.global.oauth.handler;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -51,16 +50,23 @@ public class CustomOAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSucc
 				if (findMember.getExitTime() != null) {
 					redirectUrl = REDIRECT_ENDPOINT + "/rejoin" + findMember.getMemberId();
 				}else {
-					String accessToken = jwtProvider.createAccessToken(findMember);
-					String refreshToken = jwtProvider.createRefreshToken();
+					// 닉네임 O, 캐릭터 선택 O
+					if (findMember.getCharacterId() != null && findMember.getNickname() != null) {
+						String accessToken = jwtProvider.createAccessToken(findMember);
+						String refreshToken = jwtProvider.createRefreshToken();
 
-					Cookie cookie = cookieUtils.createCookie(refreshToken);
-					response.addCookie(cookie);
+						Cookie cookie = cookieUtils.createCookie(refreshToken);
+						response.addCookie(cookie);
 
-					// AccessToken RefreshToken 저장
-					memberService.login(findMember.getMemberId().toString(), accessToken, refreshToken);
+						// AccessToken RefreshToken 저장
+						memberService.login(findMember.getMemberId().toString(), accessToken, refreshToken);
 
-					redirectUrl = REDIRECT_ENDPOINT + "/oauth2/redirect?token=" + accessToken;
+						redirectUrl = REDIRECT_ENDPOINT + "/oauth2/redirect?token=" + accessToken;
+					}
+					// 닉네임, 캐릭터 둘 중 하나라도 없다면
+					else {
+						redirectUrl = REDIRECT_ENDPOINT + "/signup?memberId=" + findMember.getMemberId();
+					}
 				}
 			},
 			// 비회원일 경우
