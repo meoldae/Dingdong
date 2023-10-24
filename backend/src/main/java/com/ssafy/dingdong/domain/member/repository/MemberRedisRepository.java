@@ -46,7 +46,7 @@ public class MemberRedisRepository {
 
 	}
 
-	public Optional<String> findByMemberId(String memberId) {
-		return Optional.ofNullable(valueOperations.get(ACCESS_TOKEN + memberId).toString());
+	public Optional<Object> findAccessTokenByMemberId(String memberId) {
+		return Optional.ofNullable(valueOperations.get(ACCESS_TOKEN + memberId));
 	}
 }
