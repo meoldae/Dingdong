@@ -1,6 +1,7 @@
 package com.ssafy.dingdong.domain.member.repository;
 
 import java.time.Duration;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
@@ -24,7 +25,7 @@ public class MemberRedisRepository {
 	Duration refreshTokenExpiration;
 
 	@PostConstruct
-	public void init(){
+	public void init() {
 		valueOperations = redisTemplate.opsForValue();
 		accessTokenExpiration = Duration.ofMinutes(30); // 30분
 		refreshTokenExpiration = Duration.ofDays(7); // 1주일
@@ -40,8 +41,12 @@ public class MemberRedisRepository {
 	}
 
 	public void deleteTokenByMemberId(String memberId) {
-		valueOperations.getAndDelete(ACCESS_TOKEN+memberId);
-		valueOperations.getAndDelete(REFRESH_TOKEN+memberId);
+		valueOperations.getAndDelete(ACCESS_TOKEN + memberId);
+		valueOperations.getAndDelete(REFRESH_TOKEN + memberId);
 
+	}
+
+	public Optional<String> findByMemberId(String memberId) {
+		return Optional.ofNullable(valueOperations.get(ACCESS_TOKEN + memberId).toString());
 	}
 }
