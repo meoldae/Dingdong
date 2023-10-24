@@ -17,7 +17,8 @@ public enum ExceptionStatus {
 	MEMBER_NOT_FOUND(ResponseStatusCode.ERROR, "회원을 찾을 수 없습니다."),
 	TOKEN_EXPIRED(ResponseStatusCode.ERROR, "토큰이 만료되었습니다."),
 	REFRESH_TOKEN_NOT_FOUND_IN_COOKIE(ResponseStatusCode.ERROR, "리프레시 토큰이 없습니다."),
-	REFRESH_TOKEN_EXPIRED(ResponseStatusCode.ERROR, "리프레시 토큰이 만료되었습니다.");
+	REFRESH_TOKEN_EXPIRED(ResponseStatusCode.ERROR, "리프레시 토큰이 만료되었습니다."),
+	LOGOUT(ResponseStatusCode.ERROR, "로그아웃 되었습니다.");
 
 	private final ResponseStatusCode code;
 	private final String message;
