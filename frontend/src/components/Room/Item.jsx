@@ -1,6 +1,6 @@
 import { useCursor, useGLTF } from "@react-three/drei";
 import { SkeletonUtils } from "three-stdlib";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useGrid } from "./UseGrid";
 import { useRecoilValue } from "recoil";
 import { buildModeState } from "./Atom";
@@ -24,6 +24,8 @@ export const Item = ({
   const [hover, setHover] = useState(false);
   const buildMode = useRecoilValue(buildModeState);
   useCursor(buildMode ? hover : undefined);
+
+  
   return (
     <group
       onClick={onClick}
@@ -34,7 +36,8 @@ export const Item = ({
       )}
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}
-    >
+    > 
+    {/* 물체 클릭 시 바닥 면 가능 불가능 색상 및 회전 각 prop 받기 */}
       <primitive object={clone} rotation-y={((rotation) * Math.PI) / 2} />
       {isDragging && (
         <mesh position-y={0.02} >

@@ -38,7 +38,7 @@ function RoomPage() {
           </span>
         )}
       </div>
-      <Canvas shadows camera={{ position: [8, 8, 8], fov: 60 }}>
+      <Canvas shadows camera={{ position: [8, 5, 8], fov: 80 }}>
         <color attach="background" args={["#ececec"]} />
         <Experience />
       </Canvas>

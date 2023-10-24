@@ -21,13 +21,12 @@ const Experience = () => {
   const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState);
   const { vector3ToGrid, gridToVector3 } = useGrid();
   const [canDrop, setCanDrop] = useState(false);
-
-
-
   const [items, setItems] = useRecoilState(ItemsState);
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState);
 
+
+  // 물체 클릭한 후에, 물체를 배치할 때 작동
   const onPlaneClicked = (e) => {
     if (!buildMode) {
       return;
@@ -51,6 +50,8 @@ const Experience = () => {
       setDraggedItem(null);
     }
   };
+
+  // onPlaneClicked 이벤트에 예외처리
   useEffect(() => {
     if (draggedItem === null) {
       return;
@@ -61,33 +62,33 @@ const Experience = () => {
     const height =
       item.rotation === 1 || item.rotation === 3 ? item.size[0] : item.size[2];
     let droppable = true;
+    console.log(width,height)
+    // 바닥 평면 넘어갔을 때 예외처리
     if (
       dragPosition[0] - width/2  < 0 ||
       dragPosition[0] + width /2 > 4.8 / 0.24
     ) {
       droppable = false;
-
     }
-
     if (
       dragPosition[2] - height/2  < 0 ||
       dragPosition[2] + height  /2> 4.8 / 0.24
     ) {
       droppable = false;
-
     }
+
+    // 바닥 겹칠 수 있는지, 벽면에 놓는건지 예외처리
     if (!item.walkable && !item.wall) {
       items.forEach((otherItem, idx) => {
         // ignore self
         if (idx === draggedItem) {
           return;
         }
-
         // ignore wall & floor
         if (otherItem.walkable || otherItem.wall) {
           return;
         }
-        // check item overlap
+        // 다른 물체 예외처리
         const otherWidth =
           otherItem.rotation === 1 || otherItem.rotation === 3
             ? otherItem.size[2] 
@@ -107,21 +108,22 @@ const Experience = () => {
             otherItem.gridPosition[2] - otherHeight /2
         ) {
           droppable = false;
-
         }
       });
     }
-
     setCanDrop(droppable);
   }, [dragPosition, draggedItem, items]);
 
+
+  // 카메라 관련 로직
   const controls = useRef();
   const state = useThree((state) => state);
 
+  // 편집 모드일 때 카메라 고정
   useEffect(() => {
     if (buildMode) {
       state.camera.position.set(8, 8, 8);
-      state.camera.fov = 60;
+      state.camera.fov = 80;
       state.camera.lookAt(0, 0, 0);
       if (controls.current) {
         controls.current.target.set(0, 0, 0);
@@ -130,20 +132,22 @@ const Experience = () => {
     }
   }, [buildMode]);
 
+  // 일반 모드일 때 카메라 회전 후 원상복귀
   const animateCameraPosition = () => {
     if (buildMode) return;
 
     gsap.to(state.camera.position, {
       duration: 0.5,
       x: 8,
-      y: 8,
+      y: 5,
       z: 8,
       onUpdate: () => state.camera.updateProjectionMatrix(),
     });
     setTimeout(() => {
-      state.camera.position.set(8, 8, 8);
+      state.camera.position.set(8, 5, 8);
     }, 50);
   };
+
   return (
     <>
       <Environment preset="sunset" />

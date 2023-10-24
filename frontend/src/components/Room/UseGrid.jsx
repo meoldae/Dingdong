@@ -2,6 +2,8 @@ import * as THREE from "three";
 
 
 
+
+//  vector3를 그리드 평면으로 변경하는 로직 
 export const useGrid = () => {
   const vector3ToGrid = (vector3) => {
     return [
@@ -10,7 +12,7 @@ export const useGrid = () => {
       Math.floor(vector3.z / 0.24) + 10,
     ];
   };
-
+// 그리드 평면을 vector3로 변경하는 로직
   const gridToVector3 = (gridPosition) => {
     // console.log(gridPosition)
     return new THREE.Vector3(
