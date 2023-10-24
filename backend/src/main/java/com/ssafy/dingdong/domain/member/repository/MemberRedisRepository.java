@@ -20,17 +20,23 @@ public class MemberRedisRepository {
 	private final RedisTemplate<String, Object> redisTemplate;
 	private ValueOperations<String, Object> valueOperations;
 
+	Duration accessTokenExpiration;
+	Duration refreshTokenExpiration;
+
 	@PostConstruct
 	public void init(){
 		valueOperations = redisTemplate.opsForValue();
+		accessTokenExpiration = Duration.ofMinutes(30); // 30분
+		refreshTokenExpiration = Duration.ofDays(7); // 1주일
 	}
 
 	public void saveToken(String memberId, String accessToken, String refreshToken) {
-		Duration accessTokenExpiration = Duration.ofMinutes(30); // 30분
-		Duration refreshTokenExpiration = Duration.ofDays(7); // 1주일
-
 		valueOperations.set(ACCESS_TOKEN + memberId, accessToken, accessTokenExpiration);
 		valueOperations.set(REFRESH_TOKEN + memberId, refreshToken, refreshTokenExpiration);
+	}
+
+	public void renewalAccessToken(String memberId, String newAccessToken) {
+		valueOperations.set(ACCESS_TOKEN + memberId, newAccessToken, accessTokenExpiration);
 	}
 
 	public void deleteTokenByMemberId(String memberId) {
