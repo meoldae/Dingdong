@@ -8,6 +8,10 @@ import {
   buildModeState,
   draggedItemState,
 } from "../../components/Room/Atom";
+import Header from "../../components/Header/Header";
+import { Html } from "@react-three/drei";
+import Footer from "../../components/Footer/Footer";
+
 function RoomPage() {
   const [editMode, setEditMode] = useRecoilState(buildModeState);
   const isDrag = useRecoilValue(draggedItemState);
@@ -15,9 +19,10 @@ function RoomPage() {
     useRecoilState(ItemRotateState);
 
   return (
-    <>
+    <div className="container">
+    <Header/>
       <div
-        id="button"
+        className="button"
         onClick={() => {
           setEditMode(!editMode);
         }}
@@ -25,7 +30,7 @@ function RoomPage() {
         {editMode && <span>편집모드</span>}
         {!editMode && <span>관광모드</span>}
       </div>
-      <div id="roationbtn">
+      <div className="roationbtn">
         {editMode && isDrag !== null && (
           <span
             onClick={() => {
@@ -38,11 +43,12 @@ function RoomPage() {
           </span>
         )}
       </div>
-      <Canvas shadows camera={{ position: [8, 5, 8], fov: 80 }}>
-        <color attach="background" args={["#ececec"]} />
+      <Canvas shadows camera={{ position: [8, 5, 8], fov: 90 }}>
+        <color attach="background" args={["skyblue"]} />
         <Experience />
       </Canvas>
-    </>
+      <Footer/>
+    </div>
   );
 }
 

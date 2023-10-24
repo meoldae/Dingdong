@@ -58,7 +58,6 @@ const map = {
       gridPosition: [10, 0, 10],
       rotation: 1,
       walkable: true,
-      wall: true,
     },
   ],
 };

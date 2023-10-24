@@ -1,0 +1,39 @@
+.wrap{
+  position: absolute;
+  z-index: 3;
+  width: 100%;
+  bottom: 50px;
+}
+
+.secondFooter{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: end;
+  margin-top: 20px;
+}
+
+.secondFooter img{
+  width: 40px;
+  height: auto;
+}
+
+.footer{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.background{
+  background: white;
+  border-radius: 50%;
+  margin: 0 20px;
+  padding: 5px;
+}
+
+.footer img{
+  width: 40px;
+  height: auto;
+}

@@ -122,8 +122,8 @@ const Experience = () => {
   // 편집 모드일 때 카메라 고정
   useEffect(() => {
     if (buildMode) {
-      state.camera.position.set(8, 8, 8);
-      state.camera.fov = 80;
+      state.camera.position.set(8, 5, 8);
+      state.camera.fov = 90;
       state.camera.lookAt(0, 0, 0);
       if (controls.current) {
         controls.current.target.set(0, 0, 0);
