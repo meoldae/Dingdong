@@ -6,8 +6,9 @@ import axios from "axios"
 
 const LoginPage = () => {
   const loginHandler = () => {
-    window.location.href =
-      "https://k9b203.p.ssafy.io/api/oauth2/authorization/kakao"
+    window.location.href = `https://${
+      import.meta.env.VITE_SERVER_URL
+    }/oauth2/authorization/kakao`
   }
 
   return (
