@@ -50,5 +50,6 @@ public class Member {
     public void signUp(String nickname, Long avatarId){
         this.nickname = nickname;
         this.avatarId = avatarId;
+        this.exitTime = null;
     }
 }
