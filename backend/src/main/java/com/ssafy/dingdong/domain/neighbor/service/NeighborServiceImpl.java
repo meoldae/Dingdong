@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.dingdong.domain.member.dto.response.MemberMainDto;
 import com.ssafy.dingdong.domain.member.entity.Member;
@@ -53,6 +54,7 @@ public class NeighborServiceImpl implements NeighborService{
 	}
 
 	@Override
+	@Transactional
 	public void setNeighborStatus(NeighborRequest neighborRequest) {
 		if (neighborRequest.flag().equals("Y")) {
 			Neighbor neighborStatus = neighborRepository.findByNeighborId(neighborRequest.neighborId()).orElseThrow(
@@ -67,6 +69,7 @@ public class NeighborServiceImpl implements NeighborService{
 	}
 
 	@Override
+	@Transactional
 	public List getNeighborList(String memberId) {
 		List neighborIdList = neighborRepository.findAllByMemberId(UUID.fromString(memberId));
 		List neighborList = new LinkedList<NeighborResponse>();
