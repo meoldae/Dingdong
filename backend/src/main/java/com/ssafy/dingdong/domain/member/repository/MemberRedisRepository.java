@@ -27,7 +27,8 @@ public class MemberRedisRepository {
 	@PostConstruct
 	public void init() {
 		valueOperations = redisTemplate.opsForValue();
-		accessTokenExpiration = Duration.ofMinutes(30); // 30분
+		// accessTokenExpiration = Duration.ofMinutes(30); // 30분
+		accessTokenExpiration = Duration.ofDays(1); // 테스트용 하루
 		refreshTokenExpiration = Duration.ofDays(7); // 1주일
 	}
 
