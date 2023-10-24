@@ -82,10 +82,9 @@ public class JwtProvider {
 			.getBody();
 
 		Date expiration = claim.getExpiration();
-		log.info("=== Token Expiration : {} === ", expiration.toString());
-		log.info("=== Now : {} ===", new Date());
+		Date now = new Date();
 
-		return expiration.before(new Date());
+		return expiration.before(now);
 	}
 
 	public String getClaimFromToken(String token, String name) {

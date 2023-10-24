@@ -2,6 +2,7 @@ package com.ssafy.dingdong.global.filter;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -61,7 +62,7 @@ public class CustomAuthenticationFilter extends OncePerRequestFilter {
 					throw new CustomException(ExceptionStatus.LOGOUT);
 				}
 
-				Member findMember = memberRepository.findByMemberId(memberId).orElseThrow(
+				Member findMember = memberRepository.findByMemberId(UUID.fromString(memberId)).orElseThrow(
 					() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
 				);
 
@@ -88,7 +89,7 @@ public class CustomAuthenticationFilter extends OncePerRequestFilter {
 			request.setAttribute(TOKEN_EXCEPTION_KEY, TOKEN_ILLEGAL);
 		} catch (CustomException e) {
 			log.info("커스텀 예외");
-			request.setAttribute(TOKEN_EXCEPTION_KEY, CUSTOM_EXCEPTION);
+			request.setAttribute(TOKEN_EXCEPTION_KEY, e.getExceptionStatus().getMessage());
 		} catch (Exception e) {
 			request.setAttribute(TOKEN_EXCEPTION_KEY, TOKEN_INVALID);
 		}
@@ -97,20 +98,16 @@ public class CustomAuthenticationFilter extends OncePerRequestFilter {
 	}
 
 	private boolean isDuplicate(String memberId, String accessToken) {
-		String olderAccessToken = memberRedisRepository.findByMemberId(memberId).orElse(TOKEN_DOES_NOT_EXIST);
-
-		// 액세스 토큰 X
-		if (TOKEN_DOES_NOT_EXIST.equals(olderAccessToken)) {
+		Object olderAccessToken = memberRedisRepository.findAccessTokenByMemberId(memberId).orElseThrow(
+			() -> new CustomException(ExceptionStatus.LOGOUT)
+		);
+		// 액세스 토큰 동일 (정상)
+		if (accessToken.equals(olderAccessToken.toString())) {
 			return false;
-		} else {
-			// 액세스 토큰 동일 (정상)
-			if (accessToken.equals(olderAccessToken)) {
-				return false;
-			}
-			// 액세스 토큰 다름 (중복 로그인)
-			else {
-				return true;
-			}
+		}
+		// 액세스 토큰 다름 (중복 로그인)
+		else {
+			return true;
 		}
 	}
 }
