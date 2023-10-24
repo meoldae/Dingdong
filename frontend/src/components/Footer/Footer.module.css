@@ -13,10 +13,7 @@
   margin-top: 20px;
 }
 
-.secondFooter img{
-  width: 40px;
-  height: auto;
-}
+
 
 .footer{
   display: flex;
@@ -27,13 +24,7 @@
 }
 
 .background{
-  background: white;
-  border-radius: 50%;
   margin: 0 20px;
-  padding: 5px;
+  /* padding: 5px; */
 }
 
-.footer img{
-  width: 40px;
-  height: auto;
-}
