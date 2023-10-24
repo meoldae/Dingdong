@@ -1,3 +1,4 @@
+import RoomBtn from "../Button/Room/RoomBtn";
 import style from "./Footer.module.css";
 
 const OtherFooter = () => {
@@ -7,15 +8,15 @@ const OtherFooter = () => {
     <div className={style.wrap}>
       <div className={style.secondFooter}>
         <div className={style.background}>
-          <img src={`${icon}heart.svg`} alt="" />
+          <RoomBtn img={"heart"} />
         </div>
       </div>
       <div className={style.footer}>
         <div className={style.background}>
-          <img src={`${icon}worldMap.svg`} />
+        <RoomBtn img={"worldMap"} />
         </div>
         <div className={style.background}>
-          <img src={`${icon}post.svg`} alt="" />
+        <RoomBtn img={"post"} />
         </div>
       </div>
     </div>
