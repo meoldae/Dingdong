@@ -1,0 +1,10 @@
+.letterContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 7px;
+}
+
+.letterTitle {
+  font-size: 20px;
+}

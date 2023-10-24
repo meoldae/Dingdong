@@ -1,0 +1,11 @@
+.postBoxContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lettersBox {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}

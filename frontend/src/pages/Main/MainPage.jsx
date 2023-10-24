@@ -1,10 +1,14 @@
 import NeighborListModal from "../../components/Modal/Neighbor/NeighborListModal"
-import PostModal from "../../components/Modal/Post/PostModal"
+import PostBox from "../../components/Modal/Post/PostBox"
+import PostDefaultModal from "../../components/Modal/Post/PostDefaultModal"
+import Letter from "../../components/PostBox/Letter"
 import "./MainPage.css"
 function MainPage() {
   return (
     <div id="main-container">
-      <PostModal />
+      {/* <PostDefaultModal /> */}
+      {/* <Letter /> */}
+      <PostBox />
     </div>
   )
 }
