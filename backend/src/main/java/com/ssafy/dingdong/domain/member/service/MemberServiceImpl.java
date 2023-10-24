@@ -2,6 +2,7 @@ package com.ssafy.dingdong.domain.member.service;
 
 import java.util.UUID;
 
+import com.ssafy.dingdong.domain.room.service.RoomService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,7 @@ public class MemberServiceImpl implements MemberService {
 
 	private final MemberRepository memberRepository;
 	private final MemberRedisRepository memberRedisRepository;
+	private final RoomService roomService;
 
 	@Override
 	@Transactional
@@ -31,6 +33,8 @@ public class MemberServiceImpl implements MemberService {
 			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
 		);
 		findMember.signUp(memberLoginDto.nickname(), memberLoginDto.avatarId());
+
+		roomService.createRoom(memberLoginDto.memberId());
 		return MemberMainDto.of(findMember);
 	}
 

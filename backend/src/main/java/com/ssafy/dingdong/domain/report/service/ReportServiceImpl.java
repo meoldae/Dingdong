@@ -22,7 +22,6 @@ public class ReportServiceImpl implements ReportService{
     private final ReportRepository reportRepository;
     private final LetterService letterService;
 
-    private final MemberRepository memberRepository;
 
     @Override
     public void createLetterReport(String memberId, Long letterId) {
