@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-public class AuthController implements AuthSwaggerController {
+public class AuthController implements AuthSwagger{
 
 	private static final String REFRESH_TOKEN = "refreshToken";
 	private final JwtProvider jwtProvider;
@@ -31,7 +31,7 @@ public class AuthController implements AuthSwaggerController {
 
 	@Override
 	@PostMapping("/refresh")
-	public DataResponse refresh(HttpServletRequest request){
+	public DataResponse<String> refresh(HttpServletRequest request){
 		String accessToken = jwtProvider.getAccessToken(request);
 		Cookie cookie = cookieUtils.getCookie(request, REFRESH_TOKEN).orElseThrow(
 			() -> new CustomException(ExceptionStatus.REFRESH_TOKEN_NOT_FOUND_IN_COOKIE)

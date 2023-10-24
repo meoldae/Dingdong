@@ -21,7 +21,7 @@ public interface MemberSwagger {
 
 	CommonResponse logout(Authentication authentication);
 
-	DataResponse<MemberMainDto> getMember(@PathVariable String memberId);
+	DataResponse<MemberMainDto> getMemberByMemberId(@PathVariable String memberId);
 
 	DataResponse<MemberMainDto> getMember(Authentication authentication);
 
