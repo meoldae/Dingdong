@@ -52,4 +52,8 @@ public class Member {
         this.avatarId = avatarId;
         this.exitTime = null;
     }
+
+    public void exit(){
+        this.exitTime = LocalDateTime.now();
+    }
 }
