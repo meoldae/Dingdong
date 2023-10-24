@@ -1,5 +1,7 @@
 package com.ssafy.dingdong.domain.member.service;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 import com.ssafy.dingdong.domain.member.entity.Member;
@@ -27,7 +29,7 @@ public class AuthServiceImpl implements AuthService{
 		// 만료 X
 		if (!jwtProvider.isExpired(refreshToken)) {
 			String memberId = jwtProvider.getClaimFromExpirationToken(accessToken, "memberId");
-			Member findMember = memberRepository.findById(memberId).orElseThrow(
+			Member findMember = memberRepository.findByMemberId(UUID.fromString(memberId)).orElseThrow(
 				() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
 			);
 			String newAccessToken = jwtProvider.createAccessToken(findMember);

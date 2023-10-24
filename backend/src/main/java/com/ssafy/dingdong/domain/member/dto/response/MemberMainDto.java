@@ -7,19 +7,19 @@ import lombok.Builder;
 public record MemberMainDto(
 	String memberId,
 	String nickname,
-	Long characterId
+	Long avatarId
 ){
 	@Builder
-	public MemberMainDto(String memberId, String nickname, Long characterId){
+	public MemberMainDto(String memberId, String nickname, Long avatarId){
 		this.memberId = memberId;
 		this.nickname = nickname;
-		this.characterId = characterId;
+		this.avatarId = avatarId;
 	}
 	public static MemberMainDto of(Member member){
 		return MemberMainDto.builder()
 			.memberId(member.getMemberId().toString())
 			.nickname(member.getNickname())
-			.characterId(member.getCharacterId())
+			.avatarId(member.getAvatarId())
 			.build();
 
 	}
