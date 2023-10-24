@@ -1,0 +1,23 @@
+.Container {
+  width: 330px;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ProfileContainer {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.InfoContainer {
+  width: 255px;
+  height: 60px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
