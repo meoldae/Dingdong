@@ -1,7 +1,6 @@
 package com.ssafy.dingdong.domain.letter.repository;
 
 import com.ssafy.dingdong.domain.letter.dto.response.LetterListResponseDto;
-import com.ssafy.dingdong.domain.letter.dto.response.LetterRecordResponseDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterResponseDto;
 import com.ssafy.dingdong.domain.letter.entity.Letter;
 import org.springframework.data.domain.Page;
