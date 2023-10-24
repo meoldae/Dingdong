@@ -11,6 +11,7 @@ import com.ssafy.dingdong.global.response.ResponseService;
 import com.ssafy.dingdong.global.response.ResponseStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -27,7 +28,9 @@ public class LetterController implements LetterSwagger {
 
     private final ResponseService responseService;
     private final LetterService letterService;
-    private static final String ANONYMOUS_UUID = "f684f5ed-f8d0-4823-8b59-630d6a3cd5a1";
+
+    @Value("${letter.anonymous}")
+    private String ANONYMOUS_UUID;
 
     @Override
     @GetMapping
@@ -43,8 +46,7 @@ public class LetterController implements LetterSwagger {
     @GetMapping("/{letterId}")
     public DataResponse getLetterDetail(Authentication authentication,
                                         @PathVariable Long letterId) {
-//        String memberId = authentication.getName();
-        String memberId = "eb7c4309-5724-4ef6-9be2-d59b5b5675d8";
+        String memberId = authentication.getName();
         LetterResponseDto result = letterService.getLetterDetail(memberId, letterId);
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, result);
     }
@@ -53,8 +55,7 @@ public class LetterController implements LetterSwagger {
     @PostMapping
     public CommonResponse sendAuthLetter(Authentication authentication,
                                      @RequestBody LetterRequestDto requestDto) {
-
-        String memberId = "6b027c6e-0219-4f94-84a9-1a4bc0d23ef4";
+        String memberId = authentication.getName();
         letterService.sendLetter(memberId, requestDto);
 
         return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
@@ -68,11 +69,9 @@ public class LetterController implements LetterSwagger {
         String ipAddress = "";
         String memberId = ANONYMOUS_UUID;
 
-        if (request != null) {
-            ipAddress = request.getHeader("X-FORWARDED-FOR");
-            if (ipAddress == null || "".equals(ipAddress)) {
-                ipAddress = request.getRemoteAddr();
-            }
+        ipAddress = request.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null || "".equals(ipAddress)) {
+            ipAddress = request.getRemoteAddr();
         }
 
         letterService.sendGuestLetter(requestDto, ipAddress, memberId);
