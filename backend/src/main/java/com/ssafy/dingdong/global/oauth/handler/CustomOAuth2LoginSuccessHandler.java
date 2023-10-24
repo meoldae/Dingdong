@@ -51,7 +51,7 @@ public class CustomOAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSucc
 					redirectUrl = REDIRECT_ENDPOINT + "/rejoin" + findMember.getMemberId();
 				}else {
 					// 닉네임 O, 캐릭터 선택 O
-					if (findMember.getCharacterId() != null && findMember.getNickname() != null) {
+					if (findMember.getAvatarId() != null && findMember.getNickname() != null) {
 						String accessToken = jwtProvider.createAccessToken(findMember);
 						String refreshToken = jwtProvider.createRefreshToken();
 
