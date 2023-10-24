@@ -15,6 +15,7 @@ public enum ExceptionStatus {
 	LETTER_NOT_FOUND(ResponseStatusCode.ERROR, "편지를 찾을 수 없습니다."),
 	NOT_FOUND_STAMP(ResponseStatusCode.ERROR, "존재하지 않는 우표입니다"),
 	MEMBER_NOT_FOUND(ResponseStatusCode.ERROR, "회원을 찾을 수 없습니다."),
+	AUTHENTICATION_FAILED(ResponseStatusCode.ERROR, "인증에 실패하였습니다."),
 	TOKEN_EXPIRED(ResponseStatusCode.ERROR, "토큰이 만료되었습니다."),
 	REFRESH_TOKEN_NOT_FOUND_IN_COOKIE(ResponseStatusCode.ERROR, "리프레시 토큰이 없습니다."),
 	REFRESH_TOKEN_EXPIRED(ResponseStatusCode.ERROR, "리프레시 토큰이 만료되었습니다."),
