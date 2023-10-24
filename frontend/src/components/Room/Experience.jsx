@@ -57,25 +57,24 @@ const Experience = () => {
     }
     const item = items[draggedItem];
     const width =
-      item.rotation === 1 || item.rotation === 3 ? item.size[1] : item.size[0];
+      item.rotation === 1 || item.rotation === 3 ? item.size[2] : item.size[0];
     const height =
-      item.rotation === 1 || item.rotation === 3 ? item.size[0] : item.size[1];
+      item.rotation === 1 || item.rotation === 3 ? item.size[0] : item.size[2];
     let droppable = true;
-    console.log(dragPosition[0],dragPosition[1])
     if (
-      dragPosition[0] - width / 0.24 / 2 < 0 ||
-      dragPosition[0] + width / 0.24 / 2 > 4.8 / 0.24
+      dragPosition[0] - width/2  < 0 ||
+      dragPosition[0] + width /2 > 4.8 / 0.24
     ) {
       droppable = false;
-      console.log("1")
+
     }
 
     if (
-      dragPosition[1] - height / 0.24 / 2 < 0 ||
-      dragPosition[1] + height / 0.24 / 2 > 4.8 / 0.24
+      dragPosition[2] - height/2  < 0 ||
+      dragPosition[2] + height  /2> 4.8 / 0.24
     ) {
       droppable = false;
-      console.log("2");
+
     }
     if (!item.walkable && !item.wall) {
       items.forEach((otherItem, idx) => {
@@ -91,25 +90,24 @@ const Experience = () => {
         // check item overlap
         const otherWidth =
           otherItem.rotation === 1 || otherItem.rotation === 3
-            ? otherItem.size[1] / 0.24
-            : otherItem.size[0] / 0.24;
+            ? otherItem.size[2] 
+            : otherItem.size[0] ;
         const otherHeight =
           otherItem.rotation === 1 || otherItem.rotation === 3
-            ? otherItem.size[0] / 0.24
-            : otherItem.size[1] / 0.24;
-
+            ? otherItem.size[0] 
+            : otherItem.size[2] ;
         if (
-          dragPosition[0] + width / 0.24 / 2 >
-            otherItem.gridPosition[0] - otherWidth / 2 &&
-          dragPosition[0] - width / 0.24 / 2 <
-            otherItem.gridPosition[0] + otherWidth / 2 &&
-          dragPosition[1] - height / 0.24 / 2 <
-            otherItem.gridPosition[1] + otherHeight / 2 &&
-          dragPosition[1] + height / 0.24 / 2 >
-            otherItem.gridPosition[1] - otherWidth / 2
+          dragPosition[0] + width /2 >
+            otherItem.gridPosition[0] - otherWidth /2 &&
+          dragPosition[0] - width /2 <
+            otherItem.gridPosition[0] + otherWidth /2 &&
+          dragPosition[2] - height/2  <
+            otherItem.gridPosition[2] + otherHeight/2  &&
+          dragPosition[2] + height/2  >
+            otherItem.gridPosition[2] - otherHeight /2
         ) {
           droppable = false;
-          console.log(3);
+
         }
       });
     }
@@ -195,7 +193,7 @@ const Experience = () => {
           if (
             !dragPosition ||
             newPosition[0] !== dragPosition[0] ||
-            newPosition[1] !== dragPosition[1]
+            newPosition[2] !== dragPosition[2]
           ) {
             setDraggPosition(newPosition);
           }

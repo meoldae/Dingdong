@@ -15,11 +15,10 @@ export const Item = ({
 }) => {
   const { name, gridPosition, size, rotation: itemRotation } = item;
   const rotation = isDragging ? dragRotation : itemRotation;
-
   const { scene } = useGLTF(`assets/models/roomitems/${name}.glb`);
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
-  const width = rotation === 1 || rotation === 3 ? size[1] : size[0];
-  const height = rotation === 1 || rotation === 3 ? size[0] : size[1];
+  const width = rotation === 1 || rotation === 3 ? size[2] : size[0];
+  const height = rotation === 1 || rotation === 3 ? size[0] : size[2];
   const { gridToVector3 } = useGrid();
 
   const [hover, setHover] = useState(false);
@@ -39,7 +38,7 @@ export const Item = ({
       <primitive object={clone} rotation-y={((rotation) * Math.PI) / 2} />
       {isDragging && (
         <mesh position-y={0.02} >
-          <boxGeometry args={[width, 0, height]} />
+          <boxGeometry args={[width * 0.48/2, 0, height *0.48/2]} />
           <meshBasicMaterial
             color={canDrop ? "green" : "red"}
             opacity={0.3}

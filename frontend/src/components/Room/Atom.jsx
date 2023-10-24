@@ -1,38 +1,37 @@
 import { atom } from "recoil";
 
 export const buildModeState = atom({
-  key:"buildModeState",
-  default:false,
-})
+  key: "buildModeState",
+  default: false,
+});
 
 export const dragPositionState = atom({
-  key:"dragPositionState",
-  default:null,
-})
+  key: "dragPositionState",
+  default: null,
+});
 
 export const draggedItemState = atom({
-  key:"draggedItem",
-  default:null,
-})
+  key: "draggedItem",
+  default: null,
+});
 
 const item = {
   sofa: {
     name: "sofa",
-    size: [1.44, 1.44],
+    size: [6, 0, 6],
   },
   carpet: {
     name: "carpet",
-    size: [2.4, 2.4],
+    size: [10, 0, 10],
   },
   vase: {
     name: "vase",
-    size: [0.48, 0.48],
+    size: [2, 0, 2],
   },
   bed: {
     name: "bed",
-    size: [1.92, 2.4],
+    size: [8, 0, 10],
   },
-  
 };
 
 const map = {
@@ -41,22 +40,22 @@ const map = {
   item: [
     {
       ...item.sofa,
-      gridPosition: [3, 16],
+      gridPosition: [3, 0, 16],
       rotation: 1,
     },
     {
       ...item.bed,
-      gridPosition: [4, 6],
+      gridPosition: [4, 0, 6],
       rotation: 2,
     },
     {
       ...item.vase,
-      gridPosition: [19,19],
+      gridPosition: [19, 0, 19],
       rotation: 1,
     },
     {
       ...item.carpet,
-      gridPosition: [10, 10],
+      gridPosition: [10, 0, 10],
       rotation: 1,
       walkable: true,
       wall: true,
@@ -65,11 +64,11 @@ const map = {
 };
 
 export const ItemsState = atom({
-  key:"ItemsState",
-  default : map.item,
-})
+  key: "ItemsState",
+  default: map.item,
+});
 
 export const ItemRotateState = atom({
   key: "ItemRotateState",
-  default : 0,
-})
+  default: 0,
+});
