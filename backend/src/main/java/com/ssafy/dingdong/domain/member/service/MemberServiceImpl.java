@@ -63,6 +63,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	@Transactional
 	public void logout(String memberId) {
 		// 세션 비활성화
 		deleteSession(memberId);
