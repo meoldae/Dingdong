@@ -54,6 +54,12 @@ public class MemberController implements MemberSwagger {
 	}
 
 	@Override
+	public DataResponse getMember(Authentication authentication) {
+		MemberMainDto member = memberService.getMemberById(authentication.getName().toString());
+		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
+	}
+
+	@Override
 	@GetMapping("/connect")
 	public CommonResponse createSession(Authentication authentication) {
 		memberService.createSession(authentication.getName());
