@@ -31,4 +31,9 @@ public interface LetterRepository extends JpaRepository<Letter, Long> {
     @Transactional
     @Query("UPDATE Letter l SET l.isRead = true WHERE l.id = :letterId")
     void updateIsReadById(Long letterId);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Letter l SET l.isReport = true WHERE l.id = :letterId")
+    void updateIsReportById(Long letterId);
 }

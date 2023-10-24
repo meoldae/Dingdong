@@ -66,4 +66,6 @@ public class LetterServiceImpl implements LetterService {
     public void updateReadLetter(Long letterId) {
         letterRepository.updateIsReadById(letterId);
     }
+
+    public void ReportLetter(Long letterId) { letterRepository.updateIsReportById(letterId); }
 }
