@@ -7,6 +7,7 @@ import Map from "../../components/Default/Map"
 import Model from "../../components/Item/PlayerItems/Model"
 import "./MainPage.css"
 import Clover from "../../components/Item/MainItems/Clover"
+import Rocket from "../../components/Item/MainItems/Rocket"
 
 function TutorialPage() {
   return (
@@ -30,6 +31,7 @@ function TutorialPage() {
         {/* 객체 */}
         <Model />
         <Clover />
+        <Rocket />
       </Canvas>
     </div>
   )
