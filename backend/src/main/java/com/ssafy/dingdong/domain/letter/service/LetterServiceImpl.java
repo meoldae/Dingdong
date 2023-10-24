@@ -27,7 +27,7 @@ public class LetterServiceImpl implements LetterService {
 
     @Override
     public Page<LetterListResponseDto> getLetterList(String memberId, Pageable pageable) {
-        Page<LetterListResponseDto> result = letterRepository.findAllByLetterTo(memberId, pageable);
+        Page<LetterListResponseDto> result = letterRepository.findAllByLetterToAndIsReportFalse(memberId, pageable);
 
         return result;
     }
@@ -63,7 +63,16 @@ public class LetterServiceImpl implements LetterService {
         letterRepository.save(letter);
     }
 
+    @Override
+    public String getLetterFromId(Long letterId) {
+        return letterRepository.findLetterFromByLetterId(letterId)
+                .orElseThrow(() -> new CustomException(ExceptionStatus.LETTER_FROM_NOT_FOUND));
+    }
+
     public void updateReadLetter(Long letterId) {
         letterRepository.updateIsReadById(letterId);
     }
+
+    @Override
+    public void reportLetter(Long letterId) { letterRepository.updateIsReportById(letterId); }
 }

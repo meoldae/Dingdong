@@ -35,15 +35,19 @@ public class Letter {
 
     @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
     private Boolean isRead;
+    @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
+    private Boolean isReport;
 
     @Column(nullable = false)
     private String ipAddress;
+
     private LocalDateTime createTime;
 
     @PrePersist
     public void setSendDate() {
         this.createTime = LocalDateTime.now();
         this.isRead = false;
+        this.isReport = false;
     }
 
     public static Letter build(LetterRequestDto requestDto,

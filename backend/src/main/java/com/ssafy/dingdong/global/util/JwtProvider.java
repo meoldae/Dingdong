@@ -83,6 +83,7 @@ public class JwtProvider {
 
 		Date expiration = claim.getExpiration();
 		Date now = new Date();
+
 		return expiration.before(now);
 	}
 
