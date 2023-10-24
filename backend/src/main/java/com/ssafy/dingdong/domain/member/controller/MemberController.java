@@ -34,7 +34,7 @@ public class MemberController implements MemberSwagger {
 
 	@Override
 	@PostMapping("/signup")
-	public DataResponse createMember(@Validated @RequestBody MemberSignUpDto memberSignUpDto, HttpServletRequest response) {
+	public DataResponse<MemberMainDto> createMember(@Validated @RequestBody MemberSignUpDto memberSignUpDto, HttpServletRequest response) {
 		MemberMainDto member = memberService.createMember(memberSignUpDto);
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
 	}
@@ -48,13 +48,13 @@ public class MemberController implements MemberSwagger {
 
 	@Override
 	@GetMapping("/{memberId}")
-	public DataResponse getMember(@PathVariable String memberId) {
+	public DataResponse<MemberMainDto> getMemberByMemberId(@PathVariable String memberId) {
 		MemberMainDto member = memberService.getMemberById(memberId);
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
 	}
 
 	@Override
-	public DataResponse getMember(Authentication authentication) {
+	public DataResponse<MemberMainDto> getMember(Authentication authentication) {
 		MemberMainDto member = memberService.getMemberById(authentication.getName().toString());
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
 	}

@@ -12,13 +12,16 @@ import com.ssafy.dingdong.domain.member.dto.response.MemberMainDto;
 import com.ssafy.dingdong.global.response.CommonResponse;
 import com.ssafy.dingdong.global.response.DataResponse;
 
+import io.swagger.annotations.Api;
+
+@Api(tags = "Member")
 public interface MemberSwagger {
 
 	DataResponse<MemberMainDto> createMember(@Validated @RequestBody MemberSignUpDto memberSignUpDto, HttpServletRequest response);
 
 	CommonResponse logout(Authentication authentication);
 
-	DataResponse<MemberMainDto> getMember(@PathVariable String memberId);
+	DataResponse<MemberMainDto> getMemberByMemberId(@PathVariable String memberId);
 
 	DataResponse<MemberMainDto> getMember(Authentication authentication);
 

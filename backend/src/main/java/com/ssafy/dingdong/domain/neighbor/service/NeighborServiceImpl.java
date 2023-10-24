@@ -59,7 +59,7 @@ public class NeighborServiceImpl implements NeighborService{
 	}
 
 	@Override
-	public List getRequestList(String memberId) {
+	public List<String> getRequestList(String memberId) {
 		return neighborRepository.findAllRequestByMemberId(UUID.fromString(memberId));
 	}
 
