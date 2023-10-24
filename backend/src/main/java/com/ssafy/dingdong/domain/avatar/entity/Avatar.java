@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @Getter
 public class Avatar {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long avatarId;
     private String glbUrl;
     private String thumbUrl;
 }
