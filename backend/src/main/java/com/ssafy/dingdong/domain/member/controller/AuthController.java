@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-public class AuthController implements AuthSwagger{
+public class AuthController implements AuthSwaggerController {
 
 	private static final String REFRESH_TOKEN = "refreshToken";
 	private final JwtProvider jwtProvider;
