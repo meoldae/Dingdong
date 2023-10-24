@@ -1,0 +1,18 @@
+.header{
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  font-size: 40px;
+  margin-top: 60px;
+}
+
+.profile{
+  color: green;
+  margin-right: 10px;
+}
+
+.slider{
+  text-align: center;
+  margin-top: 50px;
+  /* width: %; */
+}

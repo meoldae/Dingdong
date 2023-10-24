@@ -1,5 +1,6 @@
 .appWrapper {
-  max-width: 414px;
+  max-width: 464px;
+  min-width: 400px;
   overflow: hidden;
   margin: 0 auto;
   height: 100vh;

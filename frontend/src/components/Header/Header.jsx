@@ -9,11 +9,6 @@ const Header = () => {
         <div className={style.userName}>userName</div>
         <img src={`${icon}bell.svg`} alt="" />
       </div>
-      <div className={style.share}>
-        <div className={style.shareImg}>
-          <img src={`${icon}share.svg`} alt="" />
-        </div>
-      </div>
     </div>
   );
 };

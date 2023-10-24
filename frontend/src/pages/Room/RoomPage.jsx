@@ -9,8 +9,10 @@ import {
   draggedItemState,
 } from "../../components/Room/Atom";
 import Header from "../../components/Header/Header";
-import { Html } from "@react-three/drei";
-import Footer from "../../components/Footer/Footer";
+import MyFooter from "../../components/Footer/MyFooter";
+import Share from "../../components/Header/Share";
+import OtherFooter from "../../components/Footer/OtherFooter";
+import NeighborRequset from "../../components/Header/neighborRequest";
 
 function RoomPage() {
   const [editMode, setEditMode] = useRecoilState(buildModeState);
@@ -21,6 +23,8 @@ function RoomPage() {
   return (
     <div className="container">
     <Header/>
+    <Share/>
+    {/* <NeighborRequset/> */}
       <div
         className="button"
         onClick={() => {
@@ -47,7 +51,8 @@ function RoomPage() {
         <color attach="background" args={["skyblue"]} />
         <Experience />
       </Canvas>
-      <Footer/>
+      {/* <OtherFooter/> */}
+      <MyFooter/>
     </div>
   );
 }
