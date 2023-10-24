@@ -1,5 +1,7 @@
 package com.ssafy.dingdong.domain.member.service;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 import com.ssafy.dingdong.domain.member.dto.request.MemberSignUpDto;
@@ -23,7 +25,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberMainDto createMember(MemberSignUpDto memberLoginDto) {
-		Member findMember = memberRepository.findByMemberId(memberLoginDto.memberId()).orElseThrow(
+		Member findMember = memberRepository.findByMemberId(UUID.fromString(memberLoginDto.memberId())).orElseThrow(
 			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
 		);
 		findMember.signUp(memberLoginDto.nickname(), memberLoginDto.characterId());
@@ -32,7 +34,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberMainDto getMemberById(String memberId) {
-		Member findMember = memberRepository.findByMemberId(memberId).orElseThrow(
+		Member findMember = memberRepository.findByMemberId(UUID.fromString(memberId)).orElseThrow(
 			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
 		);
 		return MemberMainDto.of(findMember);
