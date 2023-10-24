@@ -16,7 +16,7 @@ import java.util.Optional;
 
 public interface LetterRepository extends JpaRepository<Letter, Long> {
 
-    Page<LetterListResponseDto> findAllByLetterTo(@Param("memberId") String memberId, Pageable pageable);
+    Page<LetterListResponseDto> findAllByLetterToAndIsReportFalse(@Param("memberId") String memberId, Pageable pageable);
 
     @Query("SELECT new com.ssafy.dingdong.domain.letter.dto.response.LetterResponseDto( " +
             "l.anonymousFlag, l.description, mf.nickname, mt.nickname, s.imgUrl, s.description, l.createTime) " +
