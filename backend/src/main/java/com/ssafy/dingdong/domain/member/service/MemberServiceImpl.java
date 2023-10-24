@@ -28,7 +28,7 @@ public class MemberServiceImpl implements MemberService {
 		Member findMember = memberRepository.findByMemberId(UUID.fromString(memberLoginDto.memberId())).orElseThrow(
 			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
 		);
-		findMember.signUp(memberLoginDto.nickname(), memberLoginDto.characterId());
+		findMember.signUp(memberLoginDto.nickname(), memberLoginDto.avatarId());
 		return MemberMainDto.of(findMember);
 	}
 
@@ -42,16 +42,17 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void createSession(String memberId) {
-		/**
-		 * Todo : Redis 활성화 세션 관리 로직
-		 */
+		memberRedisRepository.insertStatusByMemberId(memberId);
 	}
 
 	@Override
 	public void deleteSession(String memberId) {
-		/**
-		 * Todo : Redis 세션 비활성화 로직
-		 */
+		memberRedisRepository.deleteStatusByMemberId(memberId);
+	}
+
+	@Override
+	public String getStatusByMemberId(String memberId){
+		return memberRedisRepository.findStatusByMemberId(memberId).orElse("FALSE");
 	}
 
 	@Override
