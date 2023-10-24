@@ -27,6 +27,9 @@ public interface LetterRepository extends JpaRepository<Letter, Long> {
             "WHERE l.letterTo = :memberId AND l.id = :letterId")
     Optional<LetterResponseDto> findByLetterId(String memberId, Long letterId);
 
+    @Query("SELECT l.letterFrom FROM Letter l WHERE l.id = :letterId")
+    Optional<String> findLetterFromByLetterId(@Param("letterId") Long letterId);
+
     @Modifying
     @Transactional
     @Query("UPDATE Letter l SET l.isRead = true WHERE l.id = :letterId")
