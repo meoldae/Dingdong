@@ -1,6 +1,7 @@
 package com.ssafy.dingdong.domain.letter.repository;
 
 import com.ssafy.dingdong.domain.letter.dto.response.LetterListResponseDto;
+import com.ssafy.dingdong.domain.letter.dto.response.LetterRecordResponseDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterResponseDto;
 import com.ssafy.dingdong.domain.letter.entity.Letter;
 import org.springframework.data.domain.Page;
@@ -29,6 +30,18 @@ public interface LetterRepository extends JpaRepository<Letter, Long> {
 
     @Query("SELECT l.letterFrom FROM Letter l WHERE l.id = :letterId")
     Optional<String> findLetterFromByLetterId(@Param("letterId") Long letterId);
+
+    @Query("SELECT l.letterFrom, COUNT(l.letterFrom) as cnt " +
+            "FROM Letter l " +
+            "GROUP BY l.letterFrom " +
+            "ORDER BY cnt DESC")
+    List<Object[]> findTopLetterFrom();
+
+    @Query("SELECT l.letterTo, COUNT(l.letterTo) as cnt " +
+            "FROM Letter l " +
+            "GROUP BY l.letterTo " +
+            "ORDER BY cnt DESC")
+    List<Object[]> findTopLetterTo();
 
     @Modifying
     @Transactional
