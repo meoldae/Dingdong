@@ -3,6 +3,7 @@ package com.ssafy.dingdong.domain.member.service;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.dingdong.domain.member.dto.request.MemberSignUpDto;
 import com.ssafy.dingdong.domain.member.dto.response.MemberMainDto;
@@ -24,6 +25,7 @@ public class MemberServiceImpl implements MemberService {
 	private final MemberRedisRepository memberRedisRepository;
 
 	@Override
+	@Transactional
 	public MemberMainDto createMember(MemberSignUpDto memberLoginDto) {
 		Member findMember = memberRepository.findByMemberId(UUID.fromString(memberLoginDto.memberId())).orElseThrow(
 			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
@@ -65,5 +67,15 @@ public class MemberServiceImpl implements MemberService {
 		// 세션 비활성화
 		deleteSession(memberId);
 		memberRedisRepository.deleteTokenByMemberId(memberId);
+	}
+
+	@Override
+	@Transactional
+	public void deleteMember(String memberId) {
+		logout(memberId);
+		Member findMember = memberRepository.findByMemberId(UUID.fromString(memberId)).orElseThrow(
+			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
+		);
+		findMember.exit();
 	}
 }
