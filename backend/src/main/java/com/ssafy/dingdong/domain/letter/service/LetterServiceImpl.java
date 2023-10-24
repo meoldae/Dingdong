@@ -86,16 +86,10 @@ public class LetterServiceImpl implements LetterService {
         List<Object[]> result = letterRepository.findTopLetterFrom();
         log.info(result);
         if (!result.isEmpty()) {
-            log.info("비어있지않음");
-            log.info(result.get(0)[0]);
-            log.info(result.get(0)[1]);
-            LetterRecordResponseDto.builder()
+            return LetterRecordResponseDto.builder()
                     .memberId((String) result.get(0)[0])
                     .count(((Number) result.get(0)[1]).intValue())
                     .build();
-        }
-        else {
-            log.info("비어있음");
         }
         return LetterRecordResponseDto.builder().build();
     }
@@ -105,15 +99,10 @@ public class LetterServiceImpl implements LetterService {
         List<Object[]> result = letterRepository.findTopLetterTo();
         log.info(result);
         if (!result.isEmpty()) {
-            log.info("비어있지않음");
-            log.info(result.get(0).toString());
-            LetterRecordResponseDto.builder()
+            return LetterRecordResponseDto.builder()
                     .memberId((String) result.get(0)[0])
                     .count(((Number) result.get(0)[1]).intValue())
                     .build();
-        }
-        else {
-            log.info("비어있음");
         }
         return LetterRecordResponseDto.builder().build();
     }

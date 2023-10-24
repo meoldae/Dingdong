@@ -22,7 +22,7 @@ public class ScoreServiceImpl implements ScoreService{
     private final LetterService letterService;
 
 
-    @Scheduled(cron = "0 * * * * *")
+    @Scheduled(cron = "0 0 * * * *")
     public void insertScoreEveryHourOnTheHour() {
         // 편지 많이 보낸 사람
         LetterRecordResponseDto letterFromRecord = letterService.findTopLetterFrom();
@@ -38,6 +38,6 @@ public class ScoreServiceImpl implements ScoreService{
         scoreRepository.save(letterFromScore);
         scoreRepository.save(letterToScore);
 
-        //TODO (방 좋아요, 팔로워 수)
+        //TODO (방 좋아요 많은 사람, 팔로워 수 많은 사람)
     }
 }
