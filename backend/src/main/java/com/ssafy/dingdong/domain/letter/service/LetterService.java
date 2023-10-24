@@ -17,4 +17,7 @@ public interface LetterService {
     void sendLetter(String memberId, LetterRequestDto requestDto);
 
     void sendGuestLetter(LetterRequestDto requestDto, String ipAddress, String memberId);
+
+    void reportLetter(Long letterId);
+    String getLetterFromId(Long letterId);
 }

@@ -2,6 +2,7 @@ package com.ssafy.dingdong.domain.report.service;
 
 import com.ssafy.dingdong.domain.letter.dto.response.LetterResponseDto;
 import com.ssafy.dingdong.domain.letter.repository.LetterRepository;
+import com.ssafy.dingdong.domain.letter.service.LetterService;
 import com.ssafy.dingdong.domain.member.entity.Member;
 import com.ssafy.dingdong.domain.member.repository.MemberRepository;
 import com.ssafy.dingdong.domain.report.entity.Report;
@@ -19,18 +20,18 @@ import org.springframework.stereotype.Service;
 public class ReportServiceImpl implements ReportService{
 
     private final ReportRepository reportRepository;
-    private final LetterRepository letterRepository;
+    private final LetterService letterService;
+
     private final MemberRepository memberRepository;
 
     @Override
     public void createLetterReport(String memberId, Long letterId) {
-        String letterFromId = letterRepository.findLetterFromByLetterId(letterId)
-                .orElseThrow(() -> new CustomException(ExceptionStatus.LETTER_FROM_NOT_FOUND));
+        String letterFromId = letterService.getLetterFromId(letterId);
         Report report = Report.build(memberId, letterFromId, ReportType.LETTER, letterId);
         reportRepository.save(report);
+        letterService.reportLetter(letterId);
 
-//        letter isReport true 처리
-//
+        //TODO
 //        신고 당한 유저 정지 처리
 //        long reportCount = reportRepository.countByReportTo(letterFromId);
 //        Member member = memberRepository.findById(letterFromId)

@@ -63,9 +63,16 @@ public class LetterServiceImpl implements LetterService {
         letterRepository.save(letter);
     }
 
+    @Override
+    public String getLetterFromId(Long letterId) {
+        return letterRepository.findLetterFromByLetterId(letterId)
+                .orElseThrow(() -> new CustomException(ExceptionStatus.LETTER_FROM_NOT_FOUND));
+    }
+
     public void updateReadLetter(Long letterId) {
         letterRepository.updateIsReadById(letterId);
     }
 
-    public void ReportLetter(Long letterId) { letterRepository.updateIsReportById(letterId); }
+    @Override
+    public void reportLetter(Long letterId) { letterRepository.updateIsReportById(letterId); }
 }
