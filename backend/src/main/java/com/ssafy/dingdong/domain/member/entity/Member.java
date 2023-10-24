@@ -37,7 +37,7 @@ public class Member {
     private String email;
     private LocalDateTime createTime;
     private LocalDateTime exitTime;
-    private Long characterId;
+    private Long avatarId;
 
     @Builder
     public Member(String provider, String email, LocalDateTime createTime, String username){
@@ -47,8 +47,8 @@ public class Member {
         this.username = username;
     }
 
-    public void signUp(String nickname, Long characterId){
+    public void signUp(String nickname, Long avatarId){
         this.nickname = nickname;
-        this.characterId = characterId;
+        this.avatarId = avatarId;
     }
 }
