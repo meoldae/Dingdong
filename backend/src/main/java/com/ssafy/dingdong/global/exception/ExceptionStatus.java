@@ -21,8 +21,11 @@ public enum ExceptionStatus {
 	TOKEN_EXPIRED(ResponseStatusCode.ERROR, "토큰이 만료되었습니다."),
 	REFRESH_TOKEN_NOT_FOUND_IN_COOKIE(ResponseStatusCode.ERROR, "리프레시 토큰이 없습니다."),
 	REFRESH_TOKEN_EXPIRED(ResponseStatusCode.ERROR, "리프레시 토큰이 만료되었습니다."),
-	LOGOUT(ResponseStatusCode.ERROR, "로그아웃 되었습니다.");
+	LOGOUT(ResponseStatusCode.ERROR, "로그아웃 되었습니다."),
 
+	//신고
+	LETTER_FROM_NOT_FOUND(ResponseStatusCode.ERROR, "편지 작성자가 존재하지 않습니다."),
+	CHAT_FROM_NOT_FOUND(ResponseStatusCode.ERROR, "채팅 작성자가 존재하지 않습니다.");
 	private final ResponseStatusCode code;
 	private final String message;
 }
