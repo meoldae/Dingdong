@@ -25,4 +25,6 @@ public interface MemberSwagger {
 	CommonResponse createSession(Authentication authentication);
 
 	CommonResponse deleteSession(Authentication authentication);
+
+	CommonResponse deleteMember(Authentication authentication);
 }

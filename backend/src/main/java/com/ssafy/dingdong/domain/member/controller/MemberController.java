@@ -72,4 +72,11 @@ public class MemberController implements MemberSwagger {
 		memberService.deleteSession(authentication.getName());
 		return responseService.successResponse(ResponseStatus.SESSION_DELETED);
 	}
+
+	@Override
+	@DeleteMapping
+	public CommonResponse deleteMember(Authentication authentication) {
+		memberService.deleteMember(authentication.getName());
+		return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
+	}
 }
