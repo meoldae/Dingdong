@@ -1,10 +1,9 @@
-import NeighborListModal from "../../components/Modal/Neighbor/NeighborListModal"
-import PostModal from "../../components/Modal/Post/PostModal"
+import SendLetter from "../../components/Modal/Post/SendLetter"
 import "./MainPage.css"
 function MainPage() {
   return (
     <div id="main-container">
-      <PostModal />
+      <SendLetter />
     </div>
   )
 }

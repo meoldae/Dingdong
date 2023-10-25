@@ -1,0 +1,33 @@
+.postCardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  height: 400px;
+}
+
+.postCardContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.postCardContainer {
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+}
+
+.postCardContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.postCardComment {
+  text-align: center;
+  color: #5f6368;
+  margin-bottom: 10px;
+}
+
+.selectBtn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
