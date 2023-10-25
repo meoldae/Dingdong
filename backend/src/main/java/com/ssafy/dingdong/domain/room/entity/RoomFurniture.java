@@ -9,7 +9,7 @@ import lombok.Getter;
 
 @Entity
 @Getter
-public class Furniture {
+public class RoomFurniture {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
