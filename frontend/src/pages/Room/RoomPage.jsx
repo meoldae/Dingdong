@@ -1,36 +1,36 @@
-import { Canvas } from "@react-three/fiber";
-import Experience from "../../components/Room/Experience";
-import "./RoomPage.css";
-import { useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { Canvas } from "@react-three/fiber"
+import Experience from "../../components/Room/Experience"
+import "./RoomPage.css"
+import { useState } from "react"
+import { useRecoilState, useRecoilValue } from "recoil"
 import {
   ItemRotateState,
   ItemsState,
   buildModeState,
   draggedItemState,
-} from "../../components/Room/Atom";
-import Header from "../../components/Header/Header";
-import MyFooter from "../../components/Footer/MyFooter";
-import Share from "../../components/Header/Share";
-import OtherFooter from "../../components/Footer/OtherFooter";
-import NeighborRequset from "../../components/Header/NeighborRequset";
+} from "../../components/Room/Atom"
+import Header from "../../components/Header/Header"
+import MyFooter from "../../components/Footer/MyFooter"
+import Share from "../../components/Header/Share"
+import OtherFooter from "../../components/Footer/OtherFooter"
+import NeighborRequest from "../../components/Header/NeighborRequest"
 
 function RoomPage() {
-  const [editMode, setEditMode] = useRecoilState(buildModeState);
-  const isDrag = useRecoilValue(draggedItemState);
+  const [editMode, setEditMode] = useRecoilState(buildModeState)
+  const isDrag = useRecoilValue(draggedItemState)
   const [draggedItemRotation, setDraggedItemRotation] =
-    useRecoilState(ItemRotateState);
-  const item = useRecoilValue(ItemsState);
+    useRecoilState(ItemRotateState)
+  const item = useRecoilValue(ItemsState)
 
   return (
     <div className="container">
       <Header />
       <Share />
-      {/* <NeighborRequset/> */}
+      <NeighborRequest />
       <div
         className="button"
         onClick={() => {
-          setEditMode(!editMode);
+          setEditMode(!editMode)
         }}
       >
         {editMode && <span>편집모드</span>}
@@ -42,11 +42,11 @@ function RoomPage() {
             onClick={() => {
               // 벽에 있는 아이템 관련
               if (item[isDrag].wall) {
-                setDraggedItemRotation === 2 ? 1 : draggedItemRotation + 1;
+                setDraggedItemRotation === 2 ? 1 : draggedItemRotation + 1
               } else {
                 setDraggedItemRotation(
                   draggedItemRotation === 3 ? 0 : draggedItemRotation + 1
-                );
+                )
               }
             }}
           >
@@ -61,7 +61,7 @@ function RoomPage() {
       {/* <OtherFooter/> */}
       <MyFooter />
     </div>
-  );
+  )
 }
 
-export default RoomPage;
+export default RoomPage

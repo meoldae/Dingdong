@@ -1,17 +1,17 @@
-import style from "./Header.module.css";
-import RoomBtn from "../Button/Room/RoomBtn";
+import style from "./Header.module.css"
+import RoomBtn from "../Button/Room/RoomBtn"
 
-const NeighborRequset = () => {
-  const icon = "assets/icons/";
+const NeighborRequest = () => {
+  const icon = "assets/icons/"
   return (
     <div className={style.wrap}>
       <div className={style.share}>
         <div className={style.shareImg}>
-          <RoomBtn img={"addUser"}/>
+          <RoomBtn img={"addUser"} />
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NeighborRequset;
+export default NeighborRequest
