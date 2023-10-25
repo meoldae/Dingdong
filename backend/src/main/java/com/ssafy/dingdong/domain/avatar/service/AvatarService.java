@@ -5,5 +5,5 @@ import com.ssafy.dingdong.domain.avatar.dto.response.AvatarListResponseDto;
 import java.util.List;
 
 public interface AvatarService {
-    List<AvatarListResponseDto> getListAvatar();
+    AvatarListResponseDto getListAvatar();
 }
