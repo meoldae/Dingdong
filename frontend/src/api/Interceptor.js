@@ -1,8 +1,10 @@
-const axios = require("axios");
-const { RefreshToken } = require("./User");
+import axios from "axios";
+import { RefreshToken } from "./User";
 
 const onRequest = (config) => {
-    const accessToken = localStorage.getItem('accessToken') != null ? `Bearer ` + JSON.parse(localStorage.getItem('accessToken')).accessToken : "";
+    const accessToken = localStorage.getItem('userAtom') 
+        ? `Bearer ` + JSON.parse(localStorage.getItem('userAtom')).accessToken 
+        : "";
 
     config.headers.Authorization = accessToken;
     return config;
@@ -16,23 +18,22 @@ const onResponse = (res) => {
     return res;
 };
 
-const onErrorResponse = async (errResult) => {
-    const err = errResult;
-    const { response } = err;
-    const originalConfig = err.config;
+const onErrorResponse = async (err) => {
+    const _err = err;
+    const { response } = _err;
+    const originalConfig = _err.config;
 
     if (response && response.status === 401) {
         RefreshToken(({ data }) => {
-            localStorage.setItem('accessToken', `${data.data.accessToken}"`);
-            axios.defaults.headers.common.Authorization = `Bearer ` + data.data.accessToken;
-            originalConfig.headers.Authorization = `Bearer ` + data.data.accessToken;
+            localStorage.setItem('userAtom', `{"accessToken" : "${data.data}"}`);
+            axios.defaults.headers.common.Authorization = `Bearer ` + data.data;
+            originalConfig.headers.Authorization = `Bearer ` + data.data;
 
             return axios(originalConfig);
-        }, (error) => console.log(error)).then((res) => {
-        });
+        }, (error) => console.log(error)).then((res) => { });
     }
 
     return Promise.reject(err);
 };
 
-module.exports = { onRequest, onErrorRequest, onResponse, onErrorResponse };
+export { onRequest, onErrorRequest, onResponse, onErrorResponse };

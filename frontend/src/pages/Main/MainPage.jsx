@@ -3,7 +3,8 @@ import "./MainPage.css"
 function MainPage() {
   return (
     <div id="main-container">
-      <SendLetter />
+      메인페이지
+      {/* <SendLetter /> */}
     </div>
   )
 }
