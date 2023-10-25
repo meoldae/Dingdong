@@ -1,8 +1,6 @@
 package com.ssafy.dingdong.domain.room.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
-import com.ssafy.dingdong.domain.room.entity.Furniture;
 import com.ssafy.dingdong.domain.room.service.RoomService;
 import com.ssafy.dingdong.global.response.DataResponse;
 import com.ssafy.dingdong.global.response.ResponseService;
@@ -54,8 +51,8 @@ public class RoomController implements RoomSwagger{
 
     @Override
     @GetMapping("/furniture")
-    public DataResponse<List<FurnitureSummaryDto> > getFurnitureList(@RequestParam(required = false) Integer category, @PageableDefault(size = 6) Pageable pageable) {
-        List<FurnitureSummaryDto>  furnitureList;
+    public DataResponse<Page<FurnitureSummaryDto> > getFurnitureList(@RequestParam(required = false) Integer category, @PageableDefault(size = 6) Pageable pageable) {
+        Page<FurnitureSummaryDto> furnitureList;
 
         if (category != null) {
             furnitureList = roomService.getFurnitureListByCategory(category, pageable);

@@ -1,7 +1,6 @@
 package com.ssafy.dingdong.domain.room.controller;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
-import com.ssafy.dingdong.domain.room.entity.Furniture;
 import com.ssafy.dingdong.global.response.DataResponse;
 
 import io.swagger.annotations.Api;
@@ -24,6 +22,6 @@ public interface RoomSwagger {
 
 	DataResponse<RoomResponseDto> getRoomByRoomId(@PathVariable Long roomId);
 
-	DataResponse<List<FurnitureSummaryDto>> getFurnitureList(@RequestParam(required = false) Integer category, @PageableDefault(size = 6) Pageable pageable);
+	DataResponse<Page<FurnitureSummaryDto>> getFurnitureList(@RequestParam(required = false) Integer category, @PageableDefault(size = 6) Pageable pageable);
 
 }
