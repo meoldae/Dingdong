@@ -16,6 +16,7 @@ pipeline {
         stage("COPY Resources") {
             steps {
                 sh "cp -r ${APPLICATION_YML_PATH} ${PROJECT_DIR_BE}/src/main"
+                sh "cp -r ${APPLICATION_YML_PATH} ${PROJECT_DIR_BE}/src/test"
             }
         }
 
