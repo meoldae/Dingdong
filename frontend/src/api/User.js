@@ -1,11 +1,14 @@
-const { HttpJson } = require("./Http");
+import { HttpJson } from "./Http";
 
-const createUser = async (param, success, fail) => {
-    await HttpJson.post(`user/signup`, JSON.stringify(param))
+const CreateUser = async (param, success, fail) => {
+    await HttpJson.post(`member/signup`, JSON.stringify(param))
         .then(success)
         .catch(fail);
 };
 
-module.exports = {
-    createUser
-};
+const RefreshToken = async (success, fail) => {
+    await HttpJson.post(`auth/refresh`).then(success).catch(fail);
+}
+
+
+export { CreateUser, RefreshToken };
