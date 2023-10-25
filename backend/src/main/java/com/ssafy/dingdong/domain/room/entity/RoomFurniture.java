@@ -13,7 +13,7 @@ public class RoomFurniture {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long furnitureId;
+	private Long roomFurnitureId;
 	private Long roomId;
 	private String assetId;
 	private Float xPos;
