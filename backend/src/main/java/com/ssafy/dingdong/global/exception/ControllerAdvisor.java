@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import lombok.extern.log4j.Log4j2;
+
 @RestControllerAdvice
 public class ControllerAdvisor {
 
@@ -21,10 +23,11 @@ public class ControllerAdvisor {
 
 	/* 어디에서도 잡지 못한 예외 핸들링 */
 	@ExceptionHandler(Exception.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public CommonResponse exceptionHandler(Exception e) {
 		CommonResponse response = new CommonResponse();
 		response.setCode(ExceptionStatus.EXCEPTION.getCode().getCode());
-		response.setMessage(ExceptionStatus.EXCEPTION.getMessage());
+		response.setMessage(e.getMessage().toString());
 		return response;
 	}
 }
