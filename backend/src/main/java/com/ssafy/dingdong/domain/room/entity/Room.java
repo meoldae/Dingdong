@@ -31,12 +31,12 @@ public class Room {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "roomId")
-    private List<Furniture> furnitureList;
+    private List<RoomFurniture> roomFurnitureList;
 
     public RoomResponseDto toRoomResponseDto() {
         return RoomResponseDto.builder()
             .roomId(this.roomId)
-            .furnitureList(this.furnitureList)
+            .roomFurnitureList(this.roomFurnitureList)
             .build();
     }
 }
