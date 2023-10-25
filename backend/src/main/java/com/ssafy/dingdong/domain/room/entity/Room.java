@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
+
 @Entity
 @Getter
 @Builder
@@ -27,7 +29,14 @@ public class Room {
     private Long roomId;
     private String memberId;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "roomId")
     private List<Furniture> furnitureList;
+
+    public RoomResponseDto toRoomResponseDto() {
+        return RoomResponseDto.builder()
+            .roomId(this.roomId)
+            .furnitureList(this.furnitureList)
+            .build();
+    }
 }
