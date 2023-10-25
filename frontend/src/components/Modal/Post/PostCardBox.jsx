@@ -4,11 +4,8 @@ import PostDefaultModal from "./PostDefaultModal"
 
 const PostCardBox = () => {
   return (
-    <PostDefaultModal
-      className={styles.postCardContainer}
-      PostDefaultTitle={"우표"}
-    >
-      <div className={styles.postCards}>
+    <PostDefaultModal PostDefaultTitle={"우표"}>
+      <div className={styles.postCardContainer}>
         <img
           className={styles.postCard}
           src="assets/images/post/postCardDefault.png"

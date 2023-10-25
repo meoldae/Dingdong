@@ -1,13 +1,9 @@
-import PostBox from "../../components/Modal/Post/PostBox"
-import PostCardBox from "../../components/Modal/Post/PostCardBox"
-import RecevieLetter from "../../components/Modal/Post/RecevieLetter"
+import SendLetter from "../../components/Modal/Post/SendLetter"
 import "./MainPage.css"
 function MainPage() {
   return (
     <div id="main-container">
-      {/* <PostCardBox /> */}
-      {/* <PostBox /> */}
-      <RecevieLetter />
+      <SendLetter />
     </div>
   )
 }

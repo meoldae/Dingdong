@@ -1,4 +1,4 @@
-.postCards {
+.postCardContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,16 +6,16 @@
   height: 400px;
 }
 
-.postCards::-webkit-scrollbar {
+.postCardContainer::-webkit-scrollbar {
   display: none;
 }
 
-.postCards {
+.postCardContainer {
   -ms-overflow-style: none; /* 인터넷 익스플로러 */
   scrollbar-width: none; /* 파이어폭스 */
 }
 
-.postCards {
+.postCardContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
