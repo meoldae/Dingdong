@@ -13,7 +13,7 @@ import Header from "../../components/Header/Header";
 import MyFooter from "../../components/Footer/MyFooter";
 import Share from "../../components/Header/Share";
 import OtherFooter from "../../components/Footer/OtherFooter";
-import NeighborRequset from "../../components/Header/neighborRequest";
+import NeighborRequset from "../../components/Header/NeighborRequset";
 
 function RoomPage() {
   const [editMode, setEditMode] = useRecoilState(buildModeState);
