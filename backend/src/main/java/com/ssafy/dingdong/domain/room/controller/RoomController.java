@@ -58,9 +58,9 @@ public class RoomController implements RoomSwagger{
         List<FurnitureSummaryDto>  furnitureList;
 
         if (category != null) {
-            furnitureList = roomService.getFurnitureListByCategory(category);
+            furnitureList = roomService.getFurnitureListByCategory(category, pageable);
         }else {
-            furnitureList = roomService.getFurnitureList();
+            furnitureList = roomService.getFurnitureList(pageable);
         }
 
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, furnitureList);
