@@ -2,6 +2,7 @@ package com.ssafy.dingdong.domain.member.service;
 
 import java.util.UUID;
 
+import com.ssafy.dingdong.domain.member.dto.response.MemberLoginResponseDto;
 import com.ssafy.dingdong.domain.room.service.RoomService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import com.ssafy.dingdong.domain.member.repository.MemberRedisRepository;
 import com.ssafy.dingdong.domain.member.repository.MemberRepository;
 import com.ssafy.dingdong.global.exception.CustomException;
 import com.ssafy.dingdong.global.exception.ExceptionStatus;
+import com.ssafy.dingdong.global.util.JwtProvider;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -25,17 +27,19 @@ public class MemberServiceImpl implements MemberService {
 	private final MemberRepository memberRepository;
 	private final MemberRedisRepository memberRedisRepository;
 	private final RoomService roomService;
+	private final JwtProvider jwtProvider;
 
 	@Override
 	@Transactional
-	public MemberMainDto createMember(MemberSignUpDto memberLoginDto) {
+	public MemberLoginResponseDto createMember(MemberSignUpDto memberLoginDto) {
 		Member findMember = memberRepository.findByMemberId(UUID.fromString(memberLoginDto.memberId())).orElseThrow(
 			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
 		);
 		findMember.signUp(memberLoginDto.nickname(), memberLoginDto.avatarId());
+		String accessToken = jwtProvider.createAccessToken(findMember);
 
 		roomService.createRoom(memberLoginDto.memberId());
-		return MemberMainDto.of(findMember);
+		return MemberLoginResponseDto.of(findMember, accessToken);
 	}
 
 	@Override

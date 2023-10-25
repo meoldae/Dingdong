@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.dingdong.domain.member.dto.request.MemberSignUpDto;
+import com.ssafy.dingdong.domain.member.dto.response.MemberLoginResponseDto;
 import com.ssafy.dingdong.domain.member.dto.response.MemberMainDto;
 import com.ssafy.dingdong.domain.member.service.MemberService;
 import com.ssafy.dingdong.global.response.CommonResponse;
@@ -34,8 +35,8 @@ public class MemberController implements MemberSwagger {
 
 	@Override
 	@PostMapping("/signup")
-	public DataResponse<MemberMainDto> createMember(@Validated @RequestBody MemberSignUpDto memberSignUpDto, HttpServletRequest response) {
-		MemberMainDto member = memberService.createMember(memberSignUpDto);
+	public DataResponse<MemberLoginResponseDto> createMember(@Validated @RequestBody MemberSignUpDto memberSignUpDto, HttpServletRequest response) {
+		MemberLoginResponseDto member = memberService.createMember(memberSignUpDto);
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
 	}
 
