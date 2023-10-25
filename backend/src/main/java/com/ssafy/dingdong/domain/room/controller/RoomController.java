@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
 import com.ssafy.dingdong.domain.room.entity.Furniture;
 import com.ssafy.dingdong.domain.room.service.RoomService;
@@ -51,8 +52,8 @@ public class RoomController implements RoomSwagger{
 
     @Override
     @GetMapping("/furniture")
-    public DataResponse<List<Furniture>> getFurnitureList(@RequestParam(required = false) Integer category) {
-        List<Furniture> furnitureList;
+    public DataResponse<List<FurnitureSummaryDto> > getFurnitureList(@RequestParam(required = false) Integer category) {
+        List<FurnitureSummaryDto>  furnitureList;
 
         if (category != null) {
             furnitureList = roomService.getFurnitureListByCategory(category);
