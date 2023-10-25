@@ -21,7 +21,6 @@ function RoomPage() {
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState);
   const item = useRecoilValue(ItemsState);
-
   return (
     <div className="container">
       <Header />
@@ -40,10 +39,11 @@ function RoomPage() {
         {editMode && isDrag !== null && (
           <span
             onClick={() => {
-              // 벽에 있는 아이템 관련
               if (item[isDrag].wall) {
-                setDraggedItemRotation === 2 ? 1 : draggedItemRotation + 1;
+                // console.log("check");
+                setDraggedItemRotation( draggedItemRotation=== 0 ? 1 : draggedItemRotation -1);
               } else {
+                // console.log("CC")
                 setDraggedItemRotation(
                   draggedItemRotation === 3 ? 0 : draggedItemRotation + 1
                 );

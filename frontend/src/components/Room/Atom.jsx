@@ -50,7 +50,7 @@ const map = {
     {
       ...item.bed,
       gridPosition: [4, 0, 6],
-      rotation: 2,
+      rotation: 1,
     },
     {
       ...item.vase,
@@ -66,7 +66,7 @@ const map = {
     {
       ...item.clock,
       gridPosition: [10, 2, 10],
-      rotation: 1,
+      rotation: 0,
       walkable: true,
       wall:true,
     },

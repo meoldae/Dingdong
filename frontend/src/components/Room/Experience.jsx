@@ -19,7 +19,8 @@ const Experience = () => {
   const [buildMode, setBuildMode] = useRecoilState(buildModeState);
   const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState);
   const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState);
-  const { vector3ToGrid, wallLeftVector3ToGrid } = useGrid();
+  const { vector3ToGrid, wallLeftVector3ToGrid, wallRightVector3ToGrid } =
+    useGrid();
   const [canDrop, setCanDrop] = useState(false);
   const [items, setItems] = useRecoilState(ItemsState);
   const [draggedItemRotation, setDraggedItemRotation] =
@@ -72,19 +73,49 @@ const Experience = () => {
     }
   };
 
+  const onRightPlaneClicked = (e) => {
+    if (!buildMode) {
+      return;
+    }
+    if (draggedItem !== null) {
+      if (canDrop) {
+        setItems((prev) => {
+          const newItems = prev.map((item, index) => {
+            if (index === draggedItem) {
+              return {
+                ...item,
+                gridPosition: wallRightVector3ToGrid(e.point),
+                rotation: draggedItemRotation,
+              };
+            }
+            return item;
+          });
+          return newItems;
+        });
+      }
+      setDraggedItem(null);
+    }
+  };
+
   // onPlaneClicked 이벤트에 예외처리
   useEffect(() => {
     if (draggedItem === null) {
       return;
     }
+
     const item = items[draggedItem];
-    const width =
-      draggedItemRotation  === 1 || draggedItemRotation  === 3 ? item.size[2] : item.size[0];
-    const height =
-      draggedItemRotation  === 1 || draggedItemRotation  === 3 ? item.size[0] : item.size[2];
     let droppable = true;
     const thick = item.size[1];
     // 바닥 평면 넘어갔을 때 예외처리
+    const width =
+      draggedItemRotation === 1 || draggedItemRotation === 3
+        ? item.size[2]
+        : item.size[0];
+    const height =
+      draggedItemRotation === 1 || draggedItemRotation === 3
+        ? item.size[0]
+        : item.size[2];
+
     if (!item.wall) {
       if (
         dragPosition[0] - width / 2 < 0 ||
@@ -100,17 +131,41 @@ const Experience = () => {
       }
     }
     if (item.wall) {
-      if (
-        dragPosition[1] - thick / 2 < -1 ||
-        dragPosition[1] + thick / 2 > 16
-      ) {
-        droppable = false;
-      }
-      if (
-        dragPosition[2] - height / 2 < -1 ||
-        dragPosition[2] + height / 2 > 4.8 / 0.24
-      ) {
-        droppable = false;
+      const width =
+        draggedItemRotation === 1 || draggedItemRotation === 3
+          ? item.size[2]
+          : item.size[0];
+      const height =
+        draggedItemRotation === 1 || draggedItemRotation === 3
+          ? item.size[0]
+          : item.size[2];
+
+      if (draggedItemRotation) {
+        if (
+          dragPosition[1] - thick / 2 < -1 ||
+          dragPosition[1] + thick / 2 > 16
+        ) {
+          droppable = false;
+        }
+        if (
+          dragPosition[2] - height / 2 < -1 ||
+          dragPosition[2] + height / 2 > 4.8 / 0.24
+        ) {
+          droppable = false;
+        }
+      } else {
+        if (
+          dragPosition[1] - thick / 2 < -1 ||
+          dragPosition[1] + thick / 2 > 16
+        ) {
+          droppable = false;
+        }
+        if (
+          dragPosition[0] - width / 2 < -1 ||
+          dragPosition[0] + width / 2 > 4.8 / 0.24
+        ) {
+          droppable = false;
+        }
       }
     }
     // 바닥 겹칠 수 있는지, 벽면에 놓는건지 예외처리
@@ -244,8 +299,6 @@ const Experience = () => {
             setDraggPosition(newPosition);
           }
         }}
-        // rotation-z={-Math.PI / 4}
-        // position-z={Math.sqrt(2) / 10}
       >
         <planeGeometry args={[4.8, 4.8]} />
         <meshStandardMaterial color="#f0f0f0" />
@@ -276,7 +329,24 @@ const Experience = () => {
       </mesh>
 
       {/* 오른쪽 평면 */}
-      <mesh position-z={-2.394} position-y={1.92}>
+      <mesh
+        position-z={-2.394}
+        position-y={1.92}
+        onClick={onRightPlaneClicked}
+        onPointerMove={(e) => {
+          if (!buildMode) {
+            return;
+          }
+          const newPosition = wallRightVector3ToGrid(e.point);
+          if (
+            !dragPosition ||
+            newPosition[0] !== dragPosition[0] ||
+            newPosition[1] !== dragPosition[1]
+          ) {
+            setDraggPosition(newPosition);
+          }
+        }}
+      >
         <planeGeometry args={[4.8, 3.84]} />
         <meshStandardMaterial color="#f0f0f0" />
       </mesh>
@@ -287,8 +357,6 @@ const Experience = () => {
             fadeStrength={6}
             sectionSize={2.4}
             cellSize={0.24}
-            // rotation-y={Math.PI / 4}
-            // position-z={Math.sqrt(2) / 10}
           />
           <Grid
             infiniteGrid
