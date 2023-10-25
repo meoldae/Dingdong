@@ -1,0 +1,30 @@
+.wrap{
+  position: absolute;
+  z-index: 3;
+  width: 100%;
+  bottom: 50px;
+}
+
+.secondFooter{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: end;
+  margin-top: 20px;
+}
+
+
+
+.footer{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.background{
+  margin: 0 20px;
+  /* padding: 5px; */
+}
+

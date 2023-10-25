@@ -1,162 +1,234 @@
 import { Environment, Grid, OrbitControls, useCursor } from "@react-three/drei";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Item } from "./Item";
 import { Room } from "./Room";
 import { useGrid } from "./UseGrid";
+import { useRecoilState } from "recoil";
+import {
+  ItemRotateState,
+  ItemsState,
+  buildModeState,
+  dragPositionState,
+  draggedItemState,
+} from "./Atom";
+import { gsap } from "gsap";
+
 const Experience = () => {
   const [onFloor, setOnFloor] = useState(false);
-  const [buildMode, setBuildMode] = useState(true);
-  const [draggedItem, setDraggedItem] = useState(undefined);
-  const [dragPosition, setDraggPosition] = useState(null);
-  const { vector3ToGrid, gridToVector3 } = useGrid();
+  const [buildMode, setBuildMode] = useRecoilState(buildModeState);
+  const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState);
+  const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState);
+  const { vector3ToGrid, wallLeftVector3ToGrid } = useGrid();
   const [canDrop, setCanDrop] = useState(false);
-
-  const item = {
-    sofa: {
-      name: "sofa",
-      size: [1.44, 1.44],
-    },
-    carpet: {
-      name: "carpet",
-      size: [2.4, 2.4],
-    },
-    vase: {
-      name: "vase",
-      size: [0.48, 0.48],
-    },
-    bed: {
-      name: "bed",
-      size: [1.92, 2.88],
-    },
-  };
-
-  const map = {
-    size: [4.8, 4.8],
-    // gridDivision:2,
-    item: [
-      {
-        ...item.sofa,
-        gridPosition: [item.sofa.size[0] , item.sofa.size[1] ],
-        rotation: 1,
-      },
-      {
-        ...item.bed,
-        gridPosition: [item.bed.size[0] , item.bed.size[1] ],
-        rotation: 2,
-      },
-      {
-        ...item.vase,
-        gridPosition: [item.vase.size[0] , item.vase.size[1] ],
-        rotation: 1,
-      },
-      {
-        ...item.carpet,
-        gridPosition: [item.carpet.size[0] , item.carpet.size[1] ],
-        rotation: 1,
-      },
-    ],
-  };
-
-  const [items, setItems] = useState(map.item);
+  const [items, setItems] = useRecoilState(ItemsState);
+  const [draggedItemRotation, setDraggedItemRotation] =
+    useRecoilState(ItemRotateState);
+  // 물체 클릭한 후에, 물체를 배치할 때 작동
   const onPlaneClicked = (e) => {
     if (!buildMode) {
       return;
     }
-    if (draggedItem !== undefined) {
-      // console.log(e)
+    if (draggedItem !== null) {
       if (canDrop) {
-      setItems((prev) => {
-        const newItems = [...prev];
-        newItems[draggedItem].gridPosition = vector3ToGrid(e.point);
-        return newItems;
-      });
+        setItems((prev) => {
+          const newItems = prev.map((item, index) => {
+            if (index === draggedItem) {
+              return {
+                ...item,
+                gridPosition: vector3ToGrid(e.point),
+                rotation: draggedItemRotation,
+              };
+            }
+            return item;
+          });
+          return newItems;
+        });
+      }
+      setDraggedItem(null);
     }
-      setDraggedItem(undefined);
+  };
+  const onLeftPlaneClicked = (e) => {
+    if (!buildMode) {
+      return;
+    }
+    if (draggedItem !== null) {
+      if (canDrop) {
+        setItems((prev) => {
+          const newItems = prev.map((item, index) => {
+            if (index === draggedItem) {
+              return {
+                ...item,
+                gridPosition: wallLeftVector3ToGrid(e.point),
+                rotation: draggedItemRotation,
+              };
+            }
+            return item;
+          });
+          return newItems;
+        });
+      }
+      setDraggedItem(null);
     }
   };
 
+  // onPlaneClicked 이벤트에 예외처리
   useEffect(() => {
-    if (!draggedItem) {
+    if (draggedItem === null) {
       return;
     }
     const item = items[draggedItem];
-    console.log(item)
     const width =
-      item.rotation === 1 || item.rotation === 3 ? item.size[1] : item.size[0];
+      draggedItemRotation  === 1 || draggedItemRotation  === 3 ? item.size[2] : item.size[0];
     const height =
-      item.rotation === 1 || item.rotation === 3 ? item.size[0] : item.size[1];
+      draggedItemRotation  === 1 || draggedItemRotation  === 3 ? item.size[0] : item.size[2];
     let droppable = true;
-
-    // 이 부분은 내 asset 크기가 밖으로 나갈 때, 놓는걸 허락 안한다는 코드
-    if (
-      dragPosition[0] -width/0.24/2< 0 ||
-      dragPosition[0] + width/0.24/2 > map.size[0] /0.24
-    ) {
-
-      droppable = false;
+    const thick = item.size[1];
+    // 바닥 평면 넘어갔을 때 예외처리
+    if (!item.wall) {
+      if (
+        dragPosition[0] - width / 2 < 0 ||
+        dragPosition[0] + width / 2 > 4.8 / 0.24
+      ) {
+        droppable = false;
+      }
+      if (
+        dragPosition[2] - height / 2 < 0 ||
+        dragPosition[2] + height / 2 > 4.8 / 0.24
+      ) {
+        droppable = false;
+      }
     }
-
-    if (
-      dragPosition[1] - height/0.24/2 < 0 ||
-      dragPosition[1] + height/0.24/2 > map.size[1]  /0.24
-    ) {
-      droppable = false;
+    if (item.wall) {
+      if (
+        dragPosition[1] - thick / 2 < -1 ||
+        dragPosition[1] + thick / 2 > 16
+      ) {
+        droppable = false;
+      }
+      if (
+        dragPosition[2] - height / 2 < -1 ||
+        dragPosition[2] + height / 2 > 4.8 / 0.24
+      ) {
+        droppable = false;
+      }
     }
+    // 바닥 겹칠 수 있는지, 벽면에 놓는건지 예외처리
     if (!item.walkable && !item.wall) {
       items.forEach((otherItem, idx) => {
         // ignore self
         if (idx === draggedItem) {
           return;
-        } 
-
-        // ignore wall & floor
-        if (otherItem.walkable || otherItem.wall) {
+        }
+        if (otherItem.walkable) {
           return;
         }
-        // check item overlap
+        // ignore wall & floor
+        if (otherItem.wall) {
+          const otehrThick = otherItem.size[1];
+          const otherHeight =
+            otherItem.rotation === 1 || otherItem.rotation === 3
+              ? otherItem.size[0]
+              : otherItem.size[2];
+        }
+        // 다른 물체 예외처리
         const otherWidth =
           otherItem.rotation === 1 || otherItem.rotation === 3
-            ? otherItem.size[1] /0.24 
-            : otherItem.size[0] /0.24;
+            ? otherItem.size[2]
+            : otherItem.size[0];
         const otherHeight =
           otherItem.rotation === 1 || otherItem.rotation === 3
-            ? otherItem.size[0] /0.24
-            : otherItem.size[1] /0.24;
-
-
-
+            ? otherItem.size[0]
+            : otherItem.size[2];
         if (
-          dragPosition[0] + width /0.24 /2> otherItem.gridPosition[0] -otherWidth/2 &&
-          dragPosition[0] - width /0.24 /2 < otherItem.gridPosition[0] +otherWidth /2&&
-          dragPosition[1] - height/0.24 /2< otherItem.gridPosition[1] + otherHeight /2&&
-          dragPosition[1] + height /0.24 /2> otherItem.gridPosition[1] - otherWidth /2
+          dragPosition[0] + width / 2 >
+            otherItem.gridPosition[0] - otherWidth / 2 &&
+          dragPosition[0] - width / 2 <
+            otherItem.gridPosition[0] + otherWidth / 2 &&
+          dragPosition[2] - height / 2 <
+            otherItem.gridPosition[2] + otherHeight / 2 &&
+          dragPosition[2] + height / 2 >
+            otherItem.gridPosition[2] - otherHeight / 2
         ) {
           droppable = false;
         }
       });
     }
-
     setCanDrop(droppable);
   }, [dragPosition, draggedItem, items]);
+
+  // 카메라 관련 로직
+  const controls = useRef();
+  const state = useThree((state) => state);
+
+  // 편집 모드일 때 카메라 고정
+  useEffect(() => {
+    if (buildMode) {
+      state.camera.position.set(8, 5, 8);
+      state.camera.fov = 90;
+      state.camera.lookAt(0, 0, 0);
+      if (controls.current) {
+        controls.current.target.set(0, 0, 0);
+        controls.current.update();
+      }
+    }
+  }, [buildMode]);
+
+  // 일반 모드일 때 카메라 회전 후 원상복귀
+  const animateCameraPosition = () => {
+    if (buildMode) return;
+
+    gsap.to(state.camera.position, {
+      duration: 0.5,
+      x: 8,
+      y: 5,
+      z: 8,
+      onUpdate: () => state.camera.updateProjectionMatrix(),
+    });
+    setTimeout(() => {
+      state.camera.position.set(8, 5, 8);
+    }, 50);
+  };
+
   return (
     <>
       <Environment preset="sunset" />
       <ambientLight intensity={0.3} />
-      <OrbitControls />
+      <OrbitControls
+        ref={controls}
+        minDistance={5}
+        maxDistance={10}
+        minPolarAngle={0}
+        maxPolarAngle={Math.PI / 2}
+        screenSpacePanning={false}
+        // enabled={!buildMode}
+        onEnd={animateCameraPosition}
+      />
 
-      {(buildMode ? items : map.item).map((item, idx) => (
-        <Item
-          key={`${item.name}-${idx}`}
-          item={item}
-          onClick={() => setDraggedItem((prev) => (prev === undefined ? idx : prev))}
-          isDragging={draggedItem === idx}
-          dragPosition={dragPosition}
-          canDrop = {canDrop}
-        />
-      ))}
-      {/* <Room name={"room"}/> */}
+      {buildMode
+        ? items.map((item, idx) => (
+            <Item
+              key={`${item.name}-${idx}`}
+              item={item}
+              onClick={() => {
+                setDraggedItem((prev) => (prev === null ? idx : prev));
+                setDraggedItemRotation(item.rotation || 0);
+              }}
+              isDragging={draggedItem === idx}
+              dragPosition={dragPosition}
+              dragRotation={draggedItemRotation}
+              canDrop={canDrop}
+              wall={item.wall}
+            />
+          ))
+        : items.map((item, idx) => (
+            <Item key={`${item.name}-${idx}`} item={item} wall={item.wall} />
+          ))}
+
+      {/* 바닥 평면 */}
       <mesh
         rotation-x={-Math.PI / 2}
+        // visible={false}
         position-y={-0.001}
         onClick={onPlaneClicked}
         onPointerMove={(e) => {
@@ -167,7 +239,7 @@ const Experience = () => {
           if (
             !dragPosition ||
             newPosition[0] !== dragPosition[0] ||
-            newPosition[1] !== dragPosition[1]
+            newPosition[2] !== dragPosition[2]
           ) {
             setDraggPosition(newPosition);
           }
@@ -178,14 +250,64 @@ const Experience = () => {
         <planeGeometry args={[4.8, 4.8]} />
         <meshStandardMaterial color="#f0f0f0" />
       </mesh>
-      <Grid
-        infiniteGrid
-        fadeStrength={6}
-        sectionSize={2.4}
-        cellSize={0.24}
-        // rotation-y={Math.PI / 4}
-        // position-z={Math.sqrt(2) / 10}
-      />
+
+      {/* 왼쪽 평면 */}
+      <mesh
+        rotation-y={Math.PI / 2}
+        position-x={-2.394}
+        position-y={1.92}
+        onClick={onLeftPlaneClicked}
+        onPointerMove={(e) => {
+          if (!buildMode) {
+            return;
+          }
+          const newPosition = wallLeftVector3ToGrid(e.point);
+          if (
+            !dragPosition ||
+            newPosition[1] !== dragPosition[1] ||
+            newPosition[2] !== dragPosition[2]
+          ) {
+            setDraggPosition(newPosition);
+          }
+        }}
+      >
+        <planeGeometry args={[4.8, 3.84]} />
+        <meshStandardMaterial color="#f0f0f0" />
+      </mesh>
+
+      {/* 오른쪽 평면 */}
+      <mesh position-z={-2.394} position-y={1.92}>
+        <planeGeometry args={[4.8, 3.84]} />
+        <meshStandardMaterial color="#f0f0f0" />
+      </mesh>
+      {buildMode && (
+        <>
+          <Grid
+            infiniteGrid
+            fadeStrength={6}
+            sectionSize={2.4}
+            cellSize={0.24}
+            // rotation-y={Math.PI / 4}
+            // position-z={Math.sqrt(2) / 10}
+          />
+          <Grid
+            infiniteGrid
+            fadeStrength={6}
+            sectionSize={2.4}
+            cellSize={0.24}
+            position-z={-2.393}
+            rotation-x={Math.PI / 2}
+          />
+          <Grid
+            infiniteGrid
+            fadeStrength={6}
+            sectionSize={2.4}
+            cellSize={0.24}
+            position-x={-2.393}
+            rotation-z={-Math.PI / 2}
+          />
+        </>
+      )}
     </>
   );
 };
