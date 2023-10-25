@@ -3,6 +3,8 @@ package com.ssafy.dingdong.domain.room.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,7 +54,7 @@ public class RoomController implements RoomSwagger{
 
     @Override
     @GetMapping("/furniture")
-    public DataResponse<List<FurnitureSummaryDto> > getFurnitureList(@RequestParam(required = false) Integer category) {
+    public DataResponse<List<FurnitureSummaryDto> > getFurnitureList(@RequestParam(required = false) Integer category, @PageableDefault(size = 6) Pageable pageable) {
         List<FurnitureSummaryDto>  furnitureList;
 
         if (category != null) {
