@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   ItemRotateState,
+  ItemsState,
   buildModeState,
   draggedItemState,
 } from "../../components/Room/Atom";
@@ -19,12 +20,13 @@ function RoomPage() {
   const isDrag = useRecoilValue(draggedItemState);
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState);
+  const item = useRecoilValue(ItemsState);
 
   return (
     <div className="container">
-    <Header/>
-    <Share/>
-    {/* <NeighborRequset/> */}
+      <Header />
+      <Share />
+      {/* <NeighborRequset/> */}
       <div
         className="button"
         onClick={() => {
@@ -38,9 +40,14 @@ function RoomPage() {
         {editMode && isDrag !== null && (
           <span
             onClick={() => {
-              setDraggedItemRotation(
-                draggedItemRotation === 3 ? 0 : draggedItemRotation + 1
-              );
+              // 벽에 있는 아이템 관련
+              if (item[isDrag].wall) {
+                setDraggedItemRotation === 2 ? 1 : draggedItemRotation + 1;
+              } else {
+                setDraggedItemRotation(
+                  draggedItemRotation === 3 ? 0 : draggedItemRotation + 1
+                );
+              }
             }}
           >
             돌려돌려~
@@ -52,7 +59,7 @@ function RoomPage() {
         <Experience />
       </Canvas>
       {/* <OtherFooter/> */}
-      <MyFooter/>
+      <MyFooter />
     </div>
   );
 }

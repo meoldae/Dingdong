@@ -24,8 +24,6 @@ const Experience = () => {
   const [items, setItems] = useRecoilState(ItemsState);
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState);
-
-  const [check, useCheck] = useState(false);
   // 물체 클릭한 후에, 물체를 배치할 때 작동
   const onPlaneClicked = (e) => {
     if (!buildMode) {

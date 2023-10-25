@@ -25,7 +25,7 @@ export const Item = ({
   const [hover, setHover] = useState(false);
   const buildMode = useRecoilValue(buildModeState);
   useCursor(buildMode ? hover : undefined);
-
+  
   return (
     <>
       {wall ? (
@@ -41,6 +41,7 @@ export const Item = ({
             object={clone}
             position-y={0.44}
             position-z={0.12}
+            // 벽에 있는 아이템 관련
             rotation-y={(rotation * Math.PI) / 2}
           />
           {isDragging && (
