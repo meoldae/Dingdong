@@ -1,10 +1,10 @@
 import styles from "./NeighborListModal.module.css"
 
-const NeighborListModal = ({ profile, nickname }) => {
+const NeighborListModal = ({ imgName, nickname }) => {
   return (
     <div className={styles.Container}>
       <div className={styles.ProfileContainer}>
-        <img src={profile} />
+        <img src={`assets/images/${imgName}.jpg`} />
       </div>
       <div className={styles.InfoContainer}>
         <div
