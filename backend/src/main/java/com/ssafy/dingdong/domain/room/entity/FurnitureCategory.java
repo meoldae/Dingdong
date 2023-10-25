@@ -11,21 +11,18 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 @AllArgsConstructor
-public class RoomFurniture {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class FurnitureCategory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long roomFurnitureId;
-	private Long roomId;
-	private String assetId;
-	private Float xPos;
-	private Float yPos;
-	private Float zPos;
-	private Short rotation;
-
+	private Long categoryId;
+	private String description;
+	private int xDefault;
+	private int yDefault;
+	private int zDefault;
 }
