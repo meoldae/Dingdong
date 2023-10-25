@@ -3,7 +3,7 @@ import style from "./Login.module.css"
 
 const Login = () => {
     const loginHandler = () => {
-      window.location.href = `https://${import.meta.env.VITE_SERVER_URL}/oauth2/authorization/kakao`
+      window.location.href = `${import.meta.env.VITE_SERVER_URL}/oauth2/authorization/kakao`
     }
 
     return (

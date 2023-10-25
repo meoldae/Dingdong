@@ -16,7 +16,6 @@ export default function AuthRoute({ authentication }) {
     }
 
     const authText = authentication;
-    console.log(authText);
     
     if (authText.indexOf('Not') == -1) {
         if (isLogin) return <Outlet />;
