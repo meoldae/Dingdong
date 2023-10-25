@@ -78,12 +78,6 @@ public class CustomOAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSucc
 					.createTime(LocalDateTime.now()).build();
 				memberRepository.save(member);
 
-				// TODO : Login 로직 구현된 후 제거될 임시 로직
-				String accessToken = jwtProvider.createAccessToken(member);
-				String refreshToken = jwtProvider.createRefreshToken();
-				memberService.login(member.getMemberId().toString(), accessToken, refreshToken);
-
-
 				redirectUrl = REDIRECT_ENDPOINT + "/signup?memberId=" + member.getMemberId();
 			}
 		);
