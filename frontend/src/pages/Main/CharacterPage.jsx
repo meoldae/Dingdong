@@ -8,12 +8,14 @@ import Model from "../../components/Item/PlayerItems/Model"
 import House from "../../components/Item/MainItems/House"
 import Spot from "../../components/Item/MainItems/Spot"
 import "./CharacterPage.css"
+import TempMap from "../../components/Default/TempMap"
 function MainPage() {
   return (
     <div id="canvas-container">
       <Canvas shadows>
         {/* 사용자가 화면을 확대하거나 회전하지 못하도록 설정 */}
-        <OrbitControls enableZoom={false} enableRotate={false} />
+        <OrbitControls />
+        {/* <OrbitControls enableZoom={false} enableRotate={false} /> */}
 
         {/* 전체 밝기 */}
         <ambientLight intensity={1.3} />
@@ -25,7 +27,7 @@ function MainPage() {
         <CustomCamera />
 
         {/* 화면 바탕 */}
-        <Map />
+        <TempMap />
 
         {/* 객체 */}
         <Model />

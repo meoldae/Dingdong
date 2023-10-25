@@ -7,8 +7,8 @@ function Map() {
   const texture = useTexture("assets/images/grid2.png")
 
   // 패턴 반복
-  texture.wrapS = texture.wrapT = THREE.RepeatWrapping
-  texture.repeat.set(10, 10)
+  // texture.wrapS = texture.wrapT = THREE.RepeatWrapping
+  // texture.repeat.set(10, 10)
   return (
     <mesh name="floor" rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
       {/* 맵 크기 */}
