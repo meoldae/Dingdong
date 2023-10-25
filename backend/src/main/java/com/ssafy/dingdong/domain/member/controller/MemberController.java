@@ -54,6 +54,7 @@ public class MemberController implements MemberSwagger {
 	}
 
 	@Override
+	@GetMapping
 	public DataResponse<MemberMainDto> getMember(Authentication authentication) {
 		MemberMainDto member = memberService.getMemberById(authentication.getName().toString());
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
