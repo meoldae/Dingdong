@@ -5,7 +5,7 @@ const Login = () => {
     const loginHandler = () => {
       window.location.href = `https://${import.meta.env.VITE_SERVER_URL}/oauth2/authorization/kakao`
     }
-  
+
     return (
       <div className={style.container}>
         {/* <div className={style.centered}> */}
