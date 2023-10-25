@@ -1,48 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import style from "./SignUp.module.css"
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import { CreateUser } from "@/api/User";
+import { CreateUser, GetAvatarList } from "@/api/User";
 
 const SignUp = () => {
     const navigate = useNavigate(); 
-    const root = "assets/characters/";
-    const charactersData = [
-        {
-            id: 1,
-            glb: `${root}female1.png`,
-        },
-        {
-            id: 2,
-            glb: `${root}female2.png`,
-        },
-        {
-            id: 3,
-            glb: `${root}female3.png`,
-        },
-        {
-            id: 4,
-            glb: `${root}male3.png`,
-        },
-        {
-            id: 5,
-            glb: `${root}male4.png`,
-        },
-        {
-            id: 6,
-            glb: `${root}male5.png`,
-        },
-    ];
 
-    const [avatarId, setAvatar] = useState(charactersData[0].id);
+    const [charactersData, setCharactersData] =  useState([]);
+    const [avatarId, setAvatar] = useState(null);
     const [nickname, setNickname] = useState("");
+
+    useEffect(() => {
+        GetAvatarList((response) => {
+            const avatarList = response.data.data.avatarList;
+            const formattedData = Object.keys(avatarList).map(key => ({ id: parseInt(key), glb: avatarList[key] }));
+            
+            setCharactersData(formattedData);
+            setAvatar(formattedData[0].id);
+        }, (error) => {
+            console.error("Error fetching avatars:", error);
+        });
+    }, []);
+
     const charactersImages = charactersData.map(charData => charData.glb);
     const memberId = new URLSearchParams(window.location.search).get("memberId");
 
     const NextArrow = ({ onClick }) => {
         return (
-            <div className="arrow next" onClick={onClick}>
+            <div className={style.arrow + " " + style.next} onClick={onClick}>
                     ➡️
                 </div>
             );
@@ -50,7 +38,7 @@ const SignUp = () => {
 
     const PrevArrow = ({ onClick }) => {
         return (
-            <div className="arrow prev" onClick={onClick}>
+            <div className={style.arrow + " " + style.prev} onClick={onClick}>
                 ⬅️
             </div>
         );
@@ -92,7 +80,7 @@ const SignUp = () => {
 
                 <Slider {...settings}>
                     {charactersImages.map((charImg, idx) => (
-                        <img key={idx} src={charImg} alt="" onClick={() => setAvatar(charImg)} />
+                        <img key={idx} src={charImg} alt="" className={style.characterImage} onClick={() => setAvatar(charImg)} />
                     ))}
                 </Slider>
 
