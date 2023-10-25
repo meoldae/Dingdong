@@ -24,7 +24,7 @@ public enum ExceptionStatus {
 	LOGOUT(ResponseStatusCode.ERROR, "로그아웃 되었습니다."),
 	NEIGHBOR_REQUEST_ALREADY_EXIST(ResponseStatusCode.ERROR, "이미 요청을 보냈습니다."),
 	NEIGHBOR_REQUEST_DOES_NOT_EXIST(ResponseStatusCode.ERROR, "요청이 존재하지 않습니다."),
-
+	NEIGHBOR_ALREADY_CONNECTED(ResponseStatusCode.ERROR, "이미 이웃입니다"),
 	//신고
 	LETTER_FROM_NOT_FOUND(ResponseStatusCode.ERROR, "편지 작성자가 존재하지 않습니다."),
 	CHAT_FROM_NOT_FOUND(ResponseStatusCode.ERROR, "채팅 작성자가 존재하지 않습니다.");

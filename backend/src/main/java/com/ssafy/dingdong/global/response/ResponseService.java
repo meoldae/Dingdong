@@ -14,7 +14,7 @@ public class ResponseService {
 	}
 
 	/* 정상 응답 - 데이터 포함 */
-	public <T> DataResponse<?> successDataResponse(ResponseStatus responseStatus, T data){
+	public <T> DataResponse<T> successDataResponse(ResponseStatus responseStatus, T data){
 		DataResponse<T> dataResponse = new DataResponse<>();
 		dataResponse.setCode(responseStatus.getCode().getCode());
 		dataResponse.setMessage(responseStatus.getMessage());

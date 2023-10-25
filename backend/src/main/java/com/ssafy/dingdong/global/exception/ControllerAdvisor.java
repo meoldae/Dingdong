@@ -23,6 +23,7 @@ public class ControllerAdvisor {
 
 	/* 어디에서도 잡지 못한 예외 핸들링 */
 	@ExceptionHandler(Exception.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public CommonResponse exceptionHandler(Exception e) {
 		CommonResponse response = new CommonResponse();
 		response.setCode(ExceptionStatus.EXCEPTION.getCode().getCode());

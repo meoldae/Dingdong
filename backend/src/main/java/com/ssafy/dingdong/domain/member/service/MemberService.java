@@ -1,11 +1,12 @@
 package com.ssafy.dingdong.domain.member.service;
 
 import com.ssafy.dingdong.domain.member.dto.request.MemberSignUpDto;
+import com.ssafy.dingdong.domain.member.dto.response.MemberLoginResponseDto;
 import com.ssafy.dingdong.domain.member.dto.response.MemberMainDto;
 
 public interface MemberService {
 
-	MemberMainDto createMember(MemberSignUpDto memberLoginDto);
+	MemberLoginResponseDto createMember(MemberSignUpDto memberLoginDto);
 
 	MemberMainDto getMemberById(String memberId);
 
@@ -19,4 +20,5 @@ public interface MemberService {
 
 	void logout(String memberId);
 
+	void deleteMember(String memberId);
 }

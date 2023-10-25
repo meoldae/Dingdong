@@ -31,7 +31,7 @@ public class AuthController implements AuthSwagger{
 
 	@Override
 	@PostMapping("/refresh")
-	public DataResponse refresh(HttpServletRequest request){
+	public DataResponse<String> refresh(HttpServletRequest request){
 		String accessToken = jwtProvider.getAccessToken(request);
 		Cookie cookie = cookieUtils.getCookie(request, REFRESH_TOKEN).orElseThrow(
 			() -> new CustomException(ExceptionStatus.REFRESH_TOKEN_NOT_FOUND_IN_COOKIE)

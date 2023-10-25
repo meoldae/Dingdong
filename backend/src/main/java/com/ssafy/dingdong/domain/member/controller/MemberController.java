@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.dingdong.domain.member.dto.request.MemberSignUpDto;
+import com.ssafy.dingdong.domain.member.dto.response.MemberLoginResponseDto;
 import com.ssafy.dingdong.domain.member.dto.response.MemberMainDto;
 import com.ssafy.dingdong.domain.member.service.MemberService;
 import com.ssafy.dingdong.global.response.CommonResponse;
@@ -34,8 +35,8 @@ public class MemberController implements MemberSwagger {
 
 	@Override
 	@PostMapping("/signup")
-	public DataResponse createMember(@Validated @RequestBody MemberSignUpDto memberSignUpDto, HttpServletRequest response) {
-		MemberMainDto member = memberService.createMember(memberSignUpDto);
+	public DataResponse<MemberLoginResponseDto> createMember(@Validated @RequestBody MemberSignUpDto memberSignUpDto, HttpServletRequest response) {
+		MemberLoginResponseDto member = memberService.createMember(memberSignUpDto);
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
 	}
 
@@ -48,13 +49,14 @@ public class MemberController implements MemberSwagger {
 
 	@Override
 	@GetMapping("/{memberId}")
-	public DataResponse getMember(@PathVariable String memberId) {
+	public DataResponse<MemberMainDto> getMemberByMemberId(@PathVariable String memberId) {
 		MemberMainDto member = memberService.getMemberById(memberId);
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
 	}
 
 	@Override
-	public DataResponse getMember(Authentication authentication) {
+	@GetMapping
+	public DataResponse<MemberMainDto> getMember(Authentication authentication) {
 		MemberMainDto member = memberService.getMemberById(authentication.getName().toString());
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
 	}
@@ -71,5 +73,12 @@ public class MemberController implements MemberSwagger {
 	public CommonResponse deleteSession(Authentication authentication) {
 		memberService.deleteSession(authentication.getName());
 		return responseService.successResponse(ResponseStatus.SESSION_DELETED);
+	}
+
+	@Override
+	@DeleteMapping
+	public CommonResponse deleteMember(Authentication authentication) {
+		memberService.deleteMember(authentication.getName());
+		return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
 	}
 }

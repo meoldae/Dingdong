@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.dingdong.domain.neighbor.dto.request.NeighborRequest;
+import com.ssafy.dingdong.domain.neighbor.dto.response.NeighborResponse;
+import com.ssafy.dingdong.domain.neighbor.entity.Neighbor;
 import com.ssafy.dingdong.domain.neighbor.service.NeighborService;
 import com.ssafy.dingdong.global.response.CommonResponse;
 import com.ssafy.dingdong.global.response.DataResponse;
@@ -37,14 +39,14 @@ public class NeighborController implements NeighborSwagger{
 
 	@Override
 	@GetMapping("/request")
-	public DataResponse getRequestList(Authentication authentication){
+	public DataResponse<List<String>> getRequestList(Authentication authentication){
 		List requestList = neighborService.getRequestList(authentication.getName().toString());
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, requestList);
 	}
 
 	@Override
 	@GetMapping("/list")
-	public DataResponse getNeighborList(Authentication authentication){
+	public DataResponse<List<NeighborResponse>> getNeighborList(Authentication authentication){
 		List neighborList = neighborService.getNeighborList(authentication.getName().toString());
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, neighborList);
 	}
