@@ -1,10 +1,13 @@
 package com.ssafy.dingdong.domain.room.controller;
 
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
+import com.ssafy.dingdong.domain.room.entity.Furniture;
 import com.ssafy.dingdong.global.response.DataResponse;
 
 import io.swagger.annotations.Api;
@@ -17,5 +20,7 @@ public interface RoomSwagger {
 	DataResponse<RoomResponseDto> getRoomByMemberId(@PathVariable String roomId);
 
 	DataResponse<RoomResponseDto> getRoomByRoomId(@PathVariable Long roomId);
+
+	DataResponse<List<Furniture>> getFurnitureList(@RequestParam(required = false) Integer category);
 
 }

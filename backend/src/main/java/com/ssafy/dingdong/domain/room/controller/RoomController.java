@@ -1,12 +1,17 @@
 package com.ssafy.dingdong.domain.room.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
+import com.ssafy.dingdong.domain.room.entity.Furniture;
 import com.ssafy.dingdong.domain.room.service.RoomService;
 import com.ssafy.dingdong.global.response.DataResponse;
 import com.ssafy.dingdong.global.response.ResponseService;
@@ -42,5 +47,19 @@ public class RoomController implements RoomSwagger{
     public DataResponse<RoomResponseDto> getRoomByRoomId(@PathVariable Long roomId) {
         RoomResponseDto findRoom = roomService.getRoomByRoomId(roomId);
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, findRoom);
+    }
+
+    @Override
+    @GetMapping("/furniture")
+    public DataResponse<List<Furniture>> getFurnitureList(@RequestParam(required = false) Integer category) {
+        List<Furniture> furnitureList;
+
+        if (category != null) {
+            furnitureList = roomService.getFurnitureListByCategory(category);
+        }else {
+            furnitureList = roomService.getFurnitureList();
+        }
+
+        return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, furnitureList);
     }
 }
