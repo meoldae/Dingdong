@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ssafy.dingdong.domain.member.dto.request.MemberSignUpDto;
+import com.ssafy.dingdong.domain.member.dto.response.MemberLoginResponseDto;
 import com.ssafy.dingdong.domain.member.dto.response.MemberMainDto;
 import com.ssafy.dingdong.global.response.CommonResponse;
 import com.ssafy.dingdong.global.response.DataResponse;
@@ -37,7 +38,7 @@ public interface MemberSwagger {
 	}
 	)
 	@Operation(summary = "닉네임 / 캐릭터 설정", description = "닉네임을 설정하고 캐릭터를 선택합니다.")
-	DataResponse<MemberMainDto> createMember(@Parameter(name = "MemberSignUpDto", description = "회원 ID, 닉네임, 캐릭터 ID를 인자로 받습니다.") @Validated @RequestBody MemberSignUpDto memberSignUpDto, HttpServletRequest response);
+	DataResponse<MemberLoginResponseDto> createMember(@Parameter(name = "MemberSignUpDto", description = "회원 ID, 닉네임, 캐릭터 ID를 인자로 받습니다.") @Validated @RequestBody MemberSignUpDto memberSignUpDto, HttpServletRequest response);
 
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "요청에 성공했습니다."),
