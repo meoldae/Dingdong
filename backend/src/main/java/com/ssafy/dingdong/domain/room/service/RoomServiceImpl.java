@@ -5,8 +5,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
+import com.ssafy.dingdong.domain.room.entity.Furniture;
 import com.ssafy.dingdong.domain.room.entity.Room;
 import com.ssafy.dingdong.domain.room.repository.FurnitureRepository;
 import com.ssafy.dingdong.domain.room.repository.RoomFurnitureRepository;
@@ -61,6 +63,14 @@ public class RoomServiceImpl implements RoomService{
     @Override
     public Page<FurnitureSummaryDto> getFurnitureListByCategory(Integer category, Pageable pageable) {
         return furnitureRepository.findAllByCategoryId(category, pageable);
+    }
+
+    @Override
+    public FurnitureDetailDto getFurnitureByFurnitureId(String furnitureId) {
+        Furniture furniture = furnitureRepository.findById(furnitureId).orElseThrow(
+            () -> new CustomException(ExceptionStatus.FURNITURE_NOT_FOUND)
+        );
+        return new FurnitureDetailDto(furniture);
     }
 
 }

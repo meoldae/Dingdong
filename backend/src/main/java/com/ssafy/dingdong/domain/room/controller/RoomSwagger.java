@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
 import com.ssafy.dingdong.global.response.DataResponse;
@@ -23,5 +24,7 @@ public interface RoomSwagger {
 	DataResponse<RoomResponseDto> getRoomByRoomId(@PathVariable Long roomId);
 
 	DataResponse<Page<FurnitureSummaryDto>> getFurnitureList(@RequestParam(required = false) Integer category, @PageableDefault(size = 6) Pageable pageable);
+
+	DataResponse<FurnitureDetailDto> getFurnitureByFurnitureId(@PathVariable String furnitureId);
 
 }

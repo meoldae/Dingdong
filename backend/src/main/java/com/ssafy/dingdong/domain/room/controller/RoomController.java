@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
 import com.ssafy.dingdong.domain.room.service.RoomService;
@@ -61,5 +62,12 @@ public class RoomController implements RoomSwagger{
         }
 
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, furnitureList);
+    }
+
+    @Override
+    @GetMapping("/furniture/{furnitureId}")
+    public DataResponse<FurnitureDetailDto> getFurnitureByFurnitureId(@PathVariable String furnitureId) {
+        FurnitureDetailDto furniture = roomService.getFurnitureByFurnitureId(furnitureId);
+        return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, furniture);
     }
 }

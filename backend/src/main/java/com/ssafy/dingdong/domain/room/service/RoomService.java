@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
 
@@ -19,4 +20,6 @@ public interface RoomService {
     Page<FurnitureSummaryDto> getFurnitureList(Pageable pageable);
 
     Page<FurnitureSummaryDto> getFurnitureListByCategory(Integer category, Pageable pageable);
+
+    FurnitureDetailDto getFurnitureByFurnitureId(String furnitureId);
 }
