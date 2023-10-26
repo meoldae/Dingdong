@@ -15,7 +15,7 @@ const RefreshToken = async (success, fail) => {
 };
 
 const fetchRoomData = async (success, fail) => {
-    await HttpJson.get(``).then(success).catch(fail);
+    await HttpJson.get(`room/roomId`).then(success).catch(fail);
 }
 
 export { CreateUser, GetAvatarList, RefreshToken, fetchRoomData };

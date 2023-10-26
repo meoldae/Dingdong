@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import AuthRoute from "./AuthRouter";
-import AppMain from "../pages/Main/MainPage"
 import AppRoom from "../pages/Room/RoomPage"
 import AppNotFound from "../pages/NotFound/NotFoundPage"
 import AppLogin from "../pages/User/LoginPage"
@@ -10,13 +9,14 @@ import AppRedirect from "../pages/User/RedirectPage"
 import AppUserSetting from "../pages/User/UserSettingPage"
 import TutorialPage from "../pages/Main/TutorialPage"
 import CharacterPage from "../pages/Main/CharacterPage"
+import MainPage from "../pages/Main/CharacterPage";
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<AuthRoute authentication="user"/>}>
-          <Route path="/" element={<AppMain />} />
+        <Route element={<AuthRoute authentication="user"/>}> 
+          <Route path="/" element={<MainPage />} />
           <Route path="/character" element={<CharacterPage />} />
           <Route path="/room" element={<AppRoom />} />
           <Route path="/usersetting" element={<AppUserSetting />} />

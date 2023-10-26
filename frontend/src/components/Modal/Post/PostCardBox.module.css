@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   overflow: auto;
-  height: 400px;
+  height: 350px;
 }
 
 .postCardContainer::-webkit-scrollbar {
@@ -11,13 +11,17 @@
 }
 
 .postCardContainer {
-  -ms-overflow-style: none; /* 인터넷 익스플로러 */
-  scrollbar-width: none; /* 파이어폭스 */
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
 }
 
 .postCardContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+.postCard.selected {
+  border: 0.5px solid #000; 
 }
 
 .postCardComment {
