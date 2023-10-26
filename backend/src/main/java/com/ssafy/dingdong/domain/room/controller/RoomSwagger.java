@@ -32,4 +32,6 @@ public interface RoomSwagger {
 	DataResponse<FurnitureDetailDto> getFurnitureByFurnitureId(@PathVariable String furnitureId);
 
 	CommonResponse updateRoom(@RequestBody RoomUpdateRequestDto roomUpdateRequestDto, Authentication authentication);
+
+	CommonResponse roomHeart(@PathVariable Long roomId, Authentication authentication);
 }
