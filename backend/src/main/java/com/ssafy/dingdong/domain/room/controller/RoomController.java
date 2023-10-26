@@ -6,14 +6,18 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.dingdong.domain.room.dto.request.RoomUpdateRequestDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
 import com.ssafy.dingdong.domain.room.service.RoomService;
+import com.ssafy.dingdong.global.response.CommonResponse;
 import com.ssafy.dingdong.global.response.DataResponse;
 import com.ssafy.dingdong.global.response.ResponseService;
 import com.ssafy.dingdong.global.response.ResponseStatus;
@@ -70,4 +74,12 @@ public class RoomController implements RoomSwagger{
         FurnitureDetailDto furniture = roomService.getFurnitureByFurnitureId(furnitureId);
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, furniture);
     }
+
+    @Override
+    @PostMapping
+    public CommonResponse updateRoom(@RequestBody RoomUpdateRequestDto roomUpdateRequestDto, Authentication authentication) {
+        roomService.updateRoom(roomUpdateRequestDto, authentication.getName());
+        return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
+    }
+
 }
