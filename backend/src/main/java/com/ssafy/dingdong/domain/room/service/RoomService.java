@@ -1,5 +1,11 @@
 package com.ssafy.dingdong.domain.room.service;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
 
 public interface RoomService {
@@ -10,4 +16,7 @@ public interface RoomService {
 
     void createRoom(String memberId);
 
+    Page<FurnitureSummaryDto> getFurnitureList(Pageable pageable);
+
+    Page<FurnitureSummaryDto> getFurnitureListByCategory(Integer category, Pageable pageable);
 }
