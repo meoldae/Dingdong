@@ -3,16 +3,21 @@ package com.ssafy.dingdong.domain.room.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ssafy.dingdong.domain.member.repository.MemberRepository;
+import com.ssafy.dingdong.domain.member.service.MemberService;
 import com.ssafy.dingdong.domain.room.dto.request.RoomUpdateRequestDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
+import com.ssafy.dingdong.domain.room.dto.response.RoomScoreDto;
 import com.ssafy.dingdong.domain.room.entity.Furniture;
 import com.ssafy.dingdong.domain.room.entity.Room;
 import com.ssafy.dingdong.domain.room.entity.RoomFurniture;
@@ -32,6 +37,7 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class RoomServiceImpl implements RoomService {
 
+	private final MemberRepository memberRepository;
 	private final RoomRepository roomRepository;
 	private final RoomFurnitureRepository roomFurnitureRepository;
 	private final FurnitureRepository furnitureRepository;
@@ -133,5 +139,26 @@ public class RoomServiceImpl implements RoomService {
 					roomHeartRepository.save(newRecord);
 				}
 			);
+	}
+
+	@Override
+	@Transactional
+	public List<RoomScoreDto> getRoomScore() {
+		Page<RoomScoreDto> roomScoreList = roomHeartRepository.getHeartRoomScore(PageRequest.of(0, 10));
+
+		roomScoreList.stream().forEach(
+			roomScore -> {
+				Room room = roomRepository.findByRoomId(roomScore.getRoomId()).orElseThrow(
+					() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
+				);
+
+				String nickname = memberRepository.getNicknameByMemberId(UUID.fromString(room.getMemberId())).orElseThrow(
+					() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
+				);
+
+				roomScore.setNickname(nickname);
+			}
+		);
+		return roomScoreList.stream().toList();
 	}
 }

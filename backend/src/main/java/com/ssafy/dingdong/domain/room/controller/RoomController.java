@@ -1,5 +1,7 @@
 package com.ssafy.dingdong.domain.room.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -16,6 +18,7 @@ import com.ssafy.dingdong.domain.room.dto.request.RoomUpdateRequestDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
+import com.ssafy.dingdong.domain.room.dto.response.RoomScoreDto;
 import com.ssafy.dingdong.domain.room.service.RoomService;
 import com.ssafy.dingdong.global.response.CommonResponse;
 import com.ssafy.dingdong.global.response.DataResponse;
@@ -87,5 +90,12 @@ public class RoomController implements RoomSwagger{
     public CommonResponse roomHeart(@PathVariable Long roomId, Authentication authentication) {
         roomService.createHeartRoom(authentication.getName(), roomId);
         return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
+    }
+
+    @Override
+    @GetMapping("/heart/score")
+    public DataResponse<List<RoomScoreDto>> getRoomScore(){
+        List<RoomScoreDto> roomScore = roomService.getRoomScore();
+        return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, roomScore);
     }
 }
