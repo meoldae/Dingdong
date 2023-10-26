@@ -33,9 +33,10 @@ public class Room {
     @JoinColumn(name = "roomId")
     private List<RoomFurniture> roomFurnitureList;
 
-    public RoomResponseDto toRoomResponseDto() {
+    public RoomResponseDto toRoomResponseDto(Long heartCount) {
         return RoomResponseDto.builder()
             .roomId(this.roomId)
+            .heartCount(heartCount)
             .roomFurnitureList(this.roomFurnitureList)
             .build();
     }
