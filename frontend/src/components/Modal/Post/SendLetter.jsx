@@ -6,8 +6,9 @@ import styles from "./SendLetter.module.css"
 const SendLetter = ({ onClose, card }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  
+
   const cancelClick = () => {
+    onClose();
     console.log("취소로직")
   }
 
@@ -15,8 +16,14 @@ const SendLetter = ({ onClose, card }) => {
     console.log("편지전송 로직")
   }
 
-  return (
-    <div className={styles.overlay}>
+  const handleOutsideClick = (event) => {
+    if (event.target === event.currentTarget) {
+      onClose();
+    }
+  }
+
+  return (  
+    <div className={styles.overlay} onClick={handleOutsideClick}>
       <div className={styles.sendLetterContainer}>
         <Card className={styles.sendLetterBox}>
           <div className={styles.xmarkImg} onClick={cancelClick}>
