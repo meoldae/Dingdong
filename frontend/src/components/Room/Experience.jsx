@@ -143,27 +143,27 @@ const Experience = () => {
         ) {
           droppable = false;
         }
-      } else {
-        if (
-          dragPosition[1] - thick / 2 < -1 ||
-          dragPosition[1] + thick / 2 > 16
-        ) {
-          droppable = false;
-        }
-        if (
-          dragPosition[0] - width / 2 < -1 ||
-          dragPosition[0] + width / 2 > 4.8 / 0.24
-        ) {
-          droppable = false;
-        }
+      }
+      if (
+        dragPosition[1] - thick / 2 < -1 ||
+        dragPosition[1] + thick / 2 > 16
+      ) {
+        droppable = false;
+      }
+      if (
+        dragPosition[0] - width / 2 < -1 ||
+        dragPosition[0] + width / 2 > 4.8 / 0.24
+      ) {
+        droppable = false;
       }
     }
     items.forEach((otherItem, idx) => {
       // ignore self
+
       if (idx === draggedItem) {
         return;
       }
-      if (otherItem.walkable) {
+      if (otherItem.walkable && !otherItem.wall) {
         return;
       }
       // ignore wall & floor
@@ -177,8 +177,30 @@ const Experience = () => {
         otherItem.rotation === 1 || otherItem.rotation === 3
           ? otherItem.size[0]
           : otherItem.size[2];
-
-      // 바닥 겹칠 수 있는지, 벽면에 놓는건지 예외처리
+      if (otherItem.wall && !item.wall && otherItem.rotation) {
+        if (dragPosition[0] - width / 2 <= 0) {
+          if (
+            dragPosition[1] + thick > otherItem.gridPosition[1] - thick / 2 &&
+            dragPosition[2] + height / 2 >
+              otherItem.gridPosition[2] - otherHeight / 2 &&
+            dragPosition[2] - height / 2 <
+              otherItem.gridPosition[2] + otherHeight / 2
+          )
+            droppable = false;
+        }
+      }
+      if (otherItem.wall && !item.wall && !otherItem.rotation) {
+        if (dragPosition[2] - height / 2 <= 0) {
+          if (
+            dragPosition[1] + thick > otherItem.gridPosition[1] - thick / 2 &&
+            dragPosition[0] + width / 2 >
+              otherItem.gridPosition[0] - otherWidth / 2 &&
+            dragPosition[0] - width / 2 <
+              otherItem.gridPosition[0] + otherWidth / 2
+          )
+            droppable = false;
+        }
+      }
       if (!item.walkable && !item.wall) {
         if (
           dragPosition[0] + width / 2 >
@@ -194,7 +216,7 @@ const Experience = () => {
         }
       }
 
-      // 다른 물체 높이 예외 처리
+      // 다른 물체 높이 예외 처리 (벽면에 있는 게 움직일 때)
       if (item.wall && item.rotation) {
         if (otherItem.gridPosition[0] - otherWidth / 2 <= 0) {
           if (
@@ -204,15 +226,12 @@ const Experience = () => {
             dragPosition[2] - height / 2 <
               otherItem.gridPosition[2] + otherHeight / 2
           ) {
-            console.log("drag", dragPosition);
-            console.log("other", otherItem.gridPosition);
-
             droppable = false;
           }
         }
       }
-      if(item.wall && !item.rotation){
-        if(otherItem.gridPosition[2] - otherHeight /2 <=0 ){
+      if (item.wall && !item.rotation) {
+        if (otherItem.gridPosition[2] - otherHeight / 2 <= 0) {
           if (
             dragPosition[1] - thick / 2 < otherThick &&
             dragPosition[0] + width / 2 >
@@ -224,7 +243,6 @@ const Experience = () => {
           }
         }
       }
-
     });
     setCanDrop(droppable);
   }, [dragPosition, draggedItem, items]);

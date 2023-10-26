@@ -63,7 +63,7 @@ export const Item = ({
         >
           <primitive
             object={clone}
-            position-x={rotation? 0 :-0.12}
+            position-x={rotation? 0 : 0.12}
             position-y={0.44}
             position-z={0.12}
             // 벽에 있는 아이템 관련
@@ -71,7 +71,7 @@ export const Item = ({
           />
           {isDragging && (
             <mesh
-              position-x={rotation ? 0.02 : -0.12}
+              position-x={rotation ? 0.02 : 0.12}
               position-y={0.12}
               position-z={0.13}
             >
@@ -84,7 +84,7 @@ export const Item = ({
               />
               <meshBasicMaterial
                 color={canDrop ? "green" : "red"}
-                opacity={0.3}
+                opacity={0.5}
                 transparent
               />
             </mesh>
@@ -106,11 +106,11 @@ export const Item = ({
           {isDragging && (
             <mesh position-y={0.02}>
               <boxGeometry
-                args={[(width * 0.48) / 2, 0, (height * 0.48) / 2]}
+                args={[(width * 0.48) / 2, 0.01, (height * 0.48) / 2]}
               />
               <meshBasicMaterial
                 color={canDrop ? "green" : "red"}
-                opacity={0.3}
+                opacity={0.5}
                 transparent
               />
             </mesh>
