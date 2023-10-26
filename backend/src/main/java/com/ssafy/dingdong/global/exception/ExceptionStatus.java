@@ -26,6 +26,7 @@ public enum ExceptionStatus {
 	NEIGHBOR_REQUEST_DOES_NOT_EXIST(ResponseStatusCode.ERROR, "요청이 존재하지 않습니다."),
 	NEIGHBOR_ALREADY_CONNECTED(ResponseStatusCode.ERROR, "이미 이웃입니다"),
 	ROOM_NOT_FOUND(ResponseStatusCode.ERROR, "방을 찾을 수 없습니다."),
+	FURNITURE_NOT_FOUND(ResponseStatusCode.ERROR, "가구가 존재하지 않습니다."),
 	//신고
 	LETTER_FROM_NOT_FOUND(ResponseStatusCode.ERROR, "편지 작성자가 존재하지 않습니다."),
 	CHAT_FROM_NOT_FOUND(ResponseStatusCode.ERROR, "채팅 작성자가 존재하지 않습니다.");
