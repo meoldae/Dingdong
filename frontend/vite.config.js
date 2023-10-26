@@ -1,4 +1,5 @@
 import { defineConfig } from "vite"
+import path from "path";
 import react from "@vitejs/plugin-react"
 import { VitePWA } from "vite-plugin-pwa"
 
@@ -15,11 +16,38 @@ export default defineConfig({
       devOptions: {
         enabled: true,
       },
+      manifest: {
+        name: 'Ding Dong',
+        short_name: 'Ding Dong',
+        description: '딩동! 편지왔어요. 딩동! 놀러왔어요',
+        start_url: '/',
+        display: 'standalone',
+        background_color: '#F5F5F5', // 스플래시 화면의 배경색
+        // theme_color: '#F5F5F5', // 애플리케이션의 주 테마 색상
+        icons: [
+          {
+            src: "assets/icons/pwa_icon.png",
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "any maskable",
+          },
+        ],
+      },
+
     }),
   ],
   server: {
     host: "0.0.0.0",
     port: 3000,
     cors: true,
+  },
+  resolve: {
+    alias: [
+      { find: "@", replacement: path.resolve(__dirname, "src") },
+      { find: "public", replacement: path.resolve(__dirname, "public") },
+    ],
+  },
+  define: {
+    global: "window",
   },
 })

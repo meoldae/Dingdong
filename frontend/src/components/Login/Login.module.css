@@ -1,0 +1,22 @@
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #FDFFB4; 
+}
+
+/* .centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+} */
+
+.buttons img {
+    position: absolute;  
+    top: 80%;            
+    left: 50%;          
+    transform: translate(-50%, -50%); 
+}

@@ -4,3 +4,4 @@ export const isHouseVisibleAtom = atom({
   key: "isHouseVisibleAtom",
   default: false,
 })
+
