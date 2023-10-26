@@ -23,9 +23,9 @@ public class RoomFurniture {
 	private Long roomFurnitureId;
 	private Long roomId;
 	private String assetId;
-	private Float xPos;
-	private Float yPos;
-	private Float zPos;
+	private int xPos;
+	private int yPos;
+	private int zPos;
 	private Short rotation;
 
 }
