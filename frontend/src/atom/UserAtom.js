@@ -4,6 +4,8 @@ const userAtom = atom({
     key: "userAtom",
     default: {
         accessToken: "",
+        uuid: "",
+        nickname: ""        
     },
     effects: [
         ({ setSelf, onSet }) => {

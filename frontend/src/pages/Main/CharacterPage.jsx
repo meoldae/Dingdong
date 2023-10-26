@@ -8,6 +8,7 @@ import Model from "../../components/Item/PlayerItems/Model"
 import House from "../../components/Item/MainItems/House"
 import Spot from "../../components/Item/MainItems/Spot"
 import "./CharacterPage.css"
+
 function MainPage() {
   return (
     <div id="canvas-container">

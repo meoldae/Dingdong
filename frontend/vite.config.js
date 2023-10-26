@@ -3,7 +3,6 @@ import path from "path";
 import react from "@vitejs/plugin-react"
 import { VitePWA } from "vite-plugin-pwa"
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
@@ -22,8 +21,6 @@ export default defineConfig({
         description: '딩동! 편지왔어요. 딩동! 놀러왔어요',
         start_url: '/',
         display: 'standalone',
-        background_color: '#F5F5F5', // 스플래시 화면의 배경색
-        // theme_color: '#F5F5F5', // 애플리케이션의 주 테마 색상
         icons: [
           {
             src: "assets/icons/pwa_icon.png",

@@ -12,7 +12,10 @@ const GetAvatarList = async (success, fail) => {
 
 const RefreshToken = async (success, fail) => {
     await HttpJson.post(`auth/refresh`).then(success).catch(fail);
+};
+
+const fetchRoomData = async (success, fail) => {
+    await HttpJson.get(`room/roomId`).then(success).catch(fail);
 }
 
-
-export { CreateUser, GetAvatarList, RefreshToken };
+export { CreateUser, GetAvatarList, RefreshToken, fetchRoomData };
