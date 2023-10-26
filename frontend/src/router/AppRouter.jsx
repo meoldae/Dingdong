@@ -10,7 +10,6 @@ import AppRedirect from "../pages/User/RedirectPage"
 import AppUserSetting from "../pages/User/UserSettingPage"
 import TutorialPage from "../pages/Main/TutorialPage"
 import CharacterPage from "../pages/Main/CharacterPage"
-import ProfileSelect from "../pages/User/ProfileSelect";
 
 const AppRouter = () => {
   return (
@@ -19,15 +18,14 @@ const AppRouter = () => {
         <Route element={<AuthRoute authentication="user"/>}>
           <Route path="/" element={<AppMain />} />
           <Route path="/character" element={<CharacterPage />} />
-          <Route path="/tutorial" element={<TutorialPage />} />
           <Route path="/room" element={<AppRoom />} />
           <Route path="/usersetting" element={<AppUserSetting />} />
-          <Route path="/profileselect" element={<ProfileSelect />} />
         </Route>
         <Route element={<AuthRoute authentication="NotUser"/>}>
           <Route path="/login" element={<AppLogin />} />
           <Route path="/oauth2/redirect" element={<AppRedirect />} />
           <Route path="/signup" element={<AppSignUp />} />
+          <Route path="/tutorial" element={<TutorialPage />} />
         </Route>
         <Route path="/*" element={<AppNotFound />} />
       </Routes>
