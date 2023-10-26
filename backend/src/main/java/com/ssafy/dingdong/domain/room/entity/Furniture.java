@@ -20,7 +20,6 @@ public class Furniture {
 	@OneToOne
 	@JoinColumn(name = "categoryId")
 	private FurnitureCategory furnitureCategory;
-	private String thumbnail;
 	private Float xSize;
 	private Float ySize;
 	private Float zSize;
