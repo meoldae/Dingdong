@@ -21,7 +21,7 @@ public record FurnitureDetailDto(
 			furniture.getFurnitureCategory().getDescription(),
 			furniture.getThumbnail(),
 			Math.round(furniture.getXSize() / 0.24f),
-			Math.round(furniture.getYSize() / 0.24f),
+			Math.round(furniture.getYSize() / 0.24f) - 1,
 			Math.round(furniture.getZSize() / 0.24f),
 			furniture.getFurnitureCategory().getXDefault(),
 			furniture.getFurnitureCategory().getYDefault(),
