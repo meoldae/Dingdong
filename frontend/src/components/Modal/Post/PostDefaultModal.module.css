@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  /* min-height: 40%; */
+  width: 30vw;
+  padding: 15px;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3; 
+
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border: 1px solid lightcoral;
+}
+
+.xmarkImg {
+  display: flex;
+  justify-content: right;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.containerTitle {
+  font-size: 30px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+
+.horizontalRule {
+  width: 95%;
+  height: 2px;
+  background-color: #f2cae4;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);  /* 반투명 검은색 */
+  z-index: 2;
+}
