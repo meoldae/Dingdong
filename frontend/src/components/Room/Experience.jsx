@@ -191,6 +191,7 @@ const Experience = () => {
       }
       if (otherItem.wall && !item.wall && !otherItem.rotation) {
         if (dragPosition[2] - height / 2 <= 0) {
+          console.log("1")
           if (
             dragPosition[1] + thick > otherItem.gridPosition[1] - thick / 2 &&
             dragPosition[0] + width / 2 >
@@ -201,7 +202,8 @@ const Experience = () => {
             droppable = false;
         }
       }
-      if (!item.walkable && !item.wall) {
+      if (!item.walkable && !item.wall && !otherItem.wall) {
+        console.log(otherItem)
         if (
           dragPosition[0] + width / 2 >
             otherItem.gridPosition[0] - otherWidth / 2 &&
@@ -213,6 +215,7 @@ const Experience = () => {
             otherItem.gridPosition[2] - otherHeight / 2
         ) {
           droppable = false;
+          console.log(dragPosition)
         }
       }
 
