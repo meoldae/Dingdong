@@ -1,15 +1,21 @@
 package com.ssafy.dingdong.domain.room.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ssafy.dingdong.domain.room.dto.request.RoomUpdateRequestDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
 import com.ssafy.dingdong.domain.room.entity.Furniture;
 import com.ssafy.dingdong.domain.room.entity.Room;
+import com.ssafy.dingdong.domain.room.entity.RoomFurniture;
 import com.ssafy.dingdong.domain.room.repository.FurnitureRepository;
 import com.ssafy.dingdong.domain.room.repository.RoomFurnitureRepository;
 import com.ssafy.dingdong.domain.room.repository.RoomRepository;
@@ -73,4 +79,38 @@ public class RoomServiceImpl implements RoomService{
         return new FurnitureDetailDto(furniture);
     }
 
+    @Override
+    @Transactional
+    public void updateRoom(RoomUpdateRequestDto roomUpdateRequestDto, String memberId) {
+        List<RoomFurniture> roomFurnitureList = getRoomByMemberId(memberId).roomFurnitureList();
+        Map<Long, RoomFurniture> roomFurnitureMap = new HashMap<Long, RoomFurniture>();
+
+        roomFurnitureList.stream().forEach(
+            roomFurniture -> roomFurnitureMap.put(roomFurniture.getRoomFurnitureId(), roomFurniture)
+        );
+
+        Long roomId = roomUpdateRequestDto.getRoomId();
+        roomUpdateRequestDto.getUpdateFurnitureList().stream().forEach(
+            updateFurniture -> {
+                log.info(updateFurniture);
+                if (updateFurniture.roomFurnitureId() == -1) {
+                    RoomFurniture newRoomFurniture = RoomFurniture.builder()
+                        .roomId(roomId)
+                        .furnitureId(updateFurniture.furnitureId())
+                        .xPos(updateFurniture.xPos())
+                        .yPos(updateFurniture.yPos())
+                        .zPos(updateFurniture.zPos())
+                        .rotation(updateFurniture.rotation())
+                        .build();
+                    roomFurnitureRepository.save(newRoomFurniture);
+                }else {
+                    RoomFurniture findRoomFurniture = roomFurnitureMap.get(updateFurniture.roomFurnitureId());
+                    roomFurnitureMap.remove(updateFurniture.roomFurnitureId());
+
+                    findRoomFurniture.updateStatus(updateFurniture);
+                }
+            }
+        );
+        roomFurnitureRepository.deleteAllById(roomFurnitureMap.keySet());
+    }
 }
