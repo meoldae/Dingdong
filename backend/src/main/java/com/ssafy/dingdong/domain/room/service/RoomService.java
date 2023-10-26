@@ -9,6 +9,7 @@ import com.ssafy.dingdong.domain.room.dto.request.RoomUpdateRequestDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
+import com.ssafy.dingdong.domain.room.dto.response.RoomScoreDto;
 
 public interface RoomService {
 
@@ -27,4 +28,6 @@ public interface RoomService {
 	void updateRoom(RoomUpdateRequestDto roomUpdateRequestDto, String name);
 
 	void createHeartRoom(String memberId, Long roomId);
+
+	List<RoomScoreDto> getRoomScore();
 }

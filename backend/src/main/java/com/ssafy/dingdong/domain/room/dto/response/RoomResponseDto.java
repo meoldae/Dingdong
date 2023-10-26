@@ -8,11 +8,13 @@ import lombok.Builder;
 
 public record RoomResponseDto(
 	Long roomId,
+	Long heartCount,
 	List<RoomFurniture> roomFurnitureList
 ) {
 	@Builder
-	public RoomResponseDto(Long roomId, List<RoomFurniture> roomFurnitureList) {
+	public RoomResponseDto(Long roomId, Long heartCount, List<RoomFurniture> roomFurnitureList) {
 		this.roomId = roomId;
+		this.heartCount = heartCount;
 		this.roomFurnitureList = roomFurnitureList;
 	}
 }
