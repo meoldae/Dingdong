@@ -2,29 +2,34 @@ import React, { useEffect, useRef } from "react"
 import { useFrame, useThree } from "@react-three/fiber"
 import { OrthographicCamera } from "@react-three/drei"
 import { useRecoilValue } from "recoil"
-import { modelPositionAtom } from "../../atom/PlayerAtom"
-import { DefaultPosition, DefaultZoom } from "../../atom/DefaultCamAtom"
-import { ArriveAtom } from "../../atom/HouseCamAtom"
+import {
+  CharacterPositionAtom,
+  DefaultPosition,
+  DefaultZoom,
+} from "../../atom/DefaultSettingAtom"
+import { ArriveAtom } from "../../atom/SinglePlayAtom"
 
-function lerp(start, end, factor) {
+// 선형 보간
+const lerp = (start, end, factor) => {
   return (1 - factor) * start + factor * end
 }
 
-function CustomCamera() {
-  const modelPosition = useRecoilValue(modelPositionAtom)
+const CustomCamera = () => {
   const cameraRef = useRef()
   const { size } = useThree()
 
-  const defaultCamPosition = useRecoilValue(DefaultPosition)
-  const zoomPoint = useRecoilValue(DefaultZoom)
+  const characterPosition = useRecoilValue(CharacterPositionAtom)
+  const defaultCameraPosition = useRecoilValue(DefaultPosition)
+  const defaultCameraZoom = useRecoilValue(DefaultZoom)
 
-  // ArriveAtom 값 확인
+  // 각 건물 포탈에서 움직임 제어
   const isArrived = useRecoilValue(ArriveAtom)
 
   // 현재 및 목표 위치 저장
-  const currentPos = useRef([...defaultCamPosition])
-  const targetPos = useRef([...defaultCamPosition])
+  const currentPos = useRef([...defaultCameraPosition])
+  const targetPos = useRef([...defaultCameraPosition])
 
+  // 화면 사이즈 측정
   useEffect(() => {
     if (cameraRef.current) {
       const aspectRatio = size.width / size.height
@@ -36,16 +41,18 @@ function CustomCamera() {
     }
   }, [size])
 
+  // 카메라 속성
   useFrame(() => {
-    if (cameraRef.current && modelPosition) {
+    if (cameraRef.current && characterPosition) {
+      // 건물 도착했을 때 카메라 각도 조정(선형 보간)
       if (isArrived) {
         targetPos.current = [
-          modelPosition[0] + defaultCamPosition[0],
-          modelPosition[1] + defaultCamPosition[1],
-          modelPosition[2] + defaultCamPosition[2],
+          characterPosition[0] + defaultCameraPosition[0],
+          characterPosition[1] + defaultCameraPosition[1],
+          characterPosition[2] + defaultCameraPosition[2],
         ]
 
-        const factor = 0.02
+        const factor = 0.02 // 카메라 전환 속도 (값 : 0 ~ 1, 1로 갈수록 빠름)
         currentPos.current[0] = lerp(
           currentPos.current[0],
           targetPos.current[0],
@@ -63,17 +70,17 @@ function CustomCamera() {
         )
       } else {
         currentPos.current = [
-          modelPosition[0] + defaultCamPosition[0],
-          modelPosition[1] + defaultCamPosition[1],
-          modelPosition[2] + defaultCamPosition[2],
+          characterPosition[0] + defaultCameraPosition[0],
+          characterPosition[1] + defaultCameraPosition[1],
+          characterPosition[2] + defaultCameraPosition[2],
         ]
       }
 
       cameraRef.current.position.set(...currentPos.current)
       cameraRef.current.lookAt(
-        modelPosition[0],
-        modelPosition[1],
-        modelPosition[2]
+        characterPosition[0],
+        characterPosition[1],
+        characterPosition[2]
       )
     }
   })
@@ -82,8 +89,8 @@ function CustomCamera() {
     <OrthographicCamera
       ref={cameraRef}
       makeDefault
-      position={defaultCamPosition}
-      zoom={zoomPoint}
+      position={defaultCameraPosition}
+      zoom={defaultCameraZoom}
       near={0.5}
       far={20}
     />

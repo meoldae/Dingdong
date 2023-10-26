@@ -1,67 +1,67 @@
 import React, { useState, useRef, useEffect, useCallback } from "react"
 import { useFrame, useThree, useLoader } from "@react-three/fiber"
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import * as THREE from "three"
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { useRecoilValue, useSetRecoilState } from "recoil"
-import { modelPositionAtom } from "../../../atom/PlayerAtom"
+import { CharacterPositionAtom } from "../../../atom/DefaultSettingAtom"
+import { ArriveAtom } from "../../../atom/SinglePlayAtom"
 import { isPickedAtom } from "../../../atom/TutorialAtom"
-import { ArriveAtom } from "../../../atom/HouseCamAtom"
 
-function Model() {
-  const isPicked = useRecoilValue(isPickedAtom)
-  const setModelPosition = useSetRecoilState(modelPositionAtom)
-  // 캐릭터 모델 참조
-  const modelRef = useRef()
-
-  // 애니메이션 컨트롤
-  const mixerRef = useRef()
-
-  // 애니메이션 액션 리스트
-  const actions = useRef([])
-
-  // 모델 로드
-  const gltf = useLoader(GLTFLoader, "assets/models/f_7.glb")
-
-  // 로드된 모델의 각 객체에 대하여 그림자 생성
-  gltf.scene.traverse((child) => {
-    if (child.isMesh) {
-      child.castShadow = true
-    }
-  })
-
-  // 모델 애니메이션 저장
-  useEffect(() => {
-    if (gltf.animations && gltf.animations.length > 0) {
-      mixerRef.current = new THREE.AnimationMixer(gltf.scene)
-      actions.current = gltf.animations.map((clip) =>
-        mixerRef.current.clipAction(clip)
-      )
-    }
-  }, [gltf])
-
-  // 기본 설정
+const Character = () => {
+  // Three.js 기본 설정
   const {
     camera,
     scene,
     gl: { domElement },
   } = useThree()
 
-  // 모델의 현재 위치
-  const [position, setPosition] = useState(new THREE.Vector3(0, 0, 0))
-  // 목적지 위치(마우스 클릭)
-  const [destination, setDestination] = useState(new THREE.Vector3(0, 0, 0))
-  // 모델의 위치 및 애니메이션 업데이트
+  // 캐릭터
+  const characterRef = useRef()
+  const character = useLoader(GLTFLoader, "assets/models/characters/f_7.glb")
 
-  // 도착 여부
+  // 애니메이션
+  const mixerRef = useRef()
+  const actions = useRef([])
+  useEffect(() => {
+    if (character.animations && character.animations.length > 0) {
+      mixerRef.current = new THREE.AnimationMixer(character.scene)
+      actions.current = character.animations.map((clip) =>
+        mixerRef.current.clipAction(clip)
+      )
+    }
+  }, [character])
+
+  // 그림자 생성
+  character.scene.traverse((child) => {
+    if (child.isMesh) {
+      child.castShadow = true
+    }
+  })
+
+  // 공통
+  const setCharacterPosition = useSetRecoilState(CharacterPositionAtom)
+  const [position, setPosition] = useState(new THREE.Vector3(0, 0, 0))
+  const [destination, setDestination] = useState(new THREE.Vector3(0, 0, 0))
+
+  // 튜토리얼 우표 수집
+  const isPicked = useRecoilValue(isPickedAtom)
+
+  // 움직임 제어 및 카메라 선형 보간
   const isArrived = useRecoilValue(ArriveAtom)
   useFrame((_, delta) => {
     if (mixerRef.current) {
       mixerRef.current.update(delta)
     }
 
-    if (modelRef.current) {
+    if (characterRef.current) {
       const distance = position.distanceTo(destination)
 
+      // 싱글 플레이
+      if (isArrived) {
+        setDestination(position)
+      }
+
+      // 튜토리얼
       if (isPicked) {
         actions.current[1].stop()
         actions.current[0].stop()
@@ -71,34 +71,30 @@ function Model() {
         actions.current[5].stop()
       }
 
-      if (isArrived) {
-        setDestination(position)
-      }
-
-      // 모델 이동
+      // 캐릭터 이동
       if (!isPicked && distance > 0.05) {
         // 목적지까지의 거리가 0.05보다 크면 이동
         actions.current[1].play()
         actions.current[0].stop()
 
-        // 이동 방향을 계산하여 모델의 위치를 업데이트
+        // 이동 방향을 계산하여 캐릭터의 위치를 업데이트
         const angle = Math.atan2(
           destination.z - position.z,
           destination.x - position.x
         )
-        const speed = 0.07 // 모델의 이동 속도
+        const speed = 0.07 // 캐릭터의 이동 속도
         position.x += Math.cos(angle) * speed
         position.z += Math.sin(angle) * speed
         setPosition(position.clone())
 
-        // 카메라 트렉킹을 위해 현재 모델 위치 정보 저장
-        setModelPosition([
+        // 카메라 트렉킹을 위해 현재 캐릭터 위치 정보 저장
+        setCharacterPosition([
           position.clone().x,
           position.clone().y,
           position.clone().z,
         ])
       }
-      // 모델 정지
+      // 캐릭터 정지
       else {
         actions.current[1].stop()
         actions.current[0].play()
@@ -114,11 +110,7 @@ function Model() {
   const handlePositionChange = useCallback(
     (e) => {
       const event = e.type.startsWith("touch") ? e.touches[0] : e
-
-      // Get canvas offsets
       const rect = domElement.getBoundingClientRect()
-
-      // Adjust the mouse/touch position by considering the canvas offset and scaling
       mouse.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
       mouse.current.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
 
@@ -134,9 +126,9 @@ function Model() {
       // 교차점이 있다면, 그 위치를 목적지로 설정
       if (intersects.length > 0) {
         setDestination(intersects[0].point) // 가장 가까운 교차점을 선택
-        if (modelRef.current) {
-          // 모델이 마우스 및 터치 위치를 정면으로 바라보도록 설정
-          modelRef.current.lookAt(intersects[0].point)
+        if (characterRef.current) {
+          // 캐릭터이 마우스 및 터치 위치를 정면으로 바라보도록 설정
+          characterRef.current.lookAt(intersects[0].point)
         }
       }
     },
@@ -166,7 +158,6 @@ function Model() {
     domElement.addEventListener("touchend", () => setIsPressed(false))
 
     return () => {
-      // 이벤트 리스너 제거
       domElement.removeEventListener("mousedown", handleMouseDownOrTouchStart)
       domElement.removeEventListener("touchstart", handleMouseDownOrTouchStart)
       domElement.removeEventListener("mousemove", handleMouseMoveOrTouchMove)
@@ -178,11 +169,11 @@ function Model() {
 
   return (
     <primitive
-      ref={modelRef}
-      object={gltf.scene}
+      ref={characterRef}
+      object={character.scene}
       position={position.toArray()}
     />
   )
 }
 
-export default Model
+export default Character

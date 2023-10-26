@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react"
 
-function DirectionalLight() {
+const DirectionalLight = () => {
   // 조명 참조
   const lightRef = useRef()
 

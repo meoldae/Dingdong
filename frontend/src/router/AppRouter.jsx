@@ -1,6 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 import AppMain from "../pages/Main/MainPage"
 import AppRoom from "../pages/Room/RoomPage"
@@ -8,9 +6,9 @@ import AppNotFound from "../pages/NotFound/NotFoundPage"
 import AppLogin from "../pages/User/LoginPage"
 import AppSignUp from "../pages/User/SignUpPage"
 import AppUserSetting from "../pages/User/UserSettingPage"
-import TutorialPage from "../pages/Main/TutorialPage"
-import CharacterPage from "../pages/Main/CharacterPage"
-import ProfileSelect from "../pages/User/ProfileSelect";
+import SingleMainPage from "../pages/SinglePlay/SingleMainPage"
+import TutorialPage from "../pages/SinglePlay/TutorialPage"
+import ProfileSelect from "../pages/User/ProfileSelect"
 
 const AppRouter = () => {
   return (
@@ -18,7 +16,7 @@ const AppRouter = () => {
       <Routes>
         <Route>
           <Route path="/" element={<AppMain />} />
-          <Route path="/character" element={<CharacterPage />} />
+          <Route path="/single" element={<SingleMainPage />} />
           <Route path="/tutorial" element={<TutorialPage />} />
           <Route path="/room" element={<AppRoom />} />
           <Route path="/login" element={<AppLogin />} />
@@ -29,7 +27,7 @@ const AppRouter = () => {
         <Route path="/*" element={<AppNotFound />} />
       </Routes>
     </BrowserRouter>
-  );
-};
+  )
+}
 
-export default AppRouter;
+export default AppRouter

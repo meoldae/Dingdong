@@ -3,12 +3,12 @@ import { useLoader } from "@react-three/fiber"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { gsap } from "gsap"
 import { useRecoilValue } from "recoil"
-import { isHouseVisibleAtom } from "../../../atom/HouseAtom"
+import { isHouseVisibleAtom } from "../../../../atom/HouseAtom"
 
-function House() {
+const House = () => {
   const housePosition = [5, -4, 2]
   const isHouseVisible = useRecoilValue(isHouseVisibleAtom)
-  const gltf = useLoader(GLTFLoader, "assets/models/house.glb")
+  const gltf = useLoader(GLTFLoader, "assets/models/tempGlb/house.glb")
   const meshRef = useRef()
 
   useEffect(() => {

@@ -1,12 +1,10 @@
 import useAnimatedModel from "./useAnimatedModel"
 
-function Rocket() {
+const Clover = () => {
   const { isVisible, meshRef, gltf, position } = useAnimatedModel(
-    "assets/models/rocket.glb",
-    [1, 0, 10],
-    [0.3, 0.3, 0.3] // 초기 스케일 값 지정
+    "assets/models/postCards/clover.glb",
+    [0, 0, 3]
   )
-
   return isVisible ? (
     <primitive
       ref={meshRef}
@@ -17,4 +15,4 @@ function Rocket() {
   ) : null
 }
 
-export default Rocket
+export default Clover

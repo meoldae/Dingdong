@@ -2,16 +2,16 @@ import { useRef, useState, useEffect } from "react"
 import { useLoader, useFrame } from "@react-three/fiber"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { useRecoilValue, useSetRecoilState } from "recoil"
-import { modelPositionAtom } from "../../../atom/PlayerAtom"
+import { CharacterPositionAtom } from "../../../../atom/DefaultSettingAtom"
 import { gsap } from "gsap"
-import { isPickedAtom } from "../../../atom/TutorialAtom"
+import { isPickedAtom } from "../../../../atom/TutorialAtom"
 
-function useAnimatedModel(
+const useAnimatedModel = (
   modelPath,
   initialPosition,
   initialScale = [1, 1, 1]
-) {
-  const modelPosition = useRecoilValue(modelPositionAtom)
+) => {
+  const characterPosition = useRecoilValue(CharacterPositionAtom)
   const setIsPicked = useSetRecoilState(isPickedAtom)
   const meshRef = useRef()
   const [startTime] = useState(Date.now())
@@ -40,9 +40,9 @@ function useAnimatedModel(
         initialPosition[1] + Math.sin(elapsedTime) * 0.3
 
       const distance = Math.sqrt(
-        (modelPosition[0] - initialPosition[0]) ** 2 +
-          (modelPosition[1] - initialPosition[1]) ** 2 +
-          (modelPosition[2] - initialPosition[2]) ** 2
+        (characterPosition[0] - initialPosition[0]) ** 2 +
+          (characterPosition[1] - initialPosition[1]) ** 2 +
+          (characterPosition[2] - initialPosition[2]) ** 2
       )
 
       if (distance < 1) {

@@ -1,17 +1,17 @@
-import React, { useState } from "react"
+import React from "react"
+import styles from "./TutorialPage.module.css"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei"
 import CustomCamera from "../../components/Default/CustomCamera"
 import DirectionalLight from "../../components/Default/DirectionLight"
 import Map from "../../components/Default/Map"
-import Model from "../../components/Item/PlayerItems/Model"
-import "./MainPage.css"
-import Clover from "../../components/Item/MainItems/Clover"
-import Rocket from "../../components/Item/MainItems/Rocket"
+import Model from "../../components/Item/MainItems/Character"
+import Clover from "../../components/Item/MainItems/Tutorial/Clover"
+import Rocket from "../../components/Item/MainItems/Tutorial/Rocket"
 
-function TutorialPage() {
+const TutorialPage = () => {
   return (
-    <div id="canvas-container">
+    <div className={styles.canvasContainer}>
       <Canvas shadows>
         {/* 사용자가 화면을 확대하거나 회전하지 못하도록 설정 */}
         <OrbitControls enableZoom={false} enableRotate={false} />
