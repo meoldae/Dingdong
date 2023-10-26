@@ -9,7 +9,16 @@ import House from "../../components/Item/MainItems/House"
 import Spot from "../../components/Item/MainItems/Spot"
 import "./CharacterPage.css"
 import TempMap from "../../components/Default/TempMap"
+import HouseCamPoint from "../../components/Item/MainItems/HouseCamPoint"
+import RoomConfirmModal from "../../components/Modal/Confirm/RoomConfirmModal"
+import { useRecoilValue } from "recoil"
+import { RoomConfirmAtom } from "../../atom/RoomConfirmAtom"
+import None from "../../components/Item/MainItems/None"
+import { HousePointVisibleAtom } from "../../atom/HousePointVisible"
+import None2 from "../../components/Item/MainItems/None2"
 function MainPage() {
+  const RoomConfirmVisible = useRecoilValue(RoomConfirmAtom)
+  const HousePointVisible = useRecoilValue(HousePointVisibleAtom)
   return (
     <div id="canvas-container">
       <Canvas shadows>
@@ -33,7 +42,16 @@ function MainPage() {
         <Model />
         <Spot />
         <House />
+        <None />
+        {HousePointVisible ? <HouseCamPoint /> : <None2 />}
       </Canvas>
+      {RoomConfirmVisible ? (
+        <div className="roomConfirmModal">
+          <RoomConfirmModal />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   )
 }

@@ -5,6 +5,7 @@ import * as THREE from "three"
 import { useRecoilValue, useSetRecoilState } from "recoil"
 import { modelPositionAtom } from "../../../atom/PlayerAtom"
 import { isPickedAtom } from "../../../atom/TutorialAtom"
+import { ArriveAtom } from "../../../atom/HouseCamAtom"
 
 function Model() {
   const isPicked = useRecoilValue(isPickedAtom)
@@ -50,6 +51,9 @@ function Model() {
   // 목적지 위치(마우스 클릭)
   const [destination, setDestination] = useState(new THREE.Vector3(0, 0, 0))
   // 모델의 위치 및 애니메이션 업데이트
+
+  // 도착 여부
+  const isArrived = useRecoilValue(ArriveAtom)
   useFrame((_, delta) => {
     if (mixerRef.current) {
       mixerRef.current.update(delta)
@@ -65,6 +69,10 @@ function Model() {
         setDestination(position)
       } else {
         actions.current[5].stop()
+      }
+
+      if (isArrived) {
+        setDestination(position)
       }
 
       // 모델 이동

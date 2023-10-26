@@ -3,24 +3,31 @@ import { useFrame, useThree } from "@react-three/fiber"
 import { OrthographicCamera } from "@react-three/drei"
 import { useRecoilValue } from "recoil"
 import { modelPositionAtom } from "../../atom/PlayerAtom"
+import { DefaultPosition, DefaultZoom } from "../../atom/DefaultCamAtom"
+import { ArriveAtom } from "../../atom/HouseCamAtom"
+
+function lerp(start, end, factor) {
+  return (1 - factor) * start + factor * end
+}
 
 function CustomCamera() {
   const modelPosition = useRecoilValue(modelPositionAtom)
-  // 카메라 참조
   const cameraRef = useRef()
-
-  // 현재 캔버스의 너비와 높이
   const { size } = useThree()
 
-  // 초기 카메라 위치 설정
-  const position = [1, 3, 5]
+  const defaultCamPosition = useRecoilValue(DefaultPosition)
+  const zoomPoint = useRecoilValue(DefaultZoom)
+
+  // ArriveAtom 값 확인
+  const isArrived = useRecoilValue(ArriveAtom)
+
+  // 현재 및 목표 위치 저장
+  const currentPos = useRef([...defaultCamPosition])
+  const targetPos = useRef([...defaultCamPosition])
 
   useEffect(() => {
     if (cameraRef.current) {
-      // 캔버스의 가로/세로 비율 계산
       const aspectRatio = size.width / size.height
-
-      // orthographic camera의 클리핑 영역 설정
       cameraRef.current.left = -1 * aspectRatio
       cameraRef.current.right = 1 * aspectRatio
       cameraRef.current.top = 1
@@ -29,19 +36,40 @@ function CustomCamera() {
     }
   }, [size])
 
-  // frame마다 카메라의 위치와 방향을 업데이트
   useFrame(() => {
     if (cameraRef.current && modelPosition) {
-      const position = [
-        modelPosition[0] + 1,
-        modelPosition[1] + 5,
-        modelPosition[2] + 5,
-      ]
+      if (isArrived) {
+        targetPos.current = [
+          modelPosition[0] + defaultCamPosition[0],
+          modelPosition[1] + defaultCamPosition[1],
+          modelPosition[2] + defaultCamPosition[2],
+        ]
 
-      // 카메라의 위치 설정
-      cameraRef.current.position.set(...position)
+        const factor = 0.02
+        currentPos.current[0] = lerp(
+          currentPos.current[0],
+          targetPos.current[0],
+          factor
+        )
+        currentPos.current[1] = lerp(
+          currentPos.current[1],
+          targetPos.current[1],
+          factor
+        )
+        currentPos.current[2] = lerp(
+          currentPos.current[2],
+          targetPos.current[2],
+          factor
+        )
+      } else {
+        currentPos.current = [
+          modelPosition[0] + defaultCamPosition[0],
+          modelPosition[1] + defaultCamPosition[1],
+          modelPosition[2] + defaultCamPosition[2],
+        ]
+      }
 
-      // 카메라가 모델을 향하도록 방향 설정
+      cameraRef.current.position.set(...currentPos.current)
       cameraRef.current.lookAt(
         modelPosition[0],
         modelPosition[1],
@@ -53,10 +81,9 @@ function CustomCamera() {
   return (
     <OrthographicCamera
       ref={cameraRef}
-      makeDefault // 기본 카메라로 설정
-      position={position} // 카메라 초기 위치 설정
-      zoom={0.18}
-      // 카메라의 가시 범위 설정
+      makeDefault
+      position={defaultCamPosition}
+      zoom={zoomPoint}
       near={0.5}
       far={20}
     />
