@@ -191,7 +191,6 @@ const Experience = () => {
       }
       if (otherItem.wall && !item.wall && !otherItem.rotation) {
         if (dragPosition[2] - height / 2 <= 0) {
-          console.log("1")
           if (
             dragPosition[1] + thick > otherItem.gridPosition[1] - thick / 2 &&
             dragPosition[0] + width / 2 >
@@ -203,7 +202,6 @@ const Experience = () => {
         }
       }
       if (!item.walkable && !item.wall && !otherItem.wall) {
-        console.log(otherItem)
         if (
           dragPosition[0] + width / 2 >
             otherItem.gridPosition[0] - otherWidth / 2 &&
@@ -215,7 +213,6 @@ const Experience = () => {
             otherItem.gridPosition[2] - otherHeight / 2
         ) {
           droppable = false;
-          console.log(dragPosition)
         }
       }
 
@@ -294,10 +291,10 @@ const Experience = () => {
         minPolarAngle={0}
         maxPolarAngle={Math.PI / 2}
         screenSpacePanning={false}
-        // enabled={!buildMode}
+        enabled={!buildMode}
         onEnd={animateCameraPosition}
       />
-
+      <Room name={"room"}/>
       {buildMode
         ? items.map((item, idx) => (
             <Item
@@ -321,7 +318,7 @@ const Experience = () => {
       {/* 바닥 평면 */}
       <mesh
         rotation-x={-Math.PI / 2}
-        // visible={false}
+        visible={false}
         position-y={-0.001}
         onClick={onPlaneClicked}
         onPointerMove={(e) => {
@@ -346,6 +343,7 @@ const Experience = () => {
       <mesh
         rotation-y={Math.PI / 2}
         position-x={-2.394}
+        visible={false}
         position-y={1.92}
         onClick={onLeftPlaneClicked}
         onPointerMove={(e) => {
@@ -369,6 +367,7 @@ const Experience = () => {
       {/* 오른쪽 평면 */}
       <mesh
         position-z={-2.394}
+        visible={false}
         position-y={1.92}
         onClick={onRightPlaneClicked}
         onPointerMove={(e) => {
@@ -391,24 +390,26 @@ const Experience = () => {
       {buildMode && (
         <>
           <Grid
-            infiniteGrid
+            args={[4.8, 4.8]}
             fadeStrength={6}
             sectionSize={2.4}
             cellSize={0.24}
           />
           <Grid
-            infiniteGrid
+            args={[4.8, 3.84]}
             fadeStrength={6}
             sectionSize={2.4}
             cellSize={0.24}
             position-z={-2.393}
+            position-y={1.92}
             rotation-x={Math.PI / 2}
           />
           <Grid
-            infiniteGrid
+            args={[3.84, 4.8]}
             fadeStrength={6}
             sectionSize={2.4}
             cellSize={0.24}
+            position-y={1.92}
             position-x={-2.393}
             rotation-z={-Math.PI / 2}
           />

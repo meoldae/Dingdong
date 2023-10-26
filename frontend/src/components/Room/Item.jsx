@@ -44,7 +44,9 @@ export const Item = ({
     });
   }, [value]);
 
-
+  useEffect(()=>{
+    rotation
+  })
 
   return (
     <>
