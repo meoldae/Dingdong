@@ -22,6 +22,6 @@ public interface RoomSwagger {
 
 	DataResponse<RoomResponseDto> getRoomByRoomId(@PathVariable Long roomId);
 
-	DataResponse<Page<FurnitureSummaryDto>> getFurnitureList(@RequestParam(required = false) Integer category, @RequestParam(required = true) Integer pageNo, @PageableDefault(size = 6) Pageable pageable);
+	DataResponse<Page<FurnitureSummaryDto>> getFurnitureList(@RequestParam(required = false) Integer category, @PageableDefault(size = 6) Pageable pageable);
 
 }
