@@ -2,9 +2,10 @@ import { Canvas } from "@react-three/fiber"
 import Experience from "../../components/Room/Experience"
 import "./RoomPage.css"
 import { fetchRoomData } from "../../api/User"
-import { useState, useEffect } from "react"
+import { Suspense, useState, useEffect } from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { ItemRotateState, ItemsState, buildModeState, draggedItemState } from "../../components/Room/Atom"
+
 import Header from "../../components/Header/Header"
 import MyFooter from "../../components/Footer/MyFooter"
 import Share from "../../components/Header/Share"
@@ -40,10 +41,13 @@ function RoomPage() {
         {editMode && isDrag !== null && (
           <span
             onClick={() => {
-              // 벽에 있는 아이템 관련
               if (item[isDrag].wall) {
-                setDraggedItemRotation === 2 ? 1 : draggedItemRotation + 1
+                // console.log("check");
+                setDraggedItemRotation(
+                  draggedItemRotation === 0 ? 1 : draggedItemRotation - 1
+                );
               } else {
+                // console.log("CC")
                 setDraggedItemRotation(
                   draggedItemRotation === 3 ? 0 : draggedItemRotation + 1
                 )
