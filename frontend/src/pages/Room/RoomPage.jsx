@@ -8,16 +8,16 @@ import {
   ItemsState,
   buildModeState,
   draggedItemState,
-} from "../../components/Room/Atom";
-import Header from "../../components/Header/Header";
-import MyFooter from "../../components/Footer/MyFooter";
-import Share from "../../components/Header/Share";
-import OtherFooter from "../../components/Footer/OtherFooter";
-import NeighborRequset from "../../components/Header/neighborRequest";
+} from "../../components/Room/Atom"
+import Header from "../../components/Header/Header"
+import MyFooter from "../../components/Footer/MyFooter"
+import Share from "../../components/Header/Share"
+import OtherFooter from "../../components/Footer/OtherFooter"
+import NeighborRequest from "../../components/Header/NeighborRequest"
 
 function RoomPage() {
-  const [editMode, setEditMode] = useRecoilState(buildModeState);
-  const isDrag = useRecoilValue(draggedItemState);
+  const [editMode, setEditMode] = useRecoilState(buildModeState)
+  const isDrag = useRecoilValue(draggedItemState)
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState);
   const item = useRecoilValue(ItemsState);
@@ -25,11 +25,11 @@ function RoomPage() {
     <div className="container">
       <Header />
       <Share />
-      {/* <NeighborRequset/> */}
+      <NeighborRequest />
       <div
         className="button"
         onClick={() => {
-          setEditMode(!editMode);
+          setEditMode(!editMode)
         }}
       >
         {editMode && <span>편집모드</span>}
@@ -48,7 +48,7 @@ function RoomPage() {
                 // console.log("CC")
                 setDraggedItemRotation(
                   draggedItemRotation === 3 ? 0 : draggedItemRotation + 1
-                );
+                )
               }
             }}
           >
@@ -63,7 +63,7 @@ function RoomPage() {
       {/* <OtherFooter/> */}
       <MyFooter />
     </div>
-  );
+  )
 }
 
-export default RoomPage;
+export default RoomPage
