@@ -35,7 +35,7 @@ export const Item = ({
           return {
             ...item,
             gridPosition: gridPosition,
-            rotation: rotation,
+            rotation: value,
           };
         }
         return item;
@@ -63,6 +63,7 @@ export const Item = ({
         >
           <primitive
             object={clone}
+            position-x={rotation? 0 :-0.12}
             position-y={0.44}
             position-z={0.12}
             // 벽에 있는 아이템 관련
@@ -70,7 +71,7 @@ export const Item = ({
           />
           {isDragging && (
             <mesh
-              position-x={rotation ? 0.02 : 0}
+              position-x={rotation ? 0.02 : -0.12}
               position-y={0.12}
               position-z={0.13}
             >
@@ -90,6 +91,7 @@ export const Item = ({
           )}
         </group>
       )}
+
       {!wall && (
         <group
           onClick={onClick}

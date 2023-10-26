@@ -22,8 +22,8 @@ const Experience = () => {
     useGrid();
   const [canDrop, setCanDrop] = useState(false);
   const [items, setItems] = useRecoilState(ItemsState);
-  const [draggedItemRotation, setDraggedItemRotation] = useRecoilState(ItemRotateState);
-
+  const [draggedItemRotation, setDraggedItemRotation] =
+    useRecoilState(ItemRotateState);
 
   // 물체 클릭한 후에, 물체를 배치할 때 작동
   const onPlaneClicked = (e) => {
@@ -102,7 +102,6 @@ const Experience = () => {
     if (draggedItem === null) {
       return;
     }
-
     const item = items[draggedItem];
     let droppable = true;
     const thick = item.size[1];
@@ -131,15 +130,6 @@ const Experience = () => {
       }
     }
     if (item.wall) {
-      const width =
-        draggedItemRotation === 1 || draggedItemRotation === 3
-          ? item.size[2]
-          : item.size[0];
-      const height =
-        draggedItemRotation === 1 || draggedItemRotation === 3
-          ? item.size[0]
-          : item.size[2];
-
       if (draggedItemRotation) {
         if (
           dragPosition[1] - thick / 2 < -1 ||
@@ -168,33 +158,28 @@ const Experience = () => {
         }
       }
     }
-    // 바닥 겹칠 수 있는지, 벽면에 놓는건지 예외처리
-    if (!item.walkable && !item.wall) {
-      items.forEach((otherItem, idx) => {
-        // ignore self
-        if (idx === draggedItem) {
-          return;
-        }
-        if (otherItem.walkable) {
-          return;
-        }
-        // ignore wall & floor
-        if (otherItem.wall) {
-          const otehrThick = otherItem.size[1];
-          const otherHeight =
-            otherItem.rotation === 1 || otherItem.rotation === 3
-              ? otherItem.size[0]
-              : otherItem.size[2];
-        }
-        // 다른 물체 예외처리
-        const otherWidth =
-          otherItem.rotation === 1 || otherItem.rotation === 3
-            ? otherItem.size[2]
-            : otherItem.size[0];
-        const otherHeight =
-          otherItem.rotation === 1 || otherItem.rotation === 3
-            ? otherItem.size[0]
-            : otherItem.size[2];
+    items.forEach((otherItem, idx) => {
+      // ignore self
+      if (idx === draggedItem) {
+        return;
+      }
+      if (otherItem.walkable) {
+        return;
+      }
+      // ignore wall & floor
+      const otherThick = otherItem.size[1];
+      // 다른 물체 예외처리
+      const otherWidth =
+        otherItem.rotation === 1 || otherItem.rotation === 3
+          ? otherItem.size[2]
+          : otherItem.size[0];
+      const otherHeight =
+        otherItem.rotation === 1 || otherItem.rotation === 3
+          ? otherItem.size[0]
+          : otherItem.size[2];
+
+      // 바닥 겹칠 수 있는지, 벽면에 놓는건지 예외처리
+      if (!item.walkable && !item.wall) {
         if (
           dragPosition[0] + width / 2 >
             otherItem.gridPosition[0] - otherWidth / 2 &&
@@ -207,8 +192,40 @@ const Experience = () => {
         ) {
           droppable = false;
         }
-      });
-    }
+      }
+
+      // 다른 물체 높이 예외 처리
+      if (item.wall && item.rotation) {
+        if (otherItem.gridPosition[0] - otherWidth / 2 <= 0) {
+          if (
+            dragPosition[1] - thick / 2 < otherThick &&
+            dragPosition[2] + height / 2 >
+              otherItem.gridPosition[2] - otherHeight / 2 &&
+            dragPosition[2] - height / 2 <
+              otherItem.gridPosition[2] + otherHeight / 2
+          ) {
+            console.log("drag", dragPosition);
+            console.log("other", otherItem.gridPosition);
+
+            droppable = false;
+          }
+        }
+      }
+      if(item.wall && !item.rotation){
+        if(otherItem.gridPosition[2] - otherHeight /2 <=0 ){
+          if (
+            dragPosition[1] - thick / 2 < otherThick &&
+            dragPosition[0] + width / 2 >
+              otherItem.gridPosition[0] - otherWidth / 2 &&
+            dragPosition[0] - width / 2 <
+              otherItem.gridPosition[0] + otherWidth / 2
+          ) {
+            droppable = false;
+          }
+        }
+      }
+
+    });
     setCanDrop(droppable);
   }, [dragPosition, draggedItem, items]);
 

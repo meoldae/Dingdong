@@ -21,7 +21,7 @@ export const draggedItemState = atom({
 const item = {
   sofa: {
     name: "sofa",
-    size: [6, 6, 6],
+    size: [6, 5, 6],
   },
   carpet: {
     name: "carpet",
@@ -29,11 +29,11 @@ const item = {
   },
   vase: {
     name: "vase",
-    size: [2, 0, 2],
+    size: [2, 1, 2],
   },
   bed: {
     name: "bed",
-    size: [8, 0, 10],
+    size: [8, 4, 10],
   },
   clock: {
     name: "clock",
