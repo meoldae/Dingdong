@@ -21,8 +21,8 @@ public class Furniture {
 	@JoinColumn(name = "categoryId")
 	private FurnitureCategory furnitureCategory;
 	private String thumbnail;
-	private int xSize;
-	private int ySize;
-	private int zSize;
+	private Float xSize;
+	private Float ySize;
+	private Float zSize;
 
 }
