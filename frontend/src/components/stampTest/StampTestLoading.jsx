@@ -6,23 +6,23 @@ function StampTestLoading(props) {
 
   useEffect(() => {
     if (props.result === 'IST') {
-      navigate('/stampresult?result=0');
+      navigate('/yourstamp?result=0');
     } else if (props.result === 'ISF') {
-      navigate('/stampresult?result=1');
+      navigate('/yourstamp?result=1');
     } else if (props.result === 'INF') {
-      navigate('/stampresult?result=2');
+      navigate('/yourstamp?result=2');
     } else if (props.result === 'INT') {
-      navigate('/stampresult?result=3');
+      navigate('/yourstamp?result=3');
     } else if (props.result === 'EST') {
-      navigate('/stampresult?result=4');
+      navigate('/yourstamp?result=4');
     } else if (props.result === 'ESF') {
-      navigate('/stampresult?result=5');
+      navigate('/yourstamp?result=5');
     } else if (props.result === 'ENF') {
-      navigate('/stampresult?result=6');
+      navigate('/yourstamp?result=6');
     } else if (props.result === 'ENT') {
-      navigate('/stampresult?result=7');
+      navigate('/yourstamp?result=7');
     } else {
-      navigate('/stampresult?result=0');
+      navigate('/yourstamp?result=0');
     }
   });
 

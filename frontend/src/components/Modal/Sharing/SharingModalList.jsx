@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import SharingModalListItem from './SharingModalListItem';
-import { facebook, kakao, twitter, urlCopy } from '../../assets/images/sharing/sharingIcon';
+import { facebook, kakao, twitter, urlCopy } from '../../../assets/images/sharing/sharingIcon';
 // import { useRecoilValue } from 'recoil';
 // import { userNicknameAtom } from '../../atoms/userAtoms';
 

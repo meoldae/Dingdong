@@ -2,7 +2,7 @@ import React from 'react'
 import ButtonIcon from "../common/ButtonIcon";
 import { useSetRecoilState } from 'recoil';
 import { sharingAtom } from '../../atoms/userAtoms';
-import SharingModalList from './SharingModalList';
+import SharingModalList from '../../Modal/Sharing/SharingModalList';
 
 function SharingModal() {
   const setSharingAtom = useSetRecoilState(sharingAtom)

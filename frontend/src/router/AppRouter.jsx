@@ -22,14 +22,14 @@ const AppRouter = () => {
           <Route path="/character" element={<CharacterPage />} />
           <Route path="/room" element={<AppRoom />} />
           <Route path="/usersetting" element={<AppUserSetting />} />
-          <Route path="/stamptest" element={<StampTest />} />
-          <Route path="/stampresult" element={<StampTestResult />} />
         </Route>
         <Route element={<AuthRoute authentication="NotUser"/>}>
           <Route path="/login" element={<AppLogin />} />
           <Route path="/oauth2/redirect" element={<AppRedirect />} />
           <Route path="/signup" element={<AppSignUp />} />
           <Route path="/tutorial" element={<TutorialPage />} />
+          <Route path="/yourstamp" element={<StampTest />} />
+          <Route path="/yourstamp/result" element={<StampTestResult />} />
         </Route>
         <Route path="/*" element={<AppNotFound />} />
       </Routes>

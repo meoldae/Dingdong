@@ -1,6 +1,6 @@
 import React from 'react';
 // import LogoEffect from "../../assets/images/logo/logo_effect.png";
-import SharingModalList from '../Modal/SharingModalList';
+import SharingModalList from '../Modal/Sharing/SharingModalList';
 
 function StampTestStart(props) {
   return (

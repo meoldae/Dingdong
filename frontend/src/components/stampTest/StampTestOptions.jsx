@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Questions from '../../assets/questions.json'
+import Questions from '../../assets/json/questions.json'
 // import LogoEffect from '../../assets/images/logo/logo_effect.png'
 
 function StampTestOptions(props) {
