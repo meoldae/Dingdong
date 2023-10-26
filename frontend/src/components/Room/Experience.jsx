@@ -294,7 +294,7 @@ const Experience = () => {
         enabled={!buildMode}
         onEnd={animateCameraPosition}
       />
-      <Room name={"room"}/>
+      <Room name={"office"}/>
       {buildMode
         ? items.map((item, idx) => (
             <Item
@@ -318,7 +318,7 @@ const Experience = () => {
       {/* 바닥 평면 */}
       <mesh
         rotation-x={-Math.PI / 2}
-        visible={false}
+        // visible={false}
         position-y={-0.001}
         onClick={onPlaneClicked}
         onPointerMove={(e) => {
@@ -336,14 +336,14 @@ const Experience = () => {
         }}
       >
         <planeGeometry args={[4.8, 4.8]} />
-        <meshStandardMaterial color="#f0f0f0" />
+        <meshStandardMaterial color="#0f0f0f0" />
       </mesh>
 
       {/* 왼쪽 평면 */}
       <mesh
         rotation-y={Math.PI / 2}
         position-x={-2.394}
-        visible={false}
+        // visible={false}
         position-y={1.92}
         onClick={onLeftPlaneClicked}
         onPointerMove={(e) => {
@@ -367,7 +367,7 @@ const Experience = () => {
       {/* 오른쪽 평면 */}
       <mesh
         position-z={-2.394}
-        visible={false}
+        // visible={false}
         position-y={1.92}
         onClick={onRightPlaneClicked}
         onPointerMove={(e) => {
