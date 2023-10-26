@@ -52,7 +52,7 @@ const map = {
     },
     {
       ...item.bed,
-      gridPosition: [4, 0, 6],
+      gridPosition: [6, 0, 8],
       rotation: 1,
     },
     {
@@ -72,7 +72,7 @@ const map = {
       rotation: 0,
       walkable: true,
       wall:true,
-    },
+    }
   ],
 };
 

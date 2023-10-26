@@ -201,7 +201,7 @@ const Experience = () => {
             droppable = false;
         }
       }
-      if (!item.walkable && !item.wall) {
+      if (!item.walkable && !item.wall && !otherItem.wall) {
         if (
           dragPosition[0] + width / 2 >
             otherItem.gridPosition[0] - otherWidth / 2 &&
@@ -291,10 +291,10 @@ const Experience = () => {
         minPolarAngle={0}
         maxPolarAngle={Math.PI / 2}
         screenSpacePanning={false}
-        // enabled={!buildMode}
+        enabled={!buildMode}
         onEnd={animateCameraPosition}
       />
-
+      <Room name={"office"}/>
       {buildMode
         ? items.map((item, idx) => (
             <Item
@@ -336,13 +336,14 @@ const Experience = () => {
         }}
       >
         <planeGeometry args={[4.8, 4.8]} />
-        <meshStandardMaterial color="#f0f0f0" />
+        <meshStandardMaterial color="#0f0f0f0" />
       </mesh>
 
       {/* 왼쪽 평면 */}
       <mesh
         rotation-y={Math.PI / 2}
         position-x={-2.394}
+        // visible={false}
         position-y={1.92}
         onClick={onLeftPlaneClicked}
         onPointerMove={(e) => {
@@ -366,6 +367,7 @@ const Experience = () => {
       {/* 오른쪽 평면 */}
       <mesh
         position-z={-2.394}
+        // visible={false}
         position-y={1.92}
         onClick={onRightPlaneClicked}
         onPointerMove={(e) => {
@@ -388,24 +390,26 @@ const Experience = () => {
       {buildMode && (
         <>
           <Grid
-            infiniteGrid
+            args={[4.8, 4.8]}
             fadeStrength={6}
             sectionSize={2.4}
             cellSize={0.24}
           />
           <Grid
-            infiniteGrid
+            args={[4.8, 3.84]}
             fadeStrength={6}
             sectionSize={2.4}
             cellSize={0.24}
             position-z={-2.393}
+            position-y={1.92}
             rotation-x={Math.PI / 2}
           />
           <Grid
-            infiniteGrid
+            args={[3.84, 4.8]}
             fadeStrength={6}
             sectionSize={2.4}
             cellSize={0.24}
+            position-y={1.92}
             position-x={-2.393}
             rotation-z={-Math.PI / 2}
           />
