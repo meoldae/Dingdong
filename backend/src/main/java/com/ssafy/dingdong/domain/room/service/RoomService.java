@@ -25,4 +25,6 @@ public interface RoomService {
     FurnitureDetailDto getFurnitureByFurnitureId(String furnitureId);
 
 	void updateRoom(RoomUpdateRequestDto roomUpdateRequestDto, String name);
+
+	void createHeartRoom(String memberId, Long roomId);
 }
