@@ -12,4 +12,6 @@ body {
 
 body{
   margin: 0;
+  -webkit-touch-callout: none;
+  user-select:none;
 }

@@ -3,13 +3,7 @@ import { SkeletonUtils } from "three-stdlib";
 import { useEffect, useMemo, useState } from "react";
 import { useGrid } from "./UseGrid";
 import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  ItemRotateState,
-  ItemsState,
-  buildModeState,
-  draggedItemState,
-} from "./Atom";
-import { useFrame } from "@react-three/fiber";
+import { ItemRotateState, ItemsState, draggedItemState } from "./Atom";
 
 export const Item = ({
   item,
@@ -29,19 +23,28 @@ export const Item = ({
   const thick = size[1];
   const { gridToVector3, wallLeftGridToVector3, wallRightGridToVector3 } =
     useGrid();
-  const [hover, setHover] = useState(false);
-  const buildMode = useRecoilValue(buildModeState);
-  const [oneItem, setOneItem] = useRecoilState(ItemsState);
-  const [dragItem, setDragItem] = useRecoilState(draggedItemState);
-  const [wallCheck, setWallCheck] = useState(null);
+  const [items, setItems] = useRecoilState(ItemsState);
+  const draggedItem = useRecoilValue(draggedItemState);
   const value = useRecoilValue(ItemRotateState);
 
+
   useEffect(() => {
-    if (dragItem) {
-      setWallCheck(value);
-    }
-    console.log(wallCheck);
-  }, [oneItem, value]);
+    setItems((prev) => {
+      const newItems = prev.map((item, index) => {
+        if (index === draggedItem) {
+          return {
+            ...item,
+            gridPosition: gridPosition,
+            rotation: rotation,
+          };
+        }
+        return item;
+      });
+      return newItems;
+    });
+  }, [value]);
+
+
 
   return (
     <>
@@ -49,7 +52,7 @@ export const Item = ({
         <group
           onClick={onClick}
           position={
-            wallCheck
+             rotation
               ? wallLeftGridToVector3(
                   isDragging ? dragPosition || gridPosition : gridPosition
                 )
@@ -67,15 +70,15 @@ export const Item = ({
           />
           {isDragging && (
             <mesh
-              position-x={wallCheck ? 0.02 : 0}
+              position-x={rotation ? 0.02 : 0}
               position-y={0.12}
               position-z={0.13}
             >
               <boxGeometry
                 args={[
-                  wallCheck ? 0 : (width * 0.48)/2,
+                  rotation ? 0 : (width * 0.48) / 2,
                   (thick * 0.48) / 2,
-                  wallCheck ? (height * 0.48) / 2 : 0,
+                  rotation ? (height * 0.48) / 2 : 0,
                 ]}
               />
               <meshBasicMaterial
@@ -87,33 +90,6 @@ export const Item = ({
           )}
         </group>
       )}
-      {/* {wall && !rotationState && (
-        <group
-          onClick={onClick}
-          position={wallRightGridToVector3(
-            isDragging ? dragPosition || gridPosition : gridPosition,
-            rotation
-          )}
-        >
-          <primitive
-            object={clone}
-            position-y={0.44}
-            position-z={0.12}
-            // 벽에 있는 아이템 관련
-            rotation-y={(rotation * Math.PI) / 2}
-          />
-          {isDragging && (
-            <mesh position-x={0} position-y={0.12} position-z={0.13}>
-              <boxGeometry args={[(width * 0.48) / 2, (thick * 0.48) / 2, 0]} />
-              <meshBasicMaterial
-                color={canDrop ? "green" : "red"}
-                opacity={0.3}
-                transparent
-              />
-            </mesh>
-          )}
-        </group>
-      )} */}
       {!wall && (
         <group
           onClick={onClick}
@@ -122,8 +98,6 @@ export const Item = ({
             width,
             height
           )}
-          onPointerEnter={() => setHover(true)}
-          onPointerLeave={() => setHover(false)}
         >
           {/* 물체 클릭 시 바닥 면 가능 불가능 색상 및 회전 각 prop 받기 */}
           <primitive object={clone} rotation-y={(rotation * Math.PI) / 2} />

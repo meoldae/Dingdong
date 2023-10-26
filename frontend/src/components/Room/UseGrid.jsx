@@ -3,7 +3,6 @@ import * as THREE from "three";
 //  vector3를 그리드 평면으로 변경하는 로직
 export const useGrid = () => {
   const vector3ToGrid = (vector3) => {
-    // console.log(vector3)
     return [
       Math.floor(vector3.x / 0.24) + 10,
       0,
@@ -12,7 +11,6 @@ export const useGrid = () => {
   };
   // 그리드 평면을 vector3로 변경하는 로직
   const gridToVector3 = (gridPosition) => {
-    // console.log(gridPosition)
     return new THREE.Vector3(
       gridPosition[0] * 0.24 - 2.4,
       0,
@@ -28,8 +26,6 @@ export const useGrid = () => {
       ];
   };
   const wallLeftGridToVector3 = (gridPosition) => {
-    // console.log(rotation);
-
     return new THREE.Vector3(
       -2.4,
       gridPosition[1] * 0.24,
@@ -38,7 +34,6 @@ export const useGrid = () => {
   };
 
   const wallRightVector3ToGrid = (vector3) => {
-    // console.log(2)
     return [
       Math.floor(vector3.x / 0.24) + 10,
       Math.floor(vector3.y / 0.24),

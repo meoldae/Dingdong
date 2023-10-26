@@ -4,7 +4,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { Item } from "./Item";
 import { Room } from "./Room";
 import { useGrid } from "./UseGrid";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   ItemRotateState,
   ItemsState,
@@ -15,16 +15,16 @@ import {
 import { gsap } from "gsap";
 
 const Experience = () => {
-  const [onFloor, setOnFloor] = useState(false);
-  const [buildMode, setBuildMode] = useRecoilState(buildModeState);
+  const buildMode = useRecoilValue(buildModeState);
   const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState);
   const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState);
   const { vector3ToGrid, wallLeftVector3ToGrid, wallRightVector3ToGrid } =
     useGrid();
   const [canDrop, setCanDrop] = useState(false);
   const [items, setItems] = useRecoilState(ItemsState);
-  const [draggedItemRotation, setDraggedItemRotation] =
-    useRecoilState(ItemRotateState);
+  const [draggedItemRotation, setDraggedItemRotation] = useRecoilState(ItemRotateState);
+
+
   // 물체 클릭한 후에, 물체를 배치할 때 작동
   const onPlaneClicked = (e) => {
     if (!buildMode) {
@@ -267,7 +267,7 @@ const Experience = () => {
               item={item}
               onClick={() => {
                 setDraggedItem((prev) => (prev === null ? idx : prev));
-                setDraggedItemRotation(item.rotation || 0);
+                setDraggedItemRotation(item.rotation);
               }}
               isDragging={draggedItem === idx}
               dragPosition={dragPosition}

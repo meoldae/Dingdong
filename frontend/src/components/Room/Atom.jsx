@@ -5,11 +5,14 @@ export const buildModeState = atom({
   default: false,
 });
 
+
+// 클릭한 녀석 포지션
 export const dragPositionState = atom({
   key: "dragPositionState",
   default: null,
 });
 
+// 클릭한 녀석이 누군지
 export const draggedItemState = atom({
   key: "draggedItem",
   default: null,
@@ -18,7 +21,7 @@ export const draggedItemState = atom({
 const item = {
   sofa: {
     name: "sofa",
-    size: [6, 0, 6],
+    size: [6, 6, 6],
   },
   carpet: {
     name: "carpet",
@@ -73,12 +76,16 @@ const map = {
   ],
 };
 
+
+// 그냥 Item 전체
 export const ItemsState = atom({
   key: "ItemsState",
   default: map.item,
 });
 
+
+// 클릭한 녀석 회전 상태
 export const ItemRotateState = atom({
   key: "ItemRotateState",
-  default: 0,
+  default: null,
 });

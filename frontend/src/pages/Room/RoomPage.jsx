@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import Experience from "../../components/Room/Experience";
 import "./RoomPage.css";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   ItemRotateState,
@@ -41,7 +41,9 @@ function RoomPage() {
             onClick={() => {
               if (item[isDrag].wall) {
                 // console.log("check");
-                setDraggedItemRotation( draggedItemRotation=== 0 ? 1 : draggedItemRotation -1);
+                setDraggedItemRotation(
+                  draggedItemRotation === 0 ? 1 : draggedItemRotation - 1
+                );
               } else {
                 // console.log("CC")
                 setDraggedItemRotation(
@@ -54,10 +56,10 @@ function RoomPage() {
           </span>
         )}
       </div>
-      <Canvas shadows camera={{ position: [8, 5, 8], fov: 90 }}>
-        <color attach="background" args={["skyblue"]} />
-        <Experience />
-      </Canvas>
+        <Canvas shadows camera={{ position: [8, 5, 8], fov: 90 }}>
+          <color attach="background" args={["skyblue"]} />
+          <Experience />
+        </Canvas>
       {/* <OtherFooter/> */}
       <MyFooter />
     </div>
