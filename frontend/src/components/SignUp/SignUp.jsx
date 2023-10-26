@@ -75,7 +75,6 @@ const SignUp = () => {
 
     await CreateUser(param,(response) => {
       const token = response.data.data.accessToken;
-      console.log(token);
         navigate(`/oauth2/redirect?token=${token}`);
       },
       (error) => {
