@@ -1,8 +1,8 @@
-import { Canvas } from "@react-three/fiber"
-import Experience from "../../components/Room/Experience"
-import "./RoomPage.css"
-import { useState } from "react"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { Canvas } from "@react-three/fiber";
+import Experience from "../../components/Room/Experience";
+import "./RoomPage.css";
+import { Suspense, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   ItemRotateState,
   ItemsState,
@@ -19,9 +19,8 @@ function RoomPage() {
   const [editMode, setEditMode] = useRecoilState(buildModeState)
   const isDrag = useRecoilValue(draggedItemState)
   const [draggedItemRotation, setDraggedItemRotation] =
-    useRecoilState(ItemRotateState)
-  const item = useRecoilValue(ItemsState)
-
+    useRecoilState(ItemRotateState);
+  const item = useRecoilValue(ItemsState);
   return (
     <div className="container">
       <Header />
@@ -40,10 +39,13 @@ function RoomPage() {
         {editMode && isDrag !== null && (
           <span
             onClick={() => {
-              // 벽에 있는 아이템 관련
               if (item[isDrag].wall) {
-                setDraggedItemRotation === 2 ? 1 : draggedItemRotation + 1
+                // console.log("check");
+                setDraggedItemRotation(
+                  draggedItemRotation === 0 ? 1 : draggedItemRotation - 1
+                );
               } else {
+                // console.log("CC")
                 setDraggedItemRotation(
                   draggedItemRotation === 3 ? 0 : draggedItemRotation + 1
                 )
@@ -54,10 +56,10 @@ function RoomPage() {
           </span>
         )}
       </div>
-      <Canvas shadows camera={{ position: [8, 5, 8], fov: 90 }}>
-        <color attach="background" args={["skyblue"]} />
-        <Experience />
-      </Canvas>
+        <Canvas shadows camera={{ position: [8, 5, 8], fov: 90 }}>
+          <color attach="background" args={["skyblue"]} />
+          <Experience />
+        </Canvas>
       {/* <OtherFooter/> */}
       <MyFooter />
     </div>
