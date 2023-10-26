@@ -13,13 +13,13 @@ import com.ssafy.dingdong.domain.room.entity.Furniture;
 public interface FurnitureRepository extends JpaRepository<Furniture, String> {
 
 	@Query("SELECT new com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto ( "
-		 + " f.furnitureId, f.furnitureCategory.categoryId, f.thumbnail ) "
+		 + " f.furnitureId, f.furnitureCategory.categoryId ) "
 		 + "  FROM Furniture f "
 		 + " WHERE f.furnitureCategory.categoryId = :category " )
 	Page<FurnitureSummaryDto> findAllByCategoryId(Integer category, Pageable pageable);
 
 	@Query("SELECT new com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto ( "
-		+ " f.furnitureId, f.furnitureCategory.categoryId, f.thumbnail ) "
+		+ " f.furnitureId, f.furnitureCategory.categoryId ) "
 		+ "  FROM Furniture f " )
 	Page<FurnitureSummaryDto> findAllFurnitureSummaryDto(Pageable pageable);
 }
