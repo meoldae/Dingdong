@@ -43,7 +43,8 @@ public class RoomServiceImpl implements RoomService {
 		Room findRoom = roomRepository.findByMemberId(memberId).orElseThrow(
 			() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
 		);
-		return findRoom.toRoomResponseDto();
+		Long heartCount = roomHeartRepository.getCountByRoomId(findRoom.getRoomId());
+		return findRoom.toRoomResponseDto(heartCount);
 	}
 
 	@Override
@@ -52,7 +53,8 @@ public class RoomServiceImpl implements RoomService {
 		Room findRoom = roomRepository.findByRoomId(roomId).orElseThrow(
 			() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
 		);
-		return findRoom.toRoomResponseDto();
+		Long heartCount = roomHeartRepository.getCountByRoomId(findRoom.getRoomId());
+		return findRoom.toRoomResponseDto(heartCount);
 	}
 
 	@Override

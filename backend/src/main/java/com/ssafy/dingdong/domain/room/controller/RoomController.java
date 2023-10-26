@@ -88,5 +88,4 @@ public class RoomController implements RoomSwagger{
         roomService.createHeartRoom(authentication.getName(), roomId);
         return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
     }
-
 }
