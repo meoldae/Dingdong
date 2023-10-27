@@ -43,7 +43,7 @@ const SendLetter = ({ onClose, card }) => {
             <textarea
               value={content}
               onChange={(e) => handleCheckContentCount(e)}
-              style={{ fontFamily: "HandWrite-DaHaeng", fontSize: "20px" }}
+              style={{ fontFamily: "HandWrite-DaHaeng", fontSize: "25px" }}
               placeholder="편지 내용을 작성하세요."
               maxLength={199}
             />
