@@ -20,6 +20,8 @@ public interface FurnitureRepository extends JpaRepository<Furniture, String> {
 
 	@Query("SELECT new com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto ( "
 		+ " f.furnitureId, f.furnitureCategory.categoryId ) "
-		+ "  FROM Furniture f " )
+		+ "  FROM Furniture f "
+		+ " WHERE f.furnitureCategory.categoryId != 5 "
+		+ "   AND f.furnitureCategory.categoryId != 6 ")
 	Page<FurnitureSummaryDto> findAllFurnitureSummaryDto(Pageable pageable);
 }
