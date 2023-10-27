@@ -14,7 +14,8 @@ import java.util.Map;
 @Builder
 @ToString
 public class ScoreResponseDto {
-    int recordCount;
+    Long recordCount;
     String memberId;
-    String username;
+    String nickname;
+    Long roomId;
 }

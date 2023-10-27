@@ -1,6 +1,6 @@
 package com.ssafy.dingdong.domain.score.service;
 
-import com.ssafy.dingdong.domain.letter.dto.response.RecordResponseDto;
+import com.ssafy.dingdong.domain.letter.dto.response.LetterScoreDto;
 import com.ssafy.dingdong.domain.letter.service.LetterService;
 import com.ssafy.dingdong.domain.member.service.MemberService;
 import com.ssafy.dingdong.domain.room.dto.response.RoomScoreDto;
@@ -18,10 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Log4j2
 @Service
@@ -32,30 +31,43 @@ public class ScoreServiceImpl implements ScoreService{
     private final LetterService letterService;
     private final RoomService roomService;
     private final MemberService memberService;
-    
-    @Transactional
-    @Scheduled(cron = "0 0 * * * *")
+
+    public List<Score> convertLetterFromScoreToScores(List<LetterScoreDto> dtos) {
+        return dtos.stream()
+                .map(dto -> Score.build(dto.getMemberId(),
+                        roomService.getRoomIdByMemberId(dto.getMemberId()),
+                        ScoreType.LETTER_SEND_COUNT,
+                        dto.getCount()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Score> convertLetterToScoreToScores(List<LetterScoreDto> dtos) {
+        return dtos.stream()
+                .map(dto -> Score.build(dto.getMemberId(),
+                        roomService.getRoomIdByMemberId(dto.getMemberId()),
+                        ScoreType.LETTER_RECEIVE_COUNT,
+                        dto.getCount()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Score> convertRoomScoreToScores(List<RoomScoreDto> dtos) {
+        return dtos.stream()
+                .map(dto -> Score.build(dto.getMemberId(), dto.getRoomId(), ScoreType.ROOM_LIKE_COUNT, dto.getHeartCount()))
+                .collect(Collectors.toList());
+    }
+
+    @Scheduled(cron = "0 * * * * *")
     public void insertScoreEveryHourOnTheHour() {
-        // 편지 많이 보낸 사람
-        RecordResponseDto letterFromRecord = letterService.findTopLetterFrom();
-        // 편지 많이 받은 사람
-        RecordResponseDto letterToRecord = letterService.findTopLetterTo();
-        List<RoomScoreDto> roomScoreDto = roomService.getRoomScore();
+        List<LetterScoreDto> letterFromScoreList= letterService.getLetterFromScore();
+        List<LetterScoreDto> letterToScoreList = letterService.getLetterToScore();
+        List<RoomScoreDto> roomScoreList = roomService.getRoomScore();
 
+        List<Score> insertScoreList = new ArrayList<>() ;
+        insertScoreList.addAll(convertLetterFromScoreToScores(letterFromScoreList));
+        insertScoreList.addAll(convertLetterToScoreToScores(letterToScoreList));
+        insertScoreList.addAll(convertRoomScoreToScores(roomScoreList));
 
-        Score letterFromScore = Score.build(
-                letterFromRecord.getMemberId(),
-                roomService.getRoomByMemberId(letterFromRecord.getMemberId()).roomId(),
-                ScoreType.LETTER_SEND_COUNT, letterFromRecord.getCount());
-        Score letterToScore = Score.build(
-                letterToRecord.getMemberId(),
-                roomService.getRoomByMemberId(letterToRecord.getMemberId()).roomId(),
-                ScoreType.LETTER_RECEIVE_COUNT,
-                letterFromRecord.getCount());
-
-        //Score roomHeartScore = Score.build();
-        scoreRepository.save(letterFromScore);
-        scoreRepository.save(letterToScore);
+        scoreRepository.saveAll(insertScoreList);
     }
 
     public LocalDateTime getLatestRecordTime() {
@@ -76,7 +88,8 @@ public class ScoreServiceImpl implements ScoreService{
                 ScoreResponseDto scoreResponse = ScoreResponseDto.builder()
                         .recordCount(score.getRecordCount())
                         .memberId(score.getMemberId())
-                        .username(memberService.getMemberById(score.getMemberId()).nickname())
+                        .nickname(memberService.getMemberById(score.getMemberId()).nickname())
+                        .roomId(score.getRoomdId())
                         .build();
                 latestScores.put(type, scoreResponse);
             }
