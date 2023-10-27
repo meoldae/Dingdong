@@ -19,5 +19,5 @@ export const RoomPortalVisibleAtom = atom({
 })
 export const RoomPortalPositionAtom = atom({
   key: "RoomPortalPositionAtom",
-  default: [-6, 0.03, 8.5],
+  default: [-5.5, 0.03, 8.5],
 })

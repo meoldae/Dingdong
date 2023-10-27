@@ -10,7 +10,6 @@ import AppUserSetting from "../pages/User/UserSettingPage"
 import MainPage from "../pages/Main/MainPage"
 import SingleMainPage from "../pages/SinglePlay/SingleMainPage"
 import TutorialPage from "../pages/SinglePlay/TutorialPage"
-import PhysicsTestPage from "../pages/SinglePlay/PhysicsTestPage"
 
 const AppRouter = () => {
   return (
@@ -22,7 +21,6 @@ const AppRouter = () => {
           <Route path="/tutorial" element={<TutorialPage />} />
           <Route path="/room" element={<AppRoom />} />
           <Route path="/usersetting" element={<AppUserSetting />} />
-          <Route path="/test" element={<PhysicsTestPage />} />
         </Route>
 
         <Route element={<AuthRoute authentication="NotUser" />}>

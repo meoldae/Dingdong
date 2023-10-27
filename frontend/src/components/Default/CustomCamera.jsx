@@ -28,7 +28,6 @@ const CustomCamera = () => {
   // 현재 및 목표 위치 저장
   const currentPos = useRef([...defaultCameraPosition])
   const targetPos = useRef([...defaultCameraPosition])
-
   // 화면 사이즈 측정
   useEffect(() => {
     if (cameraRef.current) {
@@ -92,7 +91,7 @@ const CustomCamera = () => {
       position={defaultCameraPosition}
       zoom={defaultCameraZoom}
       near={0.5}
-      far={20}
+      far={40}
     />
   )
 }

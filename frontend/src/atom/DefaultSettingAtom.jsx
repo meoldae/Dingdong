@@ -5,11 +5,11 @@ import * as THREE from "three"
 // 카메라
 export const DefaultPosition = atom({
   key: "DefaultPosition",
-  default: [1, 5, 5],
+  default: [2, 10, 10],
 })
 export const DefaultZoom = atom({
   key: "DefaultZoom",
-  default: 0.17,
+  default: 0.18,
 })
 
 // 캐릭터

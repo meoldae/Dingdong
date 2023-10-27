@@ -12,6 +12,8 @@ import { isPickedAtom } from "../../../atom/TutorialAtom"
 import { FenceBoxAtom } from "../../../atom/FenceAtom"
 
 const Character = () => {
+  // 마우스 및 터치 여부
+  const [isPressed, setIsPressed] = useState(false)
   // Three.js 기본 설정
   const {
     camera,
@@ -95,7 +97,7 @@ const Character = () => {
       }
 
       // 캐릭터 이동
-      if (!isPicked && distance > 0.05) {
+      if (!isArrived && distance > 0.05) {
         // 목적지까지의 거리가 0.05보다 크면 이동
         actions.current[1].play()
         actions.current[0].stop()
@@ -155,34 +157,25 @@ const Character = () => {
   // 마우스 및 터치 이벤트에 따른 목적지 업데이트
   const handlePositionChange = useCallback(
     (e) => {
+      console.log(e)
       const event = e.type.startsWith("touch") ? e.touches[0] : e
       const rect = domElement.getBoundingClientRect()
-      mouse.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
-      mouse.current.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
+      const x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+      const y = -((event.clientY - rect.top) / rect.height) * 2 + 1
 
-      // 카메라와 마우스 및 터치 위치를 기반으로 레이캐스터를 설정
-      raycaster.current.setFromCamera(mouse.current, camera)
+      const vector = new THREE.Vector3(x, y, 0.5)
+      vector.unproject(camera)
+      const dir = vector.sub(camera.position).normalize()
+      const distance = -camera.position.y / dir.y
+      const pos = camera.position.clone().add(dir.multiplyScalar(distance))
 
-      // 바닥(Map)과 교차점을 계산
-      const floorMeshes = scene.children.filter(
-        (child) => child.name === "floor"
-      )
-      const intersects = raycaster.current.intersectObjects(floorMeshes, true)
-
-      // 교차점이 있다면, 그 위치를 목적지로 설정
-      if (intersects.length > 0) {
-        setDestination(intersects[0].point) // 가장 가까운 교차점을 선택
-        if (characterRef.current) {
-          // 캐릭터이 마우스 및 터치 위치를 정면으로 바라보도록 설정
-          characterRef.current.lookAt(intersects[0].point)
-        }
+      setDestination(pos)
+      if (characterRef.current) {
+        characterRef.current.lookAt(pos)
       }
     },
-    [camera, domElement, scene]
+    [camera, domElement]
   )
-
-  // 마우스 및 터치 여부
-  const [isPressed, setIsPressed] = useState(false)
 
   // 마우스 및 터치 이벤트 리스너를 추가
   useEffect(() => {

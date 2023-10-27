@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react"
 import { useSetRecoilState } from "recoil"
 import {
   ArriveAtom,
@@ -7,6 +8,15 @@ import { DefaultPosition, DefaultZoom } from "../../../atom/DefaultSettingAtom"
 import DefaultModal from "../Default/DefaultModal"
 
 const ConfirmEnteringRoomModal = () => {
+  const [isInitialRender, setIsInitialRender] = useState(true)
+
+  useEffect(() => {
+    if (isInitialRender) {
+      console.log(1)
+      setIsInitialRender(false)
+    }
+  }, [isInitialRender])
+
   // 기본 카메라 설정
   const setDefaultCameraPosition = useSetRecoilState(DefaultPosition)
   const setDefaultCameraZoom = useSetRecoilState(DefaultZoom)
@@ -27,8 +37,11 @@ const ConfirmEnteringRoomModal = () => {
     setIsArrived(false)
 
     // 기본 값 설정
-    setDefaultCameraPosition([1, 5, 5])
-    setDefaultCameraZoom(0.17)
+    setDefaultCameraPosition([2, 10, 10])
+    setDefaultCameraZoom(0.18)
+
+    // 초기화
+    setIsInitialRender(true)
   }
 
   return (
