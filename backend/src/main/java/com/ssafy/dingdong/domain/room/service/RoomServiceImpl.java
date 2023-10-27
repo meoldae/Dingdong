@@ -162,5 +162,13 @@ public class RoomServiceImpl implements RoomService {
 		return roomScoreList.stream().toList();
 	}
 
+	@Override
+	public Long getRoomIdByMemberId(String memberId) {
+		Room findRoom = roomRepository.findByMemberId(memberId).orElseThrow(
+				() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
+		);
+
+		return findRoom.getRoomId();
+	}
 
 }

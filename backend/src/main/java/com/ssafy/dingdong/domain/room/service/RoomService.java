@@ -30,4 +30,6 @@ public interface RoomService {
 	void createHeartRoom(String memberId, Long roomId);
 
 	List<RoomScoreDto> getRoomScore();
+
+    Long getRoomIdByMemberId(String memberId);
 }
