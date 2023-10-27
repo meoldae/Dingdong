@@ -6,6 +6,7 @@ import CustomCamera from "../../components/Default/CustomCamera"
 import DirectionalLight from "../../components/Default/DirectionLight"
 import Map from "../../components/Default/Map"
 import Charater from "../../components/Item/MainItems/Character"
+import PhysicsModel from "../../components/Item/MainItems/PhysicsModel"
 
 const PhysicsTestPage = () => {
   return (
@@ -28,6 +29,7 @@ const PhysicsTestPage = () => {
 
         {/* 객체 */}
         <Charater />
+        <PhysicsModel />
       </Canvas>
     </div>
   )
