@@ -79,7 +79,11 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public Page<FurnitureSummaryDto> getFurnitureListByCategory(Integer category, Pageable pageable) {
-		return furnitureRepository.findAllByCategoryId(category, pageable);
+		if (category == 0) {
+			return furnitureRepository.findAllFurnitureSummaryDto(pageable);
+		}else {
+			return furnitureRepository.findAllByCategoryId(category.longValue(), pageable);
+		}
 	}
 
 	@Override

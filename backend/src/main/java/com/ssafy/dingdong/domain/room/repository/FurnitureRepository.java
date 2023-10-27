@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
@@ -16,10 +17,12 @@ public interface FurnitureRepository extends JpaRepository<Furniture, String> {
 		 + " f.furnitureId, f.furnitureCategory.categoryId ) "
 		 + "  FROM Furniture f "
 		 + " WHERE f.furnitureCategory.categoryId = :category " )
-	Page<FurnitureSummaryDto> findAllByCategoryId(Integer category, Pageable pageable);
+	Page<FurnitureSummaryDto> findAllByCategoryId(@Param("category")Long category, Pageable pageable);
 
 	@Query("SELECT new com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto ( "
 		+ " f.furnitureId, f.furnitureCategory.categoryId ) "
-		+ "  FROM Furniture f " )
+		+ "  FROM Furniture f "
+		+ " WHERE f.furnitureCategory.categoryId != 5 "
+		+ "   AND f.furnitureCategory.categoryId != 6 ")
 	Page<FurnitureSummaryDto> findAllFurnitureSummaryDto(Pageable pageable);
 }
