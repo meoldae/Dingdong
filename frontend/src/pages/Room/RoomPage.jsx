@@ -1,22 +1,22 @@
-import { Canvas } from "@react-three/fiber";
-import { Html } from "@react-three/drei";
-import Experience from "../../components/Room/Experience";
-import { fetchRoomData } from "../../api/User";
-import { Suspense, useState, useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { Canvas } from "@react-three/fiber"
+import { Html } from "@react-three/drei"
+import Experience from "../../components/Room/Experience"
+import { fetchRoomData } from "../../api/User"
+import { Suspense, useState, useEffect } from "react"
+import { useRecoilState, useRecoilValue } from "recoil"
 import {
   ItemRotateState,
   ItemsState,
   buildModeState,
   draggedItemState,
-} from "../../components/Room/Atom";
+} from "../../components/Room/Atom"
 
-import Header from "../../components/Header/Header";
-import MyFooter from "../../components/Footer/MyFooter";
-import Share from "../../components/Header/Share";
-import OtherFooter from "../../components/Footer/OtherFooter";
-import NeighborRequest from "../../components/Header/NeighborRequest";
-import styles from "./RoomPage.module.css";
+import Header from "../../components/Header/Header"
+import MyFooter from "../../components/Footer/MyFooter"
+import Share from "../../components/Header/Share"
+import OtherFooter from "../../components/Footer/OtherFooter"
+import NeighborRequest from "../../components/Header/NeighborRequest"
+import styles from "./RoomPage.module.css"
 function RoomPage() {
   const [editMode, setEditMode] = useRecoilState(buildModeState);
   const [isMyRoom, setIsMyRoom] = useState(false);
@@ -24,10 +24,10 @@ function RoomPage() {
   useEffect(() => {
     fetchRoomData().then((response) => {
       if (response.data.isMyRoom) {
-        setIsMyRoom(true);
+        setIsMyRoom(true)
       }
-    });
-  }, []);
+    })
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -61,7 +61,7 @@ function RoomPage() {
       </Canvas>
       {isMyRoom ? <MyFooter /> : <OtherFooter />}
     </div>
-  );
+  )
 }
 
-export default RoomPage;
+export default RoomPage
