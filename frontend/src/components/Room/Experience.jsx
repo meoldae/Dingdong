@@ -212,39 +212,7 @@ const Experience = () => {
     setCanDrop(droppable);
   }, [dragPosition, draggedItem, items]);
 
-  // 카메라 관련 로직
-  const controls = useRef();
-  const state = useThree((state) => state);
-
-  // 편집 모드일 때 카메라 고정
-  useEffect(() => {
-    if (buildMode) {
-      state.camera.position.set(8, 5, 8);
-      state.camera.fov = 90;
-      state.camera.lookAt(0, 0, 0);
-      if (controls.current) {
-        controls.current.target.set(0, 0, 0);
-        controls.current.update();
-      }
-    }
-  }, [buildMode]);
-
-  // 일반 모드일 때 카메라 회전 후 원상복귀
-  const animateCameraPosition = () => {
-    if (buildMode) return;
-
-    gsap.to(state.camera.position, {
-      duration: 0.5,
-      x: 8,
-      y: 5,
-      z: 8,
-      onUpdate: () => state.camera.updateProjectionMatrix(),
-    });
-    setTimeout(() => {
-      state.camera.position.set(8, 5, 8);
-    }, 50);
-  };
-
+  // 아이템 클릭 로직
   const renderItem = (item, idx) => {
     const commonProps = {
       key: `${item.name}-${idx}`,
@@ -271,75 +239,61 @@ const Experience = () => {
     return <Item {...commonProps} />;
   };
 
+  // 카메라 관련 로직
+  const controls = useRef();
+  const state = useThree((state) => state);
+
+  // 편집 모드일 때 카메라 고정
+  useEffect(() => {
+    if (buildMode) {
+      state.camera.position.set(8, 5, 8);
+      state.camera.fov = 90;
+      state.camera.lookAt(0, 0, 0);
+      if (controls.current) {
+        controls.current.target.set(0, 0, 0);
+        controls.current.update();
+      }
+    } else {
+      state.camera.position.set(8, 5, 8);
+      state.camera.fov = 90;
+      state.camera.lookAt(0, 0, 0);
+      if (controls.current) {
+        controls.current.target.set(0, 0, 0);
+        controls.current.update();
+      }
+    }
+  }, [buildMode]);
+
+  // 일반 모드일 때 카메라 회전 후 원상복귀
+  const animateCameraPosition = () => {
+    if (buildMode) return;
+
+    gsap.to(state.camera.position, {
+      duration: 0.5,
+      x: 8,
+      y: 5,
+      z: 8,
+      onUpdate: () => state.camera.updateProjectionMatrix(),
+    });
+    setTimeout(() => {
+      state.camera.position.set(8, 5, 8);
+      state.camera.target.set(0,0,0)
+    }, 50);
+  };
+
   return (
     <>
-      {draggedItem !== null && buildMode && (
-        <Html>
-          <div className={styles.dragbutton}>
-            <img
-              src="assets/icons/refresh.svg"
-              alt=""
-              onClick={() => {
-                if (items[draggedItem].wall) {
-                  setDraggedItemRotation(
-                    draggedItemRotation === 0 ? 1 : draggedItemRotation - 1
-                  );
-                } else {
-                  setDraggedItemRotation(
-                    draggedItemRotation === 3 ? 0 : draggedItemRotation + 1
-                  );
-                }
-              }}
-            />
-            <img
-              src="assets/icons/cross.svg"
-              alt=""
-              onClick={() => {
-                setDraggedItem(null);
-              }}
-            />
-            {canDrop ? (
-              <img
-                src="assets/icons/check.svg"
-                alt=""
-                onClick={() => {
-                  if (draggedItem !== null && dragPosition) {
-                    if (canDrop) {
-                      setItems((prev) => {
-                        const newItems = prev.map((item, index) => {
-                          if (index === draggedItem) {
-                            return {
-                              ...item,
-                              gridPosition: dragPosition,
-                              rotation: draggedItemRotation,
-                            };
-                          }
-                          return item;
-                        });
-                        return newItems;
-                      });
-                    }
-                    setDraggedItem(null);
-                  }
-                }}
-              />
-            ) : (
-              <img src="assets/icons/check.svg" />
-            )}
-          </div>
-        </Html>
-      )}
-
       <Environment preset="sunset" />
       <ambientLight intensity={0.3} />
       <OrbitControls
         ref={controls}
         minDistance={5}
-        maxDistance={10}
+        maxDistance={20}
         minPolarAngle={0}
         maxPolarAngle={Math.PI / 2}
         screenSpacePanning={false}
         enabled={!buildMode}
+        // enableRotate={false}
         onEnd={animateCameraPosition}
       />
       {/* <Room name={"office"}/> */}
@@ -441,6 +395,60 @@ const Experience = () => {
             rotation-z={-Math.PI / 2}
           />
         </>
+      )}
+      {draggedItem !== null && buildMode && (
+        <Html className={styles.dragbutton}>
+          <img
+            src="assets/icons/refresh.svg"
+            alt=""
+            onClick={() => {
+              if (items[draggedItem].wall) {
+                setDraggedItemRotation(
+                  draggedItemRotation === 0 ? 1 : draggedItemRotation - 1
+                );
+              } else {
+                setDraggedItemRotation(
+                  draggedItemRotation === 3 ? 0 : draggedItemRotation + 1
+                );
+              }
+            }}
+          />
+          <img
+            src="assets/icons/cross.svg"
+            alt=""
+            onClick={() => {
+              setDraggedItem(null);
+            }}
+          />
+          {canDrop ? (
+            <img
+              src="assets/icons/check.svg"
+              alt=""
+              onClick={() => {
+                if (draggedItem !== null && dragPosition) {
+                  if (canDrop) {
+                    setItems((prev) => {
+                      const newItems = prev.map((item, index) => {
+                        if (index === draggedItem) {
+                          return {
+                            ...item,
+                            gridPosition: dragPosition,
+                            rotation: draggedItemRotation,
+                          };
+                        }
+                        return item;
+                      });
+                      return newItems;
+                    });
+                  }
+                  setDraggedItem(null);
+                }
+              }}
+            />
+          ) : (
+            <img src="assets/icons/check.svg" />
+          )}
+        </Html>
       )}
     </>
   );

@@ -96,11 +96,10 @@ export const Item = ({
 
       {!wall && (
         <group
-          onClick={onClick}
+        onPointerLeave={onClick}
           position={gridToVector3(
             isDragging ? dragPosition || gridPosition : gridPosition,
-            width,
-            height
+
           )}
         >
           {/* 물체 클릭 시 바닥 면 가능 불가능 색상 및 회전 각 prop 받기 */}
