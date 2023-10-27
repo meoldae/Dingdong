@@ -56,7 +56,7 @@ public class ScoreServiceImpl implements ScoreService{
                 .collect(Collectors.toList());
     }
 
-    @Scheduled(cron = "0 * * * * *")
+    @Scheduled(cron = "0 0 * * * *")
     public void insertScoreEveryHourOnTheHour() {
         List<LetterScoreDto> letterFromScoreList= letterService.getLetterFromScore();
         List<LetterScoreDto> letterToScoreList = letterService.getLetterToScore();
