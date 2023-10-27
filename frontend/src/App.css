@@ -1,6 +1,6 @@
 .appWrapper {
   max-width: 414px;
-  min-width: 400px;
+  min-width: 350px;
   height: 100vh;
   margin: 0 auto;
   overflow: hidden;
@@ -10,8 +10,8 @@ body {
   margin: 0;
 }
 
-body{
+body {
   margin: 0;
   -webkit-touch-callout: none;
-  user-select:none;
+  user-select: none;
 }
