@@ -75,7 +75,7 @@ const PostCardBox = (props) => {
             PostDefaultTitle={"편지함"}
             cancelClick={props.cancelClick}
             postCheck={handlerChecker()}
-          />
+          ></PostDefaultModal>
         </>
       )}
     </>
