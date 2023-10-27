@@ -10,7 +10,7 @@ export const useGrid = () => {
     ];
   };
   // 그리드 평면을 vector3로 변경하는 로직
-  const gridToVector3 = (gridPosition) => {
+  const gridToVector3 = (gridPosition,name) => {
     return new THREE.Vector3(
       gridPosition[0] * 0.24 - 2.4,
       0,
