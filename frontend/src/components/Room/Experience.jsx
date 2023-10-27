@@ -1,4 +1,10 @@
-import { Environment, Grid, OrbitControls, useCursor } from "@react-three/drei";
+import {
+  Environment,
+  Grid,
+  Html,
+  OrbitControls,
+  useCursor,
+} from "@react-three/drei";
 import { useEffect, useState, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Item } from "./Item";
@@ -13,6 +19,7 @@ import {
   draggedItemState,
 } from "./Atom";
 import { gsap } from "gsap";
+import styles from "./Room.module.css";
 
 const Experience = () => {
   const buildMode = useRecoilValue(buildModeState);
@@ -24,78 +31,77 @@ const Experience = () => {
   const [items, setItems] = useRecoilState(ItemsState);
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState);
-
   // 물체 클릭한 후에, 물체를 배치할 때 작동
-  const onPlaneClicked = (e) => {
-    if (!buildMode) {
-      return;
-    }
-    if (draggedItem !== null) {
-      if (canDrop) {
-        setItems((prev) => {
-          const newItems = prev.map((item, index) => {
-            if (index === draggedItem) {
-              return {
-                ...item,
-                gridPosition: vector3ToGrid(e.point),
-                rotation: draggedItemRotation,
-              };
-            }
-            return item;
-          });
-          return newItems;
-        });
-      }
-      setDraggedItem(null);
-    }
-  };
-  const onLeftPlaneClicked = (e) => {
-    if (!buildMode) {
-      return;
-    }
-    if (draggedItem !== null) {
-      if (canDrop) {
-        setItems((prev) => {
-          const newItems = prev.map((item, index) => {
-            if (index === draggedItem) {
-              return {
-                ...item,
-                gridPosition: wallLeftVector3ToGrid(e.point),
-                rotation: draggedItemRotation,
-              };
-            }
-            return item;
-          });
-          return newItems;
-        });
-      }
-      setDraggedItem(null);
-    }
-  };
+  // const onPlaneClicked = (e) => {
+  //   if (!buildMode) {
+  //     return;
+  //   }
+  //   if (draggedItem !== null) {
+  //     if (canDrop) {
+  //       setItems((prev) => {
+  //         const newItems = prev.map((item, index) => {
+  //           if (index === draggedItem) {
+  //             return {
+  //               ...item,
+  //               gridPosition: vector3ToGrid(e.point),
+  //               rotation: draggedItemRotation,
+  //             };
+  //           }
+  //           return item;
+  //         });
+  //         return newItems;
+  //       });
+  //     }
+  //     setDraggedItem(null);
+  //   }
+  // };
+  // const onLeftPlaneClicked = (e) => {
+  //   if (!buildMode) {
+  //     return;
+  //   }
+  //   if (draggedItem !== null) {
+  //     if (canDrop) {
+  //       setItems((prev) => {
+  //         const newItems = prev.map((item, index) => {
+  //           if (index === draggedItem) {
+  //             return {
+  //               ...item,
+  //               gridPosition: wallLeftVector3ToGrid(e.point),
+  //               rotation: draggedItemRotation,
+  //             };
+  //           }
+  //           return item;
+  //         });
+  //         return newItems;
+  //       });
+  //     }
+  //     setDraggedItem(null);
+  //   }
+  // };
 
-  const onRightPlaneClicked = (e) => {
-    if (!buildMode) {
-      return;
-    }
-    if (draggedItem !== null) {
-      if (canDrop) {
-        setItems((prev) => {
-          const newItems = prev.map((item, index) => {
-            if (index === draggedItem) {
-              return {
-                ...item,
-                gridPosition: wallRightVector3ToGrid(e.point),
-                rotation: draggedItemRotation,
-              };
-            }
-            return item;
-          });
-          return newItems;
-        });
-      }
-      setDraggedItem(null);
-    }
-  };
+  // const onRightPlaneClicked = (e) => {
+  //   if (!buildMode) {
+  //     return;
+  //   }
+  //   if (draggedItem !== null) {
+  //     if (canDrop) {
+  //       setItems((prev) => {
+  //         const newItems = prev.map((item, index) => {
+  //           if (index === draggedItem) {
+  //             return {
+  //               ...item,
+  //               gridPosition: wallRightVector3ToGrid(e.point),
+  //               rotation: draggedItemRotation,
+  //             };
+  //           }
+  //           return item;
+  //         });
+  //         return newItems;
+  //       });
+  //     }
+  //     setDraggedItem(null);
+  //   }
+  // };
 
   // onPlaneClicked 이벤트에 예외처리
   useEffect(() => {
@@ -282,6 +288,55 @@ const Experience = () => {
 
   return (
     <>
+      {draggedItem!== null && buildMode && (
+        <Html>
+          <div className={styles.dragbutton}>
+            <img
+              src="assets/icons/refresh.svg"
+              alt=""
+              onClick={() => {
+                if (items[draggedItem].wall) {
+                  setDraggedItemRotation(
+                    draggedItemRotation === 0 ? 1 : draggedItemRotation - 1
+                  );
+                } else {
+                  setDraggedItemRotation(
+                    draggedItemRotation === 3 ? 0 : draggedItemRotation + 1
+                  );
+                }
+              }}
+            />
+            <img
+              src="assets/icons/cross.svg"
+              alt=""
+              onClick={() => {
+                setDraggedItem(null);
+              }}
+            />
+            <img src="assets/icons/check.svg" alt="" 
+            onClick={()=>{
+              if (draggedItem!==null && dragPosition) {
+                if (canDrop) {
+                  setItems((prev) => {
+                    const newItems = prev.map((item, index) => {
+                      if (index === draggedItem) {
+                        return {
+                          ...item,
+                          gridPosition: dragPosition,
+                          rotation: draggedItemRotation,
+                        };
+                      }
+                      return item;
+                    });
+                    return newItems;
+                  });
+                }
+                setDraggedItem(null);
+              }
+            }}/>
+          </div>
+        </Html>
+      )}
       <Environment preset="sunset" />
       <ambientLight intensity={0.3} />
       <OrbitControls
@@ -294,7 +349,7 @@ const Experience = () => {
         enabled={!buildMode}
         onEnd={animateCameraPosition}
       />
-      <Room name={"office"}/>
+      {/* <Room name={"office"}/> */}
       {buildMode
         ? items.map((item, idx) => (
             <Item
@@ -320,7 +375,6 @@ const Experience = () => {
         rotation-x={-Math.PI / 2}
         // visible={false}
         position-y={-0.001}
-        onClick={onPlaneClicked}
         onPointerMove={(e) => {
           if (!buildMode) {
             return;
@@ -345,7 +399,6 @@ const Experience = () => {
         position-x={-2.394}
         // visible={false}
         position-y={1.92}
-        onClick={onLeftPlaneClicked}
         onPointerMove={(e) => {
           if (!buildMode) {
             return;
@@ -369,7 +422,6 @@ const Experience = () => {
         position-z={-2.394}
         // visible={false}
         position-y={1.92}
-        onClick={onRightPlaneClicked}
         onPointerMove={(e) => {
           if (!buildMode) {
             return;

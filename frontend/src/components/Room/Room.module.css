@@ -1,0 +1,8 @@
+.dragbutton{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  position: fixed;
+  z-index: 3;
+  /* transform: translate(-45%,500%); */
+  width: 100px;
+}
