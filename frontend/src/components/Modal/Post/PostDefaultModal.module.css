@@ -1,14 +1,32 @@
-.container {
+.containerOther {
   display: flex;
-  /* min-height: 40%; */
-  width: 30vw;
+  min-height: 400px;
+  min-width: 80%;
   padding: 15px;
 
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3; 
+  transform: translate(-50%, -120%);
+  z-index: 3;
+
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border: 1px solid lightcoral;
+}
+
+.containerMy {
+  display: flex;
+  min-height: 400px;
+  min-width: 80%;
+  padding: 15px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -150%);
+  z-index: 3;
 
   flex-direction: column;
   align-items: center;
@@ -43,6 +61,6 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);  /* 반투명 검은색 */
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 */
   z-index: 2;
 }
