@@ -95,6 +95,7 @@
   flex-direction: row;
   justify-content: space-between;
   font-family: "HandWrite-DaHaeng";
+  align-items: center;
 }
 
 .anonymous {
