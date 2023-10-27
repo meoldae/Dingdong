@@ -7,8 +7,8 @@ const Map = () => {
   const { scene } = useThree()
   const map = useLoader(
     GLTFLoader,
-    // "assets/models/defaultSettings/floor.glb"
-    "assets/models/defaultSettings/DefaultMap.glb"
+    "assets/models/defaultSettings/Map2.glb"
+    // "assets/models/defaultSettings/DefaultMap.glb"
   )
   const mapRef = useRef(null)
 
