@@ -39,7 +39,7 @@ const SendLetter = ({ onClose, card }) => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               maxLength={7}
-              style={{ fontFamily: "Pretendard-SemiBold" }}
+              style={{ fontFamily: "HandWrite-DaHaeng", fontSize: "20px" }}
               placeholder="제목 입력"
             />
           </div>
@@ -47,7 +47,7 @@ const SendLetter = ({ onClose, card }) => {
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              style={{ fontFamily: "Pretendard-Regular" }}
+              style={{ fontFamily: "HandWrite-DaHaeng", fontSize: "18px" }}
               placeholder="편지 내용을 작성하세요."
             />
           </div>
