@@ -2,6 +2,7 @@ package com.ssafy.dingdong.domain.letter.repository;
 
 import com.ssafy.dingdong.domain.letter.dto.response.LetterListResponseDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterResponseDto;
+import com.ssafy.dingdong.domain.letter.dto.response.LetterScoreDto;
 import com.ssafy.dingdong.domain.letter.entity.Letter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,17 +31,17 @@ public interface LetterRepository extends JpaRepository<Letter, Long> {
     @Query("SELECT l.letterFrom FROM Letter l WHERE l.id = :letterId")
     Optional<String> findLetterFromByLetterId(@Param("letterId") Long letterId);
 
-    @Query("SELECT l.letterFrom, COUNT(l.letterFrom) as cnt " +
+    @Query("SELECT new com.ssafy.dingdong.domain.letter.dto.response.LetterScoreDto(l.letterFrom, count(l.letterFrom)) " +
             "FROM Letter l " +
             "GROUP BY l.letterFrom " +
-            "ORDER BY cnt DESC")
-    List<Object[]> findTopLetterFrom();
+            "ORDER BY count(l.letterFrom) DESC")
+    Page<LetterScoreDto> getLetterFromScore(Pageable pageable);
 
-    @Query("SELECT l.letterTo, COUNT(l.letterTo) as cnt " +
+    @Query("SELECT new com.ssafy.dingdong.domain.letter.dto.response.LetterScoreDto(l.letterTo, count(l.letterTo)) " +
             "FROM Letter l " +
             "GROUP BY l.letterTo " +
-            "ORDER BY cnt DESC")
-    List<Object[]> findTopLetterTo();
+            "ORDER BY count(l.letterTo) DESC")
+    Page<LetterScoreDto> getLetterToScore(Pageable pageable);
 
     @Modifying
     @Transactional
