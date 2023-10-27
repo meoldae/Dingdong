@@ -82,7 +82,7 @@ public class RoomServiceImpl implements RoomService {
 		if (category == 0) {
 			return furnitureRepository.findAllFurnitureSummaryDto(pageable);
 		}else {
-			return furnitureRepository.findAllByCategoryId(category, pageable);
+			return furnitureRepository.findAllByCategoryId(category.longValue(), pageable);
 		}
 	}
 
