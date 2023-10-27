@@ -1,28 +1,34 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
-import AppMain from "../pages/Main/MainPage"
+import AuthRoute from "./AuthRouter"
 import AppRoom from "../pages/Room/RoomPage"
 import AppNotFound from "../pages/NotFound/NotFoundPage"
 import AppLogin from "../pages/User/LoginPage"
 import AppSignUp from "../pages/User/SignUpPage"
+import AppRedirect from "../pages/User/RedirectPage"
 import AppUserSetting from "../pages/User/UserSettingPage"
+import MainPage from "../pages/Main/MainPage"
 import SingleMainPage from "../pages/SinglePlay/SingleMainPage"
 import TutorialPage from "../pages/SinglePlay/TutorialPage"
-import ProfileSelect from "../pages/User/ProfileSelect"
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route>
-          <Route path="/" element={<AppMain />} />
+        <Route element={<AuthRoute authentication="user" />}>
+          <Route path="/" element={<MainPage />} />
           <Route path="/single" element={<SingleMainPage />} />
           <Route path="/tutorial" element={<TutorialPage />} />
+          <Route path="/character" element={<CharacterPage />} />
           <Route path="/room" element={<AppRoom />} />
-          <Route path="/login" element={<AppLogin />} />
-          <Route path="/signup" element={<AppSignUp />} />
           <Route path="/usersetting" element={<AppUserSetting />} />
-          <Route path="/profileselect" element={<ProfileSelect />} />
+        </Route>
+
+        <Route element={<AuthRoute authentication="NotUser" />}>
+          <Route path="/login" element={<AppLogin />} />
+          <Route path="/oauth2/redirect" element={<AppRedirect />} />
+          <Route path="/signup" element={<AppSignUp />} />
+          <Route path="/tutorial" element={<TutorialPage />} />
         </Route>
         <Route path="/*" element={<AppNotFound />} />
       </Routes>

@@ -1,0 +1,16 @@
+.arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    font-size: 30px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.next {
+    right: 10px;
+}
+
+.prev {
+    left: 10px;
+}

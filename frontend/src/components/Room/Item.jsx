@@ -2,8 +2,8 @@ import { useCursor, useGLTF } from "@react-three/drei";
 import { SkeletonUtils } from "three-stdlib";
 import { useEffect, useMemo, useState } from "react";
 import { useGrid } from "./UseGrid";
-import { useRecoilValue } from "recoil";
-import { buildModeState } from "./Atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { ItemRotateState, ItemsState, draggedItemState } from "./Atom";
 
 export const Item = ({
   item,
@@ -21,43 +21,80 @@ export const Item = ({
   const width = rotation === 1 || rotation === 3 ? size[2] : size[0];
   const height = rotation === 1 || rotation === 3 ? size[0] : size[2];
   const thick = size[1];
-  const { gridToVector3, wallLeftGridToVector3 } = useGrid();
-  const [hover, setHover] = useState(false);
-  const buildMode = useRecoilValue(buildModeState);
-  useCursor(buildMode ? hover : undefined);
-  
+  const { gridToVector3, wallLeftGridToVector3, wallRightGridToVector3 } =
+    useGrid();
+  const [items, setItems] = useRecoilState(ItemsState);
+  const draggedItem = useRecoilValue(draggedItemState);
+  const value = useRecoilValue(ItemRotateState);
+
+
+  useEffect(() => {
+    setItems((prev) => {
+      const newItems = prev.map((item, index) => {
+        if (index === draggedItem) {
+          return {
+            ...item,
+            gridPosition: gridPosition,
+            rotation: value,
+          };
+        }
+        return item;
+      });
+      return newItems;
+    });
+  }, [value]);
+
+  useEffect(()=>{
+    rotation
+  })
+
   return (
     <>
-      {wall ? (
+      {wall && (
         <group
           onClick={onClick}
-          position={wallLeftGridToVector3(
-            isDragging ? dragPosition || gridPosition : gridPosition,
-            width,
-            height
-          )}
+          position={
+             rotation
+              ? wallLeftGridToVector3(
+                  isDragging ? dragPosition || gridPosition : gridPosition
+                )
+              : wallRightGridToVector3(
+                  isDragging ? dragPosition || gridPosition : gridPosition
+                )
+          }
         >
           <primitive
             object={clone}
+            position-x={rotation? 0 : 0.12}
             position-y={0.44}
             position-z={0.12}
             // 벽에 있는 아이템 관련
             rotation-y={(rotation * Math.PI) / 2}
           />
           {isDragging && (
-            <mesh position-x={0.02} position-y={0.12} position-z={0.12}>
+            <mesh
+              position-x={rotation ? 0.02 : 0.12}
+              position-y={0.12}
+              position-z={0.13}
+            >
               <boxGeometry
-                args={[0, (thick * 0.48) / 2, (height * 0.48) / 2]}
+                args={[
+                  rotation ? 0 : (width * 0.48) / 2,
+                  (thick * 0.48) / 2,
+                  rotation ? (height * 0.48) / 2 : 0,
+                ]}
               />
               <meshBasicMaterial
                 color={canDrop ? "green" : "red"}
-                opacity={0.3}
+                opacity={0.5}
                 transparent
               />
             </mesh>
           )}
         </group>
-      ) : (
+      )}
+
+      {!wall && (
         <group
           onClick={onClick}
           position={gridToVector3(
@@ -65,19 +102,17 @@ export const Item = ({
             width,
             height
           )}
-          onPointerEnter={() => setHover(true)}
-          onPointerLeave={() => setHover(false)}
         >
           {/* 물체 클릭 시 바닥 면 가능 불가능 색상 및 회전 각 prop 받기 */}
           <primitive object={clone} rotation-y={(rotation * Math.PI) / 2} />
           {isDragging && (
             <mesh position-y={0.02}>
               <boxGeometry
-                args={[(width * 0.48) / 2, 0, (height * 0.48) / 2]}
+                args={[(width * 0.48) / 2, 0.01, (height * 0.48) / 2]}
               />
               <meshBasicMaterial
                 color={canDrop ? "green" : "red"}
-                opacity={0.3}
+                opacity={0.5}
                 transparent
               />
             </mesh>
