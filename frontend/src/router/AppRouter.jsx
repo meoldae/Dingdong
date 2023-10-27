@@ -19,7 +19,6 @@ const AppRouter = () => {
           <Route path="/" element={<MainPage />} />
           <Route path="/single" element={<SingleMainPage />} />
           <Route path="/tutorial" element={<TutorialPage />} />
-          <Route path="/character" element={<CharacterPage />} />
           <Route path="/room" element={<AppRoom />} />
           <Route path="/usersetting" element={<AppUserSetting />} />
         </Route>
