@@ -1,8 +1,18 @@
+import { useState } from "react"
 import RoomBtn from "../Button/Room/RoomBtn"
+import PostCardBox from "../Modal/Post/PostCardBox"
 import style from "./Footer.module.css"
 
 const MyFooter = () => {
-  const icon = "assets/icons/"
+  const [isPostBoxModalVisible, setIsPostBoxModalVisible] = useState(false)
+
+  const closeModal = () => {
+    setIsPostBoxModalVisible(false)
+  }
+
+  const handleSelectButtonClick = () => {
+    console.log(1)
+  }
 
   return (
     <div className={style.wrap}>
@@ -16,9 +26,19 @@ const MyFooter = () => {
           <RoomBtn img={"worldMap"} />
         </div>
         <div className={style.background}>
-          <RoomBtn img={"postBox"} />
+          <RoomBtn
+            img={"postBox"}
+            onClick={() => setIsPostBoxModalVisible(true)}
+          />
         </div>
       </div>
+      {isPostBoxModalVisible && (
+        <PostCardBox
+          cancelClick={closeModal}
+          onSelectButtonClick={handleSelectButtonClick}
+          checker={"MyFooter"}
+        />
+      )}
     </div>
   )
 }
