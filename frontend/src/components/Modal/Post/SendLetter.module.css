@@ -84,4 +84,7 @@
 .contentCount {
   font-family: "HandWrite-DaHaeng";
   font-size: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
