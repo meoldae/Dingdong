@@ -11,8 +11,8 @@
 }
 
 .postCardContainer {
-  -ms-overflow-style: none; 
-  scrollbar-width: none; 
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .postCardContainer {
@@ -21,7 +21,7 @@
 }
 
 .postCard.selected {
-  border: 0.5px solid #000; 
+  border: 0.5px solid #000;
 }
 
 .postCardComment {
