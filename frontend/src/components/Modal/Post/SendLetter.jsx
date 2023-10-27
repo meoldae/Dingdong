@@ -5,6 +5,7 @@ import styles from "./SendLetter.module.css"
 
 const SendLetter = ({ onClose, card }) => {
   const [content, setContent] = useState("")
+  const [contentCount, setContentCount] = useState(0)
 
   const cancelClick = () => {
     onClose()
@@ -19,6 +20,11 @@ const SendLetter = ({ onClose, card }) => {
     if (event.target === event.currentTarget) {
       onClose()
     }
+  }
+
+  const handleCheckContentCount = (event) => {
+    setContent(event.target.value)
+    setContentCount(event.target.value.length)
   }
 
   return (
@@ -36,11 +42,13 @@ const SendLetter = ({ onClose, card }) => {
           <div className={styles.letterContent}>
             <textarea
               value={content}
-              onChange={(e) => setContent(e.target.value)}
+              onChange={(e) => handleCheckContentCount(e)}
               style={{ fontFamily: "HandWrite-DaHaeng", fontSize: "20px" }}
               placeholder="편지 내용을 작성하세요."
+              maxLength={199}
             />
           </div>
+          <div className={styles.contentCount}>{contentCount}/200</div>
         </Card>
         <DefaultBtn btnName={"편지 보내기"} onClick={sendClick} />
       </div>
