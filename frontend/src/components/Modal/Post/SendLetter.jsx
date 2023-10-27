@@ -50,7 +50,9 @@ const SendLetter = ({ onClose, card }) => {
           </div>
           <div className={styles.contentCount}>{contentCount}/200</div>
           <div className={styles.footerContainer}>
-            <div className={styles.anonymous}>익명의 이웃</div>
+            <div className={styles.anonymous}>
+              <span>익명의 이웃</span>
+            </div>
             <div className={styles.FromUser}>From. 호~</div>
           </div>
         </Card>
