@@ -155,7 +155,7 @@ public class RoomServiceImpl implements RoomService {
 				String nickname = memberRepository.getNicknameByMemberId(UUID.fromString(room.getMemberId())).orElseThrow(
 					() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
 				);
-
+				roomScore.setMemberId(room.getMemberId());
 				roomScore.setNickname(nickname);
 			}
 		);

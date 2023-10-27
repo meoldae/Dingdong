@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 public class RoomScoreDto{
 	private Long roomId;
+	private String memberId;
 	private String nickname;
 	private Long heartCount;
 
@@ -17,5 +18,9 @@ public class RoomScoreDto{
 
 	public void setNickname(String nickname){
 		this.nickname = nickname;
+	}
+
+	public void setMemberId(String memberId){
+		this.memberId = memberId;
 	}
 }
