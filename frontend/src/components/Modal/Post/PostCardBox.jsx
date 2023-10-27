@@ -45,6 +45,7 @@ const PostCardBox = (props) => {
         <PostDefaultModal
           PostDefaultTitle={"우표 선택"}
           cancelClick={props.cancelClick}
+          postCheck={handlerChecker()}
         >
           <div className={styles.postCardContainer}>
             {cards.map((card, idx) => (
@@ -73,6 +74,7 @@ const PostCardBox = (props) => {
           <PostDefaultModal
             PostDefaultTitle={"편지함"}
             cancelClick={props.cancelClick}
+            postCheck={handlerChecker()}
           />
         </>
       )}
