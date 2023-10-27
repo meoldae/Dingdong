@@ -39,6 +39,18 @@ const PostCardBox = (props) => {
     { src: "thunder.png", comment: "에너지를 전달해보세요!" },
   ]
 
+  const writingPadCards = [
+    { src: "writingPad.svg" },
+    { src: "writingPad.svg" },
+    { src: "writingPad.svg" },
+    { src: "writingPad.svg" },
+    { src: "writingPad.svg" },
+    { src: "writingPad.svg" },
+    { src: "writingPad.svg" },
+    { src: "writingPad.svg" },
+    { src: "writingPad.svg" },
+  ]
+
   return (
     <>
       {handlerChecker() ? (
@@ -76,8 +88,19 @@ const PostCardBox = (props) => {
             cancelClick={props.cancelClick}
             postCheck={handlerChecker()}
           >
-            <div>
-              <img src={`assets/icons/noReadWritingPad.svg`} />
+            <div className={styles.postCardContainer}>
+              {writingPadCards.map((card, idx) => (
+                <img
+                  key={idx}
+                  className={
+                    selectedCard?.src === card.src
+                      ? `${styles.postCard} ${styles.selected}`
+                      : styles.postCard
+                  }
+                  src={`assets/icons/${card.src}`}
+                  onClick={() => handleCardClick(idx, card.src)}
+                />
+              ))}
             </div>
           </PostDefaultModal>
         </>
