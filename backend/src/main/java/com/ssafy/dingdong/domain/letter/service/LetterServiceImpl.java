@@ -2,7 +2,7 @@ package com.ssafy.dingdong.domain.letter.service;
 
 import com.ssafy.dingdong.domain.letter.dto.request.LetterRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterListResponseDto;
-import com.ssafy.dingdong.domain.letter.dto.response.LetterRecordResponseDto;
+import com.ssafy.dingdong.domain.letter.dto.response.RecordResponseDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterResponseDto;
 import com.ssafy.dingdong.domain.letter.entity.Letter;
 import com.ssafy.dingdong.domain.letter.entity.Stamp;
@@ -14,12 +14,10 @@ import com.ssafy.dingdong.global.util.EncryptUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Log4j2
 @Service
@@ -82,29 +80,29 @@ public class LetterServiceImpl implements LetterService {
     public void reportLetter(Long letterId) { letterRepository.updateIsReportById(letterId); }
 
     @Override
-    public LetterRecordResponseDto findTopLetterFrom() {
+    public RecordResponseDto findTopLetterFrom() {
         List<Object[]> result = letterRepository.findTopLetterFrom();
         log.info(result);
         if (!result.isEmpty()) {
-            return LetterRecordResponseDto.builder()
+            return RecordResponseDto.builder()
                     .memberId((String) result.get(0)[0])
                     .count(((Number) result.get(0)[1]).intValue())
                     .build();
         }
-        return LetterRecordResponseDto.builder().build();
+        return RecordResponseDto.builder().build();
     }
 
     @Override
-    public LetterRecordResponseDto findTopLetterTo() {
+    public RecordResponseDto findTopLetterTo() {
         List<Object[]> result = letterRepository.findTopLetterTo();
         log.info(result);
         if (!result.isEmpty()) {
-            return LetterRecordResponseDto.builder()
+            return RecordResponseDto.builder()
                     .memberId((String) result.get(0)[0])
                     .count(((Number) result.get(0)[1]).intValue())
                     .build();
         }
-        return LetterRecordResponseDto.builder().build();
+        return RecordResponseDto.builder().build();
     }
 
 }

@@ -161,4 +161,6 @@ public class RoomServiceImpl implements RoomService {
 		);
 		return roomScoreList.stream().toList();
 	}
+
+
 }

@@ -2,7 +2,7 @@ package com.ssafy.dingdong.domain.letter.service;
 
 import com.ssafy.dingdong.domain.letter.dto.request.LetterRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterListResponseDto;
-import com.ssafy.dingdong.domain.letter.dto.response.LetterRecordResponseDto;
+import com.ssafy.dingdong.domain.letter.dto.response.RecordResponseDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +19,6 @@ public interface LetterService {
     void reportLetter(Long letterId);
     String getLetterFromId(Long letterId);
 
-    LetterRecordResponseDto findTopLetterFrom();
-    LetterRecordResponseDto findTopLetterTo();
+    RecordResponseDto findTopLetterFrom();
+    RecordResponseDto findTopLetterTo();
 }

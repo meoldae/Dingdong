@@ -9,7 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class LetterRecordResponseDto {
+public class RecordResponseDto {
     String memberId;
     int count;
 }

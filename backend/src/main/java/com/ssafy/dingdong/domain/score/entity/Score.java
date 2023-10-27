@@ -21,6 +21,8 @@ public class Score {
 
     private String memberId;
 
+    private Long roomdId;
+
     @Enumerated(EnumType.STRING)
     private ScoreType type;
 
@@ -28,9 +30,10 @@ public class Score {
 
     private LocalDateTime recordTime;
 
-    public static Score build(String memberId, ScoreType type, int recordCount) {
+    public static Score build(String memberId, Long roomId, ScoreType type, int recordCount) {
         return Score.builder()
                 .memberId(memberId)
+                .roomdId(roomId)
                 .type(type)
                 .recordCount(recordCount)
                 .recordTime(LocalDateTime.now())
