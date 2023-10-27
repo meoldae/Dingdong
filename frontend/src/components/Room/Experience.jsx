@@ -226,7 +226,9 @@ const Experience = () => {
           {...commonProps}
           onClick={() => {
             setDraggedItem((prev) => (prev === null ? idx : prev));
-            setDraggedItemRotation(item.rotation);
+            if (draggedItemRotation===null) {
+              setDraggedItemRotation(item.rotation);
+            }
           }}
           isDragging={draggedItem === idx}
           dragPosition={dragPosition}
@@ -277,7 +279,6 @@ const Experience = () => {
     });
     setTimeout(() => {
       state.camera.position.set(8, 5, 8);
-      state.camera.target.set(0,0,0)
     }, 50);
   };
 
@@ -319,7 +320,7 @@ const Experience = () => {
         }}
       >
         <planeGeometry args={[4.8, 4.8]} />
-        <meshStandardMaterial color="#0f0f0f0" />
+        <meshStandardMaterial color="#f0f0f0" />
       </mesh>
 
       {/* 왼쪽 평면 */}
@@ -418,6 +419,8 @@ const Experience = () => {
             alt=""
             onClick={() => {
               setDraggedItem(null);
+              setDraggedItemRotation(null);
+
             }}
           />
           {canDrop ? (
@@ -441,6 +444,7 @@ const Experience = () => {
                       return newItems;
                     });
                   }
+                  setDraggedItemRotation(null);
                   setDraggedItem(null);
                 }
               }}

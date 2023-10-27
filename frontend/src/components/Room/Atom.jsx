@@ -72,13 +72,6 @@ const map = {
       rotation: 1,
       walkable: true,
       wall:true,
-    },
-    {
-      ...item.clock,
-      gridPosition: [10, 5, 10],
-      rotation: 1,
-      walkable: true,
-      wall:true,
     }
   ],
 };
