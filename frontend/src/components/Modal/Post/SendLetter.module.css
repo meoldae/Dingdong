@@ -88,3 +88,8 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.footerContainer {
+  display: flex;
+  flex-direction: row;
+}
