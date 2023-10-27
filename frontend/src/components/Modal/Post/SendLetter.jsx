@@ -51,7 +51,7 @@ const SendLetter = ({ onClose, card }) => {
           <div className={styles.contentCount}>{contentCount}/200</div>
           <div className={styles.footerContainer}>
             <div className={styles.anonymous}>익명 사용자지롱~</div>
-            <div>From. 호~</div>
+            <div className={styles.FromUser}>From. 호~</div>
           </div>
         </Card>
         <DefaultBtn btnName={"편지 보내기"} onClick={sendClick} />
