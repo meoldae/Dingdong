@@ -1,10 +1,4 @@
-import {
-  Environment,
-  Grid,
-  Html,
-  OrbitControls,
-  useCursor,
-} from "@react-three/drei";
+import { Environment, Grid, Html, OrbitControls } from "@react-three/drei";
 import { useEffect, useState, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Item } from "./Item";
@@ -31,77 +25,6 @@ const Experience = () => {
   const [items, setItems] = useRecoilState(ItemsState);
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState);
-  // 물체 클릭한 후에, 물체를 배치할 때 작동
-  // const onPlaneClicked = (e) => {
-  //   if (!buildMode) {
-  //     return;
-  //   }
-  //   if (draggedItem !== null) {
-  //     if (canDrop) {
-  //       setItems((prev) => {
-  //         const newItems = prev.map((item, index) => {
-  //           if (index === draggedItem) {
-  //             return {
-  //               ...item,
-  //               gridPosition: vector3ToGrid(e.point),
-  //               rotation: draggedItemRotation,
-  //             };
-  //           }
-  //           return item;
-  //         });
-  //         return newItems;
-  //       });
-  //     }
-  //     setDraggedItem(null);
-  //   }
-  // };
-  // const onLeftPlaneClicked = (e) => {
-  //   if (!buildMode) {
-  //     return;
-  //   }
-  //   if (draggedItem !== null) {
-  //     if (canDrop) {
-  //       setItems((prev) => {
-  //         const newItems = prev.map((item, index) => {
-  //           if (index === draggedItem) {
-  //             return {
-  //               ...item,
-  //               gridPosition: wallLeftVector3ToGrid(e.point),
-  //               rotation: draggedItemRotation,
-  //             };
-  //           }
-  //           return item;
-  //         });
-  //         return newItems;
-  //       });
-  //     }
-  //     setDraggedItem(null);
-  //   }
-  // };
-
-  // const onRightPlaneClicked = (e) => {
-  //   if (!buildMode) {
-  //     return;
-  //   }
-  //   if (draggedItem !== null) {
-  //     if (canDrop) {
-  //       setItems((prev) => {
-  //         const newItems = prev.map((item, index) => {
-  //           if (index === draggedItem) {
-  //             return {
-  //               ...item,
-  //               gridPosition: wallRightVector3ToGrid(e.point),
-  //               rotation: draggedItemRotation,
-  //             };
-  //           }
-  //           return item;
-  //         });
-  //         return newItems;
-  //       });
-  //     }
-  //     setDraggedItem(null);
-  //   }
-  // };
 
   // onPlaneClicked 이벤트에 예외처리
   useEffect(() => {
@@ -111,6 +34,7 @@ const Experience = () => {
     const item = items[draggedItem];
     let droppable = true;
     const thick = item.size[1];
+
     // 바닥 평면 넘어갔을 때 예외처리
     const width =
       draggedItemRotation === 1 || draggedItemRotation === 3
@@ -120,7 +44,6 @@ const Experience = () => {
       draggedItemRotation === 1 || draggedItemRotation === 3
         ? item.size[0]
         : item.size[2];
-
     if (!item.wall) {
       if (
         dragPosition[0] - width / 2 < 0 ||
@@ -135,6 +58,7 @@ const Experience = () => {
         droppable = false;
       }
     }
+    // 벽면이 외부로 넘어갔을 때 예외처리
     if (item.wall) {
       if (draggedItemRotation) {
         if (
@@ -163,18 +87,19 @@ const Experience = () => {
         droppable = false;
       }
     }
-    items.forEach((otherItem, idx) => {
-      // ignore self
 
+    // 다른 물체 예외 처리
+    items.forEach((otherItem, idx) => {
+      // 드래그 중인 물체면 예외 처리
       if (idx === draggedItem) {
         return;
       }
+      // 카펫처럼 쌓을 수 있고 다른 아이템이 벽면에 있는 것이 아닐 경우
       if (otherItem.walkable && !otherItem.wall) {
         return;
       }
-      // ignore wall & floor
+      // 다른 물체 크기
       const otherThick = otherItem.size[1];
-      // 다른 물체 예외처리
       const otherWidth =
         otherItem.rotation === 1 || otherItem.rotation === 3
           ? otherItem.size[2]
@@ -183,6 +108,8 @@ const Experience = () => {
         otherItem.rotation === 1 || otherItem.rotation === 3
           ? otherItem.size[0]
           : otherItem.size[2];
+
+      // 다른 물체가 왼쪽 벽에 있고, 바닥에 있는 걸 움직일 때
       if (otherItem.wall && !item.wall && otherItem.rotation) {
         if (dragPosition[0] - width / 2 <= 0) {
           if (
@@ -195,6 +122,7 @@ const Experience = () => {
             droppable = false;
         }
       }
+      // 다른 물체가 오른쪽 벽에 있고, 바닥에 있는 걸 움직일 때
       if (otherItem.wall && !item.wall && !otherItem.rotation) {
         if (dragPosition[2] - height / 2 <= 0) {
           if (
@@ -207,6 +135,7 @@ const Experience = () => {
             droppable = false;
         }
       }
+      // 바닥 평면에 있는 다른 물체가 있을 때,
       if (!item.walkable && !item.wall && !otherItem.wall) {
         if (
           dragPosition[0] + width / 2 >
@@ -222,7 +151,7 @@ const Experience = () => {
         }
       }
 
-      // 다른 물체 높이 예외 처리 (벽면에 있는 게 움직일 때)
+      // 왼쪽 벽면에 있는 게 움직일 때, 평면 물체와 비교
       if (item.wall && item.rotation) {
         if (otherItem.gridPosition[0] - otherWidth / 2 <= 0) {
           if (
@@ -236,6 +165,7 @@ const Experience = () => {
           }
         }
       }
+      // 오른쪽 벽면에 있는 게 움직일 때, 평면 물체와 비교
       if (item.wall && !item.rotation) {
         if (otherItem.gridPosition[2] - otherHeight / 2 <= 0) {
           if (
@@ -247,6 +177,35 @@ const Experience = () => {
           ) {
             droppable = false;
           }
+        }
+      }
+      // 벽면에 있는 물체끼리 비교
+      if (item.wall && item.rotation && otherItem.wall) {
+        if (
+          dragPosition[2] + height / 2 >
+            otherItem.gridPosition[2] - otherHeight / 2 &&
+          dragPosition[2] - height / 2 <
+            otherItem.gridPosition[2] + otherHeight / 2 &&
+          dragPosition[1] + thick / 2 >
+            otherItem.gridPosition[1] - otherThick / 2 &&
+          dragPosition[1] - thick / 2 <
+            otherItem.gridPosition[1] + otherThick / 2
+        ) {
+          droppable = false;
+        }
+      }
+      if (item.wall && !item.rotation && otherItem.wall) {
+        if (
+          dragPosition[0] + width / 2 >
+            otherItem.gridPosition[0] - otherWidth / 2 &&
+          dragPosition[0] - width / 2 <
+            otherItem.gridPosition[0] + otherWidth / 2 &&
+          dragPosition[1] + thick / 2 >
+            otherItem.gridPosition[1] - otherThick / 2 &&
+          dragPosition[1] - thick / 2 <
+            otherItem.gridPosition[1] + otherThick / 2
+        ) {
+          droppable = false;
         }
       }
     });
@@ -286,9 +245,35 @@ const Experience = () => {
     }, 50);
   };
 
+  const renderItem = (item, idx) => {
+    const commonProps = {
+      key: `${item.name}-${idx}`,
+      item: item,
+      wall: item.wall,
+    };
+
+    if (buildMode) {
+      return (
+        <Item
+          {...commonProps}
+          onClick={() => {
+            setDraggedItem((prev) => (prev === null ? idx : prev));
+            setDraggedItemRotation(item.rotation);
+          }}
+          isDragging={draggedItem === idx}
+          dragPosition={dragPosition}
+          dragRotation={draggedItemRotation}
+          canDrop={canDrop}
+        />
+      );
+    }
+
+    return <Item {...commonProps} />;
+  };
+
   return (
     <>
-      {draggedItem!== null && buildMode && (
+      {draggedItem !== null && buildMode && (
         <Html>
           <div className={styles.dragbutton}>
             <img
@@ -313,30 +298,38 @@ const Experience = () => {
                 setDraggedItem(null);
               }}
             />
-            <img src="assets/icons/check.svg" alt="" 
-            onClick={()=>{
-              if (draggedItem!==null && dragPosition) {
-                if (canDrop) {
-                  setItems((prev) => {
-                    const newItems = prev.map((item, index) => {
-                      if (index === draggedItem) {
-                        return {
-                          ...item,
-                          gridPosition: dragPosition,
-                          rotation: draggedItemRotation,
-                        };
-                      }
-                      return item;
-                    });
-                    return newItems;
-                  });
-                }
-                setDraggedItem(null);
-              }
-            }}/>
+            {canDrop ? (
+              <img
+                src="assets/icons/check.svg"
+                alt=""
+                onClick={() => {
+                  if (draggedItem !== null && dragPosition) {
+                    if (canDrop) {
+                      setItems((prev) => {
+                        const newItems = prev.map((item, index) => {
+                          if (index === draggedItem) {
+                            return {
+                              ...item,
+                              gridPosition: dragPosition,
+                              rotation: draggedItemRotation,
+                            };
+                          }
+                          return item;
+                        });
+                        return newItems;
+                      });
+                    }
+                    setDraggedItem(null);
+                  }
+                }}
+              />
+            ) : (
+              <img src="assets/icons/check.svg" />
+            )}
           </div>
         </Html>
       )}
+
       <Environment preset="sunset" />
       <ambientLight intensity={0.3} />
       <OrbitControls
@@ -350,25 +343,7 @@ const Experience = () => {
         onEnd={animateCameraPosition}
       />
       {/* <Room name={"office"}/> */}
-      {buildMode
-        ? items.map((item, idx) => (
-            <Item
-              key={`${item.name}-${idx}`}
-              item={item}
-              onClick={() => {
-                setDraggedItem((prev) => (prev === null ? idx : prev));
-                setDraggedItemRotation(item.rotation);
-              }}
-              isDragging={draggedItem === idx}
-              dragPosition={dragPosition}
-              dragRotation={draggedItemRotation}
-              canDrop={canDrop}
-              wall={item.wall}
-            />
-          ))
-        : items.map((item, idx) => (
-            <Item key={`${item.name}-${idx}`} item={item} wall={item.wall} />
-          ))}
+      {items.map(renderItem)}
 
       {/* 바닥 평면 */}
       <mesh
