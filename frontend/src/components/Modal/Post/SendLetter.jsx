@@ -4,7 +4,6 @@ import Card from "../../UI/Card"
 import styles from "./SendLetter.module.css"
 
 const SendLetter = ({ onClose, card }) => {
-  const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
 
   const cancelClick = () => {
@@ -33,16 +32,7 @@ const SendLetter = ({ onClose, card }) => {
             className={styles.topPostCardImg}
             src={`assets/images/post/${card.src}`}
           />
-          <div className={styles.titleInputContainer}>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              maxLength={7}
-              style={{ fontFamily: "HandWrite-DaHaeng", fontSize: "25px" }}
-              placeholder="제목 입력"
-            />
-          </div>
+          <div className={styles.ToUser}>To. 딩동이</div>
           <div className={styles.letterContent}>
             <textarea
               value={content}
