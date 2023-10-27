@@ -288,7 +288,7 @@ const Experience = () => {
 
   return (
     <>
-      {draggedItem && buildMode && (
+      {draggedItem!== null && buildMode && (
         <Html>
           <div className={styles.dragbutton}>
             <img
@@ -315,7 +315,7 @@ const Experience = () => {
             />
             <img src="assets/icons/check.svg" alt="" 
             onClick={()=>{
-              if (draggedItem && dragPosition) {
+              if (draggedItem!==null && dragPosition) {
                 if (canDrop) {
                   setItems((prev) => {
                     const newItems = prev.map((item, index) => {

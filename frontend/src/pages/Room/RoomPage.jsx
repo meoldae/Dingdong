@@ -44,7 +44,7 @@ function RoomPage() {
         {!editMode && <span>관광모드</span>}
       </div>
 
-      <Canvas shadows camera={{ position: [8, 5, 8], fov: 90 }}>
+      <Canvas shadows camera={{ position: [8, 3, 8], fov: 70 }}>
         <color attach="background" args={["skyblue"]} />
         <Suspense
           fallback={
