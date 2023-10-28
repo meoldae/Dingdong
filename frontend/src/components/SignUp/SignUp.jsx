@@ -120,6 +120,7 @@ const SignUp = () => {
           onChange={(e) => setNickname(e.target.value)}
           placeholder="닉네임 입력란"
           className={styles.nicknameInput}
+          maxLength={7}
         />
         <div className={styles.doubleCheck}>중복확인</div>
       </div>
