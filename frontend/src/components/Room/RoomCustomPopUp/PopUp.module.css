@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.popUpContainer {
+    z-index: 4;
+
+    width: 100%;
+    height: 30vh;
+    position: absolute;
+    border-radius: 15px 15px 0 0;
+    bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tabBar {
+    width: 100%;
+    top: 0px;
+    height: 5vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #d2d2d2;
+}
+
+.tabBar li{
+    background-color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #efefef;
+    list-style: none;
+    height: 100%;
+
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tabBar li:hover{
+    cursor: pointer;
+}
+
+.content {
+    background-color: white;
+    height: 25vh;
+    width: 100%;
+}  
+
+.popUpClose {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: white;
+    border-radius: 50px 50px 50px 50px;
+    width: 4vh;
+    height: 4vh;
+    right: 1vh;
+    top: -6vh;
+}
+
+.closeVector {
+    width: 1.5vh;
+    height: 1.5vh;
+}
+
+.customSaveButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: white;
+    border-radius: 50px 50px 50px 50px;
+    width: 4vh;
+    height: 4vh;
+    right: 6vh;
+    top: -6vh;
+}
+
+.customSaveVector {
+    width: 2.5vh;
+    height: 2.5vh;
+}
