@@ -98,7 +98,7 @@ const SignUp = () => {
             key={idx}
             src={charImg}
             alt=""
-            className={style.characterImage}
+            className={styles.characterImage}
             onClick={() => setAvatar(charImg)}
           />
         ))}
