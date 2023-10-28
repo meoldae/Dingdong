@@ -16,3 +16,8 @@
   flex-direction: column;
   align-items: center;
 }
+
+.Question {
+  width: 195px;
+  text-align: center;
+}

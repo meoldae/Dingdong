@@ -40,7 +40,7 @@ const StampTestOptions = (props) => {
         style={{ marginTop: "95px" }}
       />
       <div className={styles.ContentContainer}>
-        <div>{Questions[opsNum].question}</div>
+        <div className={styles.Question}>{Questions[opsNum].question}</div>
         <div>
           {Questions[opsNum].answers.map((answer) => {
             return (
