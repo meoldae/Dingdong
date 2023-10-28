@@ -7,6 +7,8 @@ import AppLogin from "../pages/User/LoginPage"
 import AppSignUp from "../pages/User/SignUpPage"
 import AppRedirect from "../pages/User/RedirectPage"
 import AppUserSetting from "../pages/User/UserSettingPage"
+import StampTest from "../pages/StampTest/StampTest"
+import StampTestResult from "../pages/StampTest/StampTestResult"; 
 import MainPage from "../pages/Main/MainPage"
 import SingleMainPage from "../pages/SinglePlay/SingleMainPage"
 import TutorialPage from "../pages/SinglePlay/TutorialPage"
@@ -21,6 +23,8 @@ const AppRouter = () => {
           <Route path="/tutorial" element={<TutorialPage />} />
           <Route path="/room" element={<AppRoom />} />
           <Route path="/usersetting" element={<AppUserSetting />} />
+          <Route path="/yourstamp" element={<StampTest />} />
+          <Route path="/yourstamp/result" element={<StampTestResult />} />
         </Route>
 
         <Route element={<AuthRoute authentication="NotUser" />}>
@@ -28,6 +32,8 @@ const AppRouter = () => {
           <Route path="/oauth2/redirect" element={<AppRedirect />} />
           <Route path="/signup" element={<AppSignUp />} />
           <Route path="/tutorial" element={<TutorialPage />} />
+          <Route path="/yourstamp" element={<StampTest />} />
+          <Route path="/yourstamp/result" element={<StampTestResult />} />
         </Route>
         <Route path="/*" element={<AppNotFound />} />
       </Routes>
