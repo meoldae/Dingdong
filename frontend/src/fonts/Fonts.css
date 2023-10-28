@@ -34,18 +34,6 @@
   src: url("./HandWrite-DaHaeng.ttf");
 }
 
-@font-face {
-  font-family: Gangwon-Bold;
-  font-style: normal;
-  src: url("./Gangwon-Bold.ttf");
-}
-
-@font-face {
-  font-family: Gangwon-Light;
-  font-style: normal;
-  src: url("./Gangwon-Light.ttf");
-}
-
 body {
   font-family: Pretendard-Medium;
 }
