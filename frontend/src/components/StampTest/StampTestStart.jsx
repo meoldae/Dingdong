@@ -7,14 +7,20 @@ function StampTestStart(props) {
     <div className={styles.Container}>
       <img
         src={"assets/images/stamp_start.svg"}
-        style={{ width: "250px", height: "300px", marginBottom: "15px" }}
+        style={{
+          width: "250px",
+          height: "300px",
+          marginBottom: "15px",
+          marginTop: "115px",
+        }}
       />
-      <p>당신에게 어울리는 우표를 찾아보세요.</p>
-      <div onClick={props.onTestModeHanlder}>
-        <p>시작</p>
+      <div className={styles.ContentContainer}>
+        <p>당신에게 어울리는</p> <p>우표를 찾아보세요.</p>
+      </div>
+      <div onClick={props.onTestModeHanlder} className={styles.StartButton}>
+        시작
       </div>
       <div>
-        <p>테스트 공유하기</p>
         <SharingModalList shareMode={"start"} />
       </div>
     </div>
