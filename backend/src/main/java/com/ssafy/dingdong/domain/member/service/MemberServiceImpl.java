@@ -87,4 +87,10 @@ public class MemberServiceImpl implements MemberService {
 		);
 		findMember.exit();
 	}
+
+	@Override
+	public boolean getMemberByNickname(String nickname) {
+		log.info("nickname {} , ", nickname);
+		return !memberRepository.findByNickname(nickname).isPresent();
+	}
 }

@@ -79,4 +79,12 @@ public interface MemberSwagger {
 	)
 	@Operation(summary = "회원 탈퇴", description = "회원 정보를 논리적으로 삭제합니다.")
 	CommonResponse deleteMember(Authentication authentication);
+
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "요청에 성공했습니다."),
+		@ApiResponse(responseCode = "400", description = "예외가 발생하였습니다.")
+	}
+	)
+	@Operation(summary = "닉네임 중복 검사", description = "닉네임이 중복인지 검사합니다.")
+	CommonResponse nicknameIsUnique(@PathVariable String nickname);
 }

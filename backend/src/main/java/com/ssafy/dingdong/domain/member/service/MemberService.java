@@ -21,4 +21,6 @@ public interface MemberService {
 	void logout(String memberId);
 
 	void deleteMember(String memberId);
+
+	boolean getMemberByNickname(String nickname);
 }

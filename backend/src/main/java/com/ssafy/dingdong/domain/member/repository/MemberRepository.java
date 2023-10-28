@@ -20,4 +20,9 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 		 + "  FROM Member m"
 		 + " WHERE m.memberId = :memberId ")
 	Optional<String> getNicknameByMemberId(@Param("memberId") UUID memberId);
+
+	@Query("SELECT m "
+		 + "  FROM Member m "
+		 + " WHERE m.nickname = :nickname")
+	Optional<Member> findByNickname(@Param("nickname") String nickname);
 }

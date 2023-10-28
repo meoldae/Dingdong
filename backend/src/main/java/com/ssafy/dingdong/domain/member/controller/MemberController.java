@@ -2,6 +2,7 @@ package com.ssafy.dingdong.domain.member.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -81,4 +82,16 @@ public class MemberController implements MemberSwagger {
 		memberService.deleteMember(authentication.getName());
 		return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
 	}
+
+	@Override
+	@GetMapping("/check/{nickname}")
+	public CommonResponse nicknameIsUnique(@PathVariable String nickname) {
+		boolean result = memberService.getMemberByNickname(nickname);
+		if (result) {
+			return responseService.successResponse(ResponseStatus.NICKNAME_IS_UNIQUE);
+		}else {
+			return responseService.successResponse(ResponseStatus.NICKNAME_IS_DUPLICATED);
+		}
+	}
+
 }
