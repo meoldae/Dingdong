@@ -20,4 +20,6 @@
 .Question {
   width: 195px;
   text-align: center;
+  margin-top: 75px;
+  font-size: 28px;
 }
