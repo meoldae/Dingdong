@@ -45,15 +45,39 @@
   transform: rotate(45deg);
 }
 
-.letterContent {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.letterToUser {
   width: 100%;
-  height: 60%;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  font-family: "HandWrite-DaHaeng";
+  font-size: 35px;
 }
 
-.sendUserName {
-  position: absolute;
-  bottom: 0;
+.letterContent {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  font-family: "HandWrite-DaHaeng";
+  font-size: 25px;
+}
+
+.footerContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: "HandWrite-DaHaeng";
+  align-items: center;
+  margin-top: 15px;
+}
+
+.report {
+  font-size: 20px;
+}
+
+.FromUser {
+  font-size: 35px;
 }
