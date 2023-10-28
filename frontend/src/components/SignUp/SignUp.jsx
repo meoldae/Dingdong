@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import style from "./SignUp.module.css"
+import styles from "./SignUp.module.css"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
@@ -87,7 +87,7 @@ const SignUp = () => {
 
   return (
     <div>
-      <span style={{ color: "#049463" }}>프로필 </span>
+      <span style={{ color: "#F2CBE4" }}>프로필 </span>
       <span style={{ color: "#2C2C2C" }}>선택</span>
 
       <Slider {...settings}>
