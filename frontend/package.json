@@ -18,7 +18,6 @@
     "html2canvas": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-modal": "^3.16.1",
     "react-router-dom": "^6.17.0",
     "react-slick": "^0.29.0",
     "react-swipeable": "^7.0.1",
