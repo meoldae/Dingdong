@@ -5,8 +5,11 @@ import styles from "./StampTestStart.module.css"
 function StampTestStart(props) {
   return (
     <div className={styles.Container}>
-      <img src={"assets/images/stamp_start.svg"} />
-      <p>{`당신에게 어울리는 우표를 찾아보세요.`}</p>
+      <img
+        src={"assets/images/stamp_start.svg"}
+        style={{ width: "250px", height: "300px" }}
+      />
+      <p className={styles.dumy}>당신에게 어울리는 우표를 찾아보세요.</p>
       <div onClick={props.onTestModeHanlder}>
         <p>시작</p>
       </div>
