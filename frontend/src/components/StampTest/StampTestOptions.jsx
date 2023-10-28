@@ -55,6 +55,7 @@ const StampTestOptions = (props) => {
             )
           })}
         </div>
+        <div className={styles.FooterNumber}>{opsNum + 1}/9</div>
       </div>
     </div>
   )
