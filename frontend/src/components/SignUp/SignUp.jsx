@@ -109,15 +109,12 @@ const SignUp = () => {
       </div>
 
       <div className={styles.nicknameContainer}>
-        <div>닉네임: </div>
-        <div>
-          <input
-            type="text"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            placeholder="닉네임을 입력해주세요"
-          />
-        </div>
+        <input
+          type="text"
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
+          placeholder="닉네임을 입력해주세요"
+        />
       </div>
 
       <div>
