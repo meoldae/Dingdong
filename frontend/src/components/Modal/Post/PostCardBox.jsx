@@ -40,15 +40,15 @@ const PostCardBox = (props) => {
   ]
 
   const writingPadCards = [
-    { src: "writingPad.svg" },
-    { src: "writingPad.svg" },
-    { src: "writingPad.svg" },
-    { src: "writingPad.svg" },
-    { src: "writingPad.svg" },
-    { src: "writingPad.svg" },
-    { src: "writingPad.svg" },
-    { src: "writingPad.svg" },
-    { src: "writingPad.svg" },
+    { src: "writingPad.svg", id: 1, check: true },
+    { src: "writingPad.svg", id: 2, check: false },
+    { src: "writingPad.svg", id: 3, check: false },
+    { src: "writingPad.svg", id: 4, check: true },
+    { src: "writingPad.svg", id: 5, check: false },
+    { src: "writingPad.svg", id: 6, check: false },
+    { src: "writingPad.svg", id: 7, check: true },
+    { src: "writingPad.svg", id: 8, check: false },
+    { src: "writingPad.svg", id: 9, check: true },
   ]
 
   return (
@@ -89,16 +89,12 @@ const PostCardBox = (props) => {
             postCheck={handlerChecker()}
           >
             <div className={styles.postCardContainer}>
-              {writingPadCards.map((card, idx) => (
+              {writingPadCards.map((card) => (
                 <img
-                  key={idx}
-                  className={
-                    selectedCard?.src === card.src
-                      ? `${styles.postCard} ${styles.selected}`
-                      : styles.postCard
-                  }
+                  key={card.id}
+                  className={styles.postCard}
                   src={`assets/icons/${card.src}`}
-                  onClick={() => handleCardClick(idx, card.src)}
+                  onClick={() => handleCardClick(card.id, card.src)}
                 />
               ))}
             </div>
