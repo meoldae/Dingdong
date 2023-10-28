@@ -18,9 +18,9 @@ import OtherFooter from "../../components/Footer/OtherFooter"
 import NeighborRequest from "../../components/Header/NeighborRequest"
 import styles from "./RoomPage.module.css"
 function RoomPage() {
-  const [editMode, setEditMode] = useRecoilState(buildModeState)
-  const [isMyRoom, setIsMyRoom] = useState(false)
-
+  const [editMode, setEditMode] = useRecoilState(buildModeState);
+  const [isMyRoom, setIsMyRoom] = useState(false);
+  const [drag,setDrag] = useRecoilState(draggedItemState);
   useEffect(() => {
     fetchRoomData().then((response) => {
       if (response.data.isMyRoom) {
@@ -37,14 +37,17 @@ function RoomPage() {
       <div
         className={styles.button}
         onClick={() => {
-          setEditMode(!editMode)
+          setEditMode(!editMode);
+          if(drag){
+            setDrag(null);
+          }
         }}
       >
         {editMode && <span>편집모드</span>}
         {!editMode && <span>관광모드</span>}
       </div>
 
-      <Canvas shadows camera={{ position: [8, 3, 8], fov: 70 }}>
+      <Canvas shadows camera={{ position: [8, 5, 8], fov: 90 }}>
         <color attach="background" args={["skyblue"]} />
         <Suspense
           fallback={
