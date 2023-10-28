@@ -51,7 +51,7 @@ const CustomCamera = () => {
           characterPosition[2] + defaultCameraPosition[2],
         ]
 
-        const factor = 0.02 // 카메라 전환 속도 (값 : 0 ~ 1, 1로 갈수록 빠름)
+        const factor = 0.04 // 카메라 전환 속도 (값 : 0 ~ 1, 1로 갈수록 빠름)
         currentPos.current[0] = lerp(
           currentPos.current[0],
           targetPos.current[0],

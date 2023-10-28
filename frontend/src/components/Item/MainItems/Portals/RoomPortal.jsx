@@ -32,8 +32,8 @@ const RoomPortal = () => {
   const setRoomPortalVisible = useSetRecoilState(RoomPortalVisibleAtom)
 
   // 카메라 각도 조절
-  const adjustedAngle = [13, 4, 2]
-  const adjustedZoom = 0.25
+  const adjustedAngle = [16, 5, 1]
+  const adjustedZoom = 0.24
 
   useEffect(() => {
     // 포탈 영역 내부에 있는지 확인
