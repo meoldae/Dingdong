@@ -2,7 +2,7 @@ import React from "react"
 import SharingModalList from "../Modal/Sharing/SharingModalList"
 import styles from "./StampTestStart.module.css"
 
-function StampTestStart(props) {
+const StampTestStart = (props) => {
   return (
     <div className={styles.Container}>
       <img
