@@ -92,7 +92,7 @@ const SignUp = () => {
         <span style={{ color: "#2C2C2C" }}>선택</span>
       </div>
 
-      <Slider {...settings}>
+      {/* <Slider {...settings}>
         {charactersImages.map((charImg, idx) => (
           <img
             key={idx}
@@ -102,9 +102,13 @@ const SignUp = () => {
             onClick={() => setAvatar(charImg)}
           />
         ))}
-      </Slider>
+      </Slider> */}
 
-      <div>
+      <div className={styles.characterContainer}>
+        <div className={styles.charactersImages}>더미 캐릭터</div>
+      </div>
+
+      <div className={styles.nicknameContainer}>
         <div>닉네임: </div>
         <div>
           <input
