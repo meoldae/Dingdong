@@ -10,25 +10,25 @@ const PostBox = () => {
       PostDefaultTitle={"편지함"}
     >
       <div className={styles.letterBox}>
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
-        <Letter letterTitle={"유저"} />
+        <Letter letterTitle={"유저"} checkRead={true} />
+        <Letter letterTitle={"유저"} checkRead={false} />
+        <Letter letterTitle={"유저"} checkRead={true} />
+        <Letter letterTitle={"유저"} checkRead={true} />
+        <Letter letterTitle={"유저"} checkRead={false} />
+        <Letter letterTitle={"유저"} checkRead={false} />
+        <Letter letterTitle={"유저"} checkRead={true} />
+        <Letter letterTitle={"유저"} checkRead={true} />
+        <Letter letterTitle={"유저"} checkRead={false} />
+        <Letter letterTitle={"유저"} checkRead={true} />
+        <Letter letterTitle={"유저"} checkRead={false} />
+        <Letter letterTitle={"유저"} checkRead={true} />
+        <Letter letterTitle={"유저"} checkRead={false} />
+        <Letter letterTitle={"유저"} checkRead={true} />
+        <Letter letterTitle={"유저"} checkRead={false} />
+        <Letter letterTitle={"유저"} checkRead={true} />
+        <Letter letterTitle={"유저"} checkRead={true} />
+        <Letter letterTitle={"유저"} checkRead={true} />
+        <Letter letterTitle={"유저"} checkRead={false} />
       </div>
     </PostDefaultModal>
   )
