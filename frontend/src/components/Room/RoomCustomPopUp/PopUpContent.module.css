@@ -1,0 +1,33 @@
+.furnitureContainer {
+    z-index: 300;
+    border: 3px solid black;
+    height: 98%;
+    overflow-y: scroll;
+}
+
+/* 웹킷 브라우저의 스크롤바 스타일 수정 */
+.furnitureContainer::-webkit-scrollbar {
+    height: 10px;
+    width: 5px; 
+}
+
+.furnitureContainer::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+.furnitureContainer::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+.furnitureContainer::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+
+.endPoint {
+    z-index: 20000;
+
+    width: 100%;
+    height: 10px;
+    bottom: 0;
+}
