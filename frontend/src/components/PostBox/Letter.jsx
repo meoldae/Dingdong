@@ -1,5 +1,5 @@
 import styles from "./Letter.module.css"
-const Letter = ({ letterTitle }) => {
+const Letter = ({ letterTitle, checkRead }) => {
   return (
     <div className={styles.letterContainer}>
       <img src="assets/icons/writingPad.svg" alt="" />
