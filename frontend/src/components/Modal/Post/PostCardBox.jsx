@@ -40,15 +40,15 @@ const PostCardBox = (props) => {
   ]
 
   const writingPadCards = [
-    { src: "writingPad.svg", id: 1, check: true },
-    { src: "writingPad.svg", id: 2, check: false },
-    { src: "writingPad.svg", id: 3, check: false },
-    { src: "writingPad.svg", id: 4, check: true },
-    { src: "writingPad.svg", id: 5, check: false },
-    { src: "writingPad.svg", id: 6, check: false },
-    { src: "writingPad.svg", id: 7, check: true },
-    { src: "writingPad.svg", id: 8, check: false },
-    { src: "writingPad.svg", id: 9, check: true },
+    { id: 1, check: true },
+    { id: 2, check: false },
+    { id: 3, check: false },
+    { id: 4, check: true },
+    { id: 5, check: false },
+    { id: 6, check: false },
+    { id: 7, check: true },
+    { id: 8, check: false },
+    { id: 9, check: true },
   ]
 
   return (
@@ -93,8 +93,10 @@ const PostCardBox = (props) => {
                 <img
                   key={card.id}
                   className={styles.postCard}
-                  src={`assets/icons/${card.src}`}
-                  onClick={() => handleCardClick(card.id, card.src)}
+                  src={"assets/icons/writingPad.svg"}
+                  onClick={() =>
+                    handleCardClick(card.id, "assets/icons/writingPad.svg")
+                  }
                 />
               ))}
             </div>
