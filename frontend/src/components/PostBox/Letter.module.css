@@ -5,6 +5,10 @@
   margin: 10px;
 }
 
+.noRead {
+  position: absolute;
+}
+
 .letterTitle {
   font-size: 20px;
 }
