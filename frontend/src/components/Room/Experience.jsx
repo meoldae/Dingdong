@@ -244,42 +244,35 @@ const Experience = () => {
   // 카메라 관련 로직
   const controls = useRef();
   const state = useThree((state) => state);
-
   // 편집 모드일 때 카메라 고정
   useEffect(() => {
     if (buildMode) {
-      state.camera.position.set(8, 5, 8);
-      state.camera.fov = 90;
-      state.camera.lookAt(0, 0, 0);
+      state.camera.position.set(20, 10, 10);
       if (controls.current) {
         controls.current.target.set(0, 0, 0);
         controls.current.update();
       }
     } else {
-      state.camera.position.set(8, 5, 8);
-      state.camera.fov = 90;
-      state.camera.lookAt(0, 0, 0);
-      if (controls.current) {
-        controls.current.target.set(0, 0, 0);
-        controls.current.update();
-      }
+      state.camera.position.set(20, 10, 10);
+      state.camera.focus=20;
     }
   }, [buildMode]);
-
   // 일반 모드일 때 카메라 회전 후 원상복귀
   const animateCameraPosition = () => {
     if (buildMode) return;
 
     gsap.to(state.camera.position, {
       duration: 0.5,
-      x: 8,
-      y: 5,
-      z: 8,
+      x: 20,
+      y: 10,
+      z: 10,
       onUpdate: () => state.camera.updateProjectionMatrix(),
     });
-    setTimeout(() => {
-      state.camera.position.set(8, 5, 8);
-    }, 50);
+    gsap.to(state.camera,{
+      fov:45,
+      duration:0.5,
+      onUpdate: () => state.camera.updateProjectionMatrix(),
+    })
   };
 
   return (

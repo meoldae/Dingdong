@@ -1,9 +1,9 @@
-import { Canvas } from "@react-three/fiber"
-import { Html } from "@react-three/drei"
-import Experience from "../../components/Room/Experience"
-import { fetchRoomData } from "../../api/User"
-import { Suspense, useState, useEffect } from "react"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { Canvas } from "@react-three/fiber";
+import { Html, PerspectiveCamera } from "@react-three/drei";
+import Experience from "../../components/Room/Experience";
+import { fetchRoomData } from "../../api/User";
+import { Suspense, useState, useEffect, useRef } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   ItemRotateState,
   ItemsState,
@@ -29,21 +29,21 @@ function RoomPage() {
   useEffect(() => {
     fetchRoomData().then((response) => {
       if (response.data.isMyRoom) {
-        setIsMyRoom(true)
+        setIsMyRoom(true);
       }
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <div className={styles.container}>
       <Header />
-      {isMyRoom ? <Share /> : <NeighborRequest />}
+      {isMyRoom ? <NeighborRequest /> : <Share canvasRef={canvasRef}/>}
 
       <div
         className={styles.button}
         onClick={() => {
           setEditMode(!editMode);
-          if(drag){
+          if (drag) {
             setDrag(null);
           }
         }}
@@ -52,7 +52,12 @@ function RoomPage() {
         {!editMode && <span>관광모드</span>}
       </div>
 
-      <Canvas shadows camera={{ position: [8, 5, 8], fov: 90 }}>
+      <Canvas
+        shadows
+        gl={{ preserveDrawingBuffer: true, antialias: true }}
+        camera={{ fov: 45 }}
+        ref={canvasRef}
+      >
         <color attach="background" args={["skyblue"]} />
         <Suspense
           fallback={
@@ -68,7 +73,7 @@ function RoomPage() {
       {/* {popUpStatus ? <PopUp/> : '' } */}
       <PopUp/>
     </div>
-  )
+  );
 }
 
-export default RoomPage
+export default RoomPage;
