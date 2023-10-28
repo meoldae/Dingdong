@@ -27,18 +27,22 @@
 }
 
 .AnswerContainer {
-  margin-top: 60px;
+  position: absolute;
+  top: 200px;
 }
 
 .Answer {
-  width: 280px;
+  width: 240px;
   height: 75px;
   background: #f1c4e1;
   border-radius: 15px;
-  text-align: center;
-  line-height: 75px;
   font-size: 24px;
   margin-bottom: 10px;
+  padding: 0px 20px 0px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .FooterNumber {
