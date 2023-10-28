@@ -119,7 +119,9 @@ const SignUp = () => {
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
           placeholder="닉네임을 입력해주세요"
+          className={styles.nicknameInput}
         />
+        <div>중복확인</div>
       </div>
 
       <div className={styles.doSignUpContainer}>
