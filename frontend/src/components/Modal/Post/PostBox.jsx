@@ -8,6 +8,7 @@ const PostBox = () => {
     <PostDefaultModal
       className={styles.postBoxContainer}
       PostDefaultTitle={"편지함"}
+      postCheck={false}
     >
       <div className={styles.letterBox}>
         <Letter letterTitle={"유저"} checkRead={true} />
