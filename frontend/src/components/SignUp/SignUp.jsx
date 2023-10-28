@@ -118,7 +118,7 @@ const SignUp = () => {
       </div>
 
       <div>
-        <button onClick={doSignUp}>회원가입</button>
+        <div onClick={doSignUp}>회원가입</div>
       </div>
     </div>
   )
