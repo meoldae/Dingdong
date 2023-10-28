@@ -6,3 +6,13 @@
   align-items: center;
   font-family: "HandWrite-DaHaeng";
 }
+
+.ContentContainer {
+  width: 320px;
+  height: 530px;
+  background: #fff;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

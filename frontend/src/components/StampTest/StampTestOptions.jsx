@@ -35,18 +35,21 @@ const StampTestOptions = (props) => {
 
   return (
     <div className={styles.Container}>
-      <img src={"assets/images/stamp_option.svg"} />
-      <div>
-        <p>{Questions[opsNum].question}</p>
-      </div>
-      <div>
-        {Questions[opsNum].answers.map((answer) => {
-          return (
-            <div key={answer.id} id={answer.type} onClick={onNextHandler}>
-              <p>{answer.content}</p>
-            </div>
-          )
-        })}
+      <img
+        src={"assets/images/stamp_option.svg"}
+        style={{ marginTop: "95px" }}
+      />
+      <div className={styles.ContentContainer}>
+        <div>{Questions[opsNum].question}</div>
+        <div>
+          {Questions[opsNum].answers.map((answer) => {
+            return (
+              <div key={answer.id} id={answer.type} onClick={onNextHandler}>
+                <p>{answer.content}</p>
+              </div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )
