@@ -1,12 +1,19 @@
 import styles from "./Letter.module.css"
 import { useSetRecoilState } from "recoil"
-import { isPostBoxVisibleAtom } from "../../atom/PostAtom"
+import {
+  isPostBoxVisibleAtom,
+  isReceiveLetterVisibleAtom,
+} from "../../atom/PostAtom"
 
 const Letter = ({ letterTitle, checkRead }) => {
   const setIsPostBoxVisible = useSetRecoilState(isPostBoxVisibleAtom)
+  const setIsReceiveLetterVisible = useSetRecoilState(
+    isReceiveLetterVisibleAtom
+  )
 
   const openReceiveLetter = () => {
     setIsPostBoxVisible(false)
+    setIsReceiveLetterVisible(true)
   }
 
   return (
