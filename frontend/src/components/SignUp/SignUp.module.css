@@ -1,16 +1,25 @@
 .arrow {
-    position: absolute;
-    top: 50%;
-    z-index: 1;
-    font-size: 30px;
-    cursor: pointer;
-    user-select: none;
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  font-size: 30px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .next {
-    right: 10px;
+  right: 10px;
 }
 
 .prev {
-    left: 10px;
+  left: 10px;
+}
+
+.Container {
+  margin: 0px 40px 0px 40px;
+}
+
+.titleContainer {
+  font-family: Pretendard-Bold;
+  font-size: 40px;
 }
