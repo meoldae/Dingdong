@@ -1,15 +1,9 @@
 package com.ssafy.dingdong.domain.report.service;
 
-import com.ssafy.dingdong.domain.letter.dto.response.LetterResponseDto;
-import com.ssafy.dingdong.domain.letter.repository.LetterRepository;
 import com.ssafy.dingdong.domain.letter.service.LetterService;
-import com.ssafy.dingdong.domain.member.entity.Member;
-import com.ssafy.dingdong.domain.member.repository.MemberRepository;
 import com.ssafy.dingdong.domain.report.entity.Report;
 import com.ssafy.dingdong.domain.report.enums.ReportType;
 import com.ssafy.dingdong.domain.report.repository.ReportRepository;
-import com.ssafy.dingdong.global.exception.CustomException;
-import com.ssafy.dingdong.global.exception.ExceptionStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -17,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Log4j2
 @Service
 @RequiredArgsConstructor
-public class ReportServiceImpl implements ReportService{
+public class ReportServiceImpl implements ReportServiceService {
 
     private final ReportRepository reportRepository;
     private final LetterService letterService;

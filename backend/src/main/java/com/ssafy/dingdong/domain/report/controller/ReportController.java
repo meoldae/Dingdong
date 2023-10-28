@@ -1,8 +1,7 @@
 package com.ssafy.dingdong.domain.report.controller;
 
-import com.ssafy.dingdong.domain.report.service.ReportService;
+import com.ssafy.dingdong.domain.report.service.ReportServiceService;
 import com.ssafy.dingdong.global.response.CommonResponse;
-import com.ssafy.dingdong.global.response.DataResponse;
 import com.ssafy.dingdong.global.response.ResponseService;
 import com.ssafy.dingdong.global.response.ResponseStatus;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ReportController implements ReportSwagger{
 
-    private final ReportService reportService;
+    private final ReportServiceService reportService;
     private final ResponseService responseService;
 
 
