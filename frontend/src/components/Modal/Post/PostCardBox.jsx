@@ -39,71 +39,31 @@ const PostCardBox = (props) => {
     { src: "thunder.png", comment: "에너지를 전달해보세요!" },
   ]
 
-  const writingPadCards = [
-    { id: 1, check: true },
-    { id: 2, check: false },
-    { id: 3, check: false },
-    { id: 4, check: true },
-    { id: 5, check: false },
-    { id: 6, check: false },
-    { id: 7, check: true },
-    { id: 8, check: false },
-    { id: 9, check: true },
-  ]
-
   return (
-    <>
-      {handlerChecker() ? (
-        <PostDefaultModal
-          PostDefaultTitle={"우표 선택"}
-          cancelClick={props.cancelClick}
-          postCheck={handlerChecker()}
-        >
-          <div className={styles.postCardContainer}>
-            {cards.map((card, idx) => (
-              <img
-                key={card.src}
-                className={
-                  selectedCard?.src === card.src
-                    ? `${styles.postCard} ${styles.selected}`
-                    : styles.postCard
-                }
-                src={`assets/images/post/${card.src}`}
-                onClick={() => handleCardClick(idx, card.src, card.comment)}
-              />
-            ))}
-          </div>
-          <div className={styles.postCardComment}>{cardComment}</div>
-          <div className={styles.selectBtn}>
-            <DefaultBtn
-              btnName={"선택하기"}
-              onClick={handleSelectButtonClick}
-            />
-          </div>
-        </PostDefaultModal>
-      ) : (
-        <>
-          <PostDefaultModal
-            PostDefaultTitle={"편지함"}
-            cancelClick={props.cancelClick}
-            postCheck={handlerChecker()}
-          >
-            <div className={styles.postCardContainer}>
-              {writingPadCards.map((card) => (
-                <img
-                  key={card.id}
-                  className={styles.postCard}
-                  src={"assets/icons/writingPad.svg"}
-                  onClick={() =>
-                    handleCardClick(card.id, "assets/icons/writingPad.svg")
-                  }
-                />
-              ))}
-            </div>
-          </PostDefaultModal>
-        </>
-      )}
-    </>
+    <PostDefaultModal
+      PostDefaultTitle={"우표 선택"}
+      cancelClick={props.cancelClick}
+      postCheck={handlerChecker()}
+    >
+      <div className={styles.postCardContainer}>
+        {cards.map((card, idx) => (
+          <img
+            key={card.src}
+            className={
+              selectedCard?.src === card.src
+                ? `${styles.postCard} ${styles.selected}`
+                : styles.postCard
+            }
+            src={`assets/images/post/${card.src}`}
+            onClick={() => handleCardClick(idx, card.src, card.comment)}
+          />
+        ))}
+      </div>
+      <div className={styles.postCardComment}>{cardComment}</div>
+      <div className={styles.selectBtn}>
+        <DefaultBtn btnName={"선택하기"} onClick={handleSelectButtonClick} />
+      </div>
+    </PostDefaultModal>
   )
 }
 
