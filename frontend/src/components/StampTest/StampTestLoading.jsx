@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
-function StampTestLoading(props) {
+const StampTestLoading = (props) => {
   const navigate = useNavigate()
 
   useEffect(() => {
