@@ -7,6 +7,15 @@
   font-family: "HandWrite-DaHaeng";
 }
 
+.PostImage {
+  width: 320px;
+  height: 420px;
+  background: #fff;
+  border-radius: 20px;
+  margin-top: 90px;
+  text-align: center;
+}
+
 .ButtonContainer {
   margin-top: 10px;
   margin-bottom: 30px;
