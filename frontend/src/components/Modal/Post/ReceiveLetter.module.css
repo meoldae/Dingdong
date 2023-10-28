@@ -2,24 +2,34 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 */
-  z-index: 2;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-.recevieLetterContainer {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.receiveLetterContainer {
+  width: 35vw;
+  height: 70vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 400px;
-  min-width: 80%;
-  padding: 15px;
+  justify-content: space-between;
+  z-index: 3;
+}
+
+.receiveLetterBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 300px;
+  height: 80%;
   background: #ffe1f5;
+  padding: 20px;
+  margin-bottom: 10px;
 }
 
 .xmarkImg {
