@@ -7,9 +7,9 @@ function StampTestStart(props) {
     <div className={styles.Container}>
       <img
         src={"assets/images/stamp_start.svg"}
-        style={{ width: "250px", height: "300px" }}
+        style={{ width: "250px", height: "300px", marginBottom: "15px" }}
       />
-      <p className={styles.dumy}>당신에게 어울리는 우표를 찾아보세요.</p>
+      <p>당신에게 어울리는 우표를 찾아보세요.</p>
       <div onClick={props.onTestModeHanlder}>
         <p>시작</p>
       </div>
