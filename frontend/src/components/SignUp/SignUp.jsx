@@ -117,7 +117,7 @@ const SignUp = () => {
         />
       </div>
 
-      <div>
+      <div className={styles.doSignUpContainer}>
         <div onClick={doSignUp}>회원가입</div>
       </div>
     </div>
