@@ -1,9 +1,14 @@
-import React, { useEffect } from 'react';
-import SharingModalListItem from './SharingModalListItem';
-import { kakao, twitter, urlCopy } from '../../../assets/images/sharing/sharingIcon';
+import React, { useEffect } from "react";
+import SharingModalListItem from "./SharingModalListItem";
+import {
+  kakao,
+  twitter,
+  urlCopy,
+} from "../../../assets/images/sharing/sharingIcon";
 // import { useRecoilValue } from 'recoil';
 // import { userNicknameAtom } from '../../atoms/userAtoms';
-
+import styles from "./Share.module.css";
+import html2canvas from "html2canvas";
 function SharingModalList(props) {
   // const userNickname = useRecoilValue(userNicknameAtom);
   const url = encodeURI(window.location.href);
@@ -13,11 +18,10 @@ function SharingModalList(props) {
       navigator.clipboard
         .writeText(window.location.href)
         .then(() => {
-          if (props.shareMode === 'board') {
-            alert(
-              // `${userNickname}님의 편지 수신함이 복사되었습니다.\n친구들에게 공유해보세요!`
-            );
-          } else if (props.shareMode === 'start') {
+          if (props.shareMode === "board") {
+            alert();
+            // `${userNickname}님의 편지 수신함이 복사되었습니다.\n친구들에게 공유해보세요!`
+          } else if (props.shareMode === "start") {
             alert(
               `우표 테스트 주소가 복사되었습니다.\n친구들에게 공유해보세요!`
             );
@@ -43,45 +47,46 @@ function SharingModalList(props) {
       textarea.select();
       document.execCommand("copy");
       document.body.removeChild(textarea);
-      if (props.shareMode === 'board') {
-        alert(
-          // `${userNickname}님의 편지 수신함이 복사되었습니다.\n친구들에게 공유해보세요!`
-        );
-      } else if (props.shareMode === 'start') {
-        alert(
-          `테스트 주소가 복사되었습니다.\n친구들에게 공유해보세요!`
-        );
+      if (props.shareMode === "board") {
+        alert();
+        // `${userNickname}님의 편지 수신함이 복사되었습니다.\n친구들에게 공유해보세요!`
+      } else if (props.shareMode === "start") {
+        alert(`테스트 주소가 복사되었습니다.\n친구들에게 공유해보세요!`);
       } else {
-        alert(
-          `테스트 결과가 복사되었습니다.\n친구들에게 공유해보세요!`
-        );
+        alert(`테스트 결과가 복사되었습니다.\n친구들에게 공유해보세요!`);
       }
     }
-    if (props.shareMode === 'board') {
+    if (props.shareMode === "board") {
       props.setSharingAtom(false);
     }
   };
 
   const shareTwitter = (e) => {
-    if (props.shareMode === 'board') {
-      const text = '우리집에 편지를 보내주세요!';
-      window.open("https://twitter.com/intent/tweet?text=" + text + "&url=" + url);
+    if (props.shareMode === "board") {
+      const text = "우리집에 편지를 보내주세요!";
+      window.open(
+        "https://twitter.com/intent/tweet?text=" + text + "&url=" + url
+      );
       props.setSharingAtom(false);
-    } else if (props.shareMode === 'start') {
-      const text = '우표 유형 테스트';
-      window.open("https://twitter.com/intent/tweet?text=" + text + "&url=" + url);
+    } else if (props.shareMode === "start") {
+      const text = "우표 유형 테스트";
+      window.open(
+        "https://twitter.com/intent/tweet?text=" + text + "&url=" + url
+      );
     } else {
-      const text = '나에게 어울리는 우표 유형은?';
-      window.open("https://twitter.com/intent/tweet?text=" + text + "&url=" + url);
+      const text = "나에게 어울리는 우표 유형은?";
+      window.open(
+        "https://twitter.com/intent/tweet?text=" + text + "&url=" + url
+      );
     }
-  }
+  };
 
   const shareKakao = (e) => {
-    if (props.shareMode === 'board') {
+    if (props.shareMode === "board") {
       window.Kakao.Share.sendDefault({
         //... the rest of the function remains the same.
       });
-    } else if (props.shareMode === 'start') { 
+    } else if (props.shareMode === "start") {
       window.Kakao.Share.sendDefault({
         //... the rest of the function remains the same.
       });
@@ -90,18 +95,41 @@ function SharingModalList(props) {
         //... the rest of the function remains the same.
       });
     }
-  }
+  };
+  const saveImg = (e) => {
+    const element = document.getElementById("shareModal");
 
+    html2canvas(element).then((canvas) => {
+      const saveImg = (uri, filename) => {
+        let link = document.createElement("a");
+
+        document.body.appendChild(link);
+
+        link.href = uri;
+        link.download = filename;
+        link.click();
+
+        document.body.removeChild(link);
+      };
+      saveImg(canvas.toDataURL("image/png"), "ding_dong.png");
+    });
+  };
   const sharetype = [
-    {icon : urlCopy, name: 'URL복사', click: shareUrl}, 
-    {icon : twitter, name: '트위터', click: shareTwitter},
-    {icon : kakao, name: '카카오톡', click: shareKakao},
+    { name: "저장하기", click: saveImg },
+    { icon: urlCopy, name: "URL복사", click: shareUrl },
+    { icon: twitter, name: "트위터", click: shareTwitter },
+    { icon: kakao, name: "카카오톡", click: shareKakao },
   ];
 
   return (
-    <div className='flex'>
+    <div className={styles.share}>
       {sharetype.map((share) => (
-        <SharingModalListItem key={share.name} icon={share.icon} name={share.name} click={share.click}/>
+        <SharingModalListItem
+          key={share.name}
+          icon={share.icon}
+          name={share.name}
+          click={share.click}
+        />
       ))}
     </div>
   );
