@@ -41,11 +41,16 @@ const StampTestOptions = (props) => {
       />
       <div className={styles.ContentContainer}>
         <div className={styles.Question}>{Questions[opsNum].question}</div>
-        <div>
+        <div className={styles.AnswerContainer}>
           {Questions[opsNum].answers.map((answer) => {
             return (
-              <div key={answer.id} id={answer.type} onClick={onNextHandler}>
-                <p>{answer.content}</p>
+              <div
+                key={answer.id}
+                id={answer.type}
+                onClick={onNextHandler}
+                className={styles.Answer}
+              >
+                {answer.content}
               </div>
             )
           })}

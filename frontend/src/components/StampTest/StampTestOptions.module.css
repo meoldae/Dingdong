@@ -24,3 +24,18 @@
   margin-top: 75px;
   font-size: 28px;
 }
+
+.AnswerContainer {
+  margin-top: 60px;
+}
+
+.Answer {
+  width: 280px;
+  height: 75px;
+  background: #f1c4e1;
+  border-radius: 15px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
