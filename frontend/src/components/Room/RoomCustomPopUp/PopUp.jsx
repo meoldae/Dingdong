@@ -1,13 +1,13 @@
 import styles from "./PopUp.module.css";
 import PopUpContent from "./PopUpContent";
-import React, { useState } from "react";
-import { useSetRecoilState } from "recoil";
+import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import { popUpStatusAtom } from "../../../atom/RoomCustomTabAtom";
 
 const PopUp = () => {
 
     const [tabStatus, setTabStatus] = useState(0);
-    const setPopUpStatus = useSetRecoilState(popUpStatusAtom);
+    const [popUpStatus, setPopUpStatus] = useRecoilState(popUpStatusAtom);
 
     const changeMenu = (image, menuIndex) =>{
         setTabStatus(menuIndex);
@@ -15,6 +15,7 @@ const PopUp = () => {
 
     const popUpClose = () => {
         setPopUpStatus(false);
+        setTabStatus(0);
     }
 
     const roomCustomSave = () => {
@@ -24,8 +25,14 @@ const PopUp = () => {
     const imagePath = '../../../../public/assets/images/roomCustom/';
     const images = ['all.png', 'furniture.png', 'carpets.png', 'wallHanging.png', 'props.png'];
 
+    useEffect(() => {
+        console.log(popUpStatus);
+        console.log("팝업 열리나요? ");
+    }, [popUpStatus])
+
     return (    
-        <div className={styles.popUpContainer}>
+        <div className={`${styles.popUpContainer} ${popUpStatus ? styles.active : styles.notActive}`}>
+        {/* <div className={`${styles.popUpContainer} ${styles.notActive}`}> */}
 
             <div className={styles.popUpClose} onClick={() => popUpClose()}> 
                 <img src="../../../../public/assets/icons/cross.svg" className={styles.closeVector} />

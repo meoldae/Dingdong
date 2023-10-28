@@ -15,6 +15,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.notActive{
+    transform: translateY(120%);
+}
+
+.active{
+    transform: translateY(0%);
 }
 
 .tabBar {

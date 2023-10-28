@@ -65,7 +65,8 @@ function RoomPage() {
         </Suspense>
       </Canvas>
       {isMyRoom ? <MyFooter /> : <OtherFooter />}
-      {popUpStatus ? <PopUp/> : '' }
+      {/* {popUpStatus ? <PopUp/> : '' } */}
+      <PopUp/>
     </div>
   )
 }
