@@ -20,9 +20,7 @@ function StampTestStart(props) {
       <div onClick={props.onTestModeHanlder} className={styles.StartButton}>
         시작
       </div>
-      <div>
-        <SharingModalList shareMode={"start"} />
-      </div>
+      <SharingModalList shareMode={"start"} />
     </div>
   )
 }
