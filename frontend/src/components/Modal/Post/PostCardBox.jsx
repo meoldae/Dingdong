@@ -20,14 +20,6 @@ const PostCardBox = (props) => {
     }
   }
 
-  const handlerChecker = () => {
-    if (props.checker === "OtherFooter") {
-      return true
-    } else {
-      return false
-    }
-  }
-
   const cards = [
     { src: "cloud.png", comment: "몽글몽글한 마음을 전달해보세요!" },
     { src: "clover.png", comment: "행운의 마음을 전달해보세요!" },
@@ -43,7 +35,7 @@ const PostCardBox = (props) => {
     <PostDefaultModal
       PostDefaultTitle={"우표 선택"}
       cancelClick={props.cancelClick}
-      postCheck={handlerChecker()}
+      postCheck={true}
     >
       <div className={styles.postCardContainer}>
         {cards.map((card, idx) => (
