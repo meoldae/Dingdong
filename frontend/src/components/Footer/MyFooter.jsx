@@ -2,9 +2,12 @@ import { useState } from "react"
 import RoomBtn from "../Button/Room/RoomBtn"
 import PostBox from "../Modal/Post/PostBox"
 import style from "./Footer.module.css"
+import { usesetRecoilState } from "recoil"
+import { isPostBoxVisibleAtom } from "../../atom/PostAtom"
 
 const MyFooter = () => {
   const [isPostBoxModalVisible, setIsPostBoxModalVisible] = useState(false)
+  const setIsPostBoxVisible = usesetRecoilState(isPostBoxVisibleAtom)
 
   const closeModal = () => {
     setIsPostBoxModalVisible(false)
@@ -12,6 +15,11 @@ const MyFooter = () => {
 
   const handleSelectButtonClick = () => {
     console.log(1)
+  }
+
+  const openPostBoxModal = () => {
+    setIsPostBoxModalVisible(true)
+    setIsPostBoxVisible(true)
   }
 
   return (
@@ -26,10 +34,7 @@ const MyFooter = () => {
           <RoomBtn img={"worldMap"} />
         </div>
         <div className={style.background}>
-          <RoomBtn
-            img={"postBox"}
-            onClick={() => setIsPostBoxModalVisible(true)}
-          />
+          <RoomBtn img={"postBox"} onClick={openPostBoxModal} />
         </div>
       </div>
       {isPostBoxModalVisible && (
