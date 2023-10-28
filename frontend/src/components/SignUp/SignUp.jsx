@@ -1,54 +1,54 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import style from "./SignUp.module.css";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { CreateUser, GetAvatarList } from "@/api/User";
+import React, { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import style from "./SignUp.module.css"
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
+import { CreateUser, GetAvatarList } from "@/api/User"
 
 const SignUp = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const [charactersData, setCharactersData] = useState([]);
-  const [avatarId, setAvatar] = useState(null);
-  const [nickname, setNickname] = useState("");
+  const [charactersData, setCharactersData] = useState([])
+  const [avatarId, setAvatar] = useState(null)
+  const [nickname, setNickname] = useState("")
 
   useEffect(() => {
     GetAvatarList(
       (response) => {
-        const avatarList = response.data.data.avatarList;
+        const avatarList = response.data.data.avatarList
         const formattedData = Object.keys(avatarList).map((key) => ({
           id: parseInt(key),
           glb: avatarList[key],
-        }));
+        }))
 
-        setCharactersData(formattedData);
-        setAvatar(formattedData[0].id);
+        setCharactersData(formattedData)
+        setAvatar(formattedData[0].id)
       },
       (error) => {
-        console.error("Error fetching avatars:", error);
+        console.error("Error fetching avatars:", error)
       }
-    );
-  }, []);
+    )
+  }, [])
 
-  const charactersImages = charactersData.map((charData) => charData.glb);
-  const memberId = new URLSearchParams(window.location.search).get("memberId");
+  const charactersImages = charactersData.map((charData) => charData.glb)
+  const memberId = new URLSearchParams(window.location.search).get("memberId")
 
   const NextArrow = ({ onClick }) => {
     return (
       <div className={style.arrow + " " + style.next} onClick={onClick}>
         ➡️
       </div>
-    );
-  };
+    )
+  }
 
   const PrevArrow = ({ onClick }) => {
     return (
       <div className={style.arrow + " " + style.prev} onClick={onClick}>
         ⬅️
       </div>
-    );
-  };
+    )
+  }
   const settings = {
     centerMode: true,
     infinite: true,
@@ -59,28 +59,30 @@ const SignUp = () => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     afterChange: (current) => handleSlideChange(current),
-  };
+  }
 
   const handleSlideChange = (index) => {
-    setAvatar(charactersData[index].id);
-  };
+    setAvatar(charactersData[index].id)
+  }
 
   async function doSignUp() {
     if (!avatarId || !nickname) {
-      window.alert("캐릭터와 닉네임을 모두 선택해주세요");
-      return;
+      window.alert("캐릭터와 닉네임을 모두 선택해주세요")
+      return
     }
 
-    const param = { memberId, avatarId, nickname };
+    const param = { memberId, avatarId, nickname }
 
-    await CreateUser(param,(response) => {
-      const token = response.data.data.accessToken;
-        navigate(`/oauth2/redirect?token=${token}`);
+    await CreateUser(
+      param,
+      (response) => {
+        const token = response.data.data.accessToken
+        navigate(`/oauth2/redirect?token=${token}`)
       },
       (error) => {
-        console.log(error);
+        console.log(error)
       }
-    );
+    )
   }
 
   return (
@@ -118,6 +120,6 @@ const SignUp = () => {
         </div>
       </div>
     </div>
-  );
-};
-export default SignUp;
+  )
+}
+export default SignUp
