@@ -1,4 +1,7 @@
 .Container {
   height: 100vh;
   background: #ffebf4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
