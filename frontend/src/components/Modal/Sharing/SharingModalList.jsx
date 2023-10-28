@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import SharingModalListItem from './SharingModalListItem';
-import { facebook, kakao, twitter, urlCopy } from '../../../assets/images/sharing/sharingIcon';
+import { kakao, twitter, urlCopy } from '../../../assets/images/sharing/sharingIcon';
 // import { useRecoilValue } from 'recoil';
 // import { userNicknameAtom } from '../../atoms/userAtoms';
 
@@ -19,7 +19,7 @@ function SharingModalList(props) {
             );
           } else if (props.shareMode === 'start') {
             alert(
-              `테스트 주소가 복사되었습니다.\n친구들에게 공유해보세요!`
+              `우표 테스트 주소가 복사되었습니다.\n친구들에게 공유해보세요!`
             );
           } else {
             alert(
@@ -62,11 +62,6 @@ function SharingModalList(props) {
     }
   };
 
-  const shareFacebook = (e) => {
-    window.open("http://www.facebook.com/sharer/sharer.php?u=" + url);
-    props.setSharingAtom(false);
-  }
-
   const shareTwitter = (e) => {
     if (props.shareMode === 'board') {
       const text = '우리집에 편지를 보내주세요!';
@@ -98,8 +93,7 @@ function SharingModalList(props) {
   }
 
   const sharetype = [
-    {icon : urlCopy, name: 'URL복사', click: shareUrl},
-    {icon : facebook, name: '페이스북', click: shareFacebook},
+    {icon : urlCopy, name: 'URL복사', click: shareUrl}, 
     {icon : twitter, name: '트위터', click: shareTwitter},
     {icon : kakao, name: '카카오톡', click: shareKakao},
   ];

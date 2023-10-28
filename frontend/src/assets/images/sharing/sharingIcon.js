@@ -1,10 +1,13 @@
-import facebook from './facebookSharing.png';
-import kakao from './kakaoSharing.png';
-import twitter from './twitterSharing.png';
-import urlCopy from './share.png';
+// import facebook from './facebookSharing.png';
+// import kakao from './kakaoSharing.png';
+// import twitter from './twitterSharing.png';
+// import urlCopy from './share.png';
 
-export {
-  facebook,
+import kakao from './kakaoSharing.svg';
+import twitter from './twitterSharing.svg';
+import urlCopy from './linkSharing.svg';
+
+export { 
   kakao,
   twitter,
   urlCopy
