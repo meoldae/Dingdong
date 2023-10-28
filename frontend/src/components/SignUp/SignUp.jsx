@@ -87,37 +87,35 @@ const SignUp = () => {
 
   return (
     <div>
+      <span style={{ color: "#049463" }}>프로필 </span>
+      <span style={{ color: "#2C2C2C" }}>선택</span>
+
+      <Slider {...settings}>
+        {charactersImages.map((charImg, idx) => (
+          <img
+            key={idx}
+            src={charImg}
+            alt=""
+            className={style.characterImage}
+            onClick={() => setAvatar(charImg)}
+          />
+        ))}
+      </Slider>
+
       <div>
-        <span style={{ color: "#049463" }}>프로필 </span>
-        <span style={{ color: "#2C2C2C" }}>선택</span>
-
-        <Slider {...settings}>
-          {charactersImages.map((charImg, idx) => (
-            <img
-              key={idx}
-              src={charImg}
-              alt=""
-              className={style.characterImage}
-              onClick={() => setAvatar(charImg)}
-            />
-          ))}
-        </Slider>
-
+        <div>닉네임: </div>
         <div>
-          <div>닉네임: </div>
-          <div>
-            <input
-              type="text"
-              value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
-              placeholder="닉네임을 입력해주세요"
-            />
-          </div>
+          <input
+            type="text"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+            placeholder="닉네임을 입력해주세요"
+          />
         </div>
+      </div>
 
-        <div>
-          <button onClick={doSignUp}>회원가입</button>
-        </div>
+      <div>
+        <button onClick={doSignUp}>회원가입</button>
       </div>
     </div>
   )
