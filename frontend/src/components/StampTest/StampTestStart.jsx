@@ -18,7 +18,7 @@ const StampTestStart = (props) => {
         <p>당신에게 어울리는</p> <p>우표를 찾아보세요.</p>
       </div>
       <div onClick={props.onTestModeHanlder} className={styles.StartButton}>
-        시작
+        시작하기
       </div>
       <SharingModalList shareMode={"start"} />
     </div>
