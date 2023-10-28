@@ -55,6 +55,10 @@
   margin-right: 10px;
 }
 
+.nicknameInput:focus {
+  outline: none;
+}
+
 .doubleCheck {
   width: 100px;
   height: 40px;
