@@ -36,7 +36,6 @@ const MyFooter = () => {
         <PostCardBox
           cancelClick={closeModal}
           onSelectButtonClick={handleSelectButtonClick}
-          checker={"MyFooter"}
         />
       )}
     </div>
