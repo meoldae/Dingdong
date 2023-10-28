@@ -41,7 +41,9 @@ const MyFooter = () => {
           onSelectButtonClick={handleSelectButtonClick}
         />
       )}
-      {isReceiveLetterVisible && <ReceiveLetter />}
+      {isReceiveLetterVisible && (
+        <ReceiveLetter cancelClick={() => setIsReceiveLetterVisible(false)} />
+      )}
     </div>
   )
 }
