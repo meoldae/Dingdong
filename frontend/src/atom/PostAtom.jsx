@@ -9,3 +9,8 @@ export const isReceiveLetterVisibleAtom = atom({
   key: "isReceiveLetterAtom",
   default: false,
 })
+
+export const isCancelVisibleAtom = atom({
+  key: "isCancelAtom",
+  default: false,
+})
