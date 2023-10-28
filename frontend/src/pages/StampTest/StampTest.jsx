@@ -22,7 +22,6 @@ function StampTest() {
           return (<StampTestLoading result={result} />)
         }
       })()}
-
     </div>
   )
 }
