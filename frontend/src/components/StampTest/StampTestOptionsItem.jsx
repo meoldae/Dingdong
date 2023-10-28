@@ -1,23 +1,23 @@
-import React from 'react';
+import React from "react"
 
-function StampTestOptionsItem(props) {
+const StampTestOptionsItem = (props) => {
   return (
     <div>
       <div>
         {props.optionInfo.map((answer) => {
           return (
-            <div 
+            <div
               id={answer.type}
-              className='mx-auto h-12 w-40 flex justify-center items-center rounded-xl border-2 bg-hrtColorYellow border-hrtColorPink shadow-[0_4px_4px_rgba(251,139,176,1)]'
+              className="mx-auto h-12 w-40 flex justify-center items-center rounded-xl border-2 bg-hrtColorYellow border-hrtColorPink shadow-[0_4px_4px_rgba(251,139,176,1)]"
               onClick={() => props.onNextHandler(props.optionInfo)}
             >
               <p>{answer.content}</p>
             </div>
-          );
+          )
         })}
       </div>
     </div>
   )
 }
 
-export default StampTestOptionsItem;
+export default StampTestOptionsItem
