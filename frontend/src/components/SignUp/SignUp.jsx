@@ -86,6 +86,10 @@ const SignUp = () => {
     )
   }
 
+  const doubleCheckHandler = () => {
+    console.log("중복검사함수")
+  }
+
   const dummyFunc = () => {
     console.log("잠시 사용하는 더미 함수")
   }
@@ -122,7 +126,9 @@ const SignUp = () => {
           className={styles.nicknameInput}
           maxLength={7}
         />
-        <div className={styles.doubleCheck}>중복확인</div>
+        <div className={styles.doubleCheck} onClick={doubleCheckHandler}>
+          중복확인
+        </div>
       </div>
 
       <div className={styles.doSignUpContainer}>
