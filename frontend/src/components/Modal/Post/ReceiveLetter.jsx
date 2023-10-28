@@ -13,14 +13,13 @@ const RecevieLetter = (props) => {
             className={styles.topPostCardImg}
             src="assets/images/post/postCardDefault.png"
           />
+          <div className={styles.letterToUser}>To. 장호</div>
           <div className={styles.letterContent}>
-            <h1>안녕 난 장호야</h1>
-          </div>
-          <div>
             <span>편지 내용입니다.</span>
           </div>
-          <div className={styles.sendUserName}>
-            <h3>From.호~~~~!</h3>
+          <div className={styles.footerContainer}>
+            <div className={styles.report}>신고하기</div>
+            <div className={styles.FromUser}>From.호~~~~!</div>
           </div>
         </Card>
       </div>
