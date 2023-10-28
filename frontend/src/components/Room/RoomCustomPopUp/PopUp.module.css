@@ -6,11 +6,7 @@
 .popUpContainer {
     z-index: 4;
 
-    /* 임시  width */
     width: 100%;
-
-    /* 원래 width */
-    /* width: 100%; */
     height: 30vh;
     position: absolute;
     border-radius: 15px 15px 0 0;
@@ -21,19 +17,14 @@
     align-items: center;
 }
 
-
-.active{
-    background-color: rgba(9, 243, 79, 0.785); 
-}
-
 .tabBar {
-    border: solid 3px red;
-    width: 98.6%;
+    width: 100%;
     top: 0px;
     height: 5vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 2px solid #d2d2d2;
 }
 
 .tabBar li{
@@ -55,7 +46,43 @@
 }
 
 .content {
-    background-color: bisque;
+    background-color: white;
     height: 25vh;
     width: 100%;
 }  
+
+.popUpClose {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: white;
+    border-radius: 50px 50px 50px 50px;
+    width: 4vh;
+    height: 4vh;
+    right: 1vh;
+    top: -6vh;
+}
+
+.closeVector {
+    width: 1.5vh;
+    height: 1.5vh;
+}
+
+.customSaveButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: white;
+    border-radius: 50px 50px 50px 50px;
+    width: 4vh;
+    height: 4vh;
+    right: 6vh;
+    top: -6vh;
+}
+
+.customSaveVector {
+    width: 2.5vh;
+    height: 2.5vh;
+}

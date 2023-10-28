@@ -12,9 +12,15 @@ const PopUpContent = (props) => {
   const [loading, setLoading] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
 
+  const addFurniture = (furnitureId) => {
+    // 가구 이미지 클릭 시 이벤트
+    // 쓰실 때 제거하세용
+    console.log(furnitureId);
+
+  }
+
   // 가구 리스트 받아오는 함수
   const fetchList = () => {    
-
     getFurnitureList(pageNo, props.category, 
       (response) => {
         const fetchingList = response.data.data.content;
@@ -41,7 +47,7 @@ const PopUpContent = (props) => {
               setPageNo(prevPageNo => prevPageNo + 1);
             }
           }
-        }, { threshold: 0.5 }
+        }, { threshold: 0.1 }
       );
       
       observer.observe(target.current);
@@ -69,23 +75,19 @@ const PopUpContent = (props) => {
 
   return (    
     <div className={styles.furnitureContainer}>
-      
       <div>
         {furnitureList.map((item, index) => (
           <img
             key={index}
             src={imagePath+`/models/roomitemspng/${item["furnitureId"]}.png`}
-            width={'32%'}
-            height={'50%'}
-            border="1px solid black"
+            width={'33%'}
+            height={'45%'}
+            onClick={() => addFurniture(item["furnitureId"])}
           />
         ))}
       </div>
-
       <div className={styles.endPoint} ref={target}></div>
-
     </div>
-    
   )   
 }
 
