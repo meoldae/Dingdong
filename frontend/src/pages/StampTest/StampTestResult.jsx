@@ -5,6 +5,7 @@ import SharingModalList from "../../components/Modal/Sharing/SharingModalList"
 import { useNavigate } from "react-router-dom"
 import { useRecoilValue } from "recoil"
 // import { isLoginAtom } from "../atoms/userAtoms";
+import styles from "./StampTestResult.module.css"
 
 const StampTestResult = () => {
   const navigate = useNavigate()
@@ -29,32 +30,8 @@ const StampTestResult = () => {
   }, [])
 
   return (
-    <div>
-      {/* <img src={LogoEffect} alt="test" className="w-full px-14 py-8" /> */}
-      <div>
-        <div>
-          <div>
-            <div>
-              <p>당신의</p>
-              <p>우표는?</p>
-            </div>
-            <div></div>
-            <div>
-              <hr />
-              <p>공유하기</p>
-              <SharingModalList />
-              <div onClick={onTestHandler}>
-                <p>다시 하기</p>
-              </div>
-            </div>
-          </div>
-          {/* <div className="w-2 h-2 rounded-xl border-2 border-hrtColorPink absolute left-1 top-1"></div>
-            <div className="w-2 h-2 rounded-xl border-2 border-hrtColorPink absolute right-1 top-1"></div>
-            <div className="w-2 h-2 rounded-xl border-2 border-hrtColorPink absolute left-1 bottom-1"></div>
-            <div className="w-2 h-2 rounded-xl border-2 border-hrtColorPink absolute right-1 bottom-1"></div> */}
-        </div>
-      </div>
-      <div></div>
+    <div className={styles.Container}>
+      <SharingModalList />
     </div>
   )
 }
