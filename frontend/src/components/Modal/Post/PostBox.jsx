@@ -5,7 +5,7 @@ import PostDefaultModal from "./PostDefaultModal"
 import { useRecoilValue } from "recoil"
 import { isPostBoxVisibleAtom } from "../../../atom/PostAtom"
 
-const PostBox = () => {
+const PostBox = (props) => {
   const isPostBoxVisible = useRecoilValue(isPostBoxVisibleAtom)
 
   return (
@@ -14,6 +14,7 @@ const PostBox = () => {
         className={styles.postBoxContainer}
         PostDefaultTitle={"편지함"}
         postCheck={false}
+        cancelClick={props.cancelClick}
       >
         <div className={styles.letterBox}>
           <Letter letterTitle={"유저"} checkRead={true} />
