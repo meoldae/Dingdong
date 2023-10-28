@@ -5,6 +5,7 @@ import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import { CreateUser, GetAvatarList } from "@/api/User"
+import DefaultBtn from "../Button/Default/DefaultBtn"
 
 const SignUp = () => {
   const navigate = useNavigate()
@@ -85,6 +86,10 @@ const SignUp = () => {
     )
   }
 
+  const dummyFunc = () => {
+    console.log("잠시 사용하는 더미 함수")
+  }
+
   return (
     <div className={styles.Container}>
       <div className={styles.titleContainer}>
@@ -118,7 +123,11 @@ const SignUp = () => {
       </div>
 
       <div className={styles.doSignUpContainer}>
-        <div onClick={doSignUp}>회원가입</div>
+        <DefaultBtn
+          btnName={"입주하기"}
+          onClick={dummyFunc}
+          color={"#FCC4D7"}
+        />
       </div>
     </div>
   )
