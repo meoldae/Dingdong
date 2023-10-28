@@ -99,8 +99,8 @@ function SharingModalList(props) {
 
   const sharetype = [
     { icon: urlCopy, name: "URL복사", click: shareUrl },
-    { icon: twitter, name: "트위터", click: shareTwitter },
     { icon: kakao, name: "카카오톡", click: shareKakao },
+    { icon: twitter, name: "트위터", click: shareTwitter },
   ]
 
   return (
