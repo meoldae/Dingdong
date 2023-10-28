@@ -44,6 +44,13 @@
   margin-top: 50px;
 }
 
+.nicknameInput {
+  border: 3px solid #fcc4d7;
+  border-radius: 40px;
+  width: 140px;
+  height: 40px;
+}
+
 .doSignUpContainer {
   display: flex;
   justify-content: center;
