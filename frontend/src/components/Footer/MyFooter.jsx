@@ -7,6 +7,7 @@ import {
   isPostBoxVisibleAtom,
   isReceiveLetterVisibleAtom,
 } from "../../atom/PostAtom"
+import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom"
 
 const MyFooter = () => {
   const [isPostBoxVisible, setIsPostBoxVisible] =
@@ -15,6 +16,7 @@ const MyFooter = () => {
   const [isReceiveLetterVisible, setIsReceiveLetterVisible] = useRecoilState(
     isReceiveLetterVisibleAtom
   )
+  const [popUpStatus, setPopUpStatus] = useRecoilState(popUpStatusAtom);
 
   const handleSelectButtonClick = () => {
     console.log(1)
@@ -24,7 +26,7 @@ const MyFooter = () => {
     <div className={style.wrap}>
       <div className={style.secondFooter}>
         <div className={style.background}>
-          <RoomBtn img={"roomEdit"} />
+          <RoomBtn img={"roomEdit"} onClick={() => setPopUpStatus(!popUpStatus)} />
         </div>
       </div>
       <div className={style.footer}>
