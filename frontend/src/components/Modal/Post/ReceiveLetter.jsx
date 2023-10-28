@@ -1,10 +1,11 @@
 import Card from "../../UI/Card"
-import styles from "./RecevieLetter.module.css"
+import styles from "./ReceiveLetter.module.css"
 
 const RecevieLetter = () => {
   const cancelClick = () => {
     console.log("취소로직")
   }
+
   return (
     <Card className={styles.recevieLetterContainer}>
       <div className={styles.xmarkImg} onClick={cancelClick}>
