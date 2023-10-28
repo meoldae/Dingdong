@@ -16,10 +16,13 @@
 }
 
 .Container {
-  margin: 65px 40px 65px 40px;
+  height: 100vh;
+  border: 1px black solid;
+  margin: 65px 40px;
 }
 
 .titleContainer {
   font-family: Pretendard-Bold;
   font-size: 40px;
+  margin-top: 40px;
 }
