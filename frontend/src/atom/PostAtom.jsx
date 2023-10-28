@@ -5,11 +5,6 @@ export const isPostBoxVisibleAtom = atom({
   default: false,
 })
 
-export const isPostCardBoxVisibleAtom = atom({
-  key: "isPostCardBoxAtom",
-  default: false,
-})
-
 export const isReceiveLetterVisibleAtom = atom({
   key: "isReceiveLetterAtom",
   default: false,
