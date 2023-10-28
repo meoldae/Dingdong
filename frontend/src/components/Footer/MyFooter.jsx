@@ -1,14 +1,22 @@
-import { useState } from "react"
 import RoomBtn from "../Button/Room/RoomBtn"
-import PostCardBox from "../Modal/Post/PostCardBox"
+import PostBox from "../Modal/Post/PostBox"
+import ReceiveLetter from "../Modal/Post/ReceiveLetter"
 import style from "./Footer.module.css"
+import { useRecoilState } from "recoil"
+import {
+  isPostBoxVisibleAtom,
+  isReceiveLetterVisibleAtom,
+} from "../../atom/PostAtom"
+import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom"
 
 const MyFooter = () => {
-  const [isPostBoxModalVisible, setIsPostBoxModalVisible] = useState(false)
+  const [isPostBoxVisible, setIsPostBoxVisible] =
+    useRecoilState(isPostBoxVisibleAtom)
 
-  const closeModal = () => {
-    setIsPostBoxModalVisible(false)
-  }
+  const [isReceiveLetterVisible, setIsReceiveLetterVisible] = useRecoilState(
+    isReceiveLetterVisibleAtom
+  )
+  const [popUpStatus, setPopUpStatus] = useRecoilState(popUpStatusAtom);
 
   const handleSelectButtonClick = () => {
     console.log(1)
@@ -18,7 +26,7 @@ const MyFooter = () => {
     <div className={style.wrap}>
       <div className={style.secondFooter}>
         <div className={style.background}>
-          <RoomBtn img={"roomEdit"} />
+          <RoomBtn img={"roomEdit"} onClick={() => setPopUpStatus(!popUpStatus)} />
         </div>
       </div>
       <div className={style.footer}>
@@ -26,18 +34,17 @@ const MyFooter = () => {
           <RoomBtn img={"worldMap"} />
         </div>
         <div className={style.background}>
-          <RoomBtn
-            img={"postBox"}
-            onClick={() => setIsPostBoxModalVisible(true)}
-          />
+          <RoomBtn img={"postBox"} onClick={() => setIsPostBoxVisible(true)} />
         </div>
       </div>
-      {isPostBoxModalVisible && (
-        <PostCardBox
-          cancelClick={closeModal}
+      {isPostBoxVisible && (
+        <PostBox
+          cancelClick={() => setIsPostBoxVisible(false)}
           onSelectButtonClick={handleSelectButtonClick}
-          checker={"MyFooter"}
         />
+      )}
+      {isReceiveLetterVisible && (
+        <ReceiveLetter cancelClick={() => setIsReceiveLetterVisible(false)} />
       )}
     </div>
   )

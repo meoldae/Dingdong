@@ -51,7 +51,6 @@ const OtherFooter = () => {
         <PostCardBox
           cancelClick={closeModal}
           onSelectButtonClick={handleSelectButtonClick}
-          checker={"OtherFooter"}
         />
       )}
       {isSendLetterModalVisible && (

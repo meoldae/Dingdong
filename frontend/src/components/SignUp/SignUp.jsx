@@ -1,54 +1,55 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import style from "./SignUp.module.css";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { CreateUser, GetAvatarList } from "@/api/User";
+import React, { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import styles from "./SignUp.module.css"
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
+import { CreateUser, GetAvatarList } from "@/api/User"
+import DefaultBtn from "../Button/Default/DefaultBtn"
 
 const SignUp = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const [charactersData, setCharactersData] = useState([]);
-  const [avatarId, setAvatar] = useState(null);
-  const [nickname, setNickname] = useState("");
+  const [charactersData, setCharactersData] = useState([])
+  const [avatarId, setAvatar] = useState(null)
+  const [nickname, setNickname] = useState("")
 
   useEffect(() => {
     GetAvatarList(
       (response) => {
-        const avatarList = response.data.data.avatarList;
+        const avatarList = response.data.data.avatarList
         const formattedData = Object.keys(avatarList).map((key) => ({
           id: parseInt(key),
           glb: avatarList[key],
-        }));
+        }))
 
-        setCharactersData(formattedData);
-        setAvatar(formattedData[0].id);
+        setCharactersData(formattedData)
+        setAvatar(formattedData[0].id)
       },
       (error) => {
-        console.error("Error fetching avatars:", error);
+        console.error("Error fetching avatars:", error)
       }
-    );
-  }, []);
+    )
+  }, [])
 
-  const charactersImages = charactersData.map((charData) => charData.glb);
-  const memberId = new URLSearchParams(window.location.search).get("memberId");
+  const charactersImages = charactersData.map((charData) => charData.glb)
+  const memberId = new URLSearchParams(window.location.search).get("memberId")
 
   const NextArrow = ({ onClick }) => {
     return (
-      <div className={style.arrow + " " + style.next} onClick={onClick}>
+      <div className={styles.arrow + " " + styles.next} onClick={onClick}>
         ➡️
       </div>
-    );
-  };
+    )
+  }
 
   const PrevArrow = ({ onClick }) => {
     return (
-      <div className={style.arrow + " " + style.prev} onClick={onClick}>
+      <div className={styles.arrow + " " + styles.prev} onClick={onClick}>
         ⬅️
       </div>
-    );
-  };
+    )
+  }
   const settings = {
     centerMode: true,
     infinite: true,
@@ -59,65 +60,85 @@ const SignUp = () => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     afterChange: (current) => handleSlideChange(current),
-  };
+  }
 
   const handleSlideChange = (index) => {
-    setAvatar(charactersData[index].id);
-  };
+    setAvatar(charactersData[index].id)
+  }
 
   async function doSignUp() {
     if (!avatarId || !nickname) {
-      window.alert("캐릭터와 닉네임을 모두 선택해주세요");
-      return;
+      window.alert("캐릭터와 닉네임을 모두 선택해주세요")
+      return
     }
 
-    const param = { memberId, avatarId, nickname };
+    const param = { memberId, avatarId, nickname }
 
-    await CreateUser(param,(response) => {
-      const token = response.data.data.accessToken;
-        navigate(`/oauth2/redirect?token=${token}`);
+    await CreateUser(
+      param,
+      (response) => {
+        const token = response.data.data.accessToken
+        navigate(`/oauth2/redirect?token=${token}`)
       },
       (error) => {
-        console.log(error);
+        console.log(error)
       }
-    );
+    )
+  }
+
+  const doubleCheckHandler = () => {
+    console.log("중복검사함수")
+  }
+
+  const dummyFunc = () => {
+    console.log("잠시 사용하는 더미 함수")
   }
 
   return (
-    <div>
-      <div>
-        <span style={{ color: "#049463" }}>프로필 </span>
+    <div className={styles.Container}>
+      <div className={styles.titleContainer}>
+        <span style={{ color: "#F2CBE4" }}>프로필 </span>
         <span style={{ color: "#2C2C2C" }}>선택</span>
+      </div>
 
-        <Slider {...settings}>
-          {charactersImages.map((charImg, idx) => (
-            <img
-              key={idx}
-              src={charImg}
-              alt=""
-              className={style.characterImage}
-              onClick={() => setAvatar(charImg)}
-            />
-          ))}
-        </Slider>
+      {/* <Slider {...settings}>
+        {charactersImages.map((charImg, idx) => (
+          <img
+            key={idx}
+            src={charImg}
+            alt=""
+            className={styles.characterImage}
+            onClick={() => setAvatar(charImg)}
+          />
+        ))}
+      </Slider> */}
 
-        <div>
-          <div>닉네임: </div>
-          <div>
-            <input
-              type="text"
-              value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
-              placeholder="닉네임을 입력해주세요"
-            />
-          </div>
-        </div>
+      <div className={styles.characterContainer}>
+        <div className={styles.charactersImages}>더미 캐릭터</div>
+      </div>
 
-        <div>
-          <button onClick={doSignUp}>회원가입</button>
+      <div className={styles.nicknameContainer}>
+        <input
+          type="text"
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
+          placeholder="닉네임 입력란"
+          className={styles.nicknameInput}
+          maxLength={7}
+        />
+        <div className={styles.doubleCheck} onClick={doubleCheckHandler}>
+          중복확인
         </div>
       </div>
+
+      <div className={styles.doSignUpContainer}>
+        <DefaultBtn
+          btnName={"입주하기"}
+          onClick={dummyFunc}
+          color={"#FCC4D7"}
+        />
+      </div>
     </div>
-  );
-};
-export default SignUp;
+  )
+}
+export default SignUp

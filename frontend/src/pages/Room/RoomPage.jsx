@@ -9,18 +9,23 @@ import {
   ItemsState,
   buildModeState,
   draggedItemState,
-} from "../../components/Room/Atom";
-import Header from "../../components/Header/Header";
-import MyFooter from "../../components/Footer/MyFooter";
-import Share from "../../components/Header/Share";
-import OtherFooter from "../../components/Footer/OtherFooter";
-import NeighborRequest from "../../components/Header/NeighborRequest";
-import styles from "./RoomPage.module.css";
+} from "../../components/Room/Atom"
+import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom"
+
+import Header from "../../components/Header/Header"
+import MyFooter from "../../components/Footer/MyFooter"
+import Share from "../../components/Header/Share"
+import OtherFooter from "../../components/Footer/OtherFooter"
+import NeighborRequest from "../../components/Header/NeighborRequest"
+import styles from "./RoomPage.module.css"
+import PopUp from "../../components/Room/RoomCustomPopUp/PopUp"
+
 function RoomPage() {
   const [editMode, setEditMode] = useRecoilState(buildModeState);
   const [isMyRoom, setIsMyRoom] = useState(false);
-  const [drag, setDrag] = useRecoilState(draggedItemState);
-  const canvasRef = useRef();
+  const [drag,setDrag] = useRecoilState(draggedItemState);
+  const popUpStatus = useRecoilValue(popUpStatusAtom);
+
   useEffect(() => {
     fetchRoomData().then((response) => {
       if (response.data.isMyRoom) {
@@ -65,6 +70,8 @@ function RoomPage() {
         </Suspense>
       </Canvas>
       {isMyRoom ? <MyFooter /> : <OtherFooter />}
+      {/* {popUpStatus ? <PopUp/> : '' } */}
+      <PopUp/>
     </div>
   );
 }
