@@ -1,6 +1,6 @@
 import { useState } from "react"
 import RoomBtn from "../Button/Room/RoomBtn"
-import PostCardBox from "../Modal/Post/PostCardBox"
+import PostBox from "../Modal/Post/PostBox"
 import style from "./Footer.module.css"
 
 const MyFooter = () => {
@@ -33,7 +33,7 @@ const MyFooter = () => {
         </div>
       </div>
       {isPostBoxModalVisible && (
-        <PostCardBox
+        <PostBox
           cancelClick={closeModal}
           onSelectButtonClick={handleSelectButtonClick}
         />
