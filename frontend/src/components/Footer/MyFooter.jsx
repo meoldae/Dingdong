@@ -1,12 +1,20 @@
 import RoomBtn from "../Button/Room/RoomBtn"
 import PostBox from "../Modal/Post/PostBox"
+import ReceiveLetter from "../Modal/Post/ReceiveLetter"
 import style from "./Footer.module.css"
 import { useRecoilState } from "recoil"
-import { isPostBoxVisibleAtom } from "../../atom/PostAtom"
+import {
+  isPostBoxVisibleAtom,
+  isReceiveLetterVisibleAtom,
+} from "../../atom/PostAtom"
 
 const MyFooter = () => {
   const [isPostBoxVisible, setIsPostBoxVisible] =
     useRecoilState(isPostBoxVisibleAtom)
+
+  const [isReceiveLetterVisible, setIsReceiveLetterVisible] = useRecoilState(
+    isReceiveLetterVisibleAtom
+  )
 
   const handleSelectButtonClick = () => {
     console.log(1)
@@ -33,6 +41,7 @@ const MyFooter = () => {
           onSelectButtonClick={handleSelectButtonClick}
         />
       )}
+      {isReceiveLetterVisible && <ReceiveLetter />}
     </div>
   )
 }
