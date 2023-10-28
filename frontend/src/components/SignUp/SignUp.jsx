@@ -36,7 +36,7 @@ const SignUp = () => {
 
   const NextArrow = ({ onClick }) => {
     return (
-      <div className={style.arrow + " " + style.next} onClick={onClick}>
+      <div className={styles.arrow + " " + styles.next} onClick={onClick}>
         ➡️
       </div>
     )
@@ -44,7 +44,7 @@ const SignUp = () => {
 
   const PrevArrow = ({ onClick }) => {
     return (
-      <div className={style.arrow + " " + style.prev} onClick={onClick}>
+      <div className={styles.arrow + " " + styles.prev} onClick={onClick}>
         ⬅️
       </div>
     )
@@ -86,9 +86,11 @@ const SignUp = () => {
   }
 
   return (
-    <div>
-      <span style={{ color: "#F2CBE4" }}>프로필 </span>
-      <span style={{ color: "#2C2C2C" }}>선택</span>
+    <div className={styles.Container}>
+      <div className={styles.titleContainer}>
+        <span style={{ color: "#F2CBE4" }}>프로필 </span>
+        <span style={{ color: "#2C2C2C" }}>선택</span>
+      </div>
 
       <Slider {...settings}>
         {charactersImages.map((charImg, idx) => (
