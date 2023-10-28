@@ -68,8 +68,8 @@ const map = {
     },
     {
       ...item.clock,
-      gridPosition: [10, 2, 10],
-      rotation: 0,
+      gridPosition: [10, 5, 10],
+      rotation: 1,
       walkable: true,
       wall:true,
     }

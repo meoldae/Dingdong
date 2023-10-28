@@ -1,33 +1,33 @@
-import { Canvas } from "@react-three/fiber";
-import { Html } from "@react-three/drei";
-import Experience from "../../components/Room/Experience";
-import { fetchRoomData } from "../../api/User";
-import { Suspense, useState, useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { Canvas } from "@react-three/fiber"
+import { Html } from "@react-three/drei"
+import Experience from "../../components/Room/Experience"
+import { fetchRoomData } from "../../api/User"
+import { Suspense, useState, useEffect } from "react"
+import { useRecoilState, useRecoilValue } from "recoil"
 import {
   ItemRotateState,
   ItemsState,
   buildModeState,
   draggedItemState,
-} from "../../components/Room/Atom";
+} from "../../components/Room/Atom"
 
-import Header from "../../components/Header/Header";
-import MyFooter from "../../components/Footer/MyFooter";
-import Share from "../../components/Header/Share";
-import OtherFooter from "../../components/Footer/OtherFooter";
-import NeighborRequest from "../../components/Header/NeighborRequest";
-import styles from "./RoomPage.module.css";
+import Header from "../../components/Header/Header"
+import MyFooter from "../../components/Footer/MyFooter"
+import Share from "../../components/Header/Share"
+import OtherFooter from "../../components/Footer/OtherFooter"
+import NeighborRequest from "../../components/Header/NeighborRequest"
+import styles from "./RoomPage.module.css"
 function RoomPage() {
   const [editMode, setEditMode] = useRecoilState(buildModeState);
   const [isMyRoom, setIsMyRoom] = useState(false);
-
+  const [drag,setDrag] = useRecoilState(draggedItemState);
   useEffect(() => {
     fetchRoomData().then((response) => {
       if (response.data.isMyRoom) {
-        setIsMyRoom(true);
+        setIsMyRoom(true)
       }
-    });
-  }, []);
+    })
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -38,13 +38,16 @@ function RoomPage() {
         className={styles.button}
         onClick={() => {
           setEditMode(!editMode);
+          if(drag){
+            setDrag(null);
+          }
         }}
       >
         {editMode && <span>편집모드</span>}
         {!editMode && <span>관광모드</span>}
       </div>
 
-      <Canvas shadows camera={{ position: [8, 3, 8], fov: 70 }}>
+      <Canvas shadows camera={{ position: [8, 5, 8], fov: 90 }}>
         <color attach="background" args={["skyblue"]} />
         <Suspense
           fallback={
@@ -58,7 +61,7 @@ function RoomPage() {
       </Canvas>
       {isMyRoom ? <MyFooter /> : <OtherFooter />}
     </div>
-  );
+  )
 }
 
-export default RoomPage;
+export default RoomPage
