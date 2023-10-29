@@ -43,7 +43,7 @@ public class RoomController implements RoomSwagger{
     }
 
     @Override
-    @GetMapping("/{memberId}")
+    @GetMapping("/memberId/{memberId}")
     public DataResponse<RoomResponseDto> getRoomByMemberId(@PathVariable String memberId) {
         RoomResponseDto findRoom = roomService.getRoomByMemberId(memberId);
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, findRoom);
@@ -51,7 +51,7 @@ public class RoomController implements RoomSwagger{
 
 
     @Override
-    @GetMapping("/roomId/{roomId}")
+    @GetMapping("/{roomId}")
     public DataResponse<RoomResponseDto> getRoomByRoomId(@PathVariable Long roomId) {
         RoomResponseDto findRoom = roomService.getRoomByRoomId(roomId);
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, findRoom);
