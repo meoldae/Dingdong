@@ -29,7 +29,6 @@ function RoomPage() {
   const popUpStatus = useRecoilValue(popUpStatusAtom);
   const canvasRef = useRef();
   const [shareModal, setShareModal] = useState(false);
-  console.log(canvasRef);
   useEffect(() => {
     fetchRoomData().then((response) => {
       if (response.data.isMyRoom) {
