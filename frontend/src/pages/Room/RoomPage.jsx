@@ -9,23 +9,27 @@ import {
   ItemsState,
   buildModeState,
   draggedItemState,
-} from "../../components/Room/Atom"
-import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom"
+} from "../../components/Room/Atom";
+import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom";
 
-import Header from "../../components/Header/Header"
-import MyFooter from "../../components/Footer/MyFooter"
-import Share from "../../components/Header/Share"
-import OtherFooter from "../../components/Footer/OtherFooter"
-import NeighborRequest from "../../components/Header/NeighborRequest"
-import styles from "./RoomPage.module.css"
-import PopUp from "../../components/Room/RoomCustomPopUp/PopUp"
+import Header from "../../components/Header/Header";
+import MyFooter from "../../components/Footer/MyFooter";
+import Share from "../../components/Header/Share";
+import OtherFooter from "../../components/Footer/OtherFooter";
+import NeighborRequest from "../../components/Header/NeighborRequest";
+import styles from "./RoomPage.module.css";
+import PopUp from "../../components/Room/RoomCustomPopUp/PopUp";
+import SharePage from "../../components/Modal/Sharing/SharePage";
+import SharingModalList from "../../components/Modal/Sharing/SharingModalList";
 
 function RoomPage() {
   const [editMode, setEditMode] = useRecoilState(buildModeState);
   const [isMyRoom, setIsMyRoom] = useState(false);
-  const [drag,setDrag] = useRecoilState(draggedItemState);
+  const [drag, setDrag] = useRecoilState(draggedItemState);
   const popUpStatus = useRecoilValue(popUpStatusAtom);
-
+  const canvasRef = useRef();
+  const [shareModal, setShareModal] = useState(false);
+  console.log(canvasRef);
   useEffect(() => {
     fetchRoomData().then((response) => {
       if (response.data.isMyRoom) {
@@ -37,8 +41,14 @@ function RoomPage() {
   return (
     <div className={styles.container}>
       <Header />
-      {isMyRoom ? <NeighborRequest /> : <Share canvasRef={canvasRef}/>}
-
+      {isMyRoom ? <NeighborRequest /> : <Share setShareModal={setShareModal} />}
+      {shareModal && (
+        <>
+          <div className={styles.back} onClick={()=>{setShareModal(false)}}/>
+          <SharePage shareModal={shareModal} canvasRef={canvasRef} />
+          <SharingModalList />
+        </>
+      )}
       <div
         className={styles.button}
         onClick={() => {
@@ -71,7 +81,7 @@ function RoomPage() {
       </Canvas>
       {isMyRoom ? <MyFooter /> : <OtherFooter />}
       {/* {popUpStatus ? <PopUp/> : '' } */}
-      <PopUp/>
+      <PopUp />
     </div>
   );
 }

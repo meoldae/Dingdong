@@ -4,10 +4,11 @@ import {
   kakao,
   twitter,
   urlCopy,
+  save,
 } from "../../../assets/images/sharing/sharingIcon"
 // import { useRecoilValue } from 'recoil';
 // import { userNicknameAtom } from '../../atoms/userAtoms';
-import styles from "./SharingModalList.module.css"
+import styles from "./Share.module.css"
 
 function SharingModalList(props) {
   // const userNickname = useRecoilValue(userNicknameAtom);
@@ -19,7 +20,7 @@ function SharingModalList(props) {
         .writeText(window.location.href)
         .then(() => {
           if (props.shareMode === "board") {
-            alert()
+            alert();
             // `${userNickname}님의 편지 수신함이 복사되었습니다.\n친구들에게 공유해보세요!`
           } else if (props.shareMode === "start") {
             alert(
@@ -79,7 +80,7 @@ function SharingModalList(props) {
         "https://twitter.com/intent/tweet?text=" + text + "&url=" + url
       )
     }
-  }
+  };
 
   const shareKakao = (e) => {
     if (props.shareMode === "board") {
@@ -95,21 +96,41 @@ function SharingModalList(props) {
         //... the rest of the function remains the same.
       })
     }
-  }
+  };
+  const saveImg = (e) => {
+    const element = document.getElementById("shareModal");
 
+    html2canvas(element).then((canvas) => {
+      const saveImg = (uri, filename) => {
+        let link = document.createElement("a");
+
+        document.body.appendChild(link);
+
+        link.href = uri;
+        link.download = filename;
+        link.click();
+
+        document.body.removeChild(link);
+      };
+      saveImg(canvas.toDataURL("image/png"), "ding_dong.png");
+    });
+  };
   const sharetype = [
-    { icon: urlCopy, name: "URL복사", click: shareUrl },
+    { icon: urlCopy, name: "URL복사", click: shareUrl },  
+    { icon:save,name: "저장하기", click: saveImg },
     { icon: kakao, name: "카카오톡", click: shareKakao },
     { icon: twitter, name: "트위터", click: shareTwitter },
-  ]
+  ];
 
   return (
-    <div className={styles.Container}>
+    <div className={styles.share}>
       {sharetype.map((share) => (
         <SharingModalListItem
           key={share.name}
           icon={share.icon}
+          name={share.name}
           click={share.click}
+          className={styles.shareItem}
         />
       ))}
     </div>
