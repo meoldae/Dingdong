@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react"
 import { useSetRecoilState } from "recoil"
-import {
-  ArriveAtom,
-  ConfirmEnteringRoomAtom,
-} from "../../../atom/SinglePlayAtom"
+import { ArriveAtom } from "../../../atom/SinglePlayAtom"
 import { DefaultPosition, DefaultZoom } from "../../../atom/DefaultSettingAtom"
-import styles from "./ConfirmEnteringRoomModal.module.css"
+import styles from "./ConfirmEnteringDefaultModal.module.css"
 
-const ConfirmEnteringRoomModal = ({ modalContent }) => {
+const ConfirmEnteringDefaultModal = ({
+  modalContent,
+  setConfirmEnteringLocation,
+  location,
+}) => {
   const [isInitialRender, setIsInitialRender] = useState(true)
 
   useEffect(() => {
@@ -21,20 +22,20 @@ const ConfirmEnteringRoomModal = ({ modalContent }) => {
   const setDefaultCameraPosition = useSetRecoilState(DefaultPosition)
   const setDefaultCameraZoom = useSetRecoilState(DefaultZoom)
 
-  // 입장 여부
-  const setConfirmEnteringHouse = useSetRecoilState(ConfirmEnteringRoomAtom)
-
   // 도착 여부
   const setIsArrived = useSetRecoilState(ArriveAtom)
 
   // 마이룸으로 이동
   const onConfirm = () => {
-    setConfirmEnteringHouse(false)
+    if (location === "house") {
+      // 집으로 이동
+    }
+    setConfirmEnteringLocation(false)
   }
 
   // 모달 취소
   const onCancle = () => {
-    setConfirmEnteringHouse(false)
+    setConfirmEnteringLocation(false)
     setIsArrived(false)
 
     // 기본 값 설정
@@ -49,12 +50,14 @@ const ConfirmEnteringRoomModal = ({ modalContent }) => {
   const [content, setContent] = useState("")
   const [yes, setYes] = useState("")
   const [no, setNo] = useState("")
+  const [ok, setOk] = useState("")
 
   // 내용
   const letters =
     modalContent === "준비중" ? "준비 중입니다..!" : `${modalContent}`
   const yesText = ["▶", " ", "예"]
   const noText = ["▶", " ", "아니오"]
+  const okText = ["▶", " ", "확인"]
 
   // 글자 나오는 속도
   const speed = 50
@@ -81,6 +84,13 @@ const ConfirmEnteringRoomModal = ({ modalContent }) => {
         await wait(speed)
       }
     }
+    // 확인 선택버튼 함수
+    const typeOk = async () => {
+      for (let char of okText) {
+        setOk((prevText) => prevText + char)
+        await wait(speed)
+      }
+    }
 
     // 모달 내용 및 예/아니오 버튼 함수
     const typeWords = async () => {
@@ -89,7 +99,9 @@ const ConfirmEnteringRoomModal = ({ modalContent }) => {
         await wait(speed)
       }
       await wait(delay)
-      if (modalContent !== "준비중") {
+      if (modalContent === "준비중") {
+        await typeOk()
+      } else {
         await typeYes()
         await typeNo()
       }
@@ -107,12 +119,21 @@ const ConfirmEnteringRoomModal = ({ modalContent }) => {
           <div className={styles.Title}>딩동!</div>
           <div className={styles.Content}>{content}</div>
           <div className={styles.ConfirmContainer}>
-            <div className={styles.Confirm} onClick={onConfirm}>
-              {yes}
-            </div>
+            {modalContent !== "준비중" && (
+              <>
+                <div className={styles.Confirm} onClick={onConfirm}>
+                  {yes}
+                </div>
+                <div className={styles.Confirm} onClick={onCancle}>
+                  {no}
+                </div>
+              </>
+            )}
+
             <div className={styles.Confirm} onClick={onCancle}>
-              {no}
+              {ok}
             </div>
+
             {/* &nbsp; = 띄어쓰기 */}
           </div>
         </div>
@@ -121,4 +142,4 @@ const ConfirmEnteringRoomModal = ({ modalContent }) => {
   )
 }
 
-export default ConfirmEnteringRoomModal
+export default ConfirmEnteringDefaultModal

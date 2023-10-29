@@ -11,6 +11,22 @@ export const ConfirmEnteringRoomAtom = atom({
   key: "ConfirmEnteringHouseAtom",
   default: false,
 })
+export const ConfirmEnteringPostOfficeAtom = atom({
+  key: "ConfirmEnteringPostOfficeAtom",
+  default: false,
+})
+export const ConfirmEnteringStoreAtom = atom({
+  key: "ConfirmEnteringStoreAtom",
+  default: false,
+})
+export const ConfirmEnteringOtherRoomAtom = atom({
+  key: "ConfirmEnteringOtherRoomAtom",
+  default: false,
+})
+export const ConfirmEnteringWorldAtom = atom({
+  key: "ConfirmEnteringWorldAtom",
+  default: false,
+})
 
 // 포탈
 export const RoomPortalVisibleAtom = atom({
@@ -20,4 +36,40 @@ export const RoomPortalVisibleAtom = atom({
 export const RoomPortalPositionAtom = atom({
   key: "RoomPortalPositionAtom",
   default: [-6.5, 0.03, 8.5],
+})
+
+export const PostOfficePortalVisibleAtom = atom({
+  key: "PostOfficePortalVisibleAtom",
+  default: true,
+})
+export const PostOfficePortalPositionAtom = atom({
+  key: "PostOfficePortalPositionAtom",
+  default: [7.6, 0.03, 3.5],
+})
+
+export const StorePortalVisibleAtom = atom({
+  key: "StorePortalVisibleAtom",
+  default: true,
+})
+export const StorePortalPositionAtom = atom({
+  key: "StorePortalPositionAtom",
+  default: [8.3, 0.03, 19],
+})
+
+export const OtherRoomPortalVisibleAtom = atom({
+  key: "OtherRoomPortalVisibleAtom",
+  default: true,
+})
+export const OtherRoomPortalPositionAtom = atom({
+  key: "OtherRoomPortalPositionAtom",
+  default: [-8.3, 0.03, 18],
+})
+
+export const WorldPortalVisibleAtom = atom({
+  key: "WorldPortalVisibleAtom",
+  default: true,
+})
+export const WorldPortalPositionAtom = atom({
+  key: "WorldPortalPositionAtom",
+  default: [0, 0.03, 26],
 })
