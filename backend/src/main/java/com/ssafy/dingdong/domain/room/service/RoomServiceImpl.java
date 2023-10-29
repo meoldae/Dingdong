@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.dingdong.domain.member.repository.MemberRepository;
-import com.ssafy.dingdong.domain.member.service.MemberService;
 import com.ssafy.dingdong.domain.room.dto.request.RoomUpdateRequestDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
@@ -143,6 +142,20 @@ public class RoomServiceImpl implements RoomService {
 					roomHeartRepository.save(newRecord);
 				}
 			);
+	}
+
+	@Override
+	@Transactional
+	public String isHeartRoom(String memberId, Long roomId) {
+		RoomHeart roomHeartInfo = roomHeartRepository.findByMemberIdAndRoomId(memberId, roomId).orElseThrow(
+			() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
+		);
+
+		if (roomHeartInfo.getCreateTime() != null) {
+			return "Y";
+		} else {
+			return "N";
+		}
 	}
 
 	@Override

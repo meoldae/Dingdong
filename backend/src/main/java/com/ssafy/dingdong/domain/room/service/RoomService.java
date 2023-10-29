@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.dingdong.domain.room.dto.request.RoomUpdateRequestDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
@@ -28,6 +29,8 @@ public interface RoomService {
 	void updateRoom(RoomUpdateRequestDto roomUpdateRequestDto, String name);
 
 	void createHeartRoom(String memberId, Long roomId);
+
+	String isHeartRoom(String memberId, Long roomId);
 
 	List<RoomScoreDto> getRoomScore();
 }
