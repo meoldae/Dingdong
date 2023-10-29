@@ -29,15 +29,24 @@ function RoomPage() {
   const popUpStatus = useRecoilValue(popUpStatusAtom)
   const canvasRef = useRef()
   const [shareModal, setShareModal] = useState(false)
-  console.log(canvasRef)
 
   useEffect(() => {
-    fetchRoomData().then((response) => {
-      if (response.data.isMyRoom) {
-        setIsMyRoom(true)
-      }
-    })
-  }, [])
+
+    const roomId = window.location.pathname.match(/\d+/g);
+    // const myRoomId = localStorage.getItem("userAtom").roomId;
+    const myRoomId = 3;
+
+    setIsMyRoom(roomId == myRoomId);
+
+    fetchRoomData(roomId, 
+      (response) => {
+        console.log(response.data.data);
+    },
+    (error) => {
+      console.error("Error at fetching RoomData...", error);''
+    });
+
+  }, [isMyRoom]);
 
   const randomVisit = () => {
     console.log("랜덤방문 함수")
