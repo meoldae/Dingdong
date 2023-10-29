@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useSetRecoilState } from "recoil"
+import { useNavigate } from "react-router-dom"
 import {
   ArriveAtom,
   ConfirmEnteringRoomAtom,
@@ -8,6 +9,8 @@ import { DefaultPosition, DefaultZoom } from "../../../atom/DefaultSettingAtom"
 import styles from "./ConfirmEnteringRoomModal.module.css"
 
 const ConfirmEnteringRoomModal = ({ modalContent }) => {
+  const navigate = useNavigate()
+
   const [isInitialRender, setIsInitialRender] = useState(true)
 
   useEffect(() => {
@@ -30,6 +33,7 @@ const ConfirmEnteringRoomModal = ({ modalContent }) => {
   // 마이룸으로 이동
   const onConfirm = () => {
     setConfirmEnteringHouse(false)
+    navigate("/room")
   }
 
   // 모달 취소
