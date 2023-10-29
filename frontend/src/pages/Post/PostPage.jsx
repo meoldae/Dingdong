@@ -31,7 +31,7 @@ const PostPage = () => {
             />
           </div>
           <div className={styles.ResultContainer}>
-            <div>유저</div>
+            <div>유저 검색 결과</div>
           </div>
         </div>
         <div className={styles.ButtonContainer}>
