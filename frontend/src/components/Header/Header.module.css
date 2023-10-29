@@ -1,10 +1,10 @@
-.wrap{
+.wrap {
   position: absolute;
   z-index: 3;
   width: 100%;
 }
-.header{
 
+.header {
   display: flex;
   width: 100%;
   align-items: center;
@@ -12,13 +12,13 @@
   margin-top: 20px;
 }
 
-.header img{
+.header img {
   padding: 0 20px;
   width: 40px;
   height: auto;
 }
 
-.userName{
+.userName {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,15 +29,14 @@
   border: 0.1px solid black;
 }
 
-.share{
+.share {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: end;
 }
 
-.shareImg{
-  padding:20 20px;
-  margin:80px 20px 0 0;
+.shareImg {
+  padding: 20 20px;
+  margin: 80px 20px 0 0;
 }
-
