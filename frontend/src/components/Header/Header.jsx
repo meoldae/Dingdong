@@ -1,13 +1,24 @@
 import style from "./Header.module.css"
 import hamburger from "../../../public/assets/icons/hamburgerbar.svg"
 import bell from "../../../public/assets/icons/bell.svg"
-const Header = () => {
+import { userAtom } from "../../atom/UserAtom"
+import { useRecoilValue } from "recoil"
+
+const Header = ({ checkMyRoom }) => {
   const icon = "../../../../public/assets/icons/"
+
+  // 유저정보
+  const userInfo = useRecoilValue(userAtom)
+
   return (
     <div className={style.wrap}>
       <div className={style.header}>
         <img src={hamburger} alt="" />
-        <div className={style.userName}>userName</div>
+        {checkMyRoom === "my" ? (
+          <div className={style.userName}>{userInfo.nickname}</div>
+        ) : (
+          <div className={style.userName}>userName</div>
+        )}
         <img src={bell} alt="" />
       </div>
     </div>

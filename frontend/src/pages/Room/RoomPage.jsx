@@ -21,7 +21,7 @@ import styles from "./RoomPage.module.css"
 import PopUp from "../../components/Room/RoomCustomPopUp/PopUp"
 import SharePage from "../../components/Modal/Sharing/SharePage"
 import SharingModalList from "../../components/Modal/Sharing/SharingModalList"
-import {userAtom} from "../../atom/UserAtom"
+import { userAtom } from "../../atom/UserAtom"
 
 function RoomPage() {
   const [editMode, setEditMode] = useRecoilState(buildModeState)
@@ -31,23 +31,24 @@ function RoomPage() {
   const popUpStatus = useRecoilValue(popUpStatusAtom)
   const canvasRef = useRef()
   const [shareModal, setShareModal] = useState(false)
-  const userInfo = useRecoilValue(userAtom);
+  const userInfo = useRecoilValue(userAtom)
 
   useEffect(() => {
+    const roomId = window.location.pathname.match(/\d+/g)
+    const myRoomId = userInfo.roomId
+    setIsMyRoom(roomId == myRoomId)
 
-    const roomId = window.location.pathname.match(/\d+/g);
-    const myRoomId = userInfo.roomId;
-    setIsMyRoom(roomId == myRoomId);
-
-    fetchRoomData(roomId, 
+    fetchRoomData(
+      roomId,
       (response) => {
-        setItems(response.data.data.roomFurnitureList);
-    },
-    (error) => {
-      console.error("Error at fetching RoomData...", error);''
-    });
-
-  }, [isMyRoom]);
+        setItems(response.data.data.roomFurnitureList)
+      },
+      (error) => {
+        console.error("Error at fetching RoomData...", error)
+        ;("")
+      }
+    )
+  }, [isMyRoom])
 
   const randomVisit = () => {
     console.log("랜덤방문 함수")
@@ -55,7 +56,11 @@ function RoomPage() {
 
   return (
     <div className={styles.container}>
-      <Header />
+      {isMyRoom ? (
+        <Header checkMyRoom={"my"} />
+      ) : (
+        <Header checkMyRoom={"other"} />
+      )}
       {isMyRoom ? <NeighborRequest /> : <Share setShareModal={setShareModal} />}
       {shareModal && (
         <>
@@ -106,7 +111,7 @@ function RoomPage() {
         <div className={styles.buttonContainer}>
           <div className={styles.randomButton} onClick={randomVisit}>
             <img
-              src={"assets/icons/random.svg"}
+              src={"../../../../public/assets/icons/random.svg"}
               className={styles.randomImage}
             />
             <div className={styles.randomButtonContent}>랜덤 방문</div>

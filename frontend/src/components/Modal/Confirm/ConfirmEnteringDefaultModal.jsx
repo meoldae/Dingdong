@@ -13,11 +13,12 @@ const ConfirmEnteringDefaultModal = ({
   setConfirmEnteringLocation,
   location,
 }) => {
+  const navigate = useNavigate()
+
   const [isInitialRender, setIsInitialRender] = useState(true)
 
   useEffect(() => {
     if (isInitialRender) {
-      console.log(1)
       setIsInitialRender(false)
     }
   }, [isInitialRender])
@@ -33,6 +34,10 @@ const ConfirmEnteringDefaultModal = ({
   const onConfirm = () => {
     if (location === "house") {
       // 집으로 이동
+      navigate("/room")
+    } else if (location === "postOffice") {
+      // 우체국으로 이동
+      navigate("/postoffice")
     }
     setConfirmEnteringLocation(false)
   }
@@ -137,8 +142,6 @@ const ConfirmEnteringDefaultModal = ({
             <div className={styles.Confirm} onClick={onCancle}>
               {ok}
             </div>
-
-            {/* &nbsp; = 띄어쓰기 */}
           </div>
         </div>
       </div>
