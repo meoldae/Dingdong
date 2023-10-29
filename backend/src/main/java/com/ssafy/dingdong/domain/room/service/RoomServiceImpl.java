@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -179,7 +180,7 @@ public class RoomServiceImpl implements RoomService {
 				roomScore.setNickname(nickname);
 			}
 		);
-		return roomScoreList.stream().toList();
+		return roomScoreList.stream().collect(Collectors.toList());
 	}
 
 	@Override
