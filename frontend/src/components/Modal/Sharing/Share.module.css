@@ -55,6 +55,16 @@ textarea:focus {
   min-width: 280px;            
 }
 
+.shareRoomSafari{
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr; 
+  z-index: 300000;
+  position: absolute;
+  bottom: 0;
+  background-color: white; 
+  min-width: 100%;            
+} 
+
 .shareRoom{
   display: grid; 
   grid-template-columns: 1fr 1fr 1fr 1fr; 

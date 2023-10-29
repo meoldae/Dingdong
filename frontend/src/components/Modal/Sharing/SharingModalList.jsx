@@ -16,6 +16,10 @@ function SharingModalList(props) {
   const url = encodeURI(window.location.href)
   const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY;
 
+  const isSafari = () => {
+    const ua = navigator.userAgent.toLowerCase();
+    return ua.indexOf('safari') !== -1 && ua.indexOf('chrome') === -1;
+  };
   
   const shareUrl = (e) => {
     if (navigator.clipboard) {
@@ -165,11 +169,34 @@ function SharingModalList(props) {
     ];
   }
 
+  if (isSafari()) {
+    sharetype = [
+      { icon: urlCopy, name: "URL복사", click: shareUrl },   
+      { icon: kakao, name: "카카오톡", click: shareKakao },
+      { icon: twitter, name: "트위터", click: shareTwitter },
+    ];
+  }
+
   
 
-  if (props.shareMode === "start" || props.shareMode === "result") {
+  if (props.shareMode === "start" || props.shareMode === "result" ) {
     return (
       <div className={styles.share}>
+        {sharetype.map((share) => (
+          <SharingModalListItem
+            key={share.name}
+            icon={share.icon}
+            name={share.name}
+            click={share.click}
+            className={styles.shareItem}
+          />
+        ))}
+      </div>
+    )
+  } 
+  else if (isSafari()) {
+    return (
+      <div className={styles.shareRoomSafari}>
         {sharetype.map((share) => (
           <SharingModalListItem
             key={share.name}
