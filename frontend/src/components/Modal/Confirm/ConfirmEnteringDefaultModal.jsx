@@ -137,8 +137,6 @@ const ConfirmEnteringDefaultModal = ({
             <div className={styles.Confirm} onClick={onCancle}>
               {ok}
             </div>
-
-            {/* &nbsp; = 띄어쓰기 */}
           </div>
         </div>
       </div>
