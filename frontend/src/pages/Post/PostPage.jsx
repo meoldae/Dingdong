@@ -7,6 +7,10 @@ import styles from "./PostPage.module.css"
 const PostPage = () => {
   const [searchText, setSearchText] = useState("")
 
+  const selectUserHandler = () => {
+    console.log("우표모달 띄우기")
+  }
+
   return (
     <div className={styles.Container}>
       <div className={styles.SemiContainer}>
@@ -34,7 +38,9 @@ const PostPage = () => {
             <div>유저 검색 결과</div>
           </div>
         </div>
-        <div className={styles.SelectButton}>선택하기</div>
+        <div className={styles.SelectButton} onClick={selectUserHandler}>
+          선택하기
+        </div>
       </div>
     </div>
   )
