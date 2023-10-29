@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { useSetRecoilState } from "recoil"
-import { ArriveAtom } from "../../../atom/SinglePlayAtom"
+import { useNavigate } from "react-router-dom"
+import {
+  ArriveAtom,
+  ConfirmEnteringRoomAtom,
+} from "../../../atom/SinglePlayAtom"
 import { DefaultPosition, DefaultZoom } from "../../../atom/DefaultSettingAtom"
 import styles from "./ConfirmEnteringDefaultModal.module.css"
 
