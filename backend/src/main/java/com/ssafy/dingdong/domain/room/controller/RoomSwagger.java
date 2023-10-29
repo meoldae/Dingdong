@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ssafy.dingdong.domain.room.dto.request.RoomUpdateRequestDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
+import com.ssafy.dingdong.domain.room.dto.response.RoomResponseAllDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomScoreDto;
 import com.ssafy.dingdong.global.response.CommonResponse;
@@ -29,7 +30,7 @@ public interface RoomSwagger {
 
 	DataResponse<RoomResponseDto> getRoomByMemberId(@PathVariable String roomId);
 
-	DataResponse<RoomResponseDto> getRoomByRoomId(@PathVariable Long roomId);
+	DataResponse<RoomResponseAllDetailDto> getRoomByRoomId(@PathVariable Long roomId);
 
 	DataResponse<Page<FurnitureSummaryDto>> getFurnitureList(Integer category, @PageableDefault(size = 6) Pageable pageable);
 

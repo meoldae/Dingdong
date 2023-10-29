@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.dingdong.domain.room.dto.request.RoomUpdateRequestDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
+import com.ssafy.dingdong.domain.room.dto.response.RoomResponseAllDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomScoreDto;
 import com.ssafy.dingdong.domain.room.service.RoomService;
@@ -52,8 +53,8 @@ public class RoomController implements RoomSwagger{
 
     @Override
     @GetMapping("/{roomId}")
-    public DataResponse<RoomResponseDto> getRoomByRoomId(@PathVariable Long roomId) {
-        RoomResponseDto findRoom = roomService.getRoomByRoomId(roomId);
+    public DataResponse<RoomResponseAllDetailDto> getRoomByRoomId(@PathVariable Long roomId) {
+        RoomResponseAllDetailDto findRoom = roomService.getRoomByRoomId(roomId);
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, findRoom);
     }
 
