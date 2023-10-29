@@ -23,4 +23,6 @@ public interface MemberService {
 	void deleteMember(String memberId);
 
 	boolean getMemberByNickname(String nickname);
+
+	Long getCCUCount();
 }

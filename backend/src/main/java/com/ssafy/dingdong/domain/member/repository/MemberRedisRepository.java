@@ -67,4 +67,8 @@ public class MemberRedisRepository {
 	public Optional<String> findStatusByMemberId(String memberId) {
 		return Optional.ofNullable(hashOperations.get(SESSION, memberId));
 	}
+
+	public Long getCCUCount(){
+		return hashOperations.size(SESSION);
+	}
 }

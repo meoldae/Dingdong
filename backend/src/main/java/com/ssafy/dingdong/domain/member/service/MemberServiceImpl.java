@@ -93,4 +93,9 @@ public class MemberServiceImpl implements MemberService {
 		log.info("nickname {} , ", nickname);
 		return !memberRepository.findByNickname(nickname).isPresent();
 	}
+
+	@Override
+	public Long getCCUCount(){
+		return memberRedisRepository.getCCUCount();
+	}
 }
