@@ -21,26 +21,27 @@ import styles from "./RoomPage.module.css"
 import PopUp from "../../components/Room/RoomCustomPopUp/PopUp"
 import SharePage from "../../components/Modal/Sharing/SharePage"
 import SharingModalList from "../../components/Modal/Sharing/SharingModalList"
+import { userAtom } from "../../atom/UserAtom"
 
 function RoomPage() {
   const [editMode, setEditMode] = useRecoilState(buildModeState)
+  const [items, setItems] = useRecoilState(ItemsState)
   const [isMyRoom, setIsMyRoom] = useState(false)
   const [drag, setDrag] = useRecoilState(draggedItemState)
   const popUpStatus = useRecoilValue(popUpStatusAtom)
   const canvasRef = useRef()
   const [shareModal, setShareModal] = useState(false)
+  const userInfo = useRecoilValue(userAtom)
 
   useEffect(() => {
     const roomId = window.location.pathname.match(/\d+/g)
-    // const myRoomId = localStorage.getItem("userAtom").roomId;
-    const myRoomId = 3
-
+    const myRoomId = userInfo.roomId
     setIsMyRoom(roomId == myRoomId)
 
     fetchRoomData(
       roomId,
       (response) => {
-        console.log(response.data.data)
+        setItems(response.data.data.roomFurnitureList)
       },
       (error) => {
         console.error("Error at fetching RoomData...", error)
@@ -69,7 +70,7 @@ function RoomPage() {
           <SharingModalList />
         </>
       )}
-      <div
+      {/* <div
         className={styles.button}
         onClick={() => {
           setEditMode(!editMode)
@@ -80,7 +81,7 @@ function RoomPage() {
       >
         {editMode && <span>편집모드</span>}
         {!editMode && <span>관광모드</span>}
-      </div>
+      </div> */}
 
       <Canvas
         shadows

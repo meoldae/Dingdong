@@ -8,7 +8,6 @@
   align-items: center;
   z-index: 10000;
   border-radius: 50px;
-
 }
 
 .modalContent {
@@ -36,7 +35,8 @@
   padding: 10px;           
   resize: none;           
   overflow: auto;          
-  box-shadow: none;        
+  box-shadow: none;      
+  /* background-color: wheat;   */
 }
 
 textarea:focus {
