@@ -44,7 +44,7 @@ export const PostOfficePortalVisibleAtom = atom({
 })
 export const PostOfficePortalPositionAtom = atom({
   key: "PostOfficePortalPositionAtom",
-  default: [0, 0.03, 3],
+  default: [7.6, 0.03, 3.5],
 })
 
 export const StorePortalVisibleAtom = atom({
@@ -53,7 +53,7 @@ export const StorePortalVisibleAtom = atom({
 })
 export const StorePortalPositionAtom = atom({
   key: "StorePortalPositionAtom",
-  default: [0, 0.03, 5],
+  default: [8.3, 0.03, 19],
 })
 
 export const OtherRoomPortalVisibleAtom = atom({
@@ -62,7 +62,7 @@ export const OtherRoomPortalVisibleAtom = atom({
 })
 export const OtherRoomPortalPositionAtom = atom({
   key: "OtherRoomPortalPositionAtom",
-  default: [0, 0.03, 7],
+  default: [-8.3, 0.03, 18],
 })
 
 export const WorldPortalVisibleAtom = atom({
@@ -71,5 +71,5 @@ export const WorldPortalVisibleAtom = atom({
 })
 export const WorldPortalPositionAtom = atom({
   key: "WorldPortalPositionAtom",
-  default: [0, 0.03, 9],
+  default: [0, 0.03, 26],
 })

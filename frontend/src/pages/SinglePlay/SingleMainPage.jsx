@@ -129,7 +129,7 @@ const SingleMainPage = () => {
             setConfirmEnteringLocation={setConfirmEnteringPostOffice}
             portalPosition={postOfficePortalPosition}
             setPortalVisible={setPostOfficePortalVisible}
-            adjustedAngle={[16, 5, 1]}
+            adjustedAngle={[-4, 4, 4]}
             adjustedZoom={0.24}
           />
         ) : (
@@ -144,8 +144,8 @@ const SingleMainPage = () => {
             setConfirmEnteringLocation={setConfirmEnteringStore}
             portalPosition={storePortalPosition}
             setPortalVisible={setStorePortalVisible}
-            adjustedAngle={[16, 5, 1]}
-            adjustedZoom={0.24}
+            adjustedAngle={[2, 4, 4]}
+            adjustedZoom={0.3}
           />
         ) : (
           <DefaultPortalRing
@@ -159,8 +159,8 @@ const SingleMainPage = () => {
             setConfirmEnteringLocation={setConfirmEnteringOtherRoom}
             portalPosition={otherRoomPortalPosition}
             setPortalVisible={setOtherRoomPortalVisible}
-            adjustedAngle={[16, 5, 1]}
-            adjustedZoom={0.24}
+            adjustedAngle={[14, 4, 1]}
+            adjustedZoom={0.23}
           />
         ) : (
           <DefaultPortalRing
@@ -174,8 +174,8 @@ const SingleMainPage = () => {
             setConfirmEnteringLocation={setConfirmEnteringWorld}
             portalPosition={worldPortalPosition}
             setPortalVisible={setWorldPortalVisible}
-            adjustedAngle={[16, 5, 1]}
-            adjustedZoom={0.24}
+            adjustedAngle={[0, 3, -8]}
+            adjustedZoom={0.3}
           />
         ) : (
           <DefaultPortalRing
@@ -192,6 +192,7 @@ const SingleMainPage = () => {
           <ConfirmEnteringDefaultModal
             modalContent={"우리집에 입장하시겠습니까?"}
             setConfirmEnteringLocation={setConfirmEnteringRoom}
+            location={"house"}
           />
         </div>
       )}
@@ -201,6 +202,7 @@ const SingleMainPage = () => {
           <ConfirmEnteringDefaultModal
             modalContent={"우체국에 입장하시겠습니까?"}
             setConfirmEnteringLocation={setConfirmEnteringPostOffice}
+            location={"postOffice"}
           />
         </div>
       )}
@@ -210,6 +212,7 @@ const SingleMainPage = () => {
           <ConfirmEnteringDefaultModal
             modalContent={"준비중"}
             setConfirmEnteringLocation={setConfirmEnteringStore}
+            location={"store"}
           />
         </div>
       )}
@@ -219,6 +222,7 @@ const SingleMainPage = () => {
           <ConfirmEnteringDefaultModal
             modalContent={"다른 유저의 집을 구경하시겠습니까?"}
             setConfirmEnteringLocation={setConfirmEnteringOtherRoom}
+            location={"otherRoom"}
           />
         </div>
       )}
@@ -228,6 +232,7 @@ const SingleMainPage = () => {
           <ConfirmEnteringDefaultModal
             modalContent={"준비중"}
             setConfirmEnteringLocation={setConfirmEnteringWorld}
+            location={"world"}
           />
         </div>
       )}

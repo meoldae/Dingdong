@@ -7,6 +7,7 @@ import styles from "./ConfirmEnteringDefaultModal.module.css"
 const ConfirmEnteringDefaultModal = ({
   modalContent,
   setConfirmEnteringLocation,
+  location,
 }) => {
   const [isInitialRender, setIsInitialRender] = useState(true)
 
@@ -26,6 +27,9 @@ const ConfirmEnteringDefaultModal = ({
 
   // 마이룸으로 이동
   const onConfirm = () => {
+    if (location === "house") {
+      // 집으로 이동
+    }
     setConfirmEnteringLocation(false)
   }
 
