@@ -23,10 +23,18 @@ const PostPage = () => {
     setIsPostCard(true)
   }
 
+  const backNavigate = () => {
+    window.location.href = "/single"
+  }
+
   return (
     <div className={styles.Container}>
       <div className={styles.SemiContainer}>
-        <img src={"assets/icons/back.svg"} className={styles.BackButton} />
+        <img
+          src={"assets/icons/back.svg"}
+          className={styles.BackButton}
+          onClick={backNavigate}
+        />
         <div className={styles.TitleContainer}>
           <div className={styles.Title}>우체국</div>
           <div className={styles.SemiTitle}>편지를 보낼 사람을 찾아보세요.</div>
