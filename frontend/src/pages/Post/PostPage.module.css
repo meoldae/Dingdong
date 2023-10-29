@@ -17,12 +17,18 @@
 }
 
 .Title {
-  font-size: 30px;
+  font-size: 35px;
   font-family: "Pretendard-Bold";
 }
 
 .SemiTitle {
   font-size: 15px;
   font-family: "Pretendard-SemiBold";
-  margin-top: 15px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.TitleLine {
+  border: 1px solid #f1c4e1;
+  margin-bottom: 30px;
 }
