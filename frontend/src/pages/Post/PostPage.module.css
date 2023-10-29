@@ -4,6 +4,7 @@
   background: #ffebf4;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .SemiContainer {
@@ -68,14 +69,10 @@
   margin-top: 30px;
 }
 
-.ButtonContainer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
 .SelectButton {
-  width: 100%;
+  position: absolute;
+  bottom: 0;
+  width: 280px;
   height: 60px;
   background: #f1c4e1;
   border-radius: 20px;
@@ -83,5 +80,4 @@
   font-size: 25px;
   text-align: center;
   line-height: 60px;
-  margin-top: 50px;
 }

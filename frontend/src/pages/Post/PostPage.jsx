@@ -34,9 +34,7 @@ const PostPage = () => {
             <div>유저 검색 결과</div>
           </div>
         </div>
-        <div className={styles.ButtonContainer}>
-          <div className={styles.SelectButton}>선택하기</div>
-        </div>
+        <div className={styles.SelectButton}>선택하기</div>
       </div>
     </div>
   )
