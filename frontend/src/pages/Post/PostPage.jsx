@@ -30,6 +30,9 @@ const PostPage = () => {
               className={styles.SearchIcon}
             />
           </div>
+          <div className={styles.ResultContainer}>
+            <div>유저</div>
+          </div>
         </div>
       </div>
     </div>
