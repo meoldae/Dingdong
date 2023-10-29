@@ -130,7 +130,7 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	@Transactional
-	public void createHeartRoom(String memberId, Long roomId) {
+	public String createHeartRoom(String memberId, Long roomId) {
 		roomHeartRepository.findByMemberIdAndRoomId(memberId, roomId)
 			.ifPresentOrElse(
 				RoomHeart::updateStatus,
@@ -142,6 +142,8 @@ public class RoomServiceImpl implements RoomService {
 					roomHeartRepository.save(newRecord);
 				}
 			);
+
+		return isHeartRoom(memberId, roomId);
 	}
 
 	@Override
