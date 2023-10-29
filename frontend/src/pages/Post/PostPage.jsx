@@ -16,7 +16,15 @@ const PostPage = () => {
         </div>
         <div className={styles.TitleLine}></div>
         <div className={styles.ContentContainer}>
-          <input type="text" />
+          <div className={styles.InputContainer}>
+            <input
+              type="text"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              placeholder="검색"
+              maxLength={7}
+            />
+          </div>
         </div>
       </div>
     </div>
