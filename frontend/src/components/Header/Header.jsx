@@ -1,7 +1,7 @@
 import style from "./Header.module.css"
 
 const Header = () => {
-  const icon = "assets/icons/"
+  const icon = "../../../../public/assets/icons/"
   return (
     <div className={style.wrap}>
       <div className={style.header}>
