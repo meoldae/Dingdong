@@ -35,6 +35,9 @@ const ConfirmEnteringDefaultModal = ({
     if (location === "house") {
       // 집으로 이동
       navigate("/room")
+    } else if (location === "postOffice") {
+      // 우체국으로 이동
+      navigate("/postoffice")
     }
     setConfirmEnteringLocation(false)
   }
