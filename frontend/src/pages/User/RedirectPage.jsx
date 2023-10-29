@@ -31,7 +31,7 @@ const RedirectPage = () => {
                     console.log(error);
                 });
             
-            navigate("/");
+            // navigate("/");
         }
     }, [loginInfo.accessToken]); 
     
