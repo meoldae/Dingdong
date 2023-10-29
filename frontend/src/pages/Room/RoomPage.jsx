@@ -31,22 +31,23 @@ function RoomPage() {
   const [shareModal, setShareModal] = useState(false)
 
   useEffect(() => {
-
-    const roomId = window.location.pathname.match(/\d+/g);
+    const roomId = window.location.pathname.match(/\d+/g)
     // const myRoomId = localStorage.getItem("userAtom").roomId;
-    const myRoomId = 3;
+    const myRoomId = 3
 
-    setIsMyRoom(roomId == myRoomId);
+    setIsMyRoom(roomId == myRoomId)
 
-    fetchRoomData(roomId, 
+    fetchRoomData(
+      roomId,
       (response) => {
-        console.log(response.data.data);
-    },
-    (error) => {
-      console.error("Error at fetching RoomData...", error);''
-    });
-
-  }, [isMyRoom]);
+        console.log(response.data.data)
+      },
+      (error) => {
+        console.error("Error at fetching RoomData...", error)
+        ;("")
+      }
+    )
+  }, [isMyRoom])
 
   const randomVisit = () => {
     console.log("랜덤방문 함수")
@@ -105,7 +106,7 @@ function RoomPage() {
         <div className={styles.buttonContainer}>
           <div className={styles.randomButton} onClick={randomVisit}>
             <img
-              src={"assets/icons/random.svg"}
+              src={"../../../../public/assets/icons/random.svg"}
               className={styles.randomImage}
             />
             <div className={styles.randomButtonContent}>랜덤 방문</div>
