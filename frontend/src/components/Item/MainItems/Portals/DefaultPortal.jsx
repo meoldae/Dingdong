@@ -49,13 +49,13 @@ const DefaultPortal = ({
       setPortalVisible(false)
     } else {
       // 카메라 세팅 기본 값으로 초기화
-      setDefaultCamPosition([2, 10, 10])
-      setDefaultZoom(0.18)
-
+      // setDefaultCamPosition([2, 10, 10])
+      // setDefaultZoom(0.18)
       // 캐릭터 움직임
-      setIsArrived(false)
+      // setIsArrived(false)
     }
   }, [characterPosition])
+  console.log()
 
   return (
     <mesh position={portalPosition} rotation={[-Math.PI / 2, 0.01, 0]}>

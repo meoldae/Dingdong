@@ -11,9 +11,20 @@ export const ConfirmEnteringRoomAtom = atom({
   key: "ConfirmEnteringHouseAtom",
   default: false,
 })
-
 export const ConfirmEnteringPostOfficeAtom = atom({
   key: "ConfirmEnteringPostOfficeAtom",
+  default: false,
+})
+export const ConfirmEnteringStoreAtom = atom({
+  key: "ConfirmEnteringStoreAtom",
+  default: false,
+})
+export const ConfirmEnteringOtherRoomAtom = atom({
+  key: "ConfirmEnteringOtherRoomAtom",
+  default: false,
+})
+export const ConfirmEnteringWorldAtom = atom({
+  key: "ConfirmEnteringWorldAtom",
   default: false,
 })
 
@@ -34,4 +45,31 @@ export const PostOfficePortalVisibleAtom = atom({
 export const PostOfficePortalPositionAtom = atom({
   key: "PostOfficePortalPositionAtom",
   default: [0, 0.03, 3],
+})
+
+export const StorePortalVisibleAtom = atom({
+  key: "StorePortalVisibleAtom",
+  default: true,
+})
+export const StorePortalPositionAtom = atom({
+  key: "StorePortalPositionAtom",
+  default: [0, 0.03, 5],
+})
+
+export const OtherRoomPortalVisibleAtom = atom({
+  key: "OtherRoomPortalVisibleAtom",
+  default: true,
+})
+export const OtherRoomPortalPositionAtom = atom({
+  key: "OtherRoomPortalPositionAtom",
+  default: [0, 0.03, 7],
+})
+
+export const WorldPortalVisibleAtom = atom({
+  key: "WorldPortalVisibleAtom",
+  default: true,
+})
+export const WorldPortalPositionAtom = atom({
+  key: "WorldPortalPositionAtom",
+  default: [0, 0.03, 9],
 })
