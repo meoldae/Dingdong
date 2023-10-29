@@ -28,7 +28,6 @@ const CustomCamera = () => {
   // 현재 및 목표 위치 저장
   const currentPos = useRef([...defaultCameraPosition])
   const targetPos = useRef([...defaultCameraPosition])
-
   // 화면 사이즈 측정
   useEffect(() => {
     if (cameraRef.current) {
@@ -52,7 +51,7 @@ const CustomCamera = () => {
           characterPosition[2] + defaultCameraPosition[2],
         ]
 
-        const factor = 0.02 // 카메라 전환 속도 (값 : 0 ~ 1, 1로 갈수록 빠름)
+        const factor = 0.04 // 카메라 전환 속도 (값 : 0 ~ 1, 1로 갈수록 빠름)
         currentPos.current[0] = lerp(
           currentPos.current[0],
           targetPos.current[0],
@@ -92,7 +91,7 @@ const CustomCamera = () => {
       position={defaultCameraPosition}
       zoom={defaultCameraZoom}
       near={0.5}
-      far={20}
+      far={40}
     />
   )
 }

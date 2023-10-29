@@ -28,12 +28,12 @@ const RoomPortal = () => {
 
   // 포탈
   const roomPortalPosition = useRecoilValue(RoomPortalPositionAtom)
-  const roomPortalSize = [0.5, 1]
+  const roomPortalSize = [0.5, 0.5]
   const setRoomPortalVisible = useSetRecoilState(RoomPortalVisibleAtom)
 
   // 카메라 각도 조절
-  const adjustedAngle = [9, 4, 2]
-  const adjustedZoom = 0.25
+  const adjustedAngle = [16, 5, 1]
+  const adjustedZoom = 0.24
 
   useEffect(() => {
     // 포탈 영역 내부에 있는지 확인
@@ -59,8 +59,8 @@ const RoomPortal = () => {
       setRoomPortalVisible(false)
     } else {
       // 카메라 세팅 기본 값으로 초기화
-      setDefaultCamPosition([1, 5, 5])
-      setDefaultZoom(0.17)
+      setDefaultCamPosition([2, 10, 10])
+      setDefaultZoom(0.18)
 
       // 캐릭터 움직임
       setIsArrived(false)
