@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.ssafy.dingdong.domain.ccu.service.CCUService;
+import com.ssafy.dingdong.domain.member.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

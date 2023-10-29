@@ -19,7 +19,7 @@ public class CCUServiceImpl implements CCUService{
 
 	@Override
 	public void createCCUCount(LocalDateTime now) {
-		Long ccuCount = memberService.getCCUCount();
+		Long ccuCount = memberService.getMaxCCUCount();
 		CCU ccu = CCU.builder().ccuCount(ccuCount).now(now).build();
 
 		ccuRepository.save(ccu);

@@ -24,5 +24,5 @@ public interface MemberService {
 
 	boolean getMemberByNickname(String nickname);
 
-	Long getCCUCount();
+	Long getMaxCCUCount();
 }
