@@ -6,13 +6,16 @@ import styles from "./PostPage.module.css"
 
 // 컴포넌트
 import PostCardBox from "../../components/Modal/Post/PostCardBox"
+import SendLetter from "../../components/Modal/Post/SendLetter"
 
 const PostPage = () => {
   const [searchText, setSearchText] = useState("")
   const [isPostCardBox, setIsPostCardBox] = useState(false)
+  const [isPostCard, setIsPostCard] = useState(false)
 
-  const selectUserHandler = () => {
-    setIsPostCardBox(true)
+  const selectedPostCardHandler = () => {
+    setIsPostCardBox(false)
+    setIsPostCard(true)
   }
 
   return (
@@ -42,11 +45,17 @@ const PostPage = () => {
             <div>유저 검색 결과</div>
           </div>
         </div>
-        <div className={styles.SelectButton} onClick={selectUserHandler}>
+        <div
+          className={styles.SelectButton}
+          onClick={() => setIsPostCardBox(true)}
+        >
           선택하기
         </div>
       </div>
-      {isPostCardBox && <PostCardBox />}
+      {isPostCardBox && (
+        <PostCardBox cancelClick={() => setIsPostCardBox(false)} />
+      )}
+      {isPostCard && <SendLetter />}
     </div>
   )
 }
