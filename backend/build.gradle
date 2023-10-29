@@ -49,6 +49,13 @@ dependencies {
 
 	// [23.10.24] JJY Swagger 의존성 추가
 	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
+	
+	// [23.10.29] KDP Prometheus 추가
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-actuator'
+		implementation 'io.micrometer:micrometer-registry-prometheus'
+	}
+
 }
 
 tasks.named('test') {
