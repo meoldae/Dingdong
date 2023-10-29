@@ -28,6 +28,7 @@ public class MemberServiceImpl implements MemberService {
 	private final MemberRedisRepository memberRedisRepository;
 	private final RoomService roomService;
 	private final JwtProvider jwtProvider;
+	private static Long maxCCUCount = 0L;
 
 	@Override
 	@Transactional
@@ -53,6 +54,8 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void createSession(String memberId) {
 		memberRedisRepository.insertStatusByMemberId(memberId);
+		Long ccuCount = memberRedisRepository.getCCUCount();
+		maxCCUCount = Math.max(maxCCUCount, ccuCount);
 	}
 
 	@Override
@@ -93,4 +96,13 @@ public class MemberServiceImpl implements MemberService {
 		log.info("nickname {} , ", nickname);
 		return !memberRepository.findByNickname(nickname).isPresent();
 	}
+
+	@Override
+	public Long getMaxCCUCount(){
+		Long ccuCount = memberRedisRepository.getCCUCount();
+		maxCCUCount = 0L;
+		return ccuCount;
+	}
+
+
 }
