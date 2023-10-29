@@ -13,6 +13,7 @@ const RedirectPage = () => {
     
     useEffect(() => {
         if (loginInfo.accessToken) {
+
             fetchUserInfo(loginInfo.accessToken)
                 .then(response => {
                     console.log(response);
@@ -31,7 +32,7 @@ const RedirectPage = () => {
                     console.log(error);
                 });
             
-            // navigate("/");
+            // navigate("/"); 
         }
     }, [loginInfo.accessToken]); 
     
@@ -40,7 +41,7 @@ const RedirectPage = () => {
         console.log(loginInfo);
     }
 
-    return null;
+    // return null;
 }
 
 export default RedirectPage;
