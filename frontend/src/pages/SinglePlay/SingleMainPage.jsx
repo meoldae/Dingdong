@@ -66,7 +66,10 @@ const SingleMainPage = () => {
       {/* 입장 확인 모달 */}
       {confirmEnteringRoom && (
         <div className={styles.roomConfirmModal}>
-          <ConfirmEnteringRoomModal />
+          {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
+          <ConfirmEnteringRoomModal
+            modalContent={"마이룸에 입장하시겠습니까?"}
+          />
         </div>
       )}
     </div>
