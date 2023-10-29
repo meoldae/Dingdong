@@ -45,21 +45,26 @@ const ConfirmEnteringRoomModal = () => {
     setIsInitialRender(true)
   }
 
-  // 글자가 작성되는 JS
+  // 글자가 작성되는 JS -----------
   const [content, setContent] = useState("")
   const [yes, setYes] = useState("")
   const [no, setNo] = useState("")
 
+  // 내용
   const letters = "마이룸에 입장하시겠습니까?"
   const yesText = ["▶", " ", "예"]
   const noText = ["▶", " ", "아니오"]
 
+  // 글자 나오는 속도
   const speed = 50
+  // 각 파트별 딜레이 속도
   const delay = 200
 
+  // 대기함수
   const wait = (ms) => new Promise((res) => setTimeout(res, ms))
 
   useEffect(() => {
+    // 예 선택버튼 함수
     const typeYes = async () => {
       for (let char of yesText) {
         setYes((prevText) => prevText + char)
@@ -68,6 +73,7 @@ const ConfirmEnteringRoomModal = () => {
       await wait(delay)
     }
 
+    // 아니오 선택버튼 함수
     const typeNo = async () => {
       for (let char of noText) {
         setNo((prevText) => prevText + char)
@@ -75,6 +81,7 @@ const ConfirmEnteringRoomModal = () => {
       }
     }
 
+    // 모달 내용 및 예/아니오 버튼 함수
     const typeWords = async () => {
       for (let char of letters) {
         setContent((prevText) => prevText + char)
@@ -84,8 +91,11 @@ const ConfirmEnteringRoomModal = () => {
       await typeYes()
       await typeNo()
     }
+
+    // 함수 실행
     typeWords()
   }, [])
+  // -----------
 
   return (
     <div className={styles.MainModal}>
