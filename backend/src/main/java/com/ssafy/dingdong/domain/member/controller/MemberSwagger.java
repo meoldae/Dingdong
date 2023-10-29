@@ -28,6 +28,14 @@ import io.swagger.annotations.Api;
 public interface MemberSwagger {
 
 	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "요청에 성공했습니다."),
+		@ApiResponse(responseCode = "400", description = "회원을 찾을 수 없습니다.", content = @Content(schema = @Schema(implementation = CommonResponse.class)))
+	}
+	)
+	@Operation(summary = "로그인", description = "로그인 후 회원 정보를 반환합니다.")
+	DataResponse<MemberLoginResponseDto> loginMember(Authentication authentication);
+
+	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "요청에 성공했습니다."),
 			@ApiResponse(responseCode = "400", description = "회원을 찾을 수 없습니다.", content = @Content(schema = @Schema(implementation = CommonResponse.class)))
 			}

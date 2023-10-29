@@ -41,8 +41,8 @@ public class MemberServiceImpl implements MemberService {
 		findMember.signUp(memberLoginDto.nickname(), memberLoginDto.avatarId());
 		String accessToken = jwtProvider.createAccessToken(findMember);
 
-		roomService.createRoom(memberLoginDto.memberId());
-		return MemberLoginResponseDto.of(findMember, accessToken);
+		Long roomId = roomService.createRoom(memberLoginDto.memberId());
+		return MemberLoginResponseDto.of(findMember, roomId, accessToken);
 	}
 
 	@Override
@@ -74,6 +74,15 @@ public class MemberServiceImpl implements MemberService {
 			}
 		);
 		return resultList;
+	}
+
+	@Override
+	public MemberLoginResponseDto getLoginMember(String memberId) {
+		Member findMember = memberRepository.findByMemberId(UUID.fromString(memberId)).orElseThrow(
+			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
+		);
+		Long roomId = roomService.getRoomIdByMemberId(memberId);
+		return MemberLoginResponseDto.of(findMember, roomId, "");
 	}
 
 	@Override
