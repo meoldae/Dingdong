@@ -11,8 +11,6 @@ const RedirectPage = () => {
     const token = urlParams.get("token");
     
     if (token !== null) {
-        setLoginInfo(prevState => ({ ...prevState, accessToken: token }));
-
         axios.get(`${import.meta.env.VITE_SERVER_URL}/member/login`, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -25,6 +23,7 @@ const RedirectPage = () => {
         
             setLoginInfo(prevState => ({
                 ...prevState,
+                accessToken: token,  // 여기에 accessToken 추가
                 avatarId: avatarId,
                 nickname: nickname,
                 roomId: roomId
