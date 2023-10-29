@@ -18,8 +18,8 @@ const fetchUserInfo = async (success, fail) => {
     await HttpJson.get(`member/login`).then(success).catch(fail);
 }
 
-const fetchRoomData = async (success, fail) => {
-    await HttpJson.get(`room/roomId`).then(success).catch(fail);
+const fetchRoomData = async (roomId, success, fail) => {
+    await HttpJson.get(`room/${roomId}`).then(success).catch(fail);
 }
 
 
