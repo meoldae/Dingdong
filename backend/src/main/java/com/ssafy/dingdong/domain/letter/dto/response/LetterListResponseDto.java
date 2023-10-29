@@ -5,4 +5,5 @@ import java.util.UUID;
 public record LetterListResponseDto(Long id,
                                     String stampImgUrl,
                                     String title,
-                                    Boolean isRead) {}
+                                    Boolean isRead,
+                                    Boolean isRandom) {}

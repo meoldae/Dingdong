@@ -8,6 +8,7 @@ import com.ssafy.dingdong.domain.letter.entity.Letter;
 import com.ssafy.dingdong.domain.letter.entity.Stamp;
 import com.ssafy.dingdong.domain.letter.repository.LetterRepository;
 import com.ssafy.dingdong.domain.letter.repository.StampRepository;
+import com.ssafy.dingdong.domain.room.service.RoomService;
 import com.ssafy.dingdong.global.exception.CustomException;
 import com.ssafy.dingdong.global.exception.ExceptionStatus;
 import com.ssafy.dingdong.global.util.EncryptUtils;
@@ -25,6 +26,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LetterServiceImpl implements LetterService {
 
+    private final RoomService roomService;
     private final LetterRepository letterRepository;
     private final StampRepository stampRepository;
     private final EncryptUtils encryptUtils;
@@ -53,7 +55,9 @@ public class LetterServiceImpl implements LetterService {
                 .orElseThrow(() -> new CustomException(ExceptionStatus.NOT_FOUND_STAMP));
 
         requestDto.setDescription(encryptUtils.encrypt(requestDto.getDescription()));
-        Letter letter = Letter.build(requestDto, memberId,false, stamp, "");
+        String letterTo = roomService.getMemberIdByRoomId(requestDto.getRoomId());
+
+        Letter letter = Letter.build(requestDto, memberId,letterTo, false, stamp, "");
         letterRepository.save(letter);
     }
 
@@ -62,8 +66,9 @@ public class LetterServiceImpl implements LetterService {
         Stamp stamp = stampRepository.findById(requestDto.getStampId())
                 .orElseThrow(() -> new CustomException(ExceptionStatus.NOT_FOUND_STAMP));
 
+        String letterTo = roomService.getMemberIdByRoomId(requestDto.getRoomId());
         requestDto.setDescription(encryptUtils.encrypt(requestDto.getDescription()));
-        Letter letter = Letter.build(requestDto, memberId, true, stamp, ipAddress);
+        Letter letter = Letter.build(requestDto, memberId, letterTo,true, stamp, ipAddress);
         letterRepository.save(letter);
     }
 
