@@ -31,4 +31,6 @@ public interface MemberService {
 	Long getMaxCCUCount();
 
 	List<MemberMainDto> getMemberListLikeNickname(String nickname);
+
+	MemberLoginResponseDto getLoginMember(String memberId);
 }
