@@ -32,6 +32,7 @@ const ConfirmEnteringRoomModal = () => {
     setConfirmEnteringHouse(false)
   }
 
+  // 모달 취소
   const onCancle = () => {
     setConfirmEnteringHouse(false)
     setIsArrived(false)
