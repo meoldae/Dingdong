@@ -8,10 +8,11 @@ import AppSignUp from "../pages/User/SignUpPage"
 import AppRedirect from "../pages/User/RedirectPage"
 import AppUserSetting from "../pages/User/UserSettingPage"
 import StampTest from "../pages/StampTest/StampTest"
-import StampTestResult from "../pages/StampTest/StampTestResult"; 
+import StampTestResult from "../pages/StampTest/StampTestResult"
 import MainPage from "../pages/Main/MainPage"
 import SingleMainPage from "../pages/SinglePlay/SingleMainPage"
 import TutorialPage from "../pages/SinglePlay/TutorialPage"
+import PostPage from "../pages/Post/PostPage"
 
 const AppRouter = () => {
   return (
@@ -22,6 +23,7 @@ const AppRouter = () => {
           <Route path="/single" element={<SingleMainPage />} />
           <Route path="/room/:roomId" element={<AppRoom />} />
           <Route path="/usersetting" element={<AppUserSetting />} />
+          <Route path="/postoffice" element={<PostPage />} />
         </Route>
 
         <Route element={<AuthRoute authentication="NotUser" />}>

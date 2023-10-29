@@ -4,8 +4,16 @@ import { useState } from "react"
 // 스타일
 import styles from "./PostPage.module.css"
 
+// 컴포넌트
+import PostCardBox from "../../components/Modal/Post/PostCardBox"
+
 const PostPage = () => {
   const [searchText, setSearchText] = useState("")
+  const [isPostCardBox, setIsPostCardBox] = useState(false)
+
+  const selectUserHandler = () => {
+    setIsPostCardBox(true)
+  }
 
   return (
     <div className={styles.Container}>
@@ -31,11 +39,14 @@ const PostPage = () => {
             />
           </div>
           <div className={styles.ResultContainer}>
-            <div>유저</div>
+            <div>유저 검색 결과</div>
           </div>
         </div>
-        <div className={styles.SelectButton}>선택하기</div>
+        <div className={styles.SelectButton} onClick={selectUserHandler}>
+          선택하기
+        </div>
       </div>
+      {isPostCardBox && <PostCardBox />}
     </div>
   )
 }
