@@ -36,7 +36,8 @@
   padding: 10px;           
   resize: none;           
   overflow: auto;          
-  box-shadow: none;        
+  box-shadow: none;      
+  /* background-color: wheat;   */
 }
 
 textarea:focus {
