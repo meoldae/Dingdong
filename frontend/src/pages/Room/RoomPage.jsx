@@ -31,13 +31,13 @@ function RoomPage() {
   const [shareModal, setShareModal] = useState(false)
   console.log(canvasRef)
 
-  // useEffect(() => {
-  //   fetchRoomData().then((response) => {
-  //     if (response.data.isMyRoom) {
-  //       setIsMyRoom(true)
-  //     }
-  //   })
-  // }, [])
+  useEffect(() => {
+    fetchRoomData().then((response) => {
+      if (response.data.isMyRoom) {
+        setIsMyRoom(true)
+      }
+    })
+  }, [])
 
   const randomVisit = () => {
     console.log("랜덤방문 함수")
