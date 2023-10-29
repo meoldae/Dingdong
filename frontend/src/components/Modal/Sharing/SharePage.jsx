@@ -31,9 +31,11 @@ const SharePage = ({shareModal, canvasRef}) => {
       setImageSrc(croppedCanvas.toDataURL("image/png"));
     });
   };
+  
   useEffect(()=>{
     onCapture();
   },[shareModal])
+
   return (
     <div className={styles.modalOverlay} id="shareModal">
       <div className={styles.modalContent}>
