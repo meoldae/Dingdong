@@ -12,6 +12,7 @@ import styles from "./SharingModalList.module.css"
 function SharingModalList(props) {
   // const userNickname = useRecoilValue(userNicknameAtom);
   const url = encodeURI(window.location.href)
+  const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY;
 
   const shareUrl = (e) => {
     if (navigator.clipboard) {
@@ -82,18 +83,40 @@ function SharingModalList(props) {
   }
 
   const shareKakao = (e) => {
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init(JS_KEY);
+    } 
+
     if (props.shareMode === "board") {
-      window.Kakao.Share.sendDefault({
-        //... the rest of the function remains the same.
-      })
+      window.Kakao.Share.sendCustom({
+        templateId: 100120,
+        templateArgs: {
+          TITLE : "딩동! ~~이네를 방문해보세요.",
+          DESC : "~~이네를 방문해서 편지를 남겨보세요.",
+          MOBILE_LINK: window.location.href,
+          WEB_LINK: window.location.href,
+        },
+      });   
     } else if (props.shareMode === "start") {
-      window.Kakao.Share.sendDefault({
-        //... the rest of the function remains the same.
-      })
+      window.Kakao.Share.sendCustom({
+        templateId: 100120,
+        templateArgs: {
+          TITLE : "당신에게 어울리는 우표는?",
+          DESC : "당신에게 어울리는 우표를 찾아 친구에게 편지를 보내보세요.",
+          MOBILE_LINK: window.location.href,
+          WEB_LINK: window.location.href,
+        },
+      });   
     } else {
-      window.Kakao.Share.sendDefault({
-        //... the rest of the function remains the same.
-      })
+      window.Kakao.Share.sendCustom({
+        templateId: 100120,
+        templateArgs: {
+          TITLE : "당신에게 어울리는 우표는?",
+          DESC : "~~님의 우표 테스트 결과를 확인해보세요!",
+          MOBILE_LINK: window.location.href,
+          WEB_LINK: window.location.href,
+        },
+      });   
     }
   }
 
