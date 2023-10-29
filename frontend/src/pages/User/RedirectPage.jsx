@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { userAtom } from '@/atom/UserAtom';
 import { useNavigate } from 'react-router-dom';
 
 const RedirectPage = () => {
     const navigate = useNavigate();
-    const [loginInfo, setLoginInfo] = useRecoilState(userAtom);
+    const setLoginInfo = useSetRecoilState(userAtom);
 
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
@@ -17,13 +17,14 @@ const RedirectPage = () => {
             }
         })
         .then(response => {
+            console.log(response);
             const avatarId = response.data.avatarId;
             const nickname = response.data.nickname;
             const roomId = response.data.roomId;
         
             setLoginInfo(prevState => ({
                 ...prevState,
-                accessToken: token,  // 여기에 accessToken 추가
+                accessToken: token, 
                 avatarId: avatarId,
                 nickname: nickname,
                 roomId: roomId
@@ -35,8 +36,6 @@ const RedirectPage = () => {
             console.error("API 요청 오류:", error);
         });
     }
-
-    return null;
 }
 
 export default RedirectPage;
