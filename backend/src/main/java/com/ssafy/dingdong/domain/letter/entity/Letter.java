@@ -38,6 +38,9 @@ public class Letter {
     @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
     private Boolean isReport;
 
+    @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
+    private Boolean isRandom;
+
     @Column(nullable = false)
     private String ipAddress;
 
@@ -48,10 +51,12 @@ public class Letter {
         this.createTime = LocalDateTime.now();
         this.isRead = false;
         this.isReport = false;
+        this.isRandom = false;
     }
 
     public static Letter build(LetterRequestDto requestDto,
                                String memberId,
+                               String letterTo,
                                Boolean anonymousFlag,
                                Stamp stamp,
                                String ipAddress) {
@@ -62,7 +67,7 @@ public class Letter {
                      .description(requestDto.getDescription())
                      .stamp(stamp)
                      .letterFrom(memberId)
-                     .letterTo(requestDto.getLetterTo())
+                     .letterTo(letterTo)
                      .ipAddress(ipAddress)
                      .build();
     }
