@@ -72,6 +72,8 @@
 .SelectButton {
   position: absolute;
   bottom: 20px;
+  left: 50%;
+  transform: translate(-50%);
   width: 280px;
   height: 60px;
   background: #f1c4e1;
