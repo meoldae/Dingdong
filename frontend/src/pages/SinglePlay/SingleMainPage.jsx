@@ -3,8 +3,11 @@ import React from "react"
 import styles from "./SingleMainPage.module.css"
 
 // Recoil
-import { useRecoilValue } from "recoil"
-import { ConfirmEnteringRoomAtom } from "../../atom/SinglePlayAtom"
+import { useRecoilState, useRecoilValue } from "recoil"
+import {
+  ConfirmEnteringRoomAtom,
+  RoomPortalPositionAtom,
+} from "../../atom/SinglePlayAtom"
 import { RoomPortalVisibleAtom } from "../../atom/SinglePlayAtom"
 
 // Three.js 기본 세팅
@@ -20,19 +23,26 @@ import House from "../../components/Item/MainItems/tempItems/House"
 import Spot from "../../components/Item/MainItems/tempItems/Spot"
 
 // 각 건물 포탈
-import RoomPortal from "../../components/Item/MainItems/Portals/RoomPortal"
-import RoomPortalRing from "../../components/Item/MainItems/Portals/RoomPortalRing"
+import DefaultPortal from "../../components/Item/MainItems/Portals/DefaultPortal"
+import DefaultPortalRing from "../../components/Item/MainItems/Portals/DefaultPortalRing"
 
 // React 컴포넌트
 import ConfirmEnteringRoomModal from "../../components/Modal/Confirm/ConfirmEnteringRoomModal"
 import PhysicsModel from "../../components/Item/MainItems/PhysicsModel"
 
 const SingleMainPage = () => {
-  // 마이룸 입장 모달
-  const confirmEnteringRoom = useRecoilValue(ConfirmEnteringRoomAtom)
+  // 장소 입장 확인 여부
+  const [confirmEnteringRoom, setConfirmEnteringRoom] = useRecoilState(
+    ConfirmEnteringRoomAtom
+  )
 
-  // 마이룸 입장 포탈
-  const roomPortalVisible = useRecoilValue(RoomPortalVisibleAtom)
+  // 포탈 생성 여부
+  const [roomPortalVisible, setRoomPortalVisible] = useRecoilState(
+    RoomPortalVisibleAtom
+  )
+
+  // 포탈 위치
+  const roomPortalPosition = useRecoilValue(RoomPortalPositionAtom)
 
   return (
     <div className={styles.canvasContainer}>
@@ -60,7 +70,20 @@ const SingleMainPage = () => {
         <PhysicsModel />
 
         {/* 포탈 */}
-        {roomPortalVisible ? <RoomPortal /> : <RoomPortalRing />}
+        {roomPortalVisible ? (
+          <DefaultPortal
+            setConfirmEnteringLocation={setConfirmEnteringRoom}
+            portalPosition={roomPortalPosition}
+            setPortalVisible={setRoomPortalVisible}
+            adjustedAngle={[16, 5, 1]}
+            adjustedZoom={0.24}
+          />
+        ) : (
+          <DefaultPortalRing
+            portalPosition={roomPortalPosition}
+            portalVisible={setRoomPortalVisible}
+          />
+        )}
       </Canvas>
 
       {/* 입장 확인 모달 */}

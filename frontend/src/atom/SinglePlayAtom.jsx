@@ -12,6 +12,11 @@ export const ConfirmEnteringRoomAtom = atom({
   default: false,
 })
 
+export const ConfirmEnteringPostOfficeAtom = atom({
+  key: "ConfirmEnteringPostOfficeAtom",
+  default: false,
+})
+
 // 포탈
 export const RoomPortalVisibleAtom = atom({
   key: "HousePortalVisibleAtom",
@@ -20,4 +25,13 @@ export const RoomPortalVisibleAtom = atom({
 export const RoomPortalPositionAtom = atom({
   key: "RoomPortalPositionAtom",
   default: [-6.5, 0.03, 8.5],
+})
+
+export const PostOfficePortalVisibleAtom = atom({
+  key: "PostOfficePortalVisibleAtom",
+  default: true,
+})
+export const PostOfficePortalPositionAtom = atom({
+  key: "PostOfficePortalPositionAtom",
+  default: [0, 0.03, 3],
 })
