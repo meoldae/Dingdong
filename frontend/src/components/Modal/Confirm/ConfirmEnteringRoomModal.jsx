@@ -7,7 +7,7 @@ import {
 import { DefaultPosition, DefaultZoom } from "../../../atom/DefaultSettingAtom"
 import styles from "./ConfirmEnteringRoomModal.module.css"
 
-const ConfirmEnteringRoomModal = () => {
+const ConfirmEnteringRoomModal = ({ modalContent }) => {
   const [isInitialRender, setIsInitialRender] = useState(true)
 
   useEffect(() => {
@@ -51,7 +51,8 @@ const ConfirmEnteringRoomModal = () => {
   const [no, setNo] = useState("")
 
   // 내용
-  const letters = "마이룸에 입장하시겠습니까?"
+  const letters =
+    modalContent === "준비중" ? "준비 중입니다..!" : `${modalContent}`
   const yesText = ["▶", " ", "예"]
   const noText = ["▶", " ", "아니오"]
 
@@ -88,8 +89,10 @@ const ConfirmEnteringRoomModal = () => {
         await wait(speed)
       }
       await wait(delay)
-      await typeYes()
-      await typeNo()
+      if (modalContent !== "준비중") {
+        await typeYes()
+        await typeNo()
+      }
     }
 
     // 함수 실행

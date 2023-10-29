@@ -1,7 +1,7 @@
-import style from "./Header.module.css";
+import style from "./Header.module.css"
 
 const Header = () => {
-  const icon = "assets/icons/";
+  const icon = "assets/icons/"
   return (
     <div className={style.wrap}>
       <div className={style.header}>
@@ -10,7 +10,7 @@ const Header = () => {
         <img src={`${icon}bell.svg`} alt="" />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
