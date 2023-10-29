@@ -4,14 +4,16 @@ import {
   kakao,
   twitter,
   urlCopy,
+  save,
 } from "../../../assets/images/sharing/sharingIcon"
 // import { useRecoilValue } from 'recoil';
 // import { userNicknameAtom } from '../../atoms/userAtoms';
-import styles from "./SharingModalList.module.css"
+import styles from "./Share.module.css"
 
 function SharingModalList(props) {
   // const userNickname = useRecoilValue(userNicknameAtom);
   const url = encodeURI(window.location.href)
+  const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY;
 
   const shareUrl = (e) => {
     if (navigator.clipboard) {
@@ -19,7 +21,7 @@ function SharingModalList(props) {
         .writeText(window.location.href)
         .then(() => {
           if (props.shareMode === "board") {
-            alert()
+            alert();
             // `${userNickname}님의 편지 수신함이 복사되었습니다.\n친구들에게 공유해보세요!`
           } else if (props.shareMode === "start") {
             alert(
@@ -79,37 +81,79 @@ function SharingModalList(props) {
         "https://twitter.com/intent/tweet?text=" + text + "&url=" + url
       )
     }
-  }
+  };
 
   const shareKakao = (e) => {
-    if (props.shareMode === "board") {
-      window.Kakao.Share.sendDefault({
-        //... the rest of the function remains the same.
-      })
-    } else if (props.shareMode === "start") {
-      window.Kakao.Share.sendDefault({
-        //... the rest of the function remains the same.
-      })
-    } else {
-      window.Kakao.Share.sendDefault({
-        //... the rest of the function remains the same.
-      })
-    }
-  }
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init(JS_KEY);
+    } 
 
+    if (props.shareMode === "board") {
+      window.Kakao.Share.sendCustom({
+        templateId: 100120,
+        templateArgs: {
+          TITLE : "딩동! ~~이네를 방문해보세요.",
+          DESC : "~~이네를 방문해서 편지를 남겨보세요.",
+          MOBILE_LINK: window.location.href,
+          WEB_LINK: window.location.href,
+        },
+      });   
+    } else if (props.shareMode === "start") {
+      window.Kakao.Share.sendCustom({
+        templateId: 100120,
+        templateArgs: {
+          TITLE : "당신에게 어울리는 우표는?",
+          DESC : "당신에게 어울리는 우표를 찾아 친구에게 편지를 보내보세요.",
+          MOBILE_LINK: window.location.href,
+          WEB_LINK: window.location.href,
+        },
+      });   
+    } else {
+      window.Kakao.Share.sendCustom({
+        templateId: 100120,
+        templateArgs: {
+          TITLE : "당신에게 어울리는 우표는?",
+          DESC : "~~님의 우표 테스트 결과를 확인해보세요!",
+          MOBILE_LINK: window.location.href,
+          WEB_LINK: window.location.href,
+        },
+      });   
+    }
+  };
+  const saveImg = (e) => {
+    const element = document.getElementById("shareModal");
+
+    html2canvas(element).then((canvas) => {
+      const saveImg = (uri, filename) => {
+        let link = document.createElement("a");
+
+        document.body.appendChild(link);
+
+        link.href = uri;
+        link.download = filename;
+        link.click();
+
+        document.body.removeChild(link);
+      };
+      saveImg(canvas.toDataURL("image/png"), "ding_dong.png");
+    });
+  };
   const sharetype = [
-    { icon: urlCopy, name: "URL복사", click: shareUrl },
+    { icon: urlCopy, name: "URL복사", click: shareUrl },  
+    { icon:save,name: "저장하기", click: saveImg },
     { icon: kakao, name: "카카오톡", click: shareKakao },
     { icon: twitter, name: "트위터", click: shareTwitter },
-  ]
+  ];
 
   return (
-    <div className={styles.Container}>
+    <div className={styles.share}>
       {sharetype.map((share) => (
         <SharingModalListItem
           key={share.name}
           icon={share.icon}
+          name={share.name}
           click={share.click}
+          className={styles.shareItem}
         />
       ))}
     </div>
