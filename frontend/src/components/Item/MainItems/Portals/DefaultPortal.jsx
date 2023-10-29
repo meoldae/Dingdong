@@ -5,14 +5,15 @@ import {
   DefaultZoom,
 } from "../../../../atom/DefaultSettingAtom"
 import { CharacterPositionAtom } from "../../../../atom/DefaultSettingAtom"
-import {
-  ArriveAtom,
-  ConfirmEnteringRoomAtom,
-  RoomPortalVisibleAtom,
-  RoomPortalPositionAtom,
-} from "../../../../atom/SinglePlayAtom"
+import { ArriveAtom } from "../../../../atom/SinglePlayAtom"
 
-const RoomPortal = () => {
+const DefaultPortal = ({
+  setConfirmEnteringLocation,
+  portalPosition,
+  setPortalVisible,
+  adjustedAngle,
+  adjustedZoom,
+}) => {
   // Canvas 기본 세팅
   const setDefaultCamPosition = useSetRecoilState(DefaultPosition)
   const setDefaultZoom = useSetRecoilState(DefaultZoom)
@@ -23,26 +24,15 @@ const RoomPortal = () => {
   // 도착 후 움직임 제어
   const setIsArrived = useSetRecoilState(ArriveAtom)
 
-  // 입장 모달
-  const setConfirmEnteringHouse = useSetRecoilState(ConfirmEnteringRoomAtom)
-
   // 포탈
-  const roomPortalPosition = useRecoilValue(RoomPortalPositionAtom)
-  const roomPortalSize = [0.5, 0.5]
-  const setRoomPortalVisible = useSetRecoilState(RoomPortalVisibleAtom)
-
-  // 카메라 각도 조절
-  const adjustedAngle = [16, 5, 1]
-  const adjustedZoom = 0.24
+  const PortalSize = [0.5, 0.5]
 
   useEffect(() => {
     // 포탈 영역 내부에 있는지 확인
     const isInsideX =
-      Math.abs(roomPortalPosition[0] - characterPosition[0]) <=
-      roomPortalSize[0] / 2
+      Math.abs(portalPosition[0] - characterPosition[0]) <= PortalSize[0] / 2
     const isInsideZ =
-      Math.abs(roomPortalPosition[2] - characterPosition[2]) <=
-      roomPortalSize[1] / 2
+      Math.abs(portalPosition[2] - characterPosition[2]) <= PortalSize[1] / 2
 
     const isInside = isInsideX && isInsideZ
 
@@ -55,28 +45,25 @@ const RoomPortal = () => {
       setIsArrived(true)
 
       // 입장
-      setConfirmEnteringHouse(true)
-      setRoomPortalVisible(false)
+      setConfirmEnteringLocation(true)
+      setPortalVisible(false)
     } else {
       // 카메라 세팅 기본 값으로 초기화
-      setDefaultCamPosition([2, 10, 10])
-      setDefaultZoom(0.18)
-
+      // setDefaultCamPosition([2, 10, 10])
+      // setDefaultZoom(0.18)
       // 캐릭터 움직임
-      setIsArrived(false)
-
-      // 강제 커서 이동 대비
-      setConfirmEnteringHouse(false)
+      // setIsArrived(false)
     }
   }, [characterPosition])
+  console.log()
 
   return (
-    <mesh position={roomPortalPosition} rotation={[-Math.PI / 2, 0.01, 0]}>
+    <mesh position={portalPosition} rotation={[-Math.PI / 2, 0.01, 0]}>
       {/* 향후 포탈 3D 에셋으로 변경 예정 */}
-      <planeGeometry args={roomPortalSize} />
+      <planeGeometry args={PortalSize} />
       <meshStandardMaterial color={"yellow"} transparent opacity={0.5} />
     </mesh>
   )
 }
 
-export default RoomPortal
+export default DefaultPortal
