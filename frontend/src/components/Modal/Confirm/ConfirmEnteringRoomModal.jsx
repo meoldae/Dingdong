@@ -5,7 +5,7 @@ import {
   ConfirmEnteringRoomAtom,
 } from "../../../atom/SinglePlayAtom"
 import { DefaultPosition, DefaultZoom } from "../../../atom/DefaultSettingAtom"
-import DefaultModal from "../Default/DefaultModal"
+import styles from "./ConfirmEnteringRoomModal.module.css"
 
 const ConfirmEnteringRoomModal = () => {
   const [isInitialRender, setIsInitialRender] = useState(true)
@@ -46,13 +46,18 @@ const ConfirmEnteringRoomModal = () => {
   }
 
   return (
-    <DefaultModal
-      content={"마이룸으로 이동 하시겠습니까?"}
-      ok={"확인"}
-      cancel={"취소"}
-      cancelClick={onCancle}
-      okClick={onConfirm}
-    />
+    <div className={styles.MainModal}>
+      <div className={styles.ContentBox}>
+        <div className={styles.ContentContainer}>
+          <div className={styles.Title}>제목</div>
+          <div className={styles.Content}>내용</div>
+        </div>
+        <div className={styles.ConfirmContainer}>
+          <div>▶ 예</div>
+          <div>▶ 아니오</div>
+        </div>
+      </div>
+    </div>
   )
 }
 
