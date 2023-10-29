@@ -1,5 +1,7 @@
 package com.ssafy.dingdong.domain.member.service;
 
+import java.util.List;
+
 import com.ssafy.dingdong.domain.member.dto.request.MemberSignUpDto;
 import com.ssafy.dingdong.domain.member.dto.response.MemberLoginResponseDto;
 import com.ssafy.dingdong.domain.member.dto.response.MemberMainDto;
@@ -9,6 +11,8 @@ public interface MemberService {
 	MemberLoginResponseDto createMember(MemberSignUpDto memberLoginDto);
 
 	MemberMainDto getMemberById(String memberId);
+
+	MemberMainDto getMemberByNickname(String nickname);
 
 	void createSession(String memberId);
 
@@ -22,7 +26,9 @@ public interface MemberService {
 
 	void deleteMember(String memberId);
 
-	boolean getMemberByNickname(String nickname);
+	boolean isMemberByNickname(String nickname);
 
 	Long getMaxCCUCount();
+
+	List<MemberMainDto> getMemberListLikeNickname(String nickname);
 }
