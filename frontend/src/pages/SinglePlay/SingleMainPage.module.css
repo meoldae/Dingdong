@@ -6,10 +6,9 @@
   margin: 0;
 }
 
-.roomConfirmModal {
+.confirmModal {
   z-index: 2;
   position: absolute;
-  top: 85%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  bottom: 0;
+  width: 100%;
 }
