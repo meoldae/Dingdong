@@ -68,7 +68,14 @@
   margin-top: 30px;
 }
 
+.ButtonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .SelectButton {
   width: 80%;
   height: 60px;
+  background: #f1c4e1;
 }
