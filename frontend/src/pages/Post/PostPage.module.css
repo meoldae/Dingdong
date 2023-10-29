@@ -39,12 +39,27 @@
 .InputContainer {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .Input {
+  width: 85%;
+  height: 40px;
+  background: #fff;
+  border: 3px solid #f1c4e1;
+  border-radius: 20px;
+  padding-left: 10px;
+  font-family: "Pretendard-Regular";
+  font-size: 15px;
+}
+
+.Input:focus {
+  outline: none;
 }
 
 .SearchIcon {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
 }
