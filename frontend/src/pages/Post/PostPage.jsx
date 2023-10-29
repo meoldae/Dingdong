@@ -6,7 +6,7 @@ const PostPage = () => {
       <div className={styles.SemiContainer}>
         <div className={styles.TitleContainer}>
           <div className={styles.Title}>우체국</div>
-          <div>편지를 보낼 사람을 찾아보세요.</div>
+          <div className={styles.SemiTitle}>편지를 보낼 사람을 찾아보세요.</div>
         </div>
         <div className={styles.ContentContainer}>
           <div>내용</div>
