@@ -43,7 +43,7 @@ public class MemberController implements MemberSwagger {
 	}
 
 	@Override
-	@GetMapping("/memberInfo")
+	@GetMapping("/login")
 	public DataResponse<MemberLoginResponseDto> loginMember(Authentication authentication){
 		MemberLoginResponseDto member = memberService.getLoginMember(authentication.getName().toString());
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
