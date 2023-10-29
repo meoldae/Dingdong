@@ -13,6 +13,8 @@ const ConfirmEnteringDefaultModal = ({
   setConfirmEnteringLocation,
   location,
 }) => {
+  const navigate = useNavigate()
+
   const [isInitialRender, setIsInitialRender] = useState(true)
 
   useEffect(() => {
@@ -33,6 +35,7 @@ const ConfirmEnteringDefaultModal = ({
   const onConfirm = () => {
     if (location === "house") {
       // 집으로 이동
+      navigate("/room")
     }
     setConfirmEnteringLocation(false)
   }
