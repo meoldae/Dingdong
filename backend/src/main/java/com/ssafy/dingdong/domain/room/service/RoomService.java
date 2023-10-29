@@ -8,14 +8,17 @@ import org.springframework.data.domain.Pageable;
 import com.ssafy.dingdong.domain.room.dto.request.RoomUpdateRequestDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
+import com.ssafy.dingdong.domain.room.dto.response.RoomResponseAllDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomScoreDto;
 
 public interface RoomService {
 
-    RoomResponseDto getRoomByMemberId(String memberId);
+	String getMemberIdByRoomId(Long roomId);
 
-    RoomResponseDto getRoomByRoomId(Long roomId);
+	RoomResponseDto getRoomByMemberId(String memberId);
+
+	RoomResponseAllDetailDto getRoomByRoomId(Long roomId);
 
     Long createRoom(String memberId);
 
