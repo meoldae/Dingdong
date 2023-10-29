@@ -56,7 +56,11 @@ function RoomPage() {
 
   return (
     <div className={styles.container}>
-      <Header />
+      {isMyRoom ? (
+        <Header checkMyRoom={"my"} />
+      ) : (
+        <Header checkMyRoom={"other"} />
+      )}
       {isMyRoom ? <NeighborRequest /> : <Share setShareModal={setShareModal} />}
       {shareModal && (
         <>
