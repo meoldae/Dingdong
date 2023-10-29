@@ -17,7 +17,7 @@ public interface RoomService {
 
     RoomResponseDto getRoomByRoomId(Long roomId);
 
-    void createRoom(String memberId);
+    Long createRoom(String memberId);
 
     Page<FurnitureSummaryDto> getFurnitureList(Pageable pageable);
 

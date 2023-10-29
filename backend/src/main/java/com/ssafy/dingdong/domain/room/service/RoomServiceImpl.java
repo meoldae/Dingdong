@@ -63,11 +63,12 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public void createRoom(String memberId) {
+	public Long createRoom(String memberId) {
 		Room room = Room.builder()
 			.memberId(memberId)
 			.build();
 		roomRepository.save(room);
+		return room.getRoomId();
 	}
 
 	@Override
