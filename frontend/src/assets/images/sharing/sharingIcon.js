@@ -11,5 +11,5 @@ export {
   kakao,
   twitter,
   urlCopy,
-  save
+  save,
 };

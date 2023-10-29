@@ -4,10 +4,11 @@ import {
   kakao,
   twitter,
   urlCopy,
+  save,
 } from "../../../assets/images/sharing/sharingIcon"
 // import { useRecoilValue } from 'recoil';
 // import { userNicknameAtom } from '../../atoms/userAtoms';
-import styles from "./SharingModalList.module.css"
+import styles from "./Share.module.css"
 
 function SharingModalList(props) {
   // const userNickname = useRecoilValue(userNicknameAtom);
