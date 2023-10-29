@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +16,7 @@ import com.ssafy.dingdong.domain.member.repository.MemberRepository;
 import com.ssafy.dingdong.domain.room.dto.request.RoomUpdateRequestDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
+import com.ssafy.dingdong.domain.room.dto.response.RoomResponseAllDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomScoreDto;
 import com.ssafy.dingdong.domain.room.entity.Furniture;
@@ -43,6 +45,14 @@ public class RoomServiceImpl implements RoomService {
 	private final RoomHeartRepository roomHeartRepository;
 
 	@Override
+	public String getMemberIdByRoomId(Long roomId){
+		Room room = roomRepository.findByRoomId(roomId).orElseThrow(
+			() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
+		);
+		return room.getMemberId();
+	}
+
+	@Override
 	@Transactional
 	public RoomResponseDto getRoomByMemberId(String memberId) {
 		Room findRoom = roomRepository.findByMemberId(memberId).orElseThrow(
@@ -54,12 +64,17 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	@Transactional
-	public RoomResponseDto getRoomByRoomId(Long roomId) {
+	public RoomResponseAllDetailDto getRoomByRoomId(Long roomId) {
 		Room findRoom = roomRepository.findByRoomId(roomId).orElseThrow(
 			() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
 		);
+
 		Long heartCount = roomHeartRepository.getCountByRoomId(findRoom.getRoomId());
-		return findRoom.toRoomResponseDto(heartCount);
+		return RoomResponseAllDetailDto.builder()
+			.roomId(findRoom.getRoomId())
+			.heartCount(heartCount)
+			.roomFurnitureList(null)
+			.build();
 	}
 
 	@Override
@@ -179,7 +194,7 @@ public class RoomServiceImpl implements RoomService {
 				roomScore.setNickname(nickname);
 			}
 		);
-		return roomScoreList.stream().toList();
+		return roomScoreList.stream().collect(Collectors.toList());
 	}
 
 	@Override
