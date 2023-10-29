@@ -79,10 +79,17 @@ public class RoomController implements RoomSwagger{
     }
 
     @Override
+    @GetMapping("/heart/{roomId}")
+    public DataResponse<String> isRoomHeart(@PathVariable Long roomId, Authentication authentication){
+        String heartRoomInfo = roomService.isHeartRoom(authentication.getName(), roomId);
+        return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, heartRoomInfo);
+    }
+
+    @Override
     @PostMapping("/heart/{roomId}")
-    public CommonResponse roomHeart(@PathVariable Long roomId, Authentication authentication) {
-        roomService.createHeartRoom(authentication.getName(), roomId);
-        return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
+    public DataResponse<String> roomHeart(@PathVariable Long roomId, Authentication authentication) {
+        String heartRoomInfo = roomService.createHeartRoom(authentication.getName(), roomId);
+        return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, heartRoomInfo);
     }
 
     @Override

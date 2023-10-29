@@ -37,7 +37,9 @@ public interface RoomSwagger {
 
 	CommonResponse updateRoom(@RequestBody RoomUpdateRequestDto roomUpdateRequestDto, Authentication authentication);
 
-	CommonResponse roomHeart(@PathVariable Long roomId, Authentication authentication);
+	DataResponse<String> isRoomHeart(@PathVariable Long roomId, Authentication authentication);
+
+	DataResponse<String> roomHeart(@PathVariable Long roomId, Authentication authentication);
 
 	DataResponse<List<RoomScoreDto>> getRoomScore();
 }

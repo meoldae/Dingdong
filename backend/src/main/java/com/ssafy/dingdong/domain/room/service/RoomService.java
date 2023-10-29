@@ -27,7 +27,9 @@ public interface RoomService {
 
 	void updateRoom(RoomUpdateRequestDto roomUpdateRequestDto, String name);
 
-	void createHeartRoom(String memberId, Long roomId);
+	String createHeartRoom(String memberId, Long roomId);
+
+	String isHeartRoom(String memberId, Long roomId);
 
 	List<RoomScoreDto> getRoomScore();
 
