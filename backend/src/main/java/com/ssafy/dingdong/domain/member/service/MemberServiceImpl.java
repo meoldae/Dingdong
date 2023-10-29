@@ -1,5 +1,7 @@
 package com.ssafy.dingdong.domain.member.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import com.ssafy.dingdong.domain.member.dto.response.MemberLoginResponseDto;
@@ -52,6 +54,29 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public MemberMainDto getMemberByNickname(String nickname) {
+		Member findMember = memberRepository.findByNickname(nickname).orElseThrow(
+			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
+		);
+		return MemberMainDto.of(findMember);
+	}
+
+
+	@Override
+	public List<MemberMainDto> getMemberListLikeNickname(String nickname) {
+		List<Member> memberList = memberRepository.findAllLikeNickname(nickname);
+		List<MemberMainDto> resultList = new ArrayList<>();
+
+		memberList.stream().forEach(
+			member -> {
+				MemberMainDto memberDto = MemberMainDto.of(member);
+				resultList.add(memberDto);
+			}
+		);
+		return resultList;
+	}
+
+	@Override
 	public void createSession(String memberId) {
 		memberRedisRepository.insertStatusByMemberId(memberId);
 		Long ccuCount = memberRedisRepository.getCCUCount();
@@ -92,7 +117,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean getMemberByNickname(String nickname) {
+	public boolean isMemberByNickname(String nickname) {
 		log.info("nickname {} , ", nickname);
 		return !memberRepository.findByNickname(nickname).isPresent();
 	}
@@ -103,6 +128,5 @@ public class MemberServiceImpl implements MemberService {
 		maxCCUCount = 0L;
 		return ccuCount;
 	}
-
 
 }

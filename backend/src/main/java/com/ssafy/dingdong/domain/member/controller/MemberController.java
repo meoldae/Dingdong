@@ -1,8 +1,9 @@
 package com.ssafy.dingdong.domain.member.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -56,6 +57,20 @@ public class MemberController implements MemberSwagger {
 	}
 
 	@Override
+	@GetMapping("/{nickname}")
+	public DataResponse<MemberMainDto> getMemberByNickname(@PathVariable String nickname) {
+		MemberMainDto member = memberService.getMemberByNickname(nickname);
+		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
+	}
+
+	@Override
+	@GetMapping("/range/{nickname}")
+	public DataResponse<List<MemberMainDto>> getMemberListLikeNickname(@PathVariable String nickname) {
+		List<MemberMainDto> memberList = memberService.getMemberListLikeNickname(nickname);
+		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, memberList);
+	}
+
+	@Override
 	@GetMapping
 	public DataResponse<MemberMainDto> getMember(Authentication authentication) {
 		MemberMainDto member = memberService.getMemberById(authentication.getName().toString());
@@ -86,7 +101,7 @@ public class MemberController implements MemberSwagger {
 	@Override
 	@GetMapping("/check/{nickname}")
 	public CommonResponse nicknameIsUnique(@PathVariable String nickname) {
-		boolean result = memberService.getMemberByNickname(nickname);
+		boolean result = memberService.isMemberByNickname(nickname);
 		if (result) {
 			return responseService.successResponse(ResponseStatus.NICKNAME_IS_UNIQUE);
 		}else {
