@@ -1,5 +1,6 @@
 package com.ssafy.dingdong.domain.room.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,10 +13,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ssafy.dingdong.domain.member.entity.Member;
 import com.ssafy.dingdong.domain.member.repository.MemberRepository;
 import com.ssafy.dingdong.domain.room.dto.request.RoomUpdateRequestDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
+import com.ssafy.dingdong.domain.room.dto.response.RoomFurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseAllDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomScoreDto;
@@ -69,11 +72,29 @@ public class RoomServiceImpl implements RoomService {
 			() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
 		);
 
+		Member member = memberRepository.findByMemberId(UUID.fromString(findRoom.getMemberId())).orElseThrow(
+			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
+		);
+
+		List<RoomFurnitureDetailDto> roomFurnitureList = new ArrayList<>();
+
+		findRoom.getRoomFurnitureList().stream().forEach(
+			roomFurniture -> {
+				Furniture furniture = furnitureRepository.findById(roomFurniture.getFurnitureId()).orElseThrow(
+					() -> new CustomException(ExceptionStatus.EXCEPTION)
+				);
+				RoomFurnitureDetailDto roomFurnitureDetailDto = new RoomFurnitureDetailDto(
+					new FurnitureDetailDto(furniture), roomFurniture);
+				roomFurnitureList.add(roomFurnitureDetailDto);
+			}
+		);
+
 		Long heartCount = roomHeartRepository.getCountByRoomId(findRoom.getRoomId());
 		return RoomResponseAllDetailDto.builder()
+			.nickname(member.getNickname())
 			.roomId(findRoom.getRoomId())
 			.heartCount(heartCount)
-			.roomFurnitureList(null)
+			.roomFurnitureList(roomFurnitureList)
 			.build();
 	}
 
