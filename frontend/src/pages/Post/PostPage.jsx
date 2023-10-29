@@ -1,6 +1,12 @@
+// 라이브러리
+import { useState } from "react"
+
+// 스타일
 import styles from "./PostPage.module.css"
 
 const PostPage = () => {
+  const [searchText, setSearchText] = useState("")
+
   return (
     <div className={styles.Container}>
       <div className={styles.SemiContainer}>
@@ -10,7 +16,7 @@ const PostPage = () => {
         </div>
         <div className={styles.TitleLine}></div>
         <div className={styles.ContentContainer}>
-          <div>내용</div>
+          <input type="text" />
         </div>
       </div>
     </div>
