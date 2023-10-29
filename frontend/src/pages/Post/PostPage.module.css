@@ -2,4 +2,19 @@
   height: 100vh;
   height: 100svh;
   background: #ffebf4;
+  display: flex;
+  justify-content: center;
+}
+
+.SemiContainer {
+  width: 80%;
+  height: 100vh;
+  height: 100svh;
+}
+
+.TitleContainer {
+  margin-top: 50px;
+}
+
+.Title {
 }
