@@ -23,8 +23,6 @@ const AppRouter = () => {
           <Route path="/single" element={<SingleMainPage />} />
           <Route path="/room/:roomId" element={<AppRoom />} />
           <Route path="/usersetting" element={<AppUserSetting />} />
-          <Route path="/yourstamp" element={<StampTest />} />
-          <Route path="/yourstamp/result" element={<StampTestResult />} />
           <Route path="/postoffice" element={<PostPage />} />
         </Route>
 
