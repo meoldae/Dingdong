@@ -16,6 +16,7 @@ const RedirectPage = () => {
 
             fetchUserInfo(loginInfo.accessToken)
                 .then(response => {
+                    console.log("요청은 했습니다");
                     console.log(response);
                     const avatarId = response.data.avatarId;
                     const nickname = response.data.nickname;
@@ -27,21 +28,21 @@ const RedirectPage = () => {
                         nickname: nickname,
                         roomId: roomId
                     }));
+
+                    navigate("/"); 
                 })
                 .catch(error => {
                     console.log(error);
                 });
             
-            // navigate("/"); 
         }
-    }, [loginInfo.accessToken]); 
+    }, [loginInfo.accessToken, navigate, setLoginInfo]); 
     
     if (token !== null) {
         setLoginInfo(prevState => ({ ...prevState, accessToken: token }));
-        console.log(loginInfo);
     }
 
-    // return null;
+    return null;
 }
 
 export default RedirectPage;
