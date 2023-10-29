@@ -1,0 +1,47 @@
+.MainModal {
+  min-width: 100vw;
+  height: 185px;
+  background: #3c3c3c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.ContentBox {
+  width: 90%;
+  height: 170px;
+  background: #212121;
+  border-radius: 10px;
+  display: flex;
+}
+
+.ContentContainer {
+  width: 100%;
+  height: 100%;
+  margin: 20px;
+  font-family: "Pretendard-Bold";
+}
+
+.Title {
+  color: #727272;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.Content {
+  color: #fff;
+  font-size: 23px;
+}
+
+.ConfirmContainer {
+  margin-top: 10px;
+}
+
+.Confirm {
+  color: #fff;
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  font-size: 20px;
+}
