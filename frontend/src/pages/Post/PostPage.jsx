@@ -23,6 +23,11 @@ const PostPage = () => {
               onChange={(e) => setSearchText(e.target.value)}
               placeholder="검색"
               maxLength={7}
+              className={styles.Input}
+            />
+            <img
+              src={"assets/icons/search.svg"}
+              className={styles.SearchIcon}
             />
           </div>
         </div>
