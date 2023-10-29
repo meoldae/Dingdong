@@ -85,7 +85,7 @@ function RoomPage() {
         </Suspense>
       </Canvas>
       {/* 랜덤 찾기 버튼 */}
-      {isMyRoom ? <></> : <div>랜덤 방문</div>}
+      {isMyRoom ? <></> : <div className={styles.randomButton}>랜덤 방문</div>}
       {isMyRoom ? <MyFooter /> : <OtherFooter />}
       {/* {popUpStatus ? <PopUp/> : '' } */}
       <PopUp />
