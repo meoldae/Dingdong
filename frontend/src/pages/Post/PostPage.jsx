@@ -34,6 +34,7 @@ const PostPage = () => {
             <div>유저</div>
           </div>
         </div>
+        <div>선택하기</div>
       </div>
     </div>
   )
