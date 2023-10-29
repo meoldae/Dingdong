@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import styles from "./Share.module.css";
 import html2canvas from "html2canvas";
 const SharePage = ({shareModal, canvasRef}) => {
-  const day = "23.10.19";
+  const today = new Date();
+  const formattedDate = `${today.getFullYear()}.${today.getMonth() + 1}.${today.getDate()}`;
+
   const [imageSrc, setImageSrc] = useState();
 
   const onCapture = () => {
@@ -31,16 +33,18 @@ const SharePage = ({shareModal, canvasRef}) => {
       setImageSrc(croppedCanvas.toDataURL("image/png"));
     });
   };
+
   useEffect(()=>{
     onCapture();
   },[shareModal])
+
   return (
     <div className={styles.modalOverlay} id="shareModal">
       <div className={styles.modalContent}>
         <img src={imageSrc} alt="Shared Content" />
-        <h2>{day}</h2>
+        <h2>{formattedDate}</h2>
         <div>
-          <textarea className={styles.textarea} placeholder="본인의 이야기를 작성해보세요!" spellCheck="false" />
+          <textarea className={styles.textarea} placeholder="본인의 이야기를 작성해보세요!" spellCheck="false" maxLength={33}/>
         </div>
       </div>
     </div>
