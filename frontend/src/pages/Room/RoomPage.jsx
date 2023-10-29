@@ -30,13 +30,13 @@ function RoomPage() {
   const canvasRef = useRef()
   const [shareModal, setShareModal] = useState(false)
   console.log(canvasRef)
-  useEffect(() => {
-    fetchRoomData().then((response) => {
-      if (response.data.isMyRoom) {
-        setIsMyRoom(true)
-      }
-    })
-  }, [])
+  // useEffect(() => {
+  //   fetchRoomData().then((response) => {
+  //     if (response.data.isMyRoom) {
+  //       setIsMyRoom(true)
+  //     }
+  //   })
+  // }, [])
 
   return (
     <div className={styles.container}>
@@ -85,7 +85,19 @@ function RoomPage() {
         </Suspense>
       </Canvas>
       {/* 랜덤 찾기 버튼 */}
-      {isMyRoom ? <></> : <div className={styles.randomButton}>랜덤 방문</div>}
+      {isMyRoom ? (
+        <></>
+      ) : (
+        <div className={styles.buttonContainer}>
+          <div className={styles.randomButton}>
+            <img
+              src={"assets/icons/random.svg"}
+              className={styles.randomImage}
+            />
+            <div className={styles.randomButtonContent}>랜덤 방문</div>
+          </div>
+        </div>
+      )}
       {isMyRoom ? <MyFooter /> : <OtherFooter />}
       {/* {popUpStatus ? <PopUp/> : '' } */}
       <PopUp />

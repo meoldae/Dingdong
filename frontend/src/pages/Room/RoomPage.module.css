@@ -36,5 +36,35 @@ canvas {
   z-index: 5;
 }
 
+.buttonContainer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .randomButton {
+  width: 200px;
+  height: 40px;
+  border-radius: 40px;
+  background: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.randomImage {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  left: 10px;
+}
+
+.randomButtonContent {
+  font-size: 20px;
+  font-family: "Pretendard-Bold";
+  margin-left: 20px;
 }
