@@ -25,6 +25,7 @@ import RoomPortalRing from "../../components/Item/MainItems/Portals/RoomPortalRi
 
 // React 컴포넌트
 import ConfirmEnteringRoomModal from "../../components/Modal/Confirm/ConfirmEnteringRoomModal"
+import PhysicsModel from "../../components/Item/MainItems/PhysicsModel"
 
 const SingleMainPage = () => {
   // 마이룸 입장 모달
@@ -54,8 +55,9 @@ const SingleMainPage = () => {
 
         {/* 객체 */}
         <Model />
-        <Spot />
-        <House />
+        {/* <Spot /> */}
+        {/* <House /> */}
+        <PhysicsModel />
 
         {/* 포탈 */}
         {roomPortalVisible ? <RoomPortal /> : <RoomPortalRing />}

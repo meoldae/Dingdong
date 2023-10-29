@@ -1,0 +1,53 @@
+.Container {
+  height: 100vh;
+  background: #ffebf4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "HandWrite-DaHaeng";
+}
+
+.ContentContainer {
+  width: 320px;
+  height: 530px;
+  background: #fff;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  position: relative;
+}
+
+.Question {
+  width: 195px;
+  text-align: center;
+  margin-top: 75px;
+  font-size: 28px;
+}
+
+.AnswerContainer {
+  position: absolute;
+  top: 200px;
+}
+
+.Answer {
+  width: 240px;
+  height: 75px;
+  background: #f1c4e1;
+  border-radius: 15px;
+  font-size: 24px;
+  margin-bottom: 10px;
+  padding: 0px 20px 0px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.FooterNumber {
+  position: absolute;
+  bottom: 0px;
+  margin-bottom: 30px;
+  font-size: 20px;
+}
