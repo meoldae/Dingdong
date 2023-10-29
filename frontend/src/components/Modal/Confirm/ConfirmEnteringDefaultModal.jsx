@@ -19,7 +19,6 @@ const ConfirmEnteringDefaultModal = ({
 
   useEffect(() => {
     if (isInitialRender) {
-      console.log(1)
       setIsInitialRender(false)
     }
   }, [isInitialRender])
