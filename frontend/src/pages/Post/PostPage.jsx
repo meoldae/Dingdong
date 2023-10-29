@@ -12,8 +12,10 @@ const PostPage = () => {
   const [searchText, setSearchText] = useState("")
   const [isPostCardBox, setIsPostCardBox] = useState(false)
   const [isPostCard, setIsPostCard] = useState(false)
+  const [selectedPostCard, setSelectedPostCard] = useState(null)
 
-  const selectedPostCardHandler = () => {
+  const selectedPostCardHandler = (selected) => {
+    setSelectedPostCard(selected)
     setIsPostCardBox(false)
     setIsPostCard(true)
   }
@@ -53,9 +55,17 @@ const PostPage = () => {
         </div>
       </div>
       {isPostCardBox && (
-        <PostCardBox cancelClick={() => setIsPostCardBox(false)} />
+        <PostCardBox
+          cancelClick={() => setIsPostCardBox(false)}
+          onSelectButtonClick={selectedPostCardHandler}
+        />
       )}
-      {isPostCard && <SendLetter />}
+      {isPostCard && (
+        <SendLetter
+          card={selectedPostCard}
+          onClose={() => setIsPostCard(false)}
+        />
+      )}
     </div>
   )
 }
