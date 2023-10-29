@@ -30,10 +30,10 @@
 
 .TitleLine {
   border: 1px solid #f1c4e1;
-  margin-bottom: 30px;
 }
 
 .ContentContainer {
+  margin-top: 30px;
 }
 
 .InputContainer {
