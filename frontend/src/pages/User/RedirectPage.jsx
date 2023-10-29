@@ -17,10 +17,9 @@ const RedirectPage = () => {
             }
         })
         .then(response => {
-            console.log(response);
-            const avatarId = response.data.avatarId;
-            const nickname = response.data.nickname;
-            const roomId = response.data.roomId;
+            const avatarId = response.data.data.avatarId;
+            const nickname = response.data.data.nickname;
+            const roomId = response.data.data.roomId;
         
             setLoginInfo(prevState => ({
                 ...prevState,
