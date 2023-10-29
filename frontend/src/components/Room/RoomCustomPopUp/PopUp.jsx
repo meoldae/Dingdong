@@ -25,11 +25,6 @@ const PopUp = () => {
     const imagePath = '../../../../public/assets/images/roomCustom/';
     const images = ['all.png', 'furniture.png', 'carpets.png', 'wallHanging.png', 'props.png'];
 
-    useEffect(() => {
-        console.log(popUpStatus);
-        console.log("팝업 열리나요? ");
-    }, [popUpStatus])
-
     return (    
         <div className={`${styles.popUpContainer} ${popUpStatus ? styles.active : styles.notActive}`}>
         {/* <div className={`${styles.popUpContainer} ${styles.notActive}`}> */}
