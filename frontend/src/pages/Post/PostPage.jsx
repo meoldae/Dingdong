@@ -25,8 +25,8 @@ const PostPage = () => {
 
   return (
     <div className={styles.Container}>
-      <img src={"assets/icons/back.svg"} className={styles.BackButton} />
       <div className={styles.SemiContainer}>
+        <img src={"assets/icons/back.svg"} className={styles.BackButton} />
         <div className={styles.TitleContainer}>
           <div className={styles.Title}>우체국</div>
           <div className={styles.SemiTitle}>편지를 보낼 사람을 찾아보세요.</div>
