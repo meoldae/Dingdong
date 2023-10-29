@@ -1,5 +1,6 @@
 // 라이브러리
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 // 스타일
 import styles from "./PostPage.module.css"
@@ -9,6 +10,8 @@ import PostCardBox from "../../components/Modal/Post/PostCardBox"
 import SendLetter from "../../components/Modal/Post/SendLetter"
 
 const PostPage = () => {
+  const navigate = useNavigate()
+
   const [searchText, setSearchText] = useState("")
   const [isPostCardBox, setIsPostCardBox] = useState(false)
   const [isPostCard, setIsPostCard] = useState(false)
