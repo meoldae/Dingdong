@@ -21,7 +21,6 @@ const AppRouter = () => {
         <Route element={<AuthRoute authentication="user" />}>
           <Route path="/" element={<MainPage />} />
           <Route path="/single" element={<SingleMainPage />} />
-          <Route path="/tutorial" element={<TutorialPage />} />
           <Route path="/room/:roomId" element={<AppRoom />} />
           <Route path="/usersetting" element={<AppUserSetting />} />
           <Route path="/yourstamp" element={<StampTest />} />
