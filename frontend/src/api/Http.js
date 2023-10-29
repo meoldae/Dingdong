@@ -18,7 +18,7 @@ const HttpForm = axios.create({
     withCredentials: true
 });
 
-// HttpForm.interceptors.request.use(onRequest, onErrorRequest);
-// HttpForm.interceptors.response.use(onResponse, onErrorResponse);
+HttpForm.interceptors.request.use(onRequest, onErrorRequest);
+HttpForm.interceptors.response.use(onResponse, onErrorResponse);
 
 export { HttpJson, HttpForm };
