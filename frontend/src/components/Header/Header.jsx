@@ -2,6 +2,7 @@ import style from "./Header.module.css"
 import hamburger from "../../../public/assets/icons/hamburgerbar.svg"
 import bell from "../../../public/assets/icons/bell.svg"
 const Header = () => {
+  const icon = "../../../../public/assets/icons/"
   return (
     <div className={style.wrap}>
       <div className={style.header}>

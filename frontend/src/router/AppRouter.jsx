@@ -21,7 +21,7 @@ const AppRouter = () => {
           <Route path="/" element={<MainPage />} />
           <Route path="/single" element={<SingleMainPage />} />
           <Route path="/tutorial" element={<TutorialPage />} />
-          <Route path="/room" element={<AppRoom />} />
+          <Route path="/room/:roomId" element={<AppRoom />} />
           <Route path="/usersetting" element={<AppUserSetting />} />
           <Route path="/yourstamp" element={<StampTest />} />
           <Route path="/yourstamp/result" element={<StampTestResult />} />

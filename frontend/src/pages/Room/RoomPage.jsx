@@ -1,41 +1,56 @@
-import { Canvas } from "@react-three/fiber";
-import { Html, PerspectiveCamera } from "@react-three/drei";
-import Experience from "../../components/Room/Experience";
-import { fetchRoomData } from "../../api/User";
-import { Suspense, useState, useEffect, useRef } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { Canvas } from "@react-three/fiber"
+import { Html, PerspectiveCamera } from "@react-three/drei"
+import Experience from "../../components/Room/Experience"
+import { fetchRoomData } from "../../api/User"
+import { Suspense, useState, useEffect, useRef } from "react"
+import { useRecoilState, useRecoilValue } from "recoil"
 import {
   ItemRotateState,
   ItemsState,
   buildModeState,
   draggedItemState,
-} from "../../components/Room/Atom";
-import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom";
+} from "../../components/Room/Atom"
+import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom"
 
-import Header from "../../components/Header/Header";
-import MyFooter from "../../components/Footer/MyFooter";
-import Share from "../../components/Header/Share";
-import OtherFooter from "../../components/Footer/OtherFooter";
-import NeighborRequest from "../../components/Header/NeighborRequest";
-import styles from "./RoomPage.module.css";
-import PopUp from "../../components/Room/RoomCustomPopUp/PopUp";
-import SharePage from "../../components/Modal/Sharing/SharePage";
-import SharingModalList from "../../components/Modal/Sharing/SharingModalList";
+import Header from "../../components/Header/Header"
+import MyFooter from "../../components/Footer/MyFooter"
+import Share from "../../components/Header/Share"
+import OtherFooter from "../../components/Footer/OtherFooter"
+import NeighborRequest from "../../components/Header/NeighborRequest"
+import styles from "./RoomPage.module.css"
+import PopUp from "../../components/Room/RoomCustomPopUp/PopUp"
+import SharePage from "../../components/Modal/Sharing/SharePage"
+import SharingModalList from "../../components/Modal/Sharing/SharingModalList"
 
 function RoomPage() {
-  const [editMode, setEditMode] = useRecoilState(buildModeState);
-  const [isMyRoom, setIsMyRoom] = useState(false);
-  const [drag, setDrag] = useRecoilState(draggedItemState);
-  const popUpStatus = useRecoilValue(popUpStatusAtom);
-  const canvasRef = useRef();
-  const [shareModal, setShareModal] = useState(false);
+  const [editMode, setEditMode] = useRecoilState(buildModeState)
+  const [isMyRoom, setIsMyRoom] = useState(false)
+  const [drag, setDrag] = useRecoilState(draggedItemState)
+  const popUpStatus = useRecoilValue(popUpStatusAtom)
+  const canvasRef = useRef()
+  const [shareModal, setShareModal] = useState(false)
+
   useEffect(() => {
-    fetchRoomData().then((response) => {
-      if (response.data.isMyRoom) {
-        setIsMyRoom(true);
-      }
+
+    const roomId = window.location.pathname.match(/\d+/g);
+    // const myRoomId = localStorage.getItem("userAtom").roomId;
+    const myRoomId = 3;
+
+    setIsMyRoom(roomId == myRoomId);
+
+    fetchRoomData(roomId, 
+      (response) => {
+        console.log(response.data.data);
+    },
+    (error) => {
+      console.error("Error at fetching RoomData...", error);''
     });
-  }, []);
+
+  }, [isMyRoom]);
+
+  const randomVisit = () => {
+    console.log("랜덤방문 함수")
+  }
 
   return (
     <div className={styles.container}>
@@ -43,7 +58,12 @@ function RoomPage() {
       {isMyRoom ? <NeighborRequest /> : <Share setShareModal={setShareModal} />}
       {shareModal && (
         <>
-          <div className={styles.back} onClick={()=>{setShareModal(false)}}/>
+          <div
+            className={styles.back}
+            onClick={() => {
+              setShareModal(false)
+            }}
+          />
           <SharePage shareModal={shareModal} canvasRef={canvasRef} />
           <SharingModalList />
         </>
@@ -51,9 +71,9 @@ function RoomPage() {
       <div
         className={styles.button}
         onClick={() => {
-          setEditMode(!editMode);
+          setEditMode(!editMode)
           if (drag) {
-            setDrag(null);
+            setDrag(null)
           }
         }}
       >
@@ -71,18 +91,32 @@ function RoomPage() {
         <Suspense
           fallback={
             <Html>
-              <div>껄껄껄 로딩중이란다 하하하ㅏ</div>
+              <div>로딩중...</div>
             </Html>
           }
         >
           <Experience />
         </Suspense>
       </Canvas>
+      {/* 랜덤 찾기 버튼 */}
+      {isMyRoom ? (
+        <></>
+      ) : (
+        <div className={styles.buttonContainer}>
+          <div className={styles.randomButton} onClick={randomVisit}>
+            <img
+              src={"assets/icons/random.svg"}
+              className={styles.randomImage}
+            />
+            <div className={styles.randomButtonContent}>랜덤 방문</div>
+          </div>
+        </div>
+      )}
       {isMyRoom ? <MyFooter /> : <OtherFooter />}
       {/* {popUpStatus ? <PopUp/> : '' } */}
       <PopUp />
     </div>
-  );
+  )
 }
 
-export default RoomPage;
+export default RoomPage

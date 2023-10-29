@@ -8,8 +8,8 @@ const HttpJson = axios.create({
     withCredentials: true
 });
 
-// HttpJson.interceptors.request.use(onRequest, onErrorRequest);
-// HttpJson.interceptors.response.use(onResponse, onErrorResponse);
+HttpJson.interceptors.request.use(onRequest, onErrorRequest);
+HttpJson.interceptors.response.use(onResponse, onErrorResponse);
 
 const HttpForm = axios.create({
     baseURL: import.meta.env.VITE_SERVER_URL,
@@ -18,7 +18,7 @@ const HttpForm = axios.create({
     withCredentials: true
 });
 
-// HttpForm.interceptors.request.use(onRequest, onErrorRequest);
-// HttpForm.interceptors.response.use(onResponse, onErrorResponse);
+HttpForm.interceptors.request.use(onRequest, onErrorRequest);
+HttpForm.interceptors.response.use(onResponse, onErrorResponse);
 
 export { HttpJson, HttpForm };

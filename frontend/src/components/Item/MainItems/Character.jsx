@@ -157,7 +157,6 @@ const Character = () => {
   // 마우스 및 터치 이벤트에 따른 목적지 업데이트
   const handlePositionChange = useCallback(
     (e) => {
-      console.log(e)
       const event = e.type.startsWith("touch") ? e.touches[0] : e
       const rect = domElement.getBoundingClientRect()
       const x = ((event.clientX - rect.left) / rect.width) * 2 - 1
