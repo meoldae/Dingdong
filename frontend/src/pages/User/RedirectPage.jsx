@@ -15,6 +15,7 @@ const RedirectPage = () => {
         if (loginInfo.accessToken) {
             fetchUserInfo(loginInfo.accessToken)
                 .then(response => {
+                    console.log(response);
                     const avatarId = response.data.avatarId;
                     const nickname = response.data.nickname;
                     const roomId = response.data.roomId;
