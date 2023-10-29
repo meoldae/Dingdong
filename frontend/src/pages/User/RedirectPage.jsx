@@ -1,4 +1,5 @@
 import { useRecoilState } from 'recoil';
+import { useEffect } from 'react';
 import { userAtom } from '@/atom/UserAtom';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserInfo } from '../../api/User';
@@ -28,12 +29,14 @@ const RedirectPage = () => {
                 .catch(error => {
                     console.log(error);
                 });
+            
             navigate("/");
         }
-    }, [loginInfo.accessToken]); // accessToken이 변경될 때만 useEffect 내부가 실행됩니다.
+    }, [loginInfo.accessToken]); 
     
     if (token !== null) {
         setLoginInfo(prevState => ({ ...prevState, accessToken: token }));
+        console.log(loginInfo);
     }
 
     return null;
