@@ -13,7 +13,6 @@ const RedirectPage = () => {
     
     useEffect(() => {
         if (loginInfo.accessToken) {
-
             fetchUserInfo(loginInfo.accessToken)
                 .then(response => {
                     console.log("요청은 했습니다");
@@ -34,7 +33,6 @@ const RedirectPage = () => {
                 .catch(error => {
                     console.log(error);
                 });
-            
         }
     }, [loginInfo.accessToken, navigate, setLoginInfo]); 
     
