@@ -40,7 +40,7 @@ const SharePage = ({shareModal, canvasRef}) => {
         <img src={imageSrc} alt="Shared Content" />
         <h2>{day}</h2>
         <div>
-          <textarea className={styles.textarea} spellCheck="false"></textarea>
+          <textarea className={styles.textarea} placeholder="본인의 이야기를 작성해보세요!" spellCheck="false" />
         </div>
       </div>
     </div>

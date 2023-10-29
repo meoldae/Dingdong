@@ -4,6 +4,7 @@ import {
   kakao,
   twitter,
   urlCopy,
+  save
 } from "../../../assets/images/sharing/sharingIcon";
 // import { useRecoilValue } from 'recoil';
 // import { userNicknameAtom } from '../../atoms/userAtoms';
@@ -115,10 +116,10 @@ function SharingModalList(props) {
     });
   };
   const sharetype = [
-    { name: "저장하기", click: saveImg },
-    { icon: urlCopy, name: "URL복사", click: shareUrl },
-    { icon: twitter, name: "트위터", click: shareTwitter },
+    { icon: urlCopy, name: "URL복사", click: shareUrl },  
+    { icon:save,name: "저장하기", click: saveImg },
     { icon: kakao, name: "카카오톡", click: shareKakao },
+    { icon: twitter, name: "트위터", click: shareTwitter },
   ];
 
   return (
@@ -129,6 +130,7 @@ function SharingModalList(props) {
           icon={share.icon}
           name={share.name}
           click={share.click}
+          className={styles.shareItem}
         />
       ))}
     </div>
