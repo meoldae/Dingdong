@@ -30,6 +30,7 @@ function RoomPage() {
   const canvasRef = useRef()
   const [shareModal, setShareModal] = useState(false)
   console.log(canvasRef)
+
   // useEffect(() => {
   //   fetchRoomData().then((response) => {
   //     if (response.data.isMyRoom) {
@@ -37,6 +38,10 @@ function RoomPage() {
   //     }
   //   })
   // }, [])
+
+  const randomVisit = () => {
+    console.log("랜덤방문 함수")
+  }
 
   return (
     <div className={styles.container}>
@@ -89,7 +94,7 @@ function RoomPage() {
         <></>
       ) : (
         <div className={styles.buttonContainer}>
-          <div className={styles.randomButton}>
+          <div className={styles.randomButton} onClick={randomVisit}>
             <img
               src={"assets/icons/random.svg"}
               className={styles.randomImage}
