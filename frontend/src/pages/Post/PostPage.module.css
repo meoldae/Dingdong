@@ -67,3 +67,8 @@
 .ResultContainer {
   margin-top: 30px;
 }
+
+.SelectButton {
+  width: 80%;
+  height: 60px;
+}
