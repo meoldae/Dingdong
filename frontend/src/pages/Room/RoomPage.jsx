@@ -44,9 +44,9 @@ function RoomPage() {
       {isMyRoom ? <NeighborRequest /> : <Share setShareModal={setShareModal} />}
       {shareModal && (
         <>
-          <div className={styles.back} onClick={()=>{setShareModal(false)}}/>
+          <div className={styles.back} onClick={()=>{setshareModal(false)}}/>
           <SharePage shareModal={shareModal} canvasRef={canvasRef} />
-          <SharingModalList />
+          <SharingModalList  shareMode={"room"}/>
         </>
       )}
       <div
