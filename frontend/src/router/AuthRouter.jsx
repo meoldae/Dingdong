@@ -21,8 +21,6 @@ export default function AuthRoute({ authentication }) {
 
   const authText = authentication
 
-  isLogin = true // 작업을 위해서 임시 로그인 처리 (향후 제거해야함!)
-
   if (authText.indexOf("Not") == -1) {
     if (isLogin) return <Outlet />
     else return <Navigate to={redirect(true, authText)} />
