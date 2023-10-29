@@ -49,12 +49,17 @@ const ConfirmEnteringRoomModal = () => {
     <div className={styles.MainModal}>
       <div className={styles.ContentBox}>
         <div className={styles.ContentContainer}>
-          <div className={styles.Title}>제목</div>
-          <div className={styles.Content}>내용</div>
-        </div>
-        <div className={styles.ConfirmContainer}>
-          <div>▶ 예</div>
-          <div>▶ 아니오</div>
+          <div className={styles.Title}>딩동!</div>
+          <div className={styles.Content}>마이룸에 입장하시겠습니까?</div>
+          <div className={styles.ConfirmContainer}>
+            <div className={styles.Confirm} onClick={onConfirm}>
+              ▶&nbsp;&nbsp;&nbsp;예
+            </div>
+            <div className={styles.Confirm} onClick={onCancle}>
+              ▶&nbsp;&nbsp;&nbsp;아니오
+            </div>
+            {/* &nbsp; = 띄어쓰기 */}
+          </div>
         </div>
       </div>
     </div>
