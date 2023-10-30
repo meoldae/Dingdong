@@ -161,7 +161,7 @@ function SharingModalList(props) {
       link.click();
       document.body.removeChild(link);
     };
-    downloadImage(props.resultSrcUrl, "StampResult.svg");
+    downloadImage(props.resultPngUrl, "StampResult.png");
   };
 
 
