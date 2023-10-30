@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useSetRecoilState } from "recoil"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 import { useNavigate } from "react-router-dom"
 import {
   ArriveAtom,
@@ -7,6 +7,7 @@ import {
 } from "../../../atom/SinglePlayAtom"
 import { DefaultPosition, DefaultZoom } from "../../../atom/DefaultSettingAtom"
 import styles from "./ConfirmEnteringDefaultModal.module.css"
+import { userAtom } from "../../../atom/UserAtom"
 
 const ConfirmEnteringDefaultModal = ({
   modalContent,
@@ -29,12 +30,12 @@ const ConfirmEnteringDefaultModal = ({
 
   // 도착 여부
   const setIsArrived = useSetRecoilState(ArriveAtom)
-
+  const userInfo = useRecoilValue(userAtom);
   // 마이룸으로 이동
   const onConfirm = () => {
     if (location === "house") {
-      // 집으로 이동
-      navigate("/room")
+      const roomId = userInfo.roomId;
+      navigate(`/room/${roomId}`)
     } else if (location === "postOffice") {
       // 우체국으로 이동
       navigate("/postoffice")
