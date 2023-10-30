@@ -1,11 +1,11 @@
 import style from "./Header.module.css"
-import hamburger from "../../../public/assets/icons/hamburgerbar.svg"
-import bell from "../../../public/assets/icons/bell.svg"
+import hamburger from "/assets/icons/hamburgerbar.svg"
+import bell from "/assets/icons/bell.svg"
 import { userAtom } from "../../atom/UserAtom"
 import { useRecoilValue } from "recoil"
 
 const Header = ({ checkMyRoom }) => {
-  const icon = "../../../../public/assets/icons/"
+  const icon = "/assets/icons/"
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
