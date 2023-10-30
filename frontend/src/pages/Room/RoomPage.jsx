@@ -22,6 +22,7 @@ import PopUp from "../../components/Room/RoomCustomPopUp/PopUp"
 import SharePage from "../../components/Modal/Sharing/SharePage"
 import SharingModalList from "../../components/Modal/Sharing/SharingModalList"
 import { userAtom } from "../../atom/UserAtom"
+import { roomInfoAtom } from "@/atom/RoomInfoAtom"
 
 function RoomPage() {
   const [editMode, setEditMode] = useRecoilState(buildModeState)
@@ -32,6 +33,7 @@ function RoomPage() {
   const canvasRef = useRef()
   const [shareModal, setShareModal] = useState(false)
   const userInfo = useRecoilValue(userAtom)
+  const [nickName, setNickName] = useRecoilState(roomInfoAtom)
 
   useEffect(() => {
     const roomId = window.location.pathname.match(/\d+/g)
@@ -42,6 +44,7 @@ function RoomPage() {
       roomId,
       (response) => {
         setItems(response.data.data.roomFurnitureList)
+        setNickName(response.data.data.nickname)
       },
       (error) => {
         console.error("Error at fetching RoomData...", error)
