@@ -27,12 +27,7 @@ const SendLetter = ({ onClose, card }) => {
       stampId: card.idx,
       roomId: roomId,
     }
-    sendLetter(
-      param,
-      (response) => {
-        console.log(response)
-        onClose()
-      },
+    sendLetter(param, (response) => { onClose() },
       (error) => {
         console.log(error)
       }
@@ -46,13 +41,10 @@ const SendLetter = ({ onClose, card }) => {
   }
 
   const handleCheckContentCount = (event) => {
-    console.log(roomInfo)
     setContent(event.target.value)
     setContentCount(event.target.value.length)
   }
-  useEffect(() => {
-    console.log(roomInfo)
-  }, [roomInfo])
+  
   return (
     <div className={styles.overlay} onClick={handleOutsideClick}>
       <div className={styles.sendLetterContainer}>

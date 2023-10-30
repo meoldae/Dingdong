@@ -1,28 +1,40 @@
 import loginKakao from "/assets/images/login_kakao.png"
-import { useNavigate } from "react-router-dom";
-import style from "./Login.module.css"
+import { useNavigate } from "react-router-dom"
+import styles from "./Login.module.css"
 
 const Login = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate()
 
-    const loginHandler = () => {
-      window.location.href = `${import.meta.env.VITE_SERVER_URL}/oauth2/authorization/kakao`
-    }
+  const loginHandler = () => {
+    window.location.href = `${
+      import.meta.env.VITE_SERVER_URL
+    }/oauth2/authorization/kakao`
+  }
 
-    const guestLoginHandler = () => {
-      navigate("/tutorial");
-    }
-    
-    return (
-      <div className={style.container}>
-        {/* <div className={style.centered}> */}
-            <div className={style.buttons}>
-                <img src={loginKakao} alt="카카오로그인" onClick={loginHandler} style={{cursor: 'pointer'}}/>
-                <button onClick={guestLoginHandler} className={style.guestButton}>게스트 로그인</button>
-            </div>
-        {/* </div> */}
+  const guestLoginHandler = () => {
+    navigate("/tutorial")
+  }
+
+  const posteCardTest = () => {
+    navigate("/yourstamp")
+  }
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.logo}>
+        <img src="/assets/images/dingdonglogo2.png" alt="" />
       </div>
-    )
+      <div className={styles.buttons}>
+        <img src={loginKakao} alt="카카오로그인" onClick={loginHandler} />
+        {/* <button onClick={guestLoginHandler} className={styles.guestButton}>
+          게스트 로그인
+        </button> */}
+        <div className={styles.testButton} onClick={posteCardTest}>
+          <p>나의 우표 유형 테스트 하러 가기!</p>
+        </div>
+      </div>
+    </div>
+  )
 }
-  
+
 export default Login
