@@ -97,15 +97,9 @@ function RoomPage() {
         ref={canvasRef}
       >
         <color attach="background" args={["skyblue"]} />
-        <Suspense
-          fallback={
-            <Html>
-              <div>로딩중...</div>
-            </Html>
-          }
-        >
+
           <Experience />
-        </Suspense>
+
       </Canvas>
       {/* 랜덤 찾기 버튼 */}
       {isMyRoom ? (
