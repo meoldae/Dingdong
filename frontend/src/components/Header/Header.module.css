@@ -147,6 +147,9 @@
 }
 
 /* 알림 모달 */
+.AlarmContainer {
+}
+
 .AlarmModal {
   z-index: 6;
   position: absolute;

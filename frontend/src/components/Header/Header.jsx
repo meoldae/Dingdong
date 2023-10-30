@@ -93,12 +93,14 @@ const Header = ({ checkMyRoom }) => {
       {isAlarm && (
         <>
           <div className={styles.Overlay} onClick={() => setIsAlarm(false)} />
-          <div className={styles.AlarmModal}>
-            <NeighborAcceptModal
-              content={"둥이맘"}
-              okClick={acceptNeighborHandler}
-              cancelClick={() => setIsAlarm(false)}
-            />
+          <div className={styles.AlarmContainer}>
+            <div className={styles.AlarmModal}>
+              <NeighborAcceptModal
+                content={"둥이맘"}
+                okClick={acceptNeighborHandler}
+                cancelClick={() => setIsAlarm(false)}
+              />
+            </div>
           </div>
         </>
       )}
