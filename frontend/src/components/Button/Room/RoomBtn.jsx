@@ -1,6 +1,6 @@
 import styles from "./RoomBtn.module.css"
 
-const imagePath = `./assets/icons/`
+const imagePath = `/assets/icons/`
 
 const RoomBtn = ({ img, onClick }) => {
   return (
