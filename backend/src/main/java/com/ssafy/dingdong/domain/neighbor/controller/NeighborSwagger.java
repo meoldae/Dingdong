@@ -17,6 +17,8 @@ public interface NeighborSwagger {
 
 	CommonResponse createNeighborRequest(@PathVariable Long targetId, Authentication authentication);
 
+	DataResponse<String> isNeighbor(@PathVariable Long targetRoomId, Authentication authentication);
+
 	DataResponse<List<String>> getRequestList(Authentication authentication);
 
 	DataResponse<List<NeighborResponse>> getNeighborList(Authentication authentication);
