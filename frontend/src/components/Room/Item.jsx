@@ -46,9 +46,8 @@ export const Item = ({
   const value = useRecoilValue(ItemRotateState);
   const mobileCheck =
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgen
+      navigator.userAgent
     );
-
   useEffect(() => {
     setItems((prev) => {
       const newItems = prev.map((item, index) => {

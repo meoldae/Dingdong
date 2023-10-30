@@ -25,7 +25,10 @@ const onErrorResponse = async (err) => {
 
     if (response && response.status === 401) {
         RefreshToken(({ data }) => {
-            localStorage.setItem('userAtom', `{"accessToken" : "${data.data}"}`);
+            const prev = JSON.parse(localStorage.getItem('userAtom'));
+            prev.accessToken = data.data;
+
+            localStorage.setItem('userAtom', JSON.stringify(prev));
             axios.defaults.headers.common.Authorization = `Bearer ` + data.data;
             originalConfig.headers.Authorization = `Bearer ` + data.data;
 

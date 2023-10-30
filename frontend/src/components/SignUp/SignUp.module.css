@@ -16,51 +16,79 @@
 }
 
 .Container {
-  height: 100vh;
-  margin: 65px 40px;
+  height: 100svh;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fff;
 }
 
 .titleContainer {
   font-family: Pretendard-Bold;
   font-size: 40px;
-  margin-top: 40px;
+  margin-top: 20px;
+  height: 10%;
+  text-align: center;
+}
+.subContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.characterContainer {
+  padding-left: 13px;
+  transform: scale(2);
 }
 
-.characterContainer {
+.selectText {
+  width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 30px;
-}
-
-.charactersImages {
-  width: 200px;
-  height: 360px;
-  border: 1px solid black;
 }
 
 .nicknameContainer {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
   font-family: "Pretendard-SemiBold";
   font-size: 16px;
+  margin-bottom: 20px;
 }
 
 .nicknameInput {
   border: 3px solid #fcc4d7;
   border-radius: 40px;
-  width: 140px;
+  width: 160px;
   height: 40px;
   text-align: center;
   margin-right: 10px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .nicknameInput:focus {
   outline: none;
 }
+.nicknameInput::placeholder {
+  font-size: 14px;
+}
+
+.nicknameInput:focus::-webkit-input-placeholder,
+textarea:focus::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: transparent;
+  font-size: 10px;
+}
+.nicknameInput:focus:-ms-input-placeholder,
+textarea:focus:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: transparent;
+  font-size: 10px;
+}
 
 .doubleCheck {
-  width: 100px;
+  width: 90px;
   height: 40px;
   border-radius: 40px;
   border: 3px solid #fcc4d7;
@@ -72,5 +100,5 @@
 .doSignUpContainer {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  margin-bottom: 40px;
 }
