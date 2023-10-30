@@ -1,11 +1,9 @@
 import styles from "./NeighborAcceptModal.module.css"
 
-const NeighborAcceptModal = ({ content, okClick, cancelClick }) => {
+const NeighborAcceptModal = ({ okClick, cancelClick }) => {
   return (
     <div className={styles.Container}>
-      <div className={styles.ContentContainer}>
-        {content}으로 부터 이웃신청이 왔습니다.
-      </div>
+      <div className={styles.ContentContainer}>이웃 요청을 하시겠습니까?</div>
       <div className={styles.HorizontalLine} />
       <div className={styles.VerticalLine} />
       <div className={styles.ButtonContainer}>
