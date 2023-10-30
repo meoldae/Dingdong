@@ -145,3 +145,13 @@
 .MenuButton {
   padding: 10px 0 10px 0;
 }
+
+/* 알림 모달 */
+.AlarmModal {
+  z-index: 6;
+  position: absolute;
+  top: 0;
+  background: #fff;
+
+  border-radius: 10px;
+}
