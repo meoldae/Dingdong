@@ -45,14 +45,36 @@ textarea:focus {
 }
 
 .share{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  display: flex;
+  justify-content: space-between;
+  /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+  /* z-index: 300000;
+  bottom: 0;
+  position: absolute; */
+  /* background-color: white; */
+  min-width: 280px;            
+}
+
+.shareRoomSafari{
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr; 
   z-index: 300000;
   position: absolute;
   bottom: 0;
-  background-color: white;
-  width: 100%;
-}
+  background-color: white; 
+  min-width: 100%;            
+} 
+
+.shareRoom{
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr 1fr; 
+  z-index: 300000;
+  position: absolute;
+  bottom: 0;
+  background-color: white; 
+  min-width: 100%;            
+} 
+
 
 .shareItem{
   display: flex;
