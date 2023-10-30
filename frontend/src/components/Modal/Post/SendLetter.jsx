@@ -27,12 +27,7 @@ const SendLetter = ({ onClose, card }) => {
       stampId: card.idx,
       roomId: roomId,
     }
-    sendLetter(
-      param,
-      (response) => {
-        console.log(response)
-        onClose()
-      },
+    sendLetter(param, (response) => { onClose() },
       (error) => {
         console.log(error)
       }
