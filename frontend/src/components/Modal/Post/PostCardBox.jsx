@@ -46,14 +46,18 @@ const PostCardBox = (props) => {
                 ? `${styles.postCard} ${styles.selected}`
                 : styles.postCard
             }
-            src={`/public/assets/images/post/${card.src}`}
+            src={`/assets/images/post/${card.src}`}
             onClick={() => handleCardClick(idx, card.src, card.comment)}
           />
         ))}
       </div>
       <div className={styles.postCardComment}>{cardComment}</div>
       <div className={styles.selectBtn}>
-        <DefaultBtn btnName={"선택하기"} onClick={handleSelectButtonClick} />
+        <DefaultBtn
+          btnName={"선택하기"}
+          onClick={handleSelectButtonClick}
+          color={"#F2CBE4"}
+        />
       </div>
     </PostDefaultModal>
   )

@@ -22,6 +22,7 @@ import PopUp from "../../components/Room/RoomCustomPopUp/PopUp"
 import SharePage from "../../components/Modal/Sharing/SharePage"
 import SharingModalList from "../../components/Modal/Sharing/SharingModalList"
 import { userAtom } from "../../atom/UserAtom"
+import { roomInfoAtom } from "@/atom/RoomInfoAtom"
 
 function RoomPage() {
   const [editMode, setEditMode] = useRecoilState(buildModeState)
@@ -32,6 +33,7 @@ function RoomPage() {
   const canvasRef = useRef()
   const [shareModal, setShareModal] = useState(false)
   const userInfo = useRecoilValue(userAtom)
+  const [nickName, setNickName] = useRecoilState(roomInfoAtom)
 
   useEffect(() => {
     const roomId = window.location.pathname.match(/\d+/g)
@@ -42,6 +44,7 @@ function RoomPage() {
       roomId,
       (response) => {
         setItems(response.data.data.roomFurnitureList)
+        setNickName(response.data.data.nickname)
       },
       (error) => {
         console.error("Error at fetching RoomData...", error)
@@ -61,12 +64,17 @@ function RoomPage() {
       ) : (
         <Header checkMyRoom={"other"} />
       )}
-      {isMyRoom ? <NeighborRequest /> : <Share setShareModal={setShareModal} />}
+      {isMyRoom ? <Share setShareModal={setShareModal} /> : <NeighborRequest />}
       {shareModal && (
         <>
-          <div className={styles.back} onClick={()=>{setshareModal(false)}}/>
+          <div
+            className={styles.back}
+            onClick={() => {
+              setShareModal(false)
+            }}
+          />
           <SharePage shareModal={shareModal} canvasRef={canvasRef} />
-          <SharingModalList  shareMode={"room"}/>
+          <SharingModalList shareMode={"room"} />
         </>
       )}
       {/* <div
@@ -106,7 +114,7 @@ function RoomPage() {
         <div className={styles.buttonContainer}>
           <div className={styles.randomButton} onClick={randomVisit}>
             <img
-              src={"/public/assets/icons/random.svg"}
+              src={"/assets/icons/random.svg"}
               className={styles.randomImage}
             />
             <div className={styles.randomButtonContent}>랜덤 방문</div>

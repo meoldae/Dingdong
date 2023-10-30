@@ -6,7 +6,7 @@ import { useRef } from 'react';
 const PopUpContent = (props) => {
     
   const [furnitureList, setFurnitureList] = useState([])
-  const imagePath = '../../../../public/assets/';
+  const imagePath = '/assets';
   const [pageNo, setPageNo] = useState(0);
   const target = useRef();
   const [loading, setLoading] = useState(false);
