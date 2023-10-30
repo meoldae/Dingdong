@@ -47,7 +47,13 @@ const Header = ({ checkMyRoom }) => {
             className={styles.Overlay}
             onClick={() => setIsHamburger(false)}
           />
-          <div className={styles.HamburgerModal}>모달</div>
+          <div className={styles.HamburgerModal}>
+            <div className={styles.ContentContainer}>
+              <div className={styles.MenuButton}>문의하기</div>
+              <div className={styles.MenuButton}>로그아웃</div>
+              <div className={styles.MenuButton}>회원탈퇴</div>
+            </div>
+          </div>
         </>
       )}
     </>
