@@ -33,7 +33,7 @@ export const Item = ({
   const height =
     rotation === 1 || rotation === 3
       ? size[0] % 2
-        ? size[0] + 1
+        ? size[0] +1
         : size[0]
       : size[2] % 2
       ? size[2] + 1
@@ -134,15 +134,15 @@ export const Item = ({
             />
             {isDragging && (
               <mesh
-                position-x={rotation ? 0.02 : 0.12}
+                position-x={rotation ? 0.02 : 0}
                 position-y={0.12}
-                position-z={0.13}
+                position-z={rotation ? 0 : 0.13}
               >
                 <boxGeometry
                   args={[
-                    rotation ? 0 : (width * 0.48) / 2,
+                    rotation ? 0 : (width * 0.24) ,
                     (thick * 0.48) / 2,
-                    rotation ? (height * 0.48) / 2 : 0,
+                    rotation ? (height * 0.24) : 0,
                   ]}
                 />
                 <meshBasicMaterial
