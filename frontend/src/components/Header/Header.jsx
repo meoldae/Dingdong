@@ -56,7 +56,7 @@ const Header = ({ checkMyRoom }) => {
           ) : (
             <div className={styles.userName}>userName</div>
           )}
-          <img src={bell} alt="" onClick={alarmHandler} />
+          <img src={bell} alt="" onClick={() => setIsAlarm(true)} />
         </div>
       </div>
       {isHamburger && (
