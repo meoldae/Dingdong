@@ -93,7 +93,7 @@ function RoomPage() {
       <Canvas
         shadows
         gl={{ preserveDrawingBuffer: true, antialias: true }}
-        camera={{ fov: 45 }}
+        camera={{ fov: 45,zoom:1.3 }}
         ref={canvasRef}
       >
         <color attach="background" args={["skyblue"]} />
