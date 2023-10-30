@@ -1,5 +1,5 @@
 // 라이브러리
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 // 스타일
 import styles from "./Header.module.css"
@@ -10,22 +10,28 @@ import RoomBtn from "../Button/Room/RoomBtn"
 // API
 import { fetchNeighrborAdd } from "@/api/Neighbor"
 
+
+useEffect(() => {
+  // 이웃 여부 헬스체크
+
+
+}, [])
+
 const NeighborRequest = () => {
   const [isAddNeighbor, setIsAddNeighbor] = useState(false)
 
   // 이웃 추가하는 함수
-  // targetId = roomId로 변경될 예정..! 수정되면 해당 주석 지워주세요.
   const isNeighbor = () => {
-    fetchNeighrborAdd(
-      targetId,
-      (response) => {
-        // 요청성공하면 setIsAddNeighbor(false) 시켜주세요!
-        console.log(response.data.data)
+    const roomId = window.location.pathname.match(/\d+/g)
+    fetchNeighrborAdd(roomId,
+      (response) => {        
       },
       (error) => {
-        console.log("Error at fetching Neighbor Add...", error)
+        // 1. "이미 요청을 보냈습니다."
+        // 2. "이미 이웃입니다."
+        console.log(error.response.data.message);
       }
-    )
+    ) 
   }
 
   return (
@@ -33,7 +39,7 @@ const NeighborRequest = () => {
       <div className={styles.wrap}>
         <div className={styles.share}>
           <div className={styles.shareImg}>
-            <RoomBtn img={"addUser"} onClick={isNeighbor} />
+            <RoomBtn img={"addUser"} onClick={() => setIsAddNeighbor(true)} />
           </div>
         </div>
       </div>
@@ -54,7 +60,7 @@ const NeighborRequest = () => {
               <div className={styles.HorizontalLine} />
               <div className={styles.VerticalLine} />
               <div className={styles.ButtonContainer}>
-                <div className={styles.Button} style={{ color: "#049463" }}>
+                <div className={styles.Button} style={{ color: "#049463" }} onClick={() => isNeighbor()}>
                   수락
                 </div>
                 <div
