@@ -36,7 +36,15 @@ const NeighborRequest = () => {
           </div>
         </div>
       </div>
-      {isAddNeighbor && <div className={styles.AddNeighbor}>모달</div>}
+      {isAddNeighbor && (
+        <div className={styles.AddNeighbor}>
+          <div>내용</div>
+          <div>
+            <div>수락</div>
+            <div>취소</div>
+          </div>
+        </div>
+      )}
     </>
   )
 }
