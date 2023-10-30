@@ -41,13 +41,17 @@ const NeighborRequest = () => {
         <div className={styles.AddNeighbor}>
           <div className={styles.MainContainer}>
             <div className={styles.TitleContainer}>
-              <div>이웃 요청을 하시겠습니까?</div>
+              <div style={{ color: "#2C2C2C" }}>이웃 요청을 하시겠습니까?</div>
             </div>
             <div className={styles.HorizontalLine} />
             <div className={styles.VerticalLine} />
             <div className={styles.ButtonContainer}>
-              <div className={styles.Button}>수락</div>
-              <div className={styles.Button}>취소</div>
+              <div className={styles.Button} style={{ color: "#049463" }}>
+                수락
+              </div>
+              <div className={styles.Button} style={{ color: "#2C2C2C" }}>
+                취소
+              </div>
             </div>
           </div>
         </div>
