@@ -6,13 +6,17 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import { CreateUser, GetAvatarList, DoubleCheck } from "@/api/User"
 import DefaultBtn from "../Button/Default/DefaultBtn"
+import { useSetRecoilState } from "recoil"
+import { userAtom } from "@/atom/UserAtom"
 
 const SignUp = () => {
   const navigate = useNavigate()
+  const setLoginInfo = useSetRecoilState(userAtom)
 
   const [charactersData, setCharactersData] = useState([])
   const [avatarId, setAvatar] = useState(null)
   const [nickname, setNickname] = useState("")
+  const [isValid, setIsValid] = useState(false)
 
   useEffect(() => {
     GetAvatarList(
@@ -53,6 +57,10 @@ const SignUp = () => {
       window.alert("캐릭터와 닉네임을 모두 선택해주세요")
       return
     }
+    if (!isValid) {
+      alert("닉네임 중복확인을 해주세요!")
+      return
+    }
 
     const param = { memberId, avatarId, nickname }
 
@@ -60,21 +68,45 @@ const SignUp = () => {
       param,
       (response) => {
         const token = response.data.data.accessToken
-        navigate(`/oauth2/redirect?token=${token}`)
+        const avatarId = response.data.data.avatarId
+        const nickname = response.data.data.nickname
+        const roomId = response.data.data.roomId
+
+        setLoginInfo((prevState) => ({
+          ...prevState,
+          accessToken: token,
+          avatarId: avatarId,
+          nickname: nickname,
+          roomId: roomId,
+        }))
+
+        navigate("/")
       },
       (error) => {
-        console.log(error)
+        console.log("입주에 실패했습니다")
       }
     )
   }
 
   const doubleCheckHandler = () => {
+    if (nickname === "") {
+      setIsValid(false)
+      alert("닉네임을 입력해주세요")
+      return
+    } else if (!/^[a-zA-Z0-9가-힣\s]*$/.test(nickname)) {
+      setIsValid(false)
+      alert("올바른 닉네임을 입력해주세요")
+      return
+    }
+
     DoubleCheck(
       nickname,
       (success) => {
+        setIsValid(true)
         alert("사용 가능한 닉네임 입니다!")
       },
       (error) => {
+        setIsValid(false)
         alert("이미 사용중인 닉네임 입니다!")
       }
     )
@@ -99,14 +131,14 @@ const SignUp = () => {
           ))}
         </Slider>
       </div>
-      <div className={styles.selectText}>
-        <p>캐릭터를 옆으로 넘기며 선택해보세요!</p>
-      </div>
+
+      <p className={styles.selectText}>캐릭터를 옆으로 넘기며 선택해보세요!</p>
+
       <div>
         <div className={styles.nicknameContainer}>
           <input
             type="text"
-            value={nickname}
+            value={nickname.trim()}
             onChange={(e) => setNickname(e.target.value)}
             placeholder="닉네임을 입력해주세요"
             className={styles.nicknameInput}
@@ -116,6 +148,7 @@ const SignUp = () => {
             중복확인
           </div>
         </div>
+
         <div className={styles.doSignUpContainer}>
           <DefaultBtn
             btnName={"입주하기"}
