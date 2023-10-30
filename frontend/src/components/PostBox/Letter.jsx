@@ -22,11 +22,11 @@ const Letter = ({ letterTitle, checkRead }) => {
         <></>
       ) : (
         <img
-          src="../../../../public/assets/icons/redDot.svg"
+          src="/assets/icons/redDot.svg"
           className={styles.noRead}
         />
       )}
-      <img src="../../../../public/assets/icons/writingPad.svg" alt="" />
+      <img src="/assets/icons/writingPad.svg" alt="" />
       <div className={styles.letterTitle}>{letterTitle}</div>
     </div>
   )

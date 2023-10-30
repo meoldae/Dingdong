@@ -64,7 +64,7 @@ function RoomPage() {
       ) : (
         <Header checkMyRoom={"other"} />
       )}
-      {isMyRoom ? <NeighborRequest /> : <Share setShareModal={setShareModal} />}
+      {isMyRoom ? <Share setShareModal={setShareModal} /> : <NeighborRequest />}
       {shareModal && (
         <>
           <div
@@ -74,7 +74,7 @@ function RoomPage() {
             }}
           />
           <SharePage shareModal={shareModal} canvasRef={canvasRef} />
-          <SharingModalList />
+          <SharingModalList shareMode={"room"} />
         </>
       )}
       {/* <div
@@ -114,7 +114,7 @@ function RoomPage() {
         <div className={styles.buttonContainer}>
           <div className={styles.randomButton} onClick={randomVisit}>
             <img
-              src={"../../../../public/assets/icons/random.svg"}
+              src={"/assets/icons/random.svg"}
               className={styles.randomImage}
             />
             <div className={styles.randomButtonContent}>랜덤 방문</div>

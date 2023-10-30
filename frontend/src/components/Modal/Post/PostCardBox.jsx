@@ -46,7 +46,7 @@ const PostCardBox = (props) => {
                 ? `${styles.postCard} ${styles.selected}`
                 : styles.postCard
             }
-            src={`../../../../public/assets/images/post/${card.src}`}
+            src={`/assets/images/post/${card.src}`}
             onClick={() => handleCardClick(idx, card.src, card.comment)}
           />
         ))}
