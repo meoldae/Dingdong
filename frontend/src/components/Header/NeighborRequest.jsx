@@ -11,7 +11,7 @@ import RoomBtn from "../Button/Room/RoomBtn"
 import { fetchNeighrborAdd } from "@/api/Neighbor"
 
 const NeighborRequest = () => {
-  const [isAddNeighbor, setIsAddNeighbor] = useState(true)
+  const [isAddNeighbor, setIsAddNeighbor] = useState(false)
 
   // 이웃 추가하는 함수
   // targetId = roomId로 변경될 예정..! 수정되면 해당 주석 지워주세요.
@@ -19,6 +19,7 @@ const NeighborRequest = () => {
     fetchNeighrborAdd(
       targetId,
       (response) => {
+        // 요청성공하면 setIsAddNeighbor(false) 시켜주세요!
         console.log(response.data.data)
       },
       (error) => {
@@ -39,7 +40,10 @@ const NeighborRequest = () => {
 
       {isAddNeighbor && (
         <>
-          <div className={styles.Overlay} />
+          <div
+            className={styles.Overlay}
+            onClick={() => setIsAddNeighbor(false)}
+          />
           <div className={styles.AddNeighbor}>
             <div className={styles.MainContainer}>
               <div className={styles.TitleContainer}>
@@ -53,7 +57,11 @@ const NeighborRequest = () => {
                 <div className={styles.Button} style={{ color: "#049463" }}>
                   수락
                 </div>
-                <div className={styles.Button} style={{ color: "#2C2C2C" }}>
+                <div
+                  className={styles.Button}
+                  style={{ color: "#2C2C2C" }}
+                  onClick={() => setIsAddNeighbor(false)}
+                >
                   취소
                 </div>
               </div>
