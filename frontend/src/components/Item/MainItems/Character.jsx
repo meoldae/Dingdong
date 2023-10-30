@@ -15,7 +15,6 @@ import { userAtom } from "../../../atom/UserAtom"
 const Character = () => {
   // 회원의 캐릭터 ID
   const characterID = useRecoilValue(userAtom).avatarId
-  console.log(characterID)
   // 마우스 및 터치 여부
   const [isPressed, setIsPressed] = useState(false)
   // Three.js 기본 설정
