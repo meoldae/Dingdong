@@ -20,7 +20,7 @@ public interface NeighborRepository extends JpaRepository<Neighbor, Long> {
 
 	void deleteByNeighborId(Long neighborId);
 
-	@Query("SELECT n.neighborId"
+	@Query("SELECT n"
 		 + "  FROM Neighbor n"
 		 + " WHERE n.acceptorId = :memberId"
 		 + "   AND n.connectTime IS NULL "
