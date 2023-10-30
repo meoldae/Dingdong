@@ -1,4 +1,5 @@
 import React, { useEffect } from "react"
+
 import { useRecoilValue, useSetRecoilState } from "recoil"
 import {
   DefaultPosition,
@@ -48,20 +49,16 @@ const DefaultPortal = ({
       setConfirmEnteringLocation(true)
       setPortalVisible(false)
     } else {
-      // 카메라 세팅 기본 값으로 초기화
-      // setDefaultCamPosition([2, 10, 10])
-      // setDefaultZoom(0.18)
-      // 캐릭터 움직임
-      // setIsArrived(false)
     }
   }, [characterPosition])
   console.log()
 
   return (
-    <mesh position={portalPosition} rotation={[-Math.PI / 2, 0.01, 0]}>
-      {/* 향후 포탈 3D 에셋으로 변경 예정 */}
-      <planeGeometry args={PortalSize} />
-      <meshStandardMaterial color={"yellow"} transparent opacity={0.5} />
+    <mesh position={portalPosition}>
+      {/* 원하는 위치로 변경 가능 */}
+      <cylinderGeometry args={[0.5, 0.5, 0.2, 20]} />
+      {/* args: [위 반지름, 아래 반지름, 높이, 방사형 세그먼트 수] */}
+      <meshStandardMaterial color={"yellow"} />
     </mesh>
   )
 }
