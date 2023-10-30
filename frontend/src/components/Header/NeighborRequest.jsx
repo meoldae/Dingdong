@@ -35,6 +35,7 @@ const NeighborRequest = () => {
       roomId,
       (response) => {},
       (error) => {
+        setIsAddNeighbor(false)
         // 1. "이미 요청을 보냈습니다."
         // 2. "이미 이웃입니다."
         console.log(error.response.data.message)
