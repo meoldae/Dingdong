@@ -11,6 +11,8 @@ import RoomBtn from "../Button/Room/RoomBtn"
 import { fetchNeighrborAdd } from "@/api/Neighbor"
 
 const NeighborRequest = () => {
+  const [isAddNeighbor, setIsAddNeighbor] = useState(false)
+
   // 이웃 추가하는 함수
   // targetId = roomId로 변경될 예정..! 수정되면 해당 주석 지워주세요.
   const isNeighbor = () => {
