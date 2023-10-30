@@ -114,4 +114,8 @@
   top: 0;
   z-index: 6;
   background: #fff;
+
+  width: 160px;
+  height: 150px;
+  border-radius: 10px;
 }
