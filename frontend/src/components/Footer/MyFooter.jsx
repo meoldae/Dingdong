@@ -2,11 +2,8 @@ import RoomBtn from "../Button/Room/RoomBtn"
 import PostBox from "../Modal/Post/PostBox"
 import ReceiveLetter from "../Modal/Post/ReceiveLetter"
 import style from "./Footer.module.css"
-import { useRecoilState, useRecoilValue } from "recoil"
-import {
-  isPostBoxVisibleAtom,
-  isReceiveLetterVisibleAtom,
-} from "../../atom/PostAtom"
+import { useRecoilState } from "recoil"
+import { isPostBoxVisibleAtom, isReceiveLetterVisibleAtom } from "../../atom/PostAtom"
 import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom"
 import { ItemsState, buildModeState } from "../Room/Atom"
 
@@ -20,7 +17,7 @@ const MyFooter = () => {
     isReceiveLetterVisibleAtom
   )
   const [popUpStatus, setPopUpStatus] = useRecoilState(popUpStatusAtom);
-
+  
   const handleSelectButtonClick = () => {
     console.log(1)
   }
@@ -46,10 +43,7 @@ const MyFooter = () => {
         </div>
       </div>
       {isPostBoxVisible && (
-        <PostBox
-          cancelClick={() => setIsPostBoxVisible(false)}
-          onSelectButtonClick={handleSelectButtonClick}
-        />
+        <PostBox cancelClick={() => setIsPostBoxVisible(false)} onSelectButtonClick={handleSelectButtonClick}/>
       )}
       {isReceiveLetterVisible && (
         <ReceiveLetter cancelClick={() => setIsReceiveLetterVisible(false)} />
