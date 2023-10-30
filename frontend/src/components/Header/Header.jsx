@@ -9,6 +9,9 @@ import styles from "./Header.module.css"
 import hamburger from "/assets/icons/hamburgerbar.svg"
 import bell from "/assets/icons/bell.svg"
 
+// 컴포넌트
+import DefaultModal from "../Modal/Default/DefaultModal"
+
 // Atom
 import { userAtom } from "../../atom/UserAtom"
 
@@ -85,7 +88,9 @@ const Header = ({ checkMyRoom }) => {
       {isAlarm && (
         <>
           <div className={styles.Overlay} onClick={() => setIsAlarm(false)} />
-          <div className={styles.AlarmModal}>모달</div>
+          <div className={styles.AlarmModal}>
+            <DefaultModal />
+          </div>
         </>
       )}
     </>
