@@ -33,7 +33,7 @@ public class LetterServiceImpl implements LetterService {
 
     @Override
     public Page<LetterListResponseDto> getLetterList(String memberId, Pageable pageable) {
-        Page<LetterListResponseDto> result = letterRepository.findAllByLetterToAndIsReportFalse(memberId, pageable);
+        Page<LetterListResponseDto> result = letterRepository.findAllByLetterToAndIsReportFalseOrderByCreateTimeDesc(memberId, pageable);
 
         return result;
     }
