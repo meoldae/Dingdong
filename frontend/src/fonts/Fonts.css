@@ -23,17 +23,27 @@
 }
 
 @font-face {
-  font-family: HandWrite-UE;
+  font-family: "GangwonEduAll-Light";
+  font-weight: 400;
   font-style: normal;
-  src: url("./HandWrite-UE.ttf");
-}
-
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllLight.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllLight.eot?#iefix') format('embedded-opentype'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllLight.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllLight.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllLight.ttf') format("truetype");
+  font-display: swap;
+} 
 @font-face {
-  font-family: HandWrite-DaHaeng;
+  font-family: "GangwonEduAll-Bold";
+  font-weight: 400;
   font-style: normal;
-  src: url("./HandWrite-DaHaeng.ttf");
-}
-
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllBold.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllBold.eot?#iefix') format('embedded-opentype'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllBold.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllBold.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllBold.ttf') format("truetype");
+  font-display: swap;
+} 
 body {
   font-family: Pretendard-Medium;
 }
