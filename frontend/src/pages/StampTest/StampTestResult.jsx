@@ -28,7 +28,11 @@ const StampTestResult = () => {
 
   return (
     <div className={styles.Container}>
-      <div className={styles.PostImage}>더미 이미지</div>
+      <div className={styles.PostImage}>
+        <img
+            src={"/public/assets/StampTest/ResultHeart.svg"} 
+        />
+      </div>
       <div className={styles.ButtonContainer}>
         <div className={styles.Button}>나의 우표로 편지 남기기</div>
         <div className={styles.Button} onClick={onTestHandler}>우표 테스트 다시하기</div>

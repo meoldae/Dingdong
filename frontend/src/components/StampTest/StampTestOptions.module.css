@@ -24,6 +24,7 @@
   text-align: center;
   margin-top: 20%;
   font-size: 28px;
+  white-space: pre-line
 }
 
 .AnswerContainer {
@@ -43,6 +44,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  white-space: pre-line
 }
 
 .FooterNumber {
