@@ -6,8 +6,9 @@ import { useRecoilState } from "recoil";
 import { ItemRotateState, ItemsState, dragPositionState, draggedItemState } from "../Atom";
 
 const PopUpContent = (props) => {
-  const [furnitureList, setFurnitureList] = useState([]);
-  const imagePath = "../../../../public/assets/";
+    
+  const [furnitureList, setFurnitureList] = useState([])
+  const imagePath = '/assets';
   const [pageNo, setPageNo] = useState(0);
   const target = useRef();
   const [loading, setLoading] = useState(false);

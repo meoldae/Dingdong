@@ -11,11 +11,11 @@ const RecevieLetter = (props) => {
       <div className={styles.receiveLetterContainer}>
         <Card className={styles.receiveLetterBox}>
           <div className={styles.xmarkImg} onClick={props.cancelClick}>
-            <img src="assets/icons/Pink_X-mark.png" alt="" />
+            <img src="/assets/icons/Pink_X-mark.png" alt="" />
           </div>
           <img
             className={styles.topPostCardImg}
-            src="assets/images/post/postCardDefault.png"
+            src="/assets/images/post/postCardDefault.png"
           />
           <div className={styles.letterToUser}>To. 장호</div>
           <div className={styles.letterContent}>

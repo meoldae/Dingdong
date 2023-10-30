@@ -51,7 +51,7 @@ const PopUp = () => {
     })
 };
 
-  const imagePath = "../../../../public/assets/images/roomCustom/";
+  const imagePath = "/assets/images/roomCustom/";
   const images = [
     "all.png",
     "furniture.png",
@@ -66,19 +66,17 @@ const PopUp = () => {
         popUpStatus ? styles.active : styles.notActive
       }`}
     >
-      {/* <div className={`${styles.popUpContainer} ${styles.notActive}`}> */}
-
       {isDragging ? (
         <div className={styles.popUpCloseerr}>
           <img
-            src="../../../../public/assets/icons/cross.svg"
+            src="/assets/icons/cross.svg"
             className={styles.closeVector}
           />
         </div>
       ) : (
         <div className={styles.popUpClose} onClick={() => popUpClose()}>
           <img
-            src="../../../../public/assets/icons/cross.svg"
+            src="/assets/icons/cross.svg"
             className={styles.closeVector}
           />
         </div>
@@ -89,7 +87,7 @@ const PopUp = () => {
           className={styles.customSaveButtonErr}
         >
           <img
-            src="../../../../public/assets/icons/save.svg"
+            src="/assets/icons/save.svg"
             className={styles.customSaveVector}
           />
         </div>
@@ -99,7 +97,7 @@ const PopUp = () => {
           onClick={() => roomCustomSave()}
         >
           <img
-            src="../../../../public/assets/icons/save.svg"
+            src="/assets/icons/save.svg"
             className={styles.customSaveVector}
           />
         </div>

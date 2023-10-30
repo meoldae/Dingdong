@@ -7,7 +7,7 @@ const DefaultPortalRing = ({ portalPosition, portalVisible }) => {
 
   // 포탈 링 속성
   const boundaryWidth = 1.5
-  const boundaryHeight = 0.7
+  const boundaryHeight = 1.1
 
   useEffect(() => {
     // 포탈 링 영역 밖 있는지 확인

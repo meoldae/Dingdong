@@ -21,9 +21,12 @@ const Letter = ({ letterTitle, checkRead }) => {
       {checkRead ? (
         <></>
       ) : (
-        <img src="assets/icons/redDot.svg" className={styles.noRead} />
+        <img
+          src="/assets/icons/redDot.svg"
+          className={styles.noRead}
+        />
       )}
-      <img src="assets/icons/writingPad.svg" alt="" />
+      <img src="/assets/icons/writingPad.svg" alt="" />
       <div className={styles.letterTitle}>{letterTitle}</div>
     </div>
   )

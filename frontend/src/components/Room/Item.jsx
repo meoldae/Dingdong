@@ -14,7 +14,7 @@ export const Item = ({
 }) => {
   const { furnitureId, position:gridPosition, size, rotation: itemRotation,categoryId} = item;
   const rotation = isDragging ? dragRotation : itemRotation;
-  const { scene } = useGLTF(`../../../../public/assets/models/roomitems/${furnitureId}.glb`);
+  const { scene } = useGLTF(`/assets/models/roomitems/${furnitureId}.glb`);
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const width = rotation === 1 || rotation === 3 ? size[2]%2 ?size[2]+1 :size[2] : size[0] %2 ? size[0]+1:size[0] ;
   const height = rotation === 1 || rotation === 3 ? size[0]%2 ? size[0]+1 : size[0] : size[2]%2 ? size[2]+1 : size[2];

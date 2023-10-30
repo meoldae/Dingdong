@@ -1,10 +1,7 @@
 import React, { useEffect } from "react"
-import resultInfo from "../../assets/json/result.json"
-// import LogoEffect from "../assets/images/logo/logo_effect.png";
-import SharingModalList from "../../components/Modal/Sharing/SharingModalList"
-import { useNavigate } from "react-router-dom"
-import { useRecoilValue } from "recoil"
-// import { isLoginAtom } from "../atoms/userAtoms";
+import resultInfo from "@/assets/json/result.json" 
+import SharingModalList from "@/components/Modal/Sharing/SharingModalList"
+import { useNavigate } from "react-router-dom" 
 import styles from "./StampTestResult.module.css"
 
 const StampTestResult = () => {
@@ -31,12 +28,16 @@ const StampTestResult = () => {
 
   return (
     <div className={styles.Container}>
-      <div className={styles.PostImage}>더미 이미지</div>
+      <div className={styles.PostImage}>
+        <img
+            src={"/public/assets/StampTest/ResultHeart.svg"} 
+        />
+      </div>
       <div className={styles.ButtonContainer}>
         <div className={styles.Button}>나의 우표로 편지 남기기</div>
-        <div className={styles.Button}>우표 테스트 다시하기</div>
+        <div className={styles.Button} onClick={onTestHandler}>우표 테스트 다시하기</div>
       </div>
-      <SharingModalList />
+      <SharingModalList shareMode={"result"} />
     </div>
   )
 }
