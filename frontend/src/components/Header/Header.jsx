@@ -36,14 +36,15 @@ const Header = ({ checkMyRoom }) => {
   const alarmHandler = () => {
     fetchNeighborRequest(
       (success) => {
-        console.log(success.data.data)
+        setAlarmsLength(success.data.data.length)
+        setAlarms(success.data.data)
       },
       (error) => {
         console.log("Error at neighbor request...", error)
       }
     )
 
-    if (alarmsLength === 0) {
+    if (alarmsLength == 0) {
       setIsAlarm(false)
       successMsg("❌ 알림이 없습니다!")
     } else {
@@ -54,22 +55,14 @@ const Header = ({ checkMyRoom }) => {
   // 이웃요청 수락함수
   const acceptNeighborHandler = (id) => {
     setAlarmsLength(alarmsLength - 1)
-    setAlarms((prev) =>
-      prev.map((alarm) =>
-        alarm.id === id ? { ...alarm, active: false } : alarm
-      )
-    )
+    setAlarms((prev) => prev.filter((alarm) => alarm.id !== id))
     console.log("이웃요청 수락")
   }
 
   // 이웃요청 거절함수
   const refuseNeighborHandler = (id) => {
     setAlarmsLength(alarmsLength - 1)
-    setAlarms((prev) =>
-      prev.map((alarm) =>
-        alarm.id === id ? { ...alarm, active: false } : alarm
-      )
-    )
+    setAlarms((prev) => prev.filter((alarm) => alarm.id !== id))
     console.log("이웃요청 거절")
   }
 
@@ -140,17 +133,15 @@ const Header = ({ checkMyRoom }) => {
               />
             </div>
             <div className={styles.alarmListContainer}>
-              {alarms.map((alarm) =>
-                alarm.active ? (
-                  <div key={alarm.id} className={styles.AlarmModal}>
-                    <NeighborAcceptModal
-                      content={alarm.content}
-                      okClick={() => acceptNeighborHandler(alarm.id)}
-                      cancelClick={() => refuseNeighborHandler(alarm.id)}
-                    />
-                  </div>
-                ) : null
-              )}
+              {alarms.map((alarm) => (
+                <div key={alarm.neighborId} className={styles.AlarmModal}>
+                  <NeighborAcceptModal
+                    content={alarm.nickname}
+                    okClick={() => acceptNeighborHandler(alarm.neighborId)}
+                    cancelClick={() => refuseNeighborHandler(alarm.neighborId)}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </>
