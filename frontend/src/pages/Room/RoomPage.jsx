@@ -106,7 +106,7 @@ function RoomPage() {
         <div className={styles.buttonContainer}>
           <div className={styles.randomButton} onClick={randomVisit}>
             <img
-              src={"../../../../public/assets/icons/random.svg"}
+              src={"/public/assets/icons/random.svg"}
               className={styles.randomImage}
             />
             <div className={styles.randomButtonContent}>랜덤 방문</div>
