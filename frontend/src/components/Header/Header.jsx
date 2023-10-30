@@ -19,8 +19,24 @@ const Header = ({ checkMyRoom }) => {
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
 
+  // 알림함수
   const alarmHandler = () => {
     console.log("알림창")
+  }
+
+  // 문의하기 함수
+  const inquiryHandler = () => {
+    console.log("문의하기")
+  }
+
+  // 로그아웃 함수
+  const logoutHandler = () => {
+    console.log("로그아웃")
+  }
+
+  // 회원탈퇴 함수
+  const withdrawalHandler = () => {
+    console.log("회원탈퇴")
   }
 
   return (
@@ -49,9 +65,15 @@ const Header = ({ checkMyRoom }) => {
           />
           <div className={styles.HamburgerModal}>
             <div className={styles.ContentContainer}>
-              <div className={styles.MenuButton}>문의하기</div>
-              <div className={styles.MenuButton}>로그아웃</div>
-              <div className={styles.MenuButton}>회원탈퇴</div>
+              <div className={styles.MenuButton} onClick={inquiryHandler}>
+                문의하기
+              </div>
+              <div className={styles.MenuButton} onClick={logoutHandler}>
+                로그아웃
+              </div>
+              <div className={styles.MenuButton} onClick={withdrawalHandler}>
+                회원탈퇴
+              </div>
             </div>
           </div>
         </>
