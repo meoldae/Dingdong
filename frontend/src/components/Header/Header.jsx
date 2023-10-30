@@ -16,6 +16,9 @@ import NeighborAcceptModal from "../Modal/Neighbor/NeighborAcceptModal"
 // Atom
 import { userAtom } from "../../atom/UserAtom"
 
+// API
+import { fetchNeighborRequest } from "../../api/Neighbor"
+
 const Header = ({ checkMyRoom }) => {
   // 햄버거메뉴바 상태관리
   const [isHamburger, setIsHamburger] = useState(false)
@@ -31,6 +34,13 @@ const Header = ({ checkMyRoom }) => {
 
   // 알림 함수
   const alarmHandler = () => {
+    fetchNeighborRequest((success) => {
+      console.log(success.data.data),
+        (error) => {
+          console.log("Error at neighbor request...", error)
+        }
+    })
+
     if (alarmsLength === 0) {
       setIsAlarm(false)
       successMsg("❌ 알림이 없습니다!")
