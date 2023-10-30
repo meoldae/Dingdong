@@ -47,6 +47,7 @@ const Header = ({ checkMyRoom }) => {
       }
     )
   }, [])
+
   // 알림 함수
   const alarmHandler = () => {
     if (alarmsLength === 0) {
