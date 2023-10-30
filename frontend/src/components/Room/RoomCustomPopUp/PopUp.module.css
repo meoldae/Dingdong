@@ -74,6 +74,19 @@
     top: -6vh;
 }
 
+.popUpCloseerr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: gray;
+    border-radius: 50px 50px 50px 50px;
+    width: 4vh;
+    height: 4vh;
+    right: 1vh;
+    top: -6vh;
+}
+
 .closeVector {
     width: 1.5vh;
     height: 1.5vh;
@@ -92,6 +105,18 @@
     top: -6vh;
 }
 
+.customSaveButtonErr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: gray;
+    border-radius: 50px 50px 50px 50px;
+    width: 4vh;
+    height: 4vh;
+    right: 6vh;
+    top: -6vh;
+}
 .customSaveVector {
     width: 2.5vh;
     height: 2.5vh;
