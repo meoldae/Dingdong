@@ -8,10 +8,3 @@ export const CustomToast = () => {
     <Toaster toastOptions={{ className: "custom-toast", duration: 3000 }} />
   )
 }
-
-export const neighborRequestMsg = (msg) => toast(msg)
-export const NeighborRequestToast = () => {
-  return (
-    <Toaster toastOptions={{ className: "neighbor-toast", duration: 3000 }} />
-  )
-}
