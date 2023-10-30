@@ -12,4 +12,6 @@ public interface NeighborService {
 	void setNeighborStatus(NeighborRequest neighborRequest);
 
 	List getNeighborList(String memberId);
+
+	String isNeigborByRoomId(Long targetRoomId, String applicantId);
 }

@@ -38,6 +38,12 @@ public class NeighborController implements NeighborSwagger{
 	}
 
 	@Override
+	public DataResponse<String> isNeighbor(Long targetRoomId, Authentication authentication) {
+		String flag = neighborService.isNeigborByRoomId(targetRoomId, authentication.getName());
+		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, flag);
+	}
+
+	@Override
 	@GetMapping("/request")
 	public DataResponse<List<String>> getRequestList(Authentication authentication){
 		List requestList = neighborService.getRequestList(authentication.getName().toString());
