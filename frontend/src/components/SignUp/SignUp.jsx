@@ -4,7 +4,7 @@ import styles from "./SignUp.module.css"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-import { CreateUser, GetAvatarList } from "@/api/User"
+import { CreateUser, GetAvatarList, DoubleCheck } from "@/api/User"
 import DefaultBtn from "../Button/Default/DefaultBtn"
 
 const SignUp = () => {
@@ -34,31 +34,13 @@ const SignUp = () => {
 
   const charactersImages = charactersData.map((charData) => charData.glb)
   const memberId = new URLSearchParams(window.location.search).get("memberId")
-
-  const NextArrow = ({ onClick }) => {
-    return (
-      <div className={styles.arrow + " " + styles.next} onClick={onClick}>
-        ➡️
-      </div>
-    )
-  }
-
-  const PrevArrow = ({ onClick }) => {
-    return (
-      <div className={styles.arrow + " " + styles.prev} onClick={onClick}>
-        ⬅️
-      </div>
-    )
-  }
   const settings = {
     centerMode: true,
     infinite: true,
     centerPadding: "0",
     slidesToShow: 1,
     speed: 500,
-    arrows: true,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    arrows: false,
     afterChange: (current) => handleSlideChange(current),
   }
 
@@ -87,56 +69,60 @@ const SignUp = () => {
   }
 
   const doubleCheckHandler = () => {
-    console.log("중복검사함수")
-  }
-
-  const dummyFunc = () => {
-    console.log("잠시 사용하는 더미 함수")
+    DoubleCheck(
+      nickname,
+      (success) => {
+        alert("사용 가능한 닉네임 입니다!")
+      },
+      (error) => {
+        alert("이미 사용중인 닉네임 입니다!")
+      }
+    )
   }
 
   return (
     <div className={styles.Container}>
       <div className={styles.titleContainer}>
         <span style={{ color: "#F2CBE4" }}>프로필 </span>
-        <span style={{ color: "#2C2C2C" }}>선택</span>
+        <span style={{ color: "#2C2C2C" }}>설정</span>
       </div>
-
-      {/* <Slider {...settings}>
-        {charactersImages.map((charImg, idx) => (
-          <img
-            key={idx}
-            src={charImg}
-            alt=""
-            className={styles.characterImage}
-            onClick={() => setAvatar(charImg)}
-          />
-        ))}
-      </Slider> */}
-
       <div className={styles.characterContainer}>
-        <div className={styles.charactersImages}>더미 캐릭터</div>
+        <Slider {...settings} className={styles.charactersImages}>
+          {charactersImages.map((charImg, idx) => (
+            <img
+              className={styles.imgsize}
+              key={idx}
+              src={charImg}
+              alt=""
+              onClick={() => setAvatar(charImg)}
+            />
+          ))}
+        </Slider>
       </div>
-
-      <div className={styles.nicknameContainer}>
-        <input
-          type="text"
-          value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
-          placeholder="닉네임 입력란"
-          className={styles.nicknameInput}
-          maxLength={7}
-        />
-        <div className={styles.doubleCheck} onClick={doubleCheckHandler}>
-          중복확인
+      <div className={styles.selectText}>
+        <p>캐릭터를 옆으로 넘기며 선택해보세요!</p>
+      </div>
+      <div>
+        <div className={styles.nicknameContainer}>
+          <input
+            type="text"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+            placeholder="닉네임을 입력해주세요"
+            className={styles.nicknameInput}
+            maxLength={7}
+          />
+          <div className={styles.doubleCheck} onClick={doubleCheckHandler}>
+            중복확인
+          </div>
         </div>
-      </div>
-
-      <div className={styles.doSignUpContainer}>
-        <DefaultBtn
-          btnName={"입주하기"}
-          onClick={dummyFunc}
-          color={"#FCC4D7"}
-        />
+        <div className={styles.doSignUpContainer}>
+          <DefaultBtn
+            btnName={"입주하기"}
+            onClick={doSignUp}
+            color={"#FCC4D7"}
+          />
+        </div>
       </div>
     </div>
   )
