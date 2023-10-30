@@ -15,6 +15,7 @@ import NeighborAcceptModal from "../Modal/Neighbor/NeighborAcceptModal"
 
 // Atom
 import { userAtom } from "../../atom/UserAtom"
+import { roomInfoAtom } from "../../atom/RoomInfoAtom"
 
 // API
 import { fetchNeighborRequest } from "../../api/Neighbor"
@@ -31,6 +32,7 @@ const Header = ({ checkMyRoom }) => {
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
+  const roomInfo = useRecoilValue(roomInfoAtom)
 
   // 유저요청 가져오기
   useEffect(() => {
@@ -96,7 +98,7 @@ const Header = ({ checkMyRoom }) => {
           {checkMyRoom === "my" ? (
             <div className={styles.userName}>{userInfo.nickname}</div>
           ) : (
-            <div className={styles.userName}>userName</div>
+            <div className={styles.userName}>{roomInfo}</div>
           )}
           <img src={bell} onClick={alarmHandler} />
         </div>
