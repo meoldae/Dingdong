@@ -14,6 +14,8 @@ import com.ssafy.dingdong.domain.neighbor.dto.request.NeighborRequest;
 import com.ssafy.dingdong.domain.neighbor.dto.response.NeighborResponse;
 import com.ssafy.dingdong.domain.neighbor.entity.Neighbor;
 import com.ssafy.dingdong.domain.neighbor.repository.NeighborRepository;
+import com.ssafy.dingdong.domain.room.entity.Room;
+import com.ssafy.dingdong.domain.room.repository.RoomRepository;
 import com.ssafy.dingdong.global.exception.CustomException;
 import com.ssafy.dingdong.global.exception.ExceptionStatus;
 
@@ -27,10 +29,17 @@ public class NeighborServiceImpl implements NeighborService{
 
 	private final NeighborRepository neighborRepository;
 	private final MemberService memberService;
+	private final RoomRepository roomRepository;
 
 	@Override
 	@Transactional
-	public void createNeighborRequest(String acceptorId, String applicantId) {
+	public void createNeighborRequest(Long acceptorRoomId, String applicantId) {
+		Room room = roomRepository.findByRoomId(acceptorRoomId).orElseThrow(
+			() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
+		);
+
+		String acceptorId = room.getMemberId();
+
 		neighborRepository.isConnectByApplicantIdAndAcceptorId(UUID.fromString(applicantId), UUID.fromString(acceptorId)).ifPresent(
 			neighbor -> {
 				if (neighbor.getConnectTime() != null && neighbor.getCancelTime() == null) {

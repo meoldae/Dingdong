@@ -5,7 +5,7 @@ import java.util.List;
 import com.ssafy.dingdong.domain.neighbor.dto.request.NeighborRequest;
 
 public interface NeighborService {
-	void createNeighborRequest(String applicantId, String acceptorId);
+	void createNeighborRequest(Long applicantRoomId, String acceptorId);
 
 	List getRequestList(String string);
 
