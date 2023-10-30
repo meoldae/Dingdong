@@ -52,19 +52,12 @@ const NeighborRequest = () => {
 
   return (
     <>
-      <div className={styles.wrap}>
-        <div className={styles.share}>
-          <div className={styles.shareImg}>
-            {!neighborFlag ? (
-              <RoomBtn img={"addUser"} onClick={() => setIsAddNeighbor(true)} />
-            ) : (
-              <RoomBtn
-                img={"Neighbor"}
-                onClick={() => setIsAddNeighbor(true)}
-              />
-            )}
-          </div>
-        </div>
+      <div className={styles.Share}>
+        {!neighborFlag ? (
+          <RoomBtn img={"addUser"} onClick={() => setIsAddNeighbor(true)} />
+        ) : (
+          <RoomBtn img={"Neighbor"} onClick={() => setIsAddNeighbor(true)} />
+        )}
       </div>
 
       {isAddNeighbor && (
