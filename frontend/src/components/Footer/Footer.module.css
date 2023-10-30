@@ -1,11 +1,11 @@
-.wrap{
+.wrap {
   position: absolute;
   z-index: 3;
   width: 100%;
   bottom: 50px;
 }
 
-.secondFooter{
+.secondFooter {
   display: flex;
   width: 100%;
   align-items: center;
@@ -13,9 +13,7 @@
   margin-top: 20px;
 }
 
-
-
-.footer{
+.footer {
   display: flex;
   width: 100%;
   align-items: center;
@@ -23,8 +21,7 @@
   margin-top: 20px;
 }
 
-.background{
+.background {
   margin: 0 20px;
   /* padding: 5px; */
 }
-
