@@ -3,7 +3,6 @@ import styles from "./Header.module.css";
 import React from "react";
 const Share = ({setShareModal}) => {
 
-
   return (
     <div className={styles.wrap}>
       <div className={styles.share}>
