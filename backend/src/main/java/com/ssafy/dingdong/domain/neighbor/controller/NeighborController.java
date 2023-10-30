@@ -67,7 +67,7 @@ public class NeighborController implements NeighborSwagger{
 	}
 
 	@Override
-	@DeleteMapping
+	@PostMapping("/delete")
 	public CommonResponse deleteNeighbor(@RequestBody Map<String, Object> paramMap, Authentication authentication) {
 		neighborService.deleteNeighbor(paramMap, authentication.getName());
 		return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
