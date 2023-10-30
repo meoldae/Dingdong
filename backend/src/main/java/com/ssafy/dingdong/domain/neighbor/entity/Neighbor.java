@@ -50,4 +50,8 @@ public class Neighbor {
 		this.connectTime = null;
 		this.cancelTime = null;
 	}
+
+	public void disconnect(LocalDateTime disconnectTime) {
+		this.cancelTime = disconnectTime;
+	}
 }

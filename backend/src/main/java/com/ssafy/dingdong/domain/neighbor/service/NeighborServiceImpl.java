@@ -3,6 +3,7 @@ package com.ssafy.dingdong.domain.neighbor.service;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -121,5 +122,26 @@ public class NeighborServiceImpl implements NeighborService{
 		} else {
 			return "F";
 		}
+	}
+
+	@Override
+	@Transactional
+	public void deleteNeighbor(Map<String, Object> paramMap, String myMemberId) {
+		UUID myMemberUUID = UUID.fromString(myMemberId);
+		UUID otherMemberUUID = null;
+		if (paramMap.containsKey("memberId")) {
+			otherMemberUUID = UUID.fromString(paramMap.get("memberId").toString());
+		}else if (paramMap.containsKey("roomId")) {
+			Long roomId = Long.valueOf(paramMap.get("roomId").toString());
+			Room room = roomRepository.findByRoomId(roomId).orElseThrow(
+				() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
+			);
+			otherMemberUUID = UUID.fromString(room.getMemberId());
+		}
+		Neighbor neighbor = neighborRepository.deleteByApplicantIdAndAcceptorId(myMemberUUID, otherMemberUUID)
+			.orElseThrow(
+				() -> new CustomException(ExceptionStatus.NEIGHBOR_NOT_FOUND)
+			);
+		neighbor.disconnect(LocalDateTime.now());
 	}
 }
