@@ -15,6 +15,8 @@ import { userAtom } from "../../atom/UserAtom"
 const Header = ({ checkMyRoom }) => {
   // 햄버거메뉴바 상태관리
   const [isHamburger, setIsHamburger] = useState(false)
+  // 알림 상태관리
+  const [isAlarm, setIsAlarm] = useState(false)
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
