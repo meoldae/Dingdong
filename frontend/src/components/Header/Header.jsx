@@ -113,20 +113,6 @@ const Header = ({ checkMyRoom }) => {
                 cancelClick={refuseNeighborHandler}
               />
             </div>
-            <div className={styles.AlarmModal}>
-              <NeighborAcceptModal
-                content={"둥이맘"}
-                okClick={acceptNeighborHandler}
-                cancelClick={refuseNeighborHandler}
-              />
-            </div>
-            <div className={styles.AlarmModal}>
-              <NeighborAcceptModal
-                content={"둥이맘"}
-                okClick={acceptNeighborHandler}
-                cancelClick={refuseNeighborHandler}
-              />
-            </div>
           </div>
         </>
       )}
