@@ -148,7 +148,7 @@
 
 /* 알림 모달 */
 .AlarmContainer {
-  top: 50%;
+  top: 40%;
   left: 50%;
   z-index: 6;
   position: absolute;
