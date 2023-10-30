@@ -33,7 +33,7 @@ const StampTestResult = () => {
             src={"/public/assets/StampTest/ResultHeart.svg"} 
         />
       </div>
-      <div className={styles.ButtonContainer}>
+      <div className={styles.ButtonContainer} onClick={onHomeHandler}>
         <div className={styles.Button}>나의 우표로 편지 남기기</div>
         <div className={styles.Button} onClick={onTestHandler}>우표 테스트 다시하기</div>
       </div>
