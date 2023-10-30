@@ -66,8 +66,6 @@ function RoomPage() {
     navigate(`/room/${randomRoom}`);
   };
 
-
-
   return (
     <div className={styles.container}>
       {isMyRoom ? (
