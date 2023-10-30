@@ -5,7 +5,7 @@ const RoomBtn = ({ img, onClick }) => {
     <div className={styles.circle} onClick={onClick}>
       {/* img버튼 상세 표기 */}
       {/* addUser / heart / post / postBox / roomEdit / share / worldMap */}
-      <img src={`/public/assets/icons/${img}.svg`} />
+      <img src={`./assets/icons/${img}.svg`} />
     </div>
   )
 }
