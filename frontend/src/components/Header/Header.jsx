@@ -89,7 +89,13 @@ const Header = ({ checkMyRoom }) => {
         <>
           <div className={styles.Overlay} onClick={() => setIsAlarm(false)} />
           <div className={styles.AlarmModal}>
-            <DefaultModal />
+            <DefaultModal
+              content={"내용"}
+              ok={"수락"}
+              cancel={"거절"}
+              okClick={""}
+              cancelClick={() => setIsAlarm(false)}
+            />
           </div>
         </>
       )}
