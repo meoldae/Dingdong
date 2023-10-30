@@ -291,8 +291,7 @@ const Experience = () => {
         onEnd={animateCameraPosition}
       />
       {/* <Room name={"office"}/> */}
-      {/* 추후 주석 해제 요망 */}
-      {/* {items.map(renderItem)} */}
+      {items.map(renderItem)}
 
       {/* 바닥 평면 */}
       <mesh
