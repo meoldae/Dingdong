@@ -2,7 +2,7 @@
 import { useState } from "react"
 
 // 스타일
-import style from "./Header.module.css"
+import styles from "./Header.module.css"
 
 // 컴포넌트
 import RoomBtn from "../Button/Room/RoomBtn"
@@ -19,6 +19,7 @@ const NeighborRequest = () => {
     fetchNeighrborAdd(
       targetId,
       (response) => {
+        // 요청성공하면 setIsAddNeighbor(false) 시켜주세요!
         console.log(response.data.data)
       },
       (error) => {
@@ -28,13 +29,47 @@ const NeighborRequest = () => {
   }
 
   return (
-    <div className={style.wrap}>
-      <div className={style.share}>
-        <div className={style.shareImg}>
-          <RoomBtn img={"addUser"} onClick={isNeighbor} />
+    <>
+      <div className={styles.wrap}>
+        <div className={styles.share}>
+          <div className={styles.shareImg}>
+            <RoomBtn img={"addUser"} onClick={isNeighbor} />
+          </div>
         </div>
       </div>
-    </div>
+
+      {isAddNeighbor && (
+        <>
+          <div
+            className={styles.Overlay}
+            onClick={() => setIsAddNeighbor(false)}
+          />
+          <div className={styles.AddNeighbor}>
+            <div className={styles.MainContainer}>
+              <div className={styles.TitleContainer}>
+                <div style={{ color: "#2C2C2C" }}>
+                  이웃 요청을 하시겠습니까?
+                </div>
+              </div>
+              <div className={styles.HorizontalLine} />
+              <div className={styles.VerticalLine} />
+              <div className={styles.ButtonContainer}>
+                <div className={styles.Button} style={{ color: "#049463" }}>
+                  수락
+                </div>
+                <div
+                  className={styles.Button}
+                  style={{ color: "#2C2C2C" }}
+                  onClick={() => setIsAddNeighbor(false)}
+                >
+                  취소
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </>
   )
 }
 
