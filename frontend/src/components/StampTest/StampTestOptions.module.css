@@ -1,0 +1,55 @@
+.Container {
+  height: 100vh;
+  background: #ffebf4;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  font-family: "GangwonEduAll-Light";
+}
+
+.ContentContainer {
+  width: 320px;
+  height: 60%;
+  background: #fff;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+  position: relative;
+}
+
+.Question {
+  width: 195px;
+  text-align: center;
+  margin-top: 20%;
+  font-size: 26px;
+  white-space: pre-line
+}
+
+.AnswerContainer {
+  position: absolute;
+  top: 40%;
+}
+
+.Answer {
+  width: 240px;
+  height: 75px;
+  background: #f1c4e1;
+  border-radius: 15px;
+  font-size: 24px;
+  margin-bottom: 10px;
+  padding: 0px 20px 0px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: pre-line
+}
+
+.FooterNumber {
+  position: absolute;
+  bottom: 0px;
+  margin-bottom: 5%;
+  font-size: 20px;
+}

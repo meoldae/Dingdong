@@ -1,0 +1,49 @@
+@font-face {
+  font-family: Pretendard-Bold;
+  font-style: normal;
+  src: url("./Pretendard-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: Pretendard-SemiBold;
+  font-style: normal;
+  src: url("./Pretendard-SemiBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: Pretendard-Medium;
+  font-style: normal;
+  src: url("./Pretendard-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: Pretendard-Regular;
+  font-style: normal;
+  src: url("./Pretendard-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "GangwonEduAll-Light";
+  font-weight: 400;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllLight.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllLight.eot?#iefix') format('embedded-opentype'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllLight.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllLight.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllLight.ttf') format("truetype");
+  font-display: swap;
+} 
+@font-face {
+  font-family: "GangwonEduAll-Bold";
+  font-weight: 400;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllBold.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllBold.eot?#iefix') format('embedded-opentype'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllBold.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllBold.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEduAllBold.ttf') format("truetype");
+  font-display: swap;
+} 
+body {
+  font-family: Pretendard-Medium;
+}

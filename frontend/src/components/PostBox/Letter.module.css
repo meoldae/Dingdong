@@ -1,0 +1,17 @@
+.letterContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  position: relative;
+}
+
+.noRead {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+}
+
+.letterTitle {
+  font-size: 20px;
+}

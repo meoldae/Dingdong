@@ -1,0 +1,26 @@
+.postBoxContainer {
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+}
+
+.postBoxContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.postBoxContainer {
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+}
+
+.letterBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.test {
+  border: 1px solid black;
+  width: 100%;
+  height: 10px;
+}

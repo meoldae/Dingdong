@@ -1,0 +1,14 @@
+.canvasContainer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  margin: 0;
+}
+
+.confirmModal {
+  z-index: 2;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
