@@ -1,34 +1,34 @@
 [
   {
     "id": 0,
-    "srcUrl": "/public/assets/StampTest/ResultStar.svg"
+    "srcUrl": "/assets/StampTest/ResultStar.svg"
   },
   {
     "id": 1,
-    "srcUrl": "/public/assets/StampTest/ResultClova.svg"
+    "srcUrl": "/assets/StampTest/ResultClova.svg"
   },
   {
     "id": 2,
-    "srcUrl": "/public/assets/StampTest/ResultCloud.svg"
+    "srcUrl": "/assets/StampTest/ResultCloud.svg"
   },
   {
     "id": 3,
-    "srcUrl": "/public/assets/StampTest/ResultPuzzle.svg"
+    "srcUrl": "/assets/StampTest/ResultPuzzle.svg"
   },
   {
     "id": 4,
-    "srcUrl": "/public/assets/StampTest/ResultLightning.svg"
+    "srcUrl": "/assets/StampTest/ResultLightning.svg"
   },
   {
     "id": 5,
-    "srcUrl": "/public/assets/StampTest/ResultFlower.svg"
+    "srcUrl": "/assets/StampTest/ResultFlower.svg"
   },
   {
     "id": 6,
-    "srcUrl": "/public/assets/StampTest/ResultHeart.svg"
+    "srcUrl": "/assets/StampTest/ResultHeart.svg"
   },
   {
     "id": 7,
-    "srcUrl": "/public/assets/StampTest/ResultRocket.svg"
+    "srcUrl": "/assets/StampTest/ResultRocket.svg"
   }
 ]
