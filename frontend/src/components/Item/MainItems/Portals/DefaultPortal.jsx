@@ -25,7 +25,7 @@ const DefaultPortal = ({
   const setIsArrived = useSetRecoilState(ArriveAtom)
 
   // 포탈
-  const PortalSize = [0.5, 0.5]
+  const PortalSize = [1, 1]
 
   useEffect(() => {
     // 포탈 영역 내부에 있는지 확인
