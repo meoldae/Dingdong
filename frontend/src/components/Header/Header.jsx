@@ -34,12 +34,14 @@ const Header = ({ checkMyRoom }) => {
 
   // 알림 함수
   const alarmHandler = () => {
-    fetchNeighborRequest((success) => {
-      console.log(success.data.data),
-        (error) => {
-          console.log("Error at neighbor request...", error)
-        }
-    })
+    fetchNeighborRequest(
+      (success) => {
+        console.log(success.data.data)
+      },
+      (error) => {
+        console.log("Error at neighbor request...", error)
+      }
+    )
 
     if (alarmsLength === 0) {
       setIsAlarm(false)
