@@ -148,9 +148,9 @@ public class RoomServiceImpl implements RoomService {
 					RoomFurniture newRoomFurniture = RoomFurniture.builder()
 						.roomId(roomId)
 						.furnitureId(updateFurniture.furnitureId())
-						.xPos(updateFurniture.xPos())
-						.yPos(updateFurniture.yPos())
-						.zPos(updateFurniture.zPos())
+						.xPos(updateFurniture.position().get(0))
+						.yPos(updateFurniture.position().get(1))
+						.zPos(updateFurniture.position().get(2))
 						.rotation(updateFurniture.rotation())
 						.build();
 					roomFurnitureRepository.save(newRoomFurniture);
