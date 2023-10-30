@@ -36,12 +36,19 @@ const NeighborRequest = () => {
           </div>
         </div>
       </div>
+
       {isAddNeighbor && (
         <div className={styles.AddNeighbor}>
-          <div>내용</div>
-          <div>
-            <div>수락</div>
-            <div>취소</div>
+          <div className={styles.MainContainer}>
+            <div className={styles.TitleContainer}>
+              <div>이웃 요청을 하시겠습니까?</div>
+            </div>
+            <div className={styles.HorizontalLine} />
+            <div className={styles.VerticalLine} />
+            <div className={styles.ButtonContainer}>
+              <div>수락</div>
+              <div>취소</div>
+            </div>
           </div>
         </div>
       )}
