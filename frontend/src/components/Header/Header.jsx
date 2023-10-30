@@ -10,7 +10,7 @@ import hamburger from "/assets/icons/hamburgerbar.svg"
 import bell from "/assets/icons/bell.svg"
 
 // 컴포넌트
-import DefaultModal from "../Modal/Default/DefaultModal"
+import NeighborAcceptModal from "../Modal/Neighbor/NeighborAcceptModal"
 
 // Atom
 import { userAtom } from "../../atom/UserAtom"
@@ -27,6 +27,11 @@ const Header = ({ checkMyRoom }) => {
   // 알림함수
   const alarmHandler = () => {
     console.log("알림창")
+  }
+
+  // 이웃요청 수락함수
+  const acceptNeighborHandler = () => {
+    console.log("이웃요청 수락")
   }
 
   // 문의하기 함수
@@ -89,11 +94,9 @@ const Header = ({ checkMyRoom }) => {
         <>
           <div className={styles.Overlay} onClick={() => setIsAlarm(false)} />
           <div className={styles.AlarmModal}>
-            <DefaultModal
-              content={"내용"}
-              ok={"수락"}
-              cancel={"거절"}
-              okClick={""}
+            <NeighborAcceptModal
+              content={"둥이맘"}
+              okClick={acceptNeighborHandler}
               cancelClick={() => setIsAlarm(false)}
             />
           </div>
