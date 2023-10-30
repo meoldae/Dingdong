@@ -57,13 +57,7 @@ function RoomPage() {
     console.log("랜덤방문 함수");
   };
 
-  useEffect(() => {
-    console.log(
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      )
-    );
-  }, []);
+
 
   return (
     <div className={styles.container}>
@@ -101,7 +95,7 @@ function RoomPage() {
       <Canvas
         shadows
         gl={{ preserveDrawingBuffer: true, antialias: true }}
-        camera={{ fov: 45, zoom: 1.3 }}
+        camera={{ fov: 45, zoom: 1.2 }}
         ref={canvasRef}
       >
         <color attach="background" args={["skyblue"]} />
