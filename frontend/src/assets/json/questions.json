@@ -2,7 +2,7 @@
 	{
 		"id": 1,
 		"option": "TF",
-		"question": "편지를 쓰려고 하는데 어떤 편지지를 살까?",
+		"question": "편지를 쓰려고 하는데\n어떤 편지지를 살까?",
 		"answers": [
 			{
 				"id": 1,
@@ -19,7 +19,7 @@
 	{
 		"id": 2,
 		"option": "EI",
-		"question": "사고 싶은 편지지가 높은 곳에 있다면?",
+		"question": "사고 싶은 편지지가\n높은 곳에 있다면?",
 		"answers": [
 			{
 				"id": 1,
@@ -29,31 +29,65 @@
 			{
 				"id": 2,
 				"type": "I",
-				"content": "가까운 곳에 있는 다른 편지지를 산다."
+				"content": "가까운 곳에 있는\n다른 편지지를 산다."
 			}
 		]
 	},
 	{
 		"id": 3,
 		"option": "EI",
-		"question": "편지지에 어떤 그림이 있는 우표를 붙일까?",
+		"question": "편지지에\n어떤 우표를 붙일까?",
 		"answers": [
 			{
 				"id": 1,
 				"type": "E",
-				"content": "밝은 햇살 아래 피크닉을 즐기는 사람들"
+				"content": "공원에서\n피크닉을 즐기는 사람들"
 			},
 			{
 				"id": 2,
 				"type": "I",
-				"content": "조용한 창가에 놓인 커피와 책"
+				"content": "조용한 창가에 있는\n커피와 책"
 			}
 		]
 	},
 	{
 		"id": 4,
+		"option": "TF",
+		"question": "힘들어하는 친구에게\n편지를 보낸다면?",
+		"answers": [
+			{
+				"id": 1,
+				"type": "T",
+				"content": "좋아하는 기프티콘에\n응원 메시지를 담아"
+			},
+			{
+				"id": 2,
+				"type": "F",
+				"content": "예쁜 편지지에\n위로의 말을 담아"
+			}
+		]
+	},
+	{
+		"id": 5,
 		"option": "NS",
-		"question": "미래의 나에게 편지를 적는다면 어떤 내용을 적을까?",
+		"question": "편지를 보낼 때\n걱정되는게 있다면?",
+		"answers": [
+			{
+				"id": 1,
+				"type": "N",
+				"content": "편지가 중간에 분실될까봐"
+			},
+			{
+				"id": 2,
+				"type": "S",
+				"content": "나는 걱정되는게 없다!"
+			}
+		]
+	},
+	{
+		"id": 6,
+		"option": "NS",
+		"question": "미래의 나에게\n편지를 적는다면?",
 		"answers": [
 			{
 				"id": 1,
@@ -63,92 +97,58 @@
 			{
 				"id": 2,
 				"type": "N",
-				"content": "앞으로 하고 싶은 일을 적는다."
-			}
-		]
-	},
-	{
-		"id": 5,
-		"option": "TF",
-		"question": "편지를 보내려고 할 때 걱정되는 것이 있다면?",
-		"answers": [
-			{
-				"id": 1,
-				"type": "T",
-				"content": "편지가 계획보다 늦게 도착할까봐 걱정된다."
-			},
-			{
-				"id": 2,
-				"type": "F",
-				"content": "편지의 감정이 제대로 전달되지 않을까봐 걱정된다."
-			}
-		]
-	},
-	{
-		"id": 6,
-		"option": "TF",
-		"question": "주변에 힘들어하는 친구가 있다면?",
-		"answers": [
-			{
-				"id": 1,
-				"type": "T",
-				"content": "기프티콘에 짧은 응원 메시지를 함꼐 보낸다."
-			},
-			{
-				"id": 2,
-				"type": "F",
-				"content": "예쁜 편지지에 위로의 말을 담아 전해준다."
+				"content": "미래에 하고 싶은 일을 적는다."
 			}
 		]
 	},
 	{
 		"id": 7,
 		"option": "EI",
-		"question": "기다리던 편지를 받았다!",
+		"question": "좋아하는 친구에게\n생일 축하 편지를 받았다.",
 		"answers": [
 			{
 				"id": 1,
 				"type": "E",
-				"content": "주변 사람들에게 소식을 전한다."
+				"content": "주변 친구들에게\n편지를 받았다고 말한다."
 			},
 			{
 				"id": 2,
 				"type": "I",
-				"content": "혼자 조용히 읽는다."
+				"content": "혼자 조용한 곳에서 읽는다."
 			}
 		]
 	},
 	{
 		"id": 8,
 		"option": "NS",
-		"question": "생일 축하 편지지에 받은 우표가 맘에 든다!",
+		"question": "생일 축하 편지의\n우표가 마음에 든다!",
 		"answers": [
 			{
 				"id": 1,
-				"type": "S",
-				"content": "생일 파티하는 그림이 그려진 우표"
+				"type": "N",
+				"content": "생일 파티 그림이 그려진 우표"
 			},
 			{
 				"id": 2,
-				"type": "F",
+				"type": "S",
 				"content": "생일 케이크가 그려진 우표"
 			}
 		]
 	},
 	{
 		"id": 9,
-		"option": "NS",
-		"question": "편지를 받았을 때 가장 기억에 남는 것은?",
+		"option": "TF",
+		"question": "편지를 읽을 후\n기억에 남는 것은?",
 		"answers": [
 			{
 				"id": 1,
-				"type": "S",
+				"type": "T",
 				"content": "편지 속 구체적인 내용"
 			},
 			{
 				"id": 2,
-				"type": "P",
-				"content": "편지 속 감정"
+				"type": "F",
+				"content": "편지 속 감정 표현"
 			}
 		]
 	}

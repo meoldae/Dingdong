@@ -11,7 +11,7 @@ const StampTestStart = (props) => {
           width: "250px",
           height: "300px",
           marginBottom: "15px",
-          marginTop: "115px",
+          marginTop: "20%",
         }}
       />
       <div className={styles.ContentContainer}>
