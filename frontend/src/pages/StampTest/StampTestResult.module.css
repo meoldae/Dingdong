@@ -9,22 +9,22 @@
 
 .PostImage {
   width: 320px;
-  height: 420px;
+  height: 50%;
   background: #fff;
   border-radius: 20px;
-  margin-top: 90px;
+  margin-top: 15%;
   text-align: center;
 }
 
 .ButtonContainer {
-  margin-top: 10px;
-  margin-bottom: 30px;
+  margin-top: 5%;
+  margin-bottom: 5%;
   font-size: 24px;
 }
 
 .Button {
   width: 320px;
-  height: 55px;
+  height: 50px;
   text-align: center;
   line-height: 50px;
   border-radius: 15px;

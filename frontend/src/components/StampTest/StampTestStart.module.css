@@ -9,7 +9,7 @@
 
 .ContentContainer {
   font-size: 28px;
-  margin-bottom: 35px;
+  margin-bottom: 10%;
 }
 
 .StartButton {
@@ -20,5 +20,5 @@
   font-size: 24px;
   text-align: center;
   line-height: 50px;
-  margin-bottom: 80px;
+  margin-bottom: 10%;
 }

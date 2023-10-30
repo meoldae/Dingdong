@@ -1,10 +1,7 @@
 import React, { useEffect } from "react"
-import resultInfo from "../../assets/json/result.json"
-// import LogoEffect from "../assets/images/logo/logo_effect.png";
-import SharingModalList from "../../components/Modal/Sharing/SharingModalList"
-import { useNavigate } from "react-router-dom"
-import { useRecoilValue } from "recoil"
-// import { isLoginAtom } from "../atoms/userAtoms";
+import resultInfo from "@/assets/json/result.json" 
+import SharingModalList from "@/components/Modal/Sharing/SharingModalList"
+import { useNavigate } from "react-router-dom" 
 import styles from "./StampTestResult.module.css"
 
 const StampTestResult = () => {
