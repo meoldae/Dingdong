@@ -29,7 +29,8 @@ public class JwtProvider {
 	private String SECRET_KEY;
 
 	//    private static final Long ACCESS_TOKEN_VALIDATE_TIME = 1000L * 60 * 30; // 30분
-	private static final Long ACCESS_TOKEN_VALIDATE_TIME = 1000L * 60 * 60 * 24; // 테스트용 24시간
+	// private static final Long ACCESS_TOKEN_VALIDATE_TIME = 1000L * 60 * 60 * 24; // 테스트용 24시간
+	private static final Long ACCESS_TOKEN_VALIDATE_TIME = 1000L * 60 * 3; // 리프레시 테스트용 3분
 	private static final Long REFRESH_TOKEN_VALIDATE_TIME = 1000L * 60 * 60 * 24 * 365; // 1년
 
 	public String createAccessToken(Member member) {
