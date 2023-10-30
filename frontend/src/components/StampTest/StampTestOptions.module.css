@@ -9,26 +9,27 @@
 
 .ContentContainer {
   width: 320px;
-  height: 530px;
+  height: 65%;
   background: #fff;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 5%;
   position: relative;
 }
 
 .Question {
   width: 195px;
   text-align: center;
-  margin-top: 75px;
+  margin-top: 20%;
   font-size: 28px;
+  white-space: pre-line
 }
 
 .AnswerContainer {
   position: absolute;
-  top: 200px;
+  top: 40%;
 }
 
 .Answer {
@@ -43,11 +44,12 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  white-space: pre-line
 }
 
 .FooterNumber {
   position: absolute;
   bottom: 0px;
-  margin-bottom: 30px;
+  margin-bottom: 5%;
   font-size: 20px;
 }

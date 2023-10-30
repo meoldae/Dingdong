@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
-import StampTestOptions from "../../components/StampTest/StampTestOptions"
-import StampTestStart from "../../components/StampTest/StampTestStart"
-import StampTestLoading from "../../components/StampTest/StampTestLoading"
+import StampTestOptions from "@/components/StampTest/StampTestOptions"
+import StampTestStart from "@/components/StampTest/StampTestStart"
+import StampTestLoading from "@/components/StampTest/StampTestLoading"
+import "./StampTest.module.css"
 
 const StampTest = () => {
   const [testMode, setTestMode] = useState("start")
@@ -12,7 +13,7 @@ const StampTest = () => {
   }
 
   return (
-    <div>
+    <div id="main-cotainer">
       {(function () {
         if (testMode === "start") {
           return <StampTestStart onTestModeHanlder={onTestModeHanlder} />
