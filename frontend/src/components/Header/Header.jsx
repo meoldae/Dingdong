@@ -1,5 +1,5 @@
 // 라이브러리
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRecoilValue } from "recoil"
 
 // 스타일
@@ -32,10 +32,11 @@ const Header = ({ checkMyRoom }) => {
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
 
-  // 알림 함수
-  const alarmHandler = () => {
+  // 유저요청 가져오기
+  useEffect(() => {
     fetchNeighborRequest(
       (success) => {
+        console.log(success.data.data)
         setAlarmsLength(success.data.data.length)
         setAlarms(success.data.data)
       },
@@ -43,8 +44,10 @@ const Header = ({ checkMyRoom }) => {
         console.log("Error at neighbor request...", error)
       }
     )
-
-    if (alarmsLength == 0) {
+  }, [])
+  // 알림 함수
+  const alarmHandler = () => {
+    if (alarmsLength === 0) {
       setIsAlarm(false)
       successMsg("❌ 알림이 없습니다!")
     } else {
@@ -132,17 +135,23 @@ const Header = ({ checkMyRoom }) => {
                 onClick={() => setAlarms(false)}
               />
             </div>
-            <div className={styles.alarmListContainer}>
-              {alarms.map((alarm) => (
-                <div key={alarm.neighborId} className={styles.AlarmModal}>
-                  <NeighborAcceptModal
-                    content={alarm.nickname}
-                    okClick={() => acceptNeighborHandler(alarm.neighborId)}
-                    cancelClick={() => refuseNeighborHandler(alarm.neighborId)}
-                  />
-                </div>
-              ))}
-            </div>
+            {alarmsLength !== 0 ? (
+              <div className={styles.alarmListContainer}>
+                {alarms.map((alarm) => (
+                  <div key={alarm.neighborId} className={styles.AlarmModal}>
+                    <NeighborAcceptModal
+                      content={alarm.nickname}
+                      okClick={() => acceptNeighborHandler(alarm.neighborId)}
+                      cancelClick={() =>
+                        refuseNeighborHandler(alarm.neighborId)
+                      }
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div>알림이 없습니다!</div>
+            )}
           </div>
         </>
       )}
