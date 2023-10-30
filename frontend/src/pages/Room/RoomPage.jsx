@@ -61,7 +61,7 @@ function RoomPage() {
       ) : (
         <Header checkMyRoom={"other"} />
       )}
-      {isMyRoom ? <NeighborRequest /> : <Share setShareModal={setShareModal} />}
+      {isMyRoom ? <Share setShareModal={setShareModal} /> : <NeighborRequest />}
       {shareModal && (
         <>
           <div
