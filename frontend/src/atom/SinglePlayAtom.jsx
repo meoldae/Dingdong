@@ -44,7 +44,7 @@ export const PostOfficePortalVisibleAtom = atom({
 })
 export const PostOfficePortalPositionAtom = atom({
   key: "PostOfficePortalPositionAtom",
-  default: [7.6, 0.03, 3.5],
+  default: [7.6, 0.03, 4],
 })
 
 export const StorePortalVisibleAtom = atom({

@@ -15,9 +15,9 @@ const PhysicsModel = () => {
   }, [meshRef])
 
   return (
-    <mesh ref={meshRef} position={[6, 0.005, 17]}>
+    <mesh ref={meshRef} position={[0, 0.005, -3]}>
       <planeGeometry args={[1, 1]} />
-      <meshStandardMaterial color={"blue"} transparent opacity={0.5} />
+      <meshStandardMaterial visible="none" transparent opacity={0.5} />
     </mesh>
   )
 }
