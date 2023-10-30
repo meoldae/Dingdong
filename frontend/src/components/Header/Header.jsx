@@ -1,27 +1,47 @@
-import style from "./Header.module.css"
-import hamburger from "/assets/icons/hamburgerbar.svg"
-import bell from "/assets/icons/bell.svg"
-import { userAtom } from "../../atom/UserAtom"
+// 라이브러리
+import { useState } from "react"
 import { useRecoilValue } from "recoil"
 
+// 스타일
+import styles from "./Header.module.css"
+
+// 이미지
+import hamburger from "/assets/icons/hamburgerbar.svg"
+import bell from "/assets/icons/bell.svg"
+
+// Atom
+import { userAtom } from "../../atom/UserAtom"
+
 const Header = ({ checkMyRoom }) => {
-  const icon = "/assets/icons/"
+  // 햄버거메뉴바 상태관리
+  const [isHamburger, setIsHamburger] = useState(false)
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
 
   return (
-    <div className={style.wrap}>
-      <div className={style.header}>
-        <img src={hamburger} alt="" />
-        {checkMyRoom === "my" ? (
-          <div className={style.userName}>{userInfo.nickname}</div>
-        ) : (
-          <div className={style.userName}>userName</div>
-        )}
-        <img src={bell} alt="" />
+    <>
+      <div className={styles.wrap}>
+        <div className={styles.header}>
+          <img
+            src={hamburger}
+            alt=""
+            onClick={() => setIsHamburger(!isHamburger)}
+          />
+          {checkMyRoom === "my" ? (
+            <div className={styles.userName}>{userInfo.nickname}</div>
+          ) : (
+            <div className={styles.userName}>userName</div>
+          )}
+          <img src={bell} alt="" />
+        </div>
       </div>
-    </div>
+      {isHamburger && (
+        <>
+          <div className={styles.HamburgerModal}>모달</div>
+        </>
+      )}
+    </>
   )
 }
 
