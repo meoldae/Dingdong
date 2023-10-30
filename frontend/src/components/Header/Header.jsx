@@ -19,23 +19,20 @@ const Header = ({ checkMyRoom }) => {
   // 햄버거메뉴바 상태관리
   const [isHamburger, setIsHamburger] = useState(false)
   // 알림 상태관리
-  const [isAlarm, setIsAlarm] = useState(false)
+  const [isAlarm, setIsAlarm] = useState([
+    { id: 1, content: "둥이맘", active: true },
+  ])
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
 
-  // 알림함수
-  const alarmHandler = () => {
-    console.log("알림창")
-  }
-
   // 이웃요청 수락함수
-  const acceptNeighborHandler = () => {
+  const acceptNeighborHandler = (id) => {
     console.log("이웃요청 수락")
   }
 
   // 이웃요청 거절함수
-  const refuseNeighborHandler = () => {
+  const refuseNeighborHandler = (id) => {
     console.log("이웃요청 거절")
   }
 
