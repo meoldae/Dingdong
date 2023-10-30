@@ -31,7 +31,7 @@ const Header = ({ checkMyRoom }) => {
             src={hamburger}
             alt=""
             onClick={() => setIsHamburger(true)}
-            style={{ zIndex: "4" }}
+            className={styles.HamburgerButton}
           />
           {checkMyRoom === "my" ? (
             <div className={styles.userName}>{userInfo.nickname}</div>
