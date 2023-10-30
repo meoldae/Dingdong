@@ -32,19 +32,17 @@ const Experience = () => {
       return;
     }
     const item = items[draggedItem];
+    console.log(item);
     let droppable = true;
-    const thick = item.size[1];
-
+    const thick = item.size[1]%2 ? item.size[1] +2: item.size[1] +1;
     // 바닥 평면 넘어갔을 때 예외처리
     const width =
       draggedItemRotation === 1 || draggedItemRotation === 3
-        ? item.size[2]
-        : item.size[0];
+        ? item.size[2]%2 ?item.size[2] +1 :item.size[2] : item.size[0] %2 ? item.size[0]+1:item.size[0]
     const height =
       draggedItemRotation === 1 || draggedItemRotation === 3
-        ? item.size[0]
-        : item.size[2];
-    if (!item.wall) {
+        ? item.size[0]%2 ? item.size[0] + 1 : item.size[0] : item.size[2]%2 ? item.size[2]+1 : item.size[2];
+    if (item.categoryId !== 3) {
       if (
         dragPosition[0] - width / 2 < 0 ||
         dragPosition[0] + width / 2 > 4.8 / 0.24
@@ -59,7 +57,7 @@ const Experience = () => {
       }
     }
     // 벽면이 외부로 넘어갔을 때 예외처리
-    if (item.wall) {
+    if (item.categoryId === 3) {
       if (draggedItemRotation) {
         if (
           dragPosition[1] - thick / 2 < -1 ||
@@ -95,115 +93,128 @@ const Experience = () => {
         return;
       }
       // 카펫처럼 쌓을 수 있고 다른 아이템이 벽면에 있는 것이 아닐 경우
-      if (otherItem.walkable && !otherItem.wall) {
+      if (otherItem.categoryId === 2 && otherItem.categoryId !== 3) {
         return;
       }
       // 다른 물체 크기
-      const otherThick = otherItem.size[1];
+      const otherThick = otherItem.size[1]%2? otherItem.size[1] +2: otherItem.size[1] +1;
       const otherWidth =
         otherItem.rotation === 1 || otherItem.rotation === 3
-          ? otherItem.size[2]
-          : otherItem.size[0];
+          ? otherItem.size[2]%2 ?otherItem.size[2]+1 :otherItem.size[2] : otherItem.size[0] %2 ? otherItem.size[0]+1:otherItem.size[0] ;
       const otherHeight =
         otherItem.rotation === 1 || otherItem.rotation === 3
-          ? otherItem.size[0]
-          : otherItem.size[2];
+          ? otherItem.size[0]%2 ? otherItem.size[0]+1 : otherItem.size[0] : otherItem.size[2]%2 ? otherItem.size[2]+1 : otherItem.size[2];
 
       // 다른 물체가 왼쪽 벽에 있고, 바닥에 있는 걸 움직일 때
-      if (otherItem.wall && !item.wall && otherItem.rotation) {
+      if (
+        otherItem.categoryId === 3 &&
+        item.categoryId !== 3 &&
+        otherItem.rotation
+      ) {
         if (dragPosition[0] - width / 2 <= 0) {
           if (
-            dragPosition[1] + thick > otherItem.gridPosition[1] - thick / 2 &&
+            dragPosition[1] + thick > otherItem.position[1] - thick / 2 &&
             dragPosition[2] + height / 2 >
-              otherItem.gridPosition[2] - otherHeight / 2 &&
+              otherItem.position[2] - otherHeight / 2 &&
             dragPosition[2] - height / 2 <
-              otherItem.gridPosition[2] + otherHeight / 2
+              otherItem.position[2] + otherHeight / 2
           )
             droppable = false;
         }
       }
       // 다른 물체가 오른쪽 벽에 있고, 바닥에 있는 걸 움직일 때
-      if (otherItem.wall && !item.wall && !otherItem.rotation) {
+      if (
+        otherItem.categoryId === 3 &&
+        item.categoryId !== 3 &&
+        !otherItem.rotation
+      ) {
         if (dragPosition[2] - height / 2 <= 0) {
           if (
-            dragPosition[1] + thick > otherItem.gridPosition[1] - thick / 2 &&
+            dragPosition[1] + thick > otherItem.position[1] - thick / 2 &&
             dragPosition[0] + width / 2 >
-              otherItem.gridPosition[0] - otherWidth / 2 &&
-            dragPosition[0] - width / 2 <
-              otherItem.gridPosition[0] + otherWidth / 2
+              otherItem.position[0] - otherWidth / 2 &&
+            dragPosition[0] - width / 2 < otherItem.position[0] + otherWidth / 2
           )
             droppable = false;
         }
       }
       // 바닥 평면에 있는 다른 물체가 있을 때,
-      if (!item.walkable && !item.wall && !otherItem.wall) {
+      if (
+        item.categoryId !== 2 &&
+        item.categoryId !== 3 &&
+        otherItem.categoryId !== 3
+      ) {
         if (
           dragPosition[0] + width / 2 >
-            otherItem.gridPosition[0] - otherWidth / 2 &&
+            otherItem.position[0] - otherWidth / 2 &&
           dragPosition[0] - width / 2 <
-            otherItem.gridPosition[0] + otherWidth / 2 &&
+            otherItem.position[0] + otherWidth / 2 &&
           dragPosition[2] - height / 2 <
-            otherItem.gridPosition[2] + otherHeight / 2 &&
-          dragPosition[2] + height / 2 >
-            otherItem.gridPosition[2] - otherHeight / 2
+            otherItem.position[2] + otherHeight / 2 &&
+          dragPosition[2] + height / 2 > otherItem.position[2] - otherHeight / 2
         ) {
           droppable = false;
         }
       }
 
       // 왼쪽 벽면에 있는 게 움직일 때, 평면 물체와 비교
-      if (item.wall && item.rotation) {
-        if (otherItem.gridPosition[0] - otherWidth / 2 <= 0) {
+      if (item.categoryId === 3 && item.rotation) {
+        if (otherItem.position[0] - otherWidth / 2 <= 0) {
           if (
             dragPosition[1] - thick / 2 < otherThick &&
             dragPosition[2] + height / 2 >
-              otherItem.gridPosition[2] - otherHeight / 2 &&
+              otherItem.position[2] - otherHeight / 2 &&
             dragPosition[2] - height / 2 <
-              otherItem.gridPosition[2] + otherHeight / 2
+              otherItem.position[2] + otherHeight / 2
           ) {
             droppable = false;
           }
         }
       }
       // 오른쪽 벽면에 있는 게 움직일 때, 평면 물체와 비교
-      if (item.wall && !item.rotation) {
-        if (otherItem.gridPosition[2] - otherHeight / 2 <= 0) {
+      if (item.categoryId === 3 && !item.rotation) {
+        if (otherItem.position[2] - otherHeight / 2 <= 0) {
           if (
             dragPosition[1] - thick / 2 < otherThick &&
             dragPosition[0] + width / 2 >
-              otherItem.gridPosition[0] - otherWidth / 2 &&
-            dragPosition[0] - width / 2 <
-              otherItem.gridPosition[0] + otherWidth / 2
+              otherItem.position[0] - otherWidth / 2 &&
+            dragPosition[0] - width / 2 < otherItem.position[0] + otherWidth / 2
           ) {
             droppable = false;
           }
         }
       }
       // 벽면에 있는 물체끼리 비교
-      if (item.wall && item.rotation && otherItem.wall) {
+      if (
+        item.categoryId === 3 &&
+        item.rotation &&
+        otherItem.categoryId === 3
+      ) {
         if (
           dragPosition[2] + height / 2 >
-            otherItem.gridPosition[2] - otherHeight / 2 &&
+            otherItem.position[2] - otherHeight / 2 &&
           dragPosition[2] - height / 2 <
-            otherItem.gridPosition[2] + otherHeight / 2 &&
+            otherItem.position[2] + otherHeight / 2 &&
           dragPosition[1] + thick / 2 >
-            otherItem.gridPosition[1] - otherThick / 2 &&
-          dragPosition[1] - thick / 2 <
-            otherItem.gridPosition[1] + otherThick / 2
+            otherItem.position[1] - otherThick / 2 &&
+          dragPosition[1] - thick / 2 < otherItem.position[1] + otherThick / 2
         ) {
           droppable = false;
         }
       }
-      if (item.wall && !item.rotation && otherItem.wall) {
+      if (
+        item.categoryId === 3 &&
+        !item.rotation &&
+        otherItem.categoryId === 3
+      ) {
         if (
           dragPosition[0] + width / 2 >
-            otherItem.gridPosition[0] - otherWidth / 2 &&
+            otherItem.position[0] - otherWidth / 2 &&
           dragPosition[0] - width / 2 <
-            otherItem.gridPosition[0] + otherWidth / 2 &&
+            otherItem.position[0] + otherWidth / 2 &&
           dragPosition[1] + thick / 2 >
-            otherItem.gridPosition[1] - otherThick / 2 &&
-          dragPosition[1] - thick / 2 <
-            otherItem.gridPosition[1] + otherThick / 2
+            otherItem.position[1] - otherThick / 2 &&
+          dragPosition[1] - thick / 2 < otherItem.position[1] + otherThick / 2
         ) {
           droppable = false;
         }
@@ -215,9 +226,9 @@ const Experience = () => {
   // 아이템 클릭 로직
   const renderItem = (item, idx) => {
     const commonProps = {
-      key: `${item.name}-${idx}`,
+      key: `${item.furnitureId}-${idx}`,
       item: item,
-      wall: item.wall,
+      categoryId: item.categoryId,
     };
 
     if (buildMode) {
@@ -226,7 +237,7 @@ const Experience = () => {
           {...commonProps}
           onClick={() => {
             setDraggedItem((prev) => (prev === null ? idx : prev));
-            if (draggedItemRotation===null) {
+            if (draggedItemRotation === null) {
               setDraggedItemRotation(item.rotation);
             }
           }}
@@ -254,7 +265,7 @@ const Experience = () => {
       }
     } else {
       state.camera.position.set(20, 10, 10);
-      state.camera.focus=20;
+      state.camera.focus = 20;
     }
   }, [buildMode]);
   // 일반 모드일 때 카메라 회전 후 원상복귀
@@ -268,11 +279,11 @@ const Experience = () => {
       z: 10,
       onUpdate: () => state.camera.updateProjectionMatrix(),
     });
-    gsap.to(state.camera,{
-      fov:45,
-      duration:0.5,
+    gsap.to(state.camera, {
+      fov: 45,
+      duration: 0.5,
       onUpdate: () => state.camera.updateProjectionMatrix(),
-    })
+    });
   };
 
   return (
@@ -286,12 +297,12 @@ const Experience = () => {
         minPolarAngle={0}
         maxPolarAngle={Math.PI / 2}
         screenSpacePanning={false}
-        enabled={!buildMode}
+        // enabled={!buildMode}
         // enableRotate={false}
         onEnd={animateCameraPosition}
       />
       {/* <Room name={"office"}/> */}
-      {items.map(renderItem)}
+      {items && items.map(renderItem)}
 
       {/* 바닥 평면 */}
       <mesh
@@ -393,12 +404,12 @@ const Experience = () => {
       {draggedItem !== null && buildMode && (
         <Html className={styles.dragbutton}>
           <img
-            src="assets/icons/refresh.svg"
+            src="../../../../public/assets/icons/refresh.svg"
             alt=""
             onClick={() => {
-              if (items[draggedItem].wall) {
+              if (items[draggedItem].categoryId === 3) {
                 setDraggedItemRotation(
-                  draggedItemRotation === 0 ? 1 : draggedItemRotation - 1
+                  draggedItemRotation === 1 ? 0 : draggedItemRotation + 1
                 );
               } else {
                 setDraggedItemRotation(
@@ -408,27 +419,30 @@ const Experience = () => {
             }}
           />
           <img
-            src="assets/icons/cross.svg"
+            src="../../../../public/assets/icons/cross.svg"
             alt=""
             onClick={() => {
+              setItems((prevItems) => {
+                return prevItems.filter((_, index) => index !== draggedItem);
+              });
               setDraggedItem(null);
               setDraggedItemRotation(null);
-
             }}
           />
           {canDrop ? (
             <img
-              src="assets/icons/check.svg"
+              src="../../../../public/assets/icons/check.svg"
               alt=""
               onClick={() => {
                 if (draggedItem !== null && dragPosition) {
                   if (canDrop) {
                     setItems((prev) => {
+                      console.log(prev)
                       const newItems = prev.map((item, index) => {
                         if (index === draggedItem) {
                           return {
                             ...item,
-                            gridPosition: dragPosition,
+                            position: dragPosition,
                             rotation: draggedItemRotation,
                           };
                         }
@@ -437,13 +451,14 @@ const Experience = () => {
                       return newItems;
                     });
                   }
+                  console.log(items)
                   setDraggedItemRotation(null);
                   setDraggedItem(null);
                 }
               }}
             />
           ) : (
-            <img src="assets/icons/check.svg" />
+            <img src="../../../../public/assets/icons/check.svg" />
           )}
         </Html>
       )}

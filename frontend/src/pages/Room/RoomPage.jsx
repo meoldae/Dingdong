@@ -42,6 +42,7 @@ function RoomPage() {
     fetchRoomData(roomId, 
       (response) => {
         setItems(response.data.data.roomFurnitureList);
+        console.log(items)
     },
     (error) => {
       console.error("Error at fetching RoomData...", error);''
