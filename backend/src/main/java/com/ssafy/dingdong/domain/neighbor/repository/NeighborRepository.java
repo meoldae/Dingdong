@@ -23,8 +23,9 @@ public interface NeighborRepository extends JpaRepository<Neighbor, Long> {
 	@Query("SELECT n.neighborId"
 		 + "  FROM Neighbor n"
 		 + " WHERE n.acceptorId = :memberId"
-		+ "    AND n.connectTime = NULL")
-	List findAllRequestByMemberId(@Param("memberId") UUID memberId);
+		 + "   AND n.connectTime IS NULL "
+		 + "   AND n.cancelTime IS NULL")
+	List<Neighbor> findAllRequestByMemberId(@Param("memberId") UUID memberId);
 
 	@Query(" SELECT "
 		 + "   CASE WHEN n.acceptorId = :memberId THEN n.applicantId"

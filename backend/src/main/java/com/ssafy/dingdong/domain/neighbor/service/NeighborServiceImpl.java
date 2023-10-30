@@ -1,6 +1,7 @@
 package com.ssafy.dingdong.domain.neighbor.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ssafy.dingdong.domain.member.dto.response.MemberMainDto;
 import com.ssafy.dingdong.domain.member.service.MemberService;
 import com.ssafy.dingdong.domain.neighbor.dto.request.NeighborRequest;
+import com.ssafy.dingdong.domain.neighbor.dto.response.NeighborRequestResponseDto;
 import com.ssafy.dingdong.domain.neighbor.dto.response.NeighborResponse;
 import com.ssafy.dingdong.domain.neighbor.entity.Neighbor;
 import com.ssafy.dingdong.domain.neighbor.repository.NeighborRepository;
@@ -69,8 +71,23 @@ public class NeighborServiceImpl implements NeighborService{
 	}
 
 	@Override
-	public List<String> getRequestList(String memberId) {
-		return neighborRepository.findAllRequestByMemberId(UUID.fromString(memberId));
+	public List<NeighborRequestResponseDto> getRequestList(String memberId) {
+		List<NeighborRequestResponseDto> result = new ArrayList<>();
+
+		neighborRepository.findAllRequestByMemberId(UUID.fromString(memberId)).stream().forEach(
+			neighborRequest -> {
+
+				String nickname = memberService.getMemberById(neighborRequest.getAcceptorId().toString()).nickname();
+
+				NeighborRequestResponseDto requestResponseDto = NeighborRequestResponseDto.builder()
+					.neighborId(neighborRequest.getNeighborId())
+					.memberId(neighborRequest.getAcceptorId().toString())
+					.nickname(nickname)
+					.build();
+				result.add(requestResponseDto);
+			}
+		);
+		return result;
 	}
 
 	@Override

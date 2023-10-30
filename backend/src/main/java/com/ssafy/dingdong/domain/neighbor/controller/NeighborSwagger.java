@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.ssafy.dingdong.domain.neighbor.dto.request.DeleteNeighborRequestDto;
 import com.ssafy.dingdong.domain.neighbor.dto.request.NeighborRequest;
+import com.ssafy.dingdong.domain.neighbor.dto.response.NeighborRequestResponseDto;
 import com.ssafy.dingdong.domain.neighbor.dto.response.NeighborResponse;
 import com.ssafy.dingdong.domain.neighbor.entity.Neighbor;
 import com.ssafy.dingdong.global.response.CommonResponse;
@@ -22,7 +23,7 @@ public interface NeighborSwagger {
 
 	DataResponse<String> isNeighbor(@PathVariable Long targetRoomId, Authentication authentication);
 
-	DataResponse<List<String>> getRequestList(Authentication authentication);
+	DataResponse<List<NeighborRequestResponseDto>> getRequestList(Authentication authentication);
 
 	DataResponse<List<NeighborResponse>> getNeighborList(Authentication authentication);
 
