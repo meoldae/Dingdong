@@ -5,6 +5,7 @@
   flex-direction: column; 
   justify-content: space-evenly;
   align-items: center; 
+  font-family: "GangwonEduAll-Light";
 } 
 
 .ContentContainer { 
