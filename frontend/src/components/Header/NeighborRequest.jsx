@@ -1,3 +1,6 @@
+// 라이브러리
+import { useState } from "react"
+
 // 스타일
 import style from "./Header.module.css"
 
