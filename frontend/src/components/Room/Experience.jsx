@@ -37,7 +37,7 @@ const Experience = () => {
     const item = items[draggedItem];
     console.log(item);
     let droppable = true;
-    const thick = item.size[1] % 2 ? item.size[1] + 2 : item.size[1] + 1;
+    const thick = item.size[1] % 2 ? item.size[1] + 1 : item.size[1];
     // 바닥 평면 넘어갔을 때 예외처리
     const width =
       draggedItemRotation === 1 || draggedItemRotation === 3
@@ -111,7 +111,7 @@ const Experience = () => {
       }
       // 다른 물체 크기
       const otherThick =
-        otherItem.size[1] % 2 ? otherItem.size[1] + 2 : otherItem.size[1] + 1;
+        otherItem.size[1] % 2 ? otherItem.size[1] + 1 : otherItem.size[1];
       const otherWidth =
         otherItem.rotation === 1 || otherItem.rotation === 3
           ? otherItem.size[2] % 2
@@ -334,6 +334,28 @@ const Experience = () => {
         rotation-x={-Math.PI / 2}
         // visible={false}
         position-y={-0.001}
+        onClick={() => {
+          if (draggedItem !== null && dragPosition) {
+            if (canDrop) {
+              setItems((prev) => {
+                console.log(prev);
+                const newItems = prev.map((item, index) => {
+                  if (index === draggedItem) {
+                    return {
+                      ...item,
+                      position: dragPosition,
+                      rotation: draggedItemRotation,
+                    };
+                  }
+                  return item;
+                });
+                return newItems;
+              });
+            }
+            setDraggedItemRotation(null);
+            setDraggedItem(null);
+          }
+        }}
         onPointerMove={(e) => {
           if (!buildMode) {
             return;
@@ -358,6 +380,28 @@ const Experience = () => {
         position-x={-2.394}
         // visible={false}
         position-y={1.92}
+        onClick={() => {
+          if (draggedItem !== null && dragPosition) {
+            if (canDrop) {
+              setItems((prev) => {
+                console.log(prev);
+                const newItems = prev.map((item, index) => {
+                  if (index === draggedItem) {
+                    return {
+                      ...item,
+                      position: dragPosition,
+                      rotation: draggedItemRotation,
+                    };
+                  }
+                  return item;
+                });
+                return newItems;
+              });
+            }
+            setDraggedItemRotation(null);
+            setDraggedItem(null);
+          }
+        }}
         onPointerMove={(e) => {
           if (!buildMode) {
             return;
@@ -392,6 +436,28 @@ const Experience = () => {
             newPosition[1] !== dragPosition[1]
           ) {
             setDraggPosition(newPosition);
+          }
+        }}
+        onClick={() => {
+          if (draggedItem !== null && dragPosition) {
+            if (canDrop) {
+              setItems((prev) => {
+                console.log(prev);
+                const newItems = prev.map((item, index) => {
+                  if (index === draggedItem) {
+                    return {
+                      ...item,
+                      position: dragPosition,
+                      rotation: draggedItemRotation,
+                    };
+                  }
+                  return item;
+                });
+                return newItems;
+              });
+            }
+            setDraggedItemRotation(null);
+            setDraggedItem(null);
           }
         }}
       >
@@ -476,7 +542,6 @@ const Experience = () => {
                       return newItems;
                     });
                   }
-                  console.log(items);
                   setDraggedItemRotation(null);
                   setDraggedItem(null);
                 }
