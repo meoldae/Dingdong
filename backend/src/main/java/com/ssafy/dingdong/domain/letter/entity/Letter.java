@@ -22,7 +22,7 @@ public class Letter {
 
     private Boolean anonymousFlag;
 
-    private String title;
+    private String nickName;
 
     @Column(columnDefinition = "TEXT")
     private String description;
@@ -63,7 +63,7 @@ public class Letter {
 
         return Letter.builder()
                      .anonymousFlag(anonymousFlag)
-                     .title(requestDto.getTitle())
+                     .nickName(requestDto.getNickName())
                      .description(requestDto.getDescription())
                      .stamp(stamp)
                      .letterFrom(memberId)

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LetterRequestDto {
-    private String title;
+    private String nickName;
     private String description;
     private Long stampId;
     private Long roomId;
