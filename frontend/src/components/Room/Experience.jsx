@@ -258,13 +258,13 @@ const Experience = () => {
   // 편집 모드일 때 카메라 고정
   useEffect(() => {
     if (buildMode) {
-      state.camera.position.set(20, 10, 10)
+      state.camera.position.set(15, 10, 10)
       if (controls.current) {
         controls.current.target.set(0, 0, 0)
         controls.current.update()
       }
     } else {
-      state.camera.position.set(20, 10, 10);
+      state.camera.position.set(15, 10, 10);
 
     }
   }, [buildMode])
@@ -273,7 +273,7 @@ const Experience = () => {
     if (buildMode) return
     gsap.to(state.camera.position, {
       duration: 0.5,
-      x: 20,
+      x: 15,
       y: 10,
       z: 10,
       onUpdate: () => state.camera.updateProjectionMatrix(),
@@ -284,7 +284,7 @@ const Experience = () => {
       onUpdate: () => state.camera.updateProjectionMatrix(),
     });
     setTimeout(() => {
-      state.camera.position.set(20, 10, 10);
+      state.camera.position.set(15, 10, 10);
     }, 600);
   };
 
