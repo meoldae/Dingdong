@@ -7,26 +7,36 @@ import Card from "../../UI/Card"
 import styles from "./SendLetter.module.css"
 import { useRecoilValue } from "recoil"
 
-
 const SendLetter = ({ onClose, card }) => {
-  const [content, setContent] = useState("");
-  const [contentCount, setContentCount] = useState(0);
-  const userInfo = useRecoilValue(userAtom);
+  const [content, setContent] = useState("")
+  const [contentCount, setContentCount] = useState(0)
+  const userInfo = useRecoilValue(userAtom)
   const roomInfo = useRecoilValue(roomInfoAtom)
 
-  const url = new URL(window.location.href);
-  const roomId = url.pathname.split('/').pop();
+  const url = new URL(window.location.href)
+  const roomId = url.pathname.split("/").pop()
 
   const cancelClick = () => {
-    onClose();
+    onClose()
   }
 
   const sendClick = () => {
-    const param = {nickName: userInfo.nickname, description: content, stampId: card.idx, roomId: roomId};
-    sendLetter(param, response => {
-      console.log(response)
-      onClose();
-    }, (error) => {console.log(error)});    
+    const param = {
+      nickName: userInfo.nickname,
+      description: content,
+      stampId: card.idx,
+      roomId: roomId,
+    }
+    sendLetter(
+      param,
+      (response) => {
+        console.log(response)
+        onClose()
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
   }
 
   const handleOutsideClick = (event) => {
@@ -70,7 +80,11 @@ const SendLetter = ({ onClose, card }) => {
             <div className={styles.FromUser}>From. {userInfo.nickname}</div>
           </div>
         </Card>
-        <DefaultBtn btnName={"편지 보내기"} onClick={sendClick} />
+        <DefaultBtn
+          btnName={"편지 보내기"}
+          onClick={sendClick}
+          color={"#F2CBE4"}
+        />
       </div>
     </div>
   )

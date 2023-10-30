@@ -4,30 +4,30 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
   font-family: "HandWrite-DaHaeng";
 }
 
 .PostImage {
   width: 320px;
-  height: 420px;
-  background: #fff;
+  height: 419px; 
   border-radius: 20px;
-  margin-top: 90px;
+  margin-top: 10%;
   text-align: center;
 }
 
 .ButtonContainer {
-  margin-top: 10px;
-  margin-bottom: 30px;
+  margin-top: 2%;
+  margin-bottom: 2%;
   font-size: 24px;
 }
 
 .Button {
   width: 320px;
-  height: 55px;
+  height: 50px;
   text-align: center;
   line-height: 50px;
   border-radius: 15px;
   background: #fff;
-  margin-bottom: 10px;
+  margin-bottom: 2%;
 }

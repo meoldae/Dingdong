@@ -53,7 +53,11 @@ const PostCardBox = (props) => {
       </div>
       <div className={styles.postCardComment}>{cardComment}</div>
       <div className={styles.selectBtn}>
-        <DefaultBtn btnName={"선택하기"} onClick={handleSelectButtonClick} />
+        <DefaultBtn
+          btnName={"선택하기"}
+          onClick={handleSelectButtonClick}
+          color={"#F2CBE4"}
+        />
       </div>
     </PostDefaultModal>
   )
