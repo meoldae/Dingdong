@@ -46,8 +46,8 @@ const NeighborRequest = () => {
             <div className={styles.HorizontalLine} />
             <div className={styles.VerticalLine} />
             <div className={styles.ButtonContainer}>
-              <div>수락</div>
-              <div>취소</div>
+              <div className={styles.Button}>수락</div>
+              <div className={styles.Button}>취소</div>
             </div>
           </div>
         </div>
