@@ -10,38 +10,36 @@ import RoomBtn from "../Button/Room/RoomBtn"
 // API
 import { fetchNeighrborAdd, neighborCheck } from "@/api/Neighbor"
 
-
-
 const NeighborRequest = () => {
-  const [roomId, setRoomId] = useState(window.location.pathname.match(/\d+/g));
-  const [neighborFlag, setNeighborFlag ] = useState(false);
-  const [isAddNeighbor, setIsAddNeighbor] = useState(false);
+  const [roomId, setRoomId] = useState(window.location.pathname.match(/\d+/g))
+  const [neighborFlag, setNeighborFlag] = useState(false)
+  const [isAddNeighbor, setIsAddNeighbor] = useState(false)
 
   useEffect(() => {
-    neighborCheck(roomId, 
-    (response) => {
-      if (response.data.data == "Y") {
-        setNeighborFlag(true);
+    neighborCheck(
+      roomId,
+      (response) => {
+        if (response.data.data == "Y") {
+          setNeighborFlag(true)
+        }
+      },
+      (error) => {
+        console.log("Error in Neighbor Health Check... ", error)
       }
-    },
-    (error) => {
-      console.log("Error in Neighbor Health Check... ", error);
-    })
+    )
   })
 
   // 이웃 추가하는 함수
   const isNeighbor = () => {
-    
-    fetchNeighrborAdd(roomId,
-      (response) => {   
-
-      },
+    fetchNeighrborAdd(
+      roomId,
+      (response) => {},
       (error) => {
         // 1. "이미 요청을 보냈습니다."
         // 2. "이미 이웃입니다."
-        console.log(error.response.data.message);
+        console.log(error.response.data.message)
       }
-    ) 
+    )
   }
 
   return (
@@ -49,11 +47,14 @@ const NeighborRequest = () => {
       <div className={styles.wrap}>
         <div className={styles.share}>
           <div className={styles.shareImg}>
-            {!neighborFlag ? 
+            {!neighborFlag ? (
               <RoomBtn img={"addUser"} onClick={() => setIsAddNeighbor(true)} />
-              :
-              <RoomBtn img={"Neighbor"} onClick={() => setIsAddNeighbor(true)} />
-            }
+            ) : (
+              <RoomBtn
+                img={"Neighbor"}
+                onClick={() => setIsAddNeighbor(true)}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -74,8 +75,12 @@ const NeighborRequest = () => {
               <div className={styles.HorizontalLine} />
               <div className={styles.VerticalLine} />
               <div className={styles.ButtonContainer}>
-                <div className={styles.Button} style={{ color: "#049463" }} onClick={() => isNeighbor()}>
-                  수락
+                <div
+                  className={styles.Button}
+                  style={{ color: "#049463" }}
+                  onClick={() => isNeighbor()}
+                >
+                  확인
                 </div>
                 <div
                   className={styles.Button}
