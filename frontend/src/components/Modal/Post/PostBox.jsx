@@ -63,7 +63,7 @@ const PostBox = (props) => {
       <PostDefaultModal className={styles.postBoxContainer} PostDefaultTitle={"편지함"} postCheck={false} cancelClick={props.cancelClick}>
         <div className={styles.letterBox} ref={letterBoxRef}>
           {letters.map((letter, index) => (
-            <Letter key={letter.id} id={letter.id} letterTitle={letter.nickName} checkRead={letter.isRead} />
+            <Letter key={letter.id} id={letter.id} stamp={letter.stampImgUrl} letterTitle={letter.nickName} checkRead={letter.isRead} />
           ))}
           <div ref={observerRef}></div>
         </div>
