@@ -19,10 +19,6 @@ const Header = ({ checkMyRoom }) => {
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
 
-  const dummy = () => {
-    console.log("1")
-  }
-
   const alarmHandler = () => {
     console.log("알림창")
   }
@@ -31,7 +27,12 @@ const Header = ({ checkMyRoom }) => {
     <>
       <div className={styles.wrap}>
         <div className={styles.header}>
-          <img src={hamburger} alt="" onClick={dummy} style={{ zIndex: "4" }} />
+          <img
+            src={hamburger}
+            alt=""
+            onClick={() => setIsHamburger(true)}
+            style={{ zIndex: "4" }}
+          />
           {checkMyRoom === "my" ? (
             <div className={styles.userName}>{userInfo.nickname}</div>
           ) : (

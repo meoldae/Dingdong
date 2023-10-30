@@ -110,4 +110,8 @@
 
 /* 헤더 햄버거 모달 CSS */
 .HamburgerModal {
+  position: absolute;
+  top: 0;
+  z-index: 6;
+  background: #fff;
 }
