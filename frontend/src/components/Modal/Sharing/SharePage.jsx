@@ -18,7 +18,7 @@ const SharePage = ({shareModal, canvasRef}) => {
 
       // 잘라낼 영역의 크기 설정
       const width = centerX * 1.8;
-      const height = centerY * 1.5;
+      const height = centerY * 1.35;
 
       // 중심 좌표를 기준으로 잘라낼 영역의 시작 좌표 계산
       const startX = centerX - width / 2;
