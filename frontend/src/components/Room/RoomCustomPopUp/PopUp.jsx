@@ -22,7 +22,7 @@ const PopUp = () => {
         console.log("방 저장 함수 구현하세요 ");
     }
 
-    const imagePath = '../../../../public/assets/images/roomCustom/';
+    const imagePath = '/public/assets/images/roomCustom/';
     const images = ['all.png', 'furniture.png', 'carpets.png', 'wallHanging.png', 'props.png'];
 
     return (    
@@ -30,10 +30,10 @@ const PopUp = () => {
         {/* <div className={`${styles.popUpContainer} ${styles.notActive}`}> */}
 
             <div className={styles.popUpClose} onClick={() => popUpClose()}> 
-                <img src="../../../../public/assets/icons/cross.svg" className={styles.closeVector} />
+                <img src="/public/assets/icons/cross.svg" className={styles.closeVector} />
             </div>
             <div className={styles.customSaveButton} onClick={() => roomCustomSave() }> 
-                <img src="../../../../public/assets/icons/save.svg" className={styles.customSaveVector} />
+                <img src="/public/assets/icons/save.svg" className={styles.customSaveVector} />
             </div>
 
             <ul className={styles.tabBar}>
