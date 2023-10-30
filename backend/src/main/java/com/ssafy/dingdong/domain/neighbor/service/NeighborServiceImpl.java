@@ -81,7 +81,7 @@ public class NeighborServiceImpl implements NeighborService{
 
 				NeighborRequestResponseDto requestResponseDto = NeighborRequestResponseDto.builder()
 					.neighborId(neighborRequest.getNeighborId())
-					.memberId(neighborRequest.getAcceptorId().toString())
+					.memberId(neighborRequest.getApplicantId().toString())
 					.nickname(nickname)
 					.build();
 				result.add(requestResponseDto);
