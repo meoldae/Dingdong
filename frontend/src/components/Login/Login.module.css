@@ -1,39 +1,75 @@
 .container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background-color: #FDFFB4; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #fff7d3;
+}
+.logo {
+  position: absolute;
+  width: 90%;
+  top: 17%;
+  display: flex;
+  justify-content: center;
+}
+.logo img {
+  width: 95%;
 }
 
 .buttons {
-    display: flex;
-    flex-direction: column; 
-    align-items: center;    
-    justify-content: center;
-    position: absolute;
-    top: 80%;         
-    left: 50%;
-    transform: translate(-50%, -50%); 
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: "pointer";
+  position: absolute;
+  bottom: 5%;
+  /* 
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
 }
 
 .buttons img {
-    margin-bottom: 10px; 
+  height: 70px;
+  cursor: "pointer";
+}
+
+.testButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a4f5a;
+  padding: 10px;
+  width: 264px;
+  height: 43px;
+  border-radius: 8px;
+  font-size: 18px;
+  text-decoration: underline;
+  text-underline-position: under;
+}
+
+.testButton:hover {
+  font-weight: bold;
 }
 
 .guestButton {
-    background-color: #000;
-    color: #fff;
+  background-color: #000;
+  color: #fff;
 
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 16px;
-    transition: background-color 0.1s;
-    width: 100%; 
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background-color 0.1s;
+  width: 100%;
 }
 
 .guestButton:hover {
-    background-color: #6a6a6a;
+  background-color: #6a6a6a;
 }
