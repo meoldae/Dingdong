@@ -8,23 +8,33 @@ import styles from "./Header.module.css"
 import RoomBtn from "../Button/Room/RoomBtn"
 
 // API
-import { fetchNeighrborAdd } from "@/api/Neighbor"
+import { fetchNeighrborAdd, neighborCheck } from "@/api/Neighbor"
 
 
-useEffect(() => {
-  // 이웃 여부 헬스체크
-
-
-}, [])
 
 const NeighborRequest = () => {
-  const [isAddNeighbor, setIsAddNeighbor] = useState(false)
+  const [roomId, setRoomId] = useState(window.location.pathname.match(/\d+/g));
+  const [neighborFlag, setNeighborFlag ] = useState(false);
+  const [isAddNeighbor, setIsAddNeighbor] = useState(false);
+
+  useEffect(() => {
+    neighborCheck(roomId, 
+    (response) => {
+      if (response.data.data == "Y") {
+        setNeighborFlag(true);
+      }
+    },
+    (error) => {
+      console.log("Error in Neighbor Health Check... ", error);
+    })
+  })
 
   // 이웃 추가하는 함수
   const isNeighbor = () => {
-    const roomId = window.location.pathname.match(/\d+/g)
+    
     fetchNeighrborAdd(roomId,
-      (response) => {        
+      (response) => {   
+
       },
       (error) => {
         // 1. "이미 요청을 보냈습니다."
@@ -39,7 +49,11 @@ const NeighborRequest = () => {
       <div className={styles.wrap}>
         <div className={styles.share}>
           <div className={styles.shareImg}>
-            <RoomBtn img={"addUser"} onClick={() => setIsAddNeighbor(true)} />
+            {!neighborFlag ? 
+              <RoomBtn img={"addUser"} onClick={() => setIsAddNeighbor(true)} />
+              :
+              <RoomBtn img={"Neighbor"} onClick={() => setIsAddNeighbor(true)} />
+            }
           </div>
         </div>
       </div>
