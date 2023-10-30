@@ -59,6 +59,7 @@ const Header = ({ checkMyRoom }) => {
           <img src={bell} alt="" onClick={() => setIsAlarm(true)} />
         </div>
       </div>
+      {/* 햄버거 바 */}
       {isHamburger && (
         <>
           <div
@@ -80,6 +81,7 @@ const Header = ({ checkMyRoom }) => {
           </div>
         </>
       )}
+      {/* 알림 */}
     </>
   )
 }
