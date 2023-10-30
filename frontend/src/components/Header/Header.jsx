@@ -82,6 +82,12 @@ const Header = ({ checkMyRoom }) => {
         </>
       )}
       {/* 알림 */}
+      {isAlarm && (
+        <>
+          <div className={styles.Overlay} />
+          <div className={styles.AlarmModal}>모달</div>
+        </>
+      )}
     </>
   )
 }
