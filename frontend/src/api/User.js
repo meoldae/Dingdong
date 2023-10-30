@@ -22,5 +22,8 @@ const fetchRoomData = async (roomId, success, fail) => {
     await HttpJson.get(`room/${roomId}`).then(success).catch(fail);
 }
 
+const fetchLetterData = async (param, success, fail) => {
+    await HttpJson.get(`letter?page=${param}`).then(success).catch(fail);
+}
 
-export { CreateUser, GetAvatarList, RefreshToken, fetchRoomData, fetchUserInfo };
+export { CreateUser, GetAvatarList, RefreshToken, fetchRoomData, fetchUserInfo, fetchLetterData };
