@@ -127,17 +127,19 @@ const Header = ({ checkMyRoom }) => {
                 onClick={() => setAlarms(false)}
               />
             </div>
-            {alarms.map((alarm) =>
-              alarm.active ? (
-                <div key={alarm.id} className={styles.AlarmModal}>
-                  <NeighborAcceptModal
-                    content={alarm.content}
-                    okClick={() => acceptNeighborHandler(alarm.id)}
-                    cancelClick={() => refuseNeighborHandler(alarm.id)}
-                  />
-                </div>
-              ) : null
-            )}
+            <div className={styles.alarmListContainer}>
+              {alarms.map((alarm) =>
+                alarm.active ? (
+                  <div key={alarm.id} className={styles.AlarmModal}>
+                    <NeighborAcceptModal
+                      content={alarm.content}
+                      okClick={() => acceptNeighborHandler(alarm.id)}
+                      cancelClick={() => refuseNeighborHandler(alarm.id)}
+                    />
+                  </div>
+                ) : null
+              )}
+            </div>
           </div>
         </>
       )}
