@@ -148,13 +148,15 @@
 
 /* 알림 모달 */
 .AlarmContainer {
+  top: 50%;
+  left: 50%;
+  z-index: 6;
+  position: absolute;
+  transform: translate(-50%, -50%);
 }
 
 .AlarmModal {
-  z-index: 6;
-  position: absolute;
-  top: 0;
   background: #fff;
-
   border-radius: 10px;
+  margin-bottom: 10px;
 }

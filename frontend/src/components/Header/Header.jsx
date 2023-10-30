@@ -101,6 +101,20 @@ const Header = ({ checkMyRoom }) => {
                 cancelClick={() => setIsAlarm(false)}
               />
             </div>
+            <div className={styles.AlarmModal}>
+              <NeighborAcceptModal
+                content={"둥이맘"}
+                okClick={acceptNeighborHandler}
+                cancelClick={() => setIsAlarm(false)}
+              />
+            </div>
+            <div className={styles.AlarmModal}>
+              <NeighborAcceptModal
+                content={"둥이맘"}
+                okClick={acceptNeighborHandler}
+                cancelClick={() => setIsAlarm(false)}
+              />
+            </div>
           </div>
         </>
       )}
