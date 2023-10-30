@@ -6,6 +6,7 @@ import DefaultBtn from "../../Button/Default/DefaultBtn"
 import Card from "../../UI/Card"
 import styles from "./SendLetter.module.css"
 import { useRecoilValue } from "recoil"
+import { successMsg } from "@/utils/customToast"
 
 const SendLetter = ({ onClose, card }) => {
   const [content, setContent] = useState("")
@@ -27,7 +28,11 @@ const SendLetter = ({ onClose, card }) => {
       stampId: card.idx,
       roomId: roomId,
     }
-    sendLetter(param, (response) => { onClose() },
+    
+    sendLetter(param, (response) => { 
+      successMsg("편지를 보냈어요!");
+      onClose() 
+    },
       (error) => {
         console.log(error)
       }
