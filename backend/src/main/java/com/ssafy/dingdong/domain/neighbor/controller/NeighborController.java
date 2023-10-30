@@ -38,7 +38,8 @@ public class NeighborController implements NeighborSwagger{
 	}
 
 	@Override
-	public DataResponse<String> isNeighbor(Long targetRoomId, Authentication authentication) {
+	@GetMapping("/check/{targetRoomId}")
+	public DataResponse<String> isNeighbor(@PathVariable Long targetRoomId, Authentication authentication) {
 		String flag = neighborService.isNeigborByRoomId(targetRoomId, authentication.getName());
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, flag);
 	}
@@ -58,7 +59,7 @@ public class NeighborController implements NeighborSwagger{
 	}
 
 	@Override
-	@PostMapping("/check")
+	@PostMapping("/response")
 	public CommonResponse setNeighborStatus(@Validated @RequestBody NeighborRequest neighborRequest){
 		neighborService.setNeighborStatus(neighborRequest);
 		return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
