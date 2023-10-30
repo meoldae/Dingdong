@@ -7,11 +7,10 @@ const StampTestStart = (props) => {
     <div className={styles.Container}>
       <img
         src={"assets/images/stamp_start.svg"}
-        style={{
-          width: "250px",
-          height: "300px",
+        style={{ 
+          width: "80%",
           marginBottom: "15px",
-          marginTop: "20%",
+          marginTop: "10%",
         }}
       />
       <div className={styles.ContentContainer}>

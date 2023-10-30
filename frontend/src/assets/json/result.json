@@ -1,34 +1,34 @@
 [
   {
+    "id": 0,
+    "srcUrl": "/public/assets/StampTest/ResultStar.svg"
+  },
+  {
     "id": 1,
-    "srcUrl": ""
+    "srcUrl": "/public/assets/StampTest/ResultClova.svg"
   },
   {
     "id": 2,
-    "srcUrl": ""
+    "srcUrl": "/public/assets/StampTest/ResultCloud.svg"
   },
   {
     "id": 3,
-    "srcUrl": ""
+    "srcUrl": "/public/assets/StampTest/ResultPuzzle.svg"
   },
   {
     "id": 4,
-    "srcUrl": ""
+    "srcUrl": "/public/assets/StampTest/ResultLightning.svg"
   },
   {
     "id": 5,
-    "srcUrl": ""
+    "srcUrl": "/public/assets/StampTest/ResultFlower.svg"
   },
   {
     "id": 6,
-    "srcUrl": ""
+    "srcUrl": "/public/assets/StampTest/ResultHeart.svg"
   },
   {
     "id": 7,
-    "srcUrl": ""
-  },
-  {
-    "id": 8,
-    "srcUrl": ""
+    "srcUrl": "/public/assets/StampTest/ResultRocket.svg"
   }
 ]

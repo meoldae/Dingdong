@@ -3,6 +3,7 @@ import resultInfo from "@/assets/json/result.json"
 import SharingModalList from "@/components/Modal/Sharing/SharingModalList"
 import { useNavigate } from "react-router-dom" 
 import styles from "./StampTestResult.module.css"
+import Results from "../../assets/json/result.json"
 
 const StampTestResult = () => {
   const navigate = useNavigate()
@@ -12,7 +13,7 @@ const StampTestResult = () => {
   let params = new URL(document.URL).searchParams
   let result = params.get("result")
   const resultIndex = Number(result)
-
+  const resultSrcUrl = Results[resultIndex].srcUrl;
   const onHomeHandler = (e) => {
     navigate("/")
   }
@@ -21,7 +22,7 @@ const StampTestResult = () => {
   }
 
   useEffect(() => {
-    if (!result || resultIndex > 8) {
+    if (!result || resultIndex > 7) {
       navigate("/notfound")
     }
   }, [])
@@ -30,14 +31,14 @@ const StampTestResult = () => {
     <div className={styles.Container}>
       <div className={styles.PostImage}>
         <img
-            src={"/public/assets/StampTest/ResultHeart.svg"} 
+            src={resultSrcUrl} 
         />
       </div>
-      <div className={styles.ButtonContainer}>
+      <div className={styles.ButtonContainer} onClick={onHomeHandler}>
         <div className={styles.Button}>나의 우표로 편지 남기기</div>
         <div className={styles.Button} onClick={onTestHandler}>우표 테스트 다시하기</div>
       </div>
-      <SharingModalList shareMode={"result"} />
+      <SharingModalList shareMode={"result"} resultSrcUrl={resultSrcUrl} />
     </div>
   )
 }
