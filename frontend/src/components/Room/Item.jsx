@@ -49,7 +49,7 @@ export const Item = ({
     <>
       {categoryId ===3 && (
         <group
-        onPointerEnter={onClick}
+        onClick={onClick}
         position={
             rotation
               ? wallLeftGridToVector3(
@@ -93,7 +93,7 @@ export const Item = ({
 
       {categoryId !==3 && (
         <group
-        onPointerUp={onClick}
+        onClick={onClick}
 
           position={gridToVector3(
             isDragging ? dragPosition || gridPosition : gridPosition,

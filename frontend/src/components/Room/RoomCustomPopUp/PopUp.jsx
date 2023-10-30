@@ -26,7 +26,7 @@ const PopUp = () => {
     } else {
       setCheck(items);
     }
-  }, [items]);
+  }, [check,items]);
   const popUpClose = () => {
     setPopUpStatus(false);
     setTabStatus(0);
@@ -35,7 +35,6 @@ const PopUp = () => {
   };
   const roomCustomSave = () => {
     setCheck(null);
-
     const updatedItem = items.map(item => {
         // console.log("items : ", item);
         const{size,defaultPosition,categoryId,gridPosition, ...rest} = item;
