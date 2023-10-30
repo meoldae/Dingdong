@@ -13,7 +13,7 @@ const StampTest = () => {
   }
 
   return (
-    <div id="main-cotainer">
+    <>
       {(function () {
         if (testMode === "start") {
           return <StampTestStart onTestModeHanlder={onTestModeHanlder} />
@@ -25,7 +25,7 @@ const StampTest = () => {
           return <StampTestLoading result={result} />
         }
       })()}
-    </div>
+    </>
   )
 }
 

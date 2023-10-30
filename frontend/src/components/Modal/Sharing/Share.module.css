@@ -46,12 +46,7 @@ textarea:focus {
 
 .share{
   display: flex;
-  justify-content: space-between;
-  /* grid-template-columns: 1fr 1fr 1fr 1fr; */
-  /* z-index: 300000;
-  bottom: 0;
-  position: absolute; */
-  /* background-color: white; */
+  justify-content: space-between; 
   min-width: 280px;            
 }
 
