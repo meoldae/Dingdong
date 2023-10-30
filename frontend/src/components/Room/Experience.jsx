@@ -404,7 +404,7 @@ const Experience = () => {
       {draggedItem !== null && buildMode && (
         <Html className={styles.dragbutton}>
           <img
-            src="../../../../public/assets/icons/refresh.svg"
+            src="/assets/icons/refresh.svg"
             alt=""
             onClick={() => {
               if (items[draggedItem].categoryId === 3) {
@@ -419,7 +419,7 @@ const Experience = () => {
             }}
           />
           <img
-            src="../../../../public/assets/icons/cross.svg"
+            src="/assets/icons/cross.svg"
             alt=""
             onClick={() => {
               setItems((prevItems) => {
@@ -431,7 +431,7 @@ const Experience = () => {
           />
           {canDrop ? (
             <img
-              src="../../../../public/assets/icons/check.svg"
+              src="/assets/icons/check.svg"
               alt=""
               onClick={() => {
                 if (draggedItem !== null && dragPosition) {
@@ -458,7 +458,7 @@ const Experience = () => {
               }}
             />
           ) : (
-            <img src="../../../../public/assets/icons/check.svg" />
+            <img src="/assets/icons/check.svg" />
           )}
         </Html>
       )}
