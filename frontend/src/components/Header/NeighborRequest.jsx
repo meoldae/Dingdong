@@ -10,6 +10,9 @@ import RoomBtn from "../Button/Room/RoomBtn"
 // API
 import { fetchNeighrborAdd, neighborCheck } from "@/api/Neighbor"
 
+// 토스트
+import { successMsg } from "@/utils/customToast"
+
 const NeighborRequest = () => {
   const [roomId, setRoomId] = useState(window.location.pathname.match(/\d+/g))
   const [neighborFlag, setNeighborFlag] = useState(false)
@@ -33,12 +36,16 @@ const NeighborRequest = () => {
   const isNeighbor = () => {
     fetchNeighrborAdd(
       roomId,
-      (response) => {},
+      (response) => {
+        setIsAddNeighbor(false)
+        successMsg("✅ 요청에 성공했습니다!")
+      },
       (error) => {
         setIsAddNeighbor(false)
         // 1. "이미 요청을 보냈습니다."
         // 2. "이미 이웃입니다."
         console.log(error.response.data.message)
+        successMsg(`❌ ${error.response.data.message}`)
       }
     )
   }
