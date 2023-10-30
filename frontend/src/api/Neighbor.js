@@ -8,4 +8,8 @@ const neighborCheck = async (targetRoomId, success, fail) => {
   await HttpJson.get(`/neighbor/check/${targetRoomId}`).then(success).catch(fail)
 }
 
-export { fetchNeighrborAdd, neighborCheck }
+const deleteNeighbor = async (param, success, fail) => {
+  await HttpJson.post(`/neighbor/delete`, param).then(success).catch(fail)
+}
+
+export { fetchNeighrborAdd, neighborCheck, deleteNeighbor }
