@@ -22,19 +22,17 @@ const Header = ({ checkMyRoom }) => {
   // 알림 상태관리
   const [isAlarm, setIsAlarm] = useState(false)
   // 알림 리스트 상태관리
-  const [alarms, setAlarms] = useState([
-    { id: 1, content: "둥이맘", active: true },
-    { id: 2, content: "토리맘", active: true },
-    { id: 3, content: "바보맘", active: true },
-    { id: 4, content: "동동맘", active: true },
-  ])
+  const [alarms, setAlarms] = useState([])
+  // 알림 리스트 길이 상태관리
+  const [alarmsLength, setAlarmsLength] = useState(0)
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
 
   // 알림 함수
   const alarmHandler = () => {
-    if (alarms.length === 0) {
+    if (alarmsLength === 0) {
+      setIsAlarm(false)
       successMsg("❌ 알림이 없습니다!")
     } else {
       setIsAlarm(true)
