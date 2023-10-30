@@ -82,7 +82,6 @@ const Header = ({ checkMyRoom }) => {
         <div className={styles.header}>
           <img
             src={hamburger}
-            alt=""
             onClick={() => setIsHamburger(true)}
             className={styles.HamburgerButton}
           />
@@ -91,7 +90,7 @@ const Header = ({ checkMyRoom }) => {
           ) : (
             <div className={styles.userName}>userName</div>
           )}
-          <img src={bell} alt="" onClick={alarmHandler} />
+          <img src={bell} onClick={alarmHandler} />
         </div>
       </div>
       {/* 햄버거 바 */}
