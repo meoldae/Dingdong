@@ -10,6 +10,7 @@ import hamburger from "/assets/icons/hamburgerbar.svg"
 import bell from "/assets/icons/bell.svg"
 
 // 컴포넌트
+import { successMsg } from "@/utils/customToast"
 import NeighborAcceptModal from "../Modal/Neighbor/NeighborAcceptModal"
 
 // Atom
@@ -19,20 +20,44 @@ const Header = ({ checkMyRoom }) => {
   // 햄버거메뉴바 상태관리
   const [isHamburger, setIsHamburger] = useState(false)
   // 알림 상태관리
-  const [isAlarm, setIsAlarm] = useState([
+  const [isAlarm, setIsAlarm] = useState(false)
+  // 알림 리스트 상태관리
+  const [alarms, setAlarms] = useState([
     { id: 1, content: "둥이맘", active: true },
+    { id: 2, content: "토리맘", active: true },
+    { id: 3, content: "바보맘", active: true },
+    { id: 4, content: "동동맘", active: true },
   ])
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
 
+  // 알림 함수
+  const alarmHandler = () => {
+    if (alarms.length === 0) {
+      successMsg("❌ 알림이 없습니다!")
+    } else {
+      setIsAlarm(true)
+    }
+  }
+
   // 이웃요청 수락함수
   const acceptNeighborHandler = (id) => {
+    setAlarms((prev) =>
+      prev.map((alarm) =>
+        alarm.id === id ? { ...alarm, active: false } : alarm
+      )
+    )
     console.log("이웃요청 수락")
   }
 
   // 이웃요청 거절함수
   const refuseNeighborHandler = (id) => {
+    setAlarms((prev) =>
+      prev.map((alarm) =>
+        alarm.id === id ? { ...alarm, active: false } : alarm
+      )
+    )
     console.log("이웃요청 거절")
   }
 
@@ -66,7 +91,7 @@ const Header = ({ checkMyRoom }) => {
           ) : (
             <div className={styles.userName}>userName</div>
           )}
-          <img src={bell} alt="" onClick={() => setIsAlarm(true)} />
+          <img src={bell} alt="" onClick={alarmHandler} />
         </div>
       </div>
       {/* 햄버거 바 */}
@@ -100,15 +125,20 @@ const Header = ({ checkMyRoom }) => {
               <img
                 src={"/assets/icons/x.svg"}
                 className={styles.AlarmX}
-                onClick={() => setIsAlarm(false)}
+                onClick={() => setAlarms(false)}
               />
             </div>
             <div className={styles.AlarmModal}>
-              <NeighborAcceptModal
-                content={"둥이맘"}
-                okClick={acceptNeighborHandler}
-                cancelClick={refuseNeighborHandler}
-              />
+              {alarms.map((alarm) =>
+                alarm.active ? (
+                  <NeighborAcceptModal
+                    key={alarm.id}
+                    content={alarm.content}
+                    okClick={() => acceptNeighborHandler(alarm.id)}
+                    cancelClick={() => refuseNeighborHandler(alarm.id)}
+                  />
+                ) : null
+              )}
             </div>
           </div>
         </>
