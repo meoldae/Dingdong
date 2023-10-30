@@ -100,7 +100,11 @@ const Header = ({ checkMyRoom }) => {
           <div className={styles.Overlay} onClick={() => setIsAlarm(false)} />
           <div className={styles.AlarmContainer}>
             <div className={styles.xButtonContainer}>
-              <img src={"/assets/icons/x.svg"} className={styles.AlarmX} />
+              <img
+                src={"/assets/icons/x.svg"}
+                className={styles.AlarmX}
+                onClick={() => setIsAlarm(false)}
+              />
             </div>
             <div className={styles.AlarmModal}>
               <NeighborAcceptModal
