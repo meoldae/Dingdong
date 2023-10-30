@@ -10,8 +10,12 @@ import {
 import { ArriveAtom } from "../../../atom/SinglePlayAtom"
 import { isPickedAtom } from "../../../atom/TutorialAtom"
 import { FenceBoxAtom } from "../../../atom/FenceAtom"
+import { userAtom } from "../../../atom/UserAtom"
 
 const Character = () => {
+  // 회원의 캐릭터 ID
+  const characterID = useRecoilValue(userAtom).avatarId
+  console.log(characterID)
   // 마우스 및 터치 여부
   const [isPressed, setIsPressed] = useState(false)
   // Three.js 기본 설정
@@ -23,7 +27,10 @@ const Character = () => {
 
   // 캐릭터
   const characterRef = useRef()
-  const character = useLoader(GLTFLoader, "assets/models/characters/f_7.glb")
+  const character = useLoader(
+    GLTFLoader,
+    `assets/models/characters/${characterID}.glb`
+  )
   const [characterBox, setcharacterBox] = useRecoilState(CharacterBoxAtom)
 
   // 애니메이션
