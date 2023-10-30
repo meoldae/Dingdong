@@ -26,7 +26,7 @@ const onErrorResponse = async (err) => {
     if (response && response.status === 401) {
         RefreshToken(({ data }) => {
             console.log(data);
-            const prev = localStorage.getItem('userAtom');
+            const prev = JSON.parse(localStorage.getItem('userAtom'));
             
             console.log(prev);
             console.log(prev.accessToken);
