@@ -34,6 +34,11 @@ const Header = ({ checkMyRoom }) => {
     console.log("이웃요청 수락")
   }
 
+  // 이웃요청 거절함수
+  const refuseNeighborHandler = () => {
+    console.log("이웃요청 거절")
+  }
+
   // 문의하기 함수
   const inquiryHandler = () => {
     console.log("문의하기")
@@ -94,25 +99,28 @@ const Header = ({ checkMyRoom }) => {
         <>
           <div className={styles.Overlay} onClick={() => setIsAlarm(false)} />
           <div className={styles.AlarmContainer}>
+            <div className={styles.xButtonContainer}>
+              <img src={"/assets/icons/x.svg"} className={styles.AlarmX} />
+            </div>
             <div className={styles.AlarmModal}>
               <NeighborAcceptModal
                 content={"둥이맘"}
                 okClick={acceptNeighborHandler}
-                cancelClick={() => setIsAlarm(false)}
+                cancelClick={refuseNeighborHandler}
               />
             </div>
             <div className={styles.AlarmModal}>
               <NeighborAcceptModal
                 content={"둥이맘"}
                 okClick={acceptNeighborHandler}
-                cancelClick={() => setIsAlarm(false)}
+                cancelClick={refuseNeighborHandler}
               />
             </div>
             <div className={styles.AlarmModal}>
               <NeighborAcceptModal
                 content={"둥이맘"}
                 okClick={acceptNeighborHandler}
-                cancelClick={() => setIsAlarm(false)}
+                cancelClick={refuseNeighborHandler}
               />
             </div>
           </div>

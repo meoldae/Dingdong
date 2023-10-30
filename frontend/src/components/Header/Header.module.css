@@ -155,6 +155,18 @@
   transform: translate(-50%, -50%);
 }
 
+.xButtonContainer {
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.AlarmX {
+  width: 15px;
+  height: 15px;
+}
+
 .AlarmModal {
   background: #fff;
   border-radius: 10px;
