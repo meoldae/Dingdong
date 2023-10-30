@@ -112,16 +112,21 @@ public class NeighborServiceImpl implements NeighborService{
 		);
 
 		String acceptorId = room.getMemberId();
+		String[] result = {"F"};
+		neighborRepository.findByApplicantIdAndAcceptorId(UUID.fromString(applicantId), UUID.fromString(acceptorId)).ifPresentOrElse(
+			neighbor -> {
+				if (neighbor.getConnectTime() != null && neighbor.getCancelTime() == null) {
+					result[0] = "Y";
+ 				} else {
+					result[0] = "F";
+				}
+			},
+			() -> {
+				result[0] = "F";
+			}
+		);
 
-		Neighbor neighbor = neighborRepository.findByApplicantIdAndAcceptorId(UUID.fromString(applicantId),
-				UUID.fromString(acceptorId))
-			.orElseThrow(() -> new CustomException(ExceptionStatus.NEIGHBOR_REQUEST_DOES_NOT_EXIST));
-
-		if (neighbor.getConnectTime() != null && neighbor.getCancelTime() == null) {
-			return "Y";
-		} else {
-			return "F";
-		}
+		return result[0];
 	}
 
 	@Override
