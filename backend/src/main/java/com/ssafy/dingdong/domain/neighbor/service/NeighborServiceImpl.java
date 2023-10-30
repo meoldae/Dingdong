@@ -77,7 +77,7 @@ public class NeighborServiceImpl implements NeighborService{
 		neighborRepository.findAllRequestByMemberId(UUID.fromString(memberId)).stream().forEach(
 			neighborRequest -> {
 
-				String nickname = memberService.getMemberById(neighborRequest.getAcceptorId().toString()).nickname();
+				String nickname = memberService.getMemberById(neighborRequest.getApplicantId().toString()).nickname();
 
 				NeighborRequestResponseDto requestResponseDto = NeighborRequestResponseDto.builder()
 					.neighborId(neighborRequest.getNeighborId())
