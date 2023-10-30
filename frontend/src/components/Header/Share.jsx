@@ -1,17 +1,12 @@
-import RoomBtn from "../Button/Room/RoomBtn";
-import styles from "./Header.module.css";
-import React from "react";
-const Share = ({setShareModal}) => {
-
+import RoomBtn from "../Button/Room/RoomBtn"
+import styles from "./Header.module.css"
+import React from "react"
+const Share = ({ setShareModal }) => {
   return (
-    <div className={styles.wrap}>
-      <div className={styles.share}>
-        <div className={styles.shareImg}>
-          <RoomBtn img={"share"} onClick={()=>setShareModal(true)}/>
-        </div>
-      </div>
+    <div className={styles.Share}>
+      <RoomBtn img={"share"} onClick={() => setShareModal(true)} />
     </div>
-  );
-};
+  )
+}
 
-export default Share;
+export default Share
