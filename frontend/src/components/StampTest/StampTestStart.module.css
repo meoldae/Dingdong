@@ -1,25 +1,24 @@
 .Container {
-  height: 100vh;
-  height: 100svh;
+  height: 100vh; 
   background: #ffebf4;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   justify-content: space-evenly;
   align-items: center; 
+} 
+
+.ContentContainer { 
+  font-size: 28px; 
+  bottom: 5%;
+  margin-bottom: 5%;
 }
 
-.ContentContainer {
-  font-size: 28px;
-  margin-bottom: 10%;
-}
-
-.StartButton {
+.StartButton {  
   background: #fff;
   width: 280px;
   height: 50px;
   border-radius: 15px;
   font-size: 24px;
   text-align: center;
-  line-height: 50px;
-  margin-bottom: 10%;
+  line-height: 50px;  
 }

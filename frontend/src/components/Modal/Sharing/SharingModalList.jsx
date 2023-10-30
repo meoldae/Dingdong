@@ -152,6 +152,19 @@ function SharingModalList(props) {
     });
   };
 
+  const saveImgTest = (e) => {
+    const downloadImage = (uri, filename) => {
+      let link = document.createElement("a");
+      document.body.appendChild(link);
+      link.href = uri;
+      link.download = filename;
+      link.click();
+      document.body.removeChild(link);
+    };
+    downloadImage(props.resultSrcUrl, "StampResult.svg");
+  };
+
+
   let sharetype = []
   if (props.shareMode === "start") {
     sharetype = [
@@ -160,6 +173,14 @@ function SharingModalList(props) {
       { icon: twitter, name: "트위터", click: shareTwitter },
     ];
   }  
+  else if (props.shareMode === "result") {
+    sharetype = [
+      { icon: urlCopy, name: "URL복사", click: shareUrl },   
+      { icon:save,name: "저장하기", click: saveImgTest },
+      { icon: kakao, name: "카카오톡", click: shareKakao },
+      { icon: twitter, name: "트위터", click: shareTwitter },
+    ];
+  } 
   else {
     sharetype = [
       { icon: urlCopy, name: "URL복사", click: shareUrl },  

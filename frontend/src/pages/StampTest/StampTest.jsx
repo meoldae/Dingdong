@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react"
 import StampTestOptions from "@/components/StampTest/StampTestOptions"
 import StampTestStart from "@/components/StampTest/StampTestStart"
-import StampTestLoading from "@/components/StampTest/StampTestLoading"
-import "./StampTest.module.css"
+import StampTestLoading from "@/components/StampTest/StampTestLoading" 
 
 const StampTest = () => {
   const [testMode, setTestMode] = useState("start")
