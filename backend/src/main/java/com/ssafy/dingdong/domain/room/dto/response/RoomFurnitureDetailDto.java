@@ -10,6 +10,7 @@ import lombok.Getter;
 @Getter
 public class RoomFurnitureDetailDto {
 
+	private Long roomFurnitureId;
 	private String furnitureId;
 	private Long categoryId;
 	private float[] size;
@@ -18,6 +19,7 @@ public class RoomFurnitureDetailDto {
 	private int rotation;
 
 	public RoomFurnitureDetailDto(FurnitureDetailDto furnitureDetailDto, RoomFurniture roomFurniture) {
+		this.roomFurnitureId = roomFurniture.getRoomFurnitureId();
 		this.furnitureId = furnitureDetailDto.furnitureId();
 		this.categoryId = furnitureDetailDto.categoryId();
 		this.size = new float[]{ furnitureDetailDto.xSize(), furnitureDetailDto.ySize(), furnitureDetailDto.zSize() };
