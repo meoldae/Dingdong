@@ -265,13 +265,12 @@ const Experience = () => {
       }
     } else {
       state.camera.position.set(20, 10, 10);
-      state.camera.focus = 20;
+
     }
   }, [buildMode])
   // 일반 모드일 때 카메라 회전 후 원상복귀
   const animateCameraPosition = () => {
     if (buildMode) return
-
     gsap.to(state.camera.position, {
       duration: 0.5,
       x: 20,
@@ -284,6 +283,9 @@ const Experience = () => {
       duration: 0.5,
       onUpdate: () => state.camera.updateProjectionMatrix(),
     });
+    setTimeout(() => {
+      state.camera.position.set(20, 10, 10);
+    }, 600);
   };
 
   return (
@@ -297,7 +299,7 @@ const Experience = () => {
         minPolarAngle={0}
         maxPolarAngle={Math.PI / 2}
         screenSpacePanning={false}
-        // enabled={!buildMode}
+        enabled={!buildMode}
         // enableRotate={false}
         onEnd={animateCameraPosition}
       />
