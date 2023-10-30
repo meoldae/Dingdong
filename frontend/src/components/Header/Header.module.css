@@ -2,19 +2,21 @@
   position: absolute;
   z-index: 3;
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
+
 .header {
   display: flex;
-  width: 100%;
+  width: 90%;
   align-items: center;
   justify-content: space-between;
   margin-top: 20px;
 }
 
 .header img {
-  padding: 0 20px;
   width: 40px;
-  height: auto;
+  height: 40px;
 }
 
 .userName {
@@ -28,16 +30,12 @@
   font-size: 20px;
 }
 
-.share {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: end;
-}
-
-.shareImg {
-  padding: 20 20px;
-  margin: 80px 20px 0 0;
+/* 공유하기 이미지 */
+.Share {
+  position: absolute;
+  top: 80px;
+  left: 85%;
+  z-index: 4;
 }
 
 /* 이웃 요청 CSS */
