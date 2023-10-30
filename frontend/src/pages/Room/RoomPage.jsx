@@ -61,12 +61,17 @@ function RoomPage() {
       ) : (
         <Header checkMyRoom={"other"} />
       )}
-      {isMyRoom ? <NeighborRequest /> : <Share setShareModal={setShareModal} />}
+      {isMyRoom ? <Share setShareModal={setShareModal} /> : <NeighborRequest />}
       {shareModal && (
         <>
-          <div className={styles.back} onClick={()=>{setshareModal(false)}}/>
+          <div
+            className={styles.back}
+            onClick={() => {
+              setShareModal(false)
+            }}
+          />
           <SharePage shareModal={shareModal} canvasRef={canvasRef} />
-          <SharingModalList  shareMode={"room"}/>
+          <SharingModalList shareMode={"room"} />
         </>
       )}
       {/* <div
