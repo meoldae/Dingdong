@@ -102,7 +102,7 @@ function SharingModalList(props) {
       window.Kakao.Share.sendCustom({
         templateId: 100120,
         templateArgs: {
-          // THU : "",
+          THU : "assets/images/Stamp_Test.png",
           TITLE : "딩동! 우리집을 방문해보세요.",
           DESC : "우리집에 방문해서 편지를 남겨주세요!",
           MOBILE_LINK: window.location.href,
@@ -113,7 +113,7 @@ function SharingModalList(props) {
       window.Kakao.Share.sendCustom({
         templateId: 100120,
         templateArgs: {
-          // THU : "https://ding-dong.s3.ap-northeast-2.amazonaws.com/female1.png",
+          THU : "https://ding-dong.s3.ap-northeast-2.amazonaws.com/female1.png",
           TITLE : "나에게 어울리는 우표는?",
           DESC : "어울리는 우표를 찾아 친구에게 편지를 보내보세요.",
           MOBILE_LINK: window.location.href,
@@ -124,7 +124,7 @@ function SharingModalList(props) {
       window.Kakao.Share.sendCustom({
         templateId: 100120,
         templateArgs: {
-          // THU : "",
+          THU : "assets/images/Stamp_Test.png",
           TITLE : "나에게 어울리는 우표 확인하기",
           DESC : "우표 테스트 결과를 확인해보세요!",
           MOBILE_LINK: window.location.href,
