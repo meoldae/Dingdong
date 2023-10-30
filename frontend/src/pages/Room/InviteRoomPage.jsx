@@ -20,6 +20,7 @@ function InviteRoomPage() {
   useEffect(() => {
     const roomId = window.location.pathname.match(/\d+/g);
     const myRoomId = userInfo.roomId;
+    
     setIsMyRoom(roomId == myRoomId);
 
     fetchRoomData(
