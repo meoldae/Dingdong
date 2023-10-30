@@ -51,6 +51,7 @@ const Header = ({ checkMyRoom }) => {
 
   // 이웃요청 수락함수
   const acceptNeighborHandler = (id) => {
+    setAlarmsLength(alarmsLength - 1)
     setAlarms((prev) =>
       prev.map((alarm) =>
         alarm.id === id ? { ...alarm, active: false } : alarm
@@ -61,6 +62,7 @@ const Header = ({ checkMyRoom }) => {
 
   // 이웃요청 거절함수
   const refuseNeighborHandler = (id) => {
+    setAlarmsLength(alarmsLength - 1)
     setAlarms((prev) =>
       prev.map((alarm) =>
         alarm.id === id ? { ...alarm, active: false } : alarm
