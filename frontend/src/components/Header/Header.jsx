@@ -38,6 +38,10 @@ const Header = ({ checkMyRoom }) => {
       </div>
       {isHamburger && (
         <>
+          <div
+            className={styles.Overlay}
+            onClick={() => setIsHamburger(false)}
+          />
           <div className={styles.HamburgerModal}>모달</div>
         </>
       )}
