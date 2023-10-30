@@ -7,6 +7,13 @@
   position: relative;
 }
 
+.BackButton {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 10px;
+}
+
 .SemiContainer {
   width: 80%;
   height: 100vh;

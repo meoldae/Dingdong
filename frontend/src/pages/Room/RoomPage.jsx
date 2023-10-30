@@ -21,32 +21,34 @@ import styles from "./RoomPage.module.css"
 import PopUp from "../../components/Room/RoomCustomPopUp/PopUp"
 import SharePage from "../../components/Modal/Sharing/SharePage"
 import SharingModalList from "../../components/Modal/Sharing/SharingModalList"
+import { userAtom } from "../../atom/UserAtom"
 
 function RoomPage() {
   const [editMode, setEditMode] = useRecoilState(buildModeState)
+  const [items, setItems] = useRecoilState(ItemsState)
   const [isMyRoom, setIsMyRoom] = useState(false)
   const [drag, setDrag] = useRecoilState(draggedItemState)
   const popUpStatus = useRecoilValue(popUpStatusAtom)
   const canvasRef = useRef()
   const [shareModal, setShareModal] = useState(false)
+  const userInfo = useRecoilValue(userAtom)
 
   useEffect(() => {
+    const roomId = window.location.pathname.match(/\d+/g)
+    const myRoomId = userInfo.roomId
+    setIsMyRoom(roomId == myRoomId)
 
-    const roomId = window.location.pathname.match(/\d+/g);
-    // const myRoomId = localStorage.getItem("userAtom").roomId;
-    const myRoomId = 3;
-
-    setIsMyRoom(roomId == myRoomId);
-
-    fetchRoomData(roomId, 
+    fetchRoomData(
+      roomId,
       (response) => {
-        console.log(response.data.data);
-    },
-    (error) => {
-      console.error("Error at fetching RoomData...", error);''
-    });
-
-  }, [isMyRoom]);
+        setItems(response.data.data.roomFurnitureList)
+      },
+      (error) => {
+        console.error("Error at fetching RoomData...", error)
+        ;("")
+      }
+    )
+  }, [isMyRoom])
 
   const randomVisit = () => {
     console.log("랜덤방문 함수")
@@ -54,7 +56,11 @@ function RoomPage() {
 
   return (
     <div className={styles.container}>
-      <Header />
+      {isMyRoom ? (
+        <Header checkMyRoom={"my"} />
+      ) : (
+        <Header checkMyRoom={"other"} />
+      )}
       {isMyRoom ? <NeighborRequest /> : <Share setShareModal={setShareModal} />}
       {shareModal && (
         <>
@@ -63,7 +69,7 @@ function RoomPage() {
           <SharingModalList  shareMode={"room"}/>
         </>
       )}
-      <div
+      {/* <div
         className={styles.button}
         onClick={() => {
           setEditMode(!editMode)
@@ -74,7 +80,7 @@ function RoomPage() {
       >
         {editMode && <span>편집모드</span>}
         {!editMode && <span>관광모드</span>}
-      </div>
+      </div> */}
 
       <Canvas
         shadows
@@ -100,7 +106,7 @@ function RoomPage() {
         <div className={styles.buttonContainer}>
           <div className={styles.randomButton} onClick={randomVisit}>
             <img
-              src={"assets/icons/random.svg"}
+              src={"../../../../public/assets/icons/random.svg"}
               className={styles.randomImage}
             />
             <div className={styles.randomButtonContent}>랜덤 방문</div>
