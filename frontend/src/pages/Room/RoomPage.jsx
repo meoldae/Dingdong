@@ -34,10 +34,10 @@ function RoomPage() {
   const [shareModal, setShareModal] = useState(false);
   const userInfo = useRecoilValue(userAtom);
   const [nickName, setNickName] = useRecoilState(roomInfoAtom);
+  const roomId = window.location.pathname.match(/\d+/g);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const roomId = window.location.pathname.match(/\d+/g);
     const myRoomId = userInfo.roomId;
     setIsMyRoom(roomId == myRoomId);
 
@@ -49,7 +49,6 @@ function RoomPage() {
       },
       (error) => {
         console.error("Error at fetching RoomData...", error);
-        ("");
       }
     );
   }, [isMyRoom]);
@@ -62,7 +61,6 @@ function RoomPage() {
     do {
       randomRoom = Math.floor(Math.random() * 6) + 1;
     } while (randomRoom === roomId || randomRoom === myRoomId);
-    console.log(randomRoom,roomId,myRoomId)
     navigate(`/room/${randomRoom}`);
   };
 
@@ -123,7 +121,7 @@ function RoomPage() {
           </div>
         </div>
       )}
-      {isMyRoom ? <MyFooter /> : <OtherFooter />}
+      {isMyRoom ? <MyFooter /> : <OtherFooter props={roomId[0]} />}
       {/* {popUpStatus ? <PopUp/> : '' } */}
       <PopUp />
     </div>
