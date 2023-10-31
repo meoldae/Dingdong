@@ -1,15 +1,24 @@
 import React, { useEffect, useRef } from "react"
 import { extend, useThree, useLoader } from "@react-three/fiber"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 extend({ GLTFLoader })
 
 const Map = () => {
   const { scene } = useThree()
-  const map = useLoader(
-    GLTFLoader,
-    "assets/models/defaultSettings/Map3.glb"
-    // "assets/models/defaultSettings/DefaultMap.glb"
-  )
+  const map = useLoader(GLTFLoader, "assets/models/defaultSettings/after.glb", loader => {
+    const draco = new DRACOLoader();
+    draco.setDecoderPath('assets/draco/');
+    loader.setDRACOLoader(draco);
+  });
+
+  // const map = useLoader(
+  //   GLTFLoader,
+  //   "assets/models/defaultSettings/after.glb"
+  //   // "assets/models/defaultSettings/Map3.glb"
+  //   // "assets/models/defaultSettings/DefaultMap.glb"
+  // )
+  
   const mapRef = useRef(null)
 
   useEffect(() => {
