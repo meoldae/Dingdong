@@ -29,11 +29,11 @@ const Letter = ({ id, stamp, letterTitle, checkRead }) => {
         <></>
       ) : (
         <img
-          src="/assets/icons/redDot.svg"
+          src="/assets/icons/redDot.png"
           className={styles.noRead}
         />
       )}
-      <img src={`/assets/images/letter/${path}.svg`} alt="" style={{ width: '84px', height: '51px' }}/>
+      <img src={`/assets/images/letter/${path}.png`} alt="" style={{ width: '84px', height: '51px' }}/>
       <div className={styles.letterTitle}>{letterTitle}</div>
     </div>
   )

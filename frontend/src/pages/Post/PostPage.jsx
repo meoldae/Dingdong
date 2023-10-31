@@ -51,7 +51,7 @@ const PostPage = () => {
               className={styles.Input}
             />
             <img
-              src={"assets/icons/search.svg"}
+              src={"assets/icons/search.png"}
               className={styles.SearchIcon}
             />
           </div>

@@ -29,3 +29,8 @@
 .furnitureContainer div img:hover {
     cursor: pointer;
 }
+
+.furnitureContainer img{
+    width: 23%;
+    margin-left: 2%;
+}
