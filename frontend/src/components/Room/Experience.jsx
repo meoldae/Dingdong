@@ -1,4 +1,4 @@
-import { Environment, Grid, Html, OrbitControls } from "@react-three/drei";
+import { Environment, Grid, OrbitControls } from "@react-three/drei";
 import { useEffect, useState, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Item } from "./Item";
@@ -321,7 +321,7 @@ const Experience = () => {
         position-y={-0.001}
         onClick={() => {
           if (!mobileCheck) {
-            if (draggedItem !== null && dragPosition) {
+            if (draggedItem !== null && dragPosition && items[draggedItem]["categoryId"] !== 3) {
               if (canDrop) {
                 setItems((prev) => {
                   console.log(prev);
@@ -381,7 +381,7 @@ const Experience = () => {
         
         onClick={() => {
           if (!mobileCheck) {
-            if (draggedItem !== null && dragPosition) {
+            if (draggedItem !== null && dragPosition && items[draggedItem].categoryId===3) {
               if (canDrop) {
                 setItems((prev) => {
                   const newItems = prev.map((item, index) => {
@@ -396,6 +396,8 @@ const Experience = () => {
                   });
                   return newItems;
                 });
+                setDraggedItemRotation(null);
+                setDraggedItem(null);
               } else {
                 if (
                   check.length !== items.length &&
@@ -406,10 +408,10 @@ const Experience = () => {
                       (_, index) => index !== draggedItem
                     );
                   });
+                  setDraggedItemRotation(null);
+                  setDraggedItem(null);
                 }
               }
-              setDraggedItemRotation(null);
-              setDraggedItem(null);
             }
           }
         }}
@@ -438,7 +440,7 @@ const Experience = () => {
         position-y={1.92}
         onClick={() => {
           if (!mobileCheck) {
-            if (draggedItem !== null && dragPosition) {
+            if (draggedItem !== null && dragPosition  && items[draggedItem].categoryId===3) {
               if (canDrop) {
                 setItems((prev) => {
                   const newItems = prev.map((item, index) => {
@@ -453,6 +455,8 @@ const Experience = () => {
                   });
                   return newItems;
                 });
+                setDraggedItemRotation(null);
+                setDraggedItem(null);
               } else {
                 if (
                   check.length !== items.length &&
@@ -463,10 +467,11 @@ const Experience = () => {
                       (_, index) => index !== draggedItem
                     );
                   });
+                  setDraggedItemRotation(null);
+                  setDraggedItem(null);
                 }
               }
-              setDraggedItemRotation(null);
-              setDraggedItem(null);
+
             }
           }
         }}
