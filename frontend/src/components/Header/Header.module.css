@@ -183,3 +183,12 @@
   border-radius: 10px;
   background: #fff;
 }
+
+.NoAlarm {
+  color: #fff;
+  font-family: "Pretendard-Bold";
+  font-size: 20px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+}

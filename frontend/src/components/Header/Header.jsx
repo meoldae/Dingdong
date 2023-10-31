@@ -18,7 +18,10 @@ import { userAtom } from "../../atom/UserAtom"
 import { roomInfoAtom } from "../../atom/RoomInfoAtom"
 
 // API
-import { fetchNeighborRequest, responseNeighborRequest } from "../../api/Neighbor"
+import {
+  fetchNeighborRequest,
+  responseNeighborRequest,
+} from "../../api/Neighbor"
 
 const Header = ({ checkMyRoom }) => {
   // 햄버거메뉴바 상태관리
@@ -38,7 +41,6 @@ const Header = ({ checkMyRoom }) => {
   useEffect(() => {
     fetchNeighborRequest(
       (success) => {
-        console.log(success.data.data)
         setAlarmsLength(success.data.data.length)
         setAlarms(success.data.data)
       },
@@ -60,27 +62,30 @@ const Header = ({ checkMyRoom }) => {
 
   // 이웃요청 수락함수
   const acceptNeighborHandler = (id) => {
-    responseNeighborRequest({"flag": "Y", "neighborId": id},
-    (response) => {
-      setAlarmsLength(alarmsLength - 1)
-      setAlarms((prev) => prev.filter((alarm) => alarm.id !== id))
-    },
-    (error) => {
-      console.log("Error in ResponseNeighborRequest ...", error);
-    })
+    responseNeighborRequest(
+      { flag: "Y", neighborId: id },
+      (response) => {
+        setAlarmsLength(alarmsLength - 1)
+        setAlarms((prev) => prev.filter((alarm) => alarm.neighborId !== id))
+      },
+      (error) => {
+        console.log("Error in ResponseNeighborRequest ...", error)
+      }
+    )
   }
 
   // 이웃요청 거절함수
   const refuseNeighborHandler = (id) => {
-    responseNeighborRequest({"flag": "N", "neighborId": id},
-    (response) => {
-      console.log(response.data);
-      setAlarmsLength(alarmsLength - 1)
-      setAlarms((prev) => prev.filter((alarm) => alarm.id !== id))
-    },
-    (error) => {
-      console.log("Error in ResponseNeighborRequest ...", error);
-    })
+    responseNeighborRequest(
+      { flag: "N", neighborId: id },
+      (response) => {
+        setAlarmsLength(alarmsLength - 1)
+        setAlarms((prev) => prev.filter((alarm) => alarm.neighborId !== id))
+      },
+      (error) => {
+        console.log("Error in ResponseNeighborRequest ...", error)
+      }
+    )
   }
 
   // 문의하기 함수
@@ -115,6 +120,7 @@ const Header = ({ checkMyRoom }) => {
           <img src={bell} onClick={alarmHandler} />
         </div>
       </div>
+
       {/* 햄버거 바 */}
       {isHamburger && (
         <>
@@ -137,6 +143,7 @@ const Header = ({ checkMyRoom }) => {
           </div>
         </>
       )}
+
       {/* 알림 */}
       {isAlarm && (
         <>
@@ -146,7 +153,7 @@ const Header = ({ checkMyRoom }) => {
               <img
                 src={"/assets/icons/x.svg"}
                 className={styles.AlarmX}
-                onClick={() => setAlarms(false)}
+                onClick={() => setIsAlarm(false)}
               />
             </div>
             {alarmsLength !== 0 ? (
@@ -164,15 +171,7 @@ const Header = ({ checkMyRoom }) => {
                 ))}
               </div>
             ) : (
-              <div
-                style={{
-                  fontFamily: "Pretendard-SemiBold",
-                  fontSize: "20px",
-                  width: "300px",
-                }}
-              >
-                알림이 없습니다!
-              </div>
+              <div className={styles.NoAlarm}>알림이 없습니다!</div>
             )}
           </div>
         </>
