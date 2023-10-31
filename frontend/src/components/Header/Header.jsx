@@ -133,18 +133,26 @@ const Header = ({ checkMyRoom }) => {
   return (
     <>
       <div className={styles.wrap}>
-        <div className={styles.header}>
-          <img
-            src={hamburger}
-            onClick={() => setIsHamburger(true)}
-            className={styles.HamburgerButton}
-          />
-          {checkMyRoom === "my" ? (
-            <div className={styles.userName}>{userInfo.nickname}</div>
-          ) : (
+        <div
+          className={
+            checkMyRoom === "invite" ? styles.inviteHeader : styles.header
+          }
+        >
+          {checkMyRoom === "invite" ? (
             <div className={styles.userName}>{roomInfo}</div>
+          ) : (
+            <>
+              <img
+                src={hamburger}
+                onClick={() => setIsHamburger(true)}
+                className={styles.HamburgerButton}
+              />
+              <div className={styles.userName}>
+                {checkMyRoom === "my" ? userInfo.nickname : roomInfo}
+              </div>
+              <img src={bell} onClick={alarmHandler} />
+            </>
           )}
-          <img src={bell} onClick={alarmHandler} />
         </div>
       </div>
 
