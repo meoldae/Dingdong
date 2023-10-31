@@ -17,6 +17,7 @@ import {
 } from "./Atom";
 import { gsap } from "gsap";
 import styles from "./Room.module.css";
+import { DoubleSide } from "three";
 
 const Experience = () => {
   const buildMode = useRecoilValue(buildModeState);
@@ -377,6 +378,7 @@ const Experience = () => {
         position-x={-2.394}
         // visible={false}
         position-y={1.92}
+        
         onClick={() => {
           if (!mobileCheck) {
             if (draggedItem !== null && dragPosition) {
@@ -426,8 +428,8 @@ const Experience = () => {
           }
         }}
       >
-        <planeGeometry args={[4.8, 3.84]} />
-        <meshStandardMaterial color="#f0f0f0" />
+        <planeGeometry args={[4.8, 3.84]}  />
+        <meshStandardMaterial color="#f0f0f0" side={DoubleSide} />
       </mesh>
 
       {/* 오른쪽 평면 */}
@@ -485,7 +487,7 @@ const Experience = () => {
         }}
       >
         <planeGeometry args={[4.8, 3.84]} />
-        <meshStandardMaterial color="#f0f0f0" />
+        <meshStandardMaterial color="#f0f0f0" side={DoubleSide} />
       </mesh>
       {buildMode && (
         <>
