@@ -7,7 +7,9 @@ import {
   ItemRotateState,
   ItemsState,
   buildModeState,
+  canDropState,
   checkState,
+  dragPositionState,
   draggedItemState,
   mobileCheckState,
 } from "../Atom";
@@ -24,7 +26,10 @@ const PopUp = () => {
   };
   const [items, setItems] = useRecoilState(ItemsState);
   const [check, setCheck] = useRecoilState(checkState);
-  const [draggedItemRotation, setDraggedItemRotation] =useRecoilState(ItemRotateState);
+  const [canDrop, setCanDrop] = useRecoilState(canDropState);
+  const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState);
+  const [draggedItemRotation, setDraggedItemRotation] =
+    useRecoilState(ItemRotateState);
   const userInfo = useRecoilValue(userAtom);
   const mobileCheck = useRecoilValue(mobileCheckState);
   const myRoomId = userInfo.roomId;
@@ -122,6 +127,17 @@ const PopUp = () => {
                         });
                         return newItems;
                       });
+                    } else {
+                      if (
+                        check.length !== items.length &&
+                        draggedItem === items.length - 1
+                      ) {
+                        setItems((prevItems) => {
+                          return prevItems.filter(
+                            (_, index) => index !== draggedItem
+                          );
+                        });
+                      }
                     }
                     setDraggedItemRotation(null);
                     setDraggedItem(null);
@@ -134,7 +150,7 @@ const PopUp = () => {
         </div>
       )}
 
-      {draggedItem !==null ? (
+      {draggedItem !== null ? (
         <div className={styles.popUpCloseerr}>
           <img src="/assets/icons/cross.svg" className={styles.closeVector} />
         </div>
