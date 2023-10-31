@@ -30,11 +30,20 @@
   font-size: 20px;
 }
 
+/* 이웃 리스트 */
 .NeighborList {
   position: absolute;
   top: 75px;
   left: 85%;
   z-index: 4;
+}
+
+.NeighborListContainer {
+  top: 40%;
+  left: 50%;
+  z-index: 6;
+  position: absolute;
+  transform: translate(-50%, -50%);
 }
 
 /* 공유하기 이미지 */
