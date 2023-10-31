@@ -1,9 +1,8 @@
 import React, { useEffect } from "react"
-import resultInfo from "@/assets/json/result.json" 
+import Results from "./result.json" 
 import SharingModalList from "@/components/Modal/Sharing/SharingModalList"
 import { useNavigate } from "react-router-dom" 
-import styles from "./StampTestResult.module.css"
-import Results from "../../assets/json/result.json"
+import styles from "./StampTestResult.module.css" 
 
 const StampTestResult = () => {
   const navigate = useNavigate()
@@ -15,7 +14,7 @@ const StampTestResult = () => {
 
   const resultIndex = Number(result)
   
-  const resultSrcUrl = Results[resultIndex].srcUrl;   
+  const resultSrcUrl = "/assets/StampTest/"+Results[resultIndex].srcUrl;   
  
 
   const onHomeHandler = (e) => {
@@ -35,7 +34,7 @@ const StampTestResult = () => {
     <div className={styles.Container}>
       <div className={styles.PostImage}>
         <img className={styles.PostImagePng}
-            src={resultSrcUrl} alt={resultSrcUrl}
+            src={resultSrcUrl}  alt={resultSrcUrl}
         />
       </div>
       <div className={styles.ButtonContainer}>

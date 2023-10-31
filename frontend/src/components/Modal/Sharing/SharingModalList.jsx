@@ -5,7 +5,7 @@ import {
   twitter,
   urlCopy,
   save,
-} from "../../../assets/images/sharing/sharingIcon"
+} from "./sharingIcon"
 // import { useRecoilValue } from 'recoil';
 // import { userNicknameAtom } from '../../atoms/userAtoms';
 import styles from "./Share.module.css"
@@ -15,8 +15,7 @@ function SharingModalList(props) {
   const baseURL = "https://ding-dong.s3.ap-northeast-2.amazonaws.com/"
   // const userNickname = useRecoilValue(userNicknameAtom);
   const url = encodeURI(window.location.href);
-  const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY; 
-
+  const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY;  
   const isSafari = () => {
     const ua = navigator.userAgent.toLowerCase()
     return ua.indexOf("safari") !== -1 && ua.indexOf("chrome") === -1

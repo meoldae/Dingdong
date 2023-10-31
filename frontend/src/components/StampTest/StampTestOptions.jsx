@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import Questions from "../../assets/json/questions.json"
+import Questions from "./questions.json"
 import styles from "./StampTestOptions.module.css"
 
 const StampTestOptions = (props) => {
