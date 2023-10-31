@@ -70,7 +70,8 @@
   resize: none;
 
   padding: 5px;
-  font-size: 1rem;
+  font-size: 25px;
+  font-family: "GangwonEduAll-Light";
   outline: none;
   text-align: center;
 }
