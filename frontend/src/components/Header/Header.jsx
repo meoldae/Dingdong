@@ -22,6 +22,7 @@ import { roomInfoAtom } from "../../atom/RoomInfoAtom"
 import {
   fetchNeighborRequest,
   responseNeighborRequest,
+  fetchNeighborList,
 } from "../../api/Neighbor"
 
 const Header = ({ checkMyRoom }) => {
@@ -42,6 +43,14 @@ const Header = ({ checkMyRoom }) => {
 
   // 유저요청 가져오기
   useEffect(() => {
+    // 이웃 리스트
+    fetchNeighborList(
+      (success) => console.log(success.data.data),
+      (error) => {
+        console.log("Error at neighbor list...", error)
+      }
+    )
+    // 이웃요청 리스트
     fetchNeighborRequest(
       (success) => {
         setAlarmsLength(success.data.data.length)
