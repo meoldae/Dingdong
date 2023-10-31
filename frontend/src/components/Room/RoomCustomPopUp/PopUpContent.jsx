@@ -27,7 +27,7 @@ const PopUpContent = (props) => {
           furnitureId: data.furnitureId,
           defaultPosition: [data.xDefault, data.yDefault, data.zDefault],
           size: [data.xSize, data.ySize, data.zSize],
-          position: [0, 0, 0],
+          position: [10, 8, 10],
           rotation: 0,
           roomFurnitureId:-1,
         };
