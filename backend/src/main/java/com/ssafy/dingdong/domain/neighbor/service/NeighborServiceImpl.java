@@ -19,6 +19,7 @@ import com.ssafy.dingdong.domain.neighbor.entity.Neighbor;
 import com.ssafy.dingdong.domain.neighbor.repository.NeighborRepository;
 import com.ssafy.dingdong.domain.room.entity.Room;
 import com.ssafy.dingdong.domain.room.repository.RoomRepository;
+import com.ssafy.dingdong.domain.room.service.RoomService;
 import com.ssafy.dingdong.global.exception.CustomException;
 import com.ssafy.dingdong.global.exception.ExceptionStatus;
 
@@ -33,6 +34,7 @@ public class NeighborServiceImpl implements NeighborService{
 	private final NeighborRepository neighborRepository;
 	private final MemberService memberService;
 	private final RoomRepository roomRepository;
+	private final RoomService roomService;
 
 	@Override
 	@Transactional
@@ -113,9 +115,11 @@ public class NeighborServiceImpl implements NeighborService{
 
 		neighborIdList.stream().forEach(
 			neighborId -> {
+
 				MemberMainDto member = memberService.getMemberById(neighborId.toString());
+				Long roomId = roomService.getRoomIdByMemberId(member.memberId().toString());
 				boolean status = memberService.getStatusByMemberId(neighborId.toString());
-				NeighborResponse neighbor = member.to(status);
+				NeighborResponse neighbor = member.to(status, roomId);
 				neighborList.add(neighbor);
 			}
 		);
