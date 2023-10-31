@@ -1,9 +1,12 @@
 import styles from "./NeighborListModal.module.css"
 
-const NeighborListModal = ({ imgName, nickname, gohome, remove }) => {
+const NeighborListModal = ({ imgName, nickname, gohome, remove, status }) => {
   return (
     <div className={styles.Container}>
       <div className={styles.ProfileContainer}>
+        <div
+          className={status ? styles.StatusOnDot : styles.StatusOffDot}
+        ></div>
         <img src={`/assets/characters/female${imgName}.png`} />
       </div>
       <div className={styles.InfoContainer}>
