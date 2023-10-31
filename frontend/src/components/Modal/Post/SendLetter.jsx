@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { sendLetter } from "@/api/Letter"
+import { sendLetter, sendGuestLetter } from "@/api/Letter"
 import { userAtom } from "@/atom/UserAtom"
 import { roomInfoAtom } from "@/atom/RoomInfoAtom"
 import DefaultBtn from "../../Button/Default/DefaultBtn"
@@ -11,9 +11,12 @@ import { successMsg } from "@/utils/customToast"
 const SendLetter = ({ onClose, card }) => {
   const [content, setContent] = useState("")
   const [contentCount, setContentCount] = useState(0)
-  const [isSending, setIsSending] = useState(false)
-
+  const [isSending, setIsSending] = useState(false) 
+  
   const userInfo = useRecoilValue(userAtom)
+  const [userNickname, setUserNickname] = useState(userInfo.nickname || "");
+
+  console.log(userInfo);
   const roomInfo = useRecoilValue(roomInfoAtom)
 
   const url = new URL(window.location.href)
@@ -29,23 +32,42 @@ const SendLetter = ({ onClose, card }) => {
     setIsSending(true)
 
     const param = {
-      nickName: userInfo.nickname,
+      nickName: userNickname,
       description: content,
       stampId: card.idx,
       roomId: roomId,
     }
+    console.log(param);
 
-    sendLetter(
-      param,
-      (response) => {
-        successMsg("💌 편지를 보냈어요!")
-        onClose()
-        setIsSending(false)
-      },
-      (error) => {
-        console.log(error)
-      }
-    )
+    if(!userInfo.accessToken) {
+      console.log("비회원 편지 전송")
+      sendGuestLetter(
+        param,
+        (response) => {
+          successMsg("💌 편지를 보냈어요!")
+          onClose()
+          setIsSending(false)
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+    }
+    else {
+      console.log("회원 편지 전송")
+      sendLetter(
+        param,
+        (response) => {
+          successMsg("💌 편지를 보냈어요!")
+          onClose()
+          setIsSending(false)
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+    }
+
   }
 
   const handleOutsideClick = (event) => {
@@ -85,7 +107,19 @@ const SendLetter = ({ onClose, card }) => {
               <span>체크박스</span>
               <span>익명의 이웃</span>
             </div> */}
-            <div className={styles.FromUser}>From. {userInfo.nickname}</div>
+            <div className={styles.FromUser}>
+              From. 
+              {userInfo.nickname ? (
+                userInfo.nickname
+              ) : (
+                <textarea
+                  value={userNickname}
+                  onChange={(e) => setUserNickname(e.target.value)}
+                  placeholder="닉네임을 입력하세요."
+                  maxLength={8}
+                />
+              )}
+            </div>
           </div>
         </Card>
         <DefaultBtn

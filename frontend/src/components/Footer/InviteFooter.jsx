@@ -39,7 +39,7 @@ const OtherFooter = (props) => {
         <div className={style.background}>
           <div>
             <div className={style.circle} onClick={openModal}>
-              <img src={"/assets/icons/post.svg"} />
+              <img src={"/assets/icons/post.png"} className={style.iconImage}/>
               <p>편지 남기기</p>
             </div>
           </div>

@@ -31,18 +31,19 @@ function InviteRoomPage() {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <Header checkMyRoom={"invite"} />
-      <Canvas
-        shadows
-        gl={{ preserveDrawingBuffer: true, antialias: true }}
-        camera={{ fov: 40, zoom: 1.2 }}
-        ref={canvasRef}
-      >
-        <color attach="background" args={["skyblue"]} />
-
-        <Experience />
-      </Canvas> 
+    <div className={styles.inviteContainer}>
+      <Header checkMyRoom={"invite"} /> 
+      <div className={styles.inviteCanvas}>
+        <Canvas
+          shadows
+          gl={{ preserveDrawingBuffer: true, antialias: true }}
+          camera={{ fov: 40, zoom: 1.2 }}
+          ref={canvasRef}
+        >
+          <color attach="background" args={["skyblue"]} />
+              <Experience />
+        </Canvas> 
+        </div>
       <InviteFooter props={roomId[0]} />
     </div>
   );
