@@ -9,8 +9,6 @@ const StampTestStart = (props) => {
         src={"assets/images/stamp_start.png"}
         style={{ 
           width: "80%",
-          marginBottom: "15px",
-          marginTop: "10%",
         }}
       />
       <div className={styles.ContentContainer}>
