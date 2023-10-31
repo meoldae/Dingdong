@@ -120,6 +120,7 @@ const Header = ({ checkMyRoom }) => {
           <img src={bell} onClick={alarmHandler} />
         </div>
       </div>
+
       {/* 햄버거 바 */}
       {isHamburger && (
         <>
@@ -142,6 +143,7 @@ const Header = ({ checkMyRoom }) => {
           </div>
         </>
       )}
+
       {/* 알림 */}
       {isAlarm && (
         <>
@@ -169,15 +171,7 @@ const Header = ({ checkMyRoom }) => {
                 ))}
               </div>
             ) : (
-              <div
-                style={{
-                  fontFamily: "Pretendard-SemiBold",
-                  fontSize: "20px",
-                  width: "300px",
-                }}
-              >
-                알림이 없습니다!
-              </div>
+              <div className={styles.NoAlarm}>알림이 없습니다!</div>
             )}
           </div>
         </>
