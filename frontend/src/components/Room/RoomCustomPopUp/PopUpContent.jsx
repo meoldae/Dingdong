@@ -113,8 +113,6 @@ const PopUpContent = (props) => {
           <img
             key={index}
             src={imagePath + `/models/roomitemspng/${item["furnitureId"]}.png`}
-            width={"33%"}
-            height={"45%"}
             onClick={() => addFurniture(item["furnitureId"])}
           />
         ))}
