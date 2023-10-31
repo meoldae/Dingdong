@@ -58,6 +58,9 @@ const OtherFooter = (props) => {
     )
   }
 
+  const goSingleMap= () =>{
+    window.location.replace("/single")
+  }
   return (
     <div className={style.wrap}>
       <div className={style.secondFooter}>
@@ -70,7 +73,7 @@ const OtherFooter = (props) => {
       </div>
       <div className={style.footer}>
         <div className={style.background}>
-          <RoomBtn img={"worldMap"} />
+          <RoomBtn img={"worldMap"} onClick={goSingleMap} />
         </div>
         <div className={style.background}>
           <RoomBtn img={"post"} onClick={openModal} />

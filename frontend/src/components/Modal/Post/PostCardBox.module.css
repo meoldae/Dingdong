@@ -1,6 +1,6 @@
 .MainContainer {
   position: relative;
-  width: 100vw;
+  max-width: 450px;
   height: 100vh;
 }
 

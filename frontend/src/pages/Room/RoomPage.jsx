@@ -1,70 +1,91 @@
-import { Canvas } from "@react-three/fiber";
-import Experience from "../../components/Room/Experience";
-import { fetchRoomData } from "../../api/User";
-import { Suspense, useState, useEffect, useRef } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { Canvas } from "@react-three/fiber"
+import Experience from "../../components/Room/Experience"
+import { fetchRoomData } from "../../api/User"
+import { Suspense, useState, useEffect, useRef } from "react"
+import { useRecoilState, useRecoilValue } from "recoil"
 import {
   ItemRotateState,
   ItemsState,
   buildModeState,
   draggedItemState,
-} from "../../components/Room/Atom";
-import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom";
-import Header from "../../components/Header/Header";
-import MyFooter from "../../components/Footer/MyFooter";
-import Share from "../../components/Header/Share";
-import OtherFooter from "../../components/Footer/OtherFooter";
-import NeighborRequest from "../../components/Header/NeighborRequest";
-import styles from "./RoomPage.module.css";
-import PopUp from "../../components/Room/RoomCustomPopUp/PopUp";
-import SharePage from "../../components/Modal/Sharing/SharePage";
-import SharingModalList from "../../components/Modal/Sharing/SharingModalList";
-import { userAtom } from "../../atom/UserAtom";
-import { roomInfoAtom } from "@/atom/RoomInfoAtom";
-import { useNavigate } from "react-router-dom";
-
+} from "../../components/Room/Atom"
+import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom"
+import Header from "../../components/Header/Header"
+import MyFooter from "../../components/Footer/MyFooter"
+import Share from "../../components/Header/Share"
+import OtherFooter from "../../components/Footer/OtherFooter"
+import NeighborRequest from "../../components/Header/NeighborRequest"
+import styles from "./RoomPage.module.css"
+import PopUp from "../../components/Room/RoomCustomPopUp/PopUp"
+import SharePage from "../../components/Modal/Sharing/SharePage"
+import SharingModalList from "../../components/Modal/Sharing/SharingModalList"
+import { userAtom } from "../../atom/UserAtom"
+import { roomInfoAtom } from "@/atom/RoomInfoAtom"
+import { useNavigate } from "react-router-dom"
+import history from "../../components/UI/history"
 
 function RoomPage() {
-  const [editMode, setEditMode] = useRecoilState(buildModeState);
-  const [items, setItems] = useRecoilState(ItemsState);
-  const [isMyRoom, setIsMyRoom] = useState(false);
-  const [drag, setDrag] = useRecoilState(draggedItemState);
-  const popUpStatus = useRecoilValue(popUpStatusAtom);
-  const canvasRef = useRef();
-  const [shareModal, setShareModal] = useState(false);
-  const userInfo = useRecoilValue(userAtom);
-  const [nickName, setNickName] = useRecoilState(roomInfoAtom);
-  const roomId = window.location.pathname.match(/\d+/g);
-  const navigate = useNavigate();
+  const [locationKeys, setLocationKeys] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const myRoomId = userInfo.roomId;
-    setIsMyRoom(roomId == myRoomId);
+    return history.listen((location) => {
+      if (history.action === "PUSH") {
+        setLocationKeys([location.key])
+        window.location.replace("single")
+      }
+
+      if (history.action === "POP") {
+        if (locationKeys[1] === location.key) {
+          setLocationKeys(([_, ...keys]) => keys)
+          window.location.replace("single")
+        } else {
+          setLocationKeys((keys) => [location.key, ...keys])
+        }
+      }
+    })
+  }, [locationKeys, history])
+
+  //
+  const [editMode, setEditMode] = useRecoilState(buildModeState)
+  const [items, setItems] = useRecoilState(ItemsState)
+  const [isMyRoom, setIsMyRoom] = useState(false)
+  const [drag, setDrag] = useRecoilState(draggedItemState)
+  const popUpStatus = useRecoilValue(popUpStatusAtom)
+  const canvasRef = useRef()
+  const [shareModal, setShareModal] = useState(false)
+  const userInfo = useRecoilValue(userAtom)
+  const [nickName, setNickName] = useRecoilState(roomInfoAtom)
+  const roomId = window.location.pathname.match(/\d+/g)
+
+  useEffect(() => {
+    const myRoomId = userInfo.roomId
+    setIsMyRoom(roomId == myRoomId)
 
     fetchRoomData(
       roomId,
       (response) => {
-        setItems(response.data.data.roomFurnitureList);
-        setNickName(response.data.data.nickname);
+        setItems(response.data.data.roomFurnitureList)
+        setNickName(response.data.data.nickname)
       },
       (error) => {
-        console.error("Error at fetching RoomData...", error);
+        console.error("Error at fetching RoomData...", error)
       }
-    );
-  }, [isMyRoom]);
+    )
+  }, [isMyRoom])
 
   const randomVisit = () => {
     const roomId = window.location.pathname.match(/\d+/g)
       ? Number(window.location.pathname.match(/\d+/g)[0])
-      : null;
-    const myRoomId = userInfo.roomId;
-    let randomRoom;
+      : null
+    const myRoomId = userInfo.roomId
+    let randomRoom
 
     do {
-      randomRoom = Math.floor(Math.random() * 6) + 1;
-    } while (randomRoom === roomId || randomRoom === myRoomId);
-    window.location.replace(`/room/${randomRoom}`);
-  };
+      randomRoom = Math.floor(Math.random() * 6) + 1
+    } while (randomRoom === roomId || randomRoom === myRoomId)
+    window.location.replace(`/room/${randomRoom}`)
+  }
 
   return (
     <div className={styles.container}>
@@ -79,7 +100,7 @@ function RoomPage() {
           <div
             className={styles.back}
             onClick={() => {
-              setShareModal(false);
+              setShareModal(false)
             }}
           />
           <SharePage shareModal={shareModal} canvasRef={canvasRef} />
@@ -89,7 +110,7 @@ function RoomPage() {
 
       <Canvas
         shadows
-        gl={{ preserveDrawingBuffer: true, antialias: true}}
+        gl={{ preserveDrawingBuffer: true, antialias: true }}
         camera={{ fov: 45, zoom: 1.2 }}
         ref={canvasRef}
       >
@@ -113,7 +134,7 @@ function RoomPage() {
       {/* {popUpStatus ? <PopUp/> : '' } */}
       <PopUp />
     </div>
-  );
+  )
 }
 
-export default RoomPage;
+export default RoomPage
