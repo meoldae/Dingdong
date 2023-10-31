@@ -6,13 +6,13 @@ import { useRecoilState } from "recoil"
 import { isPostBoxVisibleAtom, isReceiveLetterVisibleAtom } from "../../atom/PostAtom"
 import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom"
 import { ItemsState, buildModeState } from "../Room/Atom"
+import { useNavigate } from "react-router-dom"
 
 const MyFooter = () => {
   const [editMode,setEditMode] = useRecoilState(buildModeState);
   const [items,setItems] = useRecoilState(ItemsState);
   const [isPostBoxVisible, setIsPostBoxVisible] =
     useRecoilState(isPostBoxVisibleAtom)
-
   const [isReceiveLetterVisible, setIsReceiveLetterVisible] = useRecoilState(
     isReceiveLetterVisibleAtom
   )
@@ -26,7 +26,9 @@ const MyFooter = () => {
     setPopUpStatus(!popUpStatus);
     setEditMode(true);
   }
-
+  const goSingleMap= () =>{
+    window.location.replace("/single")
+  }
   return (
     <div className={style.wrap}>
       <div className={style.secondFooter}>
@@ -36,7 +38,7 @@ const MyFooter = () => {
       </div>
       <div className={style.footer}>
         <div className={style.background}>
-          <RoomBtn img={"worldMap"} />
+          <RoomBtn img={"worldMap"} onClick={()=>{goSingleMap()}}/>
         </div>
         <div className={style.background}>
           <RoomBtn img={"postBox"} onClick={() => setIsPostBoxVisible(true)} />
