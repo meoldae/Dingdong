@@ -1,5 +1,5 @@
 // 라이브러리
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRecoilValue } from "recoil"
 
 // 스타일
@@ -9,21 +9,67 @@ import styles from "./Header.module.css"
 import hamburger from "/assets/icons/hamburgerbar.svg"
 import bell from "/assets/icons/bell.svg"
 
+// 컴포넌트
+import { successMsg } from "@/utils/customToast"
+import NeighborAcceptModal from "../Modal/Neighbor/NeighborAcceptModal"
+
 // Atom
 import { userAtom } from "../../atom/UserAtom"
 import { roomInfoAtom } from "../../atom/RoomInfoAtom"
 
+// API
+import { fetchNeighborRequest } from "../../api/Neighbor"
+
 const Header = ({ checkMyRoom }) => {
   // 햄버거메뉴바 상태관리
   const [isHamburger, setIsHamburger] = useState(false)
+  // 알림 상태관리
+  const [isAlarm, setIsAlarm] = useState(false)
+  // 알림 리스트 상태관리
+  const [alarms, setAlarms] = useState([])
+  // 알림 리스트 길이 상태관리
+  const [alarmsLength, setAlarmsLength] = useState(0)
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
   const roomInfo = useRecoilValue(roomInfoAtom)
 
-  // 알림함수
+  // 유저요청 가져오기
+  useEffect(() => {
+    fetchNeighborRequest(
+      (success) => {
+        console.log(success.data.data)
+        setAlarmsLength(success.data.data.length)
+        setAlarms(success.data.data)
+      },
+      (error) => {
+        console.log("Error at neighbor request...", error)
+      }
+    )
+  }, [])
+
+  // 알림 함수
   const alarmHandler = () => {
-    console.log("알림창")
+    if (alarmsLength === 0) {
+      setIsAlarm(false)
+      successMsg("❌ 알림이 없습니다!")
+    } else {
+      setIsAlarm(true)
+    }
+  }
+
+  // 이웃요청 수락함수
+  const acceptNeighborHandler = (id) => {
+    setAlarmsLength(alarmsLength - 1)
+    setAlarms((prev) => prev.filter((alarm) => alarm.id !== id))
+    console.log("이웃요청 수락")
+  }
+
+  // 이웃요청 거절함수
+  const refuseNeighborHandler = (id) => {
+    setAlarmsLength(alarmsLength - 1)
+    setAlarms((prev) => prev.filter((alarm) => alarm.id !== id))
+    console.log("이웃요청 거절")
   }
 
   // 문의하기 함수
@@ -47,7 +93,6 @@ const Header = ({ checkMyRoom }) => {
         <div className={styles.header}>
           <img
             src={hamburger}
-            alt=""
             onClick={() => setIsHamburger(true)}
             className={styles.HamburgerButton}
           />
@@ -56,9 +101,10 @@ const Header = ({ checkMyRoom }) => {
           ) : (
             <div className={styles.userName}>{roomInfo}</div>
           )}
-          <img src={bell} alt="" onClick={alarmHandler} />
+          <img src={bell} onClick={alarmHandler} />
         </div>
       </div>
+      {/* 햄버거 바 */}
       {isHamburger && (
         <>
           <div
@@ -77,6 +123,46 @@ const Header = ({ checkMyRoom }) => {
                 회원탈퇴
               </div>
             </div>
+          </div>
+        </>
+      )}
+      {/* 알림 */}
+      {isAlarm && (
+        <>
+          <div className={styles.Overlay} onClick={() => setIsAlarm(false)} />
+          <div className={styles.AlarmContainer}>
+            <div className={styles.xButtonContainer}>
+              <img
+                src={"/assets/icons/x.svg"}
+                className={styles.AlarmX}
+                onClick={() => setAlarms(false)}
+              />
+            </div>
+            {alarmsLength !== 0 ? (
+              <div className={styles.alarmListContainer}>
+                {alarms.map((alarm) => (
+                  <div key={alarm.neighborId} className={styles.AlarmModal}>
+                    <NeighborAcceptModal
+                      content={alarm.nickname}
+                      okClick={() => acceptNeighborHandler(alarm.neighborId)}
+                      cancelClick={() =>
+                        refuseNeighborHandler(alarm.neighborId)
+                      }
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div
+                style={{
+                  fontFamily: "Pretendard-SemiBold",
+                  fontSize: "20px",
+                  width: "300px",
+                }}
+              >
+                알림이 없습니다!
+              </div>
+            )}
           </div>
         </>
       )}
