@@ -1,7 +1,6 @@
 // 라이브러리
 import { useEffect, useState } from "react"
 import { useRecoilValue } from "recoil"
-import { useNavigate } from "react-router-dom"
 
 // 스타일
 import styles from "./Header.module.css"
@@ -32,8 +31,6 @@ import { fetchLogout, fetchUserSecession } from "../../api/User"
 import { fetchInquiry } from "../../api/Cs"
 
 const Header = ({ checkMyRoom }) => {
-  const navigate = useNavigate()
-
   // 햄버거메뉴바 상태관리
   const [isHamburger, setIsHamburger] = useState(false)
   // 알림 상태관리
