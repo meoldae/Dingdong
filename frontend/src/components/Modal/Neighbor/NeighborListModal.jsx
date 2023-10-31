@@ -1,6 +1,6 @@
 import styles from "./NeighborListModal.module.css"
 
-const NeighborListModal = ({ imgName, nickname }) => {
+const NeighborListModal = ({ imgName, nickname, gohome, remove }) => {
   return (
     <div className={styles.Container}>
       <div className={styles.ProfileContainer}>
@@ -17,10 +17,15 @@ const NeighborListModal = ({ imgName, nickname }) => {
           {nickname}
         </div>
         <div>
-          <img src={"assets/icons/home.svg"} style={{ marginRight: "10px" }} />
+          <img
+            src={"assets/icons/home.svg"}
+            style={{ marginRight: "10px" }}
+            onClick={gohome}
+          />
           <img
             src={"assets/icons/removeNeighbor.svg"}
             style={{ marginRight: "15px" }}
+            onClick={remove}
           />
         </div>
       </div>
