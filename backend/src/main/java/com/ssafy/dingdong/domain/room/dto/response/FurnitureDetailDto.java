@@ -18,9 +18,9 @@ public record FurnitureDetailDto(
 		this(furniture.getFurnitureId(),
 			furniture.getFurnitureCategory().getCategoryId(),
 			furniture.getFurnitureCategory().getDescription(),
-			Math.round(furniture.getXSize() / 0.24f),
-			Math.round(furniture.getYSize() / 0.24f) - 1,
-			Math.round(furniture.getZSize() / 0.24f),
+			(int) Math.ceil(furniture.getXSize() / 0.24f) + ((int) Math.ceil(furniture.getXSize() / 0.24f) % 2 == 1 ? 1 : 0),
+			(int) Math.ceil(furniture.getYSize() / 0.24f) + ((int) Math.ceil(furniture.getYSize() / 0.24f) % 2 == 1 ? 1 : 0) - 1,
+			(int) Math.ceil(furniture.getZSize() / 0.24f) + ((int) Math.ceil(furniture.getZSize() / 0.24f) % 2 == 1 ? 1 : 0),
 			furniture.getFurnitureCategory().getXDefault(),
 			furniture.getFurnitureCategory().getYDefault(),
 			furniture.getFurnitureCategory().getZDefault());

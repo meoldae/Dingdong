@@ -1,5 +1,6 @@
 package com.ssafy.dingdong.domain.member.repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -20,4 +21,14 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 		 + "  FROM Member m"
 		 + " WHERE m.memberId = :memberId ")
 	Optional<String> getNicknameByMemberId(@Param("memberId") UUID memberId);
+
+	@Query("SELECT m "
+		 + "  FROM Member m "
+		 + " WHERE m.nickname = :nickname ")
+	Optional<Member> findByNickname(@Param("nickname") String nickname);
+
+	@Query("SELECT m "
+		+ "  FROM Member m "
+		+ " WHERE m.nickname LIKE concat('%', :nickname, '%') ")
+	List<Member> findAllLikeNickname(@Param("nickname") String nickname);
 }

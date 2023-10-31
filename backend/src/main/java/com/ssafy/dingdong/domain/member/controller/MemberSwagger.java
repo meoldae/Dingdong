@@ -1,5 +1,7 @@
 package com.ssafy.dingdong.domain.member.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -23,6 +26,14 @@ import io.swagger.annotations.Api;
 
 @Api(tags = "Member", description = "회원 API")
 public interface MemberSwagger {
+
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "요청에 성공했습니다."),
+		@ApiResponse(responseCode = "400", description = "회원을 찾을 수 없습니다.", content = @Content(schema = @Schema(implementation = CommonResponse.class)))
+	}
+	)
+	@Operation(summary = "로그인", description = "로그인 후 회원 정보를 반환합니다.")
+	DataResponse<MemberLoginResponseDto> loginMember(Authentication authentication);
 
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "요청에 성공했습니다."),
@@ -47,6 +58,22 @@ public interface MemberSwagger {
 	)
 	@Operation(summary = "회원 정보 조회", description = "회원 ID를 통해 정보를 조회합니다.")
 	DataResponse<MemberMainDto> getMemberByMemberId(@Parameter(name = "memberId", description = "회원 ID")@PathVariable String memberId);
+
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "요청에 성공했습니다."),
+		@ApiResponse(responseCode = "400", description = "예외가 발생하였습니다.")
+	}
+	)
+	@Operation(summary = "회원 정보 조회", description = "닉네임을 통해 정보를 조회합니다.")
+	DataResponse<MemberMainDto> getMemberByNickname(@PathVariable String nickname);
+
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "요청에 성공했습니다."),
+		@ApiResponse(responseCode = "400", description = "예외가 발생하였습니다.")
+	}
+	)
+	@Operation(summary = "회원 리스트 조회", description = "비슷한 닉네임을 가진 회원들을 조회합니다.")
+	DataResponse<List<MemberMainDto>> getMemberListLikeNickname(@PathVariable String nickname);
 
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "요청에 성공했습니다."),
@@ -79,4 +106,12 @@ public interface MemberSwagger {
 	)
 	@Operation(summary = "회원 탈퇴", description = "회원 정보를 논리적으로 삭제합니다.")
 	CommonResponse deleteMember(Authentication authentication);
+
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "요청에 성공했습니다."),
+		@ApiResponse(responseCode = "400", description = "예외가 발생하였습니다.")
+	}
+	)
+	@Operation(summary = "닉네임 중복 검사", description = "닉네임이 중복인지 검사합니다.")
+	CommonResponse nicknameIsUnique(@PathVariable String nickname);
 }

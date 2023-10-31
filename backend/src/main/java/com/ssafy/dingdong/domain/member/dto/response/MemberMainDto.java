@@ -26,11 +26,12 @@ public record MemberMainDto(
 			.build();
 	}
 
-	public NeighborResponse to(String status){
+	public NeighborResponse to(boolean status, Long roomId){
 		return NeighborResponse.builder()
 			.memberId(UUID.fromString(this.memberId))
 			.nickname(this.nickname())
 			.avatarId(this.avatarId())
+			.roomId(roomId)
 			.isActive(status)
 			.build();
 	}

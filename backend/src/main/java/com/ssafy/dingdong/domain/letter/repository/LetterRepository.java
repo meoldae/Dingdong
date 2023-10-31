@@ -17,16 +17,16 @@ import java.util.Optional;
 
 public interface LetterRepository extends JpaRepository<Letter, Long> {
 
-    Page<LetterListResponseDto> findAllByLetterToAndIsReportFalse(@Param("memberId") String memberId, Pageable pageable);
+    Page<LetterListResponseDto> findAllByLetterToAndIsReportFalseOrderByCreateTimeDesc(@Param("memberId") String memberId, Pageable pageable);
 
     @Query("SELECT new com.ssafy.dingdong.domain.letter.dto.response.LetterResponseDto( " +
-            "l.anonymousFlag, l.description, mf.nickname, mt.nickname, s.imgUrl, s.description, l.createTime) " +
+            "l.anonymousFlag, l.description, l.nickName, mt.nickname, s.imgUrl, s.description, l.createTime) " +
             "FROM Letter l " +
             "JOIN Member mf ON l.letterFrom = mf.memberId " +
             "JOIN Member mt ON l.letterTo = mt.memberId " +
             "JOIN Stamp s ON l.stamp.id = s.id " +
             "WHERE l.letterTo = :memberId AND l.id = :letterId")
-    Optional<LetterResponseDto> findByLetterId(String memberId, Long letterId);
+    Optional<LetterResponseDto> findByLetterId(@Param("memberId") String memberId, @Param("letterId") Long letterId);
 
     @Query("SELECT l.letterFrom FROM Letter l WHERE l.id = :letterId")
     Optional<String> findLetterFromByLetterId(@Param("letterId") Long letterId);
@@ -46,10 +46,10 @@ public interface LetterRepository extends JpaRepository<Letter, Long> {
     @Modifying
     @Transactional
     @Query("UPDATE Letter l SET l.isRead = true WHERE l.id = :letterId")
-    void updateIsReadById(Long letterId);
+    void updateIsReadById(@Param("letterId") Long letterId);
 
     @Modifying
     @Transactional
     @Query("UPDATE Letter l SET l.isReport = true WHERE l.id = :letterId")
-    void updateIsReportById(Long letterId);
+    void updateIsReportById(@Param("letterId") Long letterId);
 }

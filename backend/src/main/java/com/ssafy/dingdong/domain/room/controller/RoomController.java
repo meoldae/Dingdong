@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.dingdong.domain.room.dto.request.RoomUpdateRequestDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.FurnitureSummaryDto;
+import com.ssafy.dingdong.domain.room.dto.response.RoomResponseAllDetailDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomResponseDto;
 import com.ssafy.dingdong.domain.room.dto.response.RoomScoreDto;
 import com.ssafy.dingdong.domain.room.service.RoomService;
@@ -51,15 +52,15 @@ public class RoomController implements RoomSwagger{
 
 
     @Override
-    @GetMapping("/roomId/{roomId}")
-    public DataResponse<RoomResponseDto> getRoomByRoomId(@PathVariable Long roomId) {
-        RoomResponseDto findRoom = roomService.getRoomByRoomId(roomId);
+    @GetMapping("/{roomId}")
+    public DataResponse<RoomResponseAllDetailDto> getRoomByRoomId(@PathVariable Long roomId) {
+        RoomResponseAllDetailDto findRoom = roomService.getRoomByRoomId(roomId);
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, findRoom);
     }
 
     @Override
     @GetMapping("/furniture")
-    public DataResponse<Page<FurnitureSummaryDto> > getFurnitureList(@RequestParam Integer category, @PageableDefault(size = 6) Pageable pageable) {
+    public DataResponse<Page<FurnitureSummaryDto> > getFurnitureList(@RequestParam Integer category, @PageableDefault(size = 16) Pageable pageable) {
         Page<FurnitureSummaryDto>furnitureList = roomService.getFurnitureListByCategory(category, pageable);
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, furnitureList);
     }
@@ -79,10 +80,17 @@ public class RoomController implements RoomSwagger{
     }
 
     @Override
+    @GetMapping("/heart/{roomId}")
+    public DataResponse<String> isRoomHeart(@PathVariable Long roomId, Authentication authentication){
+        String heartRoomInfo = roomService.isHeartRoom(authentication.getName(), roomId);
+        return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, heartRoomInfo);
+    }
+
+    @Override
     @PostMapping("/heart/{roomId}")
-    public CommonResponse roomHeart(@PathVariable Long roomId, Authentication authentication) {
-        roomService.createHeartRoom(authentication.getName(), roomId);
-        return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
+    public DataResponse<String> roomHeart(@PathVariable Long roomId, Authentication authentication) {
+        String heartRoomInfo = roomService.createHeartRoom(authentication.getName(), roomId);
+        return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, heartRoomInfo);
     }
 
     @Override

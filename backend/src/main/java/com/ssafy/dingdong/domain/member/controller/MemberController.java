@@ -1,5 +1,7 @@
 package com.ssafy.dingdong.domain.member.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.Authentication;
@@ -41,6 +43,13 @@ public class MemberController implements MemberSwagger {
 	}
 
 	@Override
+	@GetMapping("/login")
+	public DataResponse<MemberLoginResponseDto> loginMember(Authentication authentication){
+		MemberLoginResponseDto member = memberService.getLoginMember(authentication.getName().toString());
+		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
+	}
+
+	@Override
 	@DeleteMapping("/logout")
 	public CommonResponse logout(Authentication authentication) {
 		memberService.logout(authentication.getName());
@@ -52,6 +61,20 @@ public class MemberController implements MemberSwagger {
 	public DataResponse<MemberMainDto> getMemberByMemberId(@PathVariable String memberId) {
 		MemberMainDto member = memberService.getMemberById(memberId);
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
+	}
+
+	@Override
+	@GetMapping("/{nickname}")
+	public DataResponse<MemberMainDto> getMemberByNickname(@PathVariable String nickname) {
+		MemberMainDto member = memberService.getMemberByNickname(nickname);
+		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
+	}
+
+	@Override
+	@GetMapping("/range/{nickname}")
+	public DataResponse<List<MemberMainDto>> getMemberListLikeNickname(@PathVariable String nickname) {
+		List<MemberMainDto> memberList = memberService.getMemberListLikeNickname(nickname);
+		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, memberList);
 	}
 
 	@Override
@@ -81,4 +104,16 @@ public class MemberController implements MemberSwagger {
 		memberService.deleteMember(authentication.getName());
 		return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
 	}
+
+	@Override
+	@GetMapping("/check/{nickname}")
+	public CommonResponse nicknameIsUnique(@PathVariable String nickname) {
+		boolean result = memberService.isMemberByNickname(nickname);
+		if (result) {
+			return responseService.successResponse(ResponseStatus.NICKNAME_IS_UNIQUE);
+		}else {
+			return responseService.successResponse(ResponseStatus.NICKNAME_IS_DUPLICATED);
+		}
+	}
+
 }

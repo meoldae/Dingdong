@@ -31,9 +31,9 @@ public class RoomFurniture {
 	private Short rotation;
 
 	public void updateStatus(UpdateFurnitureDto updateFurnitureDto){
-		this.xPos = updateFurnitureDto.xPos();
-		this.yPos = updateFurnitureDto.yPos();
-		this.zPos = updateFurnitureDto.zPos();
+		this.xPos = updateFurnitureDto.position().get(0);
+		this.yPos = updateFurnitureDto.position().get(1);
+		this.zPos = updateFurnitureDto.position().get(2);
 		this.rotation = updateFurnitureDto.rotation();
 	}
 }

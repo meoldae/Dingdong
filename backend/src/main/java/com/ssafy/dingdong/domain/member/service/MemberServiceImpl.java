@@ -1,5 +1,7 @@
 package com.ssafy.dingdong.domain.member.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import com.ssafy.dingdong.domain.member.dto.response.MemberLoginResponseDto;
@@ -28,6 +30,7 @@ public class MemberServiceImpl implements MemberService {
 	private final MemberRedisRepository memberRedisRepository;
 	private final RoomService roomService;
 	private final JwtProvider jwtProvider;
+	private static Long maxCCUCount = 0L;
 
 	@Override
 	@Transactional
@@ -38,8 +41,8 @@ public class MemberServiceImpl implements MemberService {
 		findMember.signUp(memberLoginDto.nickname(), memberLoginDto.avatarId());
 		String accessToken = jwtProvider.createAccessToken(findMember);
 
-		roomService.createRoom(memberLoginDto.memberId());
-		return MemberLoginResponseDto.of(findMember, accessToken);
+		Long roomId = roomService.createRoom(memberLoginDto.memberId());
+		return MemberLoginResponseDto.of(findMember, roomId, accessToken);
 	}
 
 	@Override
@@ -51,8 +54,42 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public MemberMainDto getMemberByNickname(String nickname) {
+		Member findMember = memberRepository.findByNickname(nickname).orElseThrow(
+			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
+		);
+		return MemberMainDto.of(findMember);
+	}
+
+
+	@Override
+	public List<MemberMainDto> getMemberListLikeNickname(String nickname) {
+		List<Member> memberList = memberRepository.findAllLikeNickname(nickname);
+		List<MemberMainDto> resultList = new ArrayList<>();
+
+		memberList.stream().forEach(
+			member -> {
+				MemberMainDto memberDto = MemberMainDto.of(member);
+				resultList.add(memberDto);
+			}
+		);
+		return resultList;
+	}
+
+	@Override
+	public MemberLoginResponseDto getLoginMember(String memberId) {
+		Member findMember = memberRepository.findByMemberId(UUID.fromString(memberId)).orElseThrow(
+			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
+		);
+		Long roomId = roomService.getRoomIdByMemberId(memberId);
+		return MemberLoginResponseDto.of(findMember, roomId, "");
+	}
+
+	@Override
 	public void createSession(String memberId) {
 		memberRedisRepository.insertStatusByMemberId(memberId);
+		Long ccuCount = memberRedisRepository.getCCUCount();
+		maxCCUCount = Math.max(maxCCUCount, ccuCount);
 	}
 
 	@Override
@@ -61,8 +98,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String getStatusByMemberId(String memberId){
-		return memberRedisRepository.findStatusByMemberId(memberId).orElse("FALSE");
+	public boolean getStatusByMemberId(String memberId){
+		return memberRedisRepository.findStatusByMemberId(memberId).isPresent();
 	}
 
 	@Override
@@ -87,4 +124,18 @@ public class MemberServiceImpl implements MemberService {
 		);
 		findMember.exit();
 	}
+
+	@Override
+	public boolean isMemberByNickname(String nickname) {
+		log.info("nickname {} , ", nickname);
+		return !memberRepository.findByNickname(nickname).isPresent();
+	}
+
+	@Override
+	public Long getMaxCCUCount(){
+		Long ccuCount = memberRedisRepository.getCCUCount();
+		maxCCUCount = 0L;
+		return ccuCount;
+	}
+
 }

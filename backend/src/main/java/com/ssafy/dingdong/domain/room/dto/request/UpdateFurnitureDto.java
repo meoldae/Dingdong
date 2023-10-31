@@ -1,11 +1,11 @@
 package com.ssafy.dingdong.domain.room.dto.request;
 
+import java.util.List;
+
 public record UpdateFurnitureDto(
 	Long roomFurnitureId,
 	String furnitureId,
-	int xPos,
-	int yPos,
-	int zPos,
+	List<Integer> position,
 	short rotation
 ) {
 
