@@ -171,7 +171,7 @@ const Header = ({ checkMyRoom }) => {
       (success) => {
         localStorage.removeItem("userAtom")
         window.location.replace("/login")
-        successMsg("✔ 로그아웃 성공!")
+        successMsg("✅ 로그아웃 성공!")
       },
       (error) => {
         "Error at Logout...", error
@@ -185,7 +185,7 @@ const Header = ({ checkMyRoom }) => {
       (success) => {
         localStorage.removeItem("userAtom")
         window.location.replace("/login")
-        successMsg("✔ 회원탈퇴 성공!")
+        successMsg("✅ 회원탈퇴 성공!")
       },
       (error) => {
         "Error at Secession...", error
