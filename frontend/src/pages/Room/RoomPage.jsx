@@ -11,7 +11,6 @@ import {
   draggedItemState,
 } from "../../components/Room/Atom";
 import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom";
-
 import Header from "../../components/Header/Header";
 import MyFooter from "../../components/Footer/MyFooter";
 import Share from "../../components/Header/Share";
@@ -23,6 +22,7 @@ import SharePage from "../../components/Modal/Sharing/SharePage";
 import SharingModalList from "../../components/Modal/Sharing/SharingModalList";
 import { userAtom } from "../../atom/UserAtom";
 import { roomInfoAtom } from "@/atom/RoomInfoAtom";
+import { useNavigate } from "react-router-dom";
 
 function RoomPage() {
   const [editMode, setEditMode] = useRecoilState(buildModeState);
@@ -34,6 +34,7 @@ function RoomPage() {
   const [shareModal, setShareModal] = useState(false);
   const userInfo = useRecoilValue(userAtom);
   const [nickName, setNickName] = useRecoilState(roomInfoAtom);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const roomId = window.location.pathname.match(/\d+/g);
@@ -54,10 +55,16 @@ function RoomPage() {
   }, [isMyRoom]);
 
   const randomVisit = () => {
-    console.log("랜덤방문 함수");
+    const roomId = window.location.pathname.match(/\d+/g) ? Number(window.location.pathname.match(/\d+/g)[0]) : null;
+    const myRoomId = userInfo.roomId;
+    let randomRoom;
+    
+    do {
+      randomRoom = Math.floor(Math.random() * 6) + 1;
+    } while (randomRoom === roomId || randomRoom === myRoomId);
+    console.log(randomRoom,roomId,myRoomId)
+    navigate(`/room/${randomRoom}`);
   };
-
-
 
   return (
     <div className={styles.container}>

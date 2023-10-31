@@ -11,6 +11,7 @@ import bell from "/assets/icons/bell.svg"
 
 // Atom
 import { userAtom } from "../../atom/UserAtom"
+import { roomInfoAtom } from "../../atom/RoomInfoAtom"
 
 const Header = ({ checkMyRoom }) => {
   // 햄버거메뉴바 상태관리
@@ -18,6 +19,7 @@ const Header = ({ checkMyRoom }) => {
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
+  const roomInfo = useRecoilValue(roomInfoAtom)
 
   // 알림함수
   const alarmHandler = () => {
@@ -52,7 +54,7 @@ const Header = ({ checkMyRoom }) => {
           {checkMyRoom === "my" ? (
             <div className={styles.userName}>{userInfo.nickname}</div>
           ) : (
-            <div className={styles.userName}>userName</div>
+            <div className={styles.userName}>{roomInfo}</div>
           )}
           <img src={bell} alt="" onClick={alarmHandler} />
         </div>
