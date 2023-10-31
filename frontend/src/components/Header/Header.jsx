@@ -8,11 +8,11 @@ import styles from "./Header.module.css"
 // 이미지
 import hamburger from "/assets/icons/hamburgerbar.svg"
 import bell from "/assets/icons/bell.svg"
-import neighbor from "/assets/icons/neighborList.svg"
 
 // 컴포넌트
 import { successMsg } from "@/utils/customToast"
 import NeighborAcceptModal from "../Modal/Neighbor/NeighborAcceptModal"
+import RoomBtn from "../Button/Room/RoomBtn"
 
 // Atom
 import { userAtom } from "../../atom/UserAtom"
@@ -33,6 +33,8 @@ const Header = ({ checkMyRoom }) => {
   const [alarms, setAlarms] = useState([])
   // 알림 리스트 길이 상태관리
   const [alarmsLength, setAlarmsLength] = useState(0)
+  // 이웃리스트 모달 상태관리
+  const [isNeighborList, setIsNeighborList] = useState(false)
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
@@ -120,7 +122,10 @@ const Header = ({ checkMyRoom }) => {
           )}
           <div className={styles.AlarmAndNeighborList}>
             <img src={bell} onClick={alarmHandler} />
-            <img src={neighbor} />
+            <RoomBtn
+              img={"neighborList"}
+              onClick={() => setIsNeighborList(true)}
+            />
           </div>
         </div>
       </div>
