@@ -13,6 +13,7 @@ import bell from "/assets/icons/bell.png"
 import NeighborAcceptModal from "../Modal/Neighbor/NeighborAcceptModal"
 import RoomBtn from "../Button/Room/RoomBtn"
 import NeighborListModal from "../Modal/Neighbor/NeighborListModal"
+import DefaultModal from "../Modal/Default/DefaultModal"
 
 // Atom
 import { userAtom } from "../../atom/UserAtom"
@@ -117,19 +118,21 @@ const Header = ({ checkMyRoom }) => {
   }
 
   // 이웃 리스트 - 이웃 삭제 모달 함수
-  const removeNeighorCheckHandler = (memberId) => {
+  const removeNeighborCheckHandler = (memberId) => {
     setRemoveNeighborList(true)
     setRemoveNeighborId(memberId)
   }
 
   // 이웃 리스트 - 이웃 삭제 함수
-  const removeNeighborHandler = (memberId) => {
+  const removeNeighborHandler = (Id) => {
     deleteNeighbor(
-      { memberId: memberId },
+      { "memberId": Id },
       (response) => {
         setNeighborList((prev) =>
-          prev.filter((item) => item.memberId !== memberId)
+          prev.filter((item) => item.memberId !== Id)
         )
+        setRemoveNeighborList(false)
+        setNeighborListLength(neighborListLength - 1)
       },
       (error) => {
         console.log("Error with Delete Neighbor...", error)
@@ -211,7 +214,7 @@ const Header = ({ checkMyRoom }) => {
                       imgName={item.avatarId}
                       nickname={item.nickname}
                       gohome={() => goNeighborHomeHandler(item.roomId)}
-                      remove={removeNeighorCheckHandler}
+                      remove={() => removeNeighborCheckHandler(item.memberId)}
                       status={item.isActive}
                     />
                   </div>
@@ -287,7 +290,15 @@ const Header = ({ checkMyRoom }) => {
             className={styles.RemoveOverlay}
             onClick={() => setRemoveNeighborList(false)}
           />
-          <div>제거 모달</div>
+          <div className={styles.RemoveNeighborContainer}>
+            <DefaultModal
+              content={"정말 이웃을 삭제하시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={() => removeNeighborHandler(removeNeighborId)}
+              cancelClick={() => setRemoveNeighborList(false)}
+            />
+          </div>
         </>
       )}
     </>
