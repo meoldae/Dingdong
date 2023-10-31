@@ -24,6 +24,7 @@ const PopUp = () => {
   };
   const [items, setItems] = useRecoilState(ItemsState);
   const [check, setCheck] = useRecoilState(checkState);
+  const [canDrop, setCanDrop] = useRecoilState(canDropState);
   const [draggedItemRotation, setDraggedItemRotation] =useRecoilState(ItemRotateState);
   const userInfo = useRecoilValue(userAtom);
   const mobileCheck = useRecoilValue(mobileCheckState);
