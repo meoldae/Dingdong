@@ -10,13 +10,13 @@
     height: 30vh;
     position: absolute;
     border-radius: 15px 15px 0 0;
-    bottom: 0px;
+    bottom: 5vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: all 0.3s ease-in-out;
-
+    z-index: -1;
 }
 
 .notActive{
@@ -25,6 +25,8 @@
 
 .active{
     transform: translateY(0%);
+    z-index: 5;
+    bottom: 0px;
 }
 
 .tabBar {
@@ -61,6 +63,21 @@
     width: 100%;
 }  
 
+.dragPopUp{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 4vh;
+    height: 4vh;
+    left: 2vh;
+    top: -6vh;
+}
+
+.dragPopUp img {
+    margin-left: 10px;
+}
 .popUpClose {
     display: flex;
     justify-content: center;

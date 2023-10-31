@@ -12,9 +12,13 @@ const StampTestResult = () => {
 
   let params = new URL(document.URL).searchParams
   let result = params.get("result")
+
   const resultIndex = Number(result)
+  
   const resultSrcUrl = Results[resultIndex].srcUrl; 
   const resultPngUrl = Results[resultIndex].pngUrl;
+
+  console.log(result);
 
   const onHomeHandler = (e) => {
     navigate("/")
@@ -22,9 +26,9 @@ const StampTestResult = () => {
   const onTestHandler = (e) => {
     navigate("/yourstamp")
   }
-
+  
   useEffect(() => {
-    if (!result || resultIndex > 7) {
+    if (!result || ![0, 1, 2, 3, 4, 5, 6, 7].includes(resultIndex)) {
       navigate("/notfound")
     }
   }, [])

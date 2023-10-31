@@ -3,7 +3,7 @@ import { SkeletonUtils } from "three-stdlib";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useGrid } from "./UseGrid";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { ItemRotateState, ItemsState, draggedItemState } from "./Atom";
+import { ItemRotateState, ItemsState, draggedItemState, mobileCheckState } from "./Atom";
 export const Item = ({
   item,
   onClick,
@@ -20,34 +20,18 @@ export const Item = ({
     categoryId,
   } = item;
   const rotation = isDragging ? dragRotation : itemRotation;
-  const { scene } = useGLTF(`/assets/models/roomitems/${furnitureId}.glb`);
+  // const { scene } = useGLTF(`/assets/models/roomitems/${furnitureId}.glb`);
+  const { scene } = useGLTF(`/assets/models/editRoomItems/${furnitureId}.glb`);
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
-  const width =
-    rotation === 1 || rotation === 3
-      ? size[2] % 2
-        ? size[2] + 1
-        : size[2]
-      : size[0] % 2
-      ? size[0] + 1
-      : size[0];
-  const height =
-    rotation === 1 || rotation === 3
-      ? size[0] % 2
-        ? size[0] +1
-        : size[0]
-      : size[2] % 2
-      ? size[2] + 1
-      : size[2];
-  const thick = size[1] % 2 ? size[1] + 2 : size[1] + 1;
+  const width = rotation === 1 || rotation === 3 ? size[2] : size[0];
+  const height = rotation === 1 || rotation === 3 ? size[0] : size[2];
+  const thick = size[1];
   const { gridToVector3, wallLeftGridToVector3, wallRightGridToVector3 } =
     useGrid();
   const [items, setItems] = useRecoilState(ItemsState);
   const draggedItem = useRecoilValue(draggedItemState);
   const value = useRecoilValue(ItemRotateState);
-  const mobileCheck =
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
+  const mobileCheck = useRecoilValue(mobileCheckState);
   useEffect(() => {
     setItems((prev) => {
       const newItems = prev.map((item, index) => {
@@ -92,9 +76,9 @@ export const Item = ({
             />
             {isDragging && (
               <mesh
-                position-x={rotation ? 0.02 : 0.12}
-                position-y={0.12}
-                position-z={0.13}
+              position-x={rotation ? 0.02 : 0}
+              position-y={0.12}
+              position-z={rotation? 0 : 0.13}
               >
                 <boxGeometry
                   args={[
@@ -136,13 +120,13 @@ export const Item = ({
               <mesh
                 position-x={rotation ? 0.02 : 0}
                 position-y={0.12}
-                position-z={rotation ? 0 : 0.13}
+                position-z={rotation? 0 : 0.13}
               >
                 <boxGeometry
                   args={[
-                    rotation ? 0 : (width * 0.24) ,
+                    rotation ? 0 : width * 0.24,
                     (thick * 0.48) / 2,
-                    rotation ? (height * 0.24) : 0,
+                    rotation ? height * 0.24 : 0,
                   ]}
                 />
                 <meshBasicMaterial

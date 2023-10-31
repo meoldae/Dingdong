@@ -9,11 +9,15 @@ import {
   ItemRotateState,
   ItemsState,
   buildModeState,
+  canDropState,
+  checkState,
   dragPositionState,
   draggedItemState,
+  mobileCheckState,
 } from "./Atom";
 import { gsap } from "gsap";
 import styles from "./Room.module.css";
+import { DoubleSide } from "three";
 
 const Experience = () => {
   const buildMode = useRecoilValue(buildModeState);
@@ -21,39 +25,28 @@ const Experience = () => {
   const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState);
   const { vector3ToGrid, wallLeftVector3ToGrid, wallRightVector3ToGrid } =
     useGrid();
-  const [canDrop, setCanDrop] = useState(false);
+  const [canDrop, setCanDrop] = useRecoilState(canDropState);
   const [items, setItems] = useRecoilState(ItemsState);
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState);
-  const mobileCheck =
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
+  const check = useRecoilValue(checkState);
+  const mobileCheck = useRecoilValue(mobileCheckState);
   // onPlaneClicked 이벤트에 예외처리
   useEffect(() => {
     if (draggedItem === null) {
       return;
     }
     const item = items[draggedItem];
-    console.log(item);
     let droppable = true;
-    const thick = item.size[1] % 2 ? item.size[1] + 1 : item.size[1];
+    const thick = item.size[1];
     // 바닥 평면 넘어갔을 때 예외처리
     const width =
       draggedItemRotation === 1 || draggedItemRotation === 3
-        ? item.size[2] % 2
-          ? item.size[2] + 1
-          : item.size[2]
-        : item.size[0] % 2
-        ? item.size[0] + 1
+        ? item.size[2]
         : item.size[0];
     const height =
       draggedItemRotation === 1 || draggedItemRotation === 3
-        ? item.size[0] % 2
-          ? item.size[0] + 1
-          : item.size[0]
-        : item.size[2] % 2
-        ? item.size[2] + 1
+        ? item.size[0]
         : item.size[2];
     if (item.categoryId !== 3) {
       if (
@@ -79,23 +72,24 @@ const Experience = () => {
           droppable = false;
         }
         if (
-          dragPosition[2] - height / 2 < -1 ||
+          dragPosition[2] - height / 2 < 0 ||
           dragPosition[2] + height / 2 > 4.8 / 0.24
         ) {
           droppable = false;
         }
-      }
-      if (
-        dragPosition[1] - thick / 2 < -1 ||
-        dragPosition[1] + thick / 2 > 16
-      ) {
-        droppable = false;
-      }
-      if (
-        dragPosition[0] - width / 2 < -1 ||
-        dragPosition[0] + width / 2 > 4.8 / 0.24
-      ) {
-        droppable = false;
+      } else {
+        if (
+          dragPosition[1] - thick / 2 < -1 ||
+          dragPosition[1] + thick / 2 > 16
+        ) {
+          droppable = false;
+        }
+        if (
+          dragPosition[0] - width / 2 < 0 ||
+          dragPosition[0] + width / 2 > 4.8 / 0.24
+        ) {
+          droppable = false;
+        }
       }
     }
 
@@ -110,23 +104,14 @@ const Experience = () => {
         return;
       }
       // 다른 물체 크기
-      const otherThick =
-        otherItem.size[1] % 2 ? otherItem.size[1] + 1 : otherItem.size[1];
+      const otherThick = otherItem.size[1];
       const otherWidth =
         otherItem.rotation === 1 || otherItem.rotation === 3
-          ? otherItem.size[2] % 2
-            ? otherItem.size[2] + 1
-            : otherItem.size[2]
-          : otherItem.size[0] % 2
-          ? otherItem.size[0] + 1
+          ? otherItem.size[2]
           : otherItem.size[0];
       const otherHeight =
         otherItem.rotation === 1 || otherItem.rotation === 3
-          ? otherItem.size[0] % 2
-            ? otherItem.size[0] + 1
-            : otherItem.size[0]
-          : otherItem.size[2] % 2
-          ? otherItem.size[2] + 1
+          ? otherItem.size[0]
           : otherItem.size[2];
 
       // 다른 물체가 왼쪽 벽에 있고, 바닥에 있는 걸 움직일 때
@@ -335,25 +320,38 @@ const Experience = () => {
         // visible={false}
         position-y={-0.001}
         onClick={() => {
-          if (draggedItem !== null && dragPosition) {
-            if (canDrop) {
-              setItems((prev) => {
-                console.log(prev);
-                const newItems = prev.map((item, index) => {
-                  if (index === draggedItem) {
-                    return {
-                      ...item,
-                      position: dragPosition,
-                      rotation: draggedItemRotation,
-                    };
-                  }
-                  return item;
+          if (!mobileCheck) {
+            if (draggedItem !== null && dragPosition) {
+              if (canDrop) {
+                setItems((prev) => {
+                  console.log(prev);
+                  const newItems = prev.map((item, index) => {
+                    if (index === draggedItem) {
+                      return {
+                        ...item,
+                        position: dragPosition,
+                        rotation: draggedItemRotation,
+                      };
+                    }
+                    return item;
+                  });
+                  return newItems;
                 });
-                return newItems;
-              });
+              } else {
+                if (
+                  check.length !== items.length &&
+                  draggedItem === items.length - 1
+                ) {
+                  setItems((prevItems) => {
+                    return prevItems.filter(
+                      (_, index) => index !== draggedItem
+                    );
+                  });
+                }
+              }
+              setDraggedItemRotation(null);
+              setDraggedItem(null);
             }
-            setDraggedItemRotation(null);
-            setDraggedItem(null);
           }
         }}
         onPointerMove={(e) => {
@@ -380,26 +378,40 @@ const Experience = () => {
         position-x={-2.394}
         // visible={false}
         position-y={1.92}
+        
         onClick={() => {
-          if (draggedItem !== null && dragPosition) {
-            if (canDrop) {
-              setItems((prev) => {
-                console.log(prev);
-                const newItems = prev.map((item, index) => {
-                  if (index === draggedItem) {
-                    return {
-                      ...item,
-                      position: dragPosition,
-                      rotation: draggedItemRotation,
-                    };
-                  }
-                  return item;
+          if (!mobileCheck) {
+            if (draggedItem !== null && dragPosition) {
+              if (canDrop) {
+                setItems((prev) => {
+                  console.log(prev);
+                  const newItems = prev.map((item, index) => {
+                    if (index === draggedItem) {
+                      return {
+                        ...item,
+                        position: dragPosition,
+                        rotation: draggedItemRotation,
+                      };
+                    }
+                    return item;
+                  });
+                  return newItems;
                 });
-                return newItems;
-              });
+              } else {
+                if (
+                  check.length !== items.length &&
+                  draggedItem === items.length - 1
+                ) {
+                  setItems((prevItems) => {
+                    return prevItems.filter(
+                      (_, index) => index !== draggedItem
+                    );
+                  });
+                }
+              }
+              setDraggedItemRotation(null);
+              setDraggedItem(null);
             }
-            setDraggedItemRotation(null);
-            setDraggedItem(null);
           }
         }}
         onPointerMove={(e) => {
@@ -416,8 +428,8 @@ const Experience = () => {
           }
         }}
       >
-        <planeGeometry args={[4.8, 3.84]} />
-        <meshStandardMaterial color="#f0f0f0" />
+        <planeGeometry args={[4.8, 3.84]}  />
+        <meshStandardMaterial color="#f0f0f0" side={DoubleSide} />
       </mesh>
 
       {/* 오른쪽 평면 */}
@@ -439,30 +451,43 @@ const Experience = () => {
           }
         }}
         onClick={() => {
-          if (draggedItem !== null && dragPosition) {
-            if (canDrop) {
-              setItems((prev) => {
-                console.log(prev);
-                const newItems = prev.map((item, index) => {
-                  if (index === draggedItem) {
-                    return {
-                      ...item,
-                      position: dragPosition,
-                      rotation: draggedItemRotation,
-                    };
-                  }
-                  return item;
+          if (mobileCheck) {
+            if (draggedItem !== null && dragPosition) {
+              if (canDrop) {
+                setItems((prev) => {
+                  console.log(prev);
+                  const newItems = prev.map((item, index) => {
+                    if (index === draggedItem) {
+                      return {
+                        ...item,
+                        position: dragPosition,
+                        rotation: draggedItemRotation,
+                      };
+                    }
+                    return item;
+                  });
+                  return newItems;
                 });
-                return newItems;
-              });
+              } else {
+                if (
+                  check.length !== items.length &&
+                  draggedItem === items.length - 1
+                ) {
+                  setItems((prevItems) => {
+                    return prevItems.filter(
+                      (_, index) => index !== draggedItem
+                    );
+                  });
+                }
+              }
+              setDraggedItemRotation(null);
+              setDraggedItem(null);
             }
-            setDraggedItemRotation(null);
-            setDraggedItem(null);
           }
         }}
       >
         <planeGeometry args={[4.8, 3.84]} />
-        <meshStandardMaterial color="#f0f0f0" />
+        <meshStandardMaterial color="#f0f0f0" side={DoubleSide} />
       </mesh>
       {buildMode && (
         <>
@@ -491,66 +516,6 @@ const Experience = () => {
             rotation-z={-Math.PI / 2}
           />
         </>
-      )}
-      {draggedItem !== null && buildMode && (
-        <Html className={styles.dragbutton}>
-          <img
-            src="/assets/icons/refresh.svg"
-            alt=""
-            onClick={() => {
-              if (items[draggedItem].categoryId === 3) {
-                setDraggedItemRotation(
-                  draggedItemRotation === 1 ? 0 : draggedItemRotation + 1
-                );
-              } else {
-                setDraggedItemRotation(
-                  draggedItemRotation === 3 ? 0 : draggedItemRotation + 1
-                );
-              }
-            }}
-          />
-          <img
-            src="/assets/icons/cross.svg"
-            alt=""
-            onClick={() => {
-              setItems((prevItems) => {
-                return prevItems.filter((_, index) => index !== draggedItem);
-              });
-              setDraggedItem(null);
-              setDraggedItemRotation(null);
-            }}
-          />
-          {canDrop ? (
-            <img
-              src="/assets/icons/check.svg"
-              alt=""
-              onClick={() => {
-                if (draggedItem !== null && dragPosition) {
-                  if (canDrop) {
-                    setItems((prev) => {
-                      console.log(prev);
-                      const newItems = prev.map((item, index) => {
-                        if (index === draggedItem) {
-                          return {
-                            ...item,
-                            position: dragPosition,
-                            rotation: draggedItemRotation,
-                          };
-                        }
-                        return item;
-                      });
-                      return newItems;
-                    });
-                  }
-                  setDraggedItemRotation(null);
-                  setDraggedItem(null);
-                }
-              }}
-            />
-          ) : (
-            <img src="/assets/icons/check.svg" />
-          )}
-        </Html>
       )}
     </>
   );
