@@ -10,7 +10,6 @@ import hamburger from "/assets/icons/hamburgerbar.svg"
 import bell from "/assets/icons/bell.png"
 
 // 컴포넌트
-import { successMsg } from "@/utils/customToast"
 import NeighborAcceptModal from "../Modal/Neighbor/NeighborAcceptModal"
 import RoomBtn from "../Button/Room/RoomBtn"
 import NeighborListModal from "../Modal/Neighbor/NeighborListModal"
@@ -70,8 +69,7 @@ const Header = ({ checkMyRoom }) => {
   // 알림 함수
   const alarmHandler = () => {
     if (alarmsLength === 0) {
-      setIsAlarm(false)
-      successMsg("❌ 알림이 없습니다!")
+      setIsAlarm(true)
     } else {
       setIsAlarm(true)
     }
