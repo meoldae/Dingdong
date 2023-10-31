@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react"
 import { useFrame, useThree, useLoader } from "@react-three/fiber"
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import {
   CharacterBoxAtom,
@@ -26,10 +27,16 @@ const Character = () => {
 
   // 캐릭터
   const characterRef = useRef()
-  const character = useLoader(
-    GLTFLoader,
-    `assets/models/characters/${characterID}.glb`
-  )
+  const character = useLoader(GLTFLoader, `assets/models/characters/${characterID}.glb`, loader => {
+    const draco = new DRACOLoader();
+    draco.setDecoderPath('assets/draco/');
+    loader.setDRACOLoader(draco);
+  });
+
+  // const character = useLoader(
+  //   GLTFLoader,
+  //   `assets/models/characters/${characterID}.glb`
+  // )
   const [characterBox, setcharacterBox] = useRecoilState(CharacterBoxAtom)
 
   // 애니메이션

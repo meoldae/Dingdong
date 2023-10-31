@@ -5,7 +5,7 @@ import styles from "./StampTestStart.module.css"
 const StampTestStart = (props) => {
   return (
     <div className={styles.Container}>
-      <img
+      <img 
         src={"assets/images/stamp_start.svg"}
         style={{ 
           width: "80%",
