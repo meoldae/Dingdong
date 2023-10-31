@@ -30,6 +30,14 @@ const fetchLetterData = async (param, success, fail) => {
   await HttpJson.get(`letter?page=${param}`).then(success).catch(fail)
 }
 
+const fetchLogout = async (success, fail) => {
+  await HttpJson.delete(`member/logout`).then(success).catch(fail)
+}
+
+const fetchUserSecession = async (success, fail) => {
+  await HttpJson.delete(`member`).then(success).catch(fail)
+}
+
 export {
   CreateUser,
   GetAvatarList,
@@ -38,4 +46,6 @@ export {
   fetchUserInfo,
   fetchLetterData,
   DoubleCheck,
+  fetchLogout,
+  fetchUserSecession,
 }

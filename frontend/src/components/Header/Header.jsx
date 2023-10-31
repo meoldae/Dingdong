@@ -1,6 +1,7 @@
 // 라이브러리
 import { useEffect, useState } from "react"
 import { useRecoilValue } from "recoil"
+import { useNavigate } from "react-router-dom"
 
 // 스타일
 import styles from "./Header.module.css"
@@ -14,6 +15,7 @@ import NeighborAcceptModal from "../Modal/Neighbor/NeighborAcceptModal"
 import RoomBtn from "../Button/Room/RoomBtn"
 import NeighborListModal from "../Modal/Neighbor/NeighborListModal"
 import DefaultModal from "../Modal/Default/DefaultModal"
+import { successMsg } from "../../utils/customToast"
 
 // Atom
 import { userAtom } from "../../atom/UserAtom"
@@ -26,8 +28,11 @@ import {
   fetchNeighborList,
   deleteNeighbor,
 } from "../../api/Neighbor"
+import { fetchLogout, fetchUserSecession } from "../../api/User"
 
 const Header = ({ checkMyRoom }) => {
+  const navigate = useNavigate()
+
   // 햄버거메뉴바 상태관리
   const [isHamburger, setIsHamburger] = useState(false)
   // 알림 상태관리
@@ -147,12 +152,30 @@ const Header = ({ checkMyRoom }) => {
 
   // 로그아웃 함수
   const logoutHandler = () => {
-    console.log("로그아웃")
+    fetchLogout(
+      (success) => {
+        localStorage.removeItem("userAtom")
+        window.location.replace("/login")
+        successMsg("✔ 로그아웃 성공!")
+      },
+      (error) => {
+        "Error at Logout...", error
+      }
+    )
   }
 
   // 회원탈퇴 함수
   const withdrawalHandler = () => {
-    console.log("회원탈퇴")
+    fetchUserSecession(
+      (success) => {
+        localStorage.removeItem("userAtom")
+        window.location.replace("/login")
+        successMsg("✔ 회원탈퇴 성공!")
+      },
+      (error) => {
+        "Error at Secession...", error
+      }
+    )
   }
 
   return (
