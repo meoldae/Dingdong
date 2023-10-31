@@ -11,7 +11,7 @@ const PopUp = () => {
   const [tabStatus, setTabStatus] = useState(0);
   const [popUpStatus, setPopUpStatus] = useRecoilState(popUpStatusAtom);
   const [editMode, setEditMode] = useRecoilState(buildModeState);
-  const isDragging = useRecoilValue(draggedItemState);
+  const [isDragging,setIsDragging] = useRecoilState(draggedItemState);
   const changeMenu = (image, menuIndex) => {
     setTabStatus(menuIndex);
   };
@@ -32,6 +32,7 @@ const PopUp = () => {
     setTabStatus(0);
     setEditMode(false);
     setItems(check);
+    setIsDragging(false);
   };
   const roomCustomSave = () => {
     setCheck(null);
