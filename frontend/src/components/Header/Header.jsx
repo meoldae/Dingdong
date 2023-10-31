@@ -189,7 +189,7 @@ const Header = ({ checkMyRoom }) => {
                     nickname={item.nickname}
                     gohome={goNeighborHomeHandler}
                     remove={removeNeighborHandler}
-                    status={true}
+                    status={true} // 더미값 -> 나중에 유저상태 받아서 변경
                   />
                 </div>
               ))}
