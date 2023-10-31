@@ -18,7 +18,7 @@ import { userAtom } from "../../atom/UserAtom"
 import { roomInfoAtom } from "../../atom/RoomInfoAtom"
 
 // API
-import { fetchNeighborRequest } from "../../api/Neighbor"
+import { fetchNeighborRequest, responseNeighborRequest } from "../../api/Neighbor"
 
 const Header = ({ checkMyRoom }) => {
   // 햄버거메뉴바 상태관리
@@ -60,16 +60,27 @@ const Header = ({ checkMyRoom }) => {
 
   // 이웃요청 수락함수
   const acceptNeighborHandler = (id) => {
-    setAlarmsLength(alarmsLength - 1)
-    setAlarms((prev) => prev.filter((alarm) => alarm.id !== id))
-    console.log("이웃요청 수락")
+    responseNeighborRequest({"flag": "Y", "neighborId": id},
+    (response) => {
+      setAlarmsLength(alarmsLength - 1)
+      setAlarms((prev) => prev.filter((alarm) => alarm.id !== id))
+    },
+    (error) => {
+      console.log("Error in ResponseNeighborRequest ...", error);
+    })
   }
 
   // 이웃요청 거절함수
   const refuseNeighborHandler = (id) => {
-    setAlarmsLength(alarmsLength - 1)
-    setAlarms((prev) => prev.filter((alarm) => alarm.id !== id))
-    console.log("이웃요청 거절")
+    responseNeighborRequest({"flag": "N", "neighborId": id},
+    (response) => {
+      console.log(response.data);
+      setAlarmsLength(alarmsLength - 1)
+      setAlarms((prev) => prev.filter((alarm) => alarm.id !== id))
+    },
+    (error) => {
+      console.log("Error in ResponseNeighborRequest ...", error);
+    })
   }
 
   // 문의하기 함수
