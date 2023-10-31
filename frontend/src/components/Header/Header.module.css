@@ -46,6 +46,17 @@
   transform: translate(-50%, -50%);
 }
 
+.NeighborItemContainer {
+  height: 260px;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.NeighborItemContainer::-webkit-scrollbar {
+  display: none;
+}
+
 /* 공유하기 이미지 */
 /* 남의 방의 경우 */
 .ShareOther {
