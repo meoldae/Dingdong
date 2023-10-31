@@ -31,6 +31,9 @@
   height: 10px;
   border-radius: 50%;
   background: #c4c4c4;
+  position: absolute;
+  left: 45px;
+  z-index: 2;
 }
 
 .InfoContainer {
