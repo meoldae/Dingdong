@@ -11,6 +11,8 @@ import { successMsg } from "@/utils/customToast"
 const SendLetter = ({ onClose, card }) => {
   const [content, setContent] = useState("")
   const [contentCount, setContentCount] = useState(0)
+  const [isSending, setIsSending] = useState(false)
+
   const userInfo = useRecoilValue(userAtom)
   const roomInfo = useRecoilValue(roomInfoAtom)
 
@@ -22,6 +24,10 @@ const SendLetter = ({ onClose, card }) => {
   }
 
   const sendClick = () => {
+    if (isSending) return
+
+    setIsSending(true)
+
     const param = {
       nickName: userInfo.nickname,
       description: content,
@@ -34,6 +40,7 @@ const SendLetter = ({ onClose, card }) => {
       (response) => {
         successMsg("편지를 보냈어요!")
         onClose()
+        setIsSending(false)
       },
       (error) => {
         console.log(error)
