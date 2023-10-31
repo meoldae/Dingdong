@@ -61,7 +61,7 @@ function RoomPage() {
     do {
       randomRoom = Math.floor(Math.random() * 6) + 1;
     } while (randomRoom === roomId || randomRoom === myRoomId);
-    navigate(`/room/${randomRoom}`);
+    window.location.replace(`/room/${randomRoom}`);
   };
 
   return (
