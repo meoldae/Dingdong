@@ -1,3 +1,9 @@
+.MainContainer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
 .postCardContainer {
   display: flex;
   flex-direction: column;
