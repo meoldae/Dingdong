@@ -26,7 +26,8 @@ function SharingModalList(props) {
       navigator.clipboard
         .writeText(window.location.href)
         .then(() => {
-          if (props.shareMode === "room") {
+          if (props.shareMode === "room") { 
+            console.log(window.location.href)
             alert(
               // `${userNickname}님의 \n친구들에게 공유해보세요!`
               `우리집 주소가 복사되었습니다.\n친구들에게 공유해보세요!`
@@ -40,6 +41,9 @@ function SharingModalList(props) {
               `우표 테스트 결과가 복사되었습니다.\n친구들에게 공유해보세요!`
             )
           }
+          navigator.clipboard
+          .writeText()
+
         })
         .catch(() => {
           alert(`지원하지 않는 브라우저입니다.\n다른 브라우저로 접속해주세요.`)
@@ -66,9 +70,9 @@ function SharingModalList(props) {
         alert(`우표 테스트 결과가 복사되었습니다.\n친구들에게 공유해보세요!`)
       }
     }
-    if (props.shareMode === "room") {
-      props.setSharingAtom(false)
-    }
+    // if (props.shareMode === "room") {
+    //   props.setSharingAtom(false)
+    // }
   }
 
   const shareTwitter = (e) => {
@@ -77,7 +81,7 @@ function SharingModalList(props) {
       window.open(
         "https://twitter.com/intent/tweet?text=" + text + "&url=" + url
       )
-      props.setSharingAtom(false)
+      // props.setSharingAtom(false)
     } else if (props.shareMode === "start") {
       const text = "나에게 어울리는 우표는?"
       window.open(
