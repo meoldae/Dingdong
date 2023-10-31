@@ -116,7 +116,11 @@ const Header = ({ checkMyRoom }) => {
   const removeNeighborHandler = (memberId) => {
     deleteNeighbor(
       { memberId: memberId },
-      (response) => {},
+      (response) => {
+        setNeighborList((prev) =>
+          prev.filter((item) => item.memberId !== memberId)
+        )
+      },
       (error) => {
         console.log("Error with Delete Neighbor...", error)
       }
