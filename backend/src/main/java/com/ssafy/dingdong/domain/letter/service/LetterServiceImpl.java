@@ -57,7 +57,7 @@ public class LetterServiceImpl implements LetterService {
         requestDto.setDescription(encryptUtils.encrypt(requestDto.getDescription()));
         String letterTo = roomService.getMemberIdByRoomId(requestDto.getRoomId());
 
-        Letter letter = Letter.build(requestDto, memberId,letterTo, false, stamp, "");
+        Letter letter = Letter.build(requestDto, memberId, letterTo, false, stamp, "");
         letterRepository.save(letter);
     }
 

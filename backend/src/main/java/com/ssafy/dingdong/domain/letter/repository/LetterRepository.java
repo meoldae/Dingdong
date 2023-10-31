@@ -20,7 +20,7 @@ public interface LetterRepository extends JpaRepository<Letter, Long> {
     Page<LetterListResponseDto> findAllByLetterToAndIsReportFalseOrderByCreateTimeDesc(@Param("memberId") String memberId, Pageable pageable);
 
     @Query("SELECT new com.ssafy.dingdong.domain.letter.dto.response.LetterResponseDto( " +
-            "l.anonymousFlag, l.description, mf.nickname, mt.nickname, s.imgUrl, s.description, l.createTime) " +
+            "l.anonymousFlag, l.description, l.nickName, mt.nickname, s.imgUrl, s.description, l.createTime) " +
             "FROM Letter l " +
             "JOIN Member mf ON l.letterFrom = mf.memberId " +
             "JOIN Member mt ON l.letterTo = mt.memberId " +
