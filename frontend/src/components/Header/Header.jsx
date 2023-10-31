@@ -153,7 +153,7 @@ const Header = ({ checkMyRoom }) => {
               <img
                 src={"/assets/icons/x.svg"}
                 className={styles.AlarmX}
-                onClick={() => setAlarms(false)}
+                onClick={() => setIsAlarm(false)}
               />
             </div>
             {alarmsLength !== 0 ? (
