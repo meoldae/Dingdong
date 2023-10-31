@@ -18,7 +18,10 @@ import { userAtom } from "../../atom/UserAtom"
 import { roomInfoAtom } from "../../atom/RoomInfoAtom"
 
 // API
-import { fetchNeighborRequest, responseNeighborRequest } from "../../api/Neighbor"
+import {
+  fetchNeighborRequest,
+  responseNeighborRequest,
+} from "../../api/Neighbor"
 
 const Header = ({ checkMyRoom }) => {
   // 햄버거메뉴바 상태관리
@@ -38,7 +41,6 @@ const Header = ({ checkMyRoom }) => {
   useEffect(() => {
     fetchNeighborRequest(
       (success) => {
-        console.log(success.data.data)
         setAlarmsLength(success.data.data.length)
         setAlarms(success.data.data)
       },
@@ -60,27 +62,30 @@ const Header = ({ checkMyRoom }) => {
 
   // 이웃요청 수락함수
   const acceptNeighborHandler = (id) => {
-    responseNeighborRequest({"flag": "Y", "neighborId": id},
-    (response) => {
-      setAlarmsLength(alarmsLength - 1)
-      setAlarms((prev) => prev.filter((alarm) => alarm.id !== id))
-    },
-    (error) => {
-      console.log("Error in ResponseNeighborRequest ...", error);
-    })
+    responseNeighborRequest(
+      { flag: "Y", neighborId: id },
+      (response) => {
+        setAlarmsLength(alarmsLength - 1)
+        setAlarms((prev) => prev.filter((alarm) => alarm.neighborId !== id))
+      },
+      (error) => {
+        console.log("Error in ResponseNeighborRequest ...", error)
+      }
+    )
   }
 
   // 이웃요청 거절함수
   const refuseNeighborHandler = (id) => {
-    responseNeighborRequest({"flag": "N", "neighborId": id},
-    (response) => {
-      console.log(response.data);
-      setAlarmsLength(alarmsLength - 1)
-      setAlarms((prev) => prev.filter((alarm) => alarm.id !== id))
-    },
-    (error) => {
-      console.log("Error in ResponseNeighborRequest ...", error);
-    })
+    responseNeighborRequest(
+      { flag: "N", neighborId: id },
+      (response) => {
+        setAlarmsLength(alarmsLength - 1)
+        setAlarms((prev) => prev.filter((alarm) => alarm.neighborId !== id))
+      },
+      (error) => {
+        console.log("Error in ResponseNeighborRequest ...", error)
+      }
+    )
   }
 
   // 문의하기 함수
