@@ -5,28 +5,71 @@
 
 .popUpContainer {
     z-index: 4;
-
     width: 100%;
     height: 30vh;
     position: absolute;
     border-radius: 15px 15px 0 0;
-    bottom: 5vh;
+    bottom: 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease-in-out;
-    z-index: -1;
+    align-items: center;    
+    animation: loadEffect1 0.3s ease-in-out forwards;
 }
 
-.notActive{
-    transform: translateY(120%);
-}
-
-.active{
-    transform: translateY(0%);
-    z-index: 5;
+/* 열릴 때 적용될 클래스 */
+.popUpContainer.opening {
+    z-index: 4;
+    width: 100%;
+    height: 30vh;
+    position: absolute;
+    border-radius: 15px 15px 0 0;
     bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    animation: openEffect 0.3s ease-in-out forwards;
+}
+
+/* 닫힐 때 적용될 클래스 */
+.popUpContainer.closing {
+    z-index: 4;
+    width: 100%;
+    height: 30vh;
+    position: absolute;
+    border-radius: 15px 15px 0 0;
+    bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    animation: closeEffect 0.3s ease-in-out forwards;
+}
+
+@keyframes openEffect {
+    0% {
+        opacity: 1;
+        transform: translateY(120%);
+      }
+      
+      100% {
+        opacity: 1;
+        transform: translateY(0%);
+      }
+}
+
+@keyframes closeEffect {
+    0% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+
+    
+    100% {
+      opacity: 1;
+      transform: translateY(120%);
+    }
 }
 
 .tabBar {
