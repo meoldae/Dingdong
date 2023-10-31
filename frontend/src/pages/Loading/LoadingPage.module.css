@@ -7,6 +7,10 @@
   flex-direction: column;
 }
 
+.Image {
+  width: 100px;
+}
+
 .Content {
   font-family: "Pretendard-Bold";
   font-size: 30px;
