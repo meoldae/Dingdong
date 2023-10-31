@@ -5,7 +5,6 @@ export const buildModeState = atom({
   default: false,
 });
 
-
 // 클릭한 녀석 포지션
 export const dragPositionState = atom({
   key: "dragPositionState",
@@ -24,15 +23,26 @@ export const ItemsState = atom({
   default: null,
 });
 
-
 // 클릭한 녀석 회전 상태
 export const ItemRotateState = atom({
   key: "ItemRotateState",
   default: null,
 });
 
-
 export const checkState = atom({
-  key:"checkState",
+  key: "checkState",
   default: null,
+});
+
+export const canDropState = atom({
+  key:"canDropState",
+  default: false,
 })
+
+export const mobileCheckState = atom({
+  key: "mobileCheckState",
+  default:
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    ),
+});

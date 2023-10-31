@@ -3,7 +3,7 @@ import { SkeletonUtils } from "three-stdlib";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useGrid } from "./UseGrid";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { ItemRotateState, ItemsState, draggedItemState } from "./Atom";
+import { ItemRotateState, ItemsState, draggedItemState, mobileCheckState } from "./Atom";
 export const Item = ({
   item,
   onClick,
@@ -31,10 +31,7 @@ export const Item = ({
   const [items, setItems] = useRecoilState(ItemsState);
   const draggedItem = useRecoilValue(draggedItemState);
   const value = useRecoilValue(ItemRotateState);
-  const mobileCheck =
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
+  const mobileCheck = useRecoilValue(mobileCheckState);
   useEffect(() => {
     setItems((prev) => {
       const newItems = prev.map((item, index) => {
@@ -79,9 +76,9 @@ export const Item = ({
             />
             {isDragging && (
               <mesh
-                position-x={rotation ? 0.02 : 0.12}
-                position-y={0.12}
-                position-z={0.13}
+              position-x={rotation ? 0.02 : 0}
+              position-y={0.12}
+              position-z={rotation? 0 : 0.13}
               >
                 <boxGeometry
                   args={[
@@ -121,9 +118,9 @@ export const Item = ({
             />
             {isDragging && (
               <mesh
-                position-x={rotation ? 0.02 : 0.24}
+                position-x={rotation ? 0.02 : 0}
                 position-y={0.12}
-                position-z={rotation? 0 : 0.2}
+                position-z={rotation? 0 : 0.13}
               >
                 <boxGeometry
                   args={[

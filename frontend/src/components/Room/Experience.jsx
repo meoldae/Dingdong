@@ -9,12 +9,15 @@ import {
   ItemRotateState,
   ItemsState,
   buildModeState,
+  canDropState,
   checkState,
   dragPositionState,
   draggedItemState,
+  mobileCheckState,
 } from "./Atom";
 import { gsap } from "gsap";
 import styles from "./Room.module.css";
+import { DoubleSide } from "three";
 
 const Experience = () => {
   const buildMode = useRecoilValue(buildModeState);
@@ -22,15 +25,12 @@ const Experience = () => {
   const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState);
   const { vector3ToGrid, wallLeftVector3ToGrid, wallRightVector3ToGrid } =
     useGrid();
-  const [canDrop, setCanDrop] = useState(false);
+  const [canDrop, setCanDrop] = useRecoilState(canDropState);
   const [items, setItems] = useRecoilState(ItemsState);
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState);
   const check = useRecoilValue(checkState);
-  const mobileCheck =
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
+  const mobileCheck = useRecoilValue(mobileCheckState);
   // onPlaneClicked 이벤트에 예외처리
   useEffect(() => {
     if (draggedItem === null) {
@@ -378,6 +378,7 @@ const Experience = () => {
         position-x={-2.394}
         // visible={false}
         position-y={1.92}
+        
         onClick={() => {
           if (!mobileCheck) {
             if (draggedItem !== null && dragPosition) {
@@ -427,8 +428,8 @@ const Experience = () => {
           }
         }}
       >
-        <planeGeometry args={[4.8, 3.84]} />
-        <meshStandardMaterial color="#f0f0f0" />
+        <planeGeometry args={[4.8, 3.84]}  />
+        <meshStandardMaterial color="#f0f0f0" side={DoubleSide} />
       </mesh>
 
       {/* 오른쪽 평면 */}
@@ -486,7 +487,7 @@ const Experience = () => {
         }}
       >
         <planeGeometry args={[4.8, 3.84]} />
-        <meshStandardMaterial color="#f0f0f0" />
+        <meshStandardMaterial color="#f0f0f0" side={DoubleSide} />
       </mesh>
       {buildMode && (
         <>
@@ -515,67 +516,6 @@ const Experience = () => {
             rotation-z={-Math.PI / 2}
           />
         </>
-      )}
-      {draggedItem !== null && buildMode && (
-        <Html className={styles.dragbutton}>
-          <img
-            src="/assets/icons/refresh.svg"
-            alt=""
-            onClick={() => {
-              if (items[draggedItem].categoryId === 3) {
-                setDraggedItemRotation(
-                  draggedItemRotation === 1 ? 0 : draggedItemRotation + 1
-                );
-              } else {
-                setDraggedItemRotation(
-                  draggedItemRotation === 3 ? 0 : draggedItemRotation + 1
-                );
-              }
-            }}
-          />
-          <img
-            src="/assets/icons/cross.svg"
-            alt=""
-            onClick={() => {
-              setItems((prevItems) => {
-                return prevItems.filter((_, index) => index !== draggedItem);
-              });
-              setDraggedItem(null);
-              setDraggedItemRotation(null);
-            }}
-          />
-          {mobileCheck &&
-            (canDrop ? (
-              <img
-                src="/assets/icons/check.svg"
-                alt=""
-                onClick={() => {
-                  if (draggedItem !== null && dragPosition) {
-                    if (canDrop) {
-                      setItems((prev) => {
-                        console.log(prev);
-                        const newItems = prev.map((item, index) => {
-                          if (index === draggedItem) {
-                            return {
-                              ...item,
-                              position: dragPosition,
-                              rotation: draggedItemRotation,
-                            };
-                          }
-                          return item;
-                        });
-                        return newItems;
-                      });
-                    }
-                    setDraggedItemRotation(null);
-                    setDraggedItem(null);
-                  }
-                }}
-              />
-            ) : (
-              <img src="/assets/icons/check.svg" />
-            ))}
-        </Html>
       )}
     </>
   );
