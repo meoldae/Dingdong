@@ -49,6 +49,8 @@ const Header = ({ checkMyRoom }) => {
   const [removeNeighborList, setRemoveNeighborList] = useState(false)
   // 제거하려는 이웃 아이디 상태관리
   const [removeNeighborId, setRemoveNeighborId] = useState(0)
+  // 문의하기 모달 상태관리
+  const [isInquiry, setIsInquiry] = useState(false)
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
