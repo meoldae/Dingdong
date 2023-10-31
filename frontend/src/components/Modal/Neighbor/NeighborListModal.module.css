@@ -13,6 +13,7 @@
   height: 50px;
   border-radius: 50%;
   background: #fff;
+  position: relative;
 }
 
 .StatusOnDot {
@@ -20,6 +21,9 @@
   height: 10px;
   border-radius: 50%;
   background: #049463;
+  position: absolute;
+  left: 45px;
+  z-index: 2;
 }
 
 .StatusOffDot {
