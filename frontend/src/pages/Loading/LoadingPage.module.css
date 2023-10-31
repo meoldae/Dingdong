@@ -1,0 +1,14 @@
+.Container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.Content {
+  font-family: "Pretendard-Bold";
+  font-size: 30px;
+  margin-bottom: 20px;
+}

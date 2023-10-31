@@ -145,3 +145,41 @@
 .MenuButton {
   padding: 10px 0 10px 0;
 }
+
+/* 알림 모달 */
+.AlarmContainer {
+  top: 40%;
+  left: 50%;
+  z-index: 6;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.alarmListContainer {
+  height: 260px;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.alarmListContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.xButtonContainer {
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.AlarmX {
+  width: 15px;
+  height: 15px;
+}
+
+.AlarmModal {
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background: #fff;
+}
