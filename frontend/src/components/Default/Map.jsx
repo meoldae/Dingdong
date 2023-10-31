@@ -11,6 +11,7 @@ const Map = () => {
     // "assets/models/defaultSettings/DefaultMap.glb"
   )
   const mapRef = useRef(null)
+  console.log(map)
 
   useEffect(() => {
     // 그림자 세팅

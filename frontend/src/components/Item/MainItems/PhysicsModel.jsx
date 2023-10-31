@@ -3,21 +3,26 @@ import * as THREE from "three"
 import { FenceBoxAtom } from "../../../atom/FenceAtom"
 import { useSetRecoilState } from "recoil"
 
-const PhysicsModel = () => {
+const PhysicsModel = ({ position, rotation, size }) => {
   const meshRef = useRef()
-  const setFenceBox = useSetRecoilState(FenceBoxAtom)
+  const setFenceBoxes = useSetRecoilState(FenceBoxAtom)
 
   useEffect(() => {
     if (meshRef.current) {
-      const fenceBox = new THREE.Box3().setFromObject(meshRef.current)
-      setFenceBox(fenceBox)
+      const newFenceBox = new THREE.Box3().setFromObject(meshRef.current)
+      setFenceBoxes((oldFenceBoxes) => [...oldFenceBoxes, newFenceBox])
     }
-  }, [meshRef])
+  }, [meshRef, setFenceBoxes])
 
   return (
-    <mesh ref={meshRef} position={[0, 0.005, -3]}>
-      <planeGeometry args={[1, 1]} />
-      <meshStandardMaterial visible="none" transparent opacity={0.5} />
+    <mesh ref={meshRef} position={position} rotation={rotation}>
+      <planeGeometry args={size} />
+      <meshStandardMaterial
+        visible="none"
+        transparent
+        opacity={0.2}
+        color={"red"}
+      />
     </mesh>
   )
 }

@@ -57,7 +57,8 @@ const Character = () => {
   const [destination, setDestination] = useState(new THREE.Vector3(0, 0, 0))
 
   // 경계 박스
-  const fenceBox = useRecoilValue(FenceBoxAtom)
+  // const fenceBox = useRecoilValue(FenceBoxAtom)
+  const fenceBoxes = useRecoilValue(FenceBoxAtom)
 
   let min = new THREE.Vector3(
     position.x - 0.1, // x의 최소값
@@ -129,8 +130,15 @@ const Character = () => {
           nextPosition,
           new THREE.Vector3(1, 0.1, 1)
         )
+        let hasCollision = false
+        for (let box of fenceBoxes) {
+          if (customBox.intersectsBox(box)) {
+            hasCollision = true
+            break
+          }
+        }
 
-        if (!customBox.intersectsBox(fenceBox)) {
+        if (!hasCollision) {
           // 충돌이 발생하지 않으면, 움직임 적용
           position.add(new THREE.Vector3(dx, 0, dz))
 
