@@ -34,6 +34,11 @@ export const checkState = atom({
   default: null,
 });
 
+export const canDropState = atom({
+  key:"canDropState",
+  default: false,
+})
+
 export const mobileCheckState = atom({
   key: "mobileCheckState",
   default:

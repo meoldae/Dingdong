@@ -9,6 +9,7 @@ import {
   ItemRotateState,
   ItemsState,
   buildModeState,
+  canDropState,
   checkState,
   dragPositionState,
   draggedItemState,
@@ -23,7 +24,7 @@ const Experience = () => {
   const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState);
   const { vector3ToGrid, wallLeftVector3ToGrid, wallRightVector3ToGrid } =
     useGrid();
-  const [canDrop, setCanDrop] = useState(false);
+  const [canDrop, setCanDrop] = useRecoilState(canDropState);
   const [items, setItems] = useRecoilState(ItemsState);
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState);
