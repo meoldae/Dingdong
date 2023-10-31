@@ -42,7 +42,7 @@
 .NeighborList {
   position: absolute;
   top: 75px;
-  left: 85%;
+  right: 4%;
   z-index: 4;
 }
 
@@ -77,7 +77,7 @@
 /* 내 방의 경우 */
 .ShareMy {
   position: absolute;
-  top: 125px;
+  top: 145px;
   right: 4%;
   z-index: 4;
 }
