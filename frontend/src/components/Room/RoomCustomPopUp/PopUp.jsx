@@ -3,7 +3,14 @@ import PopUpContent from "./PopUpContent";
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { popUpStatusAtom } from "../../../atom/RoomCustomTabAtom";
-import { ItemsState, buildModeState, checkState, draggedItemState } from "../Atom";
+import {
+  ItemRotateState,
+  ItemsState,
+  buildModeState,
+  checkState,
+  draggedItemState,
+  mobileCheckState,
+} from "../Atom";
 import { updateFurnitureList } from "../../../api/Furniture";
 import { userAtom } from "../../../atom/UserAtom";
 
@@ -11,14 +18,15 @@ const PopUp = () => {
   const [tabStatus, setTabStatus] = useState(0);
   const [popUpStatus, setPopUpStatus] = useRecoilState(popUpStatusAtom);
   const [editMode, setEditMode] = useRecoilState(buildModeState);
-  const [isDragging,setIsDragging] = useRecoilState(draggedItemState);
+  const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState);
   const changeMenu = (image, menuIndex) => {
     setTabStatus(menuIndex);
   };
   const [items, setItems] = useRecoilState(ItemsState);
   const [check, setCheck] = useRecoilState(checkState);
+  const [draggedItemRotation, setDraggedItemRotation] =useRecoilState(ItemRotateState);
   const userInfo = useRecoilValue(userAtom);
-
+  const mobileCheck = useRecoilValue(mobileCheckState);
   const myRoomId = userInfo.roomId;
   useEffect(() => {
     if (check) {
@@ -32,7 +40,6 @@ const PopUp = () => {
     setTabStatus(0);
     setEditMode(false);
     setItems(check);
-    setIsDragging(false);
   };
   const roomCustomSave = () => {
     setCheck(null);
@@ -44,8 +51,7 @@ const PopUp = () => {
       roomId: myRoomId,
       updateFurnitureList: updatedItem,
     };
-    updateFurnitureList(roomItem, (response) => {
-    }).then((res) => {
+    updateFurnitureList(roomItem, (response) => {}).then((res) => {
       setEditMode(false);
       setPopUpStatus(false);
     });
@@ -66,7 +72,69 @@ const PopUp = () => {
         popUpStatus ? styles.active : styles.notActive
       }`}
     >
-      {isDragging ? (
+      {draggedItem !== null && editMode && (
+        <div className={styles.dragPopUp}>
+          <img
+            src="/assets/icons/refresh.svg"
+            alt=""
+            onClick={() => {
+              if (items[draggedItem].categoryId === 3) {
+                setDraggedItemRotation(
+                  draggedItemRotation === 1 ? 0 : draggedItemRotation + 1
+                );
+              } else {
+                setDraggedItemRotation(
+                  draggedItemRotation === 3 ? 0 : draggedItemRotation + 1
+                );
+              }
+            }}
+          />
+          <img
+            src="/assets/icons/cross.svg"
+            alt=""
+            onClick={() => {
+              setItems((prevItems) => {
+                return prevItems.filter((_, index) => index !== draggedItem);
+              });
+              setDraggedItem(null);
+              setDraggedItemRotation(null);
+            }}
+          />
+          {mobileCheck &&
+            (canDrop ? (
+              <img
+                src="/assets/icons/check.svg"
+                alt=""
+                onClick={() => {
+                  if (draggedItem !== null && dragPosition) {
+                    if (canDrop) {
+                      setItems((prev) => {
+                        console.log(prev);
+                        const newItems = prev.map((item, index) => {
+                          if (index === draggedItem) {
+                            return {
+                              ...item,
+                              position: dragPosition,
+                              rotation: draggedItemRotation,
+                            };
+                          }
+                          return item;
+                        });
+                        return newItems;
+                      });
+                    }
+                    setDraggedItemRotation(null);
+                    setDraggedItem(null);
+                  }
+                }}
+              />
+            ) : (
+              <img src="/assets/icons/check.svg" />
+            ))}
+        </div>
+      )}
+
+      {draggedItem !==null ? (
         <div className={styles.popUpCloseerr}>
           <img src="/assets/icons/cross.svg" className={styles.closeVector} />
         </div>
@@ -76,7 +144,7 @@ const PopUp = () => {
         </div>
       )}
 
-      {isDragging ? (
+      {draggedItem !== null ? (
         <div className={styles.customSaveButtonErr}>
           <img
             src="/assets/icons/save.svg"
