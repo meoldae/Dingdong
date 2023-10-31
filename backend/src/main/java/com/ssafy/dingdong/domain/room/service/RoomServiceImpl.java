@@ -186,14 +186,16 @@ public class RoomServiceImpl implements RoomService {
 	@Override
 	@Transactional
 	public String isHeartRoom(String memberId, Long roomId) {
-		RoomHeart roomHeartInfo = roomHeartRepository.findByMemberIdAndRoomId(memberId, roomId).orElseThrow(
-			() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
-		);
+		RoomHeart roomHeartInfo = roomHeartRepository.findByMemberIdAndRoomId(memberId, roomId).orElse(null);
 
-		if (roomHeartInfo.getCreateTime() != null) {
-			return "Y";
-		} else {
+		if (roomHeartInfo == null) {
 			return "N";
+		} else {
+			if (roomHeartInfo.getCreateTime() != null) {
+				return "Y";
+			} else {
+				return "N";
+			}
 		}
 	}
 
