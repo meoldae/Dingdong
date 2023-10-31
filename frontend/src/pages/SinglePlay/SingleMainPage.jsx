@@ -212,6 +212,7 @@ const SingleMainPage = () => {
             modalContent={"우리집에 입장하시겠습니까?"}
             setConfirmEnteringLocation={setConfirmEnteringRoom}
             location={"house"}
+            flag={"1"}
           />
         </div>
       )}
@@ -219,9 +220,12 @@ const SingleMainPage = () => {
         <div className={styles.confirmModal}>
           {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
           <ConfirmEnteringDefaultModal
-            modalContent={"준비중"}
+            modalContent={
+              "다른 유저들에게 편지를 보낼 수 있는 우체국을 준비 중입니다!"
+            }
             setConfirmEnteringLocation={setConfirmEnteringPostOffice}
             location={"postOffice"}
+            flag={"0"}
           />
         </div>
       )}
@@ -229,9 +233,10 @@ const SingleMainPage = () => {
         <div className={styles.confirmModal}>
           {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
           <ConfirmEnteringDefaultModal
-            modalContent={"준비중"}
+            modalContent={"집을 꾸밀 수 있는 가구 상점을 준비 중입니다!"}
             setConfirmEnteringLocation={setConfirmEnteringStore}
             location={"store"}
+            flag={"0"}
           />
         </div>
       )}
@@ -242,6 +247,7 @@ const SingleMainPage = () => {
             modalContent={"다른 유저의 집을 구경하시겠습니까?"}
             setConfirmEnteringLocation={setConfirmEnteringOtherRoom}
             location={"otherRoom"}
+            flag={"1"}
           />
         </div>
       )}
@@ -249,9 +255,12 @@ const SingleMainPage = () => {
         <div className={styles.confirmModal}>
           {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
           <ConfirmEnteringDefaultModal
-            modalContent={"준비중"}
+            modalContent={
+              "다른 유저들을 만날 수 있는 멀티 플레이 서비스를 준비중 입니다!"
+            }
             setConfirmEnteringLocation={setConfirmEnteringWorld}
             location={"world"}
+            flag={"0"}
           />
         </div>
       )}
