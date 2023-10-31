@@ -17,7 +17,7 @@ import PostPage from "../pages/Post/PostPage"
 import InviteRoomPage from "../pages/Room/InviteRoomPage"
 import LoadingPage from "../components/UI/LoadingPage"
 import Error from "../components/UI/Error"
-// const Single = lazy(() => import("../pages/SinglePlay/SingleMainPage"))
+// const Room = lazy(() => import("../pages/SinglePlay/SingleMainPage"))
 
 const AppRouter = () => {
   return (
