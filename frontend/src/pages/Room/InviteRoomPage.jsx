@@ -32,7 +32,7 @@ function InviteRoomPage() {
 
   return (
     <div className={styles.container}>
-      <Header checkMyRoom={"other"} />
+      <Header checkMyRoom={"invite"} />
       <Canvas
         shadows
         gl={{ preserveDrawingBuffer: true, antialias: true }}
