@@ -35,7 +35,10 @@ const StampTestOptions = (props) => {
 
   return (
     <div className={styles.Container}>
-      <img src={"assets/images/stamp_option.svg"} />
+      <img
+        src={"assets/images/stamp_option.png"} 
+        style={{ marginTop: "20%", width: "60%",}}
+      />
       <div className={styles.ContentContainer}>
         <div className={styles.Question}>{Questions[opsNum].question}</div>
         <div className={styles.AnswerContainer}>

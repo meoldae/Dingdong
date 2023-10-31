@@ -86,7 +86,7 @@ const PopUp = () => {
           {draggedItem !== null && editMode && (
             <div className={styles.dragPopUp}>
               <img
-                src="/assets/icons/refresh.svg"
+                src="/assets/icons/refresh.png"
                 alt=""
                 onClick={() => {
                   if (items[draggedItem].categoryId === 3) {
@@ -101,7 +101,7 @@ const PopUp = () => {
                 }}
               />
               <img
-                src="/assets/icons/cross.svg"
+                src="/assets/icons/cross.png"
                 alt=""
                 onClick={() => {
                   setItems((prevItems) => {
@@ -116,7 +116,7 @@ const PopUp = () => {
               {mobileCheck &&
                 (canDrop ? (
                   <img
-                    src="/assets/icons/check.svg"
+                    src="/assets/icons/check.png"
                     alt=""
                     onClick={() => {
                       if (draggedItem !== null && dragPosition) {
@@ -153,7 +153,7 @@ const PopUp = () => {
                     }}
                   />
                 ) : (
-                  <img src="/assets/icons/check.svg" />
+                  <img src="/assets/icons/check.png" />
                 ))}
             </div>
           )}
@@ -161,14 +161,14 @@ const PopUp = () => {
           {draggedItem !== null ? (
             <div className={styles.popUpCloseerr}>
               <img
-                src="/assets/icons/cross.svg"
+                src="/assets/icons/cross.png"
                 className={styles.closeVector}
               />
             </div>
           ) : (
             <div className={styles.popUpClose} onClick={() => popUpClose()}>
               <img
-                src="/assets/icons/cross.svg"
+                src="/assets/icons/cross.png"
                 className={styles.closeVector}
               />
             </div>
@@ -177,7 +177,7 @@ const PopUp = () => {
           {draggedItem !== null ? (
             <div className={styles.customSaveButtonErr}>
               <img
-                src="/assets/icons/save.svg"
+                src="/assets/icons/save.png"
                 className={styles.customSaveVector}
               />
             </div>
@@ -187,7 +187,7 @@ const PopUp = () => {
               onClick={() => roomCustomSave()}
             >
               <img
-                src="/assets/icons/save.svg"
+                src="/assets/icons/save.png"
                 className={styles.customSaveVector}
               />
             </div>

@@ -7,7 +7,7 @@ import styles from "./Header.module.css"
 
 // 이미지
 import hamburger from "/assets/icons/hamburgerbar.svg"
-import bell from "/assets/icons/bell.svg"
+import bell from "/assets/icons/bell.png"
 
 // 컴포넌트
 import { successMsg } from "@/utils/customToast"
@@ -176,7 +176,7 @@ const Header = ({ checkMyRoom }) => {
           <div className={styles.NeighborListContainer}>
             <div className={styles.xButtonContainer}>
               <img
-                src={"/assets/icons/x.svg"}
+                src={"/assets/icons/x.png"}
                 className={styles.AlarmX}
                 onClick={() => setIsNeighborList(false)}
               />
@@ -228,7 +228,7 @@ const Header = ({ checkMyRoom }) => {
           <div className={styles.AlarmContainer}>
             <div className={styles.xButtonContainer}>
               <img
-                src={"/assets/icons/x.svg"}
+                src={"/assets/icons/x.png"}
                 className={styles.AlarmX}
                 onClick={() => setIsAlarm(false)}
               />
