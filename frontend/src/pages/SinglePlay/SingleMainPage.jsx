@@ -106,7 +106,26 @@ const SingleMainPage = () => {
         <Model />
         {/* <Spot /> */}
         {/* <House /> */}
-        <PhysicsModel />
+        <PhysicsModel // 상
+          position={[0, 0.005, -17]}
+          rotation={[0, 0, 0]}
+          size={[50, 0.3]}
+        />
+        <PhysicsModel //하
+          position={[0, 0.005, 45]}
+          rotation={[0, 0, 0]}
+          size={[50, 0.3]}
+        />
+        <PhysicsModel //좌
+          position={[-25, 0.005, 14]}
+          rotation={[0, Math.PI / 2, 0]}
+          size={[62, 0.3]}
+        />
+        <PhysicsModel //우
+          position={[25, 0.005, 14]}
+          rotation={[0, Math.PI / 2, 0]}
+          size={[62, 0.3]}
+        />
 
         {/* 포탈 */}
         {roomPortalVisible ? (

@@ -14,6 +14,14 @@
   margin-top: 20px;
 }
 
+.inviteHeader {
+  display: flex;
+  width: 90%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 .header img {
   width: 40px;
   height: 40px;
@@ -30,10 +38,46 @@
   font-size: 20px;
 }
 
+/* 이웃 리스트 */
+.NeighborList {
+  position: absolute;
+  top: 75px;
+  left: 85%;
+  z-index: 4;
+}
+
+.NeighborListContainer {
+  top: 40%;
+  left: 50%;
+  z-index: 6;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.NeighborItemContainer {
+  height: 260px;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.NeighborItemContainer::-webkit-scrollbar {
+  display: none;
+}
+
 /* 공유하기 이미지 */
-.Share {
+/* 남의 방의 경우 */
+.ShareOther {
   position: absolute;
   top: 80px;
+  right: 25px;
+  z-index: 3;
+}
+
+/* 내 방의 경우 */
+.ShareMy {
+  position: absolute;
+  top: 125px;
   left: 85%;
   z-index: 4;
 }

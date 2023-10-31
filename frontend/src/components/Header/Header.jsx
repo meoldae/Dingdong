@@ -12,6 +12,8 @@ import bell from "/assets/icons/bell.png"
 // 컴포넌트
 import { successMsg } from "@/utils/customToast"
 import NeighborAcceptModal from "../Modal/Neighbor/NeighborAcceptModal"
+import RoomBtn from "../Button/Room/RoomBtn"
+import NeighborListModal from "../Modal/Neighbor/NeighborListModal"
 
 // Atom
 import { userAtom } from "../../atom/UserAtom"
@@ -21,6 +23,7 @@ import { roomInfoAtom } from "../../atom/RoomInfoAtom"
 import {
   fetchNeighborRequest,
   responseNeighborRequest,
+  fetchNeighborList,
 } from "../../api/Neighbor"
 
 const Header = ({ checkMyRoom }) => {
@@ -32,6 +35,10 @@ const Header = ({ checkMyRoom }) => {
   const [alarms, setAlarms] = useState([])
   // 알림 리스트 길이 상태관리
   const [alarmsLength, setAlarmsLength] = useState(0)
+  // 이웃리스트 모달 상태관리
+  const [isNeighborList, setIsNeighborList] = useState(false)
+  // 이웃리스트 상태관리
+  const [neighborList, setNeighborList] = useState([])
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
@@ -39,6 +46,16 @@ const Header = ({ checkMyRoom }) => {
 
   // 유저요청 가져오기
   useEffect(() => {
+    // 이웃 리스트
+    fetchNeighborList(
+      (success) => {
+        setNeighborList(success.data.data)
+      },
+      (error) => {
+        console.log("Error at neighbor list...", error)
+      }
+    )
+    // 이웃요청 리스트
     fetchNeighborRequest(
       (success) => {
         setAlarmsLength(success.data.data.length)
@@ -88,6 +105,16 @@ const Header = ({ checkMyRoom }) => {
     )
   }
 
+  // 이웃 리스트 - 집 방문 함수
+  const goNeighborHomeHandler = () => {
+    console.log("집 방문 함수")
+  }
+
+  // 이웃 리스트 - 이웃 삭제 함수
+  const removeNeighborHandler = () => {
+    console.log("이웃 삭제 함수")
+  }
+
   // 문의하기 함수
   const inquiryHandler = () => {
     console.log("문의하기")
@@ -106,20 +133,70 @@ const Header = ({ checkMyRoom }) => {
   return (
     <>
       <div className={styles.wrap}>
-        <div className={styles.header}>
-          <img
-            src={hamburger}
-            onClick={() => setIsHamburger(true)}
-            className={styles.HamburgerButton}
-          />
-          {checkMyRoom === "my" ? (
-            <div className={styles.userName}>{userInfo.nickname}</div>
-          ) : (
+        <div
+          className={
+            checkMyRoom === "invite" ? styles.inviteHeader : styles.header
+          }
+        >
+          {checkMyRoom === "invite" ? (
             <div className={styles.userName}>{roomInfo}</div>
+          ) : (
+            <>
+              <img
+                src={hamburger}
+                onClick={() => setIsHamburger(true)}
+                className={styles.HamburgerButton}
+              />
+              <div className={styles.userName}>
+                {checkMyRoom === "my" ? userInfo.nickname : roomInfo}
+              </div>
+              <img src={bell} onClick={alarmHandler} />
+            </>
           )}
-          <img src={bell} onClick={alarmHandler} />
         </div>
       </div>
+
+      {/* 이웃 리스트 */}
+      {checkMyRoom === "my" && (
+        <div className={styles.NeighborList}>
+          <RoomBtn
+            img={"neighborList"}
+            onClick={() => setIsNeighborList(true)}
+          />
+        </div>
+      )}
+
+      {/* 이웃 리스트 모달 */}
+      {isNeighborList && (
+        <>
+          <div
+            className={styles.Overlay}
+            onClick={() => setIsNeighborList(false)}
+          />
+          <div className={styles.NeighborListContainer}>
+            <div className={styles.xButtonContainer}>
+              <img
+                src={"/assets/icons/x.png"}
+                className={styles.AlarmX}
+                onClick={() => setIsNeighborList(false)}
+              />
+            </div>
+            <div className={styles.NeighborItemContainer}>
+              {neighborList.map((item) => (
+                <div key={item.memberId}>
+                  <NeighborListModal
+                    imgName={item.avatarId}
+                    nickname={item.nickname}
+                    gohome={goNeighborHomeHandler}
+                    remove={removeNeighborHandler}
+                    status={item.isActive}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
 
       {/* 햄버거 바 */}
       {isHamburger && (
@@ -151,7 +228,7 @@ const Header = ({ checkMyRoom }) => {
           <div className={styles.AlarmContainer}>
             <div className={styles.xButtonContainer}>
               <img
-                src={"/assets/icons/x.svg"}
+                src={"/assets/icons/x.png"}
                 className={styles.AlarmX}
                 onClick={() => setIsAlarm(false)}
               />

@@ -384,7 +384,6 @@ const Experience = () => {
             if (draggedItem !== null && dragPosition) {
               if (canDrop) {
                 setItems((prev) => {
-                  console.log(prev);
                   const newItems = prev.map((item, index) => {
                     if (index === draggedItem) {
                       return {
@@ -437,25 +436,11 @@ const Experience = () => {
         position-z={-2.394}
         // visible={false}
         position-y={1.92}
-        onPointerMove={(e) => {
-          if (!buildMode) {
-            return;
-          }
-          const newPosition = wallRightVector3ToGrid(e.point);
-          if (
-            !dragPosition ||
-            newPosition[0] !== dragPosition[0] ||
-            newPosition[1] !== dragPosition[1]
-          ) {
-            setDraggPosition(newPosition);
-          }
-        }}
         onClick={() => {
-          if (mobileCheck) {
+          if (!mobileCheck) {
             if (draggedItem !== null && dragPosition) {
               if (canDrop) {
                 setItems((prev) => {
-                  console.log(prev);
                   const newItems = prev.map((item, index) => {
                     if (index === draggedItem) {
                       return {
@@ -485,6 +470,20 @@ const Experience = () => {
             }
           }
         }}
+        onPointerMove={(e) => {
+          if (!buildMode) {
+            return;
+          }
+          const newPosition = wallRightVector3ToGrid(e.point);
+          if (
+            !dragPosition ||
+            newPosition[0] !== dragPosition[0] ||
+            newPosition[1] !== dragPosition[1]
+          ) {
+            setDraggPosition(newPosition);
+          }
+        }}
+        
       >
         <planeGeometry args={[4.8, 3.84]} />
         <meshStandardMaterial color="#f0f0f0" side={DoubleSide} />
