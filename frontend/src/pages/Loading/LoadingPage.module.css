@@ -5,3 +5,8 @@
   justify-content: center;
   align-items: center;
 }
+
+.Content {
+  font-family: "Pretendard-Bold";
+  font-size: 30px;
+}
