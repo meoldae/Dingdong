@@ -23,6 +23,7 @@ import {
   fetchNeighborRequest,
   responseNeighborRequest,
   fetchNeighborList,
+  deleteNeighbor
 } from "../../api/Neighbor"
 
 const Header = ({ checkMyRoom }) => {
@@ -109,8 +110,14 @@ const Header = ({ checkMyRoom }) => {
   }
 
   // 이웃 리스트 - 이웃 삭제 함수
-  const removeNeighborHandler = () => {
-    console.log("이웃 삭제 함수")
+  const removeNeighborHandler = (memberId) => {
+    deleteNeighbor({"memberId": memberId}, 
+    (response) => {
+
+    },
+    (error) => {
+      console.log("Error with Delete Neighbor...", error);
+    })
   }
 
   // 문의하기 함수
@@ -186,7 +193,7 @@ const Header = ({ checkMyRoom }) => {
                     imgName={item.avatarId}
                     nickname={item.nickname}
                     gohome={goNeighborHomeHandler}
-                    remove={removeNeighborHandler}
+                    remove={removeNeighborHandler(item.memberId)}
                     status={item.isActive}
                   />
                 </div>
