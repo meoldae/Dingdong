@@ -9,6 +9,7 @@ import {
   ItemRotateState,
   ItemsState,
   buildModeState,
+  checkState,
   dragPositionState,
   draggedItemState,
 } from "./Atom";
@@ -25,6 +26,7 @@ const Experience = () => {
   const [items, setItems] = useRecoilState(ItemsState);
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState);
+  const check = useRecoilValue(checkState);
   const mobileCheck =
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
@@ -35,25 +37,16 @@ const Experience = () => {
       return;
     }
     const item = items[draggedItem];
-    console.log(item);
     let droppable = true;
-    const thick = item.size[1] % 2 ? item.size[1] + 1 : item.size[1];
+    const thick = item.size[1];
     // 바닥 평면 넘어갔을 때 예외처리
     const width =
       draggedItemRotation === 1 || draggedItemRotation === 3
-        ? item.size[2] % 2
-          ? item.size[2] + 1
-          : item.size[2]
-        : item.size[0] % 2
-        ? item.size[0] + 1
+        ? item.size[2]
         : item.size[0];
     const height =
       draggedItemRotation === 1 || draggedItemRotation === 3
-        ? item.size[0] % 2
-          ? item.size[0] + 1
-          : item.size[0]
-        : item.size[2] % 2
-        ? item.size[2] + 1
+        ? item.size[0]
         : item.size[2];
     if (item.categoryId !== 3) {
       if (
@@ -79,23 +72,24 @@ const Experience = () => {
           droppable = false;
         }
         if (
-          dragPosition[2] - height / 2 < -1 ||
+          dragPosition[2] - height / 2 < 0 ||
           dragPosition[2] + height / 2 > 4.8 / 0.24
         ) {
           droppable = false;
         }
-      }
-      if (
-        dragPosition[1] - thick / 2 < -1 ||
-        dragPosition[1] + thick / 2 > 16
-      ) {
-        droppable = false;
-      }
-      if (
-        dragPosition[0] - width / 2 < -1 ||
-        dragPosition[0] + width / 2 > 4.8 / 0.24
-      ) {
-        droppable = false;
+      } else {
+        if (
+          dragPosition[1] - thick / 2 < -1 ||
+          dragPosition[1] + thick / 2 > 16
+        ) {
+          droppable = false;
+        }
+        if (
+          dragPosition[0] - width / 2 < 0 ||
+          dragPosition[0] + width / 2 > 4.8 / 0.24
+        ) {
+          droppable = false;
+        }
       }
     }
 
@@ -110,23 +104,14 @@ const Experience = () => {
         return;
       }
       // 다른 물체 크기
-      const otherThick =
-        otherItem.size[1] % 2 ? otherItem.size[1] + 1 : otherItem.size[1];
+      const otherThick = otherItem.size[1];
       const otherWidth =
         otherItem.rotation === 1 || otherItem.rotation === 3
-          ? otherItem.size[2] % 2
-            ? otherItem.size[2] + 1
-            : otherItem.size[2]
-          : otherItem.size[0] % 2
-          ? otherItem.size[0] + 1
+          ? otherItem.size[2]
           : otherItem.size[0];
       const otherHeight =
         otherItem.rotation === 1 || otherItem.rotation === 3
-          ? otherItem.size[0] % 2
-            ? otherItem.size[0] + 1
-            : otherItem.size[0]
-          : otherItem.size[2] % 2
-          ? otherItem.size[2] + 1
+          ? otherItem.size[0]
           : otherItem.size[2];
 
       // 다른 물체가 왼쪽 벽에 있고, 바닥에 있는 걸 움직일 때
@@ -335,25 +320,38 @@ const Experience = () => {
         // visible={false}
         position-y={-0.001}
         onClick={() => {
-          if (draggedItem !== null && dragPosition) {
-            if (canDrop) {
-              setItems((prev) => {
-                console.log(prev);
-                const newItems = prev.map((item, index) => {
-                  if (index === draggedItem) {
-                    return {
-                      ...item,
-                      position: dragPosition,
-                      rotation: draggedItemRotation,
-                    };
-                  }
-                  return item;
+          if (!mobileCheck) {
+            if (draggedItem !== null && dragPosition) {
+              if (canDrop) {
+                setItems((prev) => {
+                  console.log(prev);
+                  const newItems = prev.map((item, index) => {
+                    if (index === draggedItem) {
+                      return {
+                        ...item,
+                        position: dragPosition,
+                        rotation: draggedItemRotation,
+                      };
+                    }
+                    return item;
+                  });
+                  return newItems;
                 });
-                return newItems;
-              });
+              } else {
+                if (
+                  check.length !== items.length &&
+                  draggedItem === items.length - 1
+                ) {
+                  setItems((prevItems) => {
+                    return prevItems.filter(
+                      (_, index) => index !== draggedItem
+                    );
+                  });
+                }
+              }
+              setDraggedItemRotation(null);
+              setDraggedItem(null);
             }
-            setDraggedItemRotation(null);
-            setDraggedItem(null);
           }
         }}
         onPointerMove={(e) => {
@@ -381,25 +379,38 @@ const Experience = () => {
         // visible={false}
         position-y={1.92}
         onClick={() => {
-          if (draggedItem !== null && dragPosition) {
-            if (canDrop) {
-              setItems((prev) => {
-                console.log(prev);
-                const newItems = prev.map((item, index) => {
-                  if (index === draggedItem) {
-                    return {
-                      ...item,
-                      position: dragPosition,
-                      rotation: draggedItemRotation,
-                    };
-                  }
-                  return item;
+          if (!mobileCheck) {
+            if (draggedItem !== null && dragPosition) {
+              if (canDrop) {
+                setItems((prev) => {
+                  console.log(prev);
+                  const newItems = prev.map((item, index) => {
+                    if (index === draggedItem) {
+                      return {
+                        ...item,
+                        position: dragPosition,
+                        rotation: draggedItemRotation,
+                      };
+                    }
+                    return item;
+                  });
+                  return newItems;
                 });
-                return newItems;
-              });
+              } else {
+                if (
+                  check.length !== items.length &&
+                  draggedItem === items.length - 1
+                ) {
+                  setItems((prevItems) => {
+                    return prevItems.filter(
+                      (_, index) => index !== draggedItem
+                    );
+                  });
+                }
+              }
+              setDraggedItemRotation(null);
+              setDraggedItem(null);
             }
-            setDraggedItemRotation(null);
-            setDraggedItem(null);
           }
         }}
         onPointerMove={(e) => {
@@ -439,25 +450,38 @@ const Experience = () => {
           }
         }}
         onClick={() => {
-          if (draggedItem !== null && dragPosition) {
-            if (canDrop) {
-              setItems((prev) => {
-                console.log(prev);
-                const newItems = prev.map((item, index) => {
-                  if (index === draggedItem) {
-                    return {
-                      ...item,
-                      position: dragPosition,
-                      rotation: draggedItemRotation,
-                    };
-                  }
-                  return item;
+          if (mobileCheck) {
+            if (draggedItem !== null && dragPosition) {
+              if (canDrop) {
+                setItems((prev) => {
+                  console.log(prev);
+                  const newItems = prev.map((item, index) => {
+                    if (index === draggedItem) {
+                      return {
+                        ...item,
+                        position: dragPosition,
+                        rotation: draggedItemRotation,
+                      };
+                    }
+                    return item;
+                  });
+                  return newItems;
                 });
-                return newItems;
-              });
+              } else {
+                if (
+                  check.length !== items.length &&
+                  draggedItem === items.length - 1
+                ) {
+                  setItems((prevItems) => {
+                    return prevItems.filter(
+                      (_, index) => index !== draggedItem
+                    );
+                  });
+                }
+              }
+              setDraggedItemRotation(null);
+              setDraggedItem(null);
             }
-            setDraggedItemRotation(null);
-            setDraggedItem(null);
           }
         }}
       >
@@ -520,36 +544,37 @@ const Experience = () => {
               setDraggedItemRotation(null);
             }}
           />
-          {canDrop ? (
-            <img
-              src="/assets/icons/check.svg"
-              alt=""
-              onClick={() => {
-                if (draggedItem !== null && dragPosition) {
-                  if (canDrop) {
-                    setItems((prev) => {
-                      console.log(prev);
-                      const newItems = prev.map((item, index) => {
-                        if (index === draggedItem) {
-                          return {
-                            ...item,
-                            position: dragPosition,
-                            rotation: draggedItemRotation,
-                          };
-                        }
-                        return item;
+          {mobileCheck &&
+            (canDrop ? (
+              <img
+                src="/assets/icons/check.svg"
+                alt=""
+                onClick={() => {
+                  if (draggedItem !== null && dragPosition) {
+                    if (canDrop) {
+                      setItems((prev) => {
+                        console.log(prev);
+                        const newItems = prev.map((item, index) => {
+                          if (index === draggedItem) {
+                            return {
+                              ...item,
+                              position: dragPosition,
+                              rotation: draggedItemRotation,
+                            };
+                          }
+                          return item;
+                        });
+                        return newItems;
                       });
-                      return newItems;
-                    });
+                    }
+                    setDraggedItemRotation(null);
+                    setDraggedItem(null);
                   }
-                  setDraggedItemRotation(null);
-                  setDraggedItem(null);
-                }
-              }}
-            />
-          ) : (
-            <img src="/assets/icons/check.svg" />
-          )}
+                }}
+              />
+            ) : (
+              <img src="/assets/icons/check.svg" />
+            ))}
         </Html>
       )}
     </>
