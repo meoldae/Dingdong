@@ -15,17 +15,64 @@
 
 canvas {
   width: 100%;
-  background: linear-gradient(#FBC77A, #FF6F56);
-  width: 100%;
-  height: 100vh;
 }
 
-.container {
+.container.dawn{
   width: 100%;
-  /* height: 100vh; */
+  background: linear-gradient(-45deg,#594871,#000000,#00008B);
+  animation: gradient 5s linear infinite;
+  height: 100vh;
   position: relative;
-  /* height: 100svh; */
+  height: 100svh;
+  background-size: 200% 200%;
 }
+
+.container.morning{
+  width: 100%;
+  background: linear-gradient(-45deg,#4891f6, #64c1f4,#ffffff, #ff735a);
+  animation: gradient 10s linear infinite;
+  height: 100vh;
+  position: relative;
+  height: 100svh;
+  background-size: 200% 200%;
+}
+
+.container.afternoon{
+  width: 100%;
+  background: linear-gradient(-45deg, #ee7752, #4891f6,#23d5ab, #de8f1a );
+  animation: gradient 5s linear infinite;
+  height: 100vh;
+  position: relative;
+  height: 100svh;
+  background-size: 200% 200%;
+}
+
+.container.dinner{
+  width: 100%;
+  background: linear-gradient(-45deg,#594871,#000000,#00008B);
+  animation: gradient 5s linear infinite;
+  height: 100vh;
+  position: relative;
+  height: 100svh;
+  background-size: 400% 400%;
+}
+
+@keyframes gradient {
+  0% {
+   background-position: 0% 50%;
+  }
+  50% {
+   background-position: 100% 50%;
+  }
+  100% {
+   background-position: 0% 50%;
+  }
+}
+
+
+
+
+
 
 .back {
   position: absolute;
