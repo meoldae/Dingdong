@@ -8,6 +8,7 @@ import styles from "./Header.module.css"
 // 이미지
 import hamburger from "/assets/icons/hamburgerbar.svg"
 import bell from "/assets/icons/bell.svg"
+import neighbor from "/assets/icons/neighborList.svg"
 
 // 컴포넌트
 import { successMsg } from "@/utils/customToast"
@@ -117,7 +118,10 @@ const Header = ({ checkMyRoom }) => {
           ) : (
             <div className={styles.userName}>{roomInfo}</div>
           )}
-          <img src={bell} onClick={alarmHandler} />
+          <div className={styles.AlarmAndNeighborList}>
+            <img src={bell} onClick={alarmHandler} />
+            <img src={neighbor} />
+          </div>
         </div>
       </div>
 
