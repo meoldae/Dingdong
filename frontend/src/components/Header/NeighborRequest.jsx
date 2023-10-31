@@ -69,7 +69,7 @@ const NeighborRequest = () => {
 
   return (
     <>
-      <div className={styles.Share}>
+      <div className={styles.ShareOther}>
         {!neighborFlag ? (
           <RoomBtn img={"addUser"} onClick={() => setIsAddNeighbor(true)} />
         ) : (
