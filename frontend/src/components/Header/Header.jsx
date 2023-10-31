@@ -120,17 +120,19 @@ const Header = ({ checkMyRoom }) => {
           ) : (
             <div className={styles.userName}>{roomInfo}</div>
           )}
-          <div className={styles.AlarmAndNeighborList}>
-            <img src={bell} onClick={alarmHandler} />
-            {checkMyRoom === "my" && (
-              <RoomBtn
-                img={"neighborList"}
-                onClick={() => setIsNeighborList(true)}
-              />
-            )}
-          </div>
+          <img src={bell} onClick={alarmHandler} />
         </div>
       </div>
+
+      {/* 이웃 리스트 */}
+      {checkMyRoom === "my" && (
+        <div className={styles.NeighborList}>
+          <RoomBtn
+            img={"neighborList"}
+            onClick={() => setIsNeighborList(true)}
+          />
+        </div>
+      )}
 
       {/* 햄버거 바 */}
       {isHamburger && (
