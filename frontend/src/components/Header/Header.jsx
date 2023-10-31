@@ -13,6 +13,7 @@ import bell from "/assets/icons/bell.svg"
 import { successMsg } from "@/utils/customToast"
 import NeighborAcceptModal from "../Modal/Neighbor/NeighborAcceptModal"
 import RoomBtn from "../Button/Room/RoomBtn"
+import NeighborListModal from "../Modal/Neighbor/NeighborListModal"
 
 // Atom
 import { userAtom } from "../../atom/UserAtom"
@@ -104,6 +105,16 @@ const Header = ({ checkMyRoom }) => {
     )
   }
 
+  // 이웃 리스트 - 집 방문 함수
+  const goNeighborHomeHandler = () => {
+    console.log("집 방문 함수")
+  }
+
+  // 이웃 리스트 - 이웃 삭제 함수
+  const removeNeighborHandler = () => {
+    console.log("이웃 삭제 함수")
+  }
+
   // 문의하기 함수
   const inquiryHandler = () => {
     console.log("문의하기")
@@ -164,7 +175,14 @@ const Header = ({ checkMyRoom }) => {
             </div>
             <div className={styles.NeighborItemContainer}>
               {neighborList.map((item) => (
-                <div key={item.memberId}>임시모달</div>
+                <div key={item.memberId}>
+                  <NeighborListModal
+                    imgName={item.avatarId}
+                    nickname={item.nickname}
+                    gohome={goNeighborHomeHandler}
+                    remove={removeNeighborHandler}
+                  />
+                </div>
               ))}
             </div>
           </div>
