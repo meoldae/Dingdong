@@ -151,7 +151,7 @@ const Header = ({ checkMyRoom }) => {
   const inquiryHandler = () => {
     fetchInquiry(
       { 
-        "category" : "LETTER",
+        "category" : "3",
         "content" : inquiryText,
       },
       (success) => {
