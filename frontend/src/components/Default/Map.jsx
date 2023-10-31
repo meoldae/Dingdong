@@ -20,6 +20,7 @@ const Map = () => {
   // )
   
   const mapRef = useRef(null)
+  console.log(map)
 
   useEffect(() => {
     // 그림자 세팅
