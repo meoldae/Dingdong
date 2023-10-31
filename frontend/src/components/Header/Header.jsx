@@ -41,6 +41,8 @@ const Header = ({ checkMyRoom }) => {
   const [neighborList, setNeighborList] = useState([])
   // 이웃리스트 리스트 길이 상태관리
   const [neighborListLength, setNeighborListLength] = useState(0)
+  // 이웃리스트 이웃제거 모달 상태관리
+  const [removeNeighborList, setRemoveNeighborList] = useState(false)
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
