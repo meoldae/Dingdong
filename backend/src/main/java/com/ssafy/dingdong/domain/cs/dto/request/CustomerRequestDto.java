@@ -9,6 +9,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class CustomerRequestDto {
-    private CsType category;
+    private String category;
     private String content;
 }
