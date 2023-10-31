@@ -150,7 +150,15 @@ const Header = ({ checkMyRoom }) => {
             className={styles.Overlay}
             onClick={() => setIsNeighborList(false)}
           />
-          <div>이웃 리스트 모달</div>
+          <div className={styles.NeighborListContainer}>
+            <div className={styles.xButtonContainer}>
+              <img
+                src={"/assets/icons/x.svg"}
+                className={styles.AlarmX}
+                onClick={() => setIsNeighborList(false)}
+              />
+            </div>
+          </div>
         </>
       )}
 
