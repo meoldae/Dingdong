@@ -43,6 +43,8 @@ const Header = ({ checkMyRoom }) => {
   const [neighborListLength, setNeighborListLength] = useState(0)
   // 이웃리스트 이웃제거 모달 상태관리
   const [removeNeighborList, setRemoveNeighborList] = useState(false)
+  // 제거하려는 이웃 아이디 상태관리
+  const [removeNeighborId, setRemoveNeighborId] = useState(0)
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
@@ -112,6 +114,12 @@ const Header = ({ checkMyRoom }) => {
   // 이웃 리스트 - 집 방문 함수
   const goNeighborHomeHandler = (roomId) => {
     window.location.replace(`/room/${roomId}`)
+  }
+
+  // 이웃 리스트 - 이웃 삭제 모달 함수
+  const removeNeighorCheckHandler = (memberId) => {
+    setRemoveNeighborList(true)
+    setRemoveNeighborId(memberId)
   }
 
   // 이웃 리스트 - 이웃 삭제 함수
@@ -203,7 +211,7 @@ const Header = ({ checkMyRoom }) => {
                       imgName={item.avatarId}
                       nickname={item.nickname}
                       gohome={() => goNeighborHomeHandler(item.roomId)}
-                      remove={() => removeNeighborHandler(item.memberId)}
+                      remove={removeNeighorCheckHandler}
                       status={item.isActive}
                     />
                   </div>
@@ -269,6 +277,17 @@ const Header = ({ checkMyRoom }) => {
               <div className={styles.NoAlarm}>알림이 없습니다!</div>
             )}
           </div>
+        </>
+      )}
+
+      {/* 이웃리스트의 아이템 제거를 물어보는 모달 */}
+      {removeNeighborList && (
+        <>
+          <div
+            className={styles.RemoveOverlay}
+            onClick={() => setRemoveNeighborList(false)}
+          />
+          <div>제거 모달</div>
         </>
       )}
     </>
