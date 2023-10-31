@@ -38,7 +38,7 @@ const SendLetter = ({ onClose, card }) => {
     sendLetter(
       param,
       (response) => {
-        successMsg("편지를 보냈어요!")
+        successMsg("💌 편지를 보냈어요!")
         onClose()
         setIsSending(false)
       },
