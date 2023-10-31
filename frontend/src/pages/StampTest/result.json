@@ -1,0 +1,34 @@
+[
+  {
+    "id": 0,
+    "srcUrl": "ResultStar.png"
+  },
+  {
+    "id": 1,
+    "srcUrl": "ResultClova.png"
+  },
+  {
+    "id": 2,
+    "srcUrl": "ResultCloud.png"
+  },
+  {
+    "id": 3,
+    "srcUrl": "ResultPuzzle.png"
+  },
+  {
+    "id": 4,
+    "srcUrl": "ResultLightning.png"
+  },
+  {
+    "id": 5,
+    "srcUrl": "ResultFlower.png"
+  },
+  {
+    "id": 6,
+    "srcUrl": "ResultHeart.png"
+  },
+  {
+    "id": 7,
+    "srcUrl": "ResultRocket.png"
+  }
+]
