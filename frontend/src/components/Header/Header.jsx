@@ -23,6 +23,7 @@ import {
   fetchNeighborRequest,
   responseNeighborRequest,
   fetchNeighborList,
+  deleteNeighbor,
 } from "../../api/Neighbor"
 
 const Header = ({ checkMyRoom }) => {
@@ -38,6 +39,8 @@ const Header = ({ checkMyRoom }) => {
   const [isNeighborList, setIsNeighborList] = useState(false)
   // 이웃리스트 상태관리
   const [neighborList, setNeighborList] = useState([])
+  // 이웃리스트 리스트 길이 상태관리
+  const [neighborListLength, setNeighborListLength] = useState(0)
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
@@ -49,6 +52,7 @@ const Header = ({ checkMyRoom }) => {
     fetchNeighborList(
       (success) => {
         setNeighborList(success.data.data)
+        setNeighborListLength(success.data.data.length)
       },
       (error) => {
         console.log("Error at neighbor list...", error)
@@ -104,13 +108,19 @@ const Header = ({ checkMyRoom }) => {
   }
 
   // 이웃 리스트 - 집 방문 함수
-  const goNeighborHomeHandler = () => {
-    console.log("집 방문 함수")
+  const goNeighborHomeHandler = (roomId) => {
+    window.location.replace(`/room/${roomId}`)
   }
 
   // 이웃 리스트 - 이웃 삭제 함수
-  const removeNeighborHandler = () => {
-    console.log("이웃 삭제 함수")
+  const removeNeighborHandler = (memberId) => {
+    deleteNeighbor(
+      { memberId: memberId },
+      (response) => {},
+      (error) => {
+        console.log("Error with Delete Neighbor...", error)
+      }
+    )
   }
 
   // 문의하기 함수
@@ -179,19 +189,23 @@ const Header = ({ checkMyRoom }) => {
                 onClick={() => setIsNeighborList(false)}
               />
             </div>
-            <div className={styles.NeighborItemContainer}>
-              {neighborList.map((item) => (
-                <div key={item.memberId}>
-                  <NeighborListModal
-                    imgName={item.avatarId}
-                    nickname={item.nickname}
-                    gohome={goNeighborHomeHandler}
-                    remove={removeNeighborHandler}
-                    status={item.isActive}
-                  />
-                </div>
-              ))}
-            </div>
+            {neighborListLength !== 0 ? (
+              <div className={styles.NeighborItemContainer}>
+                {neighborList.map((item) => (
+                  <div key={item.memberId}>
+                    <NeighborListModal
+                      imgName={item.avatarId}
+                      nickname={item.nickname}
+                      gohome={goNeighborHomeHandler(item.roomId)}
+                      remove={removeNeighborHandler(item.memberId)}
+                      status={item.isActive}
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className={styles.NoAlarm}>이웃이 없습니다!</div>
+            )}
           </div>
         </>
       )}

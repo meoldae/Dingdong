@@ -4,7 +4,7 @@ import { fetchRoomData } from "../../api/User";
 import { Suspense, useState, useEffect, useRef } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { ItemsState } from "../../components/Room/Atom";
-
+import InviteFooter from "../../components/Footer/InviteFooter";
 import styles from "./RoomPage.module.css";
 import Header from "../../components/Header/Header";
 import { userAtom } from "../../atom/UserAtom";
@@ -14,7 +14,7 @@ function InviteRoomPage() {
   const [items, setItems] = useRecoilState(ItemsState);
   const canvasRef = useRef();
   const [nickName, setNickName] = useRecoilState(roomInfoAtom);
-
+  const roomId = window.location.pathname.match(/\d+/g);
   useEffect(() => {
     const roomId = window.location.pathname.match(/\d+/g);
 
@@ -36,13 +36,14 @@ function InviteRoomPage() {
       <Canvas
         shadows
         gl={{ preserveDrawingBuffer: true, antialias: true }}
-        camera={{ fov: 45, zoom: 1.2 }}
+        camera={{ fov: 40, zoom: 1.2 }}
         ref={canvasRef}
       >
         <color attach="background" args={["skyblue"]} />
 
         <Experience />
       </Canvas> 
+      <InviteFooter props={roomId[0]} />
     </div>
   );
 }
