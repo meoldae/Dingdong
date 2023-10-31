@@ -36,6 +36,8 @@ const Header = ({ checkMyRoom }) => {
   const [alarmsLength, setAlarmsLength] = useState(0)
   // 이웃리스트 모달 상태관리
   const [isNeighborList, setIsNeighborList] = useState(false)
+  // 이웃리스트 상태관리
+  const [neighborList, setNeighborList] = useState([])
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
@@ -45,7 +47,9 @@ const Header = ({ checkMyRoom }) => {
   useEffect(() => {
     // 이웃 리스트
     fetchNeighborList(
-      (success) => console.log(success.data.data),
+      (success) => {
+        setNeighborList(success.data.data)
+      },
       (error) => {
         console.log("Error at neighbor list...", error)
       }
@@ -157,6 +161,11 @@ const Header = ({ checkMyRoom }) => {
                 className={styles.AlarmX}
                 onClick={() => setIsNeighborList(false)}
               />
+            </div>
+            <div className={styles.NeighborItemContainer}>
+              {neighborList.map((item) => (
+                <div key={item.memberId}>임시모달</div>
+              ))}
             </div>
           </div>
         </>
