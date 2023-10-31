@@ -29,6 +29,7 @@ import {
   deleteNeighbor,
 } from "../../api/Neighbor"
 import { fetchLogout, fetchUserSecession } from "../../api/User"
+import { fetchInquiry } from "../../api/Cs"
 
 const Header = ({ checkMyRoom }) => {
   const navigate = useNavigate()
