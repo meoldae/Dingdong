@@ -108,8 +108,8 @@ public class NeighborServiceImpl implements NeighborService{
 	@Override
 	@Transactional
 	public List getNeighborList(String memberId) {
-		List neighborIdList = neighborRepository.findAllByMemberId(UUID.fromString(memberId));
-		List neighborList = new LinkedList<NeighborResponse>();
+		List<UUID> neighborIdList = neighborRepository.findAllByMemberId(UUID.fromString(memberId));
+		List<NeighborResponse> neighborList = new LinkedList<NeighborResponse>();
 
 		neighborIdList.stream().forEach(
 			neighborId -> {
