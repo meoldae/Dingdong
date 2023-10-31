@@ -122,10 +122,12 @@ const Header = ({ checkMyRoom }) => {
           )}
           <div className={styles.AlarmAndNeighborList}>
             <img src={bell} onClick={alarmHandler} />
-            <RoomBtn
-              img={"neighborList"}
-              onClick={() => setIsNeighborList(true)}
-            />
+            {checkMyRoom === "my" && (
+              <RoomBtn
+                img={"neighborList"}
+                onClick={() => setIsNeighborList(true)}
+              />
+            )}
           </div>
         </div>
       </div>
