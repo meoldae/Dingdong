@@ -12,6 +12,7 @@ import {
   checkState,
   dragPositionState,
   draggedItemState,
+  mobileCheckState,
 } from "./Atom";
 import { gsap } from "gsap";
 import styles from "./Room.module.css";
@@ -27,10 +28,7 @@ const Experience = () => {
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState);
   const check = useRecoilValue(checkState);
-  const mobileCheck =
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
+  const mobileCheck = useRecoilValue(mobileCheckState);
   // onPlaneClicked 이벤트에 예외처리
   useEffect(() => {
     if (draggedItem === null) {
@@ -515,67 +513,6 @@ const Experience = () => {
             rotation-z={-Math.PI / 2}
           />
         </>
-      )}
-      {draggedItem !== null && buildMode && (
-        <Html className={styles.dragbutton}>
-          <img
-            src="/assets/icons/refresh.svg"
-            alt=""
-            onClick={() => {
-              if (items[draggedItem].categoryId === 3) {
-                setDraggedItemRotation(
-                  draggedItemRotation === 1 ? 0 : draggedItemRotation + 1
-                );
-              } else {
-                setDraggedItemRotation(
-                  draggedItemRotation === 3 ? 0 : draggedItemRotation + 1
-                );
-              }
-            }}
-          />
-          <img
-            src="/assets/icons/cross.svg"
-            alt=""
-            onClick={() => {
-              setItems((prevItems) => {
-                return prevItems.filter((_, index) => index !== draggedItem);
-              });
-              setDraggedItem(null);
-              setDraggedItemRotation(null);
-            }}
-          />
-          {mobileCheck &&
-            (canDrop ? (
-              <img
-                src="/assets/icons/check.svg"
-                alt=""
-                onClick={() => {
-                  if (draggedItem !== null && dragPosition) {
-                    if (canDrop) {
-                      setItems((prev) => {
-                        console.log(prev);
-                        const newItems = prev.map((item, index) => {
-                          if (index === draggedItem) {
-                            return {
-                              ...item,
-                              position: dragPosition,
-                              rotation: draggedItemRotation,
-                            };
-                          }
-                          return item;
-                        });
-                        return newItems;
-                      });
-                    }
-                    setDraggedItemRotation(null);
-                    setDraggedItem(null);
-                  }
-                }}
-              />
-            ) : (
-              <img src="/assets/icons/check.svg" />
-            ))}
-        </Html>
       )}
     </>
   );

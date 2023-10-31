@@ -61,6 +61,21 @@
     width: 100%;
 }  
 
+.dragPopUp{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 4vh;
+    height: 4vh;
+    left: 2vh;
+    top: -6vh;
+}
+
+.dragPopUp img {
+    margin-left: 10px;
+}
 .popUpClose {
     display: flex;
     justify-content: center;
