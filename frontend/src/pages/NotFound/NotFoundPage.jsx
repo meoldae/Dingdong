@@ -5,10 +5,10 @@ const NotFoundPage = () => {
         display: "flex",
         height: "100vh",
         alignItems: "center",
-        background: "#252069",
+        background: "#FFF",
       }}
     >
-      <img src={"/assets/images/404error.png"} style={{ width: "100%" }} />
+      <img src={"/assets/images/404_error_page.png"} style={{ width: "100%" }} />
     </div>
   )
 }
