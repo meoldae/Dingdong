@@ -14,8 +14,8 @@ import html2canvas from "html2canvas"
 function SharingModalList(props) {
   const baseURL = "https://ding-dong.s3.ap-northeast-2.amazonaws.com/"
   // const userNickname = useRecoilValue(userNicknameAtom);
-  const url = encodeURI(window.location.href)
-  const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY
+  const url = encodeURI(window.location.href);
+  const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY; 
 
   const isSafari = () => {
     const ua = navigator.userAgent.toLowerCase()
@@ -123,7 +123,7 @@ function SharingModalList(props) {
       window.Kakao.Share.sendCustom({
         templateId: 100120,
         templateArgs: {
-          THU: `https://ding-dong.s3.ap-northeast-2.amazonaws.com/${props.resultPngUrl}`,
+          THU: `https://ding-dong.s3.ap-northeast-2.amazonaws.com/${props.resultSrcUrl.replace('/assets/StampTest/', '')}`,
           TITLE: "나에게 어울리는 우표 확인하기",
           DESC: "우표 테스트 결과를 확인해보세요!",
           MOBILE_LINK: window.location.href,
@@ -160,7 +160,7 @@ function SharingModalList(props) {
       link.click()
       document.body.removeChild(link)
     }
-    downloadImage(props.resultPngUrl, "StampResult.png")
+    downloadImage(props.resultSrcUrl, "StampResult.png")
   }
 
   let sharetype = []

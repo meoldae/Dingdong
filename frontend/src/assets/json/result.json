@@ -1,42 +1,34 @@
 [
   {
     "id": 0,
-    "srcUrl": "/assets/StampTest/ResultStar.svg",
-    "pngUrl": "ResultStar.png"
+    "srcUrl": "/assets/StampTest/ResultStar.png"
   },
   {
     "id": 1,
-    "srcUrl": "/assets/StampTest/ResultClova.svg",
-    "pngUrl": "ResultClova.png"
+    "srcUrl": "/assets/StampTest/ResultClova.png"
   },
   {
     "id": 2,
-    "srcUrl": "/assets/StampTest/ResultCloud.svg",
-    "pngUrl": "ResultCloud.png"
+    "srcUrl": "/assets/StampTest/ResultCloud.png"
   },
   {
     "id": 3,
-    "srcUrl": "/assets/StampTest/ResultPuzzle.svg",
-    "pngUrl": "ResultPuzzle.png"
+    "srcUrl": "/assets/StampTest/ResultPuzzle.png"
   },
   {
     "id": 4,
-    "srcUrl": "/assets/StampTest/ResultLightning.svg",
-    "pngUrl": "ResultLightning.png"
+    "srcUrl": "/assets/StampTest/ResultLightning.png"
   },
   {
     "id": 5,
-    "srcUrl": "/assets/StampTest/ResultFlower.svg",
-    "pngUrl": "ResultFlower.png"
+    "srcUrl": "/assets/StampTest/ResultFlower.png"
   },
   {
     "id": 6,
-    "srcUrl": "/assets/StampTest/ResultHeart.svg",
-    "pngUrl": "ResultHeart.png"
+    "srcUrl": "/assets/StampTest/ResultHeart.png"
   },
   {
     "id": 7,
-    "srcUrl": "/assets/StampTest/ResultRocket.svg",
-    "pngUrl": "ResultRocket.png"
+    "srcUrl": "/assets/StampTest/ResultRocket.png"
   }
 ]
