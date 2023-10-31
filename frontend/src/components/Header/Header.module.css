@@ -236,3 +236,71 @@
   display: flex;
   justify-content: center;
 }
+
+.RemoveOverlay {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 7;
+}
+
+.RemoveNeighborContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 8;
+}
+
+.InquiryContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 8;
+}
+
+.InquiryTitle {
+  color: #FFF;
+  font-size: 30px;
+  font-family: "Pretendard-Bold";
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.InquiryContent {
+  width: 290px;
+  height: 170px;
+  background: #FFF;
+  border-radius: 10px;
+  
+  font-family: "Pretendard-Medium";
+  font-size: 18px;
+  padding: 10px;
+
+  outline: none;
+}
+
+.InquiryTextLength {
+  color: #FFF;
+  text-align: end;
+  margin-top: 5px;
+  font-size: 15px;
+  font-family: "Pretendard-SemiBold";
+}
+
+.Inquiry {
+  height: 50px;
+  background: #F2CBE4;
+  border-radius: 20px;
+  margin-top: 25px;
+
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  font-family: "Pretendard-Bold";
+  color: #2C2C2C;
+}

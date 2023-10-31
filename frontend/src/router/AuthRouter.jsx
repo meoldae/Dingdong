@@ -20,7 +20,7 @@ export default function AuthRoute({ authentication }) {
 
   const authText = authentication;
 
-  const isAllowedPath = currentPath.startsWith("/tutorial") || currentPath.startsWith("/yourstamp");
+  const isAllowedPath = currentPath.startsWith("/tutorial") || currentPath.startsWith("/yourstamp") || currentPath.startsWith("/invite");
   
   if (authText.indexOf("Not") === -1) {
     if (isLogin || isAllowedPath) return <Outlet />;
