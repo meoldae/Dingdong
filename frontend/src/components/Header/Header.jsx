@@ -259,7 +259,7 @@ const Header = ({ checkMyRoom }) => {
           />
           <div className={styles.HamburgerModal}>
             <div className={styles.ContentContainer}>
-              <div className={styles.MenuButton} onClick={inquiryHandler}>
+              <div className={styles.MenuButton} onClick={() => setIsInquiry(true)}>
                 문의하기
               </div>
               <div className={styles.MenuButton} onClick={logoutHandler}>
@@ -328,9 +328,9 @@ const Header = ({ checkMyRoom }) => {
       {/* 문의하기 모달 */}
       {isInquiry && (
         <>
-          <div className={styles.Overlay} onClick={() => setIsInquiry(false)} />
+          <div className={styles.RemoveOverlay} onClick={() => setIsInquiry(false)} />
           <div className={styles.InquiryContainer}>
-            
+            문의하기
           </div>
         </>
       )}
