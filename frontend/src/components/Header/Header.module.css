@@ -30,6 +30,11 @@
   font-size: 20px;
 }
 
+.AlarmAndNeighborList {
+  display: flex;
+  flex-direction: column;
+}
+
 /* 공유하기 이미지 */
 .Share {
   position: absolute;
