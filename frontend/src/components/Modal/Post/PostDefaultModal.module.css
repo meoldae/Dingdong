@@ -13,7 +13,6 @@
   flex-direction: column;
   align-items: center;
   background-color: white;
-  border: 1px solid lightcoral;
 }
 
 .containerMy {
@@ -31,7 +30,6 @@
   flex-direction: column;
   align-items: center;
   background-color: white;
-  border: 1px solid lightcoral;
 }
 
 .xmarkImg {
