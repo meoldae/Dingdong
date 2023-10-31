@@ -12,6 +12,25 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  background: #fff;
+  position: relative;
+}
+
+.StatusOnDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #049463;
+  position: absolute;
+  left: 45px;
+  z-index: 2;
+}
+
+.StatusOffDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #c4c4c4;
 }
 
 .InfoContainer {
