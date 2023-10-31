@@ -22,12 +22,12 @@ const NeighborListModal = ({ imgName, nickname, gohome, remove, status }) => {
         <div>
           <img
             src={"/assets/icons/home.png"}
-            style={{ marginRight: "10px" }}
+            style={{ marginRight: "10px", width: "25px", height: "25px" }}
             onClick={gohome}
           />
           <img
             src={"/assets/icons/removeNeighbor.png"}
-            style={{ marginRight: "15px" }}
+            style={{ marginRight: "15px", width: "25px", height: "25px" }}
             onClick={remove}
           />
         </div>
