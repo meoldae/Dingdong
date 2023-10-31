@@ -15,12 +15,13 @@ import SingleMainPage from "../pages/SinglePlay/SingleMainPage"
 import TutorialPage from "../pages/SinglePlay/TutorialPage"
 import PostPage from "../pages/Post/PostPage"
 import InviteRoomPage from "../pages/Room/InviteRoomPage"
+import LoadingPage from "../pages/Loading/LoadingPage"
 const Single = lazy(() => import("../pages/SinglePlay/SingleMainPage"))
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>대기중....</div>}>
+      <Suspense fallback={<LoadingPage />}>
         <Routes>
           <Route element={<AuthRoute authentication="user" />}>
             <Route path="/" element={<MainPage />} />
@@ -45,6 +46,5 @@ const AppRouter = () => {
     </BrowserRouter>
   )
 }
-
 
 export default AppRouter
