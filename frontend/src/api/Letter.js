@@ -12,4 +12,10 @@ const getLetterDetail = async (param, success, fail) => {
     HttpJson.get(`letter/${param}`).then(success).catch(fail);
 }
 
-export { sendLetter, sendGuestLetter, getLetterDetail };
+
+const reportLetter = async (param, success, fail) => {
+    HttpJson.post(`report/letter/${param}`).then(success).catch(fail)
+}
+
+export { sendLetter, sendGuestLetter, getLetterDetail, reportLetter, };
+

@@ -14,6 +14,7 @@ import NeighborAcceptModal from "../Modal/Neighbor/NeighborAcceptModal"
 import RoomBtn from "../Button/Room/RoomBtn"
 import NeighborListModal from "../Modal/Neighbor/NeighborListModal"
 import DefaultModal from "../Modal/Default/DefaultModal"
+import { successMsg } from "../../utils/customToast"
 
 // Atom
 import { userAtom } from "../../atom/UserAtom"
@@ -26,6 +27,8 @@ import {
   fetchNeighborList,
   deleteNeighbor,
 } from "../../api/Neighbor"
+import { fetchLogout, fetchUserSecession } from "../../api/User"
+import { fetchInquiry } from "../../api/Cs"
 
 const Header = ({ checkMyRoom }) => {
   // 햄버거메뉴바 상태관리
@@ -46,6 +49,10 @@ const Header = ({ checkMyRoom }) => {
   const [removeNeighborList, setRemoveNeighborList] = useState(false)
   // 제거하려는 이웃 아이디 상태관리
   const [removeNeighborId, setRemoveNeighborId] = useState(0)
+  // 문의하기 모달 상태관리
+  const [isInquiry, setIsInquiry] = useState(false)
+  // 문의하기 내용 상태관리
+  const [inquiryText, setInquiryText] = useState("")
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
@@ -142,17 +149,48 @@ const Header = ({ checkMyRoom }) => {
 
   // 문의하기 함수
   const inquiryHandler = () => {
-    console.log("문의하기")
+    fetchInquiry(
+      { 
+        "category" : "3",
+        "content" : inquiryText,
+      },
+      (success) => {
+        setIsInquiry(false)
+        setIsHamburger(false)
+        successMsg("✅ 문의하기가 완료됐습니다!")
+      },
+      (error) => {
+        'Error at inquiry...', error
+      }
+    )
   }
 
   // 로그아웃 함수
   const logoutHandler = () => {
-    console.log("로그아웃")
+    fetchLogout(
+      (success) => {
+        localStorage.removeItem("userAtom")
+        window.location.replace("/login")
+        successMsg("✅ 로그아웃 성공!")
+      },
+      (error) => {
+        "Error at Logout...", error
+      }
+    )
   }
 
   // 회원탈퇴 함수
   const withdrawalHandler = () => {
-    console.log("회원탈퇴")
+    fetchUserSecession(
+      (success) => {
+        localStorage.removeItem("userAtom")
+        window.location.replace("/login")
+        successMsg("✅ 회원탈퇴 성공!")
+      },
+      (error) => {
+        "Error at Secession...", error
+      }
+    )
   }
 
   return (
@@ -236,7 +274,7 @@ const Header = ({ checkMyRoom }) => {
           />
           <div className={styles.HamburgerModal}>
             <div className={styles.ContentContainer}>
-              <div className={styles.MenuButton} onClick={inquiryHandler}>
+              <div className={styles.MenuButton} onClick={() => setIsInquiry(true)}>
                 문의하기
               </div>
               <div className={styles.MenuButton} onClick={logoutHandler}>
@@ -298,6 +336,25 @@ const Header = ({ checkMyRoom }) => {
               okClick={() => removeNeighborHandler(removeNeighborId)}
               cancelClick={() => setRemoveNeighborList(false)}
             />
+          </div>
+        </>
+      )}
+
+      {/* 문의하기 모달 */}
+      {isInquiry && (
+        <>
+          <div className={styles.RemoveOverlay} onClick={() => setIsInquiry(false)} />
+          <div className={styles.InquiryContainer}>
+            <div className={styles.InquiryTitle}>문의하기</div>
+            <textarea
+              className={styles.InquiryContent}
+              placeholder="문의할 내용을 작성해주세요."
+              value={inquiryText}
+              onChange={(e) => setInquiryText(e.target.value)}
+              maxLength={199}
+            />
+            <div className={styles.InquiryTextLength}>{inquiryText.length}/200</div>
+            <div className={styles.Inquiry} onClick={inquiryHandler}>완료</div>
           </div>
         </>
       )}
