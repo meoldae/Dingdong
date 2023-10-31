@@ -34,8 +34,8 @@
 .Share {
   position: absolute;
   top: 80px;
-  left: 85%;
-  z-index: 4;
+  right: 25px;
+  z-index: 3;
 }
 
 /* 이웃 요청 CSS */
