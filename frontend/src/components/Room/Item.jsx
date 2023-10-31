@@ -78,9 +78,9 @@ export const Item = ({
             />
             {isDragging && (
               <mesh
-                position-x={rotation ? 0.02 : 0.12}
-                position-y={0.12}
-                position-z={0.13}
+              position-x={rotation ? 0.02 : 0}
+              position-y={0.12}
+              position-z={rotation? 0 : 0.13}
               >
                 <boxGeometry
                   args={[
@@ -120,9 +120,9 @@ export const Item = ({
             />
             {isDragging && (
               <mesh
-                position-x={rotation ? 0.02 : 0.24}
+                position-x={rotation ? 0.02 : 0}
                 position-y={0.12}
-                position-z={rotation? 0 : 0.2}
+                position-z={rotation? 0 : 0.13}
               >
                 <boxGeometry
                   args={[
