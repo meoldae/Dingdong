@@ -1,5 +1,4 @@
 import { Canvas } from "@react-three/fiber";
-import { Html, PerspectiveCamera } from "@react-three/drei";
 import Experience from "../../components/Room/Experience";
 import { fetchRoomData } from "../../api/User";
 import { Suspense, useState, useEffect, useRef } from "react";
@@ -23,7 +22,6 @@ import SharingModalList from "../../components/Modal/Sharing/SharingModalList";
 import { userAtom } from "../../atom/UserAtom";
 import { roomInfoAtom } from "@/atom/RoomInfoAtom";
 import { useNavigate } from "react-router-dom";
-import { TextureLoader } from 'three';
 
 
 function RoomPage() {
@@ -38,8 +36,7 @@ function RoomPage() {
   const [nickName, setNickName] = useRecoilState(roomInfoAtom);
   const roomId = window.location.pathname.match(/\d+/g);
   const navigate = useNavigate();
-  const loader = new TextureLoader();
-  const textures = loader.load('/assets/background/red.png');
+
   useEffect(() => {
     const myRoomId = userInfo.roomId;
     setIsMyRoom(roomId == myRoomId);
@@ -89,7 +86,7 @@ function RoomPage() {
           <SharingModalList shareMode={"room"} />
         </>
       )}
-      
+
       <Canvas
         shadows
         gl={{ preserveDrawingBuffer: true, antialias: true}}
