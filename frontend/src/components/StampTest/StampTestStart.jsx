@@ -5,12 +5,10 @@ import styles from "./StampTestStart.module.css"
 const StampTestStart = (props) => {
   return (
     <div className={styles.Container}>
-      <img 
+      <img
         src={"assets/images/stamp_start.svg"}
-        style={{ 
+        style={{
           width: "80%",
-          marginBottom: "15px",
-          marginTop: "10%",
         }}
       />
       <div className={styles.ContentContainer}>
