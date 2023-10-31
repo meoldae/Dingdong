@@ -114,7 +114,7 @@ public class NeighborServiceImpl implements NeighborService{
 		neighborIdList.stream().forEach(
 			neighborId -> {
 				MemberMainDto member = memberService.getMemberById(neighborId.toString());
-				String status = memberService.getStatusByMemberId(neighborId.toString());
+				boolean status = memberService.getStatusByMemberId(neighborId.toString());
 				NeighborResponse neighbor = member.to(status);
 				neighborList.add(neighbor);
 			}

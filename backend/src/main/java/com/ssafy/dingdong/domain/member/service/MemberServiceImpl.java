@@ -98,8 +98,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String getStatusByMemberId(String memberId){
-		return memberRedisRepository.findStatusByMemberId(memberId).orElse("FALSE");
+	public boolean getStatusByMemberId(String memberId){
+		return memberRedisRepository.findStatusByMemberId(memberId).isPresent();
 	}
 
 	@Override
