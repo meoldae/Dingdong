@@ -16,6 +16,7 @@ import TutorialPage from "../pages/SinglePlay/TutorialPage"
 import PostPage from "../pages/Post/PostPage"
 import InviteRoomPage from "../pages/Room/InviteRoomPage"
 import LoadingPage from "../pages/Loading/LoadingPage"
+import Error from "../components/UI/Error"
 const Single = lazy(() => import("../pages/SinglePlay/SingleMainPage"))
 
 const AppRouter = () => {
@@ -25,7 +26,14 @@ const AppRouter = () => {
         <Routes>
           <Route element={<AuthRoute authentication="user" />}>
             <Route path="/" element={<MainPage />} />
-            <Route path="/single" element={<Single />} />
+            <Route
+              path="/single"
+              element={
+                <Error>
+                  <Single />
+                </Error>
+              }
+            />
             <Route path="/room/:roomId" element={<AppRoom />} />
             <Route path="/usersetting" element={<AppUserSetting />} />
             <Route path="/postoffice" element={<PostPage />} />
