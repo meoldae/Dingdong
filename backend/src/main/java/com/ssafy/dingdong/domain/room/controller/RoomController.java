@@ -60,7 +60,7 @@ public class RoomController implements RoomSwagger{
 
     @Override
     @GetMapping("/furniture")
-    public DataResponse<Page<FurnitureSummaryDto> > getFurnitureList(@RequestParam Integer category, @PageableDefault(size = 6) Pageable pageable) {
+    public DataResponse<Page<FurnitureSummaryDto> > getFurnitureList(@RequestParam Integer category, @PageableDefault(size = 16) Pageable pageable) {
         Page<FurnitureSummaryDto>furnitureList = roomService.getFurnitureListByCategory(category, pageable);
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, furnitureList);
     }
