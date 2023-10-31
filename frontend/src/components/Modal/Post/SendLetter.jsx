@@ -28,11 +28,13 @@ const SendLetter = ({ onClose, card }) => {
       stampId: card.idx,
       roomId: roomId,
     }
-    
-    sendLetter(param, (response) => { 
-      successMsg("편지를 보냈어요!");
-      onClose() 
-    },
+
+    sendLetter(
+      param,
+      (response) => {
+        successMsg("편지를 보냈어요!")
+        onClose()
+      },
       (error) => {
         console.log(error)
       }
@@ -49,7 +51,7 @@ const SendLetter = ({ onClose, card }) => {
     setContent(event.target.value)
     setContentCount(event.target.value.length)
   }
-  
+
   return (
     <div className={styles.overlay} onClick={handleOutsideClick}>
       <div className={styles.sendLetterContainer}>
@@ -66,7 +68,6 @@ const SendLetter = ({ onClose, card }) => {
             <textarea
               value={content}
               onChange={(e) => handleCheckContentCount(e)}
-              style={{ fontFamily: "HandWrite-DaHaeng", fontSize: "25px" }}
               placeholder="편지 내용을 작성하세요."
               maxLength={199}
             />
