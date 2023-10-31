@@ -153,7 +153,15 @@ const Header = ({ checkMyRoom }) => {
                 ))}
               </div>
             ) : (
-              <div>알림이 없습니다!</div>
+              <div
+                style={{
+                  fontFamily: "Pretendard-SemiBold",
+                  fontSize: "20px",
+                  width: "300px",
+                }}
+              >
+                알림이 없습니다!
+              </div>
             )}
           </div>
         </>
