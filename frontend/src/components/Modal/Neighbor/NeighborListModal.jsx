@@ -17,9 +17,9 @@ const NeighborListModal = ({ imgName, nickname }) => {
           {nickname}
         </div>
         <div>
-          <img src={"assets/icons/home.svg"} style={{ marginRight: "10px" }} />
+          <img src={"assets/icons/home.png"} style={{ marginRight: "10px" }} />
           <img
-            src={"assets/icons/removeNeighbor.svg"}
+            src={"assets/icons/removeNeighbor.png"}
             style={{ marginRight: "15px" }}
           />
         </div>

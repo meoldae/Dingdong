@@ -7,7 +7,7 @@ import styles from "./Header.module.css"
 
 // 이미지
 import hamburger from "/assets/icons/hamburgerbar.svg"
-import bell from "/assets/icons/bell.svg"
+import bell from "/assets/icons/bell.png"
 
 // 컴포넌트
 import { successMsg } from "@/utils/customToast"

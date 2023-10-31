@@ -80,7 +80,7 @@ const PopUp = () => {
       {draggedItem !== null && editMode && (
         <div className={styles.dragPopUp}>
           <img
-            src="/assets/icons/refresh.svg"
+            src="/assets/icons/refresh.png"
             alt=""
             onClick={() => {
               if (items[draggedItem].categoryId === 3) {
@@ -163,7 +163,7 @@ const PopUp = () => {
       {draggedItem !== null ? (
         <div className={styles.customSaveButtonErr}>
           <img
-            src="/assets/icons/save.svg"
+            src="/assets/icons/save.png"
             className={styles.customSaveVector}
           />
         </div>
@@ -173,7 +173,7 @@ const PopUp = () => {
           onClick={() => roomCustomSave()}
         >
           <img
-            src="/assets/icons/save.svg"
+            src="/assets/icons/save.png"
             className={styles.customSaveVector}
           />
         </div>
