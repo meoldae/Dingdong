@@ -51,6 +51,8 @@ const Header = ({ checkMyRoom }) => {
   const [removeNeighborId, setRemoveNeighborId] = useState(0)
   // 문의하기 모달 상태관리
   const [isInquiry, setIsInquiry] = useState(false)
+  // 문의하기 내용 상태관리
+  const [inquiryText, setInquiryText] = useState("")
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
@@ -147,7 +149,20 @@ const Header = ({ checkMyRoom }) => {
 
   // 문의하기 함수
   const inquiryHandler = () => {
-    console.log("문의하기")
+    fetchInquiry(
+      { 
+        "category" : "LETTER",
+        "content" : inquiryText,
+      },
+      (success) => {
+        setIsInquiry(false)
+        setIsHamburger(false)
+        successMsg("✅ 문의하기가 완료됐습니다!")
+      },
+      (error) => {
+        'Error at inquiry...', error
+      }
+    )
   }
 
   // 로그아웃 함수
@@ -330,7 +345,16 @@ const Header = ({ checkMyRoom }) => {
         <>
           <div className={styles.RemoveOverlay} onClick={() => setIsInquiry(false)} />
           <div className={styles.InquiryContainer}>
-            문의하기
+            <div className={styles.InquiryTitle}>문의하기</div>
+            <textarea
+              className={styles.InquiryContent}
+              placeholder="문의할 내용을 작성해주세요."
+              value={inquiryText}
+              onChange={(e) => setInquiryText(e.target.value)}
+              maxLength={199}
+            />
+            <div className={styles.InquiryTextLength}>{inquiryText.length}/200</div>
+            <div className={styles.Inquiry} onClick={inquiryHandler}>완료</div>
           </div>
         </>
       )}
