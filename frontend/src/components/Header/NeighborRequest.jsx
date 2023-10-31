@@ -8,7 +8,11 @@ import styles from "./Header.module.css"
 import RoomBtn from "../Button/Room/RoomBtn"
 
 // API
-import { fetchNeighrborAdd, neighborCheck, deleteNeighbor } from "@/api/Neighbor"
+import {
+  fetchNeighrborAdd,
+  neighborCheck,
+  deleteNeighbor,
+} from "@/api/Neighbor"
 
 // 토스트
 import { successMsg } from "@/utils/customToast"
@@ -51,14 +55,14 @@ const NeighborRequest = () => {
   }
 
   const deleteNeighborByRoomId = () => {
-    const input = {"roomId": roomId[0]};
+    const input = { roomId: roomId[0] }
     deleteNeighbor(
       input,
       (response) => {
-        successMsg("✅ 요청에 성공했습니다!");
+        successMsg("✅ 요청에 성공했습니다!")
       },
       (error) => {
-        console.log("Error in delete Neighbor Method ...", error);
+        console.log("Error in delete Neighbor Method ...", error)
       }
     )
   }
@@ -83,29 +87,31 @@ const NeighborRequest = () => {
             <div className={styles.MainContainer}>
               <div className={styles.TitleContainer}>
                 <div style={{ color: "#2C2C2C" }}>
-                  {neighborFlag ? '이웃을 끊으시겠습니까?': '이웃 요청을 하시겠습니까?'}
+                  {neighborFlag
+                    ? "이웃을 끊으시겠습니까?"
+                    : "이웃 요청을 하시겠습니까?"}
                 </div>
               </div>
               <div className={styles.HorizontalLine} />
               <div className={styles.VerticalLine} />
               <div className={styles.ButtonContainer}>
-                {neighborFlag ? 
+                {neighborFlag ? (
                   <div
-                  className={styles.Button}
-                  style={{ color: "#049463" }}
-                  onClick={() => deleteNeighborByRoomId()}
-                >
-                  확인
-                </div>
-                :
-                <div
-                  className={styles.Button}
-                  style={{ color: "#049463" }}
-                  onClick={() => isNeighbor()}
-                >
-                  확인
-                </div>
-                }
+                    className={styles.Button}
+                    style={{ color: "#049463" }}
+                    onClick={() => deleteNeighborByRoomId()}
+                  >
+                    확인
+                  </div>
+                ) : (
+                  <div
+                    className={styles.Button}
+                    style={{ color: "#049463" }}
+                    onClick={() => isNeighbor()}
+                  >
+                    확인
+                  </div>
+                )}
 
                 <div
                   className={styles.Button}
