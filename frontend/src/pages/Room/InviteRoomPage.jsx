@@ -12,7 +12,6 @@ import { roomInfoAtom } from "@/atom/RoomInfoAtom";
 
 function InviteRoomPage() {
   const [items, setItems] = useRecoilState(ItemsState);
-  const [isMyRoom, setIsMyRoom] = useState(false);
   const canvasRef = useRef();
   const [nickName, setNickName] = useRecoilState(roomInfoAtom);
 
