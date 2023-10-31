@@ -26,7 +26,7 @@ public record MemberMainDto(
 			.build();
 	}
 
-	public NeighborResponse to(String status){
+	public NeighborResponse to(boolean status){
 		return NeighborResponse.builder()
 			.memberId(UUID.fromString(this.memberId))
 			.nickname(this.nickname())
