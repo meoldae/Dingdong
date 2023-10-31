@@ -36,7 +36,16 @@
 }
 
 /* 공유하기 이미지 */
-.Share {
+/* 남의 방의 경우 */
+.ShareOther {
+  position: absolute;
+  top: 80px;
+  left: 85%;
+  z-index: 4;
+}
+
+/* 내 방의 경우 */
+.ShareMy {
   position: absolute;
   top: 80px;
   left: 85%;
