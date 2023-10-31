@@ -189,7 +189,7 @@ const Header = ({ checkMyRoom }) => {
                     nickname={item.nickname}
                     gohome={goNeighborHomeHandler}
                     remove={removeNeighborHandler}
-                    status={true}
+                    status={item.isActive}
                   />
                 </div>
               ))}
