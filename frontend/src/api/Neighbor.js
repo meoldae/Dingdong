@@ -18,9 +18,14 @@ const fetchNeighborRequest = async (success, fail) => {
   await HttpJson.get(`/neighbor/request`).then(success).catch(fail)
 }
 
+const responseNeighborRequest = async (param, success, fail) => {
+  await HttpJson.post(`/neighbor/response`, param).then(success).catch(fail)
+}
+
 export {
   fetchNeighrborAdd,
   neighborCheck,
   deleteNeighbor,
   fetchNeighborRequest,
+  responseNeighborRequest
 }
