@@ -134,6 +134,17 @@ const Header = ({ checkMyRoom }) => {
         </div>
       )}
 
+      {/* 이웃 리스트 모달 */}
+      {isNeighborList && (
+        <>
+          <div
+            className={styles.Overlay}
+            onClick={() => setIsNeighborList(false)}
+          />
+          <div>이웃 리스트 모달</div>
+        </>
+      )}
+
       {/* 햄버거 바 */}
       {isHamburger && (
         <>
