@@ -1,5 +1,4 @@
 import { Canvas } from "@react-three/fiber";
-import { Html, PerspectiveCamera } from "@react-three/drei";
 import Experience from "../../components/Room/Experience";
 import { fetchRoomData } from "../../api/User";
 import { Suspense, useState, useEffect, useRef } from "react";
@@ -23,6 +22,7 @@ import SharingModalList from "../../components/Modal/Sharing/SharingModalList";
 import { userAtom } from "../../atom/UserAtom";
 import { roomInfoAtom } from "@/atom/RoomInfoAtom";
 import { useNavigate } from "react-router-dom";
+
 
 function RoomPage() {
   const [editMode, setEditMode] = useRecoilState(buildModeState);
@@ -54,10 +54,12 @@ function RoomPage() {
   }, [isMyRoom]);
 
   const randomVisit = () => {
-    const roomId = window.location.pathname.match(/\d+/g) ? Number(window.location.pathname.match(/\d+/g)[0]) : null;
+    const roomId = window.location.pathname.match(/\d+/g)
+      ? Number(window.location.pathname.match(/\d+/g)[0])
+      : null;
     const myRoomId = userInfo.roomId;
     let randomRoom;
-    
+
     do {
       randomRoom = Math.floor(Math.random() * 6) + 1;
     } while (randomRoom === roomId || randomRoom === myRoomId);
@@ -84,27 +86,13 @@ function RoomPage() {
           <SharingModalList shareMode={"room"} />
         </>
       )}
-      {/* <div
-        className={styles.button}
-        onClick={() => {
-          setEditMode(!editMode)
-          if (drag) {
-            setDrag(null)
-          }
-        }}
-      >
-        {editMode && <span>편집모드</span>}
-        {!editMode && <span>관광모드</span>}
-      </div> */}
 
       <Canvas
         shadows
-        gl={{ preserveDrawingBuffer: true, antialias: true }}
+        gl={{ preserveDrawingBuffer: true, antialias: true}}
         camera={{ fov: 45, zoom: 1.2 }}
         ref={canvasRef}
       >
-        <color attach="background" args={["skyblue"]} />
-
         <Experience />
       </Canvas>
       {/* 랜덤 찾기 버튼 */}

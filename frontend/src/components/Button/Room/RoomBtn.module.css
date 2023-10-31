@@ -1,6 +1,6 @@
 .circle {
-  width: 40px;
-  height: 40px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   background: #ffffff;
   display: flex;
@@ -9,5 +9,5 @@
 }
 
 .iconImage {
-  width: 28px;
+  width: 40px;
 }

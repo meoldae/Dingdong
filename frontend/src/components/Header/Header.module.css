@@ -42,8 +42,8 @@
 .NeighborList {
   position: absolute;
   top: 75px;
-  left: 85%;
-  z-index: 4;
+  right: 4%;
+  z-index: 3;
 }
 
 .NeighborListContainer {
@@ -70,16 +70,16 @@
 .ShareOther {
   position: absolute;
   top: 80px;
-  right: 25px;
+  right: 4%;
   z-index: 3;
 }
 
 /* 내 방의 경우 */
 .ShareMy {
   position: absolute;
-  top: 125px;
-  left: 85%;
-  z-index: 4;
+  top: 145px;
+  right: 4%;
+  z-index: 3;
 }
 
 /* 이웃 요청 CSS */

@@ -114,12 +114,13 @@
     position: absolute;
     width: 4vh;
     height: 4vh;
-    left: 2vh;
+    left: 4vh;
     top: -6vh;
 }
 
 .dragPopUp img {
     margin-left: 10px;
+    width: 24px;
 }
 .popUpClose {
     display: flex;
