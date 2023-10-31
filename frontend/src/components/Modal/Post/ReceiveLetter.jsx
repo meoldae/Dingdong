@@ -4,6 +4,8 @@ import { letterIdAtom } from "@/atom/LetterAtom"
 import { useRecoilValue } from "recoil"
 import { useState, useEffect } from "react"
 import { getLetterDetail } from "@/api/Letter"
+import { successMsg } from "../../../utils/customToast"
+import { reportLetter } from "../../../api/Letter"
 
 const RecevieLetter = (props) => {
   const letterId = useRecoilValue(letterIdAtom)
@@ -26,7 +28,15 @@ const RecevieLetter = (props) => {
   }, [])
 
   const reportHandler = () => {
-    console.log("신고하기 함수")
+    reportLetter(
+      letterId,
+      (success) => {
+        successMsg("🚫 신고하기 완료!")
+      },
+      (error) => {
+        'Error at reportLetter...', error
+      }
+    )
   }
 
   return (
