@@ -102,6 +102,7 @@ public class OAuth2ClientConfig {
 		corsConfiguration.addAllowedMethod("*");
 		corsConfiguration.addAllowedOriginPattern("*");
 		corsConfiguration.addAllowedOrigin("https://k9b203.p.ssafy.io");
+		corsConfiguration.addAllowedOrigin("https://ding-dong.kr");
 		corsConfiguration.addAllowedOrigin("http://localhost:3000");
 		corsConfiguration.addAllowedOrigin("http://localhost:5173");
 
