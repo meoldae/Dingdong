@@ -6,16 +6,28 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { ItemsState } from "../../components/Room/Atom";
 import InviteFooter from "../../components/Footer/InviteFooter";
 import styles from "./RoomPage.module.css";
-import Header from "../../components/Header/Header";
+import InviteHeader from "../../components/Header/InviteHeader";
 import { userAtom } from "../../atom/UserAtom";
-import { roomInfoAtom } from "@/atom/RoomInfoAtom";
+import { roomInfoAtom } from "@/atom/RoomInfoAtom"; 
+import { useNavigate } from "react-router-dom" 
 
 function InviteRoomPage() {
+  const navigate = useNavigate()
   const [items, setItems] = useRecoilState(ItemsState);
   const canvasRef = useRef();
   const [nickName, setNickName] = useRecoilState(roomInfoAtom);
   const roomId = window.location.pathname.match(/\d+/g);
+  const userInfo = useRecoilValue(userAtom)
+
+  const onRoomHandler = (e) => {
+    navigate(`/room/${roomId}`);
+  } 
+
   useEffect(() => {
+    if(userInfo && userInfo.accessToken !=='') {
+      onRoomHandler();
+      return; 
+    }
     const roomId = window.location.pathname.match(/\d+/g);
 
     fetchRoomData(
@@ -30,9 +42,11 @@ function InviteRoomPage() {
     );
   }, []);
 
+
+  
   return (
     <div className={styles.inviteContainer}>
-      <Header checkMyRoom={"invite"} /> 
+      <InviteHeader checkMyRoom={"invite"} /> 
       <div className={styles.inviteCanvas}>
         <Canvas
           shadows
