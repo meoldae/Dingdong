@@ -196,8 +196,8 @@ const Header = ({ checkMyRoom }) => {
                     <NeighborListModal
                       imgName={item.avatarId}
                       nickname={item.nickname}
-                      gohome={goNeighborHomeHandler(item.roomId)}
-                      remove={removeNeighborHandler(item.memberId)}
+                      gohome={() => goNeighborHomeHandler(item.roomId)}
+                      remove={() => removeNeighborHandler(item.memberId)}
                       status={item.isActive}
                     />
                   </div>
