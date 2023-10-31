@@ -324,6 +324,16 @@ const Header = ({ checkMyRoom }) => {
           </div>
         </>
       )}
+
+      {/* 문의하기 모달 */}
+      {isInquiry && (
+        <>
+          <div className={styles.Overlay} onClick={() => setIsInquiry(false)} />
+          <div className={styles.InquiryContainer}>
+            
+          </div>
+        </>
+      )}
     </>
   )
 }
