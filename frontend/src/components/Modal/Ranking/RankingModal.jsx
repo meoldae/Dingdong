@@ -57,7 +57,7 @@ const RankingModal = () => {
   const RankingSection = ({ rankingList }) => (
     <>
       {rankingList.map((item, index) => (
-        <div key={item.memberId} className={styles.Content} onClick={() => navigateRoom(item.roomId)}>
+        <div key={item.memberId} className={styles.ContentContainer} onClick={() => navigateRoom(item.roomId)}>
           <div>{index + 1}</div>
           <div>{item.nickname}</div>
           <div>{item.recordCount}</div>
@@ -100,11 +100,9 @@ const RankingModal = () => {
           <div className={styles.Type}>닉네임</div>
           <div className={styles.Type}>포인트</div>
         </div>
-        <div className={styles.ContentContainer}>
-          {rankingTab === 1 && <RankingSection rankingList={mostLikeRoomList} />}
-          {rankingTab === 2 && <RankingSection rankingList={mostReceiveLetterList} />}
-          {rankingTab === 3 && <RankingSection rankingList={mostSendLetterList} />}
-        </div>
+        {rankingTab === 1 && <RankingSection rankingList={mostLikeRoomList} />}
+        {rankingTab === 2 && <RankingSection rankingList={mostReceiveLetterList} />}
+        {rankingTab === 3 && <RankingSection rankingList={mostSendLetterList} />}
       </div>
     </>
   )
