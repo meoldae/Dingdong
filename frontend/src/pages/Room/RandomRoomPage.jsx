@@ -25,7 +25,7 @@ import { useNavigate } from "react-router-dom"
 import history from "../../components/UI/history"
 import RandomBtn from "../../components/Button/Room/RandomBtn"
 
-function RoomPage() {
+function RandomRoomPage() {
   // 브라우저 뒤로가기 버튼 처리
   const [locationKeys, setLocationKeys] = useState([])
   const navigate = useNavigate()
@@ -65,6 +65,7 @@ function RoomPage() {
   useEffect(() => {
     const myRoomId = userInfo.roomId
     setIsMyRoom(roomId == myRoomId)
+
     fetchRoomData(
       roomId,
       (response) => {
@@ -85,13 +86,14 @@ function RoomPage() {
       ? Number(window.location.pathname.match(/\d+/g)[0])
       : null
     const myRoomId = userInfo.roomId
+    // 선택 가능한 방 번호 목록
     const possibleRooms = [1, 3, 4, 6, 19, 21]
     let randomRoom
 
     do {
       randomRoom = possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
     } while (randomRoom === roomId || randomRoom === myRoomId)
-    window.location.replace(`/room/${randomRoom}`)
+    window.location.replace(`/random/${randomRoom}`)
   }
 
   useEffect(() => {
@@ -141,10 +143,18 @@ function RoomPage() {
             ref={canvasRef}
           >
             <Experience setRoomDrag={setRoomDrag}/>
-          </Canvas> 
- 
-          {isMyRoom ? <MyFooter /> : <OtherFooter props={roomId[0]} />}
-          {/* {popUpStatus ? <PopUp/> : '' } */}
+          </Canvas>
+          {/* 랜덤 찾기 버튼 */}
+          {isMyRoom ? (
+            <></>
+          ) : (
+            <div className={styles.buttonContainer}> 
+              <div className={styles.randomButton}>
+                <RandomBtn onClick={randomVisit} />
+              </div>
+            </div>
+          )}
+          {isMyRoom ? <MyFooter /> : <OtherFooter props={roomId[0]} />} 
           <PopUp />
         </div>
       )}
@@ -152,4 +162,4 @@ function RoomPage() {
   )
 }
 
-export default RoomPage
+export default RandomRoomPage
