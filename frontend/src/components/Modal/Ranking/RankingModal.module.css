@@ -113,6 +113,7 @@
 }
 
 .IndexFirst {
+  color: #FFA200;
   width: 80px;
   height: 40px;
 
@@ -124,6 +125,7 @@
 }
 
 .IndexSecond {
+  color: #828282;
   width: 80px;
   height: 40px;
 
@@ -135,6 +137,7 @@
 }
 
 .IndexThird {
+  color: #C66200;
   width: 80px;
   height: 40px;
 
