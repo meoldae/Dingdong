@@ -58,7 +58,7 @@ function RandomRoomPage() {
   const [shareModal, setShareModal] = useState(false)
   const userInfo = useRecoilValue(userAtom)
   const [nickName, setNickName] = useRecoilState(roomInfoAtom)
-  const [roomDrag,setRoomDrag] = useState(false);
+  const [roomDrag, setRoomDrag] = useState(false)
   const roomId = window.location.pathname.match(/\d+/g)
   const today = new Date()
   const [time, setTime] = useState()
@@ -75,7 +75,7 @@ function RandomRoomPage() {
       (error) => {
         console.error("Error at fetching RoomData...", error)
         if (error.response && error.response.status === 400) {
-          navigate("/notfound");  
+          navigate("/notfound")
         }
       }
     )
@@ -91,7 +91,8 @@ function RandomRoomPage() {
     let randomRoom
 
     do {
-      randomRoom = possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
+      randomRoom =
+        possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
     } while (randomRoom === roomId || randomRoom === myRoomId)
     window.location.replace(`/random/${randomRoom}`)
   }
@@ -110,9 +111,9 @@ function RandomRoomPage() {
   }, [])
   return (
     <>
-    {roomDrag && <div className={styles.roomDrag}/>}
+      {roomDrag && <div className={styles.roomDrag} />}
       {time && (
-        <div className={`${styles.container} ${styles[time]}`}>
+        <div className={`${styles.container}`}>
           {isMyRoom ? (
             <Header checkMyRoom={"my"} />
           ) : (
@@ -135,26 +136,27 @@ function RandomRoomPage() {
               <SharingModalList shareMode={"room"} />
             </>
           )}
-
-          <Canvas
-            shadows
-            gl={{ preserveDrawingBuffer: true, antialias: true }}
-            camera={{ fov: 45, zoom: 1.1 }}
-            ref={canvasRef}
-          >
-            <Experience setRoomDrag={setRoomDrag}/>
-          </Canvas>
+          <div className={`${styles.newcanvas} ${styles[time]}`}>
+            <Canvas
+              shadows
+              gl={{ preserveDrawingBuffer: true, antialias: true }}
+              camera={{ fov: 45, zoom: 1.1 }}
+              ref={canvasRef}
+            >
+              <Experience setRoomDrag={setRoomDrag} />
+            </Canvas>
+          </div>
           {/* 랜덤 찾기 버튼 */}
           {isMyRoom ? (
             <></>
           ) : (
-            <div className={styles.buttonContainer}> 
+            <div className={styles.buttonContainer}>
               <div className={styles.randomButton}>
                 <RandomBtn onClick={randomVisit} />
               </div>
             </div>
           )}
-          {isMyRoom ? <MyFooter /> : <OtherFooter props={roomId[0]} />} 
+          {isMyRoom ? <MyFooter /> : <OtherFooter props={roomId[0]} />}
           <PopUp />
         </div>
       )}
