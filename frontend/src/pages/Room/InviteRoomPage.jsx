@@ -38,6 +38,9 @@ function InviteRoomPage() {
       },
       (error) => {
         console.error("Error at fetching RoomData...", error);
+        if (error.response && error.response.status === 400) {
+          navigate("/notfound");  
+        }
       }
     );
   }, []);
