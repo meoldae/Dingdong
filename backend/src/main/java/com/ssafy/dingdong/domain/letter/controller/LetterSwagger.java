@@ -1,6 +1,7 @@
 package com.ssafy.dingdong.domain.letter.controller;
 
 import com.ssafy.dingdong.domain.letter.dto.request.LetterRequestDto;
+import com.ssafy.dingdong.domain.letter.dto.request.LetterSNSRequestDto;
 import com.ssafy.dingdong.global.response.CommonResponse;
 import com.ssafy.dingdong.global.response.DataResponse;
 import org.springframework.data.domain.Pageable;
@@ -17,4 +18,7 @@ public interface LetterSwagger {
 
     CommonResponse sendAuthLetter(Authentication authentication, LetterRequestDto requestDto);
     CommonResponse sendGuestLetter(LetterRequestDto requestDto, HttpServletRequest request);
+    CommonResponse sendSnsLetter(Authentication authentication, LetterSNSRequestDto requestDto);
+
+    DataResponse getLetterSNS(String letterId);
 }
