@@ -193,6 +193,11 @@ const Header = ({ checkMyRoom }) => {
     )
   }
 
+  const inquiryCheckHandler = () => {
+    setIsHamburger(false)
+    setIsInquiry(true)
+  }
+
   return (
     <>
       <div className={styles.wrap}>
@@ -280,7 +285,7 @@ const Header = ({ checkMyRoom }) => {
             <div className={styles.ContentContainer}>
               <div
                 className={styles.MenuButton}
-                onClick={() => setIsInquiry(true)}
+                onClick={inquiryCheckHandler}
               >
                 문의하기
               </div>
