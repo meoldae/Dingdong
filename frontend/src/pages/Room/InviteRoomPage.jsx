@@ -18,12 +18,13 @@ function InviteRoomPage() {
   const [nickName, setNickName] = useRecoilState(roomInfoAtom)
   const roomId = window.location.pathname.match(/\d+/g)
   const userInfo = useRecoilValue(userAtom)
-  const today = new Date()
-  const [time, setTime] = useState()
+  const today = new Date();
+  const [time, setTime] = useState();
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   const onRoomHandler = (e) => {
-    navigate(`/room/${roomId}`)
-  }
+    navigate(`${urlPath}/room/${roomId}`);
+  } 
 
   useEffect(() => {
     if (userInfo && userInfo.accessToken !== "") {
@@ -41,7 +42,7 @@ function InviteRoomPage() {
       (error) => {
         console.error("Error at fetching RoomData...", error)
         if (error.response && error.response.status === 400) {
-          navigate("/notfound")
+          navigate(`${urlPath}/notfound`);  
         }
       }
     )

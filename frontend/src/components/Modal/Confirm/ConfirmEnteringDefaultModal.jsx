@@ -18,6 +18,8 @@ const ConfirmEnteringDefaultModal = ({
 }) => {
   const navigate = useNavigate()
 
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
   const [isInitialRender, setIsInitialRender] = useState(true)
 
   useEffect(() => {
@@ -42,7 +44,7 @@ const ConfirmEnteringDefaultModal = ({
   const onConfirm = () => {
     if (location === "house") {
       const roomId = userInfo.roomId
-      navigate(`/room/${roomId}`)
+      navigate(`${urlPath}/room/${roomId}`)
     } else if (location === "postOffice") {
       setOnPostOfficeCard(true)
       setConfirmEnteringLocation(false)
@@ -54,6 +56,7 @@ const ConfirmEnteringDefaultModal = ({
 
     // 초기화
     setIsInitialRender(true)
+      // 우체국으로 이동
     } else if (location === "otherRoom") {
       const possibleRooms = [1, 3, 4, 6, 19, 21]
       let randomRoom 
@@ -61,7 +64,7 @@ const ConfirmEnteringDefaultModal = ({
       do {
         randomRoom = possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
       } while (randomRoom === userInfo.roomId)
-      navigate(`/random/${randomRoom}`)
+      navigate(`${urlPath}/random/${randomRoom}`)
     }
 
     setConfirmEnteringLocation(false)

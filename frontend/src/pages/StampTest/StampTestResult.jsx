@@ -6,6 +6,7 @@ import styles from "./StampTestResult.module.css"
 
 const StampTestResult = () => {
   const navigate = useNavigate()
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   // const isLogin = useRecoilValue(isLoginAtom);
 
@@ -15,15 +16,15 @@ const StampTestResult = () => {
   const resultIndex = Number(result)
 
   const onHomeHandler = (e) => {
-    navigate("/")
+    navigate(`${urlPath}/`)
   }
   const onTestHandler = (e) => {
-    navigate("/yourstamp")
+    navigate(`${urlPath}/yourstamp`)
   }
 
   useEffect(() => {
     if (!result || ![0, 1, 2, 3, 4, 5, 6, 7].includes(resultIndex)) {
-      navigate("/notfound");
+      navigate(`${urlPath}/notfound`);
     }
   }, [navigate, result, resultIndex]);
  

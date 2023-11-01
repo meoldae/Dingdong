@@ -73,8 +73,6 @@ textarea:focus {
   z-index: 300000;
   position: absolute;
   bottom: 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
   background-color: white;
   min-width: 100%;
   /* color: #fff; */

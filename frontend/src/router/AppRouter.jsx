@@ -19,9 +19,9 @@ import InviteRoomPage from "../pages/Room/InviteRoomPage"
 import LoadingPage from "../components/UI/LoadingPage"
 import Error from "../components/UI/Error"
 import ReactGA from "react-ga4";
-import PostofficeReceiveLetter from "../pages/Postoffice/PostofficeReceiveLetter"
 // const Room = lazy(() => import("../pages/SinglePlay/SingleMainPage"))
 
+const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
 const gaTrackingId = import.meta.env.VITE_APP_GA_TRACKING_ID;
 ReactGA.initialize(gaTrackingId); 
@@ -44,25 +44,24 @@ const AppRouter = () => {
       <Suspense fallback={<LoadingPage content={"잠시만 기다려 주세요"} />}>
         <Routes>
           <Route element={<AuthRoute authentication="user" />}>
-            <Route path="/" element={<SingleMainPage />} />
+            <Route path={`${urlPath}/`} element={<SingleMainPage />} />
             {/* <Route path="/single" element={<SingleMainPage />} /> */}
-            <Route path="/room/:roomId" element={<AppRoom />} />
-            <Route path="/random/:roomId" element={<AppRandomRoom />} />
-            <Route path="/usersetting" element={<AppUserSetting />} />
-            <Route path="/postoffice" element={<PostPage />} />
-            <Route path="/receiveletter" element={<PostofficeReceiveLetter/>}/>
+            <Route path={`${urlPath}/room/:roomId`} element={<AppRoom />} />
+            <Route path={`${urlPath}/random/:roomId`} element={<AppRandomRoom />} />
+            <Route path={`${urlPath}/usersetting`} element={<AppUserSetting />} />
+            <Route path={`${urlPath}/postoffice`} element={<PostPage />} />
           </Route>
 
           <Route element={<AuthRoute authentication="NotUser" />}>
-            <Route path="/login" element={<AppLogin />} />
-            <Route path="/oauth2/redirect" element={<AppRedirect />} />
-            <Route path="/signup" element={<AppSignUp />} />
-            <Route path="/tutorial" element={<TutorialPage />} />
-            <Route path="/yourstamp" element={<StampTest />} />
-            <Route path="/yourstamp/result" element={<StampTestResult />} />
-            <Route path="/invite/:roomId" element={<InviteRoomPage />} />
+            <Route path={`${urlPath}/login`} element={<AppLogin />} />
+            <Route path={`${urlPath}/oauth2/redirect`} element={<AppRedirect />} />
+            <Route path={`${urlPath}/signup`} element={<AppSignUp />} />
+            <Route path={`${urlPath}/tutorial`} element={<TutorialPage />} />
+            <Route path={`${urlPath}/yourstamp`} element={<StampTest />} />
+            <Route path={`${urlPath}/yourstamp/result`} element={<StampTestResult />} />
+            <Route path={`${urlPath}/invite/:roomId`} element={<InviteRoomPage />} />
           </Route>
-          <Route path="/*" element={<AppNotFound />} />
+          <Route path={`${urlPath}/*`} element={<AppNotFound />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
