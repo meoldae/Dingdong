@@ -4,6 +4,7 @@ import { fetchRoomData } from "../../api/User"
 import { Suspense, useState, useEffect, useRef } from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
 import {
+  ItemRotateState,
   ItemsState,
   buildModeState,
   draggedItemState,
@@ -84,12 +85,10 @@ function RoomPage() {
       ? Number(window.location.pathname.match(/\d+/g)[0])
       : null
     const myRoomId = userInfo.roomId
-    // 선택 가능한 방 번호 목록
-    const possibleRooms = [1, 3, 4, 6, 19, 21]
     let randomRoom
 
     do {
-      randomRoom = possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
+      randomRoom = Math.floor(Math.random() * 6) + 1
     } while (randomRoom === roomId || randomRoom === myRoomId)
     window.location.replace(`/room/${randomRoom}`)
   }
