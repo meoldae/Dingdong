@@ -26,7 +26,7 @@ canvas {
   height: 100svh;
   background-size: 400% 400%;
 }
-.container.dawn{
+ 
 .container.dawn {
   width: 100%;
   background: linear-gradient(-45deg, #594871, #000000, #00008b);
