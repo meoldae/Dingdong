@@ -56,7 +56,9 @@ const RankingModal = () => {
     <div className={styles.ContentContainer}>
       {rankingList.map((item, index) => (
         <div key={item.memberId} className={styles.Content} onClick={() => navigateRoom(item.roomId)}>
-          {index + 1}. {item.nickname}
+          <div>{index + 1}</div>
+          <div>{item.nickname}</div>
+          <div>{item.recordCount}</div>
         </div>
       ))}
     </div>
