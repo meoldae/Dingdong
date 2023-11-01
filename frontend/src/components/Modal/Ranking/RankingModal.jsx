@@ -10,7 +10,7 @@ import styles from "./RankingModal.module.css"
 const RankingModal = () => {
   // URL 이동경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
-  
+
   // 기준시간 상태관리
   const [standardTime, setStandardTime] = useState("")
   // 방좋아요 순위 상태관리
@@ -55,7 +55,7 @@ const RankingModal = () => {
   }
 
   const RankingSection = ({ rankingList }) => (
-    <div className={styles.ContentContainer}>
+    <>
       {rankingList.map((item, index) => (
         <div key={item.memberId} className={styles.Content} onClick={() => navigateRoom(item.roomId)}>
           <div>{index + 1}</div>
@@ -63,7 +63,7 @@ const RankingModal = () => {
           <div>{item.recordCount}</div>
         </div>
       ))}
-    </div>
+    </>
   );
 
   return (
