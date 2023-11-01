@@ -79,7 +79,7 @@ function SharingModalList(props) {
     if (props.shareMode === "room") { 
       const text = `딩동! ${userInfo.nickname}님의 집에 편지를 보내주세요.` 
       window.open(
-        "https://twitter.com/intent/tweet?text=" + text + "&url=" + url.replace("/room/", "/invite/")
+        "https://twitter.com/intent/tweet?text=" + text + "&url=" + url.replace("/room/", "/invite/") + "&media=" + kakaoUrl
       )
       // props.setSharingAtom(false)
     } else if (props.shareMode === "start") {

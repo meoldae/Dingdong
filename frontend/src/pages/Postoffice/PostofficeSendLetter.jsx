@@ -31,7 +31,24 @@ const PostofficeSendLetter = ({ card }) => {
       description: content,
       stampId: card.idx,
     }
-    sendLetterSNS(letterData,(response)=>{
+
+    const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY; 
+    sendLetterSNS(letterData,(response)=>{ 
+      
+      // if (!window.Kakao.isInitialized()) {
+      //   window.Kakao.init(JS_KEY)
+      // } 
+
+      // window.Kakao.Share.sendCustom({
+      //   templateId: 100120,
+      //   templateArgs: {
+      //     THU: kakaoUrl,
+      //     TITLE: `딩동! ${userInfo.nickname}님의 집에 편지를 보내주세요.`, //"딩동! 우리집을 방문해보세요.",
+      //     DESC: recoilText,
+      //     MOBILE_LINK: currentUrl,
+      //     WEB_LINK: currentUrl,
+      //   },
+      // })
       console.log(response)
     })
   };
@@ -76,6 +93,7 @@ const PostofficeSendLetter = ({ card }) => {
                 type="text"
                 value={toValue}
                 onChange={handleToInputChange}
+                placeholder="입력하세요."
                 maxLength="7"
               />
             </div>
@@ -98,6 +116,7 @@ const PostofficeSendLetter = ({ card }) => {
                 <input
                   type="text"
                   value={fromValue}
+                  placeholder="입력하세요."
                   onChange={handleFromInputChange}
                   maxLength="7"
                 />
