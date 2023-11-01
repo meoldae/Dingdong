@@ -40,8 +40,8 @@ export default defineConfig({
   },
   resolve: {
     alias: [
-      { find: "@", replacement: path.resolve(__dirname, "src") },
-      { find: "public", replacement: path.resolve(__dirname, "public") },
+      { find: "@", replacement: path.resolve(__dirname, "/dev/src") },
+      { find: "public", replacement: path.resolve(__dirname, "/dev/public") },
     ],
   },
   define: {
