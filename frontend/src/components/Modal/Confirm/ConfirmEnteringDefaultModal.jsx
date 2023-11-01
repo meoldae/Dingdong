@@ -57,7 +57,6 @@ const ConfirmEnteringDefaultModal = ({
     // 초기화
     setIsInitialRender(true)
       // 우체국으로 이동
-      navigate(`${urlPath}/postoffice`)
     } else if (location === "otherRoom") {
       const possibleRooms = [1, 3, 4, 6, 19, 21]
       let randomRoom 
