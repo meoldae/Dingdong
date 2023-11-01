@@ -221,7 +221,7 @@ const SingleMainPage = () => {
           {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
           <ConfirmEnteringDefaultModal
             modalContent={
-              "다른 유저들에게 편지를 보낼 수 있는 우체국을 준비 중입니다!"
+              "딩동 마을 주민들에게 편지를 보낼 수 있는 우체국을 준비 중입니다!"
             }
             setConfirmEnteringLocation={setConfirmEnteringPostOffice}
             location={"postOffice"}
@@ -244,7 +244,7 @@ const SingleMainPage = () => {
         <div className={styles.confirmModal}>
           {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
           <ConfirmEnteringDefaultModal
-            modalContent={"다른 유저의 집을 구경하시겠습니까?"}
+            modalContent={"딩동 주민의 집을 구경하시겠습니까?"}
             setConfirmEnteringLocation={setConfirmEnteringOtherRoom}
             location={"otherRoom"}
             flag={"1"}
@@ -256,7 +256,7 @@ const SingleMainPage = () => {
           {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
           <ConfirmEnteringDefaultModal
             modalContent={
-              "다른 유저들을 만날 수 있는 멀티 플레이 서비스를 준비중 입니다!"
+              "딩동 주민들을 만날 수 있는 멀티 플레이 서비스를 준비중 입니다!"
             }
             setConfirmEnteringLocation={setConfirmEnteringWorld}
             location={"world"}
