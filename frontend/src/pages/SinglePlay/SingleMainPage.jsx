@@ -39,9 +39,9 @@ import DefaultPortal from "../../components/Item/MainItems/Portals/DefaultPortal
 import DefaultPortalRing from "../../components/Item/MainItems/Portals/DefaultPortalRing"
 
 // React 컴포넌트
-
 import ConfirmEnteringDefaultModal from "../../components/Modal/Confirm/ConfirmEnteringDefaultModal"
 import PhysicsModel from "../../components/Item/MainItems/PhysicsModel"
+import RankingModal from "../../components/Modal/Ranking/RankingModal"
 
 const SingleMainPage = () => {
   // 장소 입장 확인 여부
@@ -271,7 +271,11 @@ const SingleMainPage = () => {
       </div>
 
       {/* 랭킹모달 */}
-      
+      {isRanking && (
+        <div>
+          <RankingModal />
+        </div>
+      )}
     </>
   )
 }
