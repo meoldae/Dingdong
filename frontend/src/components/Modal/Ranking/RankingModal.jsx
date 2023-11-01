@@ -5,6 +5,16 @@ import { fetchScore } from "../../../api/Score"
 import styles from "./RankingModal.module.css"
 
 const RankingModal = () => {
+  // 스코어보드 정보 가져오기
+  fetchScore(
+    (success) => {
+      console.log(success.data.data)
+    },
+    (error) => {
+      "Error at Scoreboard...", error
+    }
+  )
+
   return (
     <>
       <div className={styles.Container}>
