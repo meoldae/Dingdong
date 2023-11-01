@@ -66,7 +66,6 @@ const Header = ({ checkMyRoom }) => {
 
   // 유저요청 가져오기
   useEffect(() => {
-    console.log(userInfo)
     // 이웃 리스트
     fetchNeighborList(
       (success) => {
@@ -257,7 +256,7 @@ const Header = ({ checkMyRoom }) => {
                 {neighborList.map((item) => (
                   <div key={item.memberId}>
                     <NeighborListModal
-                      imgName={item.avatarId}
+                      imgName={`${item.avatarId}_crop`}
                       nickname={item.nickname}
                       gohome={() => goNeighborHomeHandler(item.roomId)}
                       remove={() => removeNeighborCheckHandler(item.memberId)}

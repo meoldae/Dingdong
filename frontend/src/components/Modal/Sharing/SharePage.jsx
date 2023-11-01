@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
 import styles from "./Share.module.css";
 import html2canvas from "html2canvas";
+import {useRecoilState} from "recoil";
+import { textareaAtom } from '../../../atom/TextareaAtom';
+// import { handleImageUpload } from "../../../utils/s3Util";
+
 const SharePage = ({shareModal, canvasRef}) => {
   const today = new Date();
   const formattedDate = `${today.getFullYear()}.${today.getMonth() + 1}.${today.getDate()}`;
 
   const [imageSrc, setImageSrc] = useState();
+  const [text, setText] = useRecoilState(textareaAtom);
 
-  const onCapture = () => {
-    html2canvas(canvasRef.current).then((canvas) => {
+  const onCapture = async () => {
+    html2canvas(document.getElementById("newcanvas")).then(async (canvas) => {
       const croppedCanvas = document.createElement("canvas");
       const ctx = croppedCanvas.getContext("2d");
 
@@ -31,6 +36,7 @@ const SharePage = ({shareModal, canvasRef}) => {
       ctx.drawImage(canvas, startX, startY, width, height, 0, 0, width, height);
 
       setImageSrc(croppedCanvas.toDataURL("image/png"));
+      // await handleImageUpload(croppedCanvas); 
     });
   };
 
@@ -44,7 +50,7 @@ const SharePage = ({shareModal, canvasRef}) => {
         <img src={imageSrc} alt="Shared Content" />
         <h2>{formattedDate}</h2>
         <div>
-          <textarea className={styles.textarea} placeholder="본인의 이야기를 작성해보세요!" spellCheck="false" maxLength={33}/>
+          <textarea className={styles.textarea} placeholder="본인의 이야기를 작성해보세요!" spellCheck="false" maxLength={33} onChange={(e)=>{setText(e.target.value)}}/>
         </div>
       </div>
     </div>
