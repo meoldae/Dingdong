@@ -58,7 +58,7 @@ const RankingModal = () => {
               방 꾸미기 전문가
             </div>
             <div className={styles.TitleLine} />
-            <div className={styles.MostRoomContent}>
+            <div className={styles.MostContent}>
               <div className={styles.RoomContentFirst}>
                 방 첫 번째 값
               </div>
@@ -75,7 +75,7 @@ const RankingModal = () => {
               인기왕
             </div>
             <div className={styles.TitleLine} />
-            <div className={styles.MostReceiveLetterContent}>
+            <div className={styles.MostContent}>
               <div className={styles.ReceiveLetterContentFirst}>
                 받은편지 첫 번째 값
               </div>
@@ -92,7 +92,7 @@ const RankingModal = () => {
               소통왕
             </div>
             <div className={styles.TitleLine} />
-            <div className={styles.MostReceiveLetterContent}>
+            <div className={styles.MostContent}>
               <div className={styles.SendLetterContentFirst}>
                 보낸편지 첫 번째 값
               </div>
