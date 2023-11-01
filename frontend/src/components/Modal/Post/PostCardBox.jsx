@@ -6,6 +6,7 @@ import { useState } from "react"
 const PostCardBox = (props) => {
   const [selectedCard, setSelectedCard] = useState(null)
   const [cardComment, setCardComment] = useState()
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   const handleCardClick = (cardIdx, cardSrc, comment) => {
     setSelectedCard({ idx: cardIdx + 1, src: cardSrc })
@@ -47,7 +48,7 @@ const PostCardBox = (props) => {
                   ? `${styles.postCard} ${styles.selected}`
                   : styles.postCard
               }
-              src={`/assets/images/post/${card.src}`}
+              src={`${urlPath}/assets/images/post/${card.src}`}
               onClick={() => handleCardClick(idx, card.src, card.comment)}
             />
           ))}

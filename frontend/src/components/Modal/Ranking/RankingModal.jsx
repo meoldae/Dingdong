@@ -8,6 +8,7 @@ import { fetchScore } from "../../../api/Score"
 import styles from "./RankingModal.module.css"
 
 const RankingModal = () => {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   // 기준시간 상태관리
   const [standardTime, setStandardTime] = useState("")
   // 방좋아요 순위 상태관리
@@ -47,7 +48,7 @@ const RankingModal = () => {
 
   // 방 이동 함수
   const navigateRoom = (roomId) => {
-    window.location.replace(`/room/${roomId}`)
+    window.location.replace(`${urlPath}/room/${roomId}`)
   }
 
   const RankingSection = ({ title, rankingList }) => (

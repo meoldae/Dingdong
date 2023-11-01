@@ -5,7 +5,7 @@ import styles from "./PostofficeReceiveLetter.module.css"
 import Card from "../../components/UI/Card"
 const PostofficeReceiveLetter = () => {
   const navigate = useNavigate()
-
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   // const isLogin = useRecoilValue(isLoginAtom);
 
   let params = new URL(document.URL).searchParams
@@ -14,10 +14,10 @@ const PostofficeReceiveLetter = () => {
   const resultIndex = Number(result)
 
   const onHomeHandler = (e) => {
-    navigate("/")
+    navigate(`${urlPath}/`)
   }
   const onTestHandler = (e) => {
-    navigate("/yourstamp")
+    navigate(`${urlPath}/yourstamp`)
   }
 
  
@@ -33,7 +33,7 @@ const PostofficeReceiveLetter = () => {
             </div>
             <img
               className={styles.topPostCardImg}
-              src={`/assets/images/post/clover.png`}
+              src={`${urlPath}/assets/images/post/clover.png`}
             />
             <div className={styles.ToUser}>
               To.

@@ -19,9 +19,9 @@ export const Item = ({
     rotation: itemRotation,
     categoryId,
   } = item;
-
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const rotation = isDragging ? draggedItemRotation : itemRotation;
-  const { scene } = useGLTF(`/assets/models/editRoomItems/${furnitureId}.glb`);
+  const { scene } = useGLTF(`${urlPath}/assets/models/editRoomItems/${furnitureId}.glb`);
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const width = rotation === 1 || rotation === 3 ? size[2] : size[0];
   const height = rotation === 1 || rotation === 3 ? size[0] : size[2];
@@ -32,6 +32,7 @@ export const Item = ({
   const draggedItem = useRecoilValue(draggedItemState);
   const value = useRecoilValue(ItemRotateState);
   const mobileCheck = useRecoilValue(mobileCheckState);
+  
   useEffect(() => {
     setItems((prev) => {
       const newItems = prev.map((item, index) => {

@@ -6,6 +6,7 @@ import style from "./Footer.module.css"
 import { isHeartCheck, updateHeart } from "@/api/Room"
 
 const OtherFooter = (props) => {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isSendLetterModalVisible, setIsSendLetterModalVisible] =
     useState(false)
@@ -59,7 +60,7 @@ const OtherFooter = (props) => {
   }
 
   const goSingleMap= () =>{
-    window.location.replace("/")
+    window.location.replace(`${urlPath}/`)
   }
   return (
     <div className={style.wrap}>

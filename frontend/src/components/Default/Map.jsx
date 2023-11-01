@@ -5,13 +5,14 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader"
 extend({ GLTFLoader })
 
 const Map = () => {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const { scene } = useThree()
   const map = useLoader(
     GLTFLoader,
-    "assets/models/defaultSettings/after.glb",
+    `${urlPath}/assets/models/defaultSettings/after.glb`,
     (loader) => {
       const draco = new DRACOLoader()
-      draco.setDecoderPath("assets/draco/")
+      draco.setDecoderPath(`${urlPath}/assets/draco/`)
       loader.setDRACOLoader(draco)
     }
   )

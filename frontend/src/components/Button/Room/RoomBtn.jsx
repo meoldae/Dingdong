@@ -1,6 +1,7 @@
 import styles from "./RoomBtn.module.css"
 
-const imagePath = `/assets/icons/`
+const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+const imagePath = `${urlPath}/assets/icons/`
 
 const RoomBtn = ({ img, onClick }) => {
   return (
