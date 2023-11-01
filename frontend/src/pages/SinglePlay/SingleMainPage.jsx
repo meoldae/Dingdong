@@ -84,7 +84,7 @@ const SingleMainPage = () => {
   const worldPortalPosition = useRecoilValue(WorldPortalPositionAtom)
 
   // 랭킹모달 상태관리
-  const [isRanking, setIsRanking] = useState(false)
+  const [isRanking, setIsRanking] = useState(true)
 
   return (
     <>
@@ -275,9 +275,7 @@ const SingleMainPage = () => {
         <>
           <div className={styles.overlay} onClick={() => setIsRanking(false)} />
           <div className={styles.rankingModalContainer}>
-            <div className={styles.rankingModal}>
-              <RankingModal />
-            </div>
+            <RankingModal />
           </div>
         </>
       )}
