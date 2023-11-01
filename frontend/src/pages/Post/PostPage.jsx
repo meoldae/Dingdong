@@ -11,6 +11,8 @@ import SendLetter from "../../components/Modal/Post/SendLetter"
 
 const PostPage = () => {
   const navigate = useNavigate()
+  
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   const [searchText, setSearchText] = useState("")
   const [isPostCardBox, setIsPostCardBox] = useState(false)
@@ -24,7 +26,7 @@ const PostPage = () => {
   }
 
   const backNavigate = () => {
-    window.location.href = "/single"
+    window.location.href = `${urlPath}/single`
   }
 
   return (

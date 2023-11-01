@@ -21,6 +21,7 @@ import Error from "../components/UI/Error"
 import ReactGA from "react-ga4";
 // const Room = lazy(() => import("../pages/SinglePlay/SingleMainPage"))
 
+const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
 const gaTrackingId = import.meta.env.VITE_APP_GA_TRACKING_ID;
 ReactGA.initialize(gaTrackingId); 
@@ -43,24 +44,24 @@ const AppRouter = () => {
       <Suspense fallback={<LoadingPage content={"잠시만 기다려 주세요"} />}>
         <Routes>
           <Route element={<AuthRoute authentication="user" />}>
-            <Route path="/feDev" element={<SingleMainPage />} />
+            <Route path={`${urlPath}/`} element={<SingleMainPage />} />
             {/* <Route path="/single" element={<SingleMainPage />} /> */}
-            <Route path="/feDev/room/:roomId" element={<AppRoom />} />
-            <Route path="/feDev/random/:roomId" element={<AppRandomRoom />} />
-            <Route path="/feDev/usersetting" element={<AppUserSetting />} />
-            <Route path="/feDev/postoffice" element={<PostPage />} />
+            <Route path={`${urlPath}/room/:roomId`} element={<AppRoom />} />
+            <Route path={`${urlPath}/random/:roomId`} element={<AppRandomRoom />} />
+            <Route path={`${urlPath}/usersetting`} element={<AppUserSetting />} />
+            <Route path={`${urlPath}/postoffice`} element={<PostPage />} />
           </Route>
 
           <Route element={<AuthRoute authentication="NotUser" />}>
-            <Route path="/feDev/login" element={<AppLogin />} />
-            <Route path="/feDev/oauth2/redirect" element={<AppRedirect />} />
-            <Route path="/feDev/signup" element={<AppSignUp />} />
-            <Route path="/feDev/tutorial" element={<TutorialPage />} />
-            <Route path="/feDev/yourstamp" element={<StampTest />} />
-            <Route path="/feDev/yourstamp/result" element={<StampTestResult />} />
-            <Route path="/feDev/invite/:roomId" element={<InviteRoomPage />} />
+            <Route path={`${urlPath}/login`} element={<AppLogin />} />
+            <Route path={`${urlPath}/oauth2/redirect`} element={<AppRedirect />} />
+            <Route path={`${urlPath}/signup`} element={<AppSignUp />} />
+            <Route path={`${urlPath}/tutorial`} element={<TutorialPage />} />
+            <Route path={`${urlPath}/yourstamp`} element={<StampTest />} />
+            <Route path={`${urlPath}/yourstamp/result`} element={<StampTestResult />} />
+            <Route path={`${urlPath}/invite/:roomId`} element={<InviteRoomPage />} />
           </Route>
-          <Route path="/feDev/*" element={<AppNotFound />} />
+          <Route path={`${urlPath}/*`} element={<AppNotFound />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

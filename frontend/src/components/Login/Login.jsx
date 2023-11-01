@@ -5,6 +5,8 @@ import styles from "./Login.module.css"
 const Login = () => {
   const navigate = useNavigate()
 
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
   const loginHandler = () => {
     window.location.href = `${
       import.meta.env.VITE_SERVER_URL
@@ -12,11 +14,11 @@ const Login = () => {
   }
 
   const guestLoginHandler = () => {
-    navigate("/tutorial")
+    navigate(`${urlPath}/tutorial`)
   }
 
   const posteCardTest = () => {
-    navigate("/yourstamp")
+    navigate(`${urlPath}/yourstamp`)
   }
 
   return (

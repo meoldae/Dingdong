@@ -29,18 +29,19 @@ function RandomRoomPage() {
   // 브라우저 뒤로가기 버튼 처리
   const [locationKeys, setLocationKeys] = useState([])
   const navigate = useNavigate()
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   useEffect(() => {
     return history.listen((location) => {
       if (history.action === "PUSH") {
         setLocationKeys([location.key])
-        window.location.replace("/")
+        window.location.replace(`${urlPath}/`)
       }
 
       if (history.action === "POP") {
         if (locationKeys[1] === location.key) {
           setLocationKeys(([_, ...keys]) => keys)
-          window.location.replace("/")
+          window.location.replace(`${urlPath}/`)
         } else {
           setLocationKeys((keys) => [location.key, ...keys])
         }
@@ -75,7 +76,7 @@ function RandomRoomPage() {
       (error) => {
         console.error("Error at fetching RoomData...", error)
         if (error.response && error.response.status === 400) {
-          navigate("/notfound")
+          navigate(`${urlPath}/notfound`);  
         }
       }
     )
@@ -94,7 +95,7 @@ function RandomRoomPage() {
       randomRoom =
         possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
     } while (randomRoom === roomId || randomRoom === myRoomId)
-    window.location.replace(`/random/${randomRoom}`)
+    window.location.replace(`${urlPath}/random/${randomRoom}`)
   }
 
   useEffect(() => {
