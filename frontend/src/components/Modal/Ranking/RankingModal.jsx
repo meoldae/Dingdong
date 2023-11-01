@@ -1,3 +1,6 @@
+// API
+import { fetchScore } from "../../../api/Score"
+
 // 스타일
 import styles from "./RankingModal.module.css"
 
