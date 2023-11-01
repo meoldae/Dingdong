@@ -64,15 +64,11 @@ const RankingModal = () => {
             </div>
             <div className={styles.TitleLine} />
             <div className={styles.MostContent}>
-              <div className={styles.Content} onClick={() => navigateRoom(mostLikeRoomList[0].roomId)}>
-                1등 {mostLikeRoomList[0].nickname}
-              </div>
-              <div className={styles.Content} onClick={() => navigateRoom(mostLikeRoomList[1].roomId)}>
-                2등 {mostLikeRoomList[1].nickname}
-              </div>
-              <div className={styles.Content} onClick={() => navigateRoom(mostLikeRoomList[2].roomId)}>
-                3등 {mostLikeRoomList[2].nickname}
-              </div>
+              {mostLikeRoomList.map((item, index) => (
+                <div key={item.memberId} className={styles.Content} onClick={() => navigateRoom(item.roomId)}>
+                  {index + 1}등 {item.nickname}
+                </div>
+              ))}
             </div>
           </div>
           <div className={styles.MostContainer}>
@@ -81,15 +77,11 @@ const RankingModal = () => {
             </div>
             <div className={styles.TitleLine} />
             <div className={styles.MostContent}>
-              <div className={styles.Content} onClick={() => navigateRoom(mostReceiveLetterList[0].roomId)}>
-                1등 {mostReceiveLetterList[0].nickname}
-              </div>
-              <div className={styles.Content} onClick={() => navigateRoom(mostReceiveLetterList[1].roomId)}>
-                2등 {mostReceiveLetterList[1].nickname}
-              </div>
-              <div className={styles.Content} onClick={() => navigateRoom(mostReceiveLetterList[2].roomId)}>
-                3등 {mostReceiveLetterList[2].nickname}
-              </div>
+              {mostReceiveLetterList.map((item, index) => (
+                <div key={item.memberId} className={styles.Content} onClick={() => navigateRoom(item.roomId)}>
+                  {index + 1}등 {item.nickname}
+                </div>
+              ))}
             </div>
           </div>
           <div className={styles.MostContainer}>
@@ -98,15 +90,11 @@ const RankingModal = () => {
             </div>
             <div className={styles.TitleLine} />
             <div className={styles.MostContent}>
-              <div className={styles.Content} onClick={() => navigateRoom(mostSendLetterList[0].roomId)}>
-                1등 {mostSendLetterList[0].nickname}
-              </div>
-              <div className={styles.Content} onClick={() => navigateRoom(mostSendLetterList[1].roomId)}>
-                2등 {mostSendLetterList[1].nickname}
-              </div>
-              <div className={styles.Content} onClick={() => navigateRoom(mostSendLetterList[2].roomId)}>
-                3등 {mostSendLetterList[2].nickname}
-              </div>
+              {mostSendLetterList.map((item, index) => (
+                <div key={item.memberId} className={styles.Content} onClick={() => navigateRoom(item.roomId)}>
+                  {index + 1}등 {item.nickname}
+                </div>
+              ))}
             </div>
           </div>
         </div>
