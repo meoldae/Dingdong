@@ -8,6 +8,9 @@ const RankingModal = () => {
         <div className={styles.TitleContainer}>
           <div className={styles.Title}>랭킹</div>
         </div>
+        <div className={styles.ContentContainer}>
+          <div className={styles.Content}>Content</div>
+        </div>
       </div>
     </>
   )
