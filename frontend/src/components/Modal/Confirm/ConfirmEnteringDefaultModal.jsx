@@ -47,7 +47,7 @@ const ConfirmEnteringDefaultModal = ({
       do {
         randomRoom = possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
       } while (randomRoom === userInfo.roomId)
-      navigate(`/room/${randomRoom}`)
+      navigate(`/random/${randomRoom}`)
     }
 
     setConfirmEnteringLocation(false)

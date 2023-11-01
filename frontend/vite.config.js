@@ -19,7 +19,7 @@ export default defineConfig({
         name: 'Ding Dong',
         short_name: 'Ding Dong',
         description: '딩동! 편지왔어요. 딩동! 놀러왔어요',
-        start_url: '/',
+        start_url: '/feDev/',
         display: 'standalone',
         icons: [
           {
