@@ -3,6 +3,7 @@ import { Suspense, useEffect, lazy } from "react"
 
 import AuthRoute from "./AuthRouter"
 import AppRoom from "../pages/Room/RoomPage"
+import AppRandomRoom from "../pages/Room/RandomRoomPage"
 import AppNotFound from "../pages/NotFound/NotFoundPage"
 import AppLogin from "../pages/User/LoginPage"
 import AppSignUp from "../pages/User/SignUpPage"
@@ -45,6 +46,7 @@ const AppRouter = () => {
             <Route path="/" element={<SingleMainPage />} />
             {/* <Route path="/single" element={<SingleMainPage />} /> */}
             <Route path="/room/:roomId" element={<AppRoom />} />
+            <Route path="/random/:roomId" element={<AppRandomRoom />} />
             <Route path="/usersetting" element={<AppUserSetting />} />
             <Route path="/postoffice" element={<PostPage />} />
           </Route>
