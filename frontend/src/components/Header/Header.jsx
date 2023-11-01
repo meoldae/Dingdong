@@ -15,6 +15,7 @@ import RoomBtn from "../Button/Room/RoomBtn"
 import NeighborListModal from "../Modal/Neighbor/NeighborListModal"
 import DefaultModal from "../Modal/Default/DefaultModal"
 import { successMsg } from "../../utils/customToast"
+import RoomNameBtn from "../Button/Room/RoomNameBtn"
 
 // Atom
 import { userAtom } from "../../atom/UserAtom"
@@ -29,7 +30,7 @@ import {
 } from "../../api/Neighbor"
 import { fetchLogout, fetchUserSecession } from "../../api/User"
 import { fetchInquiry } from "../../api/Cs"
-import RoomNameBtn from "../Button/Room/RoomNameBtn"
+
 
 const Header = ({ checkMyRoom }) => {
   // 햄버거메뉴바 상태관리
@@ -54,6 +55,10 @@ const Header = ({ checkMyRoom }) => {
   const [isInquiry, setIsInquiry] = useState(false)
   // 문의하기 내용 상태관리
   const [inquiryText, setInquiryText] = useState("")
+  // 로그아웃 확인 모달 상태관리
+  const [isRealLogout, setIsRealLogout] = useState(false)
+  // 회원탈퇴 확인 모달 상태관리
+  const [isRealSecession, setIsRealSecession] = useState(false)
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
@@ -193,6 +198,12 @@ const Header = ({ checkMyRoom }) => {
     )
   }
 
+  // 문의하기 버튼함수
+  const inquiryCheckHandler = () => {
+    setIsHamburger(false)
+    setIsInquiry(true)
+  }
+
   return (
     <>
       <div className={styles.wrap}>
@@ -280,14 +291,14 @@ const Header = ({ checkMyRoom }) => {
             <div className={styles.ContentContainer}>
               <div
                 className={styles.MenuButton}
-                onClick={() => setIsInquiry(true)}
+                onClick={inquiryCheckHandler}
               >
                 문의하기
               </div>
-              <div className={styles.MenuButton} onClick={logoutHandler}>
+              <div className={styles.MenuButton} onClick={() => setIsRealLogout(true)}>
                 로그아웃
               </div>
-              <div className={styles.MenuButton} onClick={withdrawalHandler}>
+              <div className={styles.MenuButton} onClick={() => setIsRealSecession(true)}>
                 회원탈퇴
               </div>
             </div>
@@ -369,6 +380,44 @@ const Header = ({ checkMyRoom }) => {
             <div className={styles.Inquiry} onClick={inquiryHandler}>
               완료
             </div>
+          </div>
+        </>
+      )}
+
+      {/* 로그아웃 확인 모달 */}
+      {isRealLogout && (
+        <>
+          <div
+            className={styles.RemoveOverlay}
+            onClick={() => setIsRealLogout(false)}
+          />
+          <div className={styles.RemoveNeighborContainer}>
+            <DefaultModal
+              content={"정말 로그아웃을 하시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={logoutHandler}
+              cancelClick={() => setIsRealLogout(false)}
+            />
+          </div>
+        </>
+      )}
+
+      {/* 회원탈퇴 확인 모달 */}
+      {isRealSecession && (
+        <>
+          <div
+            className={styles.RemoveOverlay}
+            onClick={() => setIsRealSecession(false)}
+          />
+          <div className={styles.RemoveNeighborContainer}>
+            <DefaultModal
+              content={"정말 회원탈퇴를 하시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={withdrawalHandler}
+              cancelClick={() => setIsRealSecession(false)}
+            />
           </div>
         </>
       )}
