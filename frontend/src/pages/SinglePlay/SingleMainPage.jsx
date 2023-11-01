@@ -92,9 +92,9 @@ const SingleMainPage = () => {
   const [onPostofficeCard, setOnPostOfficeCard] =
     useRecoilState(postofficeCardAtom);
   const [onPostofficeSendLetter, setOnPostofficeSendLetter] = useRecoilState(postofficeSendLetterAtom);
-   const [selectedPostCard, setSelectedPostCard] = useState(null)
+  const [selectedPostCard, setSelectedPostCard] = useState(null)
 
-   const handleSelectButtonClick = (selectedCard) => {
+  const handleSelectButtonClick = (selectedCard) => {
     setSelectedPostCard(selectedCard)
     setOnPostOfficeCard(false)
     setOnPostofficeSendLetter(true);
