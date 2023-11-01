@@ -17,7 +17,8 @@
 }
 
 .Title {
-  font-size: 30px;
+  font-size: 40px;
+  margin-top: 10px;
 }
 
 .Time {
@@ -25,8 +26,8 @@
   height: 10px;
   text-align: center;
   font-size: 15px;
-  font-family: "Pretendard-Medium";
-  margin-bottom: 30px;
+  font-family: "Pretendard-Regular";
+  margin-bottom: 10px;
 }
 
 .ContentContainer {
@@ -50,12 +51,15 @@
 
 .MostTitle {
   width: 80%;
+  font-family: "Pretendard-Bold";
+  font-size: 25px;
+  text-align: center;
 }
 
 .TitleLine {
   width: 80%;
   border: #C2C2C2 1px solid;
-  margin-top: 5px;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 
