@@ -6,6 +6,8 @@ import styles from "./Footer.module.css"
 import { useNavigate } from "react-router-dom" 
 
 const OtherFooter = (props) => {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
   const navigate = useNavigate()
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isSendLetterModalVisible, setIsSendLetterModalVisible] =
@@ -14,7 +16,7 @@ const OtherFooter = (props) => {
   const [isHeart, setIsHeart] = useState(false);
 
   const onHomeHandler = (e) => {
-    navigate("/login")
+    navigate(`${urlPath}/login`)
   }
 
   const openModal = () => {

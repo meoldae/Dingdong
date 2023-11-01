@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil"
 export default function AuthRoute({ authentication }) {
   const location = useLocation()
   const currentPath = location.pathname
-
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const [token, setToken] = useRecoilState(userAtom)
   let isLogin = token.accessToken !== "" && token.accessToken !== "undefined"
 
@@ -25,9 +25,9 @@ export default function AuthRoute({ authentication }) {
   const authText = authentication
 
   const isAllowedPath =
-    currentPath.startsWith("/tutorial") ||
-    currentPath.startsWith("/yourstamp") ||
-    currentPath.startsWith("/invite")
+    currentPath.startsWith(`${urlPath}/tutorial`) ||
+    currentPath.startsWith(`${urlPath}/yourstamp`) ||
+    currentPath.startsWith(`${urlPath}/invite`)
   if (authText.indexOf("Not") === -1) {
     if (isLogin || isAllowedPath) return <Outlet />
     else return <Navigate to={redirect(true, authText)} />

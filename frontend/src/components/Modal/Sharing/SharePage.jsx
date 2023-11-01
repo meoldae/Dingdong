@@ -3,7 +3,8 @@ import styles from "./Share.module.css";
 import html2canvas from "html2canvas";
 import {useRecoilState} from "recoil";
 import { textareaAtom } from '../../../atom/TextareaAtom';
-// import { handleImageUpload } from "../../../utils/s3Util";
+
+const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY; 
 
 const SharePage = ({shareModal, canvasRef}) => {
   const today = new Date();
@@ -35,7 +36,32 @@ const SharePage = ({shareModal, canvasRef}) => {
       // 원본 캔버스에서 잘라낼 영역만 croppedCanvas에 그리기
       ctx.drawImage(canvas, startX, startY, width, height, 0, 0, width, height);
 
-      setImageSrc(croppedCanvas.toDataURL("image/png"));
+      // 카카오 서버에 이미지 던지기
+      if (!window.Kakao.isInitialized()) {
+        window.Kakao.init(JS_KEY);
+      }
+
+      croppedCanvas.toBlob(function(blob) {
+        var file = new File([blob], "image.png", {type: "image/png", lastModified: Date.now()});
+
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+
+        window.Kakao.Share.uploadImage({
+          file: dataTransfer.files,
+        })
+          .then(function(response) {
+            setImageSrc(response.infos.original.url);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+
+      }, "image/jpeg");
+
+      // const uploadedImageUrl = await handleImageUpload(croppedCanvas);
+      // setImageSrc(uploadedImageUrl);
+      // setImageSrc(croppedCanvas.toDataURL("image/png"));
       // await handleImageUpload(croppedCanvas); 
     });
   };

@@ -114,18 +114,20 @@
     position: absolute;
     width: 4vh;
     height: 4vh;
-    left: 4vh;
+    left: 6vh;
     top: -6vh;
 
 }
 
 .dragPopUp img {
-    margin-left: 10px;
+    margin-left: 5px;
     width: 3vh;
     background-color: white;
     border-radius:  50px 50px 50px 50px;
     padding: 1vh;
+    height: 3vh;
 }
+
 .popUpClose {
     display: flex;
     justify-content: center;

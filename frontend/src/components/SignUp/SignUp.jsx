@@ -13,6 +13,8 @@ const SignUp = () => {
   const navigate = useNavigate()
   const setLoginInfo = useSetRecoilState(userAtom)
 
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
   const [charactersData, setCharactersData] = useState([])
   const [avatarId, setAvatar] = useState(null)
   const [nickname, setNickname] = useState("")
@@ -80,7 +82,7 @@ const SignUp = () => {
           roomId: roomId,
         }))
 
-        navigate("/")
+        navigate(`${urlPath}/`)
       },
       (error) => {
         console.log("입주에 실패했습니다")
