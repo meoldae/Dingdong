@@ -27,28 +27,45 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  flex-direction: column;
 }
 
 .MostLikeRoomContainer {
-
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: start;
 }
 
 .MostLikeRoomTitle {
+  width: 80%;
+}
 
+.TitleLine {
+  width: 80%;
+  border: #C2C2C2 1px solid;
 }
 
 .MostReceiveLetterContainer {
-
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .MostReceiveLetterTitle {
-
+  width: 80%;
 }
 
 .MostSendLetterContainer {
-
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .MostSendLetterTitle {
-  
+  width: 80%;
 }
