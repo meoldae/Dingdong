@@ -21,7 +21,7 @@ public class ScoreController implements ScoreSwagger{
 
     @Override
     @GetMapping
-    public DataResponse<ScoreBoardResponseDto> getScoreBoard(Long letterId) {
+    public DataResponse<ScoreBoardResponseDto> getScoreBoard() {
         ScoreBoardResponseDto result = scoreService.getLatestScores();
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, result);
     }

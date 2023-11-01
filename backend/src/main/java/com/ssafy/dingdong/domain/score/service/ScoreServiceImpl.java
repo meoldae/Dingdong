@@ -79,20 +79,24 @@ public class ScoreServiceImpl implements ScoreService{
 
     @Override
     public ScoreBoardResponseDto getLatestScores() {
-        Map<ScoreType, ScoreResponseDto> latestScores = new HashMap<>();
+        Map<ScoreType, List<ScoreResponseDto>> latestScores = new HashMap<>();
 
         for (ScoreType type : ScoreType.values()) {
-            Score score = scoreRepository.findLatestByType(type, PageRequest.of(0, 1))
-                    .stream().findFirst().orElse(null);
-            if (score != null) {
-                ScoreResponseDto scoreResponse = ScoreResponseDto.builder()
-                        .recordCount(score.getRecordCount())
-                        .memberId(score.getMemberId())
-                        .nickname(memberService.getMemberById(score.getMemberId()).nickname())
-                        .roomId(score.getRoomdId())
-                        .build();
-                latestScores.put(type, scoreResponse);
+            log.info(type.toString());
+            List<Score> scores = scoreRepository.findLatestByType(type, PageRequest.of(0, 3));
+            List<ScoreResponseDto> list = new ArrayList<>();
+            for(Score score : scores) {
+                if (score != null) {
+                    ScoreResponseDto scoreResponse = ScoreResponseDto.builder()
+                            .recordCount(score.getRecordCount())
+                            .memberId(score.getMemberId())
+                            .nickname("") //memberService.getMemberById(score.getMemberId()).nickname()
+                            .roomId(score.getRoomdId()) // //
+                            .build();
+                    list.add(scoreResponse);
+                }
             }
+            latestScores.put(type, list);
         }
 
         ScoreBoardResponseDto scoreBoardResponse = ScoreBoardResponseDto.builder()

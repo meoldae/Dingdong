@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 @Data
 @AllArgsConstructor
@@ -15,5 +16,5 @@ import java.util.Map;
 @ToString
 public class ScoreBoardResponseDto {
     LocalDateTime recordTime;
-    Map<ScoreType, ScoreResponseDto> scores;
+    Map<ScoreType, List<ScoreResponseDto>> scores;
 }
