@@ -83,6 +83,9 @@ const SingleMainPage = () => {
   const otherRoomPortalPosition = useRecoilValue(OtherRoomPortalPositionAtom)
   const worldPortalPosition = useRecoilValue(WorldPortalPositionAtom)
 
+  // 랭킹모달 상태관리
+  const [isRanking, setIsRanking] = useState(false)
+
   return (
     <div className={styles.canvasContainer}>
       <Canvas shadows>
