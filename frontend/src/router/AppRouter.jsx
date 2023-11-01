@@ -25,8 +25,8 @@ const AppRouter = () => {
       <Suspense fallback={<LoadingPage content={"잠시만 기다려 주세요"} />}>
         <Routes>
           <Route element={<AuthRoute authentication="user" />}>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/single" element={<SingleMainPage />} />
+            <Route path="/" element={<SingleMainPage />} />
+            {/* <Route path="/single" element={<SingleMainPage />} /> */}
             <Route path="/room/:roomId" element={<AppRoom />} />
             <Route path="/usersetting" element={<AppUserSetting />} />
             <Route path="/postoffice" element={<PostPage />} />
