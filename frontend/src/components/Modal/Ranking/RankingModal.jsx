@@ -36,7 +36,6 @@ const RankingModal = () => {
       }
     )
   }, [])
-  
 
   return (
     <>
