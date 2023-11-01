@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import StampTestOptions from "@/components/StampTest/StampTestOptions"
 import StampTestStart from "@/components/StampTest/StampTestStart"
 import StampTestLoading from "@/components/StampTest/StampTestLoading" 

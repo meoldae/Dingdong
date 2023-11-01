@@ -74,8 +74,12 @@
   font-family: "GangwonEduAll-Light";
   outline: none;
   text-align: center;
+  -ms-overflow-style: none;
 }
 
+.letterContent textarea::-webkit-scrollbar {
+  display: none;
+}
 
 .contentCount {
   font-family: "GangwonEduAll-Light";
