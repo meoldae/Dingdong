@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -54,13 +55,17 @@ public class ScoreServiceImpl implements ScoreService{
                 .collect(Collectors.toList());
     }
 
-    @Scheduled(cron = "0 0 * * * *")
+//    @Scheduled(cron = "0 0 * * * *")
     public void insertScoreEveryHourOnTheHour() {
         List<LetterScoreDto> letterFromScoreList= letterService.getLetterFromScore();
         List<LetterScoreDto> letterToScoreList = letterService.getLetterToScore();
         List<RoomScoreDto> roomScoreList = roomService.getRoomScore();
 
         List<Score> insertScoreList = new ArrayList<>() ;
+        log.info(letterFromScoreList);
+        log.info(letterToScoreList);
+        log.info(roomScoreList);
+
         insertScoreList.addAll(convertLetterFromScoreToScores(letterFromScoreList));
         insertScoreList.addAll(convertLetterToScoreToScores(letterToScoreList));
         insertScoreList.addAll(convertRoomScoreToScores(roomScoreList));

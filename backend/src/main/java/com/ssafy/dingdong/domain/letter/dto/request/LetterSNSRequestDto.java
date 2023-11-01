@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LetterSNSRequestDto {
     private String letterId;
+    private Long roomId;
     private String letterTo;
     private String description;
     private String letterFrom;

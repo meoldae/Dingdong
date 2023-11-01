@@ -18,6 +18,7 @@ public class LetterSNS {
     @Id
     private String letterId;
     private String memberId;
+    private Long roomId;
 
     @Length(min = 1, max = 8)
     private String letterTo;
@@ -42,6 +43,7 @@ public class LetterSNS {
         return LetterSNS.builder()
                 .memberId(memberId)
                 .letterId(requestDto.getLetterId())
+                .roomId(requestDto.getRoomId())
                 .letterTo(requestDto.getLetterTo())
                 .description(requestDto.getDescription())
                 .letterFrom(requestDto.getLetterFrom())
