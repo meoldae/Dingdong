@@ -269,6 +269,9 @@ const SingleMainPage = () => {
           </div>
         )}
       </div>
+
+      {/* 랭킹모달 */}
+      
     </>
   )
 }
