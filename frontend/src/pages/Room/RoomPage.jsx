@@ -143,24 +143,8 @@ function RoomPage() {
             ref={canvasRef}
           >
             <Experience setRoomDrag={setRoomDrag}/>
-          </Canvas>
-          {/* 랜덤 찾기 버튼 */}
-          {isMyRoom ? (
-            <></>
-          ) : (
-            <div className={styles.buttonContainer}>
-              {/* <div className={styles.randomButton} onClick={randomVisit}>
-                <img
-                  src={"/assets/icons/random.svg"}
-                  className={styles.randomImage}
-                />
-                <div className={styles.randomButtonContent}>랜덤 방문</div>
-              </div> */}
-              <div className={styles.randomButton}>
-                <RandomBtn onClick={randomVisit} />
-              </div>
-            </div>
-          )}
+          </Canvas> 
+ 
           {isMyRoom ? <MyFooter /> : <OtherFooter props={roomId[0]} />}
           {/* {popUpStatus ? <PopUp/> : '' } */}
           <PopUp />

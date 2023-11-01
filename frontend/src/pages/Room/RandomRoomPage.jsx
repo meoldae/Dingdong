@@ -93,7 +93,7 @@ function RandomRoomPage() {
     do {
       randomRoom = possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
     } while (randomRoom === roomId || randomRoom === myRoomId)
-    window.location.replace(`/room/${randomRoom}`)
+    window.location.replace(`/random/${randomRoom}`)
   }
 
   useEffect(() => {
