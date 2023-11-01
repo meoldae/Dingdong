@@ -4,7 +4,7 @@ pipeline {
         stage("Set Variable") {
             steps {
                 script {
-                    IMAGE_NAME_BE = "dingdong-springboot_prod"
+                    IMAGE_NAME_BE = "dingdong-springboot-prod"
                     APPLICATION_YML_PATH = "/usr/spring/prod/resources"
                     CONTAINER_NAME_BE = "dingdong_be_prod"
                     PROJECT_DIR_BE = "backend"
