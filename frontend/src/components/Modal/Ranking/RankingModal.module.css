@@ -3,6 +3,15 @@
   height: 500px;
   background: #FFF;
   border-radius: 10px;
+}
 
+.TitleContainer {
+  width: 95%;
+  padding-top: 5%;
+  padding-left: 5%;
+}
+
+.Title {
+  font-size: 30px;
   font-family: "Pretendard-Bold";
 }
