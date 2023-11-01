@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import com.ssafy.dingdong.domain.member.dto.response.MemberLoginResponseDto;
 import com.ssafy.dingdong.domain.room.service.RoomService;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,7 @@ import com.ssafy.dingdong.domain.member.repository.MemberRedisRepository;
 import com.ssafy.dingdong.domain.member.repository.MemberRepository;
 import com.ssafy.dingdong.global.exception.CustomException;
 import com.ssafy.dingdong.global.exception.ExceptionStatus;
+import com.ssafy.dingdong.global.util.CookieUtils;
 import com.ssafy.dingdong.global.util.JwtProvider;
 
 import lombok.RequiredArgsConstructor;
@@ -34,14 +38,15 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	@Transactional
-	public MemberLoginResponseDto createMember(MemberSignUpDto memberLoginDto) {
+	public MemberLoginResponseDto createMember(MemberSignUpDto memberLoginDto, String refreshToken) {
 		Member findMember = memberRepository.findByMemberId(UUID.fromString(memberLoginDto.memberId())).orElseThrow(
 			() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
 		);
 		findMember.signUp(memberLoginDto.nickname(), memberLoginDto.avatarId());
 		String accessToken = jwtProvider.createAccessToken(findMember);
-
 		Long roomId = roomService.createRoom(memberLoginDto.memberId());
+
+		memberRedisRepository.saveToken(findMember.getMemberId().toString(), accessToken, refreshToken);
 		return MemberLoginResponseDto.of(findMember, roomId, accessToken);
 	}
 
