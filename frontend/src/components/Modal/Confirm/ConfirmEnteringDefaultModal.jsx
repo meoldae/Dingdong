@@ -41,10 +41,11 @@ const ConfirmEnteringDefaultModal = ({
       // 우체국으로 이동
       navigate("/postoffice")
     } else if (location === "otherRoom") {
-      let randomRoom
-
+      const possibleRooms = [1, 3, 4, 6, 19, 21]
+      let randomRoom 
+      
       do {
-        randomRoom = Math.floor(Math.random() * 6) + 1
+        randomRoom = possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
       } while (randomRoom === userInfo.roomId)
       navigate(`/room/${randomRoom}`)
     }
