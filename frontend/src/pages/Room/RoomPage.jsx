@@ -34,13 +34,13 @@ function RoomPage() {
     return history.listen((location) => {
       if (history.action === "PUSH") {
         setLocationKeys([location.key])
-        window.location.replace("single")
+        window.location.replace("/")
       }
 
       if (history.action === "POP") {
         if (locationKeys[1] === location.key) {
           setLocationKeys(([_, ...keys]) => keys)
-          window.location.replace("single")
+          window.location.replace("/")
         } else {
           setLocationKeys((keys) => [location.key, ...keys])
         }
@@ -58,10 +58,10 @@ function RoomPage() {
   const [shareModal, setShareModal] = useState(false)
   const userInfo = useRecoilValue(userAtom)
   const [nickName, setNickName] = useRecoilState(roomInfoAtom)
+  const [roomDrag,setRoomDrag] = useState(false);
   const roomId = window.location.pathname.match(/\d+/g)
   const today = new Date()
   const [time, setTime] = useState()
-
   useEffect(() => {
     const myRoomId = userInfo.roomId
     setIsMyRoom(roomId == myRoomId)
@@ -74,9 +74,12 @@ function RoomPage() {
       },
       (error) => {
         console.error("Error at fetching RoomData...", error)
+        if (error.response && error.response.status === 400) {
+          navigate("/notfound");  
+        }
       }
     )
-  }, [isMyRoom])
+  }, [isMyRoom, navigate])
 
   const randomVisit = () => {
     const roomId = window.location.pathname.match(/\d+/g)
@@ -105,6 +108,7 @@ function RoomPage() {
   }, [])
   return (
     <>
+    {roomDrag && <div className={styles.roomDrag}/>}
       {time && (
         <div className={`${styles.container} ${styles[time]}`}>
           {isMyRoom ? (
@@ -133,10 +137,10 @@ function RoomPage() {
           <Canvas
             shadows
             gl={{ preserveDrawingBuffer: true, antialias: true }}
-            camera={{ fov: 45, zoom: 1.2 }}
+            camera={{ fov: 45, zoom: 1.1 }}
             ref={canvasRef}
           >
-            <Experience />
+            <Experience setRoomDrag={setRoomDrag}/>
           </Canvas>
           {/* 랜덤 찾기 버튼 */}
           {isMyRoom ? (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect} from "react"
 import Results from "./result.json" 
 import SharingModalList from "@/components/Modal/Sharing/SharingModalList"
 import { useNavigate } from "react-router-dom" 
@@ -13,9 +13,6 @@ const StampTestResult = () => {
   let result = params.get("result")
 
   const resultIndex = Number(result)
-  
-  const resultSrcUrl = "/assets/StampTest/"+Results[resultIndex].srcUrl;   
- 
 
   const onHomeHandler = (e) => {
     navigate("/")
@@ -23,12 +20,18 @@ const StampTestResult = () => {
   const onTestHandler = (e) => {
     navigate("/yourstamp")
   }
-  
+
   useEffect(() => {
     if (!result || ![0, 1, 2, 3, 4, 5, 6, 7].includes(resultIndex)) {
-      navigate("/notfound")
+      navigate("/notfound");
     }
-  }, [])
+  }, [navigate, result, resultIndex]);
+ 
+  const resultSrcUrl = "/assets/StampTest/" + Results[resultIndex]?.srcUrl;
+ 
+  if (!result || ![0, 1, 2, 3, 4, 5, 6, 7].includes(resultIndex)) {
+    return null;
+  }
 
   return (
     <div className={styles.Container}>
