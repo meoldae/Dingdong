@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LetterSNSResponseDto {
+    private Long roomId;
     private String letterTo;
     private String description;
     private String letterFrom;
