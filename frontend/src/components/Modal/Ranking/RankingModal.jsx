@@ -6,7 +6,9 @@ const RankingModal = () => {
     <>
       <div className={styles.Container}>
         <div className={styles.TitleContainer}>
-          랭킹
+          <div className={styles.Title}>
+            랭킹
+          </div>
         </div>
       </div>
     </>
