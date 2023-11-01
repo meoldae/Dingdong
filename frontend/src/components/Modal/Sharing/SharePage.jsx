@@ -8,7 +8,7 @@ const SharePage = ({shareModal, canvasRef}) => {
   const [imageSrc, setImageSrc] = useState();
 
   const onCapture = () => {
-    html2canvas(canvasRef.current).then((canvas) => {
+    html2canvas(document.getElementById("newcanvas")).then((canvas) => {
       const croppedCanvas = document.createElement("canvas");
       const ctx = croppedCanvas.getContext("2d");
 
