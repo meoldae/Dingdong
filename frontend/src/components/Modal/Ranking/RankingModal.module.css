@@ -82,4 +82,6 @@
 
 .Type {
   color: #b2b8bd;
+  width: 80px;
+  text-align: center;
 }
