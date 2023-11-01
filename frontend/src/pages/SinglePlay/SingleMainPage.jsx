@@ -273,7 +273,7 @@ const SingleMainPage = () => {
       {/* 랭킹모달 */}
       {isRanking && (
         <>
-          <div className={styles.overlay} />
+          <div className={styles.overlay} onClick={() => setIsRanking(false)} />
           <div className={styles.rankingModalContainer}>
             <div className={styles.rankingModal}>
               <RankingModal />
