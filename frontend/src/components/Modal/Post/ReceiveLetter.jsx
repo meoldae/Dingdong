@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { getLetterDetail } from "@/api/Letter"
 import { successMsg } from "../../../utils/customToast"
 import { reportLetter } from "../../../api/Letter"
+import { DefaultModal } from "../Default/DefaultModal"
 
 const RecevieLetter = (props) => {
   const letterId = useRecoilValue(letterIdAtom)
@@ -63,7 +64,7 @@ const RecevieLetter = (props) => {
                 <span>{letterDetail?.description}</span>
               </div>
               <div className={styles.footerContainer}>
-                <div className={styles.report} onClick={reportHandler}>
+                <div className={styles.report} onClick={() => setIsReport(true)}>
                   신고하기
                 </div>
                 <div className={styles.FromUser}>
@@ -74,6 +75,19 @@ const RecevieLetter = (props) => {
           </div>
         )}
       </div>
+      {isReport && (
+        <>
+          <div className={styles.reportScreen}>
+            <DefaultModal
+              content={"신고를 하시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={reportHandler}
+              cancelClick={() => setIsReport(false)}
+            />
+          </div>
+        </>
+      )}
     </>
   )
 }
