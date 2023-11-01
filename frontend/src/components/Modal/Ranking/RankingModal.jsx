@@ -11,6 +11,19 @@ const RankingModal = () => {
   // 기준시간 상태관리
   const [standardTime, setStandardTime] = useState("")
 
+  // 시간변경함수
+  const changeTime = (inputTime) => {
+    const date = new Date(inputTime)
+
+    const year = date.getFullYear().toString().substr(-2)
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const day = date.getDate().toString().padStart(2, '0')
+    const hours = date.getHours().toString().padStart(2, '0')
+    const minutes = date.getMinutes().toString().padStart(2, '0')
+
+    return `${year}/${month}/${day} ${hours}:${minutes}`
+  }
+
   // 스코어보드 정보 가져오기
   useEffect(() => {
     fetchScore(
@@ -31,7 +44,7 @@ const RankingModal = () => {
         <div className={styles.TitleContainer}>
           <div className={styles.Title}>랭킹</div>
         </div>
-        <div className={styles.Time}>기준시간 : {standardTime}</div>
+        <div className={styles.Time}>기준시간 : {changeTime(standardTime)}</div>
         <div className={styles.ContentContainer}>
           <div className={styles.MostLikeRoomContainer}>
             <div className={styles.MostLikeRoomTitle}>
