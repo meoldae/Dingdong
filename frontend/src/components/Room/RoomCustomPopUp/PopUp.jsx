@@ -122,7 +122,6 @@ const PopUp = () => {
                       if (draggedItem !== null && dragPosition) {
                         if (canDrop) {
                           setItems((prev) => {
-                            console.log(prev);
                             const newItems = prev.map((item, index) => {
                               if (index === draggedItem) {
                                 return {

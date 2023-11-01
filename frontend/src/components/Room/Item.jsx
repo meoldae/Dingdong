@@ -68,9 +68,9 @@ export const Item = ({
           >
             <primitive
               object={clone}
-              position-x={rotation ? 0 : 0.12}
+              // position-x={rotation ? 0 : 0.12}
               position-y={0.44}
-              position-z={0.12}
+              position-z={rotation? 0 :0.12}
               // 벽에 있는 아이템 관련
               rotation-y={(rotation * Math.PI) / 2}
             />
@@ -110,9 +110,9 @@ export const Item = ({
           >
             <primitive
               object={clone}
-              position-x={rotation ? 0 : 0.12}
+              // position-x={rotation ? 0 : 0.12}
               position-y={0.44}
-              position-z={0.12}
+              position-z={rotation? 0 :0.12}
               // 벽에 있는 아이템 관련
               rotation-y={(rotation * Math.PI) / 2}
             />
@@ -126,7 +126,7 @@ export const Item = ({
                   args={[
                     rotation ? 0 : width * 0.24,
                     (thick * 0.48) / 2,
-                    rotation ? height * 0.24 : 0,
+                    rotation ? (height * 0.48) / 2 : 0,
                   ]}
                 />
                 <meshBasicMaterial

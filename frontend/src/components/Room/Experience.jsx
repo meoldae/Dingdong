@@ -19,7 +19,7 @@ import { gsap } from "gsap";
 import styles from "./Room.module.css";
 import { DoubleSide } from "three";
 
-const Experience = () => {
+const Experience = ({setRoomDrag}) => {
   const buildMode = useRecoilValue(buildModeState);
   const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState);
   const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState);
@@ -279,6 +279,7 @@ const Experience = () => {
   // 일반 모드일 때 카메라 회전 후 원상복귀
   const animateCameraPosition = () => {
     if (buildMode) return;
+    setRoomDrag(true)
     gsap.to(state.camera.position, {
       duration: 0.5,
       x: 15,
@@ -292,7 +293,7 @@ const Experience = () => {
       onUpdate: () => state.camera.updateProjectionMatrix(),
     });
     setTimeout(() => {
-      state.camera.position.set(15, 10, 10);
+      setRoomDrag(false);
     }, 600);
   };
 
