@@ -27,6 +27,7 @@ const RankingModal = () => {
         <div className={styles.TitleContainer}>
           <div className={styles.Title}>랭킹</div>
         </div>
+        <div className={styles.Time}></div>
         <div className={styles.ContentContainer}>
           <div className={styles.MostLikeRoomContainer}>
             <div className={styles.MostLikeRoomTitle}>
