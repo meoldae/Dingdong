@@ -22,13 +22,12 @@ const RankingModal = () => {
   const changeTime = (inputTime) => {
     const date = new Date(inputTime)
 
-    const year = date.getFullYear().toString().substr(-2)
+    const year = date.getFullYear().toString()
     const month = (date.getMonth() + 1).toString().padStart(2, '0')
     const day = date.getDate().toString().padStart(2, '0')
     const hours = date.getHours().toString().padStart(2, '0')
-    const minutes = date.getMinutes().toString().padStart(2, '0')
 
-    return `${year}/${month}/${day} ${hours}:${minutes}`
+    return `${year}.${month}.${day} ${hours}시`
   }
 
   // 스코어보드 정보 가져오기
