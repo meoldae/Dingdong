@@ -48,7 +48,7 @@ import PhysicsModel from "../../components/Item/MainItems/PhysicsModel"
 import RankingModal from "../../components/Modal/Ranking/RankingModal"
 import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom"
 import { postofficeCardAtom, postofficeSendLetterAtom } from "../../atom/PostAtom";
-import PostofficeCardBox from "../Postoffice/PostofficeCardBox";
+import PostofficeCardBox from "../Postoffice/PostofficeCardBox"; 
 import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter";
 const SingleMainPage = () => {
   // 카메라 설정

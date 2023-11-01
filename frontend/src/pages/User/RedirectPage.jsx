@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 const RedirectPage = () => {
   const navigate = useNavigate()
   const setLoginInfo = useSetRecoilState(userAtom)
-
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const urlParams = new URLSearchParams(window.location.search)
   const token = urlParams.get("token")
 
@@ -31,7 +31,7 @@ const RedirectPage = () => {
           roomId: roomId,
         }))
 
-        navigate("/")
+        navigate(`${urlPath}/`)
       })
       .catch((error) => {
         console.error("API 요청 오류:", error)
