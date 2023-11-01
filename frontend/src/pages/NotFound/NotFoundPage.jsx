@@ -1,4 +1,5 @@
 const NotFoundPage = () => {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   return (
     <div
       style={{
@@ -8,7 +9,7 @@ const NotFoundPage = () => {
         background: "#FFF",
       }}
     >
-      <img src={"/assets/images/404_error_page.png"} style={{ width: "100%" }} />
+      <img src={`${urlPath}/assets/images/404_error_page.png`} style={{ width: "100%" }} />
     </div>
   )
 }

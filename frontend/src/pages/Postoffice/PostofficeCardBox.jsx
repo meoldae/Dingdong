@@ -13,7 +13,7 @@ const PostofficeCardBox = (props) => {
     setSelectedCard({ idx: cardIdx + 1, src: cardSrc })
     setCardComment(comment)
   }
-
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const handleSelectButtonClick = () => {
     if (selectedCard) {
       props.onSelectButtonClick(selectedCard)
@@ -48,7 +48,7 @@ const PostofficeCardBox = (props) => {
                   ? `${styles.postCard} ${styles.selected}`
                   : styles.postCard
               }
-              src={`/assets/images/post/${card.src}`}
+              src={`${urlPath}/assets/images/post/${card.src}`}
               onClick={() => handleCardClick(idx, card.src, card.comment)}
             />
           ))}

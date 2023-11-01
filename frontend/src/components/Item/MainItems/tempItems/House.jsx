@@ -6,9 +6,10 @@ import { useRecoilValue } from "recoil"
 import { isHouseVisibleAtom } from "../../../../atom/HouseAtom"
 
 const House = () => {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const housePosition = [5, -4, 2]
   const isHouseVisible = useRecoilValue(isHouseVisibleAtom)
-  const gltf = useLoader(GLTFLoader, "assets/models/tempGlb/house.glb")
+  const gltf = useLoader(GLTFLoader, `${urlPath}/assets/models/tempGlb/house.glb`)
   const meshRef = useRef()
 
   useEffect(() => {

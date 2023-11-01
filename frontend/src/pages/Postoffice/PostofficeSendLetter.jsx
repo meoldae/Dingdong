@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import toast from "react-hot-toast";
 
 const PostofficeSendLetter = ({ card }) => {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const [content, setContent] = useState("");
   const [contentCount, setContentCount] = useState(0);
   const [isSending, setIsSending] = useState(false);
@@ -64,11 +65,11 @@ const PostofficeSendLetter = ({ card }) => {
                 setOnPostofficeSendLetter(false);
               }}
             >
-              <img src="/assets/icons/Pink_X-mark.png" alt="" />
+              <img src={`${urlPath}/assets/icons/Pink_X-mark.png`} alt="" />
             </div>
             <img
               className={styles.topPostCardImg}
-              src={`/assets/images/post/${card.src}`}
+              src={`${urlPath}/assets/images/post/${card.src}`}
             />
             <div className={styles.ToUser}>
               To.

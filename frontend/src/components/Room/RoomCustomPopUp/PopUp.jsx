@@ -36,6 +36,7 @@ const PopUp = () => {
   const userInfo = useRecoilValue(userAtom)
   const mobileCheck = useRecoilValue(mobileCheckState)
   const myRoomId = userInfo.roomId
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   useEffect(() => {
     if (check) {
       return
@@ -75,7 +76,7 @@ const PopUp = () => {
       })
   }
 
-  const imagePath = "/assets/images/roomCustom/"
+  const imagePath = `${urlPath}/assets/images/roomCustom/`
   const images = [
     "all.png",
     "furniture.png",
@@ -91,7 +92,7 @@ const PopUp = () => {
           {draggedItem !== null && editMode && (
             <div className={styles.dragPopUp}>
               <img
-                src="/assets/icons/refresh.png"
+                src={`${urlPath}/assets/icons/refresh.png`}
                 alt=""
                 onClick={() => {
                   if (items[draggedItem].categoryId === 3) {
@@ -106,7 +107,7 @@ const PopUp = () => {
                 }}
               />
               <img
-                src="/assets/icons/cross.png"
+                src={`${urlPath}/assets/icons/cross.png`}
                 alt=""
                 onClick={() => {
                   setItems((prevItems) => {
@@ -119,7 +120,7 @@ const PopUp = () => {
               {mobileCheck &&
                 (canDrop ? (
                   <img
-                    src="/assets/icons/check.png"
+                    src={`${urlPath}/assets/icons/check.png`}
                     alt=""
                     onClick={() => {
                       if (draggedItem !== null && dragPosition) {
@@ -155,7 +156,7 @@ const PopUp = () => {
                     }}
                   />
                 ) : (
-                  <img src="/assets/icons/check.png" />
+                  <img src={`${urlPath}/assets/icons/check.png}`} />
                 ))}
             </div>
           )}
@@ -163,14 +164,14 @@ const PopUp = () => {
           {draggedItem !== null ? (
             <div className={styles.popUpCloseerr}>
               <img
-                src="/assets/icons/cross.png"
+                src={`${urlPath}/assets/icons/cross.png`}
                 className={styles.closeVector}
               />
             </div>
           ) : (
             <div className={styles.popUpClose} onClick={() => popUpClose()}>
               <img
-                src="/assets/icons/cross.png"
+                src={`${urlPath}/assets/icons/cross.png`}
                 className={styles.closeVector}
               />
             </div>
@@ -179,7 +180,7 @@ const PopUp = () => {
           {draggedItem !== null ? (
             <div className={styles.customSaveButtonErr}>
               <img
-                src="/assets/icons/save.png"
+                src={`${urlPath}/assets/icons/save.png`}
                 className={styles.customSaveVector}
               />
             </div>
@@ -189,7 +190,7 @@ const PopUp = () => {
               onClick={() => roomCustomSave()}
             >
               <img
-                src="/assets/icons/save.png"
+                src={`${urlPath}/assets/icons/save.png`}
                 className={styles.customSaveVector}
               />
             </div>

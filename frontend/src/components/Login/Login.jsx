@@ -4,9 +4,7 @@ import styles from "./Login.module.css"
 
 const Login = () => {
   const navigate = useNavigate()
-
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
-
   const loginHandler = () => {
     window.location.href = `${
       import.meta.env.VITE_SERVER_URL
@@ -24,7 +22,7 @@ const Login = () => {
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
-        <img src="/assets/images/dingdonglogo2.png" alt="" />
+        <img src={`${urlPath}/assets/images/dingdonglogo2.png`} alt="" />
       </div>
       <div className={styles.buttons}>
         <img src={loginKakao} alt="카카오로그인" onClick={loginHandler} />

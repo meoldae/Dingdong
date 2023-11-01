@@ -20,6 +20,7 @@ import { roomInfoAtom } from "../../atom/RoomInfoAtom"
 
 const Header = ({ checkMyRoom }) => {
   const roomInfo = useRecoilValue(roomInfoAtom)
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   
   return (
     <>

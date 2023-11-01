@@ -9,6 +9,7 @@ import { ItemsState, buildModeState } from "../Room/Atom"
 import { useNavigate } from "react-router-dom"
 
 const MyFooter = () => {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const [editMode,setEditMode] = useRecoilState(buildModeState);
   const [items,setItems] = useRecoilState(ItemsState);
   const [isPostBoxVisible, setIsPostBoxVisible] =
@@ -27,7 +28,7 @@ const MyFooter = () => {
     setEditMode(true);
   }
   const goSingleMap= () =>{
-    window.location.replace("/")
+    window.location.replace(`${urlPath}/`)
   }
   return (
     <div className={style.wrap}>

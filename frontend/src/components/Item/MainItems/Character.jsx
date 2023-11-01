@@ -14,6 +14,7 @@ import { FenceBoxAtom } from "../../../atom/FenceAtom"
 import { userAtom } from "../../../atom/UserAtom"
 
 const Character = () => {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   // 회원의 캐릭터 ID
   const characterID = useRecoilValue(userAtom).avatarId
   // 마우스 및 터치 여부
@@ -29,10 +30,10 @@ const Character = () => {
   const characterRef = useRef()
   const character = useLoader(
     GLTFLoader,
-    `assets/models/characters/${characterID}.glb`,
+    `${urlPath}/assets/models/characters/${characterID}.glb`,
     (loader) => {
       const draco = new DRACOLoader()
-      draco.setDecoderPath("assets/draco/")
+      draco.setDecoderPath(`${urlPath}/assets/draco/`)
       loader.setDRACOLoader(draco)
     }
   )
