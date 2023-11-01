@@ -2,13 +2,15 @@ package com.ssafy.dingdong.domain.member.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.ssafy.dingdong.domain.member.dto.request.MemberSignUpDto;
 import com.ssafy.dingdong.domain.member.dto.response.MemberLoginResponseDto;
 import com.ssafy.dingdong.domain.member.dto.response.MemberMainDto;
 
 public interface MemberService {
 
-	MemberLoginResponseDto createMember(MemberSignUpDto memberLoginDto);
+	MemberLoginResponseDto createMember(MemberSignUpDto memberLoginDto, String refreshToken);
 
 	MemberMainDto getMemberById(String memberId);
 

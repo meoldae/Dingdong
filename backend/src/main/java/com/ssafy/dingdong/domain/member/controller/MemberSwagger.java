@@ -3,6 +3,7 @@ package com.ssafy.dingdong.domain.member.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -49,7 +50,7 @@ public interface MemberSwagger {
 	}
 	)
 	@Operation(summary = "닉네임 / 캐릭터 설정", description = "닉네임을 설정하고 캐릭터를 선택합니다.")
-	DataResponse<MemberLoginResponseDto> createMember(@Parameter(name = "MemberSignUpDto", description = "회원 ID, 닉네임, 캐릭터 ID를 인자로 받습니다.") @Validated @RequestBody MemberSignUpDto memberSignUpDto, HttpServletRequest response);
+	DataResponse<MemberLoginResponseDto> createMember(@Parameter(name = "MemberSignUpDto", description = "회원 ID, 닉네임, 캐릭터 ID를 인자로 받습니다.") @Validated @RequestBody MemberSignUpDto memberSignUpDto, HttpServletResponse response);
 
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "요청에 성공했습니다."),

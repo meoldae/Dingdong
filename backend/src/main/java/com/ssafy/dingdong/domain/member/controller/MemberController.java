@@ -2,7 +2,9 @@ package com.ssafy.dingdong.domain.member.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
@@ -22,6 +24,8 @@ import com.ssafy.dingdong.global.response.CommonResponse;
 import com.ssafy.dingdong.global.response.DataResponse;
 import com.ssafy.dingdong.global.response.ResponseService;
 import com.ssafy.dingdong.global.response.ResponseStatus;
+import com.ssafy.dingdong.global.util.CookieUtils;
+import com.ssafy.dingdong.global.util.JwtProvider;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -34,11 +38,19 @@ public class MemberController implements MemberSwagger {
 
 	private final ResponseService responseService;
 	private final MemberService memberService;
+	private final JwtProvider jwtProvider;
+	private final CookieUtils cookieUtils;
 
 	@Override
 	@PostMapping("/signup")
-	public DataResponse<MemberLoginResponseDto> createMember(@Validated @RequestBody MemberSignUpDto memberSignUpDto, HttpServletRequest response) {
-		MemberLoginResponseDto member = memberService.createMember(memberSignUpDto);
+	public DataResponse<MemberLoginResponseDto> createMember(@Validated @RequestBody MemberSignUpDto memberSignUpDto, HttpServletResponse response) {
+		String refreshToken = jwtProvider.createRefreshToken();
+
+		Cookie cookie = cookieUtils.createCookie(refreshToken);
+		response.addCookie(cookie);
+
+		MemberLoginResponseDto member = memberService.createMember(memberSignUpDto, refreshToken);
+
 		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, member);
 	}
 
