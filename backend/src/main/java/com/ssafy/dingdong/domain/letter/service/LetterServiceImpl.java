@@ -1,12 +1,16 @@
 package com.ssafy.dingdong.domain.letter.service;
 
 import com.ssafy.dingdong.domain.letter.dto.request.LetterRequestDto;
+import com.ssafy.dingdong.domain.letter.dto.request.LetterSNSRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterListResponseDto;
+import com.ssafy.dingdong.domain.letter.dto.response.LetterSNSResponseDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterScoreDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterResponseDto;
 import com.ssafy.dingdong.domain.letter.entity.Letter;
+import com.ssafy.dingdong.domain.letter.entity.LetterSNS;
 import com.ssafy.dingdong.domain.letter.entity.Stamp;
 import com.ssafy.dingdong.domain.letter.repository.LetterRepository;
+import com.ssafy.dingdong.domain.letter.repository.LetterSNSRepository;
 import com.ssafy.dingdong.domain.letter.repository.StampRepository;
 import com.ssafy.dingdong.domain.room.service.RoomService;
 import com.ssafy.dingdong.global.exception.CustomException;
@@ -28,6 +32,7 @@ public class LetterServiceImpl implements LetterService {
 
     private final RoomService roomService;
     private final LetterRepository letterRepository;
+    private final LetterSNSRepository letterSNSRepository;
     private final StampRepository stampRepository;
     private final EncryptUtils encryptUtils;
 
@@ -87,14 +92,31 @@ public class LetterServiceImpl implements LetterService {
 
     @Override
     public List<LetterScoreDto> getLetterFromScore() {
-        Page<LetterScoreDto> lettterScoreList = letterRepository.getLetterFromScore(PageRequest.of(0, 10));
-        return lettterScoreList.stream().toList();
+        Page<LetterScoreDto> letterScoreList = letterRepository.getLetterFromScore(PageRequest.of(0, 10));
+        return letterScoreList.stream().toList();
     }
 
     @Override
     public List<LetterScoreDto> getLetterToScore() {
-        Page<LetterScoreDto> lettterScoreList = letterRepository.getLetterToScore(PageRequest.of(0, 10));
-        return lettterScoreList.stream().toList();
+        Page<LetterScoreDto> letterScoreList = letterRepository.getLetterToScore(PageRequest.of(0, 10));
+        return letterScoreList.stream().toList();
     }
 
+    @Override
+    public void sendSNSLetter(LetterSNSRequestDto requestDto, String memberId) {
+        requestDto.setDescription(encryptUtils.encrypt(requestDto.getDescription()));
+        LetterSNS letter = LetterSNS.build(requestDto, memberId);
+
+        letterSNSRepository.save(letter);
+    }
+
+    @Override
+    public LetterSNSResponseDto getSNSLetter(String letterId) {
+        LetterSNSResponseDto result = letterSNSRepository.findByLetterId(letterId)
+                .orElseThrow(() -> new CustomException(ExceptionStatus.LETTER_NOT_FOUND));
+
+        result.setDescription(encryptUtils.decrypt(result.getDescription()));
+
+        return result;
+    }
 }
