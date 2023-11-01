@@ -53,15 +53,12 @@ const RankingModal = () => {
   }
 
   const RankingSection = ({ rankingList }) => (
-    <div className={styles.MostContainer}>
-      <div className={styles.TitleLine} />
-      <div className={styles.MostContent}>
-        {rankingList.map((item, index) => (
-          <div key={item.memberId} className={styles.Content} onClick={() => navigateRoom(item.roomId)}>
-            {index + 1}. {item.nickname}
-          </div>
-        ))}
-      </div>
+    <div className={styles.ContentContainer}>
+      {rankingList.map((item, index) => (
+        <div key={item.memberId} className={styles.Content} onClick={() => navigateRoom(item.roomId)}>
+          {index + 1}. {item.nickname}
+        </div>
+      ))}
     </div>
   );
 
