@@ -1,0 +1,163 @@
+.Container {
+  height: 100vh;
+  height: 100svh;
+  background: #ffebf4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  font-family: "GangwonEduAll-Light";
+}
+
+.PostImage {
+  /* width: 320px;
+  height: 419px;  */
+  width: 100%;
+  border-radius: 20px;
+  /* margin-top: 10%; */
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.PostImagePng {
+  width: 320px;
+}
+
+.ButtonContainer {
+  font-size: 24px;
+}
+
+.Button {
+  width: 320px;
+  height: 40%;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 15px;
+  background: #fff;
+  margin-top: 5%;
+  /* margin-bottom: 3%; */
+}
+
+
+
+.sendLetterContainer {
+  width: 30vw;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 4;
+}
+
+
+.sendLetterBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 300px;
+  height: 100%;
+  background: #ffe1f5;
+  padding: 20px;
+  /* margin-bottom: 10px; */
+}
+
+.xmarkImg {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.topPostCardImg {
+  position: absolute;
+  top: -20px;
+  left: -5px;
+  transform: rotate(45deg);
+}
+
+.ToUser {
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  font-family: "GangwonEduAll-Light";
+  font-size: 35px;
+  margin-left: 15%;
+}
+
+.letterContent {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+}
+
+.letterContent textarea {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  resize: none;
+
+  padding: 5px;
+  font-size: 25px;
+  font-family: "GangwonEduAll-Light";
+  outline: none;
+  text-align: center;
+  -ms-overflow-style: none;
+}
+
+.letterContent textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.contentCount {
+  font-family: "GangwonEduAll-Light";
+  font-size: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.footerContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: "GangwonEduAll-Light";
+  align-items: center;
+  margin-top: 15px;
+}
+
+.anonymous {
+  font-size: 20px;
+}
+
+.FromUser {
+  font-size: 35px;
+  display: flex;
+}
+
+.FromUserDiv {
+  width: 60%;
+}
+
+.FromUser textarea {
+  /* width: 60%; */
+  vertical-align: middle;
+  padding-top: 4px; /* 상단 패딩 추가 */
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  resize: none;
+
+  /* padding: 5px; */
+  font-size: 25px;
+  font-family: "GangwonEduAll-Light";
+  outline: none;
+  text-align:center;
+}

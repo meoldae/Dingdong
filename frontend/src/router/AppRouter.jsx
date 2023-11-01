@@ -19,6 +19,7 @@ import InviteRoomPage from "../pages/Room/InviteRoomPage"
 import LoadingPage from "../components/UI/LoadingPage"
 import Error from "../components/UI/Error"
 import ReactGA from "react-ga4";
+import PostofficeReceiveLetter from "../pages/Postoffice/PostofficeReceiveLetter"
 // const Room = lazy(() => import("../pages/SinglePlay/SingleMainPage"))
 
 
@@ -49,6 +50,7 @@ const AppRouter = () => {
             <Route path="/random/:roomId" element={<AppRandomRoom />} />
             <Route path="/usersetting" element={<AppUserSetting />} />
             <Route path="/postoffice" element={<PostPage />} />
+            <Route path="/receiveletter" element={<PostofficeReceiveLetter/>}/>
           </Route>
 
           <Route element={<AuthRoute authentication="NotUser" />}>
