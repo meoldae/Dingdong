@@ -22,64 +22,58 @@ function SharingModalList(props) {
   }
 
   const shareUrl = (e) => {
-    if (navigator.clipboard) {
-      navigator.clipboard
-        .writeText(window.location.href)
-        .then(() => {
-          if (props.shareMode === "room") { 
-            console.log(window.location.href)
-            alert(
-              // `${userNickname}님의 \n친구들에게 공유해보세요!`
-              `우리집 주소가 복사되었습니다.\n친구들에게 공유해보세요!`
-            )
-          } else if (props.shareMode === "start") {
-            alert(
-              `우표 테스트 주소가 복사되었습니다.\n친구들에게 공유해보세요!`
-            )
-          } else if (props.shareMode === "result") {
-            alert(
-              `우표 테스트 결과가 복사되었습니다.\n친구들에게 공유해보세요!`
-            )
-          }
-          navigator.clipboard
-          .writeText()
+    let currentUrl = window.location.href;
 
-        })
-        .catch(() => {
-          alert(`지원하지 않는 브라우저입니다.\n다른 브라우저로 접속해주세요.`)
-        })
-    } else {
-      if (!document.queryCommandSupported("copy")) {
-        return alert("복사하기가 지원되지 않는 브라우저입니다.")
-      }
-
-      const textarea = document.createElement("textarea")
-      textarea.value = window.location.href
-
-      document.body.appendChild(textarea)
-      textarea.focus()
-      textarea.select()
-      document.execCommand("copy")
-      document.body.removeChild(textarea)
-      if (props.shareMode === "room") {
-        alert()// `${userNickname}님의 편지 수신함이 복사되었습니다.\n친구들에게 공유해보세요!`
-        `우리집 주소가 복사되었습니다.\n친구들에게 공유해보세요!`
-      } else if (props.shareMode === "start") {
-        alert(`우표 테스트 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
-      } else {
-        alert(`우표 테스트 결과가 복사되었습니다.\n친구들에게 공유해보세요!`)
-      }
+    // shareMode가 "room"일 때 URL 수정
+    if (props.shareMode === "room") {
+        currentUrl = currentUrl.replace("/room/", "/invite/");
     }
-    // if (props.shareMode === "room") {
-    //   props.setSharingAtom(false)
-    // }
-  }
+
+    if (navigator.clipboard) {
+        navigator.clipboard
+            .writeText(currentUrl)  // 수정된 currentUrl을 클립보드에 복사
+            .then(() => {
+                if (props.shareMode === "room") {
+                    console.log(currentUrl)
+                    alert(`우리집 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
+                } else if (props.shareMode === "start") {
+                    alert(`우표 테스트 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
+                } else if (props.shareMode === "result") {
+                    alert(`우표 테스트 결과가 복사되었습니다.\n친구들에게 공유해보세요!`)
+                }
+            })
+            .catch(() => {
+                alert(`지원하지 않는 브라우저입니다.\n다른 브라우저로 접속해주세요.`)
+            })
+    } else {
+        if (!document.queryCommandSupported("copy")) {
+            return alert("복사하기가 지원되지 않는 브라우저입니다.")
+        }
+
+        const textarea = document.createElement("textarea")
+        textarea.value = currentUrl;  // 수정된 currentUrl을 사용
+
+        document.body.appendChild(textarea)
+        textarea.focus()
+        textarea.select()
+        document.execCommand("copy")
+        document.body.removeChild(textarea)
+        if (props.shareMode === "room") {
+            alert(`우리집 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
+        } else if (props.shareMode === "start") {
+            alert(`우표 테스트 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
+        } else {
+            alert(`우표 테스트 결과가 복사되었습니다.\n친구들에게 공유해보세요!`)
+        }
+    }
+}
+
 
   const shareTwitter = (e) => {
-    if (props.shareMode === "room") {
+    if (props.shareMode === "room") { 
       const text = "딩동! 우리집에 편지를 보내주세요."
       window.open(
-        "https://twitter.com/intent/tweet?text=" + text + "&url=" + url
+        "https://twitter.com/intent/tweet?text=" + text + "&url=" + url.replace("/room/", "/invite/")
       )
       // props.setSharingAtom(false)
     } else if (props.shareMode === "start") {
@@ -100,6 +94,13 @@ function SharingModalList(props) {
       window.Kakao.init(JS_KEY)
     }
 
+    let currentUrl = window.location.href;
+
+    // shareMode가 "room"일 때 URL 수정
+    if (props.shareMode === "room") {
+        currentUrl = currentUrl.replace("/room/", "/invite/");
+    }
+
     if (props.shareMode === "room") {
       window.Kakao.Share.sendCustom({
         templateId: 100120,
@@ -107,8 +108,8 @@ function SharingModalList(props) {
           THU: "https://ding-dong.s3.ap-northeast-2.amazonaws.com/StampLogo.png",
           TITLE: "딩동! 우리집을 방문해보세요.",
           DESC: "우리집에 방문해서 편지를 남겨주세요!",
-          MOBILE_LINK: window.location.href,
-          WEB_LINK: window.location.href,
+          MOBILE_LINK: currentUrl,
+          WEB_LINK: currentUrl,
         },
       })
     } else if (props.shareMode === "start") {
@@ -118,8 +119,8 @@ function SharingModalList(props) {
           THU: "https://ding-dong.s3.ap-northeast-2.amazonaws.com/StampLogo.png",
           TITLE: "나에게 어울리는 우표는?",
           DESC: "어울리는 우표를 찾아 친구에게 편지를 보내보세요.",
-          MOBILE_LINK: window.location.href,
-          WEB_LINK: window.location.href,
+          MOBILE_LINK: currentUrl,
+          WEB_LINK: currentUrl,
         },
       })
     } else if (props.shareMode === "result") {
@@ -129,8 +130,8 @@ function SharingModalList(props) {
           THU: `https://ding-dong.s3.ap-northeast-2.amazonaws.com/${props.resultSrcUrl.replace('/assets/StampTest/', '')}`,
           TITLE: "나에게 어울리는 우표 확인하기",
           DESC: "우표 테스트 결과를 확인해보세요!",
-          MOBILE_LINK: window.location.href,
-          WEB_LINK: window.location.href,
+          MOBILE_LINK: currentUrl,
+          WEB_LINK: currentUrl,
         },
       })
     }

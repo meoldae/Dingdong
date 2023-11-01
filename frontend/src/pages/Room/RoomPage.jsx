@@ -34,13 +34,13 @@ function RoomPage() {
     return history.listen((location) => {
       if (history.action === "PUSH") {
         setLocationKeys([location.key])
-        window.location.replace("single")
+        window.location.replace("/")
       }
 
       if (history.action === "POP") {
         if (locationKeys[1] === location.key) {
           setLocationKeys(([_, ...keys]) => keys)
-          window.location.replace("single")
+          window.location.replace("/")
         } else {
           setLocationKeys((keys) => [location.key, ...keys])
         }
@@ -74,9 +74,12 @@ function RoomPage() {
       },
       (error) => {
         console.error("Error at fetching RoomData...", error)
+        if (error.response && error.response.status === 400) {
+          navigate("/notfound");  
+        }
       }
     )
-  }, [isMyRoom])
+  }, [isMyRoom, navigate])
 
   const randomVisit = () => {
     const roomId = window.location.pathname.match(/\d+/g)
