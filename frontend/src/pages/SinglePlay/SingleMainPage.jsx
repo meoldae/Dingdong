@@ -3,10 +3,12 @@ import React, { useState } from "react"
 import styles from "./SingleMainPage.module.css"
 
 // Recoil
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import {
+  ArriveAtom,
   ConfirmEnteringOtherRoomAtom,
   ConfirmEnteringPostOfficeAtom,
+  ConfirmEnteringRankAtom,
   ConfirmEnteringRoomAtom,
   ConfirmEnteringStoreAtom,
   ConfirmEnteringWorldAtom,
@@ -14,6 +16,8 @@ import {
   OtherRoomPortalVisibleAtom,
   PostOfficePortalPositionAtom,
   PostOfficePortalVisibleAtom,
+  RankPortalPositionAtom,
+  RankPortalVisibleAtom,
   RoomPortalPositionAtom,
   StorePortalPositionAtom,
   StorePortalVisibleAtom,
@@ -42,8 +46,16 @@ import DefaultPortalRing from "../../components/Item/MainItems/Portals/DefaultPo
 import ConfirmEnteringDefaultModal from "../../components/Modal/Confirm/ConfirmEnteringDefaultModal"
 import PhysicsModel from "../../components/Item/MainItems/PhysicsModel"
 import RankingModal from "../../components/Modal/Ranking/RankingModal"
+import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom"
 
 const SingleMainPage = () => {
+  // 카메라 설정
+  const setDefaultCameraPosition = useSetRecoilState(DefaultPosition)
+  const setDefaultCameraZoom = useSetRecoilState(DefaultZoom)
+
+  // 도착 여부
+  const setIsArrived = useSetRecoilState(ArriveAtom)
+
   // 장소 입장 확인 여부
   const [confirmEnteringRoom, setConfirmEnteringRoom] = useRecoilState(
     ConfirmEnteringRoomAtom
@@ -55,8 +67,11 @@ const SingleMainPage = () => {
   )
   const [confirmEnteringOtherRoom, setConfirmEnteringOtherRoom] =
     useRecoilState(ConfirmEnteringOtherRoomAtom)
-  const [confirmEnteringWorld, setConfirmEnteringWorld] = useRecoilState(
-    ConfirmEnteringWorldAtom
+  // const [confirmEnteringWorld, setConfirmEnteringWorld] = useRecoilState(
+  //   ConfirmEnteringWorldAtom
+  // )
+  const [confirmEnteringRank, setConfirmEnteringRank] = useRecoilState(
+    ConfirmEnteringRankAtom
   )
 
   // 포탈 생성 여부
@@ -72,8 +87,11 @@ const SingleMainPage = () => {
   const [otherRoomPortalVisible, setOtherRoomPortalVisible] = useRecoilState(
     OtherRoomPortalVisibleAtom
   )
-  const [worldPortalVisible, setWorldPortalVisible] = useRecoilState(
-    WorldPortalVisibleAtom
+  // const [worldPortalVisible, setWorldPortalVisible] = useRecoilState(
+  //   WorldPortalVisibleAtom
+  // )
+  const [rankPortalVisible, setRankPortalVisible] = useRecoilState(
+    RankPortalVisibleAtom
   )
 
   // 포탈 위치
@@ -81,10 +99,16 @@ const SingleMainPage = () => {
   const postOfficePortalPosition = useRecoilValue(PostOfficePortalPositionAtom)
   const storePortalPosition = useRecoilValue(StorePortalPositionAtom)
   const otherRoomPortalPosition = useRecoilValue(OtherRoomPortalPositionAtom)
-  const worldPortalPosition = useRecoilValue(WorldPortalPositionAtom)
+  // const worldPortalPosition = useRecoilValue(WorldPortalPositionAtom)
+  const rankPortalPosition = useRecoilValue(RankPortalPositionAtom)
 
   // 랭킹모달 상태관리
-  const [isRanking, setIsRanking] = useState(true)
+  const closeRanking = () => {
+    setIsArrived(false)
+    setConfirmEnteringRank(false)
+    setDefaultCameraPosition([2, 10, 10])
+    setDefaultCameraZoom(0.18)
+  }
 
   return (
     <>
@@ -192,7 +216,7 @@ const SingleMainPage = () => {
             />
           )}
 
-          {worldPortalVisible ? (
+          {/* {worldPortalVisible ? (
             <DefaultPortal
               setConfirmEnteringLocation={setConfirmEnteringWorld}
               portalPosition={worldPortalPosition}
@@ -204,6 +228,21 @@ const SingleMainPage = () => {
             <DefaultPortalRing
               portalPosition={worldPortalPosition}
               portalVisible={setWorldPortalVisible}
+            />
+          )} */}
+
+          {rankPortalVisible ? (
+            <DefaultPortal
+              setConfirmEnteringLocation={setConfirmEnteringRank}
+              portalPosition={rankPortalPosition}
+              setPortalVisible={setRankPortalVisible}
+              adjustedAngle={[0, 3, -8]}
+              adjustedZoom={0.4}
+            />
+          ) : (
+            <DefaultPortalRing
+              portalPosition={rankPortalPosition}
+              portalVisible={setRankPortalVisible}
             />
           )}
         </Canvas>
@@ -255,9 +294,10 @@ const SingleMainPage = () => {
             />
           </div>
         )}
-        {confirmEnteringWorld && (
+        {/* 멀티 플레이 포탈 */}
+        {/* {confirmEnteringWorld && (
           <div className={styles.confirmModal}>
-            {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
+    
             <ConfirmEnteringDefaultModal
               modalContent={
                 "딩동 주민들을 만날 수 있는 멀티 플레이 서비스를 준비중 입니다!"
@@ -267,13 +307,13 @@ const SingleMainPage = () => {
               flag={"0"}
             />
           </div>
-        )}
+        )} */}
       </div>
 
       {/* 랭킹모달 */}
-      {isRanking && (
+      {confirmEnteringRank && (
         <>
-          <div className={styles.overlay} onClick={() => setIsRanking(false)} />
+          <div className={styles.overlay} onClick={() => closeRanking()} />
           <div className={styles.rankingModalContainer}>
             <RankingModal />
           </div>
