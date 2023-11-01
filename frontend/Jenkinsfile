@@ -4,9 +4,9 @@ pipeline {
         stage("Set Variable") {
             steps {
                 script {
-                    IMAGE_NAME_FE = "dingdong-react"
-                    CONTAINER_NAME_FE = "dingdong_fe"
-                    APPLICATION_ENV_PATH = "/usr/react"
+                    IMAGE_NAME_FE = "dingdong-react_dev"
+                    CONTAINER_NAME_FE = "dingdong_fe_dev"
+                    APPLICATION_ENV_PATH = "/usr/react/dev"
                     PROJECT_DIR_FE = "frontend"
                 }
             }
