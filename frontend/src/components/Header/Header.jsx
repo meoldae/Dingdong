@@ -66,6 +66,7 @@ const Header = ({ checkMyRoom }) => {
 
   // 유저요청 가져오기
   useEffect(() => {
+    console.log(userInfo)
     // 이웃 리스트
     fetchNeighborList(
       (success) => {
@@ -237,7 +238,7 @@ const Header = ({ checkMyRoom }) => {
       {checkMyRoom === "my" && (
         <div className={styles.NeighborList}>
           <RoomBtn
-            img={"neighborList"}
+            img={`${userInfo.avatarId}_crop`}
             onClick={() => setIsNeighborList(true)}
           />
         </div>
