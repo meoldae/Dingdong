@@ -59,7 +59,7 @@ const RankingModal = () => {
       <div className={styles.MostContent}>
         {rankingList.map((item, index) => (
           <div key={item.memberId} className={styles.Content} onClick={() => navigateRoom(item.roomId)}>
-            {index + 1}등 {item.nickname}
+            {index + 1}. {item.nickname}
           </div>
         ))}
       </div>
@@ -70,7 +70,7 @@ const RankingModal = () => {
     <>
       <div className={styles.Container}>
         <div className={styles.TitleContainer}>
-          <div className={styles.Title}>랭킹</div>
+          <div className={styles.Title}>실시간 순위</div>
         </div>
         <div className={styles.Time}>기준시간 : {changeTime(standardTime)}</div>
         <div className={styles.ContentContainer}>
