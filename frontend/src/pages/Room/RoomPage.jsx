@@ -58,10 +58,10 @@ function RoomPage() {
   const [shareModal, setShareModal] = useState(false)
   const userInfo = useRecoilValue(userAtom)
   const [nickName, setNickName] = useRecoilState(roomInfoAtom)
+  const [roomDrag,setRoomDrag] = useState(false);
   const roomId = window.location.pathname.match(/\d+/g)
   const today = new Date()
   const [time, setTime] = useState()
-
   useEffect(() => {
     const myRoomId = userInfo.roomId
     setIsMyRoom(roomId == myRoomId)
@@ -105,6 +105,7 @@ function RoomPage() {
   }, [])
   return (
     <>
+    {roomDrag && <div className={styles.roomDrag}/>}
       {time && (
         <div className={`${styles.container} ${styles[time]}`}>
           {isMyRoom ? (
@@ -133,10 +134,10 @@ function RoomPage() {
           <Canvas
             shadows
             gl={{ preserveDrawingBuffer: true, antialias: true }}
-            camera={{ fov: 45, zoom: 1.2 }}
+            camera={{ fov: 45, zoom: 1.1 }}
             ref={canvasRef}
           >
-            <Experience />
+            <Experience setRoomDrag={setRoomDrag}/>
           </Canvas>
           {/* 랜덤 찾기 버튼 */}
           {isMyRoom ? (

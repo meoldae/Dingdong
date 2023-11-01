@@ -113,3 +113,10 @@ canvas {
   font-family: "Pretendard-Bold";
   margin-left: 20px;
 }
+
+.roomDrag{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
