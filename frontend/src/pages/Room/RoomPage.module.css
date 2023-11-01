@@ -17,6 +17,15 @@ canvas {
   width: 100%;
 }
 
+.inviteContainer {
+  width: 100%;
+  background: linear-gradient(#FBC77A, #FF6F56);
+  animation: gradient 10s linear infinite;
+  height: 100vh;
+  position: relative;
+  height: 100svh;
+  background-size: 400% 400%;
+}
 .container.dawn{
   width: 100%;
   background: linear-gradient(-45deg,#594871,#000000,#00008B);
