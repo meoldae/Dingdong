@@ -26,4 +26,12 @@
   height: 100vh;
   height: 100svh;
   z-index: 3;
+  position: relative;
+}
+
+.rankingModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
