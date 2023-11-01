@@ -31,8 +31,20 @@
   height: 30px;
   border-radius: 20px;
 
-  color: #8F949A;
-  background: #E9ECEF;
+  color: #212529;
+  background: #e9ecef;
+
+  text-align: center;
+  line-height: 30px;
+}
+
+.SelectButton {
+  width: 80px;
+  height: 30px;
+  border-radius: 20px;
+
+  color: #e9ecef;
+  background: #212529;
 
   text-align: center;
   line-height: 30px;
