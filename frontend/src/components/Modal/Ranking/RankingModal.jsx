@@ -28,7 +28,7 @@ const RankingModal = () => {
           <div className={styles.Title}>랭킹</div>
         </div>
         <div className={styles.ContentContainer}>
-          <div className={styles.Content}>Content</div>
+          <div className={styles.Content}></div>
         </div>
       </div>
     </>
