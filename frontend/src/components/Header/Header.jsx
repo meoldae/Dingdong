@@ -57,6 +57,8 @@ const Header = ({ checkMyRoom }) => {
   const [inquiryText, setInquiryText] = useState("")
   // 로그아웃 확인 모달 상태관리
   const [isRealLogout, setIsRealLogout] = useState(false)
+  // 회원탈퇴 확인 모달 상태관리
+  const [isRealSecession, setIsRealSecession] = useState(false)
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
@@ -295,7 +297,7 @@ const Header = ({ checkMyRoom }) => {
               <div className={styles.MenuButton} onClick={() => setIsRealLogout(true)}>
                 로그아웃
               </div>
-              <div className={styles.MenuButton} onClick={withdrawalHandler}>
+              <div className={styles.MenuButton} onClick={() => setIsRealSecession(true)}>
                 회원탈퇴
               </div>
             </div>
@@ -395,6 +397,25 @@ const Header = ({ checkMyRoom }) => {
               cancel={"아니오"}
               okClick={logoutHandler}
               cancelClick={() => setIsRealLogout(false)}
+            />
+          </div>
+        </>
+      )}
+
+      {/* 회원탈퇴 확인 모달 */}
+      {isRealSecession && (
+        <>
+          <div
+            className={styles.RemoveOverlay}
+            onClick={() => setIsRealSecession(false)}
+          />
+          <div className={styles.RemoveNeighborContainer}>
+            <DefaultModal
+              content={"정말 회원탈퇴를 하시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={withdrawalHandler}
+              cancelClick={() => setIsRealSecession(false)}
             />
           </div>
         </>
