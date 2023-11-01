@@ -43,7 +43,7 @@ import ConfirmEnteringDefaultModal from "../../components/Modal/Confirm/ConfirmE
 import PhysicsModel from "../../components/Item/MainItems/PhysicsModel";
 import RankingModal from "../../components/Modal/Ranking/RankingModal";
 import { postofficeCardAtom, postofficeSendLetterAtom } from "../../atom/PostAtom";
-// import PostofficeCardBox from "../Postoffice/PostofficeCardBox"; 
+import PostofficeCardBox from "../Postoffice/PostofficeCardBox"; 
 import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter";
 const SingleMainPage = () => {
   // 장소 입장 확인 여부
@@ -283,7 +283,7 @@ const SingleMainPage = () => {
         {onPostofficeCard && (
           <>
             <div className={styles.postofficemodalcontainer}>
-              {/* <PostofficeCardBox onSelectButtonClick={handleSelectButtonClick}/> */}
+              <PostofficeCardBox onSelectButtonClick={handleSelectButtonClick}/>
             </div>
           </>
         )}
