@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react"
 import { useFrame, useThree, useLoader } from "@react-three/fiber"
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader"
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import {
   CharacterBoxAtom,
@@ -27,18 +27,15 @@ const Character = () => {
 
   // 캐릭터
   const characterRef = useRef()
-  const character = useLoader(GLTFLoader, `assets/models/characters/${characterID}.glb`, loader => {
-    const draco = new DRACOLoader();
-    draco.setDecoderPath('assets/draco/');
-    loader.setDRACOLoader(draco);
-  });
-
-  // const character = useLoader(
-  //   GLTFLoader,
-  //   `assets/models/characters/${characterID}.glb`
-  // )
-  const [characterBox, setcharacterBox] = useRecoilState(CharacterBoxAtom)
-
+  const character = useLoader(
+    GLTFLoader,
+    `assets/models/characters/${characterID}.glb`,
+    (loader) => {
+      const draco = new DRACOLoader()
+      draco.setDecoderPath("assets/draco/")
+      loader.setDRACOLoader(draco)
+    }
+  )
   // 애니메이션
   const mixerRef = useRef()
   const actions = useRef([])
@@ -64,7 +61,6 @@ const Character = () => {
   const [destination, setDestination] = useState(new THREE.Vector3(0, 0, 0))
 
   // 경계 박스
-  // const fenceBox = useRecoilValue(FenceBoxAtom)
   const fenceBoxes = useRecoilValue(FenceBoxAtom)
 
   let min = new THREE.Vector3(
@@ -93,7 +89,7 @@ const Character = () => {
 
     if (characterRef.current) {
       const distance = position.distanceTo(destination)
-      const previousPosition = position.clone()
+      // console.log(distance)
 
       // 싱글 플레이
       if (isArrived) {
@@ -111,7 +107,7 @@ const Character = () => {
       }
 
       // 캐릭터 이동
-      if (!isArrived && distance > 0.05) {
+      if (!isArrived && distance > 0.04) {
         // 목적지까지의 거리가 0.05보다 크면 이동
         actions.current[1].play()
         actions.current[0].stop()
@@ -148,7 +144,7 @@ const Character = () => {
         if (!hasCollision) {
           // 충돌이 발생하지 않으면, 움직임 적용
           position.add(new THREE.Vector3(dx, 0, dz))
-
+          // console.log("move", position)
           // 위치 이동
           setPosition(position.clone())
 
@@ -183,15 +179,22 @@ const Character = () => {
       const x = ((event.clientX - rect.left) / rect.width) * 2 - 1
       const y = -((event.clientY - rect.top) / rect.height) * 2 + 1
 
-      const vector = new THREE.Vector3(x, y, 0.5)
-      vector.unproject(camera)
-      const dir = vector.sub(camera.position).normalize()
-      const distance = -camera.position.y / dir.y
-      const pos = camera.position.clone().add(dir.multiplyScalar(distance))
+      // 마우스 포지션 설정
+      mouse.current.set(x, y)
 
-      setDestination(pos)
-      if (characterRef.current) {
-        characterRef.current.lookAt(pos)
+      // Raycaster 업데이트
+      raycaster.current.setFromCamera(mouse.current, camera)
+
+      // 평면을 설정 (y = 0을 기준으로)
+      const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0)
+      const intersection = new THREE.Vector3()
+
+      if (raycaster.current.ray.intersectPlane(plane, intersection)) {
+        // 교차점을 목적지로 설정
+        setDestination(intersection)
+        if (characterRef.current) {
+          characterRef.current.lookAt(intersection)
+        }
       }
     },
     [camera, domElement]

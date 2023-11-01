@@ -1,0 +1,34 @@
+.Container {
+  width: 300px;
+  height: 500px;
+  background: #FFF;
+  border-radius: 10px;
+
+  font-family: "Pretendard-Bold";
+}
+
+.TitleContainer {
+  width: 100%;
+  height: 100px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Title {
+  font-size: 30px;
+}
+
+.ContentContainer {
+  width: 100%;
+  height: 400px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Content {
+  font-size: 20px;
+}

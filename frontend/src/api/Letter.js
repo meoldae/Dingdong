@@ -17,5 +17,8 @@ const reportLetter = async (param, success, fail) => {
     HttpJson.post(`report/letter/${param}`).then(success).catch(fail)
 }
 
-export { sendLetter, sendGuestLetter, getLetterDetail, reportLetter, };
+const sendLetterSNS = async (param, success, fail) =>{
+    HttpJson.post(`letter/sns`,param).then(success).catch(fail)
+}
+export { sendLetter, sendGuestLetter, getLetterDetail, reportLetter, sendLetterSNS };
 

@@ -14,3 +14,13 @@ export const isCancelVisibleAtom = atom({
   key: "isCancelAtom",
   default: false,
 })
+
+export const postofficeCardAtom = atom({
+  key:"postofficeCardAtom",
+  default: false,
+})
+
+export const postofficeSendLetterAtom = atom({
+  key:"postofficeSendLetterAtom",
+  default: false,
+})

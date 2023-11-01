@@ -6,7 +6,7 @@ pipeline {
                 script {
                     IMAGE_NAME_FE = "dingdong-react_prod"
                     CONTAINER_NAME_FE = "dingdong_fe_prod"
-                    APPLICATION_ENV_PATH = "/usr/react/dev"
+                    APPLICATION_ENV_PATH = "/usr/react/prod"
                     PROJECT_DIR_FE = "frontend"
                 }
             }
