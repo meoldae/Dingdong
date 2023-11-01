@@ -32,7 +32,7 @@ const PostofficeSendLetter = ({ card }) => {
       stampId: card.idx,
     }
     sendLetterSNS(letterData,(response)=>{
-      
+      console.log(response)
     })
   };
 

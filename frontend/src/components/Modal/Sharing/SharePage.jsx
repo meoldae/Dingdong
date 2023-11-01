@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "./Share.module.css";
 import html2canvas from "html2canvas";
+import {useRecoilState} from "recoil";
+import { textareaAtom } from '../../../atom/TextareaAtom';
 // import { handleImageUpload } from "../../../utils/s3Util";
 
 const SharePage = ({shareModal, canvasRef}) => {
@@ -8,6 +10,7 @@ const SharePage = ({shareModal, canvasRef}) => {
   const formattedDate = `${today.getFullYear()}.${today.getMonth() + 1}.${today.getDate()}`;
 
   const [imageSrc, setImageSrc] = useState();
+  const [text, setText] = useRecoilState(textareaAtom);
 
   const onCapture = async () => {
     html2canvas(document.getElementById("newcanvas")).then(async (canvas) => {
@@ -49,7 +52,7 @@ const SharePage = ({shareModal, canvasRef}) => {
         <img src={imageSrc} alt="Shared Content" />
         <h2>{formattedDate}</h2>
         <div>
-          <textarea className={styles.textarea} placeholder="본인의 이야기를 작성해보세요!" spellCheck="false" maxLength={33}/>
+          <textarea className={styles.textarea} placeholder="본인의 이야기를 작성해보세요!" spellCheck="false" maxLength={33} onChange={(e)=>{setText(e.target.value)}}/>
         </div>
       </div>
     </div>
