@@ -7,7 +7,7 @@ const NeighborListModal = ({ imgName, nickname, gohome, remove, status }) => {
         <div
           className={status ? styles.StatusOnDot : styles.StatusOffDot}
         ></div>
-        <img src={`/assets/characters/female${imgName}.png`} />
+        <img src={`/assets/icons/${imgName}.png`} />
       </div>
       <div className={styles.InfoContainer}>
         <div
