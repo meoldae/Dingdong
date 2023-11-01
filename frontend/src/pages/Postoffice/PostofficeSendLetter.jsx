@@ -31,6 +31,7 @@ const PostofficeSendLetter = ({ card }) => {
       letterFrom: fromValue,
       description: content,
       stampId: card.idx,
+      roomId: userInfo.roomId
     }
 
     const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY; 

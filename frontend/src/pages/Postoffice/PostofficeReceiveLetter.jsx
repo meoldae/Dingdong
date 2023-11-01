@@ -1,26 +1,36 @@
-import React, { useEffect} from "react"
+import React, { useEffect, useState} from "react"
 import SharingModalList from "@/components/Modal/Sharing/SharingModalList"
-import { useNavigate } from "react-router-dom" 
+import { useNavigate, useParams } from "react-router-dom" 
 import styles from "./PostofficeReceiveLetter.module.css" 
 import Card from "../../components/UI/Card"
+import { getLetterSNSDetail } from "../../api/Letter"; 
+
 const PostofficeReceiveLetter = () => {
   const navigate = useNavigate()
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
-  // const isLogin = useRecoilValue(isLoginAtom);
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL 
+  const { letterId } = useParams(); 
+   
+  const [letterData, setLetterData] = useState(null);
 
-  let params = new URL(document.URL).searchParams
-  let result = params.get("result")
-
-  const resultIndex = Number(result)
+  useEffect(() => { 
+    getLetterSNSDetail(
+      letterId,
+      (response) => {
+        console.log('Success:', response);
+        setLetterData(response.data.data);   
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
+  }, [letterId]); // letterId가 변경될 때마다 호출
 
   const onHomeHandler = (e) => {
     navigate(`${urlPath}/`)
   }
-  const onTestHandler = (e) => {
-    navigate(`${urlPath}/yourstamp`)
-  }
-
- 
+  const onRoomHandler = (e) => {
+    navigate(`${urlPath}/room/${letterData.roomId}`)
+  } 
 
   return (
     <div className={styles.Container}>
@@ -33,26 +43,26 @@ const PostofficeReceiveLetter = () => {
             </div>
             <img
               className={styles.topPostCardImg}
-              src={`${urlPath}/assets/images/post/clover.png`}
+              src={letterData?.stampUrl ?? `${urlPath}/assets/images/post/clover.png`}
             />
             <div className={styles.ToUser}>
-              To.
+              To. {letterData?.letterTo ?? ""}
               
             </div>
             <div className={styles.letterContent}>
-            
+              {letterData?.description ?? ""}
             </div>
             <div className={styles.footerContainer}>
               <div className={styles.FromUser}>
-                From.
+                From. {letterData?.letterFrom ?? ""}
               </div>
             </div>
           </Card>
         </div>
       </div>
       <div className={styles.ButtonContainer}>
-        <div className={styles.Button} onClick={onHomeHandler}>{}이네 집 방문하기</div>
-        <div className={styles.Button} onClick={onTestHandler}>딩동 시작하기</div>
+        <div className={styles.Button} onClick={onRoomHandler}>{letterData?.letterFrom ??  ""} 집 방문하기</div>
+        <div className={styles.Button} onClick={onHomeHandler}>딩동 시작하기</div>
       </div>
        
     </div>
