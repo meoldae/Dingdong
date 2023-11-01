@@ -10,19 +10,19 @@
 }
 
 .TitleContainer {
-  width: 95%;
-  padding-top: 5%;
+  width: 90%;
+  padding-top: 10%;
 }
 
 .Title {
   color: #212529;
-  font-size: 30px;
+  font-size: 40px;
   font-family: "Pretendard-Bold";
 }
 
 .ButtonContainer {
   width: 90%;
-  margin-top: 5%;
+  margin-top: 10%;
   margin-bottom: 10%;
 
   display: flex;
@@ -68,7 +68,7 @@
 .TypeContainer {
   width: 90%;
   height: 40px;
-  margin-top: 5%;
+  margin-top: 2%;
 
   display: flex;
   flex-direction: row;
