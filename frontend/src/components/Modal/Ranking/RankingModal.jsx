@@ -72,7 +72,7 @@ const RankingModal = () => {
         <div className={styles.TitleContainer}>
           <div className={styles.Title}>실시간 순위</div>
         </div>
-        <div className={styles.Time}>기준시간 : {changeTime(standardTime)}</div>
+        <div className={styles.Time}>{changeTime(standardTime)} 기준</div>
         <div className={styles.ContentContainer}>
           <RankingSection title="방 꾸미기 전문가" rankingList={mostLikeRoomList} />
           <RankingSection title="인기왕" rankingList={mostReceiveLetterList} />
