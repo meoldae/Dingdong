@@ -18,6 +18,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=build /dist /usr/share/nginx/html
 
-EXPOSE 3002
+EXPOSE 3000
 
 CMD [ "nginx", "-g", "daemon off;" ]
