@@ -9,7 +9,7 @@
     height: 30vh;
     position: absolute;
     border-radius: 15px 15px 0 0;
-    bottom: 0px;
+    bottom: 30vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,7 +24,7 @@
     height: 30vh;
     position: absolute;
     border-radius: 15px 15px 0 0;
-    bottom: 0px;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -39,7 +39,7 @@
     height: 30vh;
     position: absolute;
     border-radius: 15px 15px 0 0;
-    bottom: 0px;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -116,11 +116,15 @@
     height: 4vh;
     left: 4vh;
     top: -6vh;
+
 }
 
 .dragPopUp img {
     margin-left: 10px;
-    width: 24px;
+    width: 3vh;
+    background-color: white;
+    border-radius:  50px 50px 50px 50px;
+    padding: 1vh;
 }
 .popUpClose {
     display: flex;
@@ -129,8 +133,8 @@
     position: absolute;
     background-color: white;
     border-radius: 50px 50px 50px 50px;
-    width: 4vh;
-    height: 4vh;
+    width: 5vh;
+    height: 5vh;
     right: 1vh;
     top: -6vh;
 }
@@ -142,15 +146,15 @@
     position: absolute;
     background-color: gray;
     border-radius: 50px 50px 50px 50px;
-    width: 4vh;
-    height: 4vh;
+    width: 5vh;
+    height: 5vh;
     right: 1vh;
     top: -6vh;
 }
 
 .closeVector {
-    width: 1.5vh;
-    height: 1.5vh;
+    width: 2.5vh;
+    height: 2.5vh;
 }
 
 .customSaveButton {
@@ -160,9 +164,9 @@
     position: absolute;
     background-color: white;
     border-radius: 50px 50px 50px 50px;
-    width: 4vh;
-    height: 4vh;
-    right: 6vh;
+    width: 5vh;
+    height: 5vh;
+    right: 7vh;
     top: -6vh;
 }
 
@@ -173,12 +177,12 @@
     position: absolute;
     background-color: gray;
     border-radius: 50px 50px 50px 50px;
-    width: 4vh;
-    height: 4vh;
-    right: 6vh;
+    width: 5vh;
+    height: 5vh;
+    right: 7vh;
     top: -6vh;
 }
 .customSaveVector {
-    width: 2.5vh;
-    height: 2.5vh;
+    width: 3vh;
+    height: 3vh;
 }

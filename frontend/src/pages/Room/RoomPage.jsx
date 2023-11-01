@@ -65,7 +65,6 @@ function RoomPage() {
   useEffect(() => {
     const myRoomId = userInfo.roomId
     setIsMyRoom(roomId == myRoomId)
-
     fetchRoomData(
       roomId,
       (response) => {
@@ -86,7 +85,6 @@ function RoomPage() {
       ? Number(window.location.pathname.match(/\d+/g)[0])
       : null
     const myRoomId = userInfo.roomId
-    // 선택 가능한 방 번호 목록
     const possibleRooms = [1, 3, 4, 6, 19, 21]
     let randomRoom
 
