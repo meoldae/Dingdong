@@ -27,6 +27,10 @@ export const ConfirmEnteringWorldAtom = atom({
   key: "ConfirmEnteringWorldAtom",
   default: false,
 })
+export const ConfirmEnteringRankAtom = atom({
+  key: "ConfirmEnteringRankAtom",
+  default: false,
+})
 
 // 포탈
 export const RoomPortalVisibleAtom = atom({
@@ -71,5 +75,14 @@ export const WorldPortalVisibleAtom = atom({
 })
 export const WorldPortalPositionAtom = atom({
   key: "WorldPortalPositionAtom",
+  default: [0, 0.03, 26],
+})
+
+export const RankPortalVisibleAtom = atom({
+  key: "RankPortalVisibleAtom",
+  default: true,
+})
+export const RankPortalPositionAtom = atom({
+  key: "RankPortalPositionAtom",
   default: [0, 0.03, 26],
 })
