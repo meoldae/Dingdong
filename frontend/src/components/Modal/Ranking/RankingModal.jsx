@@ -100,9 +100,9 @@ const RankingModal = () => {
           <div className={styles.Type}>포인트</div>
         </div>
         <div className={styles.ContentContainer}>
-          <RankingSection rankingList={mostLikeRoomList} />
-          <RankingSection rankingList={mostReceiveLetterList} />
-          <RankingSection rankingList={mostSendLetterList} />
+          {rankingTab === 1 && <RankingSection rankingList={mostLikeRoomList} />}
+          {rankingTab === 2 && <RankingSection rankingList={mostReceiveLetterList} />}
+          {rankingTab === 3 && <RankingSection rankingList={mostSendLetterList} />}
         </div>
       </div>
     </>
