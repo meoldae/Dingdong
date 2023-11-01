@@ -75,6 +75,7 @@ const RecevieLetter = (props) => {
           </div>
         )}
       </div>
+      
       {/* 신고하기 확인 모달 */}
       {isReport && (
         <>
