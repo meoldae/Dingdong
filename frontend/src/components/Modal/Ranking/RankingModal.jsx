@@ -59,13 +59,13 @@ const RankingModal = () => {
             </div>
             <div className={styles.TitleLine} />
             <div className={styles.MostContent}>
-              <div className={styles.RoomContentFirst}>
+              <div className={styles.Content}>
                 방 첫 번째 값
               </div>
-              <div className={styles.RoomContentSecond}>
+              <div className={styles.Content}>
                 방 두 번째 값
               </div>
-              <div className={styles.RoomContentThrid}>
+              <div className={styles.Content}>
                 방 세 번째 값
               </div>
             </div>
@@ -76,13 +76,13 @@ const RankingModal = () => {
             </div>
             <div className={styles.TitleLine} />
             <div className={styles.MostContent}>
-              <div className={styles.ReceiveLetterContentFirst}>
+              <div className={styles.Content}>
                 받은편지 첫 번째 값
               </div>
-              <div className={styles.ReceiveLetterContentSecond}>
+              <div className={styles.Content}>
                 받은편지 두 번째 값
               </div>
-              <div className={styles.ReceiveLetterContentThrid}>
+              <div className={styles.Content}>
                 받은편지 세 번째 값
               </div>
             </div>
@@ -93,13 +93,13 @@ const RankingModal = () => {
             </div>
             <div className={styles.TitleLine} />
             <div className={styles.MostContent}>
-              <div className={styles.SendLetterContentFirst}>
+              <div className={styles.Content}>
                 보낸편지 첫 번째 값
               </div>
-              <div className={styles.SendLetterContentSecond}>
+              <div className={styles.Content}>
                 보낸편지 두 번째 값
               </div>
-              <div className={styles.SendLetterContentThrid}>
+              <div className={styles.Content}>
                 보낸편지 세 번째 값
               </div>
             </div>
