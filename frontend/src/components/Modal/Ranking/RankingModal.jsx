@@ -97,6 +97,11 @@ const RankingModal = () => {
         <div className={styles.TimeContainer}>
           <div className={styles.Time}>{changeTime(standardTime)} 기준</div>
         </div>
+        <div className={styles.TypeContainer}>
+          <div className={styles.Type}>순위</div>
+          <div className={styles.Type}>닉네임</div>
+          <div className={styles.Type}>포인트</div>
+        </div>
         <div className={styles.ContentContainer}>
           <RankingSection title="방꾸왕" rankingList={mostLikeRoomList} />
           <RankingSection title="인기왕" rankingList={mostReceiveLetterList} />
