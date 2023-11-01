@@ -7,6 +7,6 @@ import org.springframework.security.core.Authentication;
 
 public interface ScoreSwagger {
 
-    DataResponse getScoreBoard (Long letterId);
+    DataResponse getScoreBoard ();
 
 }

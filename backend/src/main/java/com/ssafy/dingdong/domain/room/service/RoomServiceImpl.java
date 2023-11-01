@@ -202,10 +202,11 @@ public class RoomServiceImpl implements RoomService {
 	@Override
 	@Transactional
 	public List<RoomScoreDto> getRoomScore() {
-		Page<RoomScoreDto> roomScoreList = roomHeartRepository.getHeartRoomScore(PageRequest.of(0, 10));
+		Page<RoomScoreDto> roomScoreList = roomHeartRepository.getHeartRoomScore(PageRequest.of(0, 3));
 
 		roomScoreList.stream().forEach(
 			roomScore -> {
+				log.info(roomScore.getRoomId());
 				Room room = roomRepository.findByRoomId(roomScore.getRoomId()).orElseThrow(
 					() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
 				);

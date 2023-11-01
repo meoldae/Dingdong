@@ -2,8 +2,10 @@ package com.ssafy.dingdong.domain.room.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class RoomScoreDto{
 	private Long roomId;
 	private String memberId;
