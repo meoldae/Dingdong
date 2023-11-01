@@ -18,6 +18,8 @@ function InviteRoomPage() {
   const [nickName, setNickName] = useRecoilState(roomInfoAtom);
   const roomId = window.location.pathname.match(/\d+/g);
   const userInfo = useRecoilValue(userAtom)
+  const today = new Date();
+  const [time, setTime] = useState();
 
   const onRoomHandler = (e) => {
     navigate(`/room/${roomId}`);
@@ -38,26 +40,37 @@ function InviteRoomPage() {
       },
       (error) => {
         console.error("Error at fetching RoomData...", error);
+        if (error.response && error.response.status === 400) {
+          navigate("/notfound");  
+        }
       }
     );
   }, []);
 
-
+  useEffect(() => {
+    const checkTime = today.getHours();
+    if (checkTime >= 0 && checkTime < 6) {
+        setTime("dawn");
+    } else if (checkTime >= 6 && checkTime < 12) {
+        setTime("morning");
+    } else if (checkTime >= 12 && checkTime < 18) {
+        setTime("afternoon");
+    } else {
+        setTime("dinner");
+    }
+  }, []);
   
   return (
-    <div className={styles.inviteContainer}>
-      <InviteHeader checkMyRoom={"invite"} /> 
-      <div className={styles.inviteCanvas}>
+    <div className={`${styles.container} ${styles[time]}`}>
+      <InviteHeader checkMyRoom={"invite"} />  
         <Canvas
           shadows
           gl={{ preserveDrawingBuffer: true, antialias: true }}
-          camera={{ fov: 40, zoom: 1.2 }}
+          camera={{ fov: 40, zoom: 1.0 }}
           ref={canvasRef}
-        >
-          <color attach="background" args={["skyblue"]} />
+        > 
               <Experience />
         </Canvas> 
-        </div>
       <InviteFooter props={roomId[0]} />
     </div>
   );
