@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom"
 import { Suspense, lazy } from "react"
 
 import AuthRoute from "./AuthRouter"
@@ -17,9 +17,20 @@ import PostPage from "../pages/Post/PostPage"
 import InviteRoomPage from "../pages/Room/InviteRoomPage"
 import LoadingPage from "../components/UI/LoadingPage"
 import Error from "../components/UI/Error"
+import ReactGA from "react-ga";
 // const Room = lazy(() => import("../pages/SinglePlay/SingleMainPage"))
 
+
+const gaTrackingId = import.meta.env.VITE_APP_GA_TRACKING_ID;
+ReactGA.initialize(gaTrackingId, { debug: true }); // react-ga 초기화 및 debug 사용
+
 const AppRouter = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    ReactGA.pageview(location.pathname + location.search);
+  }, [location]);
+
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingPage content={"잠시만 기다려 주세요"} />}>
