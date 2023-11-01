@@ -16,10 +16,9 @@ import {
   mobileCheckState,
 } from "./Atom";
 import { gsap } from "gsap";
-import styles from "./Room.module.css";
 import { DoubleSide } from "three";
 
-const Experience = ({setRoomDrag}) => {
+const Experience = ({ setRoomDrag }) => {
   const buildMode = useRecoilValue(buildModeState);
   const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState);
   const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState);
@@ -230,7 +229,7 @@ const Experience = ({setRoomDrag}) => {
       }
     });
     setCanDrop(droppable);
-  }, [dragPosition, draggedItem, items]);
+  }, [dragPosition, draggedItem, items,draggedItemRotation]);
 
   // 아이템 클릭 로직
   const renderItem = (item, idx) => {
@@ -247,12 +246,12 @@ const Experience = ({setRoomDrag}) => {
           onClick={() => {
             setDraggedItem((prev) => (prev === null ? idx : prev));
             if (draggedItemRotation === null) {
-              setDraggedItemRotation(item.rotation);
+              setDraggedItemRotation(items[idx].rotation);
             }
           }}
           isDragging={draggedItem === idx}
           dragPosition={dragPosition}
-          dragRotation={draggedItemRotation}
+          draggedItemRotation={draggedItemRotation}
           canDrop={canDrop}
         />
       );
@@ -279,7 +278,7 @@ const Experience = ({setRoomDrag}) => {
   // 일반 모드일 때 카메라 회전 후 원상복귀
   const animateCameraPosition = () => {
     if (buildMode) return;
-    setRoomDrag(true)
+    setRoomDrag(true);
     gsap.to(state.camera.position, {
       duration: 0.5,
       x: 15,
@@ -322,10 +321,13 @@ const Experience = ({setRoomDrag}) => {
         position-y={-0.001}
         onClick={() => {
           if (!mobileCheck) {
-            if (draggedItem !== null && dragPosition && items[draggedItem]["categoryId"] !== 3) {
+            if (
+              draggedItem !== null &&
+              dragPosition &&
+              items[draggedItem]["categoryId"] !== 3
+            ) {
               if (canDrop) {
                 setItems((prev) => {
-                  console.log(prev);
                   const newItems = prev.map((item, index) => {
                     if (index === draggedItem) {
                       return {
@@ -338,6 +340,8 @@ const Experience = ({setRoomDrag}) => {
                   });
                   return newItems;
                 });
+                setDraggedItemRotation(null);
+                setDraggedItem(null);
               } else {
                 if (
                   check.length !== items.length &&
@@ -348,10 +352,10 @@ const Experience = ({setRoomDrag}) => {
                       (_, index) => index !== draggedItem
                     );
                   });
+                  setDraggedItemRotation(null);
+                  setDraggedItem(null);
                 }
               }
-              setDraggedItemRotation(null);
-              setDraggedItem(null);
             }
           }
         }}
@@ -379,10 +383,13 @@ const Experience = ({setRoomDrag}) => {
         position-x={-2.394}
         // visible={false}
         position-y={1.92}
-        
         onClick={() => {
           if (!mobileCheck) {
-            if (draggedItem !== null && dragPosition && items[draggedItem].categoryId===3) {
+            if (
+              draggedItem !== null &&
+              dragPosition &&
+              items[draggedItem].categoryId === 3
+            ) {
               if (canDrop) {
                 setItems((prev) => {
                   const newItems = prev.map((item, index) => {
@@ -430,7 +437,7 @@ const Experience = ({setRoomDrag}) => {
           }
         }}
       >
-        <planeGeometry args={[4.8, 3.84]}  />
+        <planeGeometry args={[4.8, 3.84]} />
         <meshStandardMaterial color="#f0f0f0" side={DoubleSide} />
       </mesh>
 
@@ -441,7 +448,11 @@ const Experience = ({setRoomDrag}) => {
         position-y={1.92}
         onClick={() => {
           if (!mobileCheck) {
-            if (draggedItem !== null && dragPosition  && items[draggedItem].categoryId===3) {
+            if (
+              draggedItem !== null &&
+              dragPosition &&
+              items[draggedItem].categoryId === 3
+            ) {
               if (canDrop) {
                 setItems((prev) => {
                   const newItems = prev.map((item, index) => {
@@ -472,7 +483,6 @@ const Experience = ({setRoomDrag}) => {
                   setDraggedItem(null);
                 }
               }
-
             }
           }
         }}
@@ -489,7 +499,6 @@ const Experience = ({setRoomDrag}) => {
             setDraggPosition(newPosition);
           }
         }}
-        
       >
         <planeGeometry args={[4.8, 3.84]} />
         <meshStandardMaterial color="#f0f0f0" side={DoubleSide} />

@@ -4,7 +4,6 @@ import { fetchRoomData } from "../../api/User"
 import { Suspense, useState, useEffect, useRef } from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
 import {
-  ItemRotateState,
   ItemsState,
   buildModeState,
   draggedItemState,
@@ -65,7 +64,6 @@ function RoomPage() {
   useEffect(() => {
     const myRoomId = userInfo.roomId
     setIsMyRoom(roomId == myRoomId)
-
     fetchRoomData(
       roomId,
       (response) => {

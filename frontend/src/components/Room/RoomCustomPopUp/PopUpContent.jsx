@@ -37,7 +37,6 @@ const PopUpContent = (props) => {
             rotation: 0,
             roomFurnitureId: -1,
           };
-          console.log(data.furnitureId);
           let newIndex;
           setItems((prevItems) => {
             newIndex = prevItems.length; // 임시 변수에 인덱스 저장
@@ -65,7 +64,6 @@ const PopUpContent = (props) => {
       props.category,
       (response) => {
         const fetchingList = response.data.data.content;
-
         setFurnitureList((furnitureList) => furnitureList.concat(fetchingList));
 
         if (fetchingList.length < 6) {
