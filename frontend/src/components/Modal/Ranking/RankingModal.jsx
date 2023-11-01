@@ -10,6 +10,12 @@ import styles from "./RankingModal.module.css"
 const RankingModal = () => {
   // 기준시간 상태관리
   const [standardTime, setStandardTime] = useState("")
+  // 방좋아요 순위 상태관리
+  const [mostLikeRoomList, setMostLikeRoomList] = useState([])
+  // 편지 많이받은 순위 상태관리
+  const [mostReceiveLetterList, setMostReceiveLetterList] = useState([])
+  // 편지 많이보낸 순위 상태관리
+  const [mostSendLetterList, setMostSendLetterList] = useState([])
 
   // 시간변경함수
   const changeTime = (inputTime) => {
