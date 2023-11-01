@@ -56,3 +56,13 @@
   border: #C2C2C2 1px solid;
   margin-top: 5px;
 }
+
+.MostContent {
+  width: 100%;
+  height: 120px;
+}
+
+.Content {
+  width: 100%;
+  height: 40px;
+}
