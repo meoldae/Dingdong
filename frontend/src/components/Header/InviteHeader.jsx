@@ -20,6 +20,7 @@ import { roomInfoAtom } from "../../atom/RoomInfoAtom"
 
 const Header = ({ checkMyRoom }) => {
   const roomInfo = useRecoilValue(roomInfoAtom)
+  
   return (
     <>
       <div className={styles.wrap}>
