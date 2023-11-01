@@ -43,24 +43,24 @@ const AppRouter = () => {
       <Suspense fallback={<LoadingPage content={"잠시만 기다려 주세요"} />}>
         <Routes>
           <Route element={<AuthRoute authentication="user" />}>
-            <Route path="/" element={<SingleMainPage />} />
+            <Route path="/feDev" element={<SingleMainPage />} />
             {/* <Route path="/single" element={<SingleMainPage />} /> */}
-            <Route path="/room/:roomId" element={<AppRoom />} />
-            <Route path="/random/:roomId" element={<AppRandomRoom />} />
-            <Route path="/usersetting" element={<AppUserSetting />} />
-            <Route path="/postoffice" element={<PostPage />} />
+            <Route path="/feDev/room/:roomId" element={<AppRoom />} />
+            <Route path="/feDev/random/:roomId" element={<AppRandomRoom />} />
+            <Route path="/feDev/usersetting" element={<AppUserSetting />} />
+            <Route path="/feDev/postoffice" element={<PostPage />} />
           </Route>
 
           <Route element={<AuthRoute authentication="NotUser" />}>
-            <Route path="/login" element={<AppLogin />} />
-            <Route path="/oauth2/redirect" element={<AppRedirect />} />
-            <Route path="/signup" element={<AppSignUp />} />
-            <Route path="/tutorial" element={<TutorialPage />} />
-            <Route path="/yourstamp" element={<StampTest />} />
-            <Route path="/yourstamp/result" element={<StampTestResult />} />
-            <Route path="/invite/:roomId" element={<InviteRoomPage />} />
+            <Route path="/feDev/login" element={<AppLogin />} />
+            <Route path="/feDev/oauth2/redirect" element={<AppRedirect />} />
+            <Route path="/feDev/signup" element={<AppSignUp />} />
+            <Route path="/feDev/tutorial" element={<TutorialPage />} />
+            <Route path="/feDev/yourstamp" element={<StampTest />} />
+            <Route path="/feDev/yourstamp/result" element={<StampTestResult />} />
+            <Route path="/feDev/invite/:roomId" element={<InviteRoomPage />} />
           </Route>
-          <Route path="/*" element={<AppNotFound />} />
+          <Route path="/feDev/*" element={<AppNotFound />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
