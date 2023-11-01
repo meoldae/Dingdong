@@ -57,22 +57,52 @@ const RankingModal = () => {
             <div className={styles.MostLikeRoomTitle}>
               방 꾸미기 전문가
             </div>
-            {/* 컨텐츠 자리 */}
             <div className={styles.TitleLine} />
+            <div className={styles.MostLikeRoomContent}>
+              <div className={styles.RoomContentFirst}>
+                방 첫 번째 값
+              </div>
+              <div className={styles.RoomContentSecond}>
+                방 두 번째 값
+              </div>
+              <div className={styles.RoomContentThrid}>
+                방 세 번째 값
+              </div>
+            </div>
           </div>
           <div className={styles.MostReceiveLetterContainer}>
             <div className={styles.MostReceiveLetterTitle}>
               인기왕
             </div>
-            {/* 컨텐츠 자리 */}
             <div className={styles.TitleLine} />
+            <div className={styles.MostReceiveLetterContent}>
+              <div className={styles.ReceiveLetterContentFirst}>
+                받은편지 첫 번째 값
+              </div>
+              <div className={styles.ReceiveLetterContentSecond}>
+                받은편지 두 번째 값
+              </div>
+              <div className={styles.ReceiveLetterContentThrid}>
+                받은편지 세 번째 값
+              </div>
+            </div>
           </div>
           <div className={styles.MostSendLetterContainer}>
             <div className={styles.MostSendLetterTitle}>
               소통왕
             </div>
-            {/* 컨텐츠 자리 */}
             <div className={styles.TitleLine} />
+            <div className={styles.MostReceiveLetterContent}>
+              <div className={styles.SendLetterContentFirst}>
+                보낸편지 첫 번째 값
+              </div>
+              <div className={styles.SendLetterContentSecond}>
+                보낸편지 두 번째 값
+              </div>
+              <div className={styles.SendLetterContentThrid}>
+                보낸편지 세 번째 값
+              </div>
+            </div>
           </div>
         </div>
       </div>
