@@ -34,8 +34,10 @@ const RankingModal = () => {
   useEffect(() => {
     fetchScore(
       (success) => {
-        console.log(success.data.data)
         setStandardTime(success.data.data.recordTime)
+        setMostLikeRoomList(success.data.data.scores.ROOM_LIKE_COUNT)
+        setMostSendLetterList(success.data.data.scores.LETTER_SEND_COUNT)
+        setMostReceiveLetterList(success.data.data.scores.LETTER_RECEIVE_COUNT)
       },
       (error) => {
         "Error at Scoreboard...", error
