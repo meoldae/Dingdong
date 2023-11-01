@@ -32,16 +32,19 @@ const RankingModal = () => {
             <div className={styles.MostLikeRoomTitle}>
               방 꾸미기 전문가
             </div>
+            <div className={styles.TitleLine} />
           </div>
           <div className={styles.MostReceiveLetterContainer}>
             <div className={styles.MostReceiveLetterTitle}>
               인기왕
             </div>
+            <div className={styles.TitleLine} />
           </div>
           <div className={styles.MostSendLetterContainer}>
             <div className={styles.MostSendLetterTitle}>
               소통왕
             </div>
+            <div className={styles.TitleLine} />
           </div>
         </div>
       </div>
