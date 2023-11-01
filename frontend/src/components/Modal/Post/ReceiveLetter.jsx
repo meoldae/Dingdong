@@ -6,13 +6,10 @@ import { useState, useEffect } from "react"
 import { getLetterDetail } from "@/api/Letter"
 import { successMsg } from "../../../utils/customToast"
 import { reportLetter } from "../../../api/Letter"
-import DefaultModal from "../Default/DefaultModal"
 
 const RecevieLetter = (props) => {
   const letterId = useRecoilValue(letterIdAtom)
   const [letterDetail, setLetterDetail] = useState(null)
-  // 신고하기 확인 모달 상태관리
-  const [isReport, setIsReport] = useState(false)
 
   useEffect(() => {
     const fetchLetterDetail = async () => {
@@ -64,7 +61,7 @@ const RecevieLetter = (props) => {
                 <span>{letterDetail?.description}</span>
               </div>
               <div className={styles.footerContainer}>
-                <div className={styles.report} onClick={() => setIsReport(true)}>
+                <div className={styles.report} onClick={reportHandler}>
                   신고하기
                 </div>
                 <div className={styles.FromUser}>
@@ -75,24 +72,6 @@ const RecevieLetter = (props) => {
           </div>
         )}
       </div>
-
-      {/* 신고하기 확인 모달 */}
-      {isReport && (
-        <>
-          <div className={styles.reportOverlay} onClick={() => setIsReport(false)}/>
-          <div className={styles.reportScreen}>
-            <div className={styles.reportModal}>
-              <DefaultModal
-                content={"신고를 하시겠습니까?"}
-                ok={"네"}
-                cancel={"아니오"}
-                okClick={reportHandler}
-                cancelClick={() => setIsReport(false)}
-              />
-            </div>
-          </div>
-        </>
-      )}
     </>
   )
 }
