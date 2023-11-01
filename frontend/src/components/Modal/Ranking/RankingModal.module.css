@@ -19,3 +19,16 @@
 .Title {
   font-size: 30px;
 }
+
+.ContentContainer {
+  width: 100%;
+  height: 300px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Content {
+  font-size: 20px;
+}
