@@ -6,12 +6,17 @@ import {
   urlCopy,
   save,
 } from "./sharingIcon"
-// import { useRecoilValue } from 'recoil';
-// import { userNicknameAtom } from '../../atoms/userAtoms';
+import { useRecoilValue } from 'recoil';
+import { textareaAtom } from '../../../atom/TextareaAtom';
 import styles from "./Share.module.css"
 import html2canvas from "html2canvas"
+import { userAtom } from "../../../atom/UserAtom"
 
 function SharingModalList(props) {
+  const recoilText = useRecoilValue(textareaAtom); 
+  const userInfo = useRecoilValue(userAtom)
+
+  console.log(recoilText);
   const baseURL = "https://ding-dong.s3.ap-northeast-2.amazonaws.com/"
   // const userNickname = useRecoilValue(userNicknameAtom);
   const url = encodeURI(window.location.href);
@@ -68,10 +73,9 @@ function SharingModalList(props) {
     }
 }
 
-
   const shareTwitter = (e) => {
     if (props.shareMode === "room") { 
-      const text = "딩동! 우리집에 편지를 보내주세요."
+      const text = `딩동! ${userInfo.nickname}님의 집에 편지를 보내주세요.` 
       window.open(
         "https://twitter.com/intent/tweet?text=" + text + "&url=" + url.replace("/room/", "/invite/")
       )
@@ -106,8 +110,8 @@ function SharingModalList(props) {
         templateId: 100120,
         templateArgs: {
           THU: "https://ding-dong.s3.ap-northeast-2.amazonaws.com/StampLogo.png",
-          TITLE: "딩동! 우리집을 방문해보세요.",
-          DESC: "우리집에 방문해서 편지를 남겨주세요!",
+          TITLE: `딩동! ${userInfo.nickname}네에 편지를 보내주세요.`, //"딩동! 우리집을 방문해보세요.",
+          DESC: recoilText,
           MOBILE_LINK: currentUrl,
           WEB_LINK: currentUrl,
         },
