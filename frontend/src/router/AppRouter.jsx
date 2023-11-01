@@ -28,7 +28,8 @@ const Analytics = () => {
   const location = useLocation();
 
   useEffect(() => {
-    ReactGA.pageview(location.pathname + location.search);
+    ReactGA.set({ page: location.pathname });
+    ReactGA.send("pageview");
   }, [location]);
 
   return null;
