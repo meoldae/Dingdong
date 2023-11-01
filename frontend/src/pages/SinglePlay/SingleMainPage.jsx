@@ -272,9 +272,11 @@ const SingleMainPage = () => {
 
       {/* 랭킹모달 */}
       {isRanking && (
-        <div>
-          <RankingModal />
-        </div>
+        <>
+          <div className={styles.RankingModalContainer}>
+            <RankingModal />
+          </div>
+        </>
       )}
     </>
   )
