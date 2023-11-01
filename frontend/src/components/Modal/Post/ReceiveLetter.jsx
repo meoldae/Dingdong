@@ -6,7 +6,7 @@ import { useState, useEffect } from "react"
 import { getLetterDetail } from "@/api/Letter"
 import { successMsg } from "../../../utils/customToast"
 import { reportLetter } from "../../../api/Letter"
-import { DefaultModal } from "../Default/DefaultModal"
+import DefaultModal from "../Default/DefaultModal"
 
 const RecevieLetter = (props) => {
   const letterId = useRecoilValue(letterIdAtom)
