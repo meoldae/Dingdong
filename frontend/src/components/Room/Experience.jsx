@@ -230,7 +230,6 @@ const Experience = ({ setRoomDrag }) => {
     });
     setCanDrop(droppable);
   }, [dragPosition, draggedItem, items,draggedItemRotation]);
-
   // 아이템 클릭 로직
   const renderItem = (item, idx) => {
     const commonProps = {
@@ -263,16 +262,17 @@ const Experience = ({ setRoomDrag }) => {
   // 카메라 관련 로직
   const controls = useRef();
   const state = useThree((state) => state);
+
   // 편집 모드일 때 카메라 고정
   useEffect(() => {
     if (buildMode) {
-      state.camera.position.set(15, 10, 10);
+      state.camera.position.set(15, 15, 15);
       if (controls.current) {
         controls.current.target.set(0, 0, 0);
         controls.current.update();
       }
     } else {
-      state.camera.position.set(15, 10, 10);
+      state.camera.position.set(15, 15, 15);
     }
   }, [buildMode]);
   // 일반 모드일 때 카메라 회전 후 원상복귀
@@ -282,8 +282,8 @@ const Experience = ({ setRoomDrag }) => {
     gsap.to(state.camera.position, {
       duration: 0.5,
       x: 15,
-      y: 10,
-      z: 10,
+      y: 15,
+      z: 15,
       onUpdate: () => state.camera.updateProjectionMatrix(),
     });
     gsap.to(state.camera, {
@@ -295,7 +295,9 @@ const Experience = ({ setRoomDrag }) => {
       setRoomDrag(false);
     }, 600);
   };
-
+  useFrame((state)=>{
+    state.camera.lookAt(0,1,0);
+  })
   return (
     <>
       <Environment preset="sunset" />
