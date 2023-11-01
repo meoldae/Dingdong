@@ -23,13 +23,17 @@ pipeline {
         // 소나큐브 정적분석
         stage("SonaQube Analyze") {
             steps {
-                withSonarQubeEnv('SonarQube_BE_Production') {
+                // withSonarQubeEnv('SonarQube_BE_Production') {
                     sh """
                     cd ${PROJECT_DIR_BE}
                     chmod 777 ./gradlew
-                    ./gradlew sonarqube
+                    ./gradlew sonar \
+                    -Dsonar.projectKey=dingdong_be_prod \
+                    -Dsonar.projectName='dingdong_be_prod' \
+                    -Dsonar.host.url=http://k9b203.p.ssafy.io:9000 \
+                    -Dsonar.token=sqp_ee86a56ef5a6a0f02b69ebc5303a281a332b11fb
                     """
-                }
+                // }
             }
         }
         
