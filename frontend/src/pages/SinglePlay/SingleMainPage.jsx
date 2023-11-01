@@ -275,7 +275,9 @@ const SingleMainPage = () => {
         <>
           <div className={styles.overlay} />
           <div className={styles.rankingModalContainer}>
-            <RankingModal />
+            <div className={styles.rankingModal}>
+              <RankingModal />
+            </div>
           </div>
         </>
       )}
