@@ -7,6 +7,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -27,7 +28,8 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class CustomOAuth2LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-	private static final String REDIRECT_ENDPOINT = "https://ding-dong.kr";
+	@Value("${my.redirect-url}")
+	private String REDIRECT_ENDPOINT;
 
 	private final MemberRepository memberRepository;
 	private final MemberService memberService;
