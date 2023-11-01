@@ -96,6 +96,7 @@ const Header = ({ checkMyRoom }) => {
       (response) => {
         setAlarmsLength(alarmsLength - 1)
         setAlarms((prev) => prev.filter((alarm) => alarm.neighborId !== id))
+        successMsg("✅ 이웃 수락이 완료됐습니다!")
       },
       (error) => {
         console.log("Error in ResponseNeighborRequest ...", error)
@@ -110,6 +111,7 @@ const Header = ({ checkMyRoom }) => {
       (response) => {
         setAlarmsLength(alarmsLength - 1)
         setAlarms((prev) => prev.filter((alarm) => alarm.neighborId !== id))
+        successMsg("✅ 이웃 거절이 완료됐습니다!")
       },
       (error) => {
         console.log("Error in ResponseNeighborRequest ...", error)
