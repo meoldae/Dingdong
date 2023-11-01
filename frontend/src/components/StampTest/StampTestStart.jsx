@@ -3,10 +3,11 @@ import SharingModalList from "../Modal/Sharing/SharingModalList"
 import styles from "./StampTestStart.module.css"
 
 const StampTestStart = (props) => {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   return (
     <div className={styles.Container}>
       <img 
-        src={"assets/images/Stamp_Test.png"}
+        src={`${urlPath}/assets/images/Stamp_Test.png`}
         style={{ 
           width: "80%",
         }}

@@ -33,7 +33,7 @@ const PostPage = () => {
     <div className={styles.Container}>
       <div className={styles.SemiContainer}>
         <img
-          src={"assets/icons/back.svg"}
+          src={`${urlPath}/assets/icons/back.svg`}
           className={styles.BackButton}
           onClick={backNavigate}
         />
@@ -53,7 +53,7 @@ const PostPage = () => {
               className={styles.Input}
             />
             <img
-              src={"assets/icons/search.png"}
+              src={`${urlPath}/assets/icons/search.png`}
               className={styles.SearchIcon}
             />
           </div>

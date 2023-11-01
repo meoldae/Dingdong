@@ -10,6 +10,7 @@ import { reportLetter } from "../../../api/Letter"
 const RecevieLetter = (props) => {
   const letterId = useRecoilValue(letterIdAtom)
   const [letterDetail, setLetterDetail] = useState(null)
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   useEffect(() => {
     const fetchLetterDetail = async () => {
@@ -46,11 +47,11 @@ const RecevieLetter = (props) => {
           <div className={styles.receiveLetterContainer}>
             <Card className={styles.receiveLetterBox}>
               <div className={styles.xmarkImg} onClick={props.cancelClick}>
-                <img src="/assets/icons/Pink_X-mark.png" alt="" />
+                <img src={`${urlPath}/assets/icons/Pink_X-mark.png`} alt="" />
               </div>
               <img
                 className={styles.topPostCardImg}
-                src={`/assets/images/post/${letterDetail?.stampImgUrl
+                src={`${urlPath}/assets/images/post/${letterDetail?.stampImgUrl
                   .split("/")
                   .pop()}`}
               />

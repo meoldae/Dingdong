@@ -22,6 +22,8 @@ const SendLetter = ({ onClose, card }) => {
   const url = new URL(window.location.href)
   const roomId = url.pathname.split("/").pop()
 
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
   const cancelClick = () => {
     onClose()
   }
@@ -86,11 +88,11 @@ const SendLetter = ({ onClose, card }) => {
       <div className={styles.sendLetterContainer}>
         <Card className={styles.sendLetterBox}>
           <div className={styles.xmarkImg} onClick={cancelClick}>
-            <img src="/assets/icons/Pink_X-mark.png" alt="" />
+            <img src={`${urlPath}/assets/icons/Pink_X-mark.png`} alt="" />
           </div>
           <img
             className={styles.topPostCardImg}
-            src={`/assets/images/post/${card.src}`}
+            src={`${urlPath}/assets/images/post/${card.src}`}
           />
           <div className={styles.ToUser}>To. {roomInfo}</div>
           <div className={styles.letterContent}>

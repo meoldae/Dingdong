@@ -28,7 +28,7 @@ const StampTestResult = () => {
     }
   }, [navigate, result, resultIndex]);
  
-  const resultSrcUrl = "/assets/StampTest/" + Results[resultIndex]?.srcUrl;
+  const resultSrcUrl = `${urlPath}/assets/StampTest/` + Results[resultIndex]?.srcUrl;
  
   if (!result || ![0, 1, 2, 3, 4, 5, 6, 7].includes(resultIndex)) {
     return null;
