@@ -3,11 +3,7 @@ import React, { useState } from "react";
 import styles from "./SingleMainPage.module.css";
 
 // Recoil
-<<<<<<< frontend/src/pages/SinglePlay/SingleMainPage.jsx
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
-=======
-import { useRecoilState, useRecoilValue } from "recoil";
->>>>>>> frontend/src/pages/SinglePlay/SingleMainPage.jsx
 import {
   ArriveAtom,
   ConfirmEnteringOtherRoomAtom,
@@ -72,7 +68,6 @@ const SingleMainPage = () => {
     ConfirmEnteringStoreAtom
   );
   const [confirmEnteringOtherRoom, setConfirmEnteringOtherRoom] =
-<<<<<<< frontend/src/pages/SinglePlay/SingleMainPage.jsx
     useRecoilState(ConfirmEnteringOtherRoomAtom)
   // const [confirmEnteringWorld, setConfirmEnteringWorld] = useRecoilState(
   //   ConfirmEnteringWorldAtom
@@ -80,12 +75,6 @@ const SingleMainPage = () => {
   const [confirmEnteringRank, setConfirmEnteringRank] = useRecoilState(
     ConfirmEnteringRankAtom
   )
-=======
-    useRecoilState(ConfirmEnteringOtherRoomAtom);
-  const [confirmEnteringWorld, setConfirmEnteringWorld] = useRecoilState(
-    ConfirmEnteringWorldAtom
-  );
->>>>>>> frontend/src/pages/SinglePlay/SingleMainPage.jsx
 
   // 포탈 생성 여부
   const [roomPortalVisible, setRoomPortalVisible] = useRecoilState(
@@ -99,7 +88,6 @@ const SingleMainPage = () => {
   );
   const [otherRoomPortalVisible, setOtherRoomPortalVisible] = useRecoilState(
     OtherRoomPortalVisibleAtom
-<<<<<<< frontend/src/pages/SinglePlay/SingleMainPage.jsx
   )
   // const [worldPortalVisible, setWorldPortalVisible] = useRecoilState(
   //   WorldPortalVisibleAtom
@@ -123,34 +111,19 @@ const SingleMainPage = () => {
     setDefaultCameraPosition([2, 10, 10])
     setDefaultCameraZoom(0.18)
   }
-=======
-  );
-  const [worldPortalVisible, setWorldPortalVisible] = useRecoilState(
-    WorldPortalVisibleAtom
-  );
-
-  // 포탈 위치
-  const roomPortalPosition = useRecoilValue(RoomPortalPositionAtom);
-  const postOfficePortalPosition = useRecoilValue(PostOfficePortalPositionAtom);
-  const storePortalPosition = useRecoilValue(StorePortalPositionAtom);
-  const otherRoomPortalPosition = useRecoilValue(OtherRoomPortalPositionAtom);
-  const worldPortalPosition = useRecoilValue(WorldPortalPositionAtom);
-
-  // 랭킹모달 상태관리
-  const [isRanking, setIsRanking] = useState(true);
->>>>>>> frontend/src/pages/SinglePlay/SingleMainPage.jsx
 
   // 우체국 도착 상태관리
   const [onPostofficeCard, setOnPostOfficeCard] =
     useRecoilState(postofficeCardAtom);
   const [onPostofficeSendLetter, setOnPostofficeSendLetter] = useRecoilState(postofficeSendLetterAtom);
-   const [selectedPostCard, setSelectedPostCard] = useState(null)
+  const [selectedPostCard, setSelectedPostCard] = useState(null)
 
-   const handleSelectButtonClick = (selectedCard) => {
+  const handleSelectButtonClick = (selectedCard) => {
     setSelectedPostCard(selectedCard)
     setOnPostOfficeCard(false)
     setOnPostofficeSendLetter(true);
   }
+  
   return (
     <>
       <div className={styles.canvasContainer}>
@@ -346,9 +319,6 @@ const SingleMainPage = () => {
               flag={"0"}
             />
           </div>
-<<<<<<< frontend/src/pages/SinglePlay/SingleMainPage.jsx
-        )} */}
-=======
         )}
         {/* 우체국모달 */}
         {onPostofficeCard && (
@@ -367,7 +337,6 @@ const SingleMainPage = () => {
         )
 
         }
->>>>>>> frontend/src/pages/SinglePlay/SingleMainPage.jsx
       </div>
 
       {/* 랭킹모달 */}
