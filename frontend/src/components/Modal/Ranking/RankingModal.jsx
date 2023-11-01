@@ -45,6 +45,11 @@ const RankingModal = () => {
     )
   }, [])
 
+  // 방 이동 함수
+  const navigateRoom = (roomId) => {
+    window.location.replace(`/room/${roomId}`)
+  }
+
   return (
     <>
       <div className={styles.Container}>
@@ -59,14 +64,14 @@ const RankingModal = () => {
             </div>
             <div className={styles.TitleLine} />
             <div className={styles.MostContent}>
-              <div className={styles.Content}>
-                방 첫 번째 값
+              <div className={styles.Content} onClick={() => navigateRoom(mostLikeRoomList[0].roomId)}>
+                1등 {mostLikeRoomList[0].nickname}
               </div>
-              <div className={styles.Content}>
-                방 두 번째 값
+              <div className={styles.Content} onClick={() => navigateRoom(mostLikeRoomList[1].roomId)}>
+                2등 {mostLikeRoomList[1].nickname}
               </div>
-              <div className={styles.Content}>
-                방 세 번째 값
+              <div className={styles.Content} onClick={() => navigateRoom(mostLikeRoomList[2].roomId)}>
+                3등 {mostLikeRoomList[2].nickname}
               </div>
             </div>
           </div>
@@ -76,14 +81,14 @@ const RankingModal = () => {
             </div>
             <div className={styles.TitleLine} />
             <div className={styles.MostContent}>
-              <div className={styles.Content}>
-                받은편지 첫 번째 값
+              <div className={styles.Content} onClick={() => navigateRoom(mostReceiveLetterList[0].roomId)}>
+                1등 {mostReceiveLetterList[0].nickname}
               </div>
-              <div className={styles.Content}>
-                받은편지 두 번째 값
+              <div className={styles.Content} onClick={() => navigateRoom(mostReceiveLetterList[1].roomId)}>
+                2등 {mostReceiveLetterList[1].nickname}
               </div>
-              <div className={styles.Content}>
-                받은편지 세 번째 값
+              <div className={styles.Content} onClick={() => navigateRoom(mostReceiveLetterList[2].roomId)}>
+                3등 {mostReceiveLetterList[2].nickname}
               </div>
             </div>
           </div>
@@ -93,14 +98,14 @@ const RankingModal = () => {
             </div>
             <div className={styles.TitleLine} />
             <div className={styles.MostContent}>
-              <div className={styles.Content}>
-                보낸편지 첫 번째 값
+              <div className={styles.Content} onClick={() => navigateRoom(mostSendLetterList[0].roomId)}>
+                1등 {mostSendLetterList[0].nickname}
               </div>
-              <div className={styles.Content}>
-                보낸편지 두 번째 값
+              <div className={styles.Content} onClick={() => navigateRoom(mostSendLetterList[1].roomId)}>
+                2등 {mostSendLetterList[1].nickname}
               </div>
-              <div className={styles.Content}>
-                보낸편지 세 번째 값
+              <div className={styles.Content} onClick={() => navigateRoom(mostSendLetterList[2].roomId)}>
+                3등 {mostSendLetterList[2].nickname}
               </div>
             </div>
           </div>
