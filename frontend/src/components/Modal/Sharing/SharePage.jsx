@@ -35,6 +35,8 @@ const SharePage = ({shareModal, canvasRef}) => {
       // 원본 캔버스에서 잘라낼 영역만 croppedCanvas에 그리기
       ctx.drawImage(canvas, startX, startY, width, height, 0, 0, width, height);
 
+      const uploadedImageUrl = await handleImageUpload(croppedCanvas);
+      setImageSrc(uploadedImageUrl);
       setImageSrc(croppedCanvas.toDataURL("image/png"));
       // await handleImageUpload(croppedCanvas); 
     });
