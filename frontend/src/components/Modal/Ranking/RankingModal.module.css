@@ -111,3 +111,36 @@
   font-size: 18px;
   font-family: "Pretendard-Medium";
 }
+
+.IndexFirst {
+  width: 80px;
+  height: 40px;
+
+  text-align: center;
+  line-height: 40px;
+
+  font-size: 18px;
+  font-family: "Pretendard-Medium";
+}
+
+.IndexSecond {
+  width: 80px;
+  height: 40px;
+
+  text-align: center;
+  line-height: 40px;
+
+  font-size: 18px;
+  font-family: "Pretendard-Medium";
+}
+
+.IndexThird {
+  width: 80px;
+  height: 40px;
+
+  text-align: center;
+  line-height: 40px;
+
+  font-size: 18px;
+  font-family: "Pretendard-Medium";
+}
