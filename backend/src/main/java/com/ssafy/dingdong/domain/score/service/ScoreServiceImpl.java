@@ -63,9 +63,6 @@ public class ScoreServiceImpl implements ScoreService{
         List<RoomScoreDto> roomScoreList = roomService.getRoomScore();
 
         List<Score> insertScoreList = new ArrayList<>() ;
-        log.info(letterFromScoreList);
-        log.info(letterToScoreList);
-        log.info(roomScoreList);
         insertScoreList.addAll(convertLetterFromScoreToScores(letterFromScoreList));
         insertScoreList.addAll(convertLetterToScoreToScores(letterToScoreList));
         insertScoreList.addAll(convertRoomScoreToScores(roomScoreList));
@@ -85,8 +82,8 @@ public class ScoreServiceImpl implements ScoreService{
         Map<ScoreType, List<ScoreResponseDto>> latestScores = new HashMap<>();
 
         for (ScoreType type : ScoreType.values()) {
-            log.info(type.toString());
-            List<Score> scores = scoreRepository.findLatestByType(type, PageRequest.of(0, 3));
+            Optional<LocalDateTime> time = scoreRepository.findLatestRecordTime();
+            List<Score> scores = scoreRepository.findLatestByType(type, time);
             List<ScoreResponseDto> list = new ArrayList<>();
             for(Score score : scores) {
                 if (score != null) {
