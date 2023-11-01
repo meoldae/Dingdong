@@ -89,15 +89,6 @@ const Header = ({ checkMyRoom }) => {
     )
   }, [])
 
-  // 알림 함수
-  const alarmHandler = () => {
-    if (alarmsLength === 0) {
-      setIsAlarm(true)
-    } else {
-      setIsAlarm(true)
-    }
-  }
-
   // 이웃요청 수락함수
   const acceptNeighborHandler = (id) => {
     responseNeighborRequest(
@@ -228,7 +219,7 @@ const Header = ({ checkMyRoom }) => {
                 {checkMyRoom === "my" ? userInfo.nickname : roomInfo}
               </RoomNameBtn>
               {/* </div> */}
-              <img src={bell} onClick={alarmHandler} />
+              <img src={bell} onClick={() => setIsAlarm(true)} />
             </>
           )}
         </div>
