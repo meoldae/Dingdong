@@ -11,7 +11,7 @@
 }
 
 .modalContent {
-  background-color: #fff;
+  /* background-color: #fff; */
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -63,7 +63,7 @@ textarea:focus {
   z-index: 300000;
   position: absolute;
   bottom: 0;
-  background-color: white;
+  /* background-color: white; */
   min-width: 100%;
 }
 
@@ -73,9 +73,9 @@ textarea:focus {
   z-index: 300000;
   position: absolute;
   bottom: 0;
-  background-color: white;
+  /* background-color: white; */
   min-width: 100%;
-  /* color: #fff; */
+  color: #fff;
 }
 
 .shareItem {
