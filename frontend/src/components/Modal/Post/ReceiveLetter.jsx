@@ -40,37 +40,39 @@ const RecevieLetter = (props) => {
   }
 
   return (
-    <div className={styles.overlay} onClick={props.cancelClick}>
-      {letterDetail && (
-        <div className={styles.receiveLetterContainer}>
-          <Card className={styles.receiveLetterBox}>
-            <div className={styles.xmarkImg} onClick={props.cancelClick}>
-              <img src="/assets/icons/Pink_X-mark.png" alt="" />
-            </div>
-            <img
-              className={styles.topPostCardImg}
-              src={`/assets/images/post/${letterDetail?.stampImgUrl
-                .split("/")
-                .pop()}`}
-            />
-            <div className={styles.letterToUser}>
-              To. {letterDetail?.letterTo}
-            </div>
-            <div className={styles.letterContent}>
-              <span>{letterDetail?.description}</span>
-            </div>
-            <div className={styles.footerContainer}>
-              <div className={styles.report} onClick={reportHandler}>
-                신고하기
+    <>
+      <div className={styles.overlay} onClick={props.cancelClick}>
+        {letterDetail && (
+          <div className={styles.receiveLetterContainer}>
+            <Card className={styles.receiveLetterBox}>
+              <div className={styles.xmarkImg} onClick={props.cancelClick}>
+                <img src="/assets/icons/Pink_X-mark.png" alt="" />
               </div>
-              <div className={styles.FromUser}>
-                From. {letterDetail?.letterFrom}
+              <img
+                className={styles.topPostCardImg}
+                src={`/assets/images/post/${letterDetail?.stampImgUrl
+                  .split("/")
+                  .pop()}`}
+              />
+              <div className={styles.letterToUser}>
+                To. {letterDetail?.letterTo}
               </div>
-            </div>
-          </Card>
-        </div>
-      )}
-    </div>
+              <div className={styles.letterContent}>
+                <span>{letterDetail?.description}</span>
+              </div>
+              <div className={styles.footerContainer}>
+                <div className={styles.report} onClick={reportHandler}>
+                  신고하기
+                </div>
+                <div className={styles.FromUser}>
+                  From. {letterDetail?.letterFrom}
+                </div>
+              </div>
+            </Card>
+          </div>
+        )}
+      </div>
+    </>
   )
 }
 
