@@ -10,7 +10,7 @@ export const Item = ({
   isDragging,
   dragPosition,
   canDrop,
-  dragRotation,
+  draggedItemRotation,
 }) => {
   const {
     furnitureId,
@@ -19,8 +19,8 @@ export const Item = ({
     rotation: itemRotation,
     categoryId,
   } = item;
-  const rotation = isDragging ? dragRotation : itemRotation;
-  // const { scene } = useGLTF(`/assets/models/roomitems/${furnitureId}.glb`);
+
+  const rotation = isDragging ? draggedItemRotation : itemRotation;
   const { scene } = useGLTF(`/assets/models/editRoomItems/${furnitureId}.glb`);
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const width = rotation === 1 || rotation === 3 ? size[2] : size[0];
@@ -40,7 +40,7 @@ export const Item = ({
             return {
               ...item,
               position: gridPosition,
-              rotation: value,
+              rotation: draggedItemRotation,
             };
           }
         }
