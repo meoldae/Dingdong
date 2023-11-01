@@ -4,6 +4,7 @@ import lombok.*;
 
 
 @Getter
+@ToString
 public class LetterScoreDto {
     private String memberId;
     private Long count;

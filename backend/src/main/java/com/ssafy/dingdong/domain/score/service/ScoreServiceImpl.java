@@ -63,6 +63,9 @@ public class ScoreServiceImpl implements ScoreService{
         List<RoomScoreDto> roomScoreList = roomService.getRoomScore();
 
         List<Score> insertScoreList = new ArrayList<>() ;
+        log.info(letterFromScoreList);
+        log.info(letterToScoreList);
+        log.info(roomScoreList);
         insertScoreList.addAll(convertLetterFromScoreToScores(letterFromScoreList));
         insertScoreList.addAll(convertLetterToScoreToScores(letterToScoreList));
         insertScoreList.addAll(convertRoomScoreToScores(roomScoreList));
@@ -90,8 +93,8 @@ public class ScoreServiceImpl implements ScoreService{
                     ScoreResponseDto scoreResponse = ScoreResponseDto.builder()
                             .recordCount(score.getRecordCount())
                             .memberId(score.getMemberId())
-                            .nickname("") //memberService.getMemberById(score.getMemberId()).nickname()
-                            .roomId(score.getRoomdId()) // //
+                            .nickname(memberService.getMemberById(score.getMemberId()).nickname())
+                            .roomId(score.getRoomdId())
                             .build();
                     list.add(scoreResponse);
                 }

@@ -87,13 +87,13 @@ public class LetterServiceImpl implements LetterService {
 
     @Override
     public List<LetterScoreDto> getLetterFromScore() {
-        Page<LetterScoreDto> lettterScoreList = letterRepository.getLetterFromScore(PageRequest.of(0, 10));
+        Page<LetterScoreDto> lettterScoreList = letterRepository.getLetterFromScore(PageRequest.of(0, 3));
         return lettterScoreList.stream().toList();
     }
 
     @Override
     public List<LetterScoreDto> getLetterToScore() {
-        Page<LetterScoreDto> lettterScoreList = letterRepository.getLetterToScore(PageRequest.of(0, 10));
+        Page<LetterScoreDto> lettterScoreList = letterRepository.getLetterToScore(PageRequest.of(0, 3));
         return lettterScoreList.stream().toList();
     }
 
