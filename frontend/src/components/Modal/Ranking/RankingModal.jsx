@@ -52,11 +52,8 @@ const RankingModal = () => {
     window.location.replace(`${urlPath}/room/${roomId}`)
   }
 
-  const RankingSection = ({ title, rankingList }) => (
+  const RankingSection = ({ rankingList }) => (
     <div className={styles.MostContainer}>
-      <div className={styles.MostTitle}>
-        {title}
-      </div>
       <div className={styles.TitleLine} />
       <div className={styles.MostContent}>
         {rankingList.map((item, index) => (
@@ -103,9 +100,9 @@ const RankingModal = () => {
           <div className={styles.Type}>포인트</div>
         </div>
         <div className={styles.ContentContainer}>
-          <RankingSection title="방꾸왕" rankingList={mostLikeRoomList} />
-          <RankingSection title="인기왕" rankingList={mostReceiveLetterList} />
-          <RankingSection title="소통왕" rankingList={mostSendLetterList} />
+          <RankingSection rankingList={mostLikeRoomList} />
+          <RankingSection rankingList={mostReceiveLetterList} />
+          <RankingSection rankingList={mostSendLetterList} />
         </div>
       </div>
     </>
