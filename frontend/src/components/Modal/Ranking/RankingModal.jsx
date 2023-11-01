@@ -1,5 +1,5 @@
 // 라이브러리
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 // API
 import { fetchScore } from "../../../api/Score"
@@ -8,11 +8,15 @@ import { fetchScore } from "../../../api/Score"
 import styles from "./RankingModal.module.css"
 
 const RankingModal = () => {
+  // 기준시간 상태관리
+  const [standardTime, setStandardTime] = useState("")
+
   // 스코어보드 정보 가져오기
   useEffect(() => {
     fetchScore(
       (success) => {
         console.log(success.data.data)
+        setStandardTime(success.data.data.recordTime)
       },
       (error) => {
         "Error at Scoreboard...", error
@@ -27,7 +31,7 @@ const RankingModal = () => {
         <div className={styles.TitleContainer}>
           <div className={styles.Title}>랭킹</div>
         </div>
-        <div className={styles.Time}></div>
+        <div className={styles.Time}>기준시간 : {standardTime}</div>
         <div className={styles.ContentContainer}>
           <div className={styles.MostLikeRoomContainer}>
             <div className={styles.MostLikeRoomTitle}>
