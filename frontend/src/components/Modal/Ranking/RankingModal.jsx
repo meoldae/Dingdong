@@ -17,6 +17,8 @@ const RankingModal = () => {
   const [mostReceiveLetterList, setMostReceiveLetterList] = useState([])
   // 편지 많이보낸 순위 상태관리
   const [mostSendLetterList, setMostSendLetterList] = useState([])
+  // 랭킹 탭 상태관리
+  const [rankingTab, setRankingTab] = useState(1)
 
   // 시간변경함수
   const changeTime = (inputTime) => {
@@ -73,11 +75,28 @@ const RankingModal = () => {
           <div className={styles.Title}>실시간 순위</div>
         </div>
         <div className={styles.ButtonContainer}>
-          <div className={styles.Button}>방꾸왕</div>
-          <div className={styles.Button}>인기왕</div>
-          <div className={styles.Button}>소통왕</div>
+          <div
+            className={rankingTab === 1 ? styles.SelectButton : styles.Button}
+            onClick={() => setRankingTab(1)}
+          >
+            방꾸왕
+          </div>
+          <div
+            className={rankingTab === 2 ? styles.SelectButton : styles.Button}
+            onClick={() => setRankingTab(2)}
+          >
+            인기왕
+          </div>
+          <div
+            className={rankingTab === 3 ? styles.SelectButton : styles.Button}
+            onClick={() => setRankingTab(3)}
+          >
+            소통왕
+          </div>
         </div>
-        <div className={styles.Time}>{changeTime(standardTime)} 기준</div>
+        <div className={styles.TimeContainer}>
+          <div className={styles.Time}>{changeTime(standardTime)} 기준</div>
+        </div>
         <div className={styles.ContentContainer}>
           <RankingSection title="방꾸왕" rankingList={mostLikeRoomList} />
           <RankingSection title="인기왕" rankingList={mostReceiveLetterList} />
