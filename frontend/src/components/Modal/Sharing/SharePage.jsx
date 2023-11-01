@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import styles from "./Share.module.css";
 import html2canvas from "html2canvas";
+import { handleImageUpload } from "../../../utils/s3Util";
+
 const SharePage = ({shareModal, canvasRef}) => {
   const today = new Date();
   const formattedDate = `${today.getFullYear()}.${today.getMonth() + 1}.${today.getDate()}`;
 
   const [imageSrc, setImageSrc] = useState();
 
-  const onCapture = () => {
-    html2canvas(document.getElementById("newcanvas")).then((canvas) => {
+  const onCapture = async () => {
+    html2canvas(document.getElementById("newcanvas")).then(async (canvas) => {
       const croppedCanvas = document.createElement("canvas");
       const ctx = croppedCanvas.getContext("2d");
 
@@ -30,7 +32,8 @@ const SharePage = ({shareModal, canvasRef}) => {
       // 원본 캔버스에서 잘라낼 영역만 croppedCanvas에 그리기
       ctx.drawImage(canvas, startX, startY, width, height, 0, 0, width, height);
 
-      setImageSrc(croppedCanvas.toDataURL("image/png"));
+      const uploadedImageUrl = await handleImageUpload(croppedCanvas);
+      setImageSrc(uploadedImageUrl);
     });
   };
 
