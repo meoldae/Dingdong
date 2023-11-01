@@ -24,7 +24,7 @@ const PostofficeSendLetter = ({ card }) => {
   const sendClick = () => {
     if (isSending) return;
     const newID =  String(uuidv4());
-    console.log(newID)
+    //console.log(newID)
     const letterData = {
       letterId: newID,
       letterTo: toValue,
@@ -35,22 +35,23 @@ const PostofficeSendLetter = ({ card }) => {
 
     const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY; 
     sendLetterSNS(letterData,(response)=>{ 
-      
-      // if (!window.Kakao.isInitialized()) {
-      //   window.Kakao.init(JS_KEY)
-      // } 
-
-      // window.Kakao.Share.sendCustom({
-      //   templateId: 100120,
-      //   templateArgs: {
-      //     THU: kakaoUrl,
-      //     TITLE: `딩동! ${userInfo.nickname}님의 집에 편지를 보내주세요.`, //"딩동! 우리집을 방문해보세요.",
-      //     DESC: recoilText,
-      //     MOBILE_LINK: currentUrl,
-      //     WEB_LINK: currentUrl,
-      //   },
-      // })
+      if (!window.Kakao.isInitialized()) {
+        window.Kakao.init(JS_KEY)
+      } 
       console.log(response)
+      let currentUrl = window.location.href; 
+      const kakaoUrl = currentUrl.endsWith('/') ? `${currentUrl}letter/${newID}` : `${currentUrl}/letter/${newID}`;
+      console.log(kakaoUrl)
+      window.Kakao.Share.sendCustom({
+        templateId: 100120,
+        templateArgs: {
+          THU: "https://ding-dong.s3.ap-northeast-2.amazonaws.com/StampLogo.png",
+          TITLE: `딩동! ${letterData.letterFrom}님이 보낸 편지를 확인해보세요.`, 
+          DESC: `From. ${letterData.letterFrom}`,
+          MOBILE_LINK: kakaoUrl,
+          WEB_LINK: kakaoUrl,
+        },
+      }) 
     })
   };
 
@@ -108,10 +109,6 @@ const PostofficeSendLetter = ({ card }) => {
             </div>
             <div className={styles.contentCount}>{contentCount}/200</div>
             <div className={styles.footerContainer}>
-              {/* <div className={styles.anonymous}>
-              <span>체크박스</span>
-              <span>익명의 이웃</span>
-            </div> */}
               <div className={styles.FromUser}>
                 From.
                 <input

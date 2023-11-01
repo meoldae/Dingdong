@@ -17,6 +17,7 @@ import TutorialPage from "../pages/SinglePlay/TutorialPage"
 import PostPage from "../pages/Post/PostPage"
 import InviteRoomPage from "../pages/Room/InviteRoomPage"
 import LoadingPage from "../components/UI/LoadingPage"
+import LetterSNSReceivePage from "../pages/Postoffice/PostofficeReceiveLetter"
 import Error from "../components/UI/Error"
 import ReactGA from "react-ga4";
 // const Room = lazy(() => import("../pages/SinglePlay/SingleMainPage"))
@@ -60,6 +61,7 @@ const AppRouter = () => {
             <Route path={`${urlPath}/yourstamp`} element={<StampTest />} />
             <Route path={`${urlPath}/yourstamp/result`} element={<StampTestResult />} />
             <Route path={`${urlPath}/invite/:roomId`} element={<InviteRoomPage />} />
+            <Route path={`${urlPath}/letter/:letterId`} element={<LetterSNSReceivePage />} />
           </Route>
           <Route path={`${urlPath}/*`} element={<AppNotFound />} />
         </Routes>
