@@ -19,7 +19,7 @@ export default defineConfig({
         name: 'Ding Dong',
         short_name: 'Ding Dong',
         description: '딩동! 편지왔어요. 딩동! 놀러왔어요',
-        start_url: '/feDev/',
+        start_url: '/',
         display: 'standalone',
         icons: [
           {
@@ -40,8 +40,8 @@ export default defineConfig({
   },
   resolve: {
     alias: [
-      { find: "@", replacement: path.resolve(__dirname, "/feDev/dist/src") },
-      { find: "public", replacement: path.resolve(__dirname, "/feDev/dist/public") },
+      { find: "@", replacement: path.resolve(__dirname, "src") },
+      { find: "public", replacement: path.resolve(__dirname, "public") },
     ],
   },
   define: {
