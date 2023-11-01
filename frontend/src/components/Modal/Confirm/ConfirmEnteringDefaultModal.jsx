@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useRecoilValue, useSetRecoilState } from "recoil"
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import { useNavigate } from "react-router-dom"
 import {
   ArriveAtom,
@@ -8,6 +8,7 @@ import {
 import { DefaultPosition, DefaultZoom } from "../../../atom/DefaultSettingAtom"
 import styles from "./ConfirmEnteringDefaultModal.module.css"
 import { userAtom } from "../../../atom/UserAtom"
+import { postofficeCardAtom } from "../../../atom/PostAtom"
 
 const ConfirmEnteringDefaultModal = ({
   modalContent,
@@ -32,14 +33,27 @@ const ConfirmEnteringDefaultModal = ({
   // 도착 여부
   const setIsArrived = useSetRecoilState(ArriveAtom)
   const userInfo = useRecoilValue(userAtom)
+
+  // 우체국 상태 관리
+  const [onPostofficeCard, setOnPostOfficeCard] = useRecoilState(postofficeCardAtom);
+
+
   // 마이룸으로 이동
   const onConfirm = () => {
     if (location === "house") {
       const roomId = userInfo.roomId
       navigate(`/room/${roomId}`)
     } else if (location === "postOffice") {
-      // 우체국으로 이동
-      navigate("/postoffice")
+      setOnPostOfficeCard(true)
+      setConfirmEnteringLocation(false)
+    setIsArrived(false)
+
+    // 기본 값 설정
+    setDefaultCameraPosition([2, 10, 10])
+    setDefaultCameraZoom(0.18)
+
+    // 초기화
+    setIsInitialRender(true)
     } else if (location === "otherRoom") {
       const possibleRooms = [1, 3, 4, 6, 19, 21]
       let randomRoom 
@@ -129,6 +143,8 @@ const ConfirmEnteringDefaultModal = ({
     // 함수 실행
     typeWords()
   }, [])
+
+
   // -----------
 
   return (

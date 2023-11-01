@@ -31,3 +31,10 @@
   transform: translate(-50%, -50%);
   z-index: 3;
 }
+
+.postofficemodalcontainer{
+  position: absolute;
+  z-index: 3;
+  width: 100%;
+  bottom: 50px;
+}
