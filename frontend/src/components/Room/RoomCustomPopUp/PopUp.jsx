@@ -15,13 +15,14 @@ import {
 } from "../Atom";
 import { updateFurnitureList } from "../../../api/Furniture";
 import { userAtom } from "../../../atom/UserAtom";
+import toast from "react-hot-toast";
 
 const PopUp = () => {
   const [tabStatus, setTabStatus] = useState(0);
   const [popUpStatus, setPopUpStatus] = useRecoilState(popUpStatusAtom);
   const [editMode, setEditMode] = useRecoilState(buildModeState);
   const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState);
-  const [animationState, setAnimationState] = useState("opening"); 
+  const [animationState, setAnimationState] = useState("opening");
 
   const changeMenu = (image, menuIndex) => {
     setTabStatus(menuIndex);
@@ -48,6 +49,7 @@ const PopUp = () => {
     setItems(check);
     setTabStatus(0);
     setTimeout(() => {
+      toast.error("취소되었습니다!");
       setAnimationState("opening"); // 초기화
       setPopUpStatus(false);
     }, 300);
@@ -62,10 +64,17 @@ const PopUp = () => {
       roomId: myRoomId,
       updateFurnitureList: updatedItem,
     };
-    updateFurnitureList(roomItem, (response) => {}).then((res) => {
-      setEditMode(false);
-      setPopUpStatus(false);
-    });
+    updateFurnitureList(roomItem, (response) => {
+
+    })
+      .then((res) => {
+        toast.success("저장되었습니다!")
+        setEditMode(false);
+        setPopUpStatus(false);
+      })
+      .catch((res) => {
+        toast.error("에러가 발생했습니다!")
+      });
   };
 
   const imagePath = "/assets/images/roomCustom/";
@@ -80,9 +89,7 @@ const PopUp = () => {
   return (
     <>
       {popUpStatus && (
-        <div
-          className={`${styles.popUpContainer} ${styles[animationState]}`}
-        >
+        <div className={`${styles.popUpContainer} ${styles[animationState]}`}>
           {draggedItem !== null && editMode && (
             <div className={styles.dragPopUp}>
               <img
