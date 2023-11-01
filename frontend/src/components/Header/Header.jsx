@@ -55,6 +55,8 @@ const Header = ({ checkMyRoom }) => {
   const [isInquiry, setIsInquiry] = useState(false)
   // 문의하기 내용 상태관리
   const [inquiryText, setInquiryText] = useState("")
+  // 로그아웃 확인 모달 상태관리
+  const [isRealLogout, setIsRealLogout] = useState(false)
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
@@ -290,7 +292,7 @@ const Header = ({ checkMyRoom }) => {
               >
                 문의하기
               </div>
-              <div className={styles.MenuButton} onClick={logoutHandler}>
+              <div className={styles.MenuButton} onClick={() => setIsRealLogout(true)}>
                 로그아웃
               </div>
               <div className={styles.MenuButton} onClick={withdrawalHandler}>
@@ -375,6 +377,25 @@ const Header = ({ checkMyRoom }) => {
             <div className={styles.Inquiry} onClick={inquiryHandler}>
               완료
             </div>
+          </div>
+        </>
+      )}
+
+      {/* 로그아웃 확인 모달 */}
+      {isRealLogout && (
+        <>
+          <div
+            className={styles.RemoveOverlay}
+            onClick={() => setIsRealLogout(false)}
+          />
+          <div className={styles.RemoveNeighborContainer}>
+            <DefaultModal
+              content={"정말 로그아웃을 하시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={logoutHandler}
+              cancelClick={() => setIsRealLogout(false)}
+            />
           </div>
         </>
       )}
