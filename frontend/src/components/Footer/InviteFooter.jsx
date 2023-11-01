@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import PostCardBox from "../Modal/Post/PostCardBox"
 import RoomBtn from "../Button/Room/RoomBtn"
 import SendLetter from "../Modal/Post/SendLetter"
-import style from "./Footer.module.css" 
+import styles from "./Footer.module.css" 
 import { useNavigate } from "react-router-dom" 
 
 const OtherFooter = (props) => {
@@ -40,16 +40,16 @@ const OtherFooter = (props) => {
   }
 
   return (
-    <div className={style.wrap}>
-      <div className={style.inviteFooter}> 
-        <div className={style.background}>
+    <div className={styles.wrap}>
+      <div className={styles.inviteFooter}> 
+        <div className={styles.background}>
           <div>
-            <div className={style.circle} onClick={onHomeHandler}>
-              <img src={"/assets/icons/post.png"} className={style.iconImage}/>
+            <div className={styles.circle} onClick={onHomeHandler}>
+              <img src={"/assets/icons/post.png"} className={styles.iconImage}/>
               <p>딩동 즐기러 가기</p>
             </div>
-            <div className={style.circle} onClick={openModal}>
-              <img src={"/assets/icons/post.png"} className={style.iconImage}/>
+            <div className={styles.circle} onClick={openModal}>
+              <img src={"/assets/icons/post.png"} className={styles.iconImage}/>
               <p>편지 남기기</p>
             </div>
           </div>
