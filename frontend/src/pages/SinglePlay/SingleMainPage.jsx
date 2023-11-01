@@ -1,9 +1,9 @@
 // React
-import React, { useState } from "react"
+import React from "react"
 import styles from "./SingleMainPage.module.css"
 
 // Recoil
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   ConfirmEnteringOtherRoomAtom,
   ConfirmEnteringPostOfficeAtom,
@@ -19,62 +19,62 @@ import {
   StorePortalVisibleAtom,
   WorldPortalPositionAtom,
   WorldPortalVisibleAtom,
-} from "../../atom/SinglePlayAtom"
-import { RoomPortalVisibleAtom } from "../../atom/SinglePlayAtom"
+} from "../../atom/SinglePlayAtom";
+import { RoomPortalVisibleAtom } from "../../atom/SinglePlayAtom";
 
 // Three.js 기본 세팅
-import { Canvas } from "@react-three/fiber"
-import { OrbitControls } from "@react-three/drei"
-import CustomCamera from "../../components/Default/CustomCamera"
-import DirectionalLight from "../../components/Default/DirectionLight"
-import Map from "../../components/Default/Map"
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import CustomCamera from "../../components/Default/CustomCamera";
+import DirectionalLight from "../../components/Default/DirectionLight";
+import Map from "../../components/Default/Map";
 
 // Three.js
-import Model from "../../components/Item/MainItems/Character"
-import House from "../../components/Item/MainItems/tempItems/House"
-import Spot from "../../components/Item/MainItems/tempItems/Spot"
+import Model from "../../components/Item/MainItems/Character";
+import House from "../../components/Item/MainItems/tempItems/House";
+import Spot from "../../components/Item/MainItems/tempItems/Spot";
 
 // 각 건물 포탈
-import DefaultPortal from "../../components/Item/MainItems/Portals/DefaultPortal"
-import DefaultPortalRing from "../../components/Item/MainItems/Portals/DefaultPortalRing"
+import DefaultPortal from "../../components/Item/MainItems/Portals/DefaultPortal";
+import DefaultPortalRing from "../../components/Item/MainItems/Portals/DefaultPortalRing";
 
 // React 컴포넌트
+
 import ConfirmEnteringDefaultModal from "../../components/Modal/Confirm/ConfirmEnteringDefaultModal"
 import PhysicsModel from "../../components/Item/MainItems/PhysicsModel"
-import RankingModal from "../../components/Modal/Ranking/RankingModal"
 
 const SingleMainPage = () => {
   // 장소 입장 확인 여부
   const [confirmEnteringRoom, setConfirmEnteringRoom] = useRecoilState(
     ConfirmEnteringRoomAtom
-  )
+  );
   const [confirmEnteringPostOffice, setConfirmEnteringPostOffice] =
-    useRecoilState(ConfirmEnteringPostOfficeAtom)
+    useRecoilState(ConfirmEnteringPostOfficeAtom);
   const [confirmEnteringStore, setConfirmEnteringStore] = useRecoilState(
     ConfirmEnteringStoreAtom
-  )
+  );
   const [confirmEnteringOtherRoom, setConfirmEnteringOtherRoom] =
-    useRecoilState(ConfirmEnteringOtherRoomAtom)
+    useRecoilState(ConfirmEnteringOtherRoomAtom);
   const [confirmEnteringWorld, setConfirmEnteringWorld] = useRecoilState(
     ConfirmEnteringWorldAtom
-  )
+  );
 
   // 포탈 생성 여부
   const [roomPortalVisible, setRoomPortalVisible] = useRecoilState(
     RoomPortalVisibleAtom
-  )
+  );
   const [postOfficePortalVisible, setPostOfficePortalVisible] = useRecoilState(
     PostOfficePortalVisibleAtom
-  )
+  );
   const [storePortalVisible, setStorePortalVisible] = useRecoilState(
     StorePortalVisibleAtom
-  )
+  );
   const [otherRoomPortalVisible, setOtherRoomPortalVisible] = useRecoilState(
     OtherRoomPortalVisibleAtom
-  )
+  );
   const [worldPortalVisible, setWorldPortalVisible] = useRecoilState(
     WorldPortalVisibleAtom
-  )
+  );
 
   // 포탈 위치
   const roomPortalPosition = useRecoilValue(RoomPortalPositionAtom)
@@ -82,9 +82,6 @@ const SingleMainPage = () => {
   const storePortalPosition = useRecoilValue(StorePortalPositionAtom)
   const otherRoomPortalPosition = useRecoilValue(OtherRoomPortalPositionAtom)
   const worldPortalPosition = useRecoilValue(WorldPortalPositionAtom)
-
-  // 랭킹모달 상태관리
-  const [isRanking, setIsRanking] = useState(true)
 
   return (
     <>
@@ -208,79 +205,69 @@ const SingleMainPage = () => {
           )}
         </Canvas>
 
-        {/* 입장 확인 모달 */}
-        {confirmEnteringRoom && (
-          <div className={styles.confirmModal}>
-            {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
-            <ConfirmEnteringDefaultModal
-              modalContent={"우리집에 입장하시겠습니까?"}
-              setConfirmEnteringLocation={setConfirmEnteringRoom}
-              location={"house"}
-              flag={"1"}
-            />
-          </div>
-        )}
-        {confirmEnteringPostOffice && (
-          <div className={styles.confirmModal}>
-            {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
-            <ConfirmEnteringDefaultModal
-              modalContent={
-                "딩동 마을 주민들에게 편지를 보낼 수 있는 우체국을 준비 중입니다!"
-              }
-              setConfirmEnteringLocation={setConfirmEnteringPostOffice}
-              location={"postOffice"}
-              flag={"0"}
-            />
-          </div>
-        )}
-        {confirmEnteringStore && (
-          <div className={styles.confirmModal}>
-            {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
-            <ConfirmEnteringDefaultModal
-              modalContent={"집을 꾸밀 수 있는 가구 상점을 준비 중입니다!"}
-              setConfirmEnteringLocation={setConfirmEnteringStore}
-              location={"store"}
-              flag={"0"}
-            />
-          </div>
-        )}
-        {confirmEnteringOtherRoom && (
-          <div className={styles.confirmModal}>
-            {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
-            <ConfirmEnteringDefaultModal
-              modalContent={"딩동 주민의 집을 구경하시겠습니까?"}
-              setConfirmEnteringLocation={setConfirmEnteringOtherRoom}
-              location={"otherRoom"}
-              flag={"1"}
-            />
-          </div>
-        )}
-        {confirmEnteringWorld && (
-          <div className={styles.confirmModal}>
-            {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
-            <ConfirmEnteringDefaultModal
-              modalContent={
-                "딩동 주민들을 만날 수 있는 멀티 플레이 서비스를 준비중 입니다!"
-              }
-              setConfirmEnteringLocation={setConfirmEnteringWorld}
-              location={"world"}
-              flag={"0"}
-            />
-          </div>
-        )}
-      </div>
-
-      {/* 랭킹모달 */}
-      {isRanking && (
-        <>
-          <div className={styles.overlay} onClick={() => setIsRanking(false)} />
-          <div className={styles.rankingModalContainer}>
-            <RankingModal />
-          </div>
-        </>
+      {/* 입장 확인 모달 */}
+      {confirmEnteringRoom && (
+        <div className={styles.confirmModal}>
+          {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
+          <ConfirmEnteringDefaultModal
+            modalContent={"우리집에 입장하시겠습니까?"}
+            setConfirmEnteringLocation={setConfirmEnteringRoom}
+            location={"house"}
+            flag={"1"}
+          />
+        </div>
       )}
-    </>
+      {confirmEnteringPostOffice && (
+        <div className={styles.confirmModal}>
+          {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
+          <ConfirmEnteringDefaultModal
+            modalContent={
+              "딩동 마을 주민들에게 편지를 보낼 수 있는 우체국을 준비 중입니다!"
+            }
+            setConfirmEnteringLocation={setConfirmEnteringPostOffice}
+            location={"postOffice"}
+            flag={"0"}
+          />
+        </div>
+      )}
+      {confirmEnteringStore && (
+        <div className={styles.confirmModal}>
+          {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
+          <ConfirmEnteringDefaultModal
+            modalContent={"집을 꾸밀 수 있는 가구 상점을 준비 중입니다!"}
+            setConfirmEnteringLocation={setConfirmEnteringStore}
+            location={"store"}
+            flag={"0"}
+          />
+        </div>
+      )}
+      {confirmEnteringOtherRoom && (
+        <div className={styles.confirmModal}>
+          {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
+          <ConfirmEnteringDefaultModal
+            modalContent={"딩동 주민의 집을 구경하시겠습니까?"}
+            setConfirmEnteringLocation={setConfirmEnteringOtherRoom}
+            location={"otherRoom"}
+            flag={"1"}
+          />
+        </div>
+      )}
+      {confirmEnteringWorld && (
+        <div className={styles.confirmModal}>
+          {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
+          <ConfirmEnteringDefaultModal
+            modalContent={
+              "딩동 주민들을 만날 수 있는 멀티 플레이 서비스를 준비중 입니다!"
+            }
+            setConfirmEnteringLocation={setConfirmEnteringWorld}
+            location={"world"}
+            flag={"0"}
+          />
+        </div>
+      )}
+    </div>
+  </>
   )
 }
 
-export default SingleMainPage
+export default SingleMainPage;
