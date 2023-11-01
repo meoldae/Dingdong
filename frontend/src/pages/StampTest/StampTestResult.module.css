@@ -1,5 +1,6 @@
 .Container {
   height: 100vh;
+  height: 100svh;
   background: #ffebf4;
   display: flex;
   flex-direction: column;
