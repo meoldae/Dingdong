@@ -266,6 +266,7 @@ const SingleMainPage = () => {
         </div>
       )}
     </div>
+  </>
   )
 }
 
