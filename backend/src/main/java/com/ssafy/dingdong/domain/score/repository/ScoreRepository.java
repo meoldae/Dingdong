@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface ScoreRepository extends JpaRepository<Score, Long> {
     @Query(value = "SELECT s FROM Score s " +
             "WHERE s.type = :type " +
-            "AND DATE_FORMAT(s.recordTime, '%Y-%m-%d %H:%i') = DATE_FORMAT(:dateTime, '%Y-%m-%d %H:%i') " +
+            "AND DATE_FORMAT(s.recordTime, '%Y-%m-%d %H:%i:%s') = DATE_FORMAT(:dateTime, '%Y-%m-%d %H:%i:%s') " +
             "ORDER BY s.recordTime DESC")
     List<Score> findLatestByType(ScoreType type, Optional<LocalDateTime> dateTime);
 
