@@ -5,7 +5,7 @@ import styles from "./StampTestOptions.module.css"
 const StampTestOptions = (props) => {
   const [opsNum, setOpsNum] = useState(0)
   const [MBTI, setMBTI] = useState(["A"])
-
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const onNextHandler = (e) => {
     const optionType = e.currentTarget.id
     const newMBTI = [...MBTI]
@@ -36,7 +36,7 @@ const StampTestOptions = (props) => {
   return (
     <div className={styles.Container}>
       <img
-        src={"/assets/images/Stamp_Test_Option.png"} 
+        src={`${urlPath}/assets/images/Stamp_Test_Option.png`} 
         style={{ marginTop: "20%", width: "60%",}}
       />
       <div className={styles.ContentContainer}>

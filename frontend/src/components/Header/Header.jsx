@@ -63,6 +63,7 @@ const Header = ({ checkMyRoom }) => {
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
   const roomInfo = useRecoilValue(roomInfoAtom)
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   // 유저요청 가져오기
   useEffect(() => {
@@ -120,7 +121,7 @@ const Header = ({ checkMyRoom }) => {
 
   // 이웃 리스트 - 집 방문 함수
   const goNeighborHomeHandler = (roomId) => {
-    window.location.replace(`/room/${roomId}`)
+    window.location.replace(`${urlPath}/room/${roomId}`)
   }
 
   // 이웃 리스트 - 이웃 삭제 모달 함수
@@ -167,7 +168,7 @@ const Header = ({ checkMyRoom }) => {
     fetchLogout(
       (success) => {
         localStorage.removeItem("userAtom")
-        window.location.replace("/login")
+        window.location.replace(`${urlPath}/login`)
         successMsg("✅ 로그아웃 성공!")
       },
       (error) => {
@@ -181,7 +182,7 @@ const Header = ({ checkMyRoom }) => {
     fetchUserSecession(
       (success) => {
         localStorage.removeItem("userAtom")
-        window.location.replace("/login")
+        window.location.replace(`${urlPath}/login`)
         successMsg("✅ 회원탈퇴 성공!")
       },
       (error) => {
@@ -246,7 +247,7 @@ const Header = ({ checkMyRoom }) => {
           <div className={styles.NeighborListContainer}>
             <div className={styles.xButtonContainer}>
               <img
-                src={"/assets/icons/x.png"}
+                src={`${urlPath}/assets/icons/x.png`}
                 className={styles.AlarmX}
                 onClick={() => setIsNeighborList(false)}
               />
@@ -305,7 +306,7 @@ const Header = ({ checkMyRoom }) => {
           <div className={styles.AlarmContainer}>
             <div className={styles.xButtonContainer}>
               <img
-                src={"/assets/icons/x.png"}
+                src={`${urlPath}/assets/icons/x.png`}
                 className={styles.AlarmX}
                 onClick={() => setIsAlarm(false)}
               />

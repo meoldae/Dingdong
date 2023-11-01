@@ -1,7 +1,8 @@
 import { useGLTF } from "@react-three/drei";
 
 export const Room = ({ name }) => {
-  const { scene } = useGLTF(`assets/models/roomitems/${name}.glb`);
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+  const { scene } = useGLTF(`${urlPath}/assets/models/roomitems/${name}.glb`);
   return (
     <primitive
       object={scene}

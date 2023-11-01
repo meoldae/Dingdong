@@ -17,7 +17,7 @@ function SharingModalList(props) {
   const recoilText = useRecoilValue(textareaAtom); 
   const kakaoUrl = useRecoilValue(kakaoUrlAtom);
   const userInfo = useRecoilValue(userAtom)
-
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   console.log(recoilText);
   const baseURL = "https://ding-dong.s3.ap-northeast-2.amazonaws.com/"
   // const userNickname = useRecoilValue(userNicknameAtom);
@@ -132,7 +132,7 @@ function SharingModalList(props) {
       window.Kakao.Share.sendCustom({
         templateId: 100120,
         templateArgs: {
-          THU: `https://ding-dong.s3.ap-northeast-2.amazonaws.com/${props.resultSrcUrl.replace('/assets/StampTest/', '')}`,
+          THU: `https://ding-dong.s3.ap-northeast-2.amazonaws.com/${props.resultSrcUrl.replace(`${urlPath}/assets/StampTest/`, '')}`,
           TITLE: "나에게 어울리는 우표 확인하기",
           DESC: "우표 테스트 결과를 확인해보세요!",
           MOBILE_LINK: currentUrl,

@@ -7,6 +7,7 @@ import {
 import { letterIdAtom } from "@/atom/LetterAtom"
 
 const Letter = ({ id, stamp, letterTitle, checkRead }) => {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const setIsPostBoxVisible = useSetRecoilState(isPostBoxVisibleAtom)
   const setIsReceiveLetterVisible = useSetRecoilState(
     isReceiveLetterVisibleAtom
@@ -33,10 +34,10 @@ const Letter = ({ id, stamp, letterTitle, checkRead }) => {
       {checkRead ? (
         <></>
       ) : (
-        <img src="/assets/icons/redDot.png" className={styles.noRead} />
+        <img src={`${urlPath}/assets/icons/redDot.png`} className={styles.noRead} />
       )}
       <img
-        src={`/assets/images/letter/${path}.png`}
+        src={`${urlPath}/assets/images/letter/${path}.png`}
         alt=""
         style={{ width: "84px", height: "51px" }}
       />

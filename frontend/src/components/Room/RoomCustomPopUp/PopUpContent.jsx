@@ -22,6 +22,7 @@ const PopUpContent = (props) => {
   const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState);
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState);
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const addFurniture = (furnitureId) => {
     if (draggedItem === null) {
       getFurnitureDetail(

@@ -6,14 +6,13 @@ import styles from "./Footer.module.css"
 import { useNavigate } from "react-router-dom" 
 
 const OtherFooter = (props) => {
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
-
   const navigate = useNavigate()
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isSendLetterModalVisible, setIsSendLetterModalVisible] =
     useState(false)
   const [selectedPostCard, setSelectedPostCard] = useState(null)
   const [isHeart, setIsHeart] = useState(false);
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   const onHomeHandler = (e) => {
     navigate(`${urlPath}/login`)
@@ -48,13 +47,13 @@ const OtherFooter = (props) => {
           <div>
             <div className={styles.circle} onClick={onHomeHandler}>
               <div className={styles.button}>
-                <img src={"/assets/icons/post.png"} className={styles.iconImage}/>
+                <img src={`${urlPath}/assets/icons/post.png`} className={styles.iconImage}/>
                 <div className={styles.buttonContent}>딩동 즐기러 가기</div>
               </div>
             </div>
             <div className={styles.circle} onClick={openModal}>
               <div className={styles.button}>
-                <img src={"/assets/icons/post.png"} className={styles.iconImage}/>
+                <img src={`${urlPath}/assets/icons/post.png`} className={styles.iconImage}/>
                 <div className={styles.buttonContent}>편지 남기기</div>
               </div>
             </div>
