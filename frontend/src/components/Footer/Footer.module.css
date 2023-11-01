@@ -38,6 +38,7 @@
   align-items: center;
   font-size: 20px;
   margin-bottom: 15px;
+  box-shadow: 0px 0px 10px 1px rgb(200, 200, 200);
 }
 
 .button {
