@@ -29,6 +29,7 @@ import {
 } from "../../api/Neighbor"
 import { fetchLogout, fetchUserSecession } from "../../api/User"
 import { fetchInquiry } from "../../api/Cs"
+import RoomNameBtn from "../Button/Room/RoomNameBtn"
 
 const Header = ({ checkMyRoom }) => {
   // 햄버거메뉴바 상태관리
@@ -133,11 +134,9 @@ const Header = ({ checkMyRoom }) => {
   // 이웃 리스트 - 이웃 삭제 함수
   const removeNeighborHandler = (Id) => {
     deleteNeighbor(
-      { "memberId": Id },
+      { memberId: Id },
       (response) => {
-        setNeighborList((prev) =>
-          prev.filter((item) => item.memberId !== Id)
-        )
+        setNeighborList((prev) => prev.filter((item) => item.memberId !== Id))
         setRemoveNeighborList(false)
         setNeighborListLength(neighborListLength - 1)
       },
@@ -150,9 +149,9 @@ const Header = ({ checkMyRoom }) => {
   // 문의하기 함수
   const inquiryHandler = () => {
     fetchInquiry(
-      { 
-        "category" : "3",
-        "content" : inquiryText,
+      {
+        category: "3",
+        content: inquiryText,
       },
       (success) => {
         setIsInquiry(false)
@@ -160,7 +159,7 @@ const Header = ({ checkMyRoom }) => {
         successMsg("✅ 문의하기가 완료됐습니다!")
       },
       (error) => {
-        'Error at inquiry...', error
+        "Error at inquiry...", error
       }
     )
   }
@@ -210,9 +209,13 @@ const Header = ({ checkMyRoom }) => {
                 onClick={() => setIsHamburger(true)}
                 className={styles.HamburgerButton}
               />
-              <div className={styles.userName}>
+              {/* <div className={styles.userName}> */}
+              {/* {checkMyRoom === "my" ? userInfo.nickname : roomInfo} */}
+              <RoomNameBtn>
+                {" "}
                 {checkMyRoom === "my" ? userInfo.nickname : roomInfo}
-              </div>
+              </RoomNameBtn>
+              {/* </div> */}
               <img src={bell} onClick={alarmHandler} />
             </>
           )}
@@ -274,7 +277,10 @@ const Header = ({ checkMyRoom }) => {
           />
           <div className={styles.HamburgerModal}>
             <div className={styles.ContentContainer}>
-              <div className={styles.MenuButton} onClick={() => setIsInquiry(true)}>
+              <div
+                className={styles.MenuButton}
+                onClick={() => setIsInquiry(true)}
+              >
                 문의하기
               </div>
               <div className={styles.MenuButton} onClick={logoutHandler}>
@@ -343,7 +349,10 @@ const Header = ({ checkMyRoom }) => {
       {/* 문의하기 모달 */}
       {isInquiry && (
         <>
-          <div className={styles.RemoveOverlay} onClick={() => setIsInquiry(false)} />
+          <div
+            className={styles.RemoveOverlay}
+            onClick={() => setIsInquiry(false)}
+          />
           <div className={styles.InquiryContainer}>
             <div className={styles.InquiryTitle}>문의하기</div>
             <textarea
@@ -353,8 +362,12 @@ const Header = ({ checkMyRoom }) => {
               onChange={(e) => setInquiryText(e.target.value)}
               maxLength={199}
             />
-            <div className={styles.InquiryTextLength}>{inquiryText.length}/200</div>
-            <div className={styles.Inquiry} onClick={inquiryHandler}>완료</div>
+            <div className={styles.InquiryTextLength}>
+              {inquiryText.length}/200
+            </div>
+            <div className={styles.Inquiry} onClick={inquiryHandler}>
+              완료
+            </div>
           </div>
         </>
       )}

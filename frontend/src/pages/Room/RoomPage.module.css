@@ -17,9 +17,9 @@ canvas {
   width: 100%;
 }
 
-.container.dawn{
+.container.dawn {
   width: 100%;
-  background: linear-gradient(-45deg,#594871,#000000,#00008B);
+  background: linear-gradient(-45deg, #594871, #000000, #00008b);
   animation: gradient 5s linear infinite;
   height: 100vh;
   position: relative;
@@ -27,9 +27,9 @@ canvas {
   background-size: 200% 200%;
 }
 
-.container.morning{
+.container.morning {
   width: 100%;
-  background: linear-gradient(-45deg,#4891f6, #64c1f4,#ffffff, #ff735a);
+  background: linear-gradient(-45deg, #4891f6, #64c1f4, #ffffff, #ff735a);
   animation: gradient 10s linear infinite;
   height: 100vh;
   position: relative;
@@ -37,9 +37,9 @@ canvas {
   background-size: 200% 200%;
 }
 
-.container.afternoon{
+.container.afternoon {
   width: 100%;
-  background: linear-gradient(-45deg, #ee7752, #4891f6,#23d5ab, #de8f1a );
+  background: linear-gradient(-45deg, #ee7752, #4891f6, #23d5ab, #de8f1a);
   animation: gradient 5s linear infinite;
   height: 100vh;
   position: relative;
@@ -47,9 +47,9 @@ canvas {
   background-size: 200% 200%;
 }
 
-.container.dinner{
+.container.dinner {
   width: 100%;
-  background: linear-gradient(-45deg,#594871,#000000,#00008B);
+  background: linear-gradient(-45deg, #594871, #000000, #00008b);
   animation: gradient 5s linear infinite;
   height: 100vh;
   position: relative;
@@ -59,20 +59,15 @@ canvas {
 
 @keyframes gradient {
   0% {
-   background-position: 0% 50%;
+    background-position: 0% 50%;
   }
   50% {
-   background-position: 100% 50%;
+    background-position: 100% 50%;
   }
   100% {
-   background-position: 0% 50%;
+    background-position: 0% 50%;
   }
 }
-
-
-
-
-
 
 .back {
   position: absolute;
@@ -88,12 +83,12 @@ canvas {
 
 .buttonContainer {
   position: absolute;
-  bottom: 200px;
+  bottom: 180px;
   width: 100%;
   display: flex;
   justify-content: center;
 }
-
+/* 
 .randomButton {
   width: 200px;
   height: 40px;
@@ -104,7 +99,7 @@ canvas {
   justify-content: center;
   align-items: center;
   position: relative;
-}
+} */
 
 .randomImage {
   width: 25px;
