@@ -59,7 +59,7 @@ const OtherFooter = (props) => {
   }
 
   const goSingleMap= () =>{
-    window.location.replace("/single")
+    window.location.replace("/")
   }
   return (
     <div className={style.wrap}>

@@ -23,8 +23,10 @@ import { userAtom } from "../../atom/UserAtom"
 import { roomInfoAtom } from "@/atom/RoomInfoAtom"
 import { useNavigate } from "react-router-dom"
 import history from "../../components/UI/history"
+import RandomBtn from "../../components/Button/Room/RandomBtn"
 
 function RoomPage() {
+  // 브라우저 뒤로가기 버튼 처리
   const [locationKeys, setLocationKeys] = useState([])
   const navigate = useNavigate()
 
@@ -32,13 +34,13 @@ function RoomPage() {
     return history.listen((location) => {
       if (history.action === "PUSH") {
         setLocationKeys([location.key])
-        window.location.replace("single")
+        window.location.replace("/")
       }
 
       if (history.action === "POP") {
         if (locationKeys[1] === location.key) {
           setLocationKeys(([_, ...keys]) => keys)
-          window.location.replace("single")
+          window.location.replace("/")
         } else {
           setLocationKeys((keys) => [location.key, ...keys])
         }
@@ -46,7 +48,7 @@ function RoomPage() {
     })
   }, [locationKeys, history])
 
-  //
+  // 마이룸 로직
   const [editMode, setEditMode] = useRecoilState(buildModeState)
   const [items, setItems] = useRecoilState(ItemsState)
   const [isMyRoom, setIsMyRoom] = useState(false)
@@ -57,8 +59,8 @@ function RoomPage() {
   const userInfo = useRecoilValue(userAtom)
   const [nickName, setNickName] = useRecoilState(roomInfoAtom)
   const roomId = window.location.pathname.match(/\d+/g)
-  const today = new Date();
-  const [time, setTime] = useState();
+  const today = new Date()
+  const [time, setTime] = useState()
 
   useEffect(() => {
     const myRoomId = userInfo.roomId
@@ -72,9 +74,12 @@ function RoomPage() {
       },
       (error) => {
         console.error("Error at fetching RoomData...", error)
+        if (error.response && error.response.status === 400) {
+          navigate("/notfound");  
+        }
       }
     )
-  }, [isMyRoom])
+  }, [isMyRoom, navigate])
 
   const randomVisit = () => {
     const roomId = window.location.pathname.match(/\d+/g)
@@ -90,74 +95,76 @@ function RoomPage() {
   }
 
   useEffect(() => {
-    const checkTime = today.getHours();
+    const checkTime = today.getHours()
     if (checkTime >= 0 && checkTime < 6) {
-        setTime("dawn");
+      setTime("dawn")
     } else if (checkTime >= 6 && checkTime < 12) {
-        setTime("morning");
+      setTime("morning")
     } else if (checkTime >= 12 && checkTime < 18) {
-        setTime("afternoon");
+      setTime("afternoon")
     } else {
-        setTime("dinner");
+      setTime("dinner")
     }
-  }, []);
+  }, [])
   return (
     <>
-    {time &&
-
-      <div className={`${styles.container} ${styles[time]}`}>
-        {isMyRoom ? (
-          <Header checkMyRoom={"my"} />
-        ) : (
-          <Header checkMyRoom={"other"} />
-        )}
-        {isMyRoom ? (
-          <Share setShareModal={setShareModal} />
-        ) : (
-          <NeighborRequest />
-        )}
-        {shareModal && (
-          <>
-            <div
-              className={styles.back}
-              onClick={() => {
-                setShareModal(false);
-              }}
-            />
-            <SharePage shareModal={shareModal} canvasRef={canvasRef} />
-            <SharingModalList shareMode={"room"} />
-          </>
-        )}
-
-        <Canvas
-          shadows
-          gl={{ preserveDrawingBuffer: true, antialias: true }}
-          camera={{ fov: 45, zoom: 1.2 }}
-          ref={canvasRef}
-        >
-          <Experience />
-        </Canvas>
-        {/* 랜덤 찾기 버튼 */}
-        {isMyRoom ? (
-          <></>
-        ) : (
-          <div className={styles.buttonContainer}>
-            <div className={styles.randomButton} onClick={randomVisit}>
-              <img
-                src={"/assets/icons/random.svg"}
-                className={styles.randomImage}
+      {time && (
+        <div className={`${styles.container} ${styles[time]}`}>
+          {isMyRoom ? (
+            <Header checkMyRoom={"my"} />
+          ) : (
+            <Header checkMyRoom={"other"} />
+          )}
+          {isMyRoom ? (
+            <Share setShareModal={setShareModal} />
+          ) : (
+            <NeighborRequest />
+          )}
+          {shareModal && (
+            <>
+              <div
+                className={styles.back}
+                onClick={() => {
+                  setShareModal(false)
+                }}
               />
-              <div className={styles.randomButtonContent}>랜덤 방문</div>
+              <SharePage shareModal={shareModal} canvasRef={canvasRef} />
+              <SharingModalList shareMode={"room"} />
+            </>
+          )}
+
+          <Canvas
+            shadows
+            gl={{ preserveDrawingBuffer: true, antialias: true }}
+            camera={{ fov: 45, zoom: 1.2 }}
+            ref={canvasRef}
+          >
+            <Experience />
+          </Canvas>
+          {/* 랜덤 찾기 버튼 */}
+          {isMyRoom ? (
+            <></>
+          ) : (
+            <div className={styles.buttonContainer}>
+              {/* <div className={styles.randomButton} onClick={randomVisit}>
+                <img
+                  src={"/assets/icons/random.svg"}
+                  className={styles.randomImage}
+                />
+                <div className={styles.randomButtonContent}>랜덤 방문</div>
+              </div> */}
+              <div className={styles.randomButton}>
+                <RandomBtn onClick={randomVisit} />
+              </div>
             </div>
-          </div>
-        )}
-        {isMyRoom ? <MyFooter /> : <OtherFooter props={roomId[0]} />}
-        {/* {popUpStatus ? <PopUp/> : '' } */}
-        <PopUp />
-      </div>
-  }
+          )}
+          {isMyRoom ? <MyFooter /> : <OtherFooter props={roomId[0]} />}
+          {/* {popUpStatus ? <PopUp/> : '' } */}
+          <PopUp />
+        </div>
+      )}
     </>
-  );
+  )
 }
 
 export default RoomPage
