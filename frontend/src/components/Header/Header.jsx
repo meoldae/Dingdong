@@ -193,6 +193,7 @@ const Header = ({ checkMyRoom }) => {
     )
   }
 
+  // 문의하기 버튼함수
   const inquiryCheckHandler = () => {
     setIsHamburger(false)
     setIsInquiry(true)
