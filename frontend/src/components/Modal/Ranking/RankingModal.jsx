@@ -53,12 +53,12 @@ const RankingModal = () => {
         </div>
         <div className={styles.Time}>기준시간 : {changeTime(standardTime)}</div>
         <div className={styles.ContentContainer}>
-          <div className={styles.MostLikeRoomContainer}>
-            <div className={styles.MostLikeRoomTitle}>
+          <div className={styles.MostContainer}>
+            <div className={styles.MostTitle}>
               방 꾸미기 전문가
             </div>
             <div className={styles.TitleLine} />
-            <div className={styles.MostContent}>
+            <div className={styles.MostRoomContent}>
               <div className={styles.RoomContentFirst}>
                 방 첫 번째 값
               </div>
@@ -71,7 +71,7 @@ const RankingModal = () => {
             </div>
           </div>
           <div className={styles.MostContainer}>
-            <div className={styles.MostReceiveLetterTitle}>
+            <div className={styles.MostTitle}>
               인기왕
             </div>
             <div className={styles.TitleLine} />
@@ -88,7 +88,7 @@ const RankingModal = () => {
             </div>
           </div>
           <div className={styles.MostContainer}>
-            <div className={styles.MostSendLetterTitle}>
+            <div className={styles.MostTitle}>
               소통왕
             </div>
             <div className={styles.TitleLine} />
