@@ -86,7 +86,7 @@ const SingleMainPage = () => {
   const worldPortalPosition = useRecoilValue(WorldPortalPositionAtom);
 
   // 랭킹모달 상태관리
-  const [isRanking, setIsRanking] = useState(true);
+  const [isRanking, setIsRanking] = useState(false);
 
   // 우체국 도착 상태관리
   const [onPostofficeCard, setOnPostOfficeCard] =
