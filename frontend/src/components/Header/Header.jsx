@@ -1,7 +1,6 @@
 // 라이브러리
 import { useEffect, useState } from "react"
 import { useRecoilValue } from "recoil"
-import { motion } from "framer-motion"
 
 // 스타일
 import styles from "./Header.module.css"
