@@ -5,11 +5,7 @@ import styles from "./Login.module.css"
 const Login = () => {
   const navigate = useNavigate()
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
-  const loginHandler = () => {
-    window.location.href = `${
-      import.meta.env.VITE_SERVER_URL
-    }/oauth2/authorization/kakao`
-  }
+  const loginHandler = () => {window.location.href = `${import.meta.env.VITE_SERVER_URL}/oauth2/authorization/kakao`}
 
   const guestLoginHandler = () => {
     navigate(`${urlPath}/tutorial`)
@@ -21,6 +17,9 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
+      {/* <div id="matterCanvasCon">
+        <LoginMatter />
+      </div> */}
       <div className={styles.logo}>
         <img src={`${urlPath}/assets/images/dingdonglogo2.png`} alt="" />
       </div>
