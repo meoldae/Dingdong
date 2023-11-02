@@ -27,7 +27,8 @@ export default function AuthRoute({ authentication }) {
   const isAllowedPath =
     currentPath.startsWith(`${urlPath}/tutorial`) ||
     currentPath.startsWith(`${urlPath}/yourstamp`) ||
-    currentPath.startsWith(`${urlPath}/invite`)
+    currentPath.startsWith(`${urlPath}/invite`) ||
+    currentPath.startsWith(`${urlPath}/letter`)
   if (authText.indexOf("Not") === -1) {
     if (isLogin || isAllowedPath) return <Outlet />
     else return <Navigate to={redirect(true, authText)} />

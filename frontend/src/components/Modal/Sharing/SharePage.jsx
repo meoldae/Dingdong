@@ -3,6 +3,7 @@ import styles from "./Share.module.css";
 import html2canvas from "html2canvas";
 import {useRecoilState} from "recoil";
 import { textareaAtom } from '../../../atom/TextareaAtom';
+import { kakaoUrlAtom } from '../../../atom/KakaoUrlAtom';
 
 const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY; 
 
@@ -12,6 +13,7 @@ const SharePage = ({shareModal, canvasRef}) => {
 
   const [imageSrc, setImageSrc] = useState();
   const [text, setText] = useRecoilState(textareaAtom);
+  const [kakaoUrl, setKakaoUrl] = useRecoilState(kakaoUrlAtom);
 
   const onCapture = async () => {
     html2canvas(document.getElementById("newcanvas")).then(async (canvas) => {
@@ -41,21 +43,60 @@ const SharePage = ({shareModal, canvasRef}) => {
         window.Kakao.init(JS_KEY);
       }
 
+      function cropToSquare(canvas) {
+        const context = canvas.getContext('2d');
+      
+        const width = canvas.width;
+        const height = canvas.height;
+        let newWidth, newHeight, offsetX, offsetY;
+      
+        // 이미지의 너비와 높이 중 작은 값을 기준으로 정사각형 
+        if (width > height) {
+          newWidth = height;
+          newHeight = height;
+          offsetX = (width - height) / 2;
+          offsetY = 0;
+        } else {
+          newWidth = width;
+          newHeight = width;
+          offsetX = 0;
+          offsetY = (height - width) / 2;
+        }
+      
+        // 정사각형 크기의 새로운 Canvas 
+        const croppedCanvas = document.createElement('canvas');
+        croppedCanvas.width = newWidth;
+        croppedCanvas.height = newHeight;
+      
+        // 새로운 Canvas에 이미지의 정사각형 부분 
+        const croppedContext = croppedCanvas.getContext('2d');
+        croppedContext.drawImage(canvas, offsetX, offsetY, newWidth, newHeight, 0, 0, newWidth, newHeight);
+      
+        return croppedCanvas;
+      }   
+      // 화면에 표시할 이미지를 위한 Blob 
       croppedCanvas.toBlob(function(blob) {
-        var file = new File([blob], "image.png", {type: "image/png", lastModified: Date.now()});
+        var displayFile = new File([blob], "displayImage.png", {type: "image/png", lastModified: Date.now()});
+        setImageSrc(URL.createObjectURL(displayFile));
+      }, "image/png");
+
+      // 카카오 공유 기능을 위한 Blob  
+      const saveCanvas = cropToSquare(croppedCanvas);
+      saveCanvas.toBlob(function(blob) {
+        var shareFile = new File([blob], "shareImage.png", {type: "image/png", lastModified: Date.now()});
 
         const dataTransfer = new DataTransfer();
-        dataTransfer.items.add(file);
+        dataTransfer.items.add(shareFile);
 
         window.Kakao.Share.uploadImage({
           file: dataTransfer.files,
         })
-          .then(function(response) {
-            setImageSrc(response.infos.original.url);
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
+        .then(function(response) {
+          setKakaoUrl(response.infos.original.url);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
 
       }, "image/jpeg");
 

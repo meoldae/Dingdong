@@ -29,7 +29,12 @@ const SendLetter = ({ onClose, card }) => {
   }
 
   const sendClick = () => {
-    if (isSending) return
+    if (isSending) return;
+
+    if (!userNickname.trim() || !content.trim()) {
+      successMsg("❌ 편지를 작성해주세요.")
+      return;  
+    }
 
     setIsSending(true)
 

@@ -144,8 +144,7 @@ const SingleMainPage = () => {
         <SingleHeader/>
         <Canvas shadows>
           {/* 사용자가 화면을 확대하거나 회전하지 못하도록 설정 */}
-          <OrbitControls />
-          {/* <OrbitControls enableZoom={false} enableRotate={false} /> */}
+          <OrbitControls enableZoom={false} enableRotate={false} />
 
           {/* 전체 밝기 */}
           <ambientLight intensity={1.3} />
@@ -292,7 +291,7 @@ const SingleMainPage = () => {
           <div className={styles.confirmModal}>
             {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
             <ConfirmEnteringDefaultModal
-              modalContent={"우리집에 입장하시겠습니까?"}
+              modalContent={"나의 방에 입장하기"}
               setConfirmEnteringLocation={setConfirmEnteringRoom}
               location={"house"}
               flag={"1"}
@@ -303,7 +302,7 @@ const SingleMainPage = () => {
           <div className={styles.confirmModal}>
             {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
             <ConfirmEnteringDefaultModal
-              modalContent={"당신의 마음이 담긴 편지를 전달하시겠습니까?"}
+              modalContent={"편지를 카카오톡으로 전달해보세요!"}
               setConfirmEnteringLocation={setConfirmEnteringPostOffice}
               location={"postOffice"}
               flag={"1"}
@@ -314,7 +313,7 @@ const SingleMainPage = () => {
           <div className={styles.confirmModal}>
             {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
             <ConfirmEnteringDefaultModal
-              modalContent={"집을 꾸밀 수 있는 가구 상점을 준비 중입니다!"}
+              modalContent={"가구 상점을 준비 중입니다!"}
               setConfirmEnteringLocation={setConfirmEnteringStore}
               location={"store"}
               flag={"0"}
@@ -325,7 +324,7 @@ const SingleMainPage = () => {
           <div className={styles.confirmModal}>
             {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
             <ConfirmEnteringDefaultModal
-              modalContent={"딩동 주민의 집을 구경하시겠습니까?"}
+              modalContent={"딩동 주민의 방 구경하기"}
               setConfirmEnteringLocation={setConfirmEnteringOtherRoom}
               location={"otherRoom"}
               flag={"1"}
@@ -346,6 +345,7 @@ const SingleMainPage = () => {
             />
           </div>
         )}
+      
         {/* 우체국모달 */}
         {onPostofficeCard && (
           <>
