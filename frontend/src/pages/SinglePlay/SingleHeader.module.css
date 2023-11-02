@@ -1,0 +1,308 @@
+.wrap {
+  position: absolute;
+  z-index: 3;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  width: 90%;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.inviteHeader {
+  display: flex;
+  width: 90%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.header img {
+  width: 40px;
+  height: 40px;
+}
+
+.userName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 50px 50px;
+  width: 50%;
+  height: 50px;
+  font-size: 20px;
+}
+
+/* 이웃 리스트 */
+.NeighborList {
+  position: absolute;
+  top: 75px;
+  right: 4%;
+  z-index: 3;
+}
+
+.NeighborListContainer {
+  top: 40%;
+  left: 50%;
+  z-index: 6;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.NeighborItemContainer {
+  height: 260px;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.NeighborItemContainer::-webkit-scrollbar {
+  display: none;
+}
+
+/* 공유하기 이미지 */
+/* 남의 방의 경우 */
+.ShareOther {
+  position: absolute;
+  top: 80px;
+  right: 4%;
+  z-index: 3;
+}
+
+/* 내 방의 경우 */
+.ShareMy {
+  position: absolute;
+  top: 145px;
+  right: 4%;
+  z-index: 3;
+}
+
+/* 이웃 요청 CSS */
+.Overlay {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+}
+
+.AddNeighbor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+
+  width: 300px;
+  height: 185px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.MainContainer {
+  position: relative;
+  font-size: 20px;
+}
+
+.TitleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 120px;
+  font-family: Pretendard-SemiBold;
+}
+
+.HorizontalLine {
+  width: 250px;
+  border: 1px solid #e8e8e8;
+  position: absolute;
+  top: 120px;
+  left: 25px;
+}
+
+.VerticalLine {
+  height: 40px;
+  border: 1px solid #e8e8e8;
+  position: absolute;
+  top: 133px;
+  left: 150px;
+}
+
+.ButtonContainer {
+  display: flex;
+  flex-direction: row;
+  width: 300px;
+  height: 65px;
+}
+
+.Button {
+  width: 150px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Pretendard-SemiBold";
+}
+
+/* 헤더 햄버거 모달 CSS */
+.HamburgerButton {
+  z-index: 6;
+}
+
+.HamburgerModal {
+  position: absolute;
+  top: 0;
+  z-index: 6;
+  background: #fff;
+
+  width: 160px;
+  height: 150px;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  top: 75px;
+  left: 20px;
+}
+
+.ContentContainer {
+  width: 90%;
+  height: 90%;
+  font-family: "Pretendard-SemiBold";
+  font-size: 18px;
+  color: #2c2c2c;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.MenuButton {
+  padding: 10px 0 10px 0;
+}
+
+/* 알림 모달 */
+.AlarmContainer {
+  top: 40%;
+  left: 50%;
+  z-index: 6;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.alarmListContainer {
+  height: 260px;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.alarmListContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.xButtonContainer {
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.AlarmX {
+  width: 15px;
+  height: 15px;
+}
+
+.AlarmModal {
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.NoAlarm {
+  color: #fff;
+  font-family: "Pretendard-Bold";
+  font-size: 20px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.RemoveOverlay {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 7;
+}
+
+.RemoveNeighborContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 8;
+}
+
+.InquiryContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 8;
+}
+
+.InquiryTitle {
+  color: #FFF;
+  font-size: 30px;
+  font-family: "Pretendard-Bold";
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.InquiryContent {
+  width: 290px;
+  height: 170px;
+  background: #FFF;
+  border-radius: 10px;
+  
+  font-family: "Pretendard-Medium";
+  font-size: 18px;
+  padding: 10px;
+
+  outline: none;
+  resize: none;
+  border: none;
+}
+
+.InquiryTextLength {
+  color: #FFF;
+  text-align: end;
+  margin-top: 5px;
+  font-size: 15px;
+  font-family: "Pretendard-SemiBold";
+}
+
+.Inquiry {
+  height: 50px;
+  background: #F2CBE4;
+  border-radius: 20px;
+  margin-top: 25px;
+
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  font-family: "Pretendard-Bold";
+  color: #2C2C2C;
+}

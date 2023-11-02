@@ -4,6 +4,7 @@ import styles from "./PostofficeCardBox.module.css"
 import PostofficeDefaultModal from "./PostofficeDefaultModal"
 import { useState } from "react"
 import { postofficeSendLetterAtom } from "../../atom/PostAtom"
+import toast from "react-hot-toast"
 
 const PostofficeCardBox = (props) => {
   const [selectedCard, setSelectedCard] = useState(null)
@@ -19,7 +20,7 @@ const PostofficeCardBox = (props) => {
       props.onSelectButtonClick(selectedCard)
       setOnPostofficeSendLetter(true);  
     } else {
-      alert("우표를 선택해주세요!")
+      toast.error("우표를 선택해주세요!")
     }
   }
 

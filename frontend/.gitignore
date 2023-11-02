@@ -29,4 +29,4 @@ dist-ssr
 # dev-dist
 dev-dist/
 
-vite.config.js
+# vite.config.js
