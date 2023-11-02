@@ -25,6 +25,7 @@ const PopUpContent = (props) => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const addFurniture = (furnitureId) => {
     if (draggedItem === null) {
+      console.log(furnitureId)
       getFurnitureDetail(
         furnitureId,
         (response) => {

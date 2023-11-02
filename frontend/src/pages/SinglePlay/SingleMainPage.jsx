@@ -54,6 +54,7 @@ import {
 import PostofficeCardBox from "../Postoffice/PostofficeCardBox"
 import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter"
 import GuidePage from "../../components/UI/GuidePage"
+import SingleHeader from "./SingleHeader"
 const SingleMainPage = () => {
   // 카메라 설정
   const setDefaultCameraPosition = useSetRecoilState(DefaultPosition)
@@ -140,6 +141,7 @@ const SingleMainPage = () => {
   return (
     <>
       <div className={styles.canvasContainer}>
+        <SingleHeader/>
         <Canvas shadows>
           {/* 사용자가 화면을 확대하거나 회전하지 못하도록 설정 */}
           <OrbitControls />
