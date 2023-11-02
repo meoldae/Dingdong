@@ -8,6 +8,7 @@ import { CreateUser, GetAvatarList, DoubleCheck } from "@/api/User"
 import DefaultBtn from "../Button/Default/DefaultBtn"
 import { useSetRecoilState } from "recoil"
 import { userAtom } from "@/atom/UserAtom"
+import { successMsg } from "../../utils/customToast"
 
 const SignUp = () => {
   const navigate = useNavigate()
@@ -56,11 +57,11 @@ const SignUp = () => {
 
   async function doSignUp() {
     if (!avatarId || !nickname) {
-      window.alert("캐릭터와 닉네임을 모두 선택해주세요")
+      successMsg("⛔ 캐릭터와 닉네임을 모두 선택해주세요")
       return
     }
     if (!isValid) {
-      alert("닉네임 중복확인을 해주세요!")
+      successMsg("⛔ 닉네임 중복확인을 해주세요!")
       return
     }
 
@@ -93,11 +94,11 @@ const SignUp = () => {
   const doubleCheckHandler = () => {
     if (nickname === "") {
       setIsValid(false)
-      alert("닉네임을 입력해주세요")
+      successMsg("⛔ 닉네임을 입력해주세요")
       return
     } else if (!/^[a-zA-Z0-9가-힣\s]*$/.test(nickname)) {
       setIsValid(false)
-      alert("올바른 닉네임을 입력해주세요")
+      successMsg("⛔ 올바른 닉네임을 입력해주세요")
       return
     }
 
@@ -105,11 +106,11 @@ const SignUp = () => {
       nickname,
       (success) => {
         setIsValid(true)
-        alert("사용 가능한 닉네임 입니다!")
+        successMsg("✅ 사용 가능한 닉네임 입니다!")
       },
       (error) => {
         setIsValid(false)
-        alert("이미 사용중인 닉네임 입니다!")
+        successMsg("❌ 이미 사용중인 닉네임 입니다!")
       }
     )
   }
