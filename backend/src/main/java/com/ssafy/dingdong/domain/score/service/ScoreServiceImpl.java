@@ -55,16 +55,13 @@ public class ScoreServiceImpl implements ScoreService{
                 .collect(Collectors.toList());
     }
 
-//    @Scheduled(cron = "0 0 * * * *")
+    @Transactional
+    @Scheduled(cron = "0 * * * * *")
     public void insertScoreEveryHourOnTheHour() {
         List<LetterScoreDto> letterFromScoreList= letterService.getLetterFromScore();
         List<LetterScoreDto> letterToScoreList = letterService.getLetterToScore();
         List<RoomScoreDto> roomScoreList = roomService.getRoomScore();
-
-        List<Score> insertScoreList = new ArrayList<>() ;
-        log.info(letterFromScoreList);
-        log.info(letterToScoreList);
-        log.info(roomScoreList);
+        List<Score> insertScoreList = new ArrayList<>();
 
         insertScoreList.addAll(convertLetterFromScoreToScores(letterFromScoreList));
         insertScoreList.addAll(convertLetterToScoreToScores(letterToScoreList));
