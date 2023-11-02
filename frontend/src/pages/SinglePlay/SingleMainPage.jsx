@@ -380,7 +380,7 @@ const SingleMainPage = () => {
 
       {/* 랭킹모달 */}
       {confirmEnteringRank && (
-        <motion.div initial={{opacity: 0}} animate={{opacity:1}} transition={{delay: 0.5, duration: 0.5}}>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 1 }}>
           <div className={styles.overlay} onClick={() => closeRanking()} />
           <div className={styles.rankingModalContainer}>
             <RankingModal />
