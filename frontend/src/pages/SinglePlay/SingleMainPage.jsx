@@ -142,8 +142,7 @@ const SingleMainPage = () => {
       <div className={styles.canvasContainer}>
         <Canvas shadows>
           {/* 사용자가 화면을 확대하거나 회전하지 못하도록 설정 */}
-          <OrbitControls />
-          {/* <OrbitControls enableZoom={false} enableRotate={false} /> */}
+          <OrbitControls enableZoom={false} enableRotate={false} />
 
           {/* 전체 밝기 */}
           <ambientLight intensity={1.3} />
@@ -344,6 +343,7 @@ const SingleMainPage = () => {
             />
           </div>
         )}
+      
         {/* 우체국모달 */}
         {onPostofficeCard && (
           <>
