@@ -288,48 +288,56 @@ const SingleMainPage = () => {
 
         {/* 입장 확인 모달 */}
         {confirmEnteringRoom && (
-          <div className={styles.confirmModal}>
-            {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
-            <ConfirmEnteringDefaultModal
-              modalContent={"우리집에 입장하시겠습니까?"}
-              setConfirmEnteringLocation={setConfirmEnteringRoom}
-              location={"house"}
-              flag={"1"}
-            />
-          </div>
+          <motion.div initial={{opacity: 0}} animate={{opacity:1}} transition={{delay: 1, duration: 0.5}}>
+            <div className={styles.confirmModal}>
+              {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
+              <ConfirmEnteringDefaultModal
+                modalContent={"우리집에 입장하시겠습니까?"}
+                setConfirmEnteringLocation={setConfirmEnteringRoom}
+                location={"house"}
+                flag={"1"}
+              />
+            </div>
+          </motion.div>
         )}
         {confirmEnteringPostOffice && (
-          <div className={styles.confirmModal}>
-            {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
-            <ConfirmEnteringDefaultModal
-              modalContent={"당신의 마음이 담긴 편지를 전달하시겠습니까?"}
-              setConfirmEnteringLocation={setConfirmEnteringPostOffice}
-              location={"postOffice"}
-              flag={"1"}
-            />
-          </div>
+          <motion.div initial={{opacity: 0}} animate={{opacity:1}} transition={{delay: 1, duration: 0.5}}>
+            <div className={styles.confirmModal}>
+              {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
+              <ConfirmEnteringDefaultModal
+                modalContent={"당신의 마음이 담긴 편지를 전달하시겠습니까?"}
+                setConfirmEnteringLocation={setConfirmEnteringPostOffice}
+                location={"postOffice"}
+                flag={"1"}
+              />
+            </div>
+          </motion.div>
         )}
         {confirmEnteringStore && (
-          <div className={styles.confirmModal}>
-            {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
-            <ConfirmEnteringDefaultModal
-              modalContent={"집을 꾸밀 수 있는 가구 상점을 준비 중입니다!"}
-              setConfirmEnteringLocation={setConfirmEnteringStore}
-              location={"store"}
-              flag={"0"}
-            />
-          </div>
+          <motion.div initial={{opacity: 0}} animate={{opacity:1}} transition={{delay: 1, duration: 0.5}}>
+            <div className={styles.confirmModal}>
+              {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
+              <ConfirmEnteringDefaultModal
+                modalContent={"집을 꾸밀 수 있는 가구 상점을 준비 중입니다!"}
+                setConfirmEnteringLocation={setConfirmEnteringStore}
+                location={"store"}
+                flag={"0"}
+              />
+            </div>
+          </motion.div>
         )}
         {confirmEnteringOtherRoom && (
-          <div className={styles.confirmModal}>
-            {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
-            <ConfirmEnteringDefaultModal
-              modalContent={"딩동 주민의 집을 구경하시겠습니까?"}
-              setConfirmEnteringLocation={setConfirmEnteringOtherRoom}
-              location={"otherRoom"}
-              flag={"1"}
-            />
-          </div>
+          <motion.div initial={{opacity: 0}} animate={{opacity:1}} transition={{delay: 1, duration: 0.5}}>
+            <div className={styles.confirmModal}>
+              {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
+              <ConfirmEnteringDefaultModal
+                modalContent={"딩동 주민의 집을 구경하시겠습니까?"}
+                setConfirmEnteringLocation={setConfirmEnteringOtherRoom}
+                location={"otherRoom"}
+                flag={"1"}
+              />
+            </div>
+          </motion.div>
         )}
         {/* 멀티 플레이 포탈 */}
         {/* {confirmEnteringWorld && (
