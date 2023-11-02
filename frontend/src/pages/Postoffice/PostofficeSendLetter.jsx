@@ -131,9 +131,9 @@ const PostofficeSendLetter = ({ card }) => {
             </div>
           </Card>
           <DefaultBtn
-            btnName={"카카오톡으로 편지 보내기"}
+            btnName={"편지 보내기"}
             onClick={sendClick}
-            color={"#F2CBE4"}
+            color={"#fff"}
           />
         </div>
       </div>

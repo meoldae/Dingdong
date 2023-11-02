@@ -38,6 +38,11 @@
   width: 100%;
   margin-bottom: 10px;
 }
+.xmarkImg img {
+  width: 5%;
+  display: flex;
+  justify-content: flex-end;
+}
 
 .containerTitle {
   font-size: 30px;
@@ -48,7 +53,7 @@
 .horizontalRule {
   width: 95%;
   height: 2px;
-  background-color: #f2cae4;
+  background-color: #fff;
   border-radius: 5px;
   margin-bottom: 10px;
 }
