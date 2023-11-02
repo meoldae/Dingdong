@@ -147,7 +147,8 @@ const SingleMainPage = () => {
         <SingleHeader />
         <Canvas shadows>
           {/* 사용자가 화면을 확대하거나 회전하지 못하도록 설정 */}
-          <OrbitControls enableZoom={false} enableRotate={false} />
+          {/* <OrbitControls enableZoom={false} enableRotate={false} /> */}
+          <OrbitControls />
 
           {/* 전체 밝기 */}
           <ambientLight intensity={1.3} />
@@ -178,12 +179,12 @@ const SingleMainPage = () => {
             size={[50, 0.3]}
           />
           <PhysicsModel //좌
-            position={[-25, 0.005, 14]}
+            position={[-25.3, 0.005, 14]}
             rotation={[0, Math.PI / 2, 0]}
             size={[62, 0.3]}
           />
           <PhysicsModel //우
-            position={[25, 0.005, 14]}
+            position={[24.6, 0.005, 14]}
             rotation={[0, Math.PI / 2, 0]}
             size={[62, 0.3]}
           />
@@ -269,8 +270,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringRank}
               portalPosition={rankPortalPosition}
               setPortalVisible={setRankPortalVisible}
-              adjustedAngle={[0, 3, -8]}
-              adjustedZoom={0.4}
+              adjustedAngle={[0, 5.5, -23]}
+              adjustedZoom={0.32}
             />
           ) : (
             <DefaultPortalRing
@@ -333,7 +334,7 @@ const SingleMainPage = () => {
             <div className={styles.confirmModal}>
               {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
               <ConfirmEnteringDefaultModal
-                modalContent={"가구 상점을 준비 중입니다!"}
+                modalContent={"방을 꾸밀 수 있는 가구 상점을 준비 중입니다!"}
                 setConfirmEnteringLocation={setConfirmEnteringStore}
                 location={"store"}
                 flag={"0"}
