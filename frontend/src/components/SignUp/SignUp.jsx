@@ -99,6 +99,7 @@ const SignUp = () => {
     } else if (nickname.length > 5) {
       setIsValid(false)
       successMsg("⛔ 닉네임은 5글자 이하로 입력해주세요")
+      return
     } else if (!/^[a-zA-Z0-9가-힣\s]*$/.test(nickname)) {
       setIsValid(false)
       successMsg("⛔ 올바른 닉네임을 입력해주세요")
@@ -148,7 +149,7 @@ const SignUp = () => {
             onChange={(e) => setNickname(e.target.value)}
             placeholder="닉네임을 입력해주세요"
             className={styles.nicknameInput}
-            maxLength={7}
+            maxLength={6}
           />
           <div className={styles.doubleCheck} onClick={doubleCheckHandler}>
             중복확인
