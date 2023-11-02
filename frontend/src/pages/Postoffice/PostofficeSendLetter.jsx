@@ -7,7 +7,8 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { postofficeSendLetterAtom } from "../../atom/PostAtom";
 import { sendLetterSNS } from "../../api/Letter";
 import { v4 as uuidv4 } from 'uuid';
-import toast from "react-hot-toast";
+import toast from "react-hot-toast"; 
+import { successMsg } from "@/utils/customToast"
 
 const PostofficeSendLetter = ({ card }) => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -23,8 +24,13 @@ const PostofficeSendLetter = ({ card }) => {
   const userInfo = useRecoilValue(userAtom);
   const sendClick = () => {
     if (isSending) return;
-    const newID =  String(uuidv4());
-    //console.log(newID)
+
+    if (!toValue.trim() || !fromValue.trim() || !content.trim()) {
+      successMsg("❌ 편지를 작성해주세요.")
+      return;  
+    }
+
+    const newID =  String(uuidv4()); 
     const letterData = {
       letterId: newID,
       letterTo: toValue,
@@ -53,7 +59,9 @@ const PostofficeSendLetter = ({ card }) => {
           WEB_LINK: kakaoUrl,
         },
       }) 
-    })
+      setOnPostofficeSendLetter(false); 
+      successMsg("💌 편지를 보냈어요!")
+    }) 
   };
 
   const handleCheckContentCount = (event) => {
@@ -123,7 +131,7 @@ const PostofficeSendLetter = ({ card }) => {
             </div>
           </Card>
           <DefaultBtn
-            btnName={"편지 보내기"}
+            btnName={"카카오톡으로 편지 보내기"}
             onClick={sendClick}
             color={"#F2CBE4"}
           />

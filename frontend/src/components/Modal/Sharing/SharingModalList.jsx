@@ -42,7 +42,7 @@ function SharingModalList(props) {
             .then(() => {
                 if (props.shareMode === "room") {
                     console.log(currentUrl)
-                    alert(`우리집 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
+                    alert(`나의 방 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
                 } else if (props.shareMode === "start") {
                     alert(`우표 테스트 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
                 } else if (props.shareMode === "result") {
@@ -66,7 +66,7 @@ function SharingModalList(props) {
         document.execCommand("copy")
         document.body.removeChild(textarea)
         if (props.shareMode === "room") {
-            alert(`우리집 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
+            alert(`나의 방 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
         } else if (props.shareMode === "start") {
             alert(`우표 테스트 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
         } else {
@@ -77,7 +77,7 @@ function SharingModalList(props) {
 
   const shareTwitter = (e) => {
     if (props.shareMode === "room") { 
-      const text = `딩동! ${userInfo.nickname}님의 집에 편지를 보내주세요.` 
+      const text = `딩동! ${userInfo.nickname}님의 방에 편지를 보내주세요.` 
       window.open(
         "https://twitter.com/intent/tweet?text=" + text + "&url=" + url.replace("/room/", "/invite/") + "&media=" + kakaoUrl
       )
@@ -111,7 +111,7 @@ function SharingModalList(props) {
         templateId: 100120,
         templateArgs: {
           THU: kakaoUrl,
-          TITLE: `딩동! ${userInfo.nickname}님의 집에 편지를 보내주세요.`, //"딩동! 우리집을 방문해보세요.",
+          TITLE: `딩동! ${userInfo.nickname}님의 방에 편지를 보내주세요.`,  
           DESC: recoilText,
           MOBILE_LINK: currentUrl,
           WEB_LINK: currentUrl,

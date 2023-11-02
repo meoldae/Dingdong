@@ -43,7 +43,7 @@ const PostofficeReceiveLetter = () => {
             </div>
             <img
               className={styles.topPostCardImg}
-              src={letterData?.stampUrl ?? `${urlPath}/assets/images/post/clover.png`}
+              src={letterData?.stampUrl ?? ""}
             />
             <div className={styles.ToUser}>
               To. {letterData?.letterTo ?? ""}
@@ -61,7 +61,7 @@ const PostofficeReceiveLetter = () => {
         </div>
       </div>
       <div className={styles.ButtonContainer}>
-        <div className={styles.Button} onClick={onRoomHandler}>{letterData?.letterFrom ??  ""} 집 방문하기</div>
+        <div className={styles.Button} onClick={onRoomHandler}>{letterData?.letterFrom ??  ""}님의 방 방문하기</div>
         <div className={styles.Button} onClick={onHomeHandler}>딩동 시작하기</div>
       </div>
        
