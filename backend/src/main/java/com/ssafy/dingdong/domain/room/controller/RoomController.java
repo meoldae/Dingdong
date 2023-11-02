@@ -27,7 +27,9 @@ import com.ssafy.dingdong.global.response.ResponseService;
 import com.ssafy.dingdong.global.response.ResponseStatus;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @RestController
 @RequestMapping("/room")
 @RequiredArgsConstructor
@@ -98,5 +100,12 @@ public class RoomController implements RoomSwagger{
     public DataResponse<List<RoomScoreDto>> getRoomScore(){
         List<RoomScoreDto> roomScore = roomService.getRoomScore();
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, roomScore);
+    }
+
+    @Override
+    @GetMapping("/random")
+    public DataResponse<Long> getRandomRoom(Authentication authentication){
+        Long roomId = roomService.getRandomRoomId(authentication.getName().toString());
+        return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, roomId);
     }
 }
