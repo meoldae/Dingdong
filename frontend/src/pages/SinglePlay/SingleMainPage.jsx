@@ -316,7 +316,7 @@ const SingleMainPage = () => {
             <div className={styles.confirmModal}>
               {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
               <ConfirmEnteringDefaultModal
-                modalContent={"카카오톡으로 편지 보내기"}
+                modalContent={"카카오톡으로 마음을 담은 편지 보내기"}
                 setConfirmEnteringLocation={setConfirmEnteringPostOffice}
                 location={"postOffice"}
                 flag={"1"}
