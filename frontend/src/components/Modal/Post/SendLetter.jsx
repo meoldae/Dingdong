@@ -106,6 +106,7 @@ const SendLetter = ({ onClose, card }) => {
               onChange={(e) => handleCheckContentCount(e)}
               placeholder="편지 내용을 작성하세요."
               maxLength={199}
+              spellcheck="false"
             />
           </div>
           <div className={styles.contentCount}>{contentCount}/200</div>

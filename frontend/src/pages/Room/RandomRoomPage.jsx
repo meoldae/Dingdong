@@ -24,6 +24,7 @@ import { roomInfoAtom } from "@/atom/RoomInfoAtom"
 import { useNavigate } from "react-router-dom"
 import history from "../../components/UI/history"
 import RandomBtn from "../../components/Button/Room/RandomBtn"
+import { getRandomRoom } from "@/api/Room"
 
 function RandomRoomPage() {
   // 브라우저 뒤로가기 버튼 처리
@@ -89,13 +90,24 @@ function RandomRoomPage() {
     const myRoomId = userInfo.roomId
     // 선택 가능한 방 번호 목록
     const possibleRooms = [1, 3, 4, 6, 19, 21]
-    let randomRoom
+    // let randomRoom
 
-    do {
-      randomRoom =
-        possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
-    } while (randomRoom === roomId || randomRoom === myRoomId)
-    window.location.replace(`${urlPath}/random/${randomRoom}`)
+    // do {
+    //   randomRoom =
+    //     possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
+    // } while (randomRoom === roomId || randomRoom === myRoomId)
+    let randRoomId
+
+    getRandomRoom( 
+    (response) => {
+      randRoomId = response.data.data;
+      
+      // window.location.replace(`${urlPath}/random/${randRoomId}`)
+      navigate(`${urlPath}/random/${randRoomId}`)
+    },
+    (error) => {
+      console.log("Error with Random Room...", error);
+    })
   }
 
   useEffect(() => {

@@ -199,6 +199,7 @@ const Experience = ({ setRoomDrag }) => {
         otherItem.categoryId === 3
       ) {
         if (
+          otherItem.position[0] - otherWidth / 2 === 0 &&
           dragPosition[2] + height / 2 >
             otherItem.position[2] - otherHeight / 2 &&
           dragPosition[2] - height / 2 <
@@ -216,6 +217,7 @@ const Experience = ({ setRoomDrag }) => {
         otherItem.categoryId === 3
       ) {
         if (
+          otherItem.position[2] - otherHeight / 2 === 0 &&
           dragPosition[0] + width / 2 >
             otherItem.position[0] - otherWidth / 2 &&
           dragPosition[0] - width / 2 <
@@ -229,7 +231,7 @@ const Experience = ({ setRoomDrag }) => {
       }
     });
     setCanDrop(droppable);
-  }, [dragPosition, draggedItem, items,draggedItemRotation]);
+  }, [dragPosition, draggedItem, items, draggedItemRotation]);
   // 아이템 클릭 로직
   const renderItem = (item, idx) => {
     const commonProps = {
@@ -295,9 +297,9 @@ const Experience = ({ setRoomDrag }) => {
       setRoomDrag(false);
     }, 600);
   };
-  useFrame((state)=>{
-    state.camera.lookAt(0,1,0);
-  })
+  useFrame((state) => {
+    state.camera.lookAt(0, 1, 0);
+  });
   return (
     <>
       <Environment preset="sunset" />
