@@ -35,7 +35,7 @@
 .sendLetterContainer input{
   outline: none;
   border: 0;
-  background: #ffe1f5;
+  background: #fff;
   font-size: 30px;
   width: 70%;
   font-family: "GangwonEduAll-Light";
@@ -50,7 +50,7 @@
   align-items: center;
   min-width: 300px;
   height: 80%;
-  background: #ffe1f5;
+  background: #fff;
   padding: 20px;
   margin-bottom: 10px;
 }
@@ -60,11 +60,17 @@
   display: flex;
   justify-content: flex-end;
 }
+.xmarkImg img {
+  width: 5%;
+  display: flex;
+  justify-content: flex-end;
+}
 
 .topPostCardImg {
+  width: 25%;
   position: absolute;
-  top: -20px;
-  left: -5px;
+  top: -35px;
+  left: -15px;
   transform: rotate(45deg);
 }
 

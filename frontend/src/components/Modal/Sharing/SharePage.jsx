@@ -4,6 +4,7 @@ import html2canvas from "html2canvas";
 import {useRecoilState} from "recoil";
 import { textareaAtom } from '../../../atom/TextareaAtom';
 import { kakaoUrlAtom } from '../../../atom/KakaoUrlAtom';
+import { SyncLoader } from "react-spinners"
 
 const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY; 
 
@@ -14,6 +15,8 @@ const SharePage = ({shareModal, canvasRef}) => {
   const [imageSrc, setImageSrc] = useState();
   const [text, setText] = useRecoilState(textareaAtom);
   const [kakaoUrl, setKakaoUrl] = useRecoilState(kakaoUrlAtom);
+  // 로딩을 띄우기 위한 상태관리
+  const [loading, setLoading] = useState(true)
 
   const onCapture = async () => {
     html2canvas(document.getElementById("newcanvas")).then(async (canvas) => {
@@ -78,6 +81,7 @@ const SharePage = ({shareModal, canvasRef}) => {
       croppedCanvas.toBlob(function(blob) {
         var displayFile = new File([blob], "displayImage.png", {type: "image/png", lastModified: Date.now()});
         setImageSrc(URL.createObjectURL(displayFile));
+        setLoading(false)
       }, "image/png");
 
       // 카카오 공유 기능을 위한 Blob  
@@ -114,7 +118,14 @@ const SharePage = ({shareModal, canvasRef}) => {
   return (
     <div className={styles.modalOverlay} id="shareModal">
       <div className={styles.modalContent}>
-        <img src={imageSrc} alt="Shared Content" />
+        {loading ? (
+          <div className={styles.Loading}>
+            <div style={{ marginBottom: "5px" }}>Loading...</div>
+            <SyncLoader />
+          </div>
+        ) : (
+          <img src={imageSrc} alt="Shared Content" />
+        )}
         <h2>{formattedDate}</h2>
         <div>
           <textarea className={styles.textarea} placeholder="본인의 이야기를 작성해보세요!" spellCheck="false" maxLength={33} onChange={(e)=>{setText(e.target.value)}}/>
