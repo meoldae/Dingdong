@@ -28,7 +28,7 @@ const NeighborListModal = ({ imgName, nickname, gohome, remove, status }) => {
             onClick={gohome}
           />
           <img
-            src={`$[urlPath}/assets/icons/removeNeighbor.png`}
+            src={`${urlPath}/assets/icons/removeNeighbor.png`}
             style={{ marginRight: "15px", width: "25px", height: "25px" }}
             onClick={remove}
           />
