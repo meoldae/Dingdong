@@ -1,3 +1,4 @@
+import toast from "react-hot-toast"
 import DefaultBtn from "../../Button/Default/DefaultBtn"
 import styles from "./PostCardBox.module.css"
 import PostDefaultModal from "./PostDefaultModal"
@@ -17,7 +18,7 @@ const PostCardBox = (props) => {
     if (selectedCard) {
       props.onSelectButtonClick(selectedCard)
     } else {
-      alert("우표를 선택해주세요!")
+      toast.error("우표를 선택해주세요!")
     }
   }
 
