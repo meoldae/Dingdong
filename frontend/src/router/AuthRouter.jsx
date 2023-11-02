@@ -27,7 +27,8 @@ export default function AuthRoute({ authentication }) {
   const isAllowedPath =
     currentPath.startsWith(`${urlPath}/tutorial`) ||
     currentPath.startsWith(`${urlPath}/yourstamp`) ||
-    currentPath.startsWith(`${urlPath}/invite`)
+    currentPath.startsWith(`${urlPath}/invite`) ||
+    currentPath.startsWith(`${urlPath}/letter`)
   if (authText.indexOf("Not") === -1) {
     if (isLogin || isAllowedPath) return <Outlet />
     else return <Navigate to={redirect(true, authText)} />
@@ -38,6 +39,7 @@ export default function AuthRoute({ authentication }) {
 }
 
 function redirect(needLogin, authText) {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   let result = needLogin ? `${urlPath}/login` : "/"
   if (authText === "Admin") {
     result = "/adm" + result

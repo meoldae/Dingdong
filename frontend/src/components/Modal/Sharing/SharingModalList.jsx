@@ -8,12 +8,14 @@ import {
 } from "./sharingIcon"
 import { useRecoilValue } from 'recoil';
 import { textareaAtom } from '../../../atom/TextareaAtom';
+import { kakaoUrlAtom } from '../../../atom/KakaoUrlAtom';
 import styles from "./Share.module.css"
 import html2canvas from "html2canvas"
 import { userAtom } from "../../../atom/UserAtom"
 
 function SharingModalList(props) {
   const recoilText = useRecoilValue(textareaAtom); 
+  const kakaoUrl = useRecoilValue(kakaoUrlAtom);
   const userInfo = useRecoilValue(userAtom)
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   console.log(recoilText);
@@ -40,7 +42,7 @@ function SharingModalList(props) {
             .then(() => {
                 if (props.shareMode === "room") {
                     console.log(currentUrl)
-                    alert(`우리집 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
+                    alert(`나의 방 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
                 } else if (props.shareMode === "start") {
                     alert(`우표 테스트 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
                 } else if (props.shareMode === "result") {
@@ -64,7 +66,7 @@ function SharingModalList(props) {
         document.execCommand("copy")
         document.body.removeChild(textarea)
         if (props.shareMode === "room") {
-            alert(`우리집 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
+            alert(`나의 방 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
         } else if (props.shareMode === "start") {
             alert(`우표 테스트 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
         } else {
@@ -75,9 +77,9 @@ function SharingModalList(props) {
 
   const shareTwitter = (e) => {
     if (props.shareMode === "room") { 
-      const text = `딩동! ${userInfo.nickname}님의 집에 편지를 보내주세요.` 
+      const text = `딩동! ${userInfo.nickname}님의 방에 편지를 보내주세요.` 
       window.open(
-        "https://twitter.com/intent/tweet?text=" + text + "&url=" + url.replace("/room/", "/invite/")
+        "https://twitter.com/intent/tweet?text=" + text + "&url=" + url.replace("/room/", "/invite/") + "&media=" + kakaoUrl
       )
       // props.setSharingAtom(false)
     } else if (props.shareMode === "start") {
@@ -96,8 +98,7 @@ function SharingModalList(props) {
   const shareKakao = (e) => {
     if (!window.Kakao.isInitialized()) {
       window.Kakao.init(JS_KEY)
-    }
-
+    } 
     let currentUrl = window.location.href;
 
     // shareMode가 "room"일 때 URL 수정
@@ -109,8 +110,8 @@ function SharingModalList(props) {
       window.Kakao.Share.sendCustom({
         templateId: 100120,
         templateArgs: {
-          THU: "https://ding-dong.s3.ap-northeast-2.amazonaws.com/StampLogo.png",
-          TITLE: `딩동! ${userInfo.nickname}네에 편지를 보내주세요.`, //"딩동! 우리집을 방문해보세요.",
+          THU: kakaoUrl,
+          TITLE: `딩동! ${userInfo.nickname}님의 방에 편지를 보내주세요.`,  
           DESC: recoilText,
           MOBILE_LINK: currentUrl,
           WEB_LINK: currentUrl,
