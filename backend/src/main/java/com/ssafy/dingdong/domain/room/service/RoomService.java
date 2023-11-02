@@ -37,4 +37,6 @@ public interface RoomService {
 	List<RoomScoreDto> getRoomScore();
 
     Long getRoomIdByMemberId(String memberId);
+
+	Long getRandomRoomId(String memberId);
 }
