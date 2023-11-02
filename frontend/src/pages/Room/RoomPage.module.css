@@ -87,7 +87,7 @@
 }
 
 .buttonContainer {
-  z-index: 100;
+  z-index: 2;
   position: absolute;
   bottom: 140px;
   width: 100%;
