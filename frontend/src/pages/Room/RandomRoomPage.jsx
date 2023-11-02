@@ -24,7 +24,7 @@ import { roomInfoAtom } from "@/atom/RoomInfoAtom"
 import { useNavigate } from "react-router-dom"
 import history from "../../components/UI/history"
 import RandomBtn from "../../components/Button/Room/RandomBtn"
-import { getRandomRoom } from "@/api/room"
+import { getRandomRoom } from "@/api/Room"
 
 function RandomRoomPage() {
   // 브라우저 뒤로가기 버튼 처리
