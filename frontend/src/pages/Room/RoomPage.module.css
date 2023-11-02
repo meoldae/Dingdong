@@ -13,18 +13,16 @@
   left: 100px;
 }
 
-.container{
+.container {
   width: 100%;
   height: 100vh;
   position: relative;
   height: 100svh;
 }
 
-
-
 .inviteContainer {
   width: 100%;
-  background: linear-gradient(#FBC77A, #FF6F56);
+  background: linear-gradient(#fbc77a, #ff6f56);
   animation: gradient 10s linear infinite;
   height: 100vh;
   position: relative;
@@ -32,7 +30,7 @@
   background-size: 400% 400%;
 }
 
-.newcanvas.dawn{
+.newcanvas.dawn {
   width: 100%;
   height: 100%;
   background: linear-gradient(-45deg, #594871, #000000, #00008b);
@@ -46,7 +44,6 @@
   animation: gradient 10s linear infinite;
   background-size: 200% 200%;
   height: 100%;
-
 }
 
 .newcanvas.afternoon {
@@ -55,7 +52,6 @@
   animation: gradient 5s linear infinite;
   background-size: 200% 200%;
   height: 100%;
-
 }
 
 .newcanvas.dinner {
@@ -64,7 +60,6 @@
   animation: gradient 5s linear infinite;
   background-size: 400% 400%;
   height: 100%;
-
 }
 
 @keyframes gradient {
@@ -92,8 +87,9 @@
 }
 
 .buttonContainer {
+  z-index: 100;
   position: absolute;
-  bottom: 180px;
+  bottom: 140px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -124,7 +120,7 @@
   margin-left: 20px;
 }
 
-.roomDrag{
+.roomDrag {
   position: fixed;
   width: 100%;
   height: 100%;

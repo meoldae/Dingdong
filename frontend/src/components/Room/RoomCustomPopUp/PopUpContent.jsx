@@ -1,35 +1,35 @@
-import styles from "./PopUpContent.module.css";
-import React, { useState, useEffect } from "react";
-import { getFurnitureList, getFurnitureDetail } from "@/api/Furniture";
-import { useRef } from "react";
-import { useRecoilState } from "recoil";
+import styles from "./PopUpContent.module.css"
+import React, { useState, useEffect } from "react"
+import { getFurnitureList, getFurnitureDetail } from "@/api/Furniture"
+import { useRef } from "react"
+import { useRecoilState } from "recoil"
 import {
   ItemRotateState,
   ItemsState,
   dragPositionState,
   draggedItemState,
-} from "../Atom";
+} from "../Atom"
 
 const PopUpContent = (props) => {
-  const [furnitureList, setFurnitureList] = useState([]);
-  const imagePath = "/assets";
-  const [pageNo, setPageNo] = useState(0);
-  const target = useRef();
-  const [loading, setLoading] = useState(false);
-  const [isEnd, setIsEnd] = useState(false);
-  const [items, setItems] = useRecoilState(ItemsState);
-  const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState);
-  const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState);
+  const [furnitureList, setFurnitureList] = useState([])
+  const imagePath = "/assets"
+  const [pageNo, setPageNo] = useState(0)
+  const target = useRef()
+  const [loading, setLoading] = useState(false)
+  const [isEnd, setIsEnd] = useState(false)
+  const [items, setItems] = useRecoilState(ItemsState)
+  const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState)
+  const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState)
   const [draggedItemRotation, setDraggedItemRotation] =
-    useRecoilState(ItemRotateState);
+    useRecoilState(ItemRotateState)
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const addFurniture = (furnitureId) => {
     if (draggedItem === null) {
-      console.log(furnitureId)
+      // console.log(furnitureId)
       getFurnitureDetail(
         furnitureId,
         (response) => {
-          const data = response.data.data;
+          const data = response.data.data
           const addFurniture = {
             categoryId: data.categoryId,
             furnitureId: data.furnitureId,
@@ -38,26 +38,26 @@ const PopUpContent = (props) => {
             position: [10, 8, 10],
             rotation: 0,
             roomFurnitureId: -1,
-          };
-          let newIndex;
+          }
+          let newIndex
           setItems((prevItems) => {
-            newIndex = prevItems.length; // 임시 변수에 인덱스 저장
-            return [...prevItems, addFurniture];
-          });
-          checkList(newIndex, addFurniture.position, addFurniture.rotation);
+            newIndex = prevItems.length // 임시 변수에 인덱스 저장
+            return [...prevItems, addFurniture]
+          })
+          checkList(newIndex, addFurniture.position, addFurniture.rotation)
           // 비동기 문제 처리해보자..
         },
         (error) => {
-          console.log("Error at fetching Furniture Detail ...", error);
+          console.log("Error at fetching Furniture Detail ...", error)
         }
-      );
+      )
     }
-  };
+  }
   const checkList = (index, position, rotation) => {
-    setDraggedItem(index);
-    setDraggPosition(position);
-    setDraggedItemRotation(rotation);
-  };
+    setDraggedItem(index)
+    setDraggPosition(position)
+    setDraggedItemRotation(rotation)
+  }
 
   // 가구 리스트 받아오는 함수
   const fetchList = () => {
@@ -65,19 +65,19 @@ const PopUpContent = (props) => {
       pageNo,
       props.category,
       (response) => {
-        const fetchingList = response.data.data.content;
-        setFurnitureList((furnitureList) => furnitureList.concat(fetchingList));
+        const fetchingList = response.data.data.content
+        setFurnitureList((furnitureList) => furnitureList.concat(fetchingList))
 
         if (fetchingList.length < 6) {
-          setIsEnd(true);
+          setIsEnd(true)
         }
       },
       (error) => {
-        console.error("Error at fetching Furniture List...", error);
+        console.error("Error at fetching Furniture List...", error)
       }
-    );
-    setLoading(true);
-  };
+    )
+    setLoading(true)
+  }
 
   useEffect(() => {
     if (loading) {
@@ -85,32 +85,32 @@ const PopUpContent = (props) => {
         (entries) => {
           if (entries[0].isIntersecting) {
             if (!isEnd) {
-              setPageNo((prevPageNo) => prevPageNo + 1);
+              setPageNo((prevPageNo) => prevPageNo + 1)
             }
           }
         },
         { threshold: 0.1 }
-      );
+      )
 
-      observer.observe(target.current);
+      observer.observe(target.current)
 
       if (isEnd) {
-        observer.unobserve(target.current);
+        observer.unobserve(target.current)
       }
     }
-  }, [loading]);
+  }, [loading])
 
   // Tab 바뀌어서 새로 조회해야할 때
   useEffect(() => {
-    setFurnitureList([]);
-    setPageNo(0);
-    setIsEnd(false);
-  }, [props.category]);
+    setFurnitureList([])
+    setPageNo(0)
+    setIsEnd(false)
+  }, [props.category])
 
   // 새 페이지 로딩될 때
   useEffect(() => {
-    fetchList();
-  }, [pageNo]);
+    fetchList()
+  }, [pageNo])
 
   return (
     <div className={styles.furnitureContainer}>
@@ -125,7 +125,7 @@ const PopUpContent = (props) => {
       </div>
       <div className={styles.endPoint} ref={target}></div>
     </div>
-  );
-};
+  )
+}
 
-export default PopUpContent;
+export default PopUpContent
