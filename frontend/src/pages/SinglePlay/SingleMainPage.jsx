@@ -1,6 +1,7 @@
 // React
 import React, { useEffect, useState } from "react"
 import styles from "./SingleMainPage.module.css"
+import { motion, AnimatePresence } from "framer-motion"
 
 // Recoil
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
@@ -365,12 +366,14 @@ const SingleMainPage = () => {
 
       {/* 랭킹모달 */}
       {confirmEnteringRank && (
-        <>
-          <div className={styles.overlay} onClick={() => closeRanking()} />
-          <div className={styles.rankingModalContainer}>
-            <RankingModal />
-          </div>
-        </>
+        <AnimatePresence>
+          <motion.div initial={{opacity: 0}} animate={{opacity:1}} transition={{delay: 1, duration: 0.5}}>
+            <div className={styles.overlay} onClick={() => closeRanking()} />
+            <div className={styles.rankingModalContainer}>
+              <RankingModal />
+            </div>
+          </motion.div>
+        </AnimatePresence>
       )}
     </>
   )
