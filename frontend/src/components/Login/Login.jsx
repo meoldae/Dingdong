@@ -32,6 +32,9 @@ const Login = () => {
           <p>나의 우표 유형 테스트 하러 가기!</p>
         </div>
       </div>
+      <div className={styles.home}>
+        <img src={`${urlPath}/assets/images/home.png`} alt="" style={{ width: "100%" }}/>
+      </div>
     </div>
   )
 }
