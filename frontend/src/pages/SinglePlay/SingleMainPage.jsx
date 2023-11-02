@@ -1,6 +1,6 @@
 // React
-import React, { useState } from "react";
-import styles from "./SingleMainPage.module.css";
+import React, { useEffect, useState } from "react"
+import styles from "./SingleMainPage.module.css"
 
 // Recoil
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
@@ -23,33 +23,38 @@ import {
   StorePortalVisibleAtom,
   WorldPortalPositionAtom,
   WorldPortalVisibleAtom,
-} from "../../atom/SinglePlayAtom";
-import { RoomPortalVisibleAtom } from "../../atom/SinglePlayAtom";
+} from "../../atom/SinglePlayAtom"
+import { RoomPortalVisibleAtom } from "../../atom/SinglePlayAtom"
 
 // Three.js 기본 세팅
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import CustomCamera from "../../components/Default/CustomCamera";
-import DirectionalLight from "../../components/Default/DirectionLight";
-import Map from "../../components/Default/Map";
+import { Canvas } from "@react-three/fiber"
+import { OrbitControls } from "@react-three/drei"
+import CustomCamera from "../../components/Default/CustomCamera"
+import DirectionalLight from "../../components/Default/DirectionLight"
+import Map from "../../components/Default/Map"
 
 // Three.js
-import Model from "../../components/Item/MainItems/Character";
-import House from "../../components/Item/MainItems/tempItems/House";
-import Spot from "../../components/Item/MainItems/tempItems/Spot";
+import Model from "../../components/Item/MainItems/Character"
+import House from "../../components/Item/MainItems/tempItems/House"
+import Spot from "../../components/Item/MainItems/tempItems/Spot"
 
 // 각 건물 포탈
-import DefaultPortal from "../../components/Item/MainItems/Portals/DefaultPortal";
-import DefaultPortalRing from "../../components/Item/MainItems/Portals/DefaultPortalRing";
+import DefaultPortal from "../../components/Item/MainItems/Portals/DefaultPortal"
+import DefaultPortalRing from "../../components/Item/MainItems/Portals/DefaultPortalRing"
 
 // React 컴포넌트
 import ConfirmEnteringDefaultModal from "../../components/Modal/Confirm/ConfirmEnteringDefaultModal"
 import PhysicsModel from "../../components/Item/MainItems/PhysicsModel"
 import RankingModal from "../../components/Modal/Ranking/RankingModal"
 import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom"
-import { postofficeCardAtom, postofficeSendLetterAtom } from "../../atom/PostAtom";
-import PostofficeCardBox from "../Postoffice/PostofficeCardBox"; 
-import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter";
+import {
+  postofficeCardAtom,
+  postofficeSendLetterAtom,
+} from "../../atom/PostAtom"
+import PostofficeCardBox from "../Postoffice/PostofficeCardBox"
+import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter"
+import GuidePage from "../../components/UI/GuidePage"
+import SingleHeader from "./SingleHeader"
 const SingleMainPage = () => {
   // 카메라 설정
   const setDefaultCameraPosition = useSetRecoilState(DefaultPosition)
@@ -61,12 +66,12 @@ const SingleMainPage = () => {
   // 장소 입장 확인 여부
   const [confirmEnteringRoom, setConfirmEnteringRoom] = useRecoilState(
     ConfirmEnteringRoomAtom
-  );
+  )
   const [confirmEnteringPostOffice, setConfirmEnteringPostOffice] =
-    useRecoilState(ConfirmEnteringPostOfficeAtom);
+    useRecoilState(ConfirmEnteringPostOfficeAtom)
   const [confirmEnteringStore, setConfirmEnteringStore] = useRecoilState(
     ConfirmEnteringStoreAtom
-  );
+  )
   const [confirmEnteringOtherRoom, setConfirmEnteringOtherRoom] =
     useRecoilState(ConfirmEnteringOtherRoomAtom)
   // const [confirmEnteringWorld, setConfirmEnteringWorld] = useRecoilState(
@@ -79,13 +84,13 @@ const SingleMainPage = () => {
   // 포탈 생성 여부
   const [roomPortalVisible, setRoomPortalVisible] = useRecoilState(
     RoomPortalVisibleAtom
-  );
+  )
   const [postOfficePortalVisible, setPostOfficePortalVisible] = useRecoilState(
     PostOfficePortalVisibleAtom
-  );
+  )
   const [storePortalVisible, setStorePortalVisible] = useRecoilState(
     StorePortalVisibleAtom
-  );
+  )
   const [otherRoomPortalVisible, setOtherRoomPortalVisible] = useRecoilState(
     OtherRoomPortalVisibleAtom
   )
@@ -114,23 +119,32 @@ const SingleMainPage = () => {
 
   // 우체국 도착 상태관리
   const [onPostofficeCard, setOnPostOfficeCard] =
-    useRecoilState(postofficeCardAtom);
-  const [onPostofficeSendLetter, setOnPostofficeSendLetter] = useRecoilState(postofficeSendLetterAtom);
+    useRecoilState(postofficeCardAtom)
+  const [onPostofficeSendLetter, setOnPostofficeSendLetter] = useRecoilState(
+    postofficeSendLetterAtom
+  )
   const [selectedPostCard, setSelectedPostCard] = useState(null)
 
   const handleSelectButtonClick = (selectedCard) => {
     setSelectedPostCard(selectedCard)
     setOnPostOfficeCard(false)
-    setOnPostofficeSendLetter(true);
+    setOnPostofficeSendLetter(true)
   }
-  
+  const [guide, setGuide] = useState(true)
+  // 가이드 관리
+  useEffect(() => {
+    if (localStorage.getItem("guideVisible")) {
+      setGuide(false)
+    }
+  }, [])
+
   return (
     <>
       <div className={styles.canvasContainer}>
+        <SingleHeader/>
         <Canvas shadows>
           {/* 사용자가 화면을 확대하거나 회전하지 못하도록 설정 */}
-          <OrbitControls />
-          {/* <OrbitControls enableZoom={false} enableRotate={false} /> */}
+          <OrbitControls enableZoom={false} enableRotate={false} />
 
           {/* 전체 밝기 */}
           <ambientLight intensity={1.3} />
@@ -148,6 +162,8 @@ const SingleMainPage = () => {
           <Model />
           {/* <Spot /> */}
           {/* <House /> */}
+
+          {/* 경계 */}
           <PhysicsModel // 상
             position={[0, 0.005, -17]}
             rotation={[0, 0, 0]}
@@ -260,6 +276,15 @@ const SingleMainPage = () => {
             />
           )}
         </Canvas>
+        {/* 가이드 페이지 */}
+        {guide && (
+          <GuidePage
+            onClick={() => {
+              localStorage.setItem("guideVisible", true)
+              setGuide(false)
+            }}
+          />
+        )}
 
         {/* 입장 확인 모달 */}
         {confirmEnteringRoom && (
@@ -320,23 +345,24 @@ const SingleMainPage = () => {
             />
           </div>
         )}
+      
         {/* 우체국모달 */}
         {onPostofficeCard && (
           <>
             <div className={styles.postofficemodalcontainer}>
-              <PostofficeCardBox onSelectButtonClick={handleSelectButtonClick}/>
+              <PostofficeCardBox
+                onSelectButtonClick={handleSelectButtonClick}
+              />
             </div>
           </>
         )}
         {onPostofficeSendLetter && (
           <>
-          <div className={styles.postofficemodalcontainer}>
-            <PostofficeSendLetter card={selectedPostCard}/>
-          </div>
+            <div className={styles.postofficemodalcontainer}>
+              <PostofficeSendLetter card={selectedPostCard} />
+            </div>
           </>
-        )
-
-        }
+        )}
       </div>
 
       {/* 랭킹모달 */}
@@ -344,12 +370,12 @@ const SingleMainPage = () => {
         <>
           <div className={styles.overlay} onClick={() => closeRanking()} />
           <div className={styles.rankingModalContainer}>
-            <RankingModal/>
+            <RankingModal />
           </div>
         </>
       )}
     </>
-  );
-};
+  )
+}
 
-export default SingleMainPage;
+export default SingleMainPage

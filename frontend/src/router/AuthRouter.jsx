@@ -39,7 +39,7 @@ export default function AuthRoute({ authentication }) {
 }
 
 function redirect(needLogin, authText) {
-  let result = needLogin ? "/login" : "/"
+  let result = needLogin ? `${urlPath}/login` : "/"
   if (authText === "Admin") {
     result = "/adm" + result
   }
