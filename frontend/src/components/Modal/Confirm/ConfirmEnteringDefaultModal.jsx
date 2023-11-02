@@ -9,7 +9,7 @@ import { DefaultPosition, DefaultZoom } from "../../../atom/DefaultSettingAtom"
 import styles from "./ConfirmEnteringDefaultModal.module.css"
 import { userAtom } from "../../../atom/UserAtom"
 import { postofficeCardAtom } from "../../../atom/PostAtom"
-import { getRandomRoom } from "@/api/room"
+import { getRandomRoom } from "@/api/Room"
 
 const ConfirmEnteringDefaultModal = ({
   modalContent,
