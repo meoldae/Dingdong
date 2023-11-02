@@ -54,8 +54,7 @@ public class ScoreServiceImpl implements ScoreService{
                 .map(dto -> Score.build(dto.getMemberId(), dto.getRoomId(), ScoreType.ROOM_LIKE_COUNT, dto.getHeartCount()))
                 .collect(Collectors.toList());
     }
-
-    @Transactional
+ 
     @Scheduled(cron = "0 0 * * * *")
     public void insertScoreEveryHourOnTheHour() {
         List<LetterScoreDto> letterFromScoreList= letterService.getLetterFromScore();
