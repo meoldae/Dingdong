@@ -1,7 +1,7 @@
 .Container {
   width: 300px;
   height: 400px;
-  background: #FFF;
+  background: #fff;
   border-radius: 10px;
 
   display: flex;
@@ -18,6 +18,7 @@
   color: #212529;
   font-size: 40px;
   font-family: "Pretendard-Bold";
+  text-align: center;
 }
 
 .ButtonContainer {
@@ -62,7 +63,7 @@
 }
 
 .Time {
-  color: #e9ecef;
+  color: #c0c2c5;
   font-size: 15px;
   font-family: "Pretendard-Regular";
 }
@@ -113,7 +114,7 @@
 }
 
 .IndexFirst {
-  color: #FFA200;
+  color: #ffa200;
   width: 80px;
   height: 40px;
 
@@ -137,7 +138,7 @@
 }
 
 .IndexThird {
-  color: #C66200;
+  color: #c66200;
   width: 80px;
   height: 40px;
 

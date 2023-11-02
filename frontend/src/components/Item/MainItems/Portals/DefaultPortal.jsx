@@ -51,7 +51,6 @@ const DefaultPortal = ({
     } else {
     }
   }, [characterPosition])
-  console.log()
 
   return (
     <mesh position={portalPosition}>

@@ -29,7 +29,7 @@ const PostofficeReceiveLetter = () => {
     navigate(`${urlPath}/`)
   }
   const onRoomHandler = (e) => {
-    navigate(`${urlPath}/room/${letterData.roomId}`)
+    navigate(`${urlPath}/invite/${letterData.roomId}`)
   } 
 
   return (
