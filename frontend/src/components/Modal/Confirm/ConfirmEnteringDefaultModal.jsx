@@ -9,6 +9,7 @@ import { DefaultPosition, DefaultZoom } from "../../../atom/DefaultSettingAtom"
 import styles from "./ConfirmEnteringDefaultModal.module.css"
 import { userAtom } from "../../../atom/UserAtom"
 import { postofficeCardAtom } from "../../../atom/PostAtom"
+import { getRandomRoom } from "@/api/room"
 
 const ConfirmEnteringDefaultModal = ({
   modalContent,
@@ -61,10 +62,21 @@ const ConfirmEnteringDefaultModal = ({
       const possibleRooms = [1, 3, 4, 6, 19, 21]
       let randomRoom 
       
-      do {
-        randomRoom = possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
-      } while (randomRoom === userInfo.roomId)
-      navigate(`${urlPath}/random/${randomRoom}`)
+      // do {
+      //   randomRoom = possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
+      // } while (randomRoom === userInfo.roomId)
+      let randRoomId
+
+      getRandomRoom( 
+      (response) => {
+        randRoomId = response.data.data;
+        
+        navigate(`${urlPath}/random/${randRoomId}`)
+      },
+      (error) => {
+        console.log("Error with Random Room...", error);
+      })
+
     }
 
     setConfirmEnteringLocation(false)
