@@ -87,11 +87,12 @@
 }
 
 .buttonContainer {
-  z-index: 100;
+  z-index:3;
   position: absolute;
   bottom: 140px;
-  width: 100%;
   display: flex;
+  left: 50%;
+  transform: translate(-50%);
   justify-content: center;
 }
 /* 
