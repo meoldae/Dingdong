@@ -43,4 +43,6 @@ public interface RoomSwagger {
 	DataResponse<String> roomHeart(@PathVariable Long roomId, Authentication authentication);
 
 	DataResponse<List<RoomScoreDto>> getRoomScore();
+
+	DataResponse<Long> getRandomRoom(Authentication authentication);
 }
