@@ -39,6 +39,7 @@ export default function AuthRoute({ authentication }) {
 }
 
 function redirect(needLogin, authText) {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   let result = needLogin ? `${urlPath}/login` : "/"
   if (authText === "Admin") {
     result = "/adm" + result
