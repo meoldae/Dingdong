@@ -25,6 +25,14 @@
   margin-bottom: 30px;
 }
 
+.Loading {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 .textarea {
   margin-top: 10px;
   width: 95%;
