@@ -1,7 +1,6 @@
 import loginKakao from "/assets/images/login_kakao.png"
 import { useNavigate } from "react-router-dom"
 import styles from "./Login.module.css"
-import LoginMatter from "./LoginMatter"
 
 const Login = () => {
   const navigate = useNavigate()
@@ -18,9 +17,9 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
-      <div id="matterCanvasCon">
+      {/* <div id="matterCanvasCon">
         <LoginMatter />
-      </div>
+      </div> */}
       <div className={styles.logo}>
         <img src={`${urlPath}/assets/images/dingdonglogo2.png`} alt="" />
       </div>
