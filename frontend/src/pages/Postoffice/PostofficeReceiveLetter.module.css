@@ -60,13 +60,19 @@
   align-items: center;
   min-width: 300px;
   height: 100%;
-  background: #ffe1f5;
+  background: #fff;
   padding: 20px;
   /* margin-bottom: 10px; */
 }
 
 .xmarkImg {
   width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.xmarkImg img {
+  width: 5%;
   display: flex;
   justify-content: flex-end;
 }

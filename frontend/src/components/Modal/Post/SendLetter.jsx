@@ -132,7 +132,7 @@ const SendLetter = ({ onClose, card }) => {
         <DefaultBtn
           btnName={"편지 보내기"}
           onClick={sendClick}
-          color={"#F2CBE4"}
+          color={"#fff"}
         />
       </div>
     </div>
