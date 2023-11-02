@@ -131,18 +131,20 @@ const SingleMainPage = () => {
     setOnPostOfficeCard(false)
     setOnPostofficeSendLetter(true)
   }
-  const [guide, setGuide] = useState(true)
+  const [guide, setGuide] = useState(false)
   // 가이드 관리
   useEffect(() => {
     if (localStorage.getItem("guideVisible")) {
       setGuide(false)
+    } else {
+      setGuide(true)
     }
   }, [])
 
   return (
     <>
       <div className={styles.canvasContainer}>
-        <SingleHeader/>
+        <SingleHeader />
         <Canvas shadows>
           {/* 사용자가 화면을 확대하거나 회전하지 못하도록 설정 */}
           <OrbitControls enableZoom={false} enableRotate={false} />
@@ -289,7 +291,11 @@ const SingleMainPage = () => {
 
         {/* 입장 확인 모달 */}
         {confirmEnteringRoom && (
-          <motion.div initial={{opacity: 0}} animate={{opacity:1}} transition={{delay: 0.5, duration: 0.5}}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
             <div className={styles.confirmModal}>
               {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
               <ConfirmEnteringDefaultModal
@@ -302,7 +308,11 @@ const SingleMainPage = () => {
           </motion.div>
         )}
         {confirmEnteringPostOffice && (
-          <motion.div initial={{opacity: 0}} animate={{opacity:1}} transition={{delay: 0.5, duration: 0.5}}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
             <div className={styles.confirmModal}>
               {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
               <ConfirmEnteringDefaultModal
@@ -315,7 +325,11 @@ const SingleMainPage = () => {
           </motion.div>
         )}
         {confirmEnteringStore && (
-          <motion.div initial={{opacity: 0}} animate={{opacity:1}} transition={{delay: 0.5, duration: 0.5}}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
             <div className={styles.confirmModal}>
               {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
               <ConfirmEnteringDefaultModal
@@ -328,7 +342,11 @@ const SingleMainPage = () => {
           </motion.div>
         )}
         {confirmEnteringOtherRoom && (
-          <motion.div initial={{opacity: 0}} animate={{opacity:1}} transition={{delay: 0.5, duration: 0.5}}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
             <div className={styles.confirmModal}>
               {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
               <ConfirmEnteringDefaultModal
@@ -358,7 +376,11 @@ const SingleMainPage = () => {
         {/* 우체국모달 */}
         {onPostofficeCard && (
           <>
-            <motion.div initial={{opacity: 0}} animate={{opacity:1}} transition={{delay: 0.5, duration: 0.5}}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            >
               <div className={styles.postofficemodalcontainer}>
                 <PostofficeCardBox
                   onSelectButtonClick={handleSelectButtonClick}
@@ -369,7 +391,11 @@ const SingleMainPage = () => {
         )}
         {onPostofficeSendLetter && (
           <>
-            <motion.div initial={{opacity: 0}} animate={{opacity:1}} transition={{delay: 0.5, duration: 0.5}}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            >
               <div className={styles.postofficemodalcontainer}>
                 <PostofficeSendLetter card={selectedPostCard} />
               </div>
@@ -380,7 +406,11 @@ const SingleMainPage = () => {
 
       {/* 랭킹모달 */}
       {confirmEnteringRank && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 1 }}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
+        >
           <div className={styles.overlay} onClick={() => closeRanking()} />
           <div className={styles.rankingModalContainer}>
             <RankingModal />
