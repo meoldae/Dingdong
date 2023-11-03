@@ -25,9 +25,6 @@ const Login = () => {
       </div>
       <div className={styles.buttons}>
         <img src={loginKakao} alt="카카오로그인" onClick={loginHandler} />
-        {/* <button onClick={guestLoginHandler} className={styles.guestButton}>
-          게스트 로그인
-        </button> */}
         <div className={styles.testButton} onClick={posteCardTest}>
           <p>나의 우표 유형 테스트 하러 가기!</p>
         </div>
