@@ -261,21 +261,22 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 8;
+
+  background: #FFF;
+  border-radius: 10px;
 }
 
 .InquiryTitle {
-  color: #FFF;
+  color: #2C2C2C;
   font-size: 30px;
   font-family: "Pretendard-Bold";
   text-align: center;
-  margin-bottom: 15px;
+  margin: 15px 0 15px 0;
 }
 
 .InquiryContent {
   width: 290px;
   height: 170px;
-  background: #FFF;
-  border-radius: 10px;
   
   font-family: "Pretendard-Medium";
   font-size: 18px;
@@ -287,18 +288,27 @@
 }
 
 .InquiryTextLength {
-  color: #FFF;
+  color: #2C2C2C;
   text-align: end;
   margin-top: 5px;
+  margin-right: 15px;
   font-size: 15px;
   font-family: "Pretendard-SemiBold";
 }
 
+.InquiryButtonContainer {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+
 .InquiryButton {
+  width: 80%;
   height: 50px;
   background: #F2CBE4;
-  border-radius: 20px;
-  margin-top: 25px;
+  border-radius: 10px;
+  margin: 15px 0 15px 0;
 
   text-align: center;
   line-height: 50px;
