@@ -63,7 +63,7 @@ const Header = ({ checkMyRoom }) => {
   // 회원탈퇴 확인 모달 상태관리
   const [isRealSecession, setIsRealSecession] = useState(false)
   // 내 방가기 상태관리
-  const [isMyRoom, setIsMyRoom] = useState(false)
+  // const [isMyRoom, setIsMyRoom] = useState(false)
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
@@ -216,18 +216,18 @@ const Header = ({ checkMyRoom }) => {
   }
 
   // 내 방 체크 함수
-  useEffect(() => {
-    const checkMyRoomHandler = () => {
-      const roomCheckId = window.location.pathname.match(/\d+/g)
-      const roomNum = JSON.parse(localStorage.getItem("userAtom"))
-      if (roomCheckId == roomNum.roomId) {
-        setIsMyRoom(true)
-      } else {
-        setIsMyRoom(false)
-      }
-    }
-    checkMyRoomHandler()
-  }, [isHamburger])
+  // useEffect(() => {
+  //   const checkMyRoomHandler = () => {
+  //     const roomCheckId = window.location.pathname.match(/\d+/g)
+  //     const roomNum = JSON.parse(localStorage.getItem("userAtom"))
+  //     if (roomCheckId == roomNum.roomId) {
+  //       setIsMyRoom(true)
+  //     } else {
+  //       setIsMyRoom(false)
+  //     }
+  //   }
+  //   checkMyRoomHandler()
+  // }, [isHamburger])
 
   // 메뉴에 보일 이름
   const menuUserName = JSON.parse(localStorage.getItem("userAtom")).nickname
@@ -323,13 +323,13 @@ const Header = ({ checkMyRoom }) => {
               <div className={styles.Name}>{menuUserName}</div>
             </div>
             <div className={styles.ContentContainer}>
-              {isMyRoom ? (
+              {/* {isMyRoom ? (
                 <></>
               ) : (
                 <div className={styles.MenuButton} onClick={goMyRoom} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
                   내 방 가기
                 </div>
-              )}
+              )} */}
               <div className={styles.MenuButton} onClick={inquiryCheckHandler} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
                 문의하기
               </div>
