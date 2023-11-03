@@ -21,7 +21,7 @@
   height: 10px;
   border-radius: 50%;
   background: #049463;
-  position: absolute;
+  position: relative;
   left: 45px;
   z-index: 2;
 }
