@@ -13,9 +13,40 @@ import ReactDOM from "react-dom/client"
 import { CustomToast } from "./utils/customToast.jsx"
 import AppRouter from "./router/AppRouter.jsx"
 
+// API
+import { fetchOnSession, fetchOffSession } from "./api/Session.js"
+
 const AppWrapper = () => {
+  // 세션관리
   useEffect(() => {
-    
+    const isUserAtom = localStorage.getItem("userAtom")
+
+    const onSession = () => {
+      if (isUserAtom !== null && isUserAtom !== "") {
+        if (document.visibilityState === "visible") {
+          fetchOnSession(
+            (success) => {},
+            (error) => {
+              console.log("Error at Fail to connect session...", error)
+            }
+          )
+        } else {
+          fetchOffSession(
+            (success) => {},
+            (error) => {
+              console.log("Error at Fail to disconnect session...", error)
+            }
+          )
+        }
+      }
+    }
+    onSession()
+    // visibility change 이벤트 리스너 등록
+    document.addEventListener("visibilitychange", onSession)
+    // 컴포넌트 언마운트 시 이벤트 리스너 제거
+    return () => {
+      document.removeEventListener("visibilitychange", onSession);
+    };
   }, [])
 
   return (
