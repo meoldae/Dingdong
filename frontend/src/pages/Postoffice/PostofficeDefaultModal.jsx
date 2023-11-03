@@ -6,7 +6,8 @@ const PostDefaultModal = (props) => {
   const [onPostofficeCard, setOnPostOfficeCard] =
     useRecoilState(postofficeCardAtom); 
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
-     return (
+  
+  return (
     <>
       <div className={styles.overlay} onClick={()=>{setOnPostOfficeCard(false)}}/>
       {onPostofficeCard ? (
