@@ -35,19 +35,15 @@ const PostofficeReceiveLetter = () => {
   return (
     <div className={styles.Container}>
       <div className={styles.PostImage}>
-      <div className={styles.sendLetterContainer}>
+        <div className={styles.sendLetterContainer}>
           <Card className={styles.sendLetterBox}>
-            <div
-              className={styles.xmarkImg}
-            >
-            </div>
+            <div className={styles.xmarkImg}></div>
             <img
               className={styles.topPostCardImg}
               src={letterData?.stampUrl ?? ""}
             />
             <div className={styles.ToUser}>
               To. {letterData?.letterTo ?? ""}
-              
             </div>
             <div className={styles.letterContent}>
               {letterData?.description ?? ""}
@@ -64,7 +60,6 @@ const PostofficeReceiveLetter = () => {
         <div className={styles.Button} onClick={onRoomHandler}>{letterData?.letterFrom ??  ""}님의 방 방문하기</div>
         <div className={styles.Button} onClick={onHomeHandler}>딩동 시작하기</div>
       </div>
-       
     </div>
   )
 }
