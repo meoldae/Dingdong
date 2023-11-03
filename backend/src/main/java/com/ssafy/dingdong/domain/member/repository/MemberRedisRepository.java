@@ -56,6 +56,11 @@ public class MemberRedisRepository {
 		return Optional.ofNullable(valueOperations.get(ACCESS_TOKEN + memberId));
 	}
 
+	public Optional<Object> findRefreshTokenByMemberId(String memberId) {
+		return Optional.ofNullable(valueOperations.get(REFRESH_TOKEN + memberId));
+	}
+
+
 	public void insertStatusByMemberId(String memberId) {
 		hashOperations.put(SESSION, memberId, "TRUE");
 	}

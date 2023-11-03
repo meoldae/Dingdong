@@ -25,10 +25,22 @@ public class AuthServiceImpl implements AuthService{
 
 	@Override
 	public String refresh(String accessToken, String refreshToken) {
+		String memberId = jwtProvider.getClaimFromExpirationToken(accessToken, "memberId");
+
+		memberRedisRepository.findRefreshTokenByMemberId(memberId).ifPresentOrElse(
+			olderRefreshToken -> {
+				if (!refreshToken.equals(olderRefreshToken)) {
+					throw new CustomException(ExceptionStatus.LOGOUT);
+				}
+			},
+			() -> {
+				throw new CustomException(ExceptionStatus.REFRESH_TOKEN_EXPIRED);
+			}
+		);
 
 		// 만료 X
 		if (!jwtProvider.isExpired(refreshToken)) {
-			String memberId = jwtProvider.getClaimFromExpirationToken(accessToken, "memberId");
+			memberId = jwtProvider.getClaimFromExpirationToken(accessToken, "memberId");
 			Member findMember = memberRepository.findByMemberId(UUID.fromString(memberId)).orElseThrow(
 				() -> new CustomException(ExceptionStatus.MEMBER_NOT_FOUND)
 			);
