@@ -9,7 +9,7 @@ const PostofficeReceiveLetter = () => {
   const navigate = useNavigate()
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL 
   const { letterId } = useParams(); 
-   
+
   const [letterData, setLetterData] = useState(null);
 
   useEffect(() => { 
