@@ -1,26 +1,26 @@
-import toast from "react-hot-toast"
-import DefaultBtn from "../../Button/Default/DefaultBtn"
-import styles from "./PostCardBox.module.css"
-import PostDefaultModal from "./PostDefaultModal"
-import { useState } from "react"
+import toast from "react-hot-toast";
+import DefaultBtn from "../../Button/Default/DefaultBtn";
+import styles from "./PostCardBox.module.css";
+import PostDefaultModal from "./PostDefaultModal";
+import { useState } from "react";
 
 const PostCardBox = (props) => {
-  const [selectedCard, setSelectedCard] = useState(null)
-  const [cardComment, setCardComment] = useState()
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [cardComment, setCardComment] = useState();
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
 
   const handleCardClick = (cardIdx, cardSrc, comment) => {
-    setSelectedCard({ idx: cardIdx + 1, src: cardSrc })
-    setCardComment(comment)
-  }
+    setSelectedCard({ idx: cardIdx + 1, src: cardSrc });
+    setCardComment(comment);
+  };
 
   const handleSelectButtonClick = () => {
     if (selectedCard) {
-      props.onSelectButtonClick(selectedCard)
+      props.onSelectButtonClick(selectedCard);
     } else {
-      toast.error("우표를 선택해주세요!")
+      toast.error("우표를 선택해주세요!");
     }
-  }
+  };
 
   const cards = [
     { src: "cloud.png", comment: "몽글몽글한 마음을 전달해보세요!" },
@@ -31,7 +31,7 @@ const PostCardBox = (props) => {
     { src: "rocket.png", comment: "응원의 마음을 담아 전달해보세요!" },
     { src: "star.png", comment: "특별한 마음을 전달해요!" },
     { src: "thunder.png", comment: "에너지를 전달해보세요!" },
-  ]
+  ];
 
   return (
     <div className={styles.MainContainer}>
@@ -54,7 +54,11 @@ const PostCardBox = (props) => {
             />
           ))}
         </div>
-        <div className={styles.postCardComment}>{cardComment}</div>
+        {cardComment ? (
+          <div className={styles.postCardComment}>{cardComment}</div>
+        ) : (
+          <div className={styles.postCardComment}>우표를 선택해보세요!</div>
+        )}
         <div className={styles.selectBtn}>
           <DefaultBtn
             btnName={"선택하기"}
@@ -64,7 +68,7 @@ const PostCardBox = (props) => {
         </div>
       </PostDefaultModal>
     </div>
-  )
-}
+  );
+};
 
-export default PostCardBox
+export default PostCardBox;

@@ -18,6 +18,7 @@ const RecevieLetter = (props) => {
         getLetterDetail(letterId, (response) => {
           if (response.data.code === "SUCCESS") {
             setLetterDetail(response.data.data)
+            console.log(response.data.data)
           }
         })
       } catch (error) {
@@ -59,7 +60,7 @@ const RecevieLetter = (props) => {
                 To. {letterDetail?.letterTo}
               </div>
               <div className={styles.letterContent}>
-                <span>{letterDetail?.description}</span>
+              <span dangerouslySetInnerHTML={{ __html: letterDetail?.description.replaceAll('\n', '<br />') }} />
               </div>
               <div className={styles.footerContainer}>
                 <div className={styles.report} onClick={reportHandler}>

@@ -40,7 +40,7 @@ const SendLetter = ({ onClose, card }) => {
 
     const param = {
       nickName: userNickname,
-      description: content,
+      description: content.replaceAll("<br>","\r\n"),
       stampId: card.idx,
       roomId: roomId,
     }
@@ -82,6 +82,9 @@ const SendLetter = ({ onClose, card }) => {
   }
 
   const handleCheckContentCount = (event) => {
+    if(event.target.value.length % 13 ===0){
+      event.target.value += "\n"
+    }
     setContent(event.target.value)
     setContentCount(event.target.value.length)
   }
@@ -104,7 +107,7 @@ const SendLetter = ({ onClose, card }) => {
               onChange={(e) => handleCheckContentCount(e)}
               placeholder="편지 내용을 작성하세요."
               maxLength={199}
-              spellcheck="false"
+              spellCheck="false"
             />
           </div>
           <div className={styles.contentCount}>{contentCount}/200</div>
