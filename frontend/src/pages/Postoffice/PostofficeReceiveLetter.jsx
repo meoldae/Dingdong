@@ -16,7 +16,6 @@ const PostofficeReceiveLetter = () => {
     getLetterSNSDetail(
       letterId,
       (response) => {
-        console.log('Success:', response);
         setLetterData(response.data.data);   
       },
       (error) => {
