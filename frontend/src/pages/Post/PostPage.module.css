@@ -57,7 +57,7 @@
   height: 40px;
   background: #fff;
   border: 3px solid #f1c4e1;
-  border-radius: 20px;
+  border-radius: 10px;
   padding-left: 10px;
   font-family: "Pretendard-Regular";
   font-size: 15px;
@@ -84,7 +84,7 @@
   width: 280px;
   height: 60px;
   background: #f1c4e1;
-  border-radius: 20px;
+  border-radius: 10px;
   font-family: "Pretendard-Medium";
   font-size: 25px;
   text-align: center;
