@@ -160,19 +160,17 @@
 .HamburgerModal {
   position: absolute;
   top: 0;
+  left: 0;
   z-index: 6;
   background: #fff;
 
-  width: 160px;
-  height: 150px;
-  border-radius: 10px;
+  width: 250px;
+  height: 100vh;
+  height: 100svh;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  top: 75px;
-  left: 20px;
 }
 
 .ContentContainer {
@@ -183,7 +181,6 @@
   color: #2c2c2c;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .MenuButton {
