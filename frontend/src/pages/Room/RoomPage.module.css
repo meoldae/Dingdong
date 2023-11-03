@@ -33,14 +33,14 @@
 .newcanvas.dawn {
   width: 100%;
   height: 100%;
-  background: linear-gradient(-45deg, #594871, #000000, #00008b);
+  background: linear-gradient(#6C5378 ,#7080CC);
   background-size: 100% 100vh;
   height: 100%;
   height: 100svh;}
 
 .newcanvas.morning {
   width: 100%;
-  background: linear-gradient(-45deg, #4891f6, #64c1f4, #ffffff, #ff735a);
+  background: linear-gradient(#F49494,#F9EDCE);
   background-size: 100% 100vh;
   height: 100%;
   height: 100svh;
@@ -48,7 +48,7 @@
 
 .newcanvas.afternoon {
   width: 100%;
-  background: linear-gradient(-45deg, #ee7752, #4891f6, #23d5ab, #de8f1a);
+  background: linear-gradient(#479CEA,#FFF4CE);
   background-size: 100% 100vh;
   height: 100%;
   height: 100svh;
@@ -56,7 +56,7 @@
 
 .newcanvas.dinner {
   width: 100%;
-  background: linear-gradient(-45deg, #594871, #000000, #00008b);
+  background: linear-gradient(#6071D3  ,#F8D8D4);
   background-size: 100% 100vh;
   height: 100%;
   height: 100svh;

@@ -27,21 +27,21 @@ import RandomBtn from "../../components/Button/Room/RandomBtn";
 
 function RoomPage() {
   // 브라우저 뒤로가기 버튼 처리
-  const [locationKeys, setLocationKeys] = useState([])
-  const navigate = useNavigate()
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+  const [locationKeys, setLocationKeys] = useState([]);
+  const navigate = useNavigate();
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
 
   useEffect(() => {
     return history.listen((location) => {
       if (history.action === "PUSH") {
-        setLocationKeys([location.key])
-        window.location.replace(`${urlPath}/`)
+        setLocationKeys([location.key]);
+        window.location.replace(`${urlPath}/`);
       }
 
       if (history.action === "POP") {
         if (locationKeys[1] === location.key) {
-          setLocationKeys(([_, ...keys]) => keys)
-          window.location.replace(`${urlPath}/`)
+          setLocationKeys(([_, ...keys]) => keys);
+          window.location.replace(`${urlPath}/`);
         } else {
           setLocationKeys((keys) => [location.key, ...keys]);
         }
@@ -75,7 +75,7 @@ function RoomPage() {
       (error) => {
         console.error("Error at fetching RoomData...", error);
         if (error.response && error.response.status === 400) {
-          navigate(`${urlPath}/notfound`);  
+          navigate(`${urlPath}/notfound`);
         }
       }
     );
@@ -98,13 +98,17 @@ function RoomPage() {
 
   useEffect(() => {
     const checkTime = today.getHours();
-    if (checkTime >= 0 && checkTime < 6) {
+
+    if (checkTime >= 22 || checkTime < 6) {
       setTime("dawn");
-    } else if (checkTime >= 6 && checkTime < 12) {
+    } else if (checkTime >= 6 && checkTime < 10) {
+      // 06시부터 10시까지 morning
       setTime("morning");
-    } else if (checkTime >= 12 && checkTime < 18) {
+    } else if (checkTime >= 10 && checkTime < 18) {
+      // 10시부터 18시까지 afternoon
       setTime("afternoon");
     } else {
+      // 18시부터 22시까지 dinner
       setTime("dinner");
     }
   }, []);
@@ -142,6 +146,7 @@ function RoomPage() {
               gl={{ preserveDrawingBuffer: true, antialias: true }}
               camera={{ fov: 45, zoom: 1.1 }}
               ref={canvasRef}
+              flat={true}
             >
               <Experience setRoomDrag={setRoomDrag} />
             </Canvas>
