@@ -1,6 +1,7 @@
 // 라이브러리
 import { useEffect, useState } from "react"
 import { useRecoilValue } from "recoil"
+import { useNavigate } from "react-router-dom"
 
 // 스타일
 import styles from "./Header.module.css"
@@ -33,6 +34,8 @@ import { fetchInquiry } from "../../api/Cs"
 
 
 const Header = ({ checkMyRoom }) => {
+  const navigate = useNavigate()
+
   // 햄버거메뉴바 상태관리
   const [isHamburger, setIsHamburger] = useState(false)
   // 알림 상태관리
@@ -59,6 +62,8 @@ const Header = ({ checkMyRoom }) => {
   const [isRealLogout, setIsRealLogout] = useState(false)
   // 회원탈퇴 확인 모달 상태관리
   const [isRealSecession, setIsRealSecession] = useState(false)
+  // 내 방가기 상태관리
+  const [isMyRoom, setIsMyRoom] = useState(false)
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
@@ -202,6 +207,31 @@ const Header = ({ checkMyRoom }) => {
     setIsInquiry(true)
   }
 
+  // 내 방가기 함수
+  const goMyRoom = () => {
+    const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+    const roomNum = JSON.parse(localStorage.getItem("userAtom"))
+    setIsHamburger(false)
+    navigate(`${urlPath}/room/${roomNum.roomId}`)
+  }
+
+  // 내 방 체크 함수
+  useEffect(() => {
+    const checkMyRoomHandler = () => {
+      const roomCheckId = window.location.pathname.match(/\d+/g)
+      const roomNum = JSON.parse(localStorage.getItem("userAtom"))
+      if (roomCheckId == roomNum.roomId) {
+        setIsMyRoom(true)
+      } else {
+        setIsMyRoom(false)
+      }
+    }
+    checkMyRoomHandler()
+  }, [isHamburger])
+
+  // 메뉴에 보일 이름
+  const menuUserName = JSON.parse(localStorage.getItem("userAtom")).nickname
+
   return (
     <>
       <div className={styles.wrap}>
@@ -290,9 +320,16 @@ const Header = ({ checkMyRoom }) => {
               <img src={'/assets/icons/Pink_X-mark.png'} className={styles.XImage} onClick={() => setIsHamburger(false)} />
             </div>
             <div className={styles.NameContainer}>
-              <div className={styles.Name}>{roomInfo}</div>
+              <div className={styles.Name}>{menuUserName}</div>
             </div>
             <div className={styles.ContentContainer}>
+              {isMyRoom ? (
+                <></>
+              ) : (
+                <div className={styles.MenuButton} onClick={goMyRoom} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
+                  내 방 가기
+                </div>
+              )}
               <div className={styles.MenuButton} onClick={inquiryCheckHandler} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
                 문의하기
               </div>
