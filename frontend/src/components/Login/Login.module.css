@@ -67,20 +67,3 @@
 .testButton:hover {
   font-weight: bold;
 }
-
-.guestButton {
-  background-color: #000;
-  color: #fff;
-
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 16px;
-  transition: background-color 0.1s;
-  width: 100%;
-}
-
-.guestButton:hover {
-  background-color: #6a6a6a;
-}
