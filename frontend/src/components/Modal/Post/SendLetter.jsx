@@ -82,9 +82,6 @@ const SendLetter = ({ onClose, card }) => {
   }
 
   const handleCheckContentCount = (event) => {
-    if(event.target.value.length % 13 ===0){
-      event.target.value += "\n"
-    }
     setContent(event.target.value)
     setContentCount(event.target.value.length)
   }
