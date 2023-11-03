@@ -133,8 +133,7 @@ function SharingModalList(props) {
           DESC: "어울리는 우표를 찾아 친구에게 편지를 보내보세요.",
           MOBILE_LINK: currentUrl,
           WEB_LINK: currentUrl,
-        },
-        installTalk: true
+        }
       })
     } else if (props.shareMode === "result") {
       window.Kakao.Share.sendCustom({
