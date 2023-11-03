@@ -27,6 +27,10 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
 		String exception = (String)request.getAttribute("exception");
 
+		if (ExceptionStatus.LOGOUT.getMessage().equals(exception)){
+			response.setStatus(417);
+		}
+
 		CommonResponse commonResponse = new CommonResponse();
 		commonResponse.setCode(ExceptionStatus.AUTHENTICATION_FAILED.getCode().getCode());
 		commonResponse.setMessage(ExceptionStatus.AUTHENTICATION_FAILED.getMessage() + "  사유 : " + exception);
