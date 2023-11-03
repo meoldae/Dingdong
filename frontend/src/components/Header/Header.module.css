@@ -209,7 +209,8 @@
 .ContentContainer {
   width: 90%;
   height: 90%;
-  font-family: "Pretendard-SemiBold";
+  font-size: 15px;
+  font-family: "Pretendard-Medium";
   font-size: 18px;
   color: #2c2c2c;
   display: flex;
