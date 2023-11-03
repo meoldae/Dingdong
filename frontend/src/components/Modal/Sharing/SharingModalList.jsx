@@ -99,10 +99,13 @@ function SharingModalList(props) {
     }
   }
 
-  const shareKakao = (e) => {
+  
+
+  const shareKakao = (e) => {  
     if (!window.Kakao.isInitialized()) {
       window.Kakao.init(JS_KEY)
     }
+    
     let currentUrl = window.location.href
 
     // shareMode가 "room"일 때 URL 수정
@@ -119,7 +122,7 @@ function SharingModalList(props) {
           DESC: recoilText,
           MOBILE_LINK: currentUrl,
           WEB_LINK: currentUrl,
-        },
+        }, 
       })
     } else if (props.shareMode === "start") {
       window.Kakao.Share.sendCustom({
@@ -130,7 +133,7 @@ function SharingModalList(props) {
           DESC: "어울리는 우표를 찾아 친구에게 편지를 보내보세요.",
           MOBILE_LINK: currentUrl,
           WEB_LINK: currentUrl,
-        },
+        }
       })
     } else if (props.shareMode === "result") {
       window.Kakao.Share.sendCustom({
