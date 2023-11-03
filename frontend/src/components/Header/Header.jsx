@@ -286,10 +286,7 @@ const Header = ({ checkMyRoom }) => {
           />
           <div className={styles.HamburgerModal}>
             <div className={styles.ContentContainer}>
-              <div
-                className={styles.MenuButton}
-                onClick={inquiryCheckHandler}
-              >
+              <div className={styles.MenuButton} onClick={inquiryCheckHandler}>
                 문의하기
               </div>
               <div className={styles.MenuButton} onClick={() => setIsRealLogout(true)}>
