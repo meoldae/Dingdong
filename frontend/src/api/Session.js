@@ -5,7 +5,7 @@ const fetchOnSession = async (success, fail) => {
 };
 
 const fetchOffSession = async (success, fail) => {
-  await HttpJson.get(`member/disconnect`).then(success).catch(fail);
+  await HttpJson.delete(`member/disconnect`).then(success).catch(fail);
 };
 
 export { fetchOnSession, fetchOffSession };
