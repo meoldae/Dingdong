@@ -10,7 +10,7 @@
   flex-direction: column;
   align-items: center;
   overflow: auto;
-  height: 330px;
+  height: 350px;
 }
 
 .postCardContainer::-webkit-scrollbar {
