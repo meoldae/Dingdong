@@ -147,34 +147,38 @@ const Header = ({ checkMyRoom }) => {
 
   // 문의하기 함수
   const inquiryHandler = () => {
-    fetchInquiry(
-      {
-        category: "3",
-        content: inquiryText,
-      },
-      (success) => {
-        setIsInquiry(false)
-        setIsHamburger(false)
-        successMsg("✅ 문의하기가 완료됐습니다!")
-      },
-      (error) => {
-        "Error at inquiry...", error
-      }
-    )
+    if (inquiryText < 5) {
+      successMsg("❌ 5자 이상 작성해주세요.")
+    } else {
+      fetchInquiry(
+        {
+          category: "3",
+          content: inquiryText,
+        },
+        (success) => {
+          setIsInquiry(false)
+          setIsHamburger(false)
+          successMsg("✅ 문의하기가 완료됐습니다!")
+        },
+        (error) => {
+          "Error at inquiry...", error
+        }
+      )
+    }
   }
 
   // 로그아웃 함수
   const logoutHandler = () => {
     fetchLogout(
       (success) => {
-        localStorage.removeItem("userAtom")
-        window.location.replace(`${urlPath}/login`)
         successMsg("✅ 로그아웃 성공!")
       },
       (error) => {
         "Error at Logout...", error
       }
     )
+    localStorage.removeItem("userAtom")
+    window.location.replace(`${urlPath}/login`)
   }
 
   // 회원탈퇴 함수
@@ -370,7 +374,7 @@ const Header = ({ checkMyRoom }) => {
             <div className={styles.InquiryTextLength}>
               {inquiryText.length}/200
             </div>
-            <div className={styles.Inquiry} onClick={inquiryHandler}>
+            <div className={styles.InquiryButton} onClick={inquiryHandler}>
               완료
             </div>
           </div>

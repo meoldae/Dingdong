@@ -18,6 +18,7 @@
   justify-content: center;
   margin-bottom: 30px;
 }
+
 .guideCharacter img {
   width: 80px;
   height: 90px;
@@ -49,10 +50,11 @@
   display: flex;
   justify-content: center;
 }
+
 .guideButton button {
   width: 33%;
   height: 25%;
-  border-radius: 50px;
+  border-radius: 10px;
   font-size: 15px;
   font-weight: bolder;
 }
