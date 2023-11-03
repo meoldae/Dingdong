@@ -171,14 +171,14 @@ const Header = ({ checkMyRoom }) => {
   const logoutHandler = () => {
     fetchLogout(
       (success) => {
-        localStorage.removeItem("userAtom")
-        window.location.replace(`${urlPath}/login`)
         successMsg("✅ 로그아웃 성공!")
       },
       (error) => {
         "Error at Logout...", error
       }
     )
+    localStorage.removeItem("userAtom")
+    window.location.replace(`${urlPath}/login`)
   }
 
   // 회원탈퇴 함수
