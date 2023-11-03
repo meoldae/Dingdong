@@ -171,14 +171,14 @@ const Header = ({ checkMyRoom }) => {
   const logoutHandler = () => {
     fetchLogout(
       (success) => {
-        localStorage.removeItem("userAtom")
-        window.location.replace(`${urlPath}/login`)
         successMsg("✅ 로그아웃 성공!")
       },
       (error) => {
         "Error at Logout...", error
       }
     )
+    localStorage.removeItem("userAtom")
+    window.location.replace(`${urlPath}/login`)
   }
 
   // 회원탈퇴 함수
@@ -374,7 +374,7 @@ const Header = ({ checkMyRoom }) => {
             <div className={styles.InquiryTextLength}>
               {inquiryText.length}/200
             </div>
-            <div className={styles.Inquiry} onClick={inquiryHandler}>
+            <div className={styles.InquiryButton} onClick={inquiryHandler}>
               완료
             </div>
           </div>
