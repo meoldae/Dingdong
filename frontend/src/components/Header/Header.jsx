@@ -293,10 +293,10 @@ const Header = ({ checkMyRoom }) => {
               <div className={styles.Name}>{roomInfo}</div>
             </div>
             <div className={styles.ContentContainer}>
-              <div className={styles.MenuButton} onClick={inquiryCheckHandler} style={{ borderBottom: "1px solid #C2C2C2" }}>
+              <div className={styles.MenuButton} onClick={inquiryCheckHandler} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
                 문의하기
               </div>
-              <div className={styles.MenuButton} onClick={() => setIsRealLogout(true)} style={{ borderBottom: "1px solid #C2C2C2" }}>
+              <div className={styles.MenuButton} onClick={() => setIsRealLogout(true)} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
                 로그아웃
               </div>
               <div className={styles.MenuButton} onClick={() => setIsRealSecession(true)}>
