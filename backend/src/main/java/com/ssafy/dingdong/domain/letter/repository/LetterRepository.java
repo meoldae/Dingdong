@@ -33,6 +33,7 @@ public interface LetterRepository extends JpaRepository<Letter, Long> {
 
     @Query("SELECT new com.ssafy.dingdong.domain.letter.dto.response.LetterScoreDto(l.letterFrom, count(l.letterFrom)) " +
             "FROM Letter l " +
+            "WHERE l.letterFrom != 'f684f5ed-f8d0-4823-8b59-630d6a3cd5a1'" +
             "GROUP BY l.letterFrom " +
             "ORDER BY count(l.letterFrom) DESC")
     Page<LetterScoreDto> getLetterFromScore(Pageable pageable);
