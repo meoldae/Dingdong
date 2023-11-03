@@ -374,7 +374,7 @@ const Header = ({ checkMyRoom }) => {
             <div className={styles.InquiryTextLength}>
               {inquiryText.length}/200
             </div>
-            <div className={styles.Inquiry} onClick={inquiryHandler}>
+            <div className={styles.InquiryButton} onClick={inquiryHandler}>
               완료
             </div>
           </div>
