@@ -35,7 +35,7 @@ const PostofficeSendLetter = ({ card }) => {
       letterId: newID,
       letterTo: toValue,
       letterFrom: fromValue,
-      description: content,
+      description: content.replaceAll("<br>","\r\n"),
       stampId: card.idx,
       roomId: userInfo.roomId,
     }
@@ -116,7 +116,7 @@ const PostofficeSendLetter = ({ card }) => {
                 onChange={(e) => handleCheckContentCount(e)}
                 placeholder="편지 내용을 작성하세요."
                 maxLength={199}
-                spellcheck="false"
+                spellCheck="false"
               />
             </div>
             <div className={styles.contentCount}>{contentCount}/200</div>
