@@ -364,13 +364,15 @@ const Header = ({ checkMyRoom }) => {
           />
           <div className={styles.InquiryContainer}>
             <div className={styles.InquiryTitle}>문의하기</div>
-            <textarea
-              className={styles.InquiryContent}
-              placeholder="문의할 내용을 작성해주세요."
-              value={inquiryText}
-              onChange={(e) => setInquiryText(e.target.value)}
-              maxLength={199}
-            />
+            <div className={styles.InquiryContentContainer}>
+              <textarea
+                className={styles.InquiryContent}
+                placeholder="문의할 내용을 작성해주세요."
+                value={inquiryText}
+                onChange={(e) => setInquiryText(e.target.value)}
+                maxLength={199}
+              />
+            </div>
             <div className={styles.InquiryTextLength}>
               {inquiryText.length}/200
             </div>
