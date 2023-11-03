@@ -24,12 +24,12 @@ const SharePage = ({shareModal, canvasRef}) => {
       const ctx = croppedCanvas.getContext("2d");
 
       // 집 모양의 중심 좌표
-      const centerX = canvas.width / 2 + 10; // 집 모양의 중심 x 좌표를 여기에 입력
-      const centerY = canvas.height / 2 - 100; // 집 모양의 중심 y 좌표를 여기에 입력
+      const centerX = canvas.width / 2; // 집 모양의 중심 x 좌표를 여기에 입력
+      const centerY = canvas.height / 2 -50; // 집 모양의 중심 y 좌표를 여기에 입력
 
       // 잘라낼 영역의 크기 설정
       const width = centerX * 1.8;
-      const height = centerY * 1.35;
+      const height = centerY * 1.1;
 
       // 중심 좌표를 기준으로 잘라낼 영역의 시작 좌표 계산
       const startX = centerX - width / 2;

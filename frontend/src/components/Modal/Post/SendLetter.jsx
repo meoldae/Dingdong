@@ -11,12 +11,12 @@ import { successMsg } from "@/utils/customToast"
 const SendLetter = ({ onClose, card }) => {
   const [content, setContent] = useState("")
   const [contentCount, setContentCount] = useState(0)
-  const [isSending, setIsSending] = useState(false) 
-  
-  const userInfo = useRecoilValue(userAtom)
-  const [userNickname, setUserNickname] = useState(userInfo.nickname || "");
+  const [isSending, setIsSending] = useState(false)
 
-  console.log(userInfo);
+  const userInfo = useRecoilValue(userAtom)
+  const [userNickname, setUserNickname] = useState(userInfo.nickname || "")
+
+  // console.log(userInfo);
   const roomInfo = useRecoilValue(roomInfoAtom)
 
   const url = new URL(window.location.href)
@@ -29,11 +29,11 @@ const SendLetter = ({ onClose, card }) => {
   }
 
   const sendClick = () => {
-    if (isSending) return;
+    if (isSending) return
 
     if (!userNickname.trim() || !content.trim()) {
       successMsg("❌ 편지를 작성해주세요.")
-      return;  
+      return
     }
 
     setIsSending(true)
@@ -44,10 +44,10 @@ const SendLetter = ({ onClose, card }) => {
       stampId: card.idx,
       roomId: roomId,
     }
-    console.log(param);
+    // console.log(param)
 
-    if(!userInfo.accessToken) {
-      console.log("비회원 편지 전송")
+    if (!userInfo.accessToken) {
+      // console.log("비회원 편지 전송")
       sendGuestLetter(
         param,
         (response) => {
@@ -59,9 +59,8 @@ const SendLetter = ({ onClose, card }) => {
           console.log(error)
         }
       )
-    }
-    else {
-      console.log("회원 편지 전송")
+    } else {
+      // console.log("회원 편지 전송")
       sendLetter(
         param,
         (response) => {
@@ -74,7 +73,6 @@ const SendLetter = ({ onClose, card }) => {
         }
       )
     }
-
   }
 
   const handleOutsideClick = (event) => {
@@ -116,7 +114,7 @@ const SendLetter = ({ onClose, card }) => {
               <span>익명의 이웃</span>
             </div> */}
             <div className={styles.FromUser}>
-              From. 
+              From.
               {userInfo.nickname ? (
                 userInfo.nickname
               ) : (

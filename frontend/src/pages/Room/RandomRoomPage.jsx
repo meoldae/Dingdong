@@ -102,8 +102,8 @@ function RandomRoomPage() {
     (response) => {
       randRoomId = response.data.data;
       
-      // window.location.replace(`${urlPath}/random/${randRoomId}`)
-      navigate(`${urlPath}/random/${randRoomId}`)
+      window.location.replace(`${urlPath}/random/${randRoomId}`)
+      // navigate(`${urlPath}/random/${randRoomId}`)
     },
     (error) => {
       console.log("Error with Random Room...", error);
