@@ -45,7 +45,7 @@ const PostofficeReceiveLetter = () => {
               To. {letterData?.letterTo ?? ""}
             </div>
             <div className={styles.letterContent}>
-              {letterData?.description ?? ""}
+            <span dangerouslySetInnerHTML={{ __html: letterData?.description.replaceAll('\n', '<br />') }} />
             </div>
             <div className={styles.footerContainer}>
               <div className={styles.FromUser}>
