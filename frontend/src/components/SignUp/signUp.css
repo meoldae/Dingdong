@@ -1,0 +1,22 @@
+
+
+
+.slick-next, .slick-prev{
+  content: '';
+  height: 50px;
+  width: 50px;
+  /* background-image: url('/frontend/public/assets/icons/leftArrow.svg'); */
+  z-index: 2;
+  /* background-color: black; */
+  margin: 20px;
+}
+
+
+
+
+.slick-slide img {
+  object-fit: cover;
+  height: 350px;
+  width: 100%;
+  box-sizing: border-box;
+}
