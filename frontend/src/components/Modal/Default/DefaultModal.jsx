@@ -1,23 +1,23 @@
 import styles from "./DefaultModal.module.css"
 
 const DefaultModal = ({ content, ok, cancel, okClick, cancelClick }) => {
-  // 모달 외부의 배경이 어둡게 변하는건 모달을 사용하는 page에서 작성해야할듯 합니다.
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
   return (
     <div className={styles.Container}>
+      <img src={`${urlPath}/assets/icons/x.png`} className={styles.xButton} onClick={cancelClick} />
       <div className={styles.ContentContainer}>{content}</div>
-      <div className={styles.HorizontalLine} />
-      <div className={styles.VerticalLine} />
       <div className={styles.ButtonContainer}>
         <div
           className={styles.Button}
-          style={{ color: "#049463" }}
+          style={{ color: "#FFFFFF", background: "#02C26F", boxShadow: "0px 4px 0px #009152" }}
           onClick={okClick}
         >
           {ok}
         </div>
         <div
           className={styles.Button}
-          style={{ color: "#2C2C2C" }}
+          style={{ color: "#000000", background: "#ECECEC", boxShadow: "0px 4px 0px #858585" }}
           onClick={cancelClick}
         >
           {cancel}

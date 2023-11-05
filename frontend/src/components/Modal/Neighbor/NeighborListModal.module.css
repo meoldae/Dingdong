@@ -8,21 +8,29 @@
   justify-content: space-between;
 }
 
+.ProfileContainer {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
 .ProfileContainer img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #fff;
-  position: relative;
+  background: #FFFFFF;
 }
 
 .StatusOnDot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #049463;
-  position: relative;
-  left: 45px;
+  background: #02C26F;
+  border: 2px solid #FFFFFF;
+
+  position: absolute;
+  top: 0;
+  left: 38px;
   z-index: 2;
 }
 
@@ -30,9 +38,12 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #c4c4c4;
+  background: #C4C4C4;
+  border: 2px solid #FFFFFF;
+
   position: absolute;
-  left: 45px;
+  top: 0;
+  left: 38px;
   z-index: 2;
 }
 

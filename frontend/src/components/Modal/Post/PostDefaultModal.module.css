@@ -37,8 +37,10 @@
   width: 100%;
   margin-bottom: 10px;
 }
+
 .xmarkImg img {
-  width: 5%;
+  width: 25px;
+  height: 25px;
   display: flex;
   justify-content: flex-end;
 }
@@ -63,6 +65,26 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100svh;
   background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 */
   z-index: 2;
+}
+
+.finishSelectOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 */
+  z-index: 3;
+}
+
+.finishSelectContainer {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 4;
 }
