@@ -6,10 +6,15 @@ import { useState, useEffect } from "react"
 import { getLetterDetail } from "@/api/Letter"
 import { successMsg } from "../../../utils/customToast"
 import { reportLetter } from "../../../api/Letter"
+import DefaultModal from "../Default/DefaultModal"
 
 const RecevieLetter = (props) => {
   const letterId = useRecoilValue(letterIdAtom)
+
   const [letterDetail, setLetterDetail] = useState(null)
+  // 편지함 종료모달 상태관리
+  const [isFinishReceiveLetter, setIsFinishReceiveLetter] = useState(false)
+
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   useEffect(() => {
@@ -42,11 +47,11 @@ const RecevieLetter = (props) => {
 
   return (
     <>
-      <div className={styles.overlay} onClick={props.cancelClick}>
+      <div className={styles.overlay} onClick={() => setIsFinishReceiveLetter(true)}>
         {letterDetail ? (
           <div className={styles.receiveLetterContainer}>
             <Card className={styles.receiveLetterBox}>
-              <div className={styles.xmarkImg} onClick={props.cancelClick}>
+              <div className={styles.xmarkImg} onClick={() => setIsFinishReceiveLetter(true)}>
                 <img src={`${urlPath}/assets/icons/Pink_X-mark.png`} alt="" />
               </div>
               <img
@@ -78,6 +83,23 @@ const RecevieLetter = (props) => {
         )
         }
       </div>
+
+      {/* 받은편지 종료모달 */}
+      {isFinishReceiveLetter && (
+        <>
+          <div className={styles.finishOverlay} onClick={() => setIsFinishReceiveLetter(false)}>
+            <div className={styles.finishContainer}>
+              <DefaultModal
+                content={"편지를 종료하시겠습니까?"}
+                ok={"네"}
+                cancel={"아니오"}
+                okClick={props.cancelClick}
+                cancelClick={() => setIsFinishReceiveLetter(false)}
+              />
+            </div>
+          </div>
+        </>
+      )}
     </>
   )
 }

@@ -69,6 +69,7 @@ const PostBox = (props) => {
           PostDefaultTitle={"편지함"}
           postCheck={false}
           cancelClick={props.cancelClick}
+          checkStatus={"postbox"}
         >
           <div className={styles.letterBox} ref={letterBoxRef}>
             {letters.map((letter, index) => (
