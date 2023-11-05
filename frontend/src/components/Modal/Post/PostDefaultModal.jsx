@@ -1,4 +1,10 @@
+// 라이브러리
+import { useState } from "react"
+
+// 컴포넌트
 import Card from "../../UI/Card"
+
+// 스타일
 import styles from "./PostDefaultModal.module.css"
 
 const PostDefaultModal = (props) => {
