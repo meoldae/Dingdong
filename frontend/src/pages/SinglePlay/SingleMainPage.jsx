@@ -56,6 +56,8 @@ import PostofficeCardBox from "../Postoffice/PostofficeCardBox"
 import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter"
 import GuidePage from "../../components/UI/GuidePage"
 import SingleHeader from "./SingleHeader"
+import RankingInformation from "../../components/Modal/Ranking/RankingInformation"
+
 const SingleMainPage = () => {
   // 카메라 설정
   const setDefaultCameraPosition = useSetRecoilState(DefaultPosition)
@@ -420,6 +422,16 @@ const SingleMainPage = () => {
               <RankingModal />
             </div>
           </motion.div>
+        )}
+
+        {/* 랭킹정보모달 */}
+        {isRankingInformation && (
+          <>
+            <div className={styles.InformationOverlay} onClick={() => setIsRankingInformation(false)} />
+            <div className={styles.RankingInformationContainer}>
+              <RankingInformation />
+            </div>
+          </>
         )}
       </div>
     </>
