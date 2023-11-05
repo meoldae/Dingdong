@@ -17,10 +17,9 @@ const SignUp = () => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
 
   const [charactersData, setCharactersData] = useState([]);
-  const [avatarId, setAvatar] = useState(null);
+  const [avatarId, setAvatar] = useState(1);
   const [nickname, setNickname] = useState("");
   const [isValid, setIsValid] = useState(false);
-
   useEffect(() => {
     GetAvatarList(
       (response) => {
@@ -48,8 +47,8 @@ const SignUp = () => {
     slidesToShow: 1,
     speed: 500,
     arrows: true,
-    prevArrow: <img src="assets/icons/leftArrow.png"/>,
-    nextArrow: <img src="assets/icons/rightArrow.png"/>,
+    prevArrow: <img src={`${urlPath}/assets/icons/leftArrow.png`}/>,
+    nextArrow: <img src={`${urlPath}/assets/icons/rightArrow.png`}/>,
     // prevArrow: "<button type='button' class='slick-prev'>Previous</button>", // 이전 화살표 모양 설정
     // nextArrow: "<button type='button' class='slick-next'>Next</button>",
     afterChange: (current) => handleSlideChange(current),
