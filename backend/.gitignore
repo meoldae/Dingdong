@@ -39,4 +39,6 @@ out/
 ### VS Code ###
 .vscode/
 
+/resources/firebase/
 /resources/
+dingdong_fcm.json
