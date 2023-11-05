@@ -39,6 +39,7 @@ const SignUp = () => {
   }, []);
 
   const charactersImages = charactersData.map((charData) => charData.glb);
+  console.log(charactersImages)
   const memberId = new URLSearchParams(window.location.search).get("memberId");
   const settings = {
     centerMode: true,

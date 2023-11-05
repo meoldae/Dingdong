@@ -12,7 +12,11 @@
   overflow: auto;
   height: 350px;
 }
-
+.postCardCenter{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .postCardContainer::-webkit-scrollbar {
   display: none;
 }
@@ -31,10 +35,10 @@
   width: 70%;
 }
 
-.postCard {
+/* .postCard {
   margin-left: 10px;
   margin-right: 10px;
-}
+} */
 
 .postCard.selected {
   border-radius: 5px;
