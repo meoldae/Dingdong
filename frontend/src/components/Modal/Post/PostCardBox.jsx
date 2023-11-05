@@ -39,6 +39,7 @@ const PostCardBox = (props) => {
         PostDefaultTitle={"우표 선택"}
         cancelClick={props.cancelClick}
         postCheck={true}
+        checkStatus={"postcardbox"}
       >
         <div className={styles.postCardContainer}>
           {cards.map((card, idx) => (
