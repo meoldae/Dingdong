@@ -223,6 +223,7 @@ function SharingModalList(props) {
             name={share.name}
             click={share.click}
             className={styles.shareItem}
+            color={"black"}
           />
         ))}
       </div>
@@ -237,6 +238,7 @@ function SharingModalList(props) {
             name={share.name}
             click={share.click}
             className={styles.shareItem}
+            color={"black"}
           />
         ))}
       </div>
@@ -251,6 +253,7 @@ function SharingModalList(props) {
             name={share.name}
             click={share.click}
             className={styles.shareItem}
+            color={"black"}
           />
         ))}
       </div>
