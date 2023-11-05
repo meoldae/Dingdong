@@ -9,14 +9,14 @@ const NeighborAcceptModal = ({ content, okClick, cancelClick }) => {
       <div className={styles.ButtonContainer}>
         <div
           className={styles.Button}
-          style={{ color: "#049463" }}
+          style={{ color: "#FFFFFF" }}
           onClick={okClick}
         >
           수락
         </div>
         <div
           className={styles.Button}
-          style={{ color: "#2C2C2C" }}
+          style={{ color: "#000000" }}
           onClick={cancelClick}
         >
           거절
