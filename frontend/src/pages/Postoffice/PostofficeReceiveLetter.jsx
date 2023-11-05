@@ -32,7 +32,7 @@ const PostofficeReceiveLetter = () => {
   } 
 
   return (
-    <div className={styles.Container}>
+    <div className={styles.Container} style={{ fontFamily: "GangwonEduAll-Light" }}>
       <div className={styles.PostImage}>
         <div className={styles.sendLetterContainer}>
           <Card className={styles.sendLetterBox}>

@@ -1,4 +1,6 @@
 .Container {
+  max-width: 450px;
+  min-width: 350px;
   padding: 10px;
   height: 100vh;
   height: 100svh;
@@ -7,7 +9,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  font-family: "GangwonEduAll-Light";
+  /* font-family: "GangwonEduAll-Light"; */
 }
 
 .PostImage {
