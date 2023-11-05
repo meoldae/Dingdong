@@ -8,14 +8,14 @@ const DefaultModal = ({ content, ok, cancel, okClick, cancelClick }) => {
       <div className={styles.ButtonContainer}>
         <div
           className={styles.Button}
-          style={{ color: "#FFFFFF" }}
+          style={{ color: "#FFFFFF", background: "#02C26F", boxShadow: "0px 4px 0px #009152" }}
           onClick={okClick}
         >
           {ok}
         </div>
         <div
           className={styles.Button}
-          style={{ color: "#000000" }}
+          style={{ color: "#000000", background: "#ECECEC", boxShadow: "0px 4px 0px #858585" }}
           onClick={cancelClick}
         >
           {cancel}
