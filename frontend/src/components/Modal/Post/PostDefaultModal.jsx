@@ -10,6 +10,10 @@ import styles from "./PostDefaultModal.module.css"
 const PostDefaultModal = (props) => {
   // 이미지 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
+  // 우표선택 종료모달 상태관리
+  const [isFinishSelectPostCard, setIsFinishSelectPostCard] = useState(false)
+
   return (
     <>
       <div className={styles.overlay} onClick={props.cancelClick} />
