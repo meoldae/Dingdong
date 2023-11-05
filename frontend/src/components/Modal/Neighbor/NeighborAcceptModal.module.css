@@ -33,15 +33,12 @@
 .Button {
   width: 90px;
   height: 25px;
+  border-radius: 10px;
 
   display: flex;
   align-items: center;
   justify-content: center;
   
   font-size: 15px;
-  font-family: Pretendard-SemiBold;
-
-  background: #02C26F;
-  border-radius: 10px;
-  box-shadow: 0px 4px 0px #009152;
+  font-family: "Pretendard-SemiBold";
 }
