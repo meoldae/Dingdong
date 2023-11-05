@@ -49,9 +49,30 @@
 .nicknameContainer {
   display: flex;
   justify-content: center;
+  align-items: center;
   font-family: "Pretendard-SemiBold";
   font-size: 16px;
   margin-bottom: 20px;
+}
+
+
+
+.alertMessageSuccess{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: #02C26F;
+}
+
+.alertMessageError{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: red;
 }
 
 .characterContainer{
@@ -61,23 +82,52 @@
 }
 
 
-.nicknameInput {
-  border: 3px solid #049463;
-  border-radius: 40px;
+.nicknameInputSuccess{
+  border: 0;
+  border-bottom: 3px solid #02C26F;
+  /* border-radius: 40px; */
   width: 160px;
   height: 40px;
   text-align: center;
-  margin-right: 10px;
+  /* margin-right: 10px; */
   font-size: 18px;
   font-weight: bold;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  margin-right: 10px;
 }
 
-.nicknameInput:focus {
+.nicknameInputError{
+  border: 0;
+  border-bottom: 3px solid red;
+  /* border-radius: 40px; */
+  width: 160px;
+  height: 40px;
+  text-align: center;
+  /* margin-right: 10px; */
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+
+.nicknameInputSuccess:focus {
   outline: none;
 }
-.nicknameInput::placeholder {
+.nicknameInputSuccess::placeholder {
   font-size: 14px;
 }
+
+
+.nicknameInputError:focus {
+  outline: none;
+}
+.nicknameInputError::placeholder {
+  font-size: 14px;
+}
+
 
 .nicknameInput:focus::-webkit-input-placeholder,
 textarea:focus::-webkit-input-placeholder {
@@ -106,5 +156,6 @@ textarea:focus:-ms-input-placeholder {
 .doSignUpContainer {
   display: flex;
   justify-content: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
+  /* margin-top: 10px; */
 }
