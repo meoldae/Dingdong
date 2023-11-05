@@ -418,7 +418,11 @@ const SingleMainPage = () => {
           >
             <div className={styles.overlay} onClick={() => closeRanking()} />
             <div className={styles.rankingModalContainer}>
-              <img src={'/assets/icons/information-circle.png'} className={styles.Infromation} onClick={() => setIsRankingInformation(true)} />
+              <img
+                src={'/assets/icons/information-circle.png'}
+                className={styles.Infromation}
+                onClick={() => setIsRankingInformation(true)}
+              />
               <RankingModal />
             </div>
           </motion.div>
