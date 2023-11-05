@@ -1,9 +1,11 @@
 import styles from "./DefaultModal.module.css"
 
 const DefaultModal = ({ content, ok, cancel, okClick, cancelClick }) => {
-  // 모달 외부의 배경이 어둡게 변하는건 모달을 사용하는 page에서 작성해야할듯 합니다.
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
   return (
     <div className={styles.Container}>
+      <img src={`${urlPath}/assets/icons/x.png`} className={styles.xButton} onClick={cancelClick} />
       <div className={styles.ContentContainer}>{content}</div>
       <div className={styles.ButtonContainer}>
         <div
