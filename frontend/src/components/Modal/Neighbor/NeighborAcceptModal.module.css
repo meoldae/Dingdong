@@ -16,20 +16,6 @@
   align-items: center;
 }
 
-.HorizontalLine {
-  width: 250px;
-  border: 1px solid #e8e8e8;
-  position: absolute;
-  top: 40px;
-}
-
-.VerticalLine {
-  height: 30px;
-  border: 1px solid #e8e8e8;
-  position: absolute;
-  top: 45px;
-}
-
 .ButtonContainer {
   position: absolute;
   top: 40px;

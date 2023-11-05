@@ -6,8 +6,6 @@ const NeighborAcceptModal = ({ content, okClick, cancelClick }) => {
       <div className={styles.ContentContainer}>
         {content}으로 부터 이웃신청이 왔습니다.
       </div>
-      <div className={styles.HorizontalLine} />
-      <div className={styles.VerticalLine} />
       <div className={styles.ButtonContainer}>
         <div
           className={styles.Button}
