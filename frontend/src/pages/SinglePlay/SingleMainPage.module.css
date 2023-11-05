@@ -33,6 +33,13 @@
   z-index: 3;
 }
 
+.Infromation {
+  width: 25px;
+  height: 25px;
+  position: relative;
+  left: 275px;
+}
+
 .postofficemodalcontainer {
   position: absolute;
   z-index: 3;
