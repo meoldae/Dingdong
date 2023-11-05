@@ -23,20 +23,21 @@ const PostCardBox = (props) => {
   };
 
   const cards = [
-    { src: "cloud.png", comment: "몽글몽글한 마음을 전달해보세요!" },
-    { src: "clover.png", comment: "행운의 마음을 전달해보세요!" },
-    { src: "flower.png", comment: "아름다운 기억을 전달해보세요!" },
-    { src: "heart.png", comment: "사랑을 담아 전달해보세요!" },
-    { src: "puzzle.png", comment: "추억의 조각을 전달해보세요!" },
-    { src: "rocket.png", comment: "응원의 마음을 담아 전달해보세요!" },
-    { src: "star.png", comment: "특별한 마음을 전달해요!" },
+    { src: "heart.png", comment: "두근거리는 사랑을 전달해보세요!" },
     { src: "thunder.png", comment: "에너지를 전달해보세요!" },
+    { src: "star.png", comment: "반짝 빛나는 마음을 전달해해보세요!" },
+    { src: "puzzle.png", comment: "추억의 조각을 전달해보세요!" },
+    { src: "dingdong.png", comment: "딩동! 특별한 마음을 전달해보세요!" },
+    { src: "clover.png", comment: "행운의 마음을 전달해보세요!" },
+    { src: "cloud.png", comment: "몽글몽글한 마음을 전달해보세요!" },
+    { src: "flower.png", comment: "아름다운 기억을 전달해보세요!" },
+    { src: "rocket.png", comment: "응원의 마음을 전달해보세요!" },
   ];
 
   return (
     <div className={styles.MainContainer}>
       <PostDefaultModal
-        PostDefaultTitle={"우표 선택"}
+        PostDefaultTitle={"우표를 골라주세요"}
         cancelClick={props.cancelClick}
         postCheck={true}
       >
@@ -47,7 +48,7 @@ const PostCardBox = (props) => {
                 key={card.src}
                 className={
                   selectedCard?.src === card.src
-                    ? `${styles.postCard} ${styles.selected}`
+                    ? `${styles.postCard} ${styles.selected} ${styles[`${card.src.split(".")[0]}Selected`]}`
                     : styles.postCard
                 }
                 src={`${urlPath}/assets/images/post/${card.src}`}
