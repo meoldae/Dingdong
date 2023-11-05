@@ -75,6 +75,14 @@
   right: 5vw;
 }
 
+.poststampFrame {
+  width: 180px;
+  height: 130px;
+  position: absolute;
+  top : 10px;
+  right: 12px;
+}
+
 .ToUser {
   width: 100%;
   padding: 5px;

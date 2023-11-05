@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { userAtom } from "@/atom/UserAtom"
-import DefaultBtn from "../../components/Button/Default/DefaultBtn"
+import DefaultPostBtn from "../../components/Button/DefaultPost/DefaultPostBtn"
 import Card from "../../components/UI/Card"
 import styles from "./PostofficeSendLetter.module.css"
 import { useRecoilState, useRecoilValue } from "recoil"
@@ -87,15 +87,18 @@ const PostofficeSendLetter = ({ card }) => {
       />
       <div className={styles.overlay}>
         <div className={styles.sendLetterContainer} id="sendLetter">
-          <Card className={styles.sendLetterBox}>
-            <div
-              className={styles.xmarkImg}
-              onClick={() => {
-                setOnPostofficeSendLetter(false)
-              }}
-            >
-              <img src={`${urlPath}/assets/icons/Pink_X-mark.png`} alt="" />
-            </div>
+          <div
+            className={styles.xmarkImg}
+            onClick={() => {
+              setOnPostofficeSendLetter(false)
+            }}
+          >
+            <img src={`${urlPath}/assets/icons/grayXmark.png`} alt="" />
+          </div>
+          <Card className={`${styles.sendLetterBox} ${styles[card.order]}`}>
+            <img className={styles.poststampFrame}
+              src={`${urlPath}/assets/images/poststamp_frame.png`}
+            />
             <img
               className={styles.topPostCardImg}
               src={`${urlPath}/assets/images/post/${card.src}`}
@@ -133,10 +136,10 @@ const PostofficeSendLetter = ({ card }) => {
               </div>
             </div>
           </Card>
-          <DefaultBtn
+          <DefaultPostBtn
             btnName={"편지 보내기"}
             onClick={sendClick}
-            color={"#fff"}
+            color={card.order}
           />
         </div>
       </div>

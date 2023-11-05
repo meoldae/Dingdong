@@ -97,6 +97,9 @@ const SendLetter = ({ onClose, card }) => {
             <img src={`${urlPath}/assets/icons/grayXmark.png`} alt="" />
           </div>
           <Card className={`${styles.sendLetterBox} ${styles[card.order]}`}>  
+            <img className={styles.poststampFrame}
+                src={`${urlPath}/assets/images/poststamp_frame.png`}
+            />  
             <img
               className={styles.topPostCardImg}
               src={`${urlPath}/assets/images/post/${card.src}`}
