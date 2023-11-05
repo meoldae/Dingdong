@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { sendLetter, sendGuestLetter } from "@/api/Letter"
 import { userAtom } from "@/atom/UserAtom"
 import { roomInfoAtom } from "@/atom/RoomInfoAtom"
-import DefaultBtn from "../../Button/Default/DefaultBtn"
+import DefaultPostBtn from "../../Button/DefaultPost/DefaultPostBtn"
 import Card from "../../UI/Card"
 import styles from "./SendLetter.module.css"
 import { useRecoilValue } from "recoil"
@@ -89,10 +89,10 @@ const SendLetter = ({ onClose, card }) => {
   return (
     <div className={styles.overlay} onClick={handleOutsideClick}>
       <div className={styles.sendLetterContainer}>
-        <Card className={styles.sendLetterBox}>
-          <div className={styles.xmarkImg} onClick={cancelClick}>
-            <img src={`${urlPath}/assets/icons/Pink_X-mark.png`} alt="" />
-          </div>
+        <div className={styles.xmarkImg} onClick={cancelClick}>
+          <img src={`${urlPath}/assets/icons/grayXmark.png`} alt="" />
+        </div>
+        <Card className={`${styles.sendLetterBox} ${styles[card.order]}`}>  
           <img
             className={styles.topPostCardImg}
             src={`${urlPath}/assets/images/post/${card.src}`}
@@ -105,7 +105,7 @@ const SendLetter = ({ onClose, card }) => {
               placeholder="편지 내용을 작성하세요."
               maxLength={199}
               spellCheck="false"
-              style={{ fontFamily: "GangwonEduAll-Light" }}
+              style={{ fontFamily: "GangwonEduAll-Light"}}
             />
           </div>
           <div className={styles.contentCount} style={{ fontFamily: "GangwonEduAll-Light" }}>{contentCount}/200</div>
@@ -130,10 +130,10 @@ const SendLetter = ({ onClose, card }) => {
             </div>
           </div>
         </Card>
-        <DefaultBtn
+        <DefaultPostBtn
           btnName={"편지 보내기"}
           onClick={sendClick}
-          color={"#fff"}
+          color={card.order}
         />
       </div>
     </div>
