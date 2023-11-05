@@ -6,9 +6,7 @@ const RandomBtn = ({ onClick }) => {
     <button className={styles.button82Pushable} role="button" onClick={onClick}>
       <span className={styles.button82Shadow}></span>
       <span className={styles.button82Edge}></span>
-      <span className={`${styles.button82Front} ${styles.text}`}>
-        랜덤 방문
-      </span>
+      <span className={`${styles.button82Front} ${styles.text}`}>랜덤 방문</span>
     </button>
   )
 }
