@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import DefaultBtn from "../../Button/Default/DefaultBtn";
+import DefaultPostBtn from "../../Button/DefaultPost/DefaultPostBtn";
 import styles from "./PostCardBox.module.css";
 import PostDefaultModal from "./PostDefaultModal";
 import { useState } from "react";
@@ -10,7 +10,7 @@ const PostCardBox = (props) => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
 
   const handleCardClick = (cardIdx, cardSrc, comment) => {
-    setSelectedCard({ idx: cardIdx + 1, src: cardSrc });
+    setSelectedCard({ idx: cardIdx + 1, src: cardSrc, order: numberToString(cardIdx + 1) });
     setCardComment(comment);
   };
 
@@ -19,6 +19,21 @@ const PostCardBox = (props) => {
       props.onSelectButtonClick(selectedCard);
     } else {
       toast.error("우표를 선택해주세요!");
+    }
+  };
+
+  const numberToString = (num) => {
+    switch (num) {
+      case 1: return "one";
+      case 2: return "two";
+      case 3: return "three";
+      case 4: return "four";
+      case 5: return "five";
+      case 6: return "six";
+      case 7: return "seven";
+      case 8: return "eight";
+      case 9: return "nine";
+      default: return "";
     }
   };
 
@@ -43,9 +58,8 @@ const PostCardBox = (props) => {
       >
         <div className={styles.postCardContainer}>
           {cards.map((card, idx) => (
-            <div className={styles.postCardCenter}>
+            <div className={styles.postCardCenter} key={card.src}>
               <img
-                key={card.src}
                 className={
                   selectedCard?.src === card.src
                     ? `${styles.postCard} ${styles.selected} ${styles[`${card.src.split(".")[0]}Selected`]}`
@@ -63,11 +77,7 @@ const PostCardBox = (props) => {
           <div className={styles.postCardComment}>우표를 선택해보세요!</div>
         )}
         <div className={styles.selectBtn}>
-          <DefaultBtn
-            btnName={"선택하기"}
-            onClick={handleSelectButtonClick}
-            color={"#F2CBE4"}
-          />
+          <DefaultPostBtn btnName={"선택하기"} onClick={handleSelectButtonClick} color='six' />
         </div>
       </PostDefaultModal>
     </div>
