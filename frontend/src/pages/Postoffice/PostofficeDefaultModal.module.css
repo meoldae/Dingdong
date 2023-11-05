@@ -12,7 +12,7 @@
 
   flex-direction: column;
   align-items: center;
-  background-color: white;
+  background-color: rgba(255,255,255,0.8);
 }
 
 .containerMy {
@@ -54,7 +54,7 @@
 .horizontalRule {
   width: 95%;
   height: 2px;
-  background-color: #f2cae4;
+  background-color: #fff;
   margin-bottom: 10px;
 }
 

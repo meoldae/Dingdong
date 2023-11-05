@@ -160,34 +160,65 @@
 .HamburgerModal {
   position: absolute;
   top: 0;
+  left: 0;
   z-index: 6;
   background: #fff;
 
-  width: 160px;
-  height: 150px;
-  border-radius: 10px;
+  width: 250px;
+  height: 100vh;
+  height: 100svh;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.XContainer {
+  width: 100%;
+  height: 30px;
+  margin-top: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.XImage {
+  width: 15px;
+  height: 15px;
+  margin-right: 15px;
+}
+
+.NameContainer {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 50px;
 
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
-  top: 75px;
-  left: 20px;
+.Name {
+  width: 90%;
+
+  font-size: 25px;
+  font-family: "Pretendard-SemiBold";
 }
 
 .ContentContainer {
   width: 90%;
   height: 90%;
-  font-family: "Pretendard-SemiBold";
+  font-size: 15px;
+  font-family: "Pretendard-Medium";
   font-size: 18px;
   color: #2c2c2c;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .MenuButton {
-  padding: 10px 0 10px 0;
+  padding: 15px 0 15px 0;
 }
 
 /* 알림 모달 */
@@ -261,21 +292,29 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 8;
+
+  background: #FFF;
+  border-radius: 10px;
 }
 
 .InquiryTitle {
-  color: #FFF;
+  color: #2C2C2C;
   font-size: 30px;
   font-family: "Pretendard-Bold";
   text-align: center;
-  margin-bottom: 15px;
+  margin: 15px 0 15px 0;
+}
+
+.InquiryContentContainer {
+  width: 290px;
+
+  display: flex;
+  justify-content: center;
 }
 
 .InquiryContent {
-  width: 290px;
+  width: 80%;
   height: 170px;
-  background: #FFF;
-  border-radius: 10px;
   
   font-family: "Pretendard-Medium";
   font-size: 18px;
@@ -287,18 +326,27 @@
 }
 
 .InquiryTextLength {
-  color: #FFF;
+  color: #2C2C2C;
   text-align: end;
   margin-top: 5px;
+  margin-right: 10%;
   font-size: 15px;
   font-family: "Pretendard-SemiBold";
 }
 
+.InquiryButtonContainer {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+
 .InquiryButton {
+  width: 80%;
   height: 50px;
   background: #F2CBE4;
-  border-radius: 20px;
-  margin-top: 25px;
+  border-radius: 10px;
+  margin: 15px 0 15px 0;
 
   text-align: center;
   line-height: 50px;

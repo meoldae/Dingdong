@@ -1,19 +1,23 @@
-import loginKakao from "/assets/images/login_kakao.png"
-import { useNavigate } from "react-router-dom"
-import styles from "./Login.module.css"
+import loginKakao from "/assets/images/login_kakao.png";
+import { useNavigate } from "react-router-dom";
+import styles from "./Login.module.css";
 
 const Login = () => {
-  const navigate = useNavigate()
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
-  const loginHandler = () => {window.location.href = `${import.meta.env.VITE_SERVER_URL}/oauth2/authorization/kakao`}
+  const navigate = useNavigate();
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
+  const loginHandler = () => {
+    window.location.href = `${
+      import.meta.env.VITE_SERVER_URL
+    }/oauth2/authorization/kakao`;
+  };
 
   const guestLoginHandler = () => {
-    navigate(`${urlPath}/tutorial`)
-  }
+    navigate(`${urlPath}/tutorial`);
+  };
 
   const posteCardTest = () => {
-    navigate(`${urlPath}/yourstamp`)
-  }
+    navigate(`${urlPath}/yourstamp`);
+  };
 
   return (
     <div className={styles.container}>
@@ -21,8 +25,10 @@ const Login = () => {
         <LoginMatter />
       </div> */}
       <div className={styles.logo}>
-        <img src={`${urlPath}/assets/images/dingdonglogo2.png`} alt="" />
+        <img src={`${urlPath}/assets/images/logo.png`} alt="" />
+        <img src={`${urlPath}/assets/images/slogun.png`}/>
       </div>
+
       <div className={styles.buttons}>
         <img src={loginKakao} alt="카카오로그인" onClick={loginHandler} />
         <div className={styles.testButton} onClick={posteCardTest}>
@@ -30,10 +36,14 @@ const Login = () => {
         </div>
       </div>
       <div className={styles.home}>
-        <img src={`${urlPath}/assets/images/home.png`} alt="" style={{ width: "100%" }}/>
+        <img
+          src={`${urlPath}/assets/images/logo2.png`}
+          alt=""
+          style={{ width: "100%" }}
+        />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

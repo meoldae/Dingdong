@@ -33,33 +33,33 @@
 .newcanvas.dawn {
   width: 100%;
   height: 100%;
-  background: linear-gradient(-45deg, #594871, #000000, #00008b);
-  animation: gradient 5s linear infinite;
-  background-size: 200% 200%;
-}
+  background: linear-gradient(#6C5378 ,#7080CC);
+  background-size: 100% 100vh;
+  height: 100%;
+  height: 100svh;}
 
 .newcanvas.morning {
   width: 100%;
-  background: linear-gradient(-45deg, #4891f6, #64c1f4, #ffffff, #ff735a);
-  animation: gradient 10s linear infinite;
-  background-size: 200% 200%;
+  background: linear-gradient(#F49494,#F9EDCE);
+  background-size: 100% 100vh;
   height: 100%;
+  height: 100svh;
 }
 
 .newcanvas.afternoon {
   width: 100%;
-  background: linear-gradient(-45deg, #ee7752, #4891f6, #23d5ab, #de8f1a);
-  animation: gradient 5s linear infinite;
-  background-size: 200% 200%;
+  background: linear-gradient(#479CEA,#FFF4CE);
+  background-size: 100% 100vh;
   height: 100%;
+  height: 100svh;
 }
 
 .newcanvas.dinner {
   width: 100%;
-  background: linear-gradient(-45deg, #594871, #000000, #00008b);
-  animation: gradient 5s linear infinite;
-  background-size: 400% 400%;
+  background: linear-gradient(#6071D3  ,#F8D8D4);
+  background-size: 100% 100vh;
   height: 100%;
+  height: 100svh;
 }
 
 @keyframes gradient {
@@ -95,18 +95,7 @@
   transform: translate(-50%);
   justify-content: center;
 }
-/* 
-.randomButton {
-  width: 200px;
-  height: 40px;
-  border-radius: 40px;
-  background: #fff;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-} */
+
 
 .randomImage {
   width: 25px;

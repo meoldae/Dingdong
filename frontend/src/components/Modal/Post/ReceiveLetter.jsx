@@ -43,7 +43,7 @@ const RecevieLetter = (props) => {
   return (
     <>
       <div className={styles.overlay} onClick={props.cancelClick}>
-        {letterDetail && (
+        {letterDetail ? (
           <div className={styles.receiveLetterContainer}>
             <Card className={styles.receiveLetterBox}>
               <div className={styles.xmarkImg} onClick={props.cancelClick}>
@@ -55,13 +55,13 @@ const RecevieLetter = (props) => {
                   .split("/")
                   .pop()}`}
               />
-              <div className={styles.letterToUser}>
+              <div className={styles.letterToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>
                 To. {letterDetail?.letterTo}
               </div>
-              <div className={styles.letterContent}>
+              <div className={styles.letterContent} style={{ fontFamily: "GangwonEduAll-Light" }}>
               <span dangerouslySetInnerHTML={{ __html: letterDetail?.description.replaceAll('\n', '<br />') }} />
               </div>
-              <div className={styles.footerContainer}>
+              <div className={styles.footerContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
                 <div className={styles.report} onClick={reportHandler}>
                   신고하기
                 </div>
@@ -71,7 +71,12 @@ const RecevieLetter = (props) => {
               </div>
             </Card>
           </div>
-        )}
+        ):(
+          <div>
+            편지가 없습니다.
+          </div>
+        )
+        }
       </div>
     </>
   )
