@@ -3,6 +3,7 @@ import { useState } from "react"
 
 // 컴포넌트
 import Card from "../../UI/Card"
+import DefaultModal from "../Default/DefaultModal"
 
 // 스타일
 import styles from "./PostDefaultModal.module.css"
@@ -27,7 +28,7 @@ const PostDefaultModal = (props) => {
 
   return (
     <>
-      <div className={styles.overlay} onClick={finishSelectHandler} />
+      <div className={styles.overlay} onClick={() => finishSelectHandler()} />
       {props.postCheck ? (
         <Card className={styles.containerOther}>
           <div className={styles.xmarkImg} onClick={props.cancelClick}>
@@ -46,6 +47,22 @@ const PostDefaultModal = (props) => {
           <div className={styles.horizontalRule}></div>
           <div className={props.className}>{props.children}</div>
         </Card>
+      )}
+
+      {/* 우표선택 종료모달 */}
+      {isFinishSelectPostCard && (
+        <>
+          <div className={styles.finishSelectOverlay} onClick={() => setIsFinishSelectPostCard(false)} />
+          <div className={styles.finishSelectContainer}>
+            <DefaultModal
+              content={"우표 선택을 종료하시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={props.cancelClick}
+              cancelClick={() => setIsFinishSelectPostCard(false)}
+            />
+          </div>
+        </>
       )}
     </>
   )
