@@ -7,11 +7,13 @@ import Card from "../../UI/Card"
 import styles from "./SendLetter.module.css"
 import { useRecoilValue } from "recoil"
 import { successMsg } from "@/utils/customToast"
+import DefaultModal from "../Default/DefaultModal"
 
 const SendLetter = ({ onClose, card }) => {
   const [content, setContent] = useState("")
   const [contentCount, setContentCount] = useState(0)
   const [isSending, setIsSending] = useState(false)
+  const [isFinishSendLetter, setIsFinishSendLetter] = useState(false)
 
   const userInfo = useRecoilValue(userAtom)
   const [userNickname, setUserNickname] = useState(userInfo.nickname || "")
@@ -26,6 +28,7 @@ const SendLetter = ({ onClose, card }) => {
 
   const cancelClick = () => {
     onClose()
+    setIsFinishSendLetter(false)
   }
 
   const sendClick = () => {
@@ -77,7 +80,7 @@ const SendLetter = ({ onClose, card }) => {
 
   const handleOutsideClick = (event) => {
     if (event.target === event.currentTarget) {
-      onClose()
+      setIsFinishSendLetter(true)
     }
   }
 
@@ -90,7 +93,7 @@ const SendLetter = ({ onClose, card }) => {
     <>
       <div className={styles.overlay} onClick={handleOutsideClick}>
         <div className={styles.sendLetterContainer}>
-          <div className={styles.xmarkImg} onClick={cancelClick}>
+          <div className={styles.xmarkImg} onClick={() => setIsFinishSendLetter(true)}>
             <img src={`${urlPath}/assets/icons/grayXmark.png`} alt="" />
           </div>
           <Card className={`${styles.sendLetterBox} ${styles[card.order]}`}>  
@@ -138,6 +141,23 @@ const SendLetter = ({ onClose, card }) => {
           />
         </div>
       </div>
+
+      {/* 편지보내기 종료모달 */}
+      {isFinishSendLetter && (
+        <>
+          <div className={styles.finishOverlay} onClick={() => setIsFinishSendLetter(false)}>
+            <div className={styles.finishContainer}>
+              <DefaultModal
+                content={"편지 작성을 종료하시겠습니까?"}
+                ok={"네"}
+                cancel={"아니오"}
+                okClick={cancelClick}
+                cancelClick={() => setIsFinishSendLetter(false)}
+              />
+            </div>
+          </div>
+        </>
+      )}
     </>
   )
 }
