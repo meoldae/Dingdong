@@ -42,16 +42,18 @@ const PostofficeCardBox = (props) => {
       <PostofficeDefaultModal PostDefaultTitle={"우표 선택"}>
         <div className={styles.postCardContainer}>
           {cards.map((card, idx) => (
-            <img
-              key={card.src}
-              className={
-                selectedCard?.src === card.src
-                  ? `${styles.postCard} ${styles.selected}`
-                  : styles.postCard
-              }
-              src={`${urlPath}/assets/images/post/${card.src}`}
-              onClick={() => handleCardClick(idx, card.src, card.comment)}
-            />
+            <div className={styles.postCardCenter}>
+              <img
+                key={card.src}
+                className={
+                  selectedCard?.src === card.src
+                    ? `${styles.postCard} ${styles.selected}`
+                    : styles.postCard
+                }
+                src={`${urlPath}/assets/images/post/${card.src}`}
+                onClick={() => handleCardClick(idx, card.src, card.comment)}
+              />
+            </div>
           ))}
         </div>
         {cardComment ? (
