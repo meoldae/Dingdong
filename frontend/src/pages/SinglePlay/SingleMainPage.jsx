@@ -141,6 +141,9 @@ const SingleMainPage = () => {
     }
   }, [])
 
+  // 랭킹정보 모달 상태관리
+  const [isRankingInformation, setIsRankingInformation] = useState(false)
+
   return (
     <>
       <div className={styles.canvasContainer}>
@@ -413,7 +416,7 @@ const SingleMainPage = () => {
           >
             <div className={styles.overlay} onClick={() => closeRanking()} />
             <div className={styles.rankingModalContainer}>
-              <img src={'/assets/icons/information-circle.png'} className={styles.Infromation} />
+              <img src={'/assets/icons/information-circle.png'} className={styles.Infromation} onClick={() => setIsRankingInformation(true)} />
               <RankingModal />
             </div>
           </motion.div>
