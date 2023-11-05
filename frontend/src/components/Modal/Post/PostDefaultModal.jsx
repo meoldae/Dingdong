@@ -5,7 +5,7 @@ const PostDefaultModal = (props) => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   return (
     <>
-      <div className={styles.overlay} onClick={props.cancelClick}></div>
+      <div className={styles.overlay} onClick={props.cancelClick} />
       {props.postCheck ? (
         <Card className={styles.containerOther}>
           <div className={styles.xmarkImg} onClick={props.cancelClick}>
