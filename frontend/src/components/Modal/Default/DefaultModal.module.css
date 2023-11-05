@@ -12,6 +12,15 @@
   z-index: 999;
 }
 
+.xButton {
+  width: 25px;
+  height: 25px;
+
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
 .ContentContainer {
   height: 120px;
   display: flex;
