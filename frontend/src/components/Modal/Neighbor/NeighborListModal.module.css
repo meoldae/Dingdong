@@ -20,7 +20,9 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #049463;
+  background: #02C26F;
+  border: 2px solid #FFFFFF;
+
   position: relative;
   left: 45px;
   z-index: 2;
@@ -30,7 +32,9 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #c4c4c4;
+  background: #C4C4C4;
+  border: 2px solid #FFFFFF;
+
   position: absolute;
   left: 45px;
   z-index: 2;
