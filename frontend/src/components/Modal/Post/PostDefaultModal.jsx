@@ -13,10 +13,21 @@ const PostDefaultModal = (props) => {
 
   // 우표선택 종료모달 상태관리
   const [isFinishSelectPostCard, setIsFinishSelectPostCard] = useState(false)
+  // 편지함 종료모달 상태관리
+  const [isFinishSelectPost, setIsFinishSelectPost] = useState(false)
+
+  // 종료모달 함수
+  const finishSelectHandler = () => {
+    if (props.checkStatus === "postbox") {
+      setIsFinishSelectPost(true)
+    } else {
+      setIsFinishSelectPostCard(true)
+    }
+  }
 
   return (
     <>
-      <div className={styles.overlay} onClick={props.cancelClick} />
+      <div className={styles.overlay} onClick={finishSelectHandler} />
       {props.postCheck ? (
         <Card className={styles.containerOther}>
           <div className={styles.xmarkImg} onClick={props.cancelClick}>
