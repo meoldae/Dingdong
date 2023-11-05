@@ -20,7 +20,7 @@ const PostDefaultModal = (props) => {
       {props.postCheck ? (
         <Card className={styles.containerOther}>
           <div className={styles.xmarkImg} onClick={props.cancelClick}>
-            <img src={`${urlPath}/assets/icons/Pink_X-mark.png`} />
+            <img src={`${urlPath}/assets/icons/x.png`} />
           </div>
           <div className={styles.containerTitle}>{props.PostDefaultTitle}</div>
           <div className={styles.horizontalRule}></div>
@@ -29,7 +29,7 @@ const PostDefaultModal = (props) => {
       ) : (
         <Card className={styles.containerMy}>
           <div className={styles.xmarkImg} onClick={props.cancelClick}>
-            <img src={`${urlPath}/assets/icons/Pink_X-mark.png`} />
+            <img src={`${urlPath}/assets/icons/x.png`} />
           </div>
           <div className={styles.containerTitle}>{props.PostDefaultTitle}</div>
           <div className={styles.horizontalRule}></div>
