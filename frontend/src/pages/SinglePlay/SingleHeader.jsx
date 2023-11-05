@@ -177,7 +177,7 @@ const SingleHeader = ({ checkMyRoom }) => {
                 className={styles.HamburgerButton}
               />
               <RoomNameBtn >
-                <div>딩동 마을</div>
+                딩동 마을
               </RoomNameBtn >
               {/* </div> */}
               <img src={bell} onClick={() => setIsAlarm(true)} />

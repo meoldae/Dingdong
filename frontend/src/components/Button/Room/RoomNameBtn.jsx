@@ -3,9 +3,9 @@ import styles from "./RoomNameBtn.module.css"
 
 const RoomNameBtn = (props) => {
   return (
-    <button className={styles.RoomNameBtn} role="button" {...props}>
-      {props.children}
-    </button>
+    <div className={styles.RoomNameBtn}>
+      {props.children === "딩동 마을" ? (<>{props.children}</>) : (<>{props.children}의 방</>)}
+    </div>
   )
 }
 
