@@ -19,20 +19,6 @@
   font-size: 20px;
 }
 
-.HorizontalLine {
-  width: 250px;
-  border: 1px solid #e8e8e8;
-  position: absolute;
-  top: 120px;
-}
-
-.VerticalLine {
-  height: 40px;
-  border: 1px solid #e8e8e8;
-  position: absolute;
-  top: 133px;
-}
-
 .ButtonContainer {
   position: absolute;
   top: 120px;
