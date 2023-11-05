@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { sendLetter, sendGuestLetter } from "@/api/Letter"
 import { userAtom } from "@/atom/UserAtom"
 import { roomInfoAtom } from "@/atom/RoomInfoAtom"
@@ -87,56 +87,58 @@ const SendLetter = ({ onClose, card }) => {
   }
 
   return (
-    <div className={styles.overlay} onClick={handleOutsideClick}>
-      <div className={styles.sendLetterContainer}>
-        <div className={styles.xmarkImg} onClick={cancelClick}>
-          <img src={`${urlPath}/assets/icons/grayXmark.png`} alt="" />
-        </div>
-        <Card className={`${styles.sendLetterBox} ${styles[card.order]}`}>  
-          <img
-            className={styles.topPostCardImg}
-            src={`${urlPath}/assets/images/post/${card.src}`}
-          />
-          <div className={styles.ToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>To. {roomInfo}</div>
-          <div className={styles.letterContent}>
-            <textarea
-              value={content}
-              onChange={(e) => handleCheckContentCount(e)}
-              placeholder="편지 내용을 작성하세요."
-              maxLength={199}
-              spellCheck="false"
-              style={{ fontFamily: "GangwonEduAll-Light"}}
+    <>
+      <div className={styles.overlay} onClick={handleOutsideClick}>
+        <div className={styles.sendLetterContainer}>
+          <div className={styles.xmarkImg} onClick={cancelClick}>
+            <img src={`${urlPath}/assets/icons/grayXmark.png`} alt="" />
+          </div>
+          <Card className={`${styles.sendLetterBox} ${styles[card.order]}`}>  
+            <img
+              className={styles.topPostCardImg}
+              src={`${urlPath}/assets/images/post/${card.src}`}
             />
-          </div>
-          <div className={styles.contentCount} style={{ fontFamily: "GangwonEduAll-Light" }}>{contentCount}/200</div>
-          <div className={styles.footerContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
-            {/* <div className={styles.anonymous}>
-              <span>체크박스</span>
-              <span>익명의 이웃</span>
-            </div> */}
-            <div className={styles.FromUser}>
-              From.
-              {userInfo.nickname ? (
-                userInfo.nickname
-              ) : (
-                <textarea
-                  value={userNickname}
-                  onChange={(e) => setUserNickname(e.target.value)}
-                  placeholder="닉네임을 입력하세요."
-                  maxLength={8}
-                  style={{ fontFamily: "GangwonEduAll-Light" }}
-                />
-              )}
+            <div className={styles.ToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>To. {roomInfo}</div>
+            <div className={styles.letterContent}>
+              <textarea
+                value={content}
+                onChange={(e) => handleCheckContentCount(e)}
+                placeholder="편지 내용을 작성하세요."
+                maxLength={199}
+                spellCheck="false"
+                style={{ fontFamily: "GangwonEduAll-Light"}}
+              />
             </div>
-          </div>
-        </Card>
-        <DefaultPostBtn
-          btnName={"편지 보내기"}
-          onClick={sendClick}
-          color={card.order}
-        />
+            <div className={styles.contentCount} style={{ fontFamily: "GangwonEduAll-Light" }}>{contentCount}/200</div>
+            <div className={styles.footerContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
+              {/* <div className={styles.anonymous}>
+                <span>체크박스</span>
+                <span>익명의 이웃</span>
+              </div> */}
+              <div className={styles.FromUser}>
+                From.
+                {userInfo.nickname ? (
+                  userInfo.nickname
+                ) : (
+                  <textarea
+                    value={userNickname}
+                    onChange={(e) => setUserNickname(e.target.value)}
+                    placeholder="닉네임을 입력하세요."
+                    maxLength={8}
+                    style={{ fontFamily: "GangwonEduAll-Light" }}
+                  />
+                )}
+              </div>
+            </div>
+          </Card>
+          <DefaultPostBtn
+            btnName={"편지 보내기"}
+            onClick={sendClick}
+            color={card.order}
+          />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
