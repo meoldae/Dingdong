@@ -14,21 +14,24 @@
 
   font-family: Pretendard-SemiBold;
   font-size: 15px;
-  
+
   display: flex;
   align-items: center;
 }
 
 .ButtonContainer {
-  position: absolute;
-  top: 40px;
+  width: 80%;
+  height: 40px;
+  
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .Button {
-  width: 150px;
-  height: 40px;
+  width: 90px;
+  height: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
