@@ -59,6 +59,7 @@ import SingleHeader from "./SingleHeader"
 import RankingInformation from "../../components/Modal/Ranking/RankingInformation"
 
 const SingleMainPage = () => {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
   // 카메라 설정
   const setDefaultCameraPosition = useSetRecoilState(DefaultPosition)
   const setDefaultCameraZoom = useSetRecoilState(DefaultZoom)
@@ -419,7 +420,7 @@ const SingleMainPage = () => {
             <div className={styles.overlay} onClick={() => closeRanking()} />
             <div className={styles.rankingModalContainer}>
               <img
-                src={'/assets/icons/information-circle.png'}
+                src={`${urlPath}/assets/icons/information-circle.png`}
                 className={styles.Infromation}
                 onClick={() => setIsRankingInformation(true)}
               />
