@@ -57,7 +57,7 @@
   padding: 5px;
   display: flex;
   justify-content: center;
-  font-family: "GangwonEduAll-Light";
+  /* font-family: "GangwonEduAll-Light"; */
   font-size: 35px;
 }
 
@@ -78,7 +78,7 @@
 
   padding: 5px;
   font-size: 25px;
-  font-family: "GangwonEduAll-Light";
+  /* font-family: "GangwonEduAll-Light"; */
   outline: none;
   text-align: center;
   -ms-overflow-style: none;
@@ -89,7 +89,7 @@
 }
 
 .contentCount {
-  font-family: "GangwonEduAll-Light";
+  /* font-family: "GangwonEduAll-Light"; */
   font-size: 20px;
   width: 100%;
   display: flex;
@@ -101,7 +101,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-family: "GangwonEduAll-Light";
+  /* font-family: "GangwonEduAll-Light"; */
   align-items: center;
   margin-top: 15px;
 }
@@ -130,7 +130,7 @@
 
   /* padding: 5px; */
   font-size: 25px;
-  font-family: "GangwonEduAll-Light";
+  /* font-family: "GangwonEduAll-Light"; */
   outline: none;
   text-align:center;
 }
