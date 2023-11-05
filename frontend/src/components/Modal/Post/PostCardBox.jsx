@@ -57,6 +57,7 @@ const PostCardBox = (props) => {
         postCheck={true}
         checkStatus={"postcardbox"}
       >
+        <div className={styles.greenLine}></div>
         <div className={styles.postCardContainer}>
           {cards.map((card, idx) => (
             <div className={styles.postCardCenter} key={card.src}>
