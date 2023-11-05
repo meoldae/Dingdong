@@ -39,7 +39,7 @@ const StampTestOptions = (props) => {
         src={`${urlPath}/assets/images/Stamp_Test_Option.png`} 
         style={{ marginTop: "20%", width: "60%",}}
       />
-      <div className={styles.ContentContainer}>
+      <div className={styles.ContentContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
         <div className={styles.Question}>{Questions[opsNum].question}</div>
         <div className={styles.AnswerContainer}>
           {Questions[opsNum].answers.map((answer) => {
