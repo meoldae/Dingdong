@@ -31,7 +31,7 @@ const PostDefaultModal = (props) => {
       <div className={styles.overlay} onClick={() => finishSelectHandler()} />
       {props.postCheck ? (
         <Card className={styles.containerOther}>
-          <div className={styles.xmarkImg} onClick={props.cancelClick}>
+          <div className={styles.xmarkImg} onClick={() => finishSelectHandler()}>
             <img src={`${urlPath}/assets/icons/x.png`} />
           </div>
           <div className={styles.containerTitle}>{props.PostDefaultTitle}</div>
@@ -40,7 +40,7 @@ const PostDefaultModal = (props) => {
         </Card>
       ) : (
         <Card className={styles.containerMy}>
-          <div className={styles.xmarkImg} onClick={props.cancelClick}>
+          <div className={styles.xmarkImg} onClick={() => finishSelectHandler()}>
             <img src={`${urlPath}/assets/icons/x.png`} />
           </div>
           <div className={styles.containerTitle}>{props.PostDefaultTitle}</div>
@@ -60,6 +60,22 @@ const PostDefaultModal = (props) => {
               cancel={"아니오"}
               okClick={props.cancelClick}
               cancelClick={() => setIsFinishSelectPostCard(false)}
+            />
+          </div>
+        </>
+      )}
+
+      {/* 편지함 종료모달 */}
+      {isFinishSelectPost && (
+        <>
+          <div className={styles.finishSelectOverlay} onClick={() => setIsFinishSelectPost(false)} />
+          <div className={styles.finishSelectContainer}>
+            <DefaultModal
+              content={"편지함을 종료하시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={props.cancelClick}
+              cancelClick={() => setIsFinishSelectPost(false)}
             />
           </div>
         </>
