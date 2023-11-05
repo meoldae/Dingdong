@@ -3,4 +3,13 @@
   height: 500px;
   background: #FFF;
   border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SemiContainer {
+  width: 90%;
+  height: 90%;
 }
