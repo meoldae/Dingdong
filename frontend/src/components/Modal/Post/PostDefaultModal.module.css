@@ -39,7 +39,8 @@
 }
 
 .xmarkImg img {
-  width: 5%;
+  width: 25px;
+  height: 25px;
   display: flex;
   justify-content: flex-end;
 }
