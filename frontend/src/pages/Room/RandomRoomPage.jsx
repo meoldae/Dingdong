@@ -111,17 +111,21 @@ function RandomRoomPage() {
   }
 
   useEffect(() => {
-    const checkTime = today.getHours()
-    if (checkTime >= 0 && checkTime < 6) {
-      setTime("dawn")
-    } else if (checkTime >= 6 && checkTime < 12) {
-      setTime("morning")
-    } else if (checkTime >= 12 && checkTime < 18) {
-      setTime("afternoon")
+    const checkTime = today.getHours();
+
+    if (checkTime >= 22 || checkTime < 6) {
+      setTime("dawn");
+    } else if (checkTime >= 6 && checkTime < 10) {
+      // 06시부터 10시까지 morning
+      setTime("morning");
+    } else if (checkTime >= 10 && checkTime < 18) {
+      // 10시부터 18시까지 afternoon
+      setTime("afternoon");
     } else {
-      setTime("dinner")
+      // 18시부터 22시까지 dinner
+      setTime("dinner");
     }
-  }, [])
+  }, []);
   return (
     <>
       {roomDrag && <div className={styles.roomDrag} />}
