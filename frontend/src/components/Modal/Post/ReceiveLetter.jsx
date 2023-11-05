@@ -43,7 +43,7 @@ const RecevieLetter = (props) => {
   return (
     <>
       <div className={styles.overlay} onClick={props.cancelClick}>
-        {letterDetail && (
+        {letterDetail ? (
           <div className={styles.receiveLetterContainer}>
             <Card className={styles.receiveLetterBox}>
               <div className={styles.xmarkImg} onClick={props.cancelClick}>
@@ -71,7 +71,12 @@ const RecevieLetter = (props) => {
               </div>
             </Card>
           </div>
-        )}
+        ):(
+          <div>
+            편지가 없습니다.
+          </div>
+        )
+        }
       </div>
     </>
   )
