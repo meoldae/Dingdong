@@ -74,6 +74,7 @@ const PostBox = (props) => {
           cancelClick={props.cancelClick}
           checkStatus={"postbox"}
         >
+          {letters.length?
           <div className={styles.letterBox} ref={letterBoxRef}>
             {letters.map((letter, index) => (
               <Letter
@@ -86,6 +87,9 @@ const PostBox = (props) => {
             ))}
             <div ref={observerRef}></div>
           </div>
+          :<>
+          {/* 텅 넣을 것 */}
+          </>}
         </PostDefaultModal>
       </div>
     )
