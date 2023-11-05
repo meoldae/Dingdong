@@ -56,6 +56,8 @@ import PostofficeCardBox from "../Postoffice/PostofficeCardBox"
 import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter"
 import GuidePage from "../../components/UI/GuidePage"
 import SingleHeader from "./SingleHeader"
+import RankingInformation from "../../components/Modal/Ranking/RankingInformation"
+
 const SingleMainPage = () => {
   // 카메라 설정
   const setDefaultCameraPosition = useSetRecoilState(DefaultPosition)
@@ -140,6 +142,9 @@ const SingleMainPage = () => {
       setGuide(true)
     }
   }, [])
+
+  // 랭킹정보 모달 상태관리
+  const [isRankingInformation, setIsRankingInformation] = useState(false)
 
   return (
     <>
@@ -403,21 +408,36 @@ const SingleMainPage = () => {
             </motion.div>
           </>
         )}
-      </div>
 
-      {/* 랭킹모달 */}
-      {confirmEnteringRank && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-        >
-          <div className={styles.overlay} onClick={() => closeRanking()} />
-          <div className={styles.rankingModalContainer}>
-            <RankingModal />
-          </div>
-        </motion.div>
-      )}
+        {/* 랭킹모달 */}
+        {confirmEnteringRank && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 1 }}
+          >
+            <div className={styles.overlay} onClick={() => closeRanking()} />
+            <div className={styles.rankingModalContainer}>
+              <img
+                src={'/assets/icons/information-circle.png'}
+                className={styles.Infromation}
+                onClick={() => setIsRankingInformation(true)}
+              />
+              <RankingModal />
+            </div>
+          </motion.div>
+        )}
+
+        {/* 랭킹정보모달 */}
+        {isRankingInformation && (
+          <>
+            <div className={styles.InformationOverlay} onClick={() => setIsRankingInformation(false)} />
+            <div className={styles.RankingInformationContainer}>
+              <RankingInformation />
+            </div>
+          </>
+        )}
+      </div>
     </>
   )
 }
