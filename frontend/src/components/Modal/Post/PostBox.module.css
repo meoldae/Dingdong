@@ -23,7 +23,7 @@
 
 .letterBox {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr); /* 3열로 설정 */
 }
 
 .test {
