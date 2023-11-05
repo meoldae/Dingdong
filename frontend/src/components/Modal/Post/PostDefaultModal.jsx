@@ -8,6 +8,7 @@ import Card from "../../UI/Card"
 import styles from "./PostDefaultModal.module.css"
 
 const PostDefaultModal = (props) => {
+  // 이미지 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   return (
     <>
