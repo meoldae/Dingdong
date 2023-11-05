@@ -5,19 +5,17 @@ const DefaultModal = ({ content, ok, cancel, okClick, cancelClick }) => {
   return (
     <div className={styles.Container}>
       <div className={styles.ContentContainer}>{content}</div>
-      <div className={styles.HorizontalLine} />
-      <div className={styles.VerticalLine} />
       <div className={styles.ButtonContainer}>
         <div
           className={styles.Button}
-          style={{ color: "#049463" }}
+          style={{ color: "#FFFFFF" }}
           onClick={okClick}
         >
           {ok}
         </div>
         <div
           className={styles.Button}
-          style={{ color: "#2C2C2C" }}
+          style={{ color: "#000000" }}
           onClick={cancelClick}
         >
           {cancel}
