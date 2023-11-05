@@ -34,10 +34,10 @@
   border-radius: 30px;
   background: linear-gradient(
     to left,
-    hsl(330, 74%, 74%) 0%,
-    /* 진한 핑크로 변경 */ hsl(330, 70%, 78%) 8%,
-    /* 진한 핑크로 변경 */ hsl(330, 84%, 83%) 92%,
-    /* 진한 핑크로 변경 */ hsl(330, 85%, 79%) 100% /* 진한 핑크로 변경 */
+    hsl(0, 0%, 74%) 0%,
+    /* 진한 핑크로 변경 */ hsl(0, 0%, 75%) 8%,
+    /* 진한 핑크로 변경 */ hsl(0, 0%, 81%) 92%,
+    /* 진한 핑크로 변경 */ hsl(0, 0%, 76%) 100% /* 진한 핑크로 변경 */
   );
 }
 
@@ -48,7 +48,7 @@
   border-radius: 30px;
   font-size: 1.1rem;
   color: white;
-  background: hsl(330, 87%, 76%); /* 진한 핑크로 변경 */
+  background: hsl(0, 0%, 100%); /* 진한 핑크로 변경 */
   will-change: transform;
   transform: translateY(-4px);
   transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
@@ -92,4 +92,5 @@
 
 .text {
   font-weight: bold;
+  color: #000000;
 }
