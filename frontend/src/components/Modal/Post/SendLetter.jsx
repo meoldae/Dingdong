@@ -97,7 +97,7 @@ const SendLetter = ({ onClose, card }) => {
             className={styles.topPostCardImg}
             src={`${urlPath}/assets/images/post/${card.src}`}
           />
-          <div className={styles.ToUser}>To. {roomInfo}</div>
+          <div className={styles.ToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>To. {roomInfo}</div>
           <div className={styles.letterContent}>
             <textarea
               value={content}
@@ -105,10 +105,11 @@ const SendLetter = ({ onClose, card }) => {
               placeholder="편지 내용을 작성하세요."
               maxLength={199}
               spellCheck="false"
+              style={{ fontFamily: "GangwonEduAll-Light" }}
             />
           </div>
-          <div className={styles.contentCount}>{contentCount}/200</div>
-          <div className={styles.footerContainer}>
+          <div className={styles.contentCount} style={{ fontFamily: "GangwonEduAll-Light" }}>{contentCount}/200</div>
+          <div className={styles.footerContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
             {/* <div className={styles.anonymous}>
               <span>체크박스</span>
               <span>익명의 이웃</span>
@@ -123,6 +124,7 @@ const SendLetter = ({ onClose, card }) => {
                   onChange={(e) => setUserNickname(e.target.value)}
                   placeholder="닉네임을 입력하세요."
                   maxLength={8}
+                  style={{ fontFamily: "GangwonEduAll-Light" }}
                 />
               )}
             </div>
