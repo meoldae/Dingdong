@@ -6,6 +6,7 @@ import styles from "./Header.module.css"
 
 // 컴포넌트
 import RoomBtn from "../Button/Room/RoomBtn"
+import DefaultModal from "../Modal/Default/DefaultModal"
 
 // API
 import {
@@ -84,44 +85,27 @@ const NeighborRequest = () => {
             onClick={() => setIsAddNeighbor(false)}
           />
           <div className={styles.AddNeighbor}>
-            <div className={styles.MainContainer}>
-              <div className={styles.TitleContainer}>
-                <div style={{ color: "#2C2C2C" }}>
-                  {neighborFlag
-                    ? "이웃을 끊으시겠습니까?"
-                    : "이웃 요청을 하시겠습니까?"}
-                </div>
-              </div>
-              <div className={styles.HorizontalLine} />
-              <div className={styles.VerticalLine} />
-              <div className={styles.ButtonContainer}>
-                {neighborFlag ? (
-                  <div
-                    className={styles.Button}
-                    style={{ color: "#049463" }}
-                    onClick={() => deleteNeighborByRoomId()}
-                  >
-                    확인
-                  </div>
-                ) : (
-                  <div
-                    className={styles.Button}
-                    style={{ color: "#049463" }}
-                    onClick={() => isNeighbor()}
-                  >
-                    확인
-                  </div>
-                )}
-
-                <div
-                  className={styles.Button}
-                  style={{ color: "#2C2C2C" }}
-                  onClick={() => setIsAddNeighbor(false)}
-                >
-                  취소
-                </div>
-              </div>
-            </div>
+            {neighborFlag ? (
+              <>
+                <DefaultModal
+                  content={"이웃을 끊으시겠습니까?"}
+                  ok={"확인"}
+                  cancel={"취소"}
+                  okClick={() => deleteNeighborByRoomId()}
+                  cancelClick={() => setIsAddNeighbor(false)}
+                />
+              </>
+            ) : (
+              <>
+                <DefaultModal
+                  content={"이웃 요청을 하시겠습니까?"}
+                  ok={"확인"}
+                  cancel={"취소"}
+                  okClick={() => isNeighbor()}
+                  cancelClick={() => setIsAddNeighbor(false)}
+                />
+              </>
+            )}
           </div>
         </>
       )}
