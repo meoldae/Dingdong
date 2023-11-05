@@ -55,13 +55,13 @@ const RecevieLetter = (props) => {
                   .split("/")
                   .pop()}`}
               />
-              <div className={styles.letterToUser}>
+              <div className={styles.letterToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>
                 To. {letterDetail?.letterTo}
               </div>
-              <div className={styles.letterContent}>
+              <div className={styles.letterContent} style={{ fontFamily: "GangwonEduAll-Light" }}>
               <span dangerouslySetInnerHTML={{ __html: letterDetail?.description.replaceAll('\n', '<br />') }} />
               </div>
-              <div className={styles.footerContainer}>
+              <div className={styles.footerContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
                 <div className={styles.report} onClick={reportHandler}>
                   신고하기
                 </div>
