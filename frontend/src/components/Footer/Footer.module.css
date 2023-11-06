@@ -2,7 +2,9 @@
   position: absolute;
   z-index: 3;
   width: 100%;
-  bottom: 50px;
+  height: 100vh;
+  height: 100svh;
+  top: 0;
 }
 
 .secondFooter {
@@ -10,14 +12,14 @@
   position: absolute;
   align-items: center;
   justify-content: end;
-  bottom: 80px;
+  bottom: 15%;
   right: 0;
 }
 
 .footer {
   display: flex;
   width: 100%;
-  bottom: 0;
+  bottom: 3%;
   position: absolute;
   align-items: center;
   justify-content: space-between;
