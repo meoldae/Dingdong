@@ -25,8 +25,8 @@
   height: 120px;
   display: flex;
   align-items: center;
-  font-family: Pretendard-SemiBold;
-  font-size: 20px;
+  /* font-family: Pretendard-SemiBold; */
+  font-size: 18px;
 }
 
 .ButtonContainer {
@@ -45,6 +45,6 @@
   justify-content: center;
   align-items: center;
 
-  font-family: Pretendard-SemiBold;
+  /* font-family: Pretendard-SemiBold; */
   font-size: 15px;
 }

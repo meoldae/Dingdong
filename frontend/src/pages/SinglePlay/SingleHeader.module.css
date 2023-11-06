@@ -117,7 +117,7 @@
   align-items: center;
   width: 300px;
   height: 120px;
-  font-family: Pretendard-SemiBold;
+  /* font-family: Pretendard-SemiBold; */
 }
 
 .HorizontalLine {
@@ -149,7 +149,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Pretendard-SemiBold";
+  /* font-family: "Pretendard-SemiBold"; */
 }
 
 /* 헤더 햄버거 모달 CSS */
@@ -178,7 +178,7 @@
 .ContentContainer {
   width: 90%;
   height: 90%;
-  font-family: "Pretendard-SemiBold";
+  /* font-family: "Pretendard-SemiBold"; */
   font-size: 18px;
   color: #2c2c2c;
   display: flex;
@@ -230,7 +230,7 @@
 
 .NoAlarm {
   color: #fff;
-  font-family: "Pretendard-Bold";
+  /* font-family: "Pretendard-Bold"; */
   font-size: 20px;
   width: 300px;
   display: flex;
@@ -266,7 +266,7 @@
 .InquiryTitle {
   color: #FFF;
   font-size: 30px;
-  font-family: "Pretendard-Bold";
+  /* font-family: "Pretendard-Bold"; */
   text-align: center;
   margin-bottom: 15px;
 }
@@ -277,7 +277,7 @@
   background: #FFF;
   border-radius: 10px;
   
-  font-family: "Pretendard-Medium";
+  /* font-family: "Pretendard-Medium"; */
   font-size: 18px;
   padding: 10px;
 
@@ -291,7 +291,7 @@
   text-align: end;
   margin-top: 5px;
   font-size: 15px;
-  font-family: "Pretendard-SemiBold";
+  /* font-family: "Pretendard-SemiBold"; */
 }
 
 .Inquiry {
@@ -303,6 +303,6 @@
   text-align: center;
   line-height: 50px;
   font-size: 20px;
-  font-family: "Pretendard-Bold";
+  /* font-family: "Pretendard-Bold"; */
   color: #2C2C2C;
 }
