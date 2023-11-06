@@ -16,18 +16,31 @@ const PostDefaultModal = (props) => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   const setOnPostOfficeCard = useSetRecoilState(postofficeCardAtom);
+
+  // 우표함 종료확인 모달 상태관리
+  const [isFinishPostCardBox, setIsFinishPostCardBox] = useState(false)
   
   return (
     <>
       <div className={styles.overlay} onClick={()=>{setOnPostOfficeCard(false)}}/>
-        <Card className={styles.container}>
-          <div className={styles.xmarkImg} onClick={()=>{setOnPostOfficeCard(false)}}>
-            <img src={`${urlPath}/assets/icons/x.png`} />
+      <Card className={styles.container}>
+        <div className={styles.xmarkImg} onClick={()=>{setOnPostOfficeCard(false)}}>
+          <img src={`${urlPath}/assets/icons/x.png`} />
+        </div>
+        <div className={styles.containerTitle}>{props.PostDefaultTitle}</div>
+        <div className={styles.horizontalRule}></div>
+        <div className={props.className}>{props.children}</div>
+      </Card>
+
+      {/* 우표함 종료확인 모달 */}
+      {isFinishPostCardBox && (
+        <>
+          <div />
+          <div>
+            
           </div>
-          <div className={styles.containerTitle}>{props.PostDefaultTitle}</div>
-          <div className={styles.horizontalRule}></div>
-          <div className={props.className}>{props.children}</div>
-        </Card>
+        </>
+      )}
     </>
   )
 }
