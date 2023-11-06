@@ -1,7 +1,7 @@
 import React from "react"
 import SharingModalList from "../Modal/Sharing/SharingModalList"
 import styles from "./StampTestStart.module.css"
-import { useNavigate } from "react-router-dom" 
+import { useNavigate } from "react-router-dom"
 
 const StampTestStart = (props) => {
   const navigate = useNavigate()
@@ -10,11 +10,14 @@ const StampTestStart = (props) => {
     navigate(`${urlPath}/`)
   }
   return (
-    <div className={styles.Container} style={{ fontFamily: "GangwonEduAll-Light" }}>
-      <img 
+    <div
+      className={styles.Container}
+      style={{ fontFamily: "GangwonEduAll-Light" }}
+    >
+      <img
         src={`${urlPath}/assets/images/Stamp_Test_Start.png`}
-        style={{ 
-          width: "70%",
+        style={{
+          width: "60%",
         }}
       />
       <div className={styles.ContentContainer}>
@@ -23,8 +26,8 @@ const StampTestStart = (props) => {
       <div>
         <div onClick={props.onTestModeHanlder} className={styles.StartButton}>
           테스트 시작하기
-        </div> 
-        <div className={styles.StartButton} onClick={onHomeHandler}> 
+        </div>
+        <div className={styles.StartButton} onClick={onHomeHandler}>
           딩동 시작하기
         </div>
       </div>
