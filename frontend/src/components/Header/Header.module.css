@@ -306,6 +306,19 @@
   margin: 15px 0 15px 0;
 }
 
+.LineContainer {
+  width: 100%;
+  margin-bottom: 10px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.InquiryLine {
+  width: 80%;
+  border: 1px solid rgba(194, 194, 194, 0.5);
+}
+
 .InquiryContentContainer {
   width: 290px;
 
@@ -345,7 +358,7 @@
 .InquiryButton {
   width: 80%;
   height: 50px;
-  background: #F2CBE4;
+  background: #02C26F;
   border-radius: 10px;
   margin: 15px 0 15px 0;
 
@@ -353,5 +366,5 @@
   line-height: 50px;
   font-size: 20px;
   font-family: "Pretendard-Bold";
-  color: #2C2C2C;
+  color: #FFFFFF;
 }
