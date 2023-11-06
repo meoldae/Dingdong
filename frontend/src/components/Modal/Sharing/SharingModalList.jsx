@@ -139,7 +139,7 @@ function SharingModalList(props) {
       window.Kakao.Share.sendCustom({
         templateId: 100120,
         templateArgs: {
-          THU: `https://ding-dong.s3.ap-northeast-2.amazonaws.com/${props.resultSrcUrl.replace(
+          THU: `https://ding-dong.s3.ap-northeast-2.amazonaws.com/Stamp${props.resultSrcUrl.replace(
             `${urlPath}/assets/StampTest/`,
             ""
           )}`,
