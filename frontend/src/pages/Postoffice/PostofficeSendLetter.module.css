@@ -22,6 +22,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
 }
+
 .sendLetterContainer {
   width: 330px;
   height: 70vh;
@@ -41,7 +42,6 @@
   font-family: "GangwonEduAll-Light";
   margin-left: 10px;
 }
-
 
 .sendLetterBox {
   position: relative;
@@ -63,6 +63,7 @@
   display: flex;
   justify-content: flex-end;
 }
+
 .xmarkImg img {
   width: 25px;
   height: 25px;
@@ -172,6 +173,23 @@
   font-family: "GangwonEduAll-Light";
   outline: none;
   text-align:center;
+}
+
+.finishOverlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 3;
+}
+
+.finishContainer {
+  z-index: 4;
 }
 
 .one {
