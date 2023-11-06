@@ -1,14 +1,15 @@
 .Container {
   height: 100vh;
   height: 100svh;
-  background: #ffebf4;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   /* font-family: "GangwonEduAll-Light"; */
+  background: linear-gradient(180deg, #9ED0FF 0%, #FFFFFF 100%);
 }
-
+ 
 .ContentContainer {
   width: 320px;
   height: 70%;
@@ -37,7 +38,7 @@
 .Answer {
   width: 240px;
   height: 75px;
-  background: #f1c4e1;
+  background: #FFFFFF;
   border-radius: 10px;
   font-size: 24px;
   margin-bottom: 10px;
@@ -47,6 +48,10 @@
   justify-content: center;
   text-align: center;
   white-space: pre-line;
+  background: #FFFFFF;
+  border: 2px solid #2998FE;
+  border-radius: 10px;
+  box-shadow: 0px 4px 0px #9ad0ff;
 }
 
 .FooterNumber {

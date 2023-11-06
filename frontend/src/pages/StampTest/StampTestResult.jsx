@@ -43,7 +43,7 @@ const StampTestResult = () => {
       </div>
       <div className={styles.ButtonContainer}>
         <div className={styles.Button} onClick={onTestHandler}>테스트 다시하기</div>
-        <div className={styles.Button} onClick={onHomeHandler}>딩동에서 편지 남기기</div>
+        <div className={styles.Button} onClick={onHomeHandler}>딩동 시작하기</div>
       </div>
       <SharingModalList shareMode={"result"} resultSrcUrl={resultSrcUrl} />
     </div>
