@@ -70,7 +70,11 @@ textarea:focus {
   position: absolute;
   bottom: 0;
   background-color: white;
+
   min-width: 100%;
+  padding-bottom: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   /* height: ; */
 }
 
@@ -82,7 +86,9 @@ textarea:focus {
   bottom: 0;
   background-color: white;
   min-width: 100%;
-  color: #fff;
+  padding-bottom: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .shareItem {
