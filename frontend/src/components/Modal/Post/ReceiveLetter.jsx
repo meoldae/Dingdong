@@ -14,6 +14,8 @@ const RecevieLetter = (props) => {
   const [letterDetail, setLetterDetail] = useState(null)
   // 편지함 종료모달 상태관리
   const [isFinishReceiveLetter, setIsFinishReceiveLetter] = useState(false)
+  // 신고하기 모달 상태관리
+  const [isReport, setIsReport] = useState(false)
 
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
@@ -37,12 +39,20 @@ const RecevieLetter = (props) => {
     reportLetter(
       letterId,
       (success) => {
+        props.cancelClick()
+        setIsFinishReceiveLetter(false)
         successMsg("🚫 신고하기 완료!")
       },
       (error) => {
         'Error at reportLetter...', error
       }
     )
+  }
+
+  // 신고하기 모달종료 함수
+  const repostFinishHandler = () => {
+    setIsReport(false)
+    setIsFinishReceiveLetter(false)
   }
 
   return (
@@ -67,7 +77,7 @@ const RecevieLetter = (props) => {
               <span dangerouslySetInnerHTML={{ __html: letterDetail?.description.replaceAll('\n', '<br />') }} />
               </div>
               <div className={styles.footerContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
-                <div className={styles.report} onClick={reportHandler}>
+                <div className={styles.report} onClick={() => setIsReport(true)}>
                   신고하기
                 </div>
                 <div className={styles.FromUser}>
@@ -93,8 +103,25 @@ const RecevieLetter = (props) => {
                 content={"편지를 종료하시겠습니까?"}
                 ok={"네"}
                 cancel={"아니오"}
-                okClick={props.cancelClick}
+                okClick={() => props.cancelClick()}
                 cancelClick={() => setIsFinishReceiveLetter(false)}
+              />
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* 신고하기 모달 */}
+      {isReport && (
+        <>
+          <div className={styles.finishOverlay} onClick={() => repostFinishHandler()}>
+            <div className={styles.finishContainer}>
+              <DefaultModal
+                content={"신고하시겠습니까?"}
+                ok={"네"}
+                cancel={"아니오"}
+                okClick={() => reportHandler()}
+                cancelClick={() => repostFinishHandler()}
               />
             </div>
           </div>

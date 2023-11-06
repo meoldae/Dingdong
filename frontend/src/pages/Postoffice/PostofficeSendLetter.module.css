@@ -23,7 +23,7 @@
   z-index: 2;
 }
 .sendLetterContainer {
-  width: 85vw;
+  width: 330px;
   height: 70vh;
   display: flex;
   flex-direction: column;
@@ -62,7 +62,6 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  margin: 5% 7% 0 0;
 }
 .xmarkImg img {
   width: 25px;
@@ -76,15 +75,15 @@
   width: 25%;
   position: absolute;
   top : 20px;
-  right: 5vw;
+  right: 20px;
 }
 
 .poststampFrame {
-  width: 200px;
-  height: 140px;
+  width: 180px;
+  height: 130px;
   position: absolute;
-  top : 10px;
-  right: 12px;
+  top : 12px;
+  right: 13px;
 }
 
 .ToUser {
@@ -95,7 +94,7 @@
   justify-content: start;
   font-family: "GangwonEduAll-Light";
   font-size: 35px;
-  margin-left: 15%;
+
 }
 
 .letterContent {
@@ -132,7 +131,7 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  margin-right: 10%;
+  margin-right: 20px;
 }
 
 .footerContainer {
@@ -150,7 +149,7 @@
 }
 
 .FromUser {
-  margin: 0 0 5% 5%;
+  margin: 0 0 10px 10px;
   font-size: 35px;
   display: flex;
 }
