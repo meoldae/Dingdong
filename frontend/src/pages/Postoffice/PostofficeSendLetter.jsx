@@ -8,6 +8,7 @@ import { postofficeSendLetterAtom } from "../../atom/PostAtom"
 import { sendLetterSNS } from "../../api/Letter"
 import { v4 as uuidv4 } from "uuid"
 import { successMsg } from "@/utils/customToast"
+import DefaultModal from "../../components/Modal/Default/DefaultModal"
 
 const PostofficeSendLetter = ({ card }) => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -74,21 +75,22 @@ const PostofficeSendLetter = ({ card }) => {
     setFromValue(event.target.value)
   }
 
+  const finishHandler = () => {
+    setIsFinishSendLetter(false)
+    setOnPostofficeSendLetter(false)
+  }
+
   return (
     <>
       <div
         className={styles.overlays}
-        onClick={() => {
-          setOnPostofficeSendLetter(false)
-        }}
+        onClick={() => setIsFinishSendLetter(true)}
       />
       <div className={styles.overlay}>
         <div className={styles.sendLetterContainer} id="sendLetter">
           <div
             className={styles.xmarkImg}
-            onClick={() => {
-              setOnPostofficeSendLetter(false)
-            }}
+            onClick={() => setIsFinishSendLetter(true)}
           >
             <img src={`${urlPath}/assets/icons/grayXmark.png`} alt="" />
           </div>
@@ -144,9 +146,16 @@ const PostofficeSendLetter = ({ card }) => {
       {/* 편지보내기 종료모달 */}
       {isFinishSendLetter && (
         <>
-          <div />
-          <div>
-
+          <div className={styles.finishOverlay} onClick={() => setIsFinishSendLetter(false)}>
+            <div className={styles.finishContainer}>
+              <DefaultModal
+                content={"편지 보내기를 종료하시겠습니까?"}
+                ok={"네"}
+                cancel={"아니오"}
+                okClick={() => finishHandler()}
+                cancelClick={() => setIsFinishSendLetter(false)}
+              />
+            </div>
           </div>
         </>
       )}
