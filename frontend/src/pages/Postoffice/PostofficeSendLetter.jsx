@@ -16,9 +16,10 @@ const PostofficeSendLetter = ({ card }) => {
   const [contentCount, setContentCount] = useState(0)
   const [toValue, setToValue] = useState("")
   const [fromValue, setFromValue] = useState("")
+  const [isFinishSendLetter, setIsFinishSendLetter] = useState(false)
 
   const setOnPostofficeSendLetter = useSetRecoilState(postofficeSendLetterAtom)
-  
+
   const userInfo = useRecoilValue(userAtom)
 
   const sendClick = () => {
@@ -138,6 +139,16 @@ const PostofficeSendLetter = ({ card }) => {
           />
         </div>
       </div>
+
+      {/* 편지보내기 종료모달 */}
+      {isFinishSendLetter && (
+        <>
+          <div />
+          <div>
+
+          </div>
+        </>
+      )}
     </>
   )
 }
