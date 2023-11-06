@@ -9,7 +9,7 @@ const Map = () => {
   const { scene } = useThree()
   const map = useLoader(
     GLTFLoader,
-    `${urlPath}/assets/models/defaultSettings/after.glb`,
+    `${urlPath}/assets/models/defaultSettings/after2.glb`,
     (loader) => {
       const draco = new DRACOLoader()
       draco.setDecoderPath(`${urlPath}/assets/draco/`)

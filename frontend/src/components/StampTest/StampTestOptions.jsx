@@ -37,7 +37,7 @@ const StampTestOptions = (props) => {
     <div className={styles.Container}>
       <img
         src={`${urlPath}/assets/images/Stamp_Test_Option.png`} 
-        style={{ marginTop: "20%", width: "60%",}}
+        style={{ marginTop: "10%", width: "60%",}}
       />
       <div className={styles.ContentContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
         <div className={styles.Question}>{Questions[opsNum].question}</div>

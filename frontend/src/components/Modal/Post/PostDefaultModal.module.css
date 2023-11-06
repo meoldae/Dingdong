@@ -12,7 +12,7 @@
 
   flex-direction: column;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgb(255, 255, 255);
 }
 
 .containerMy {
@@ -37,22 +37,24 @@
   width: 100%;
   margin-bottom: 10px;
 }
+
 .xmarkImg img {
-  width: 5%;
+  width: 25px;
+  height: 25px;
   display: flex;
   justify-content: flex-end;
 }
 
 .containerTitle {
-  font-size: 30px;
+  font-size: 24px;
   font-weight: bolder;
   margin-bottom: 10px;
 }
 
 .horizontalRule {
-  width: 95%;
+  width: 90%;
   height: 2px;
-  background-color: #fff;
+  background-color: #02C26F;
   border-radius: 5px;
   margin-bottom: 10px;
 }
@@ -63,6 +65,26 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100svh;
   background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 */
   z-index: 2;
+}
+
+.finishSelectOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 */
+  z-index: 3;
+}
+
+.finishSelectContainer {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 4;
 }

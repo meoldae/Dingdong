@@ -1,14 +1,17 @@
 .ButtonContainer {
   width: 280px;
   height: 60px;
-  border-radius: 10px;
+  border-radius: 20px;;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0.5px 0.5px rgba(1, 1, 1, 0.2);
+  box-shadow: 0px 5px 1px #009152;
 }
 
 .ButtonContent {
-  font-family: Pretendard-Medium;
+  /* font-family: Pretendard-Medium; */
   font-size: 24px;
+    color: white;
+  margin-left: 20px;
 }

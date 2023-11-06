@@ -31,6 +31,18 @@ export const ConfirmEnteringRankAtom = atom({
   key: "ConfirmEnteringRankAtom",
   default: false,
 })
+export const ConfirmEnteringTestAtom = atom({
+  key: "ConfirmEnteringTestAtom",
+  default: false,
+})
+export const ConfirmEnteringInstaAtom = atom({
+  key: "ConfirmEnteringInstaAtom",
+  default: false,
+})
+export const ConfirmEnteringTwitterAtom = atom({
+  key: "ConfirmEnteringTwitterAtom",
+  default: false,
+})
 
 // 포탈
 export const RoomPortalVisibleAtom = atom({
@@ -85,4 +97,31 @@ export const RankPortalVisibleAtom = atom({
 export const RankPortalPositionAtom = atom({
   key: "RankPortalPositionAtom",
   default: [0, 0.03, 26],
+})
+
+export const TestPortalVisibleAtom = atom({
+  key: "TestPortalVisibleAtom",
+  default: true,
+})
+export const TestPortalPositionAtom = atom({
+  key: "TestPortalPositionAtom",
+  default: [1.9, 0.03, -4.5],
+})
+
+export const InstaPortalVisibleAtom = atom({
+  key: "InstaPortalVisibleAtom",
+  default: true,
+})
+export const InstaPortalPositionAtom = atom({
+  key: "InstaPortalPositionAtom",
+  default: [0.1, 0.03, -4.5],
+})
+
+export const TwitterPortalVisibleAtom = atom({
+  key: "TwitterPortalVisibleAtom",
+  default: true,
+})
+export const TwitterPortalPositionAtom = atom({
+  key: "TwitterPortalPositionAtom",
+  default: [-1.7, 0.03, -4.5],
 })

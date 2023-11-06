@@ -38,45 +38,53 @@ const ConfirmEnteringDefaultModal = ({
   const userInfo = useRecoilValue(userAtom)
 
   // 우체국 상태 관리
-  const [onPostofficeCard, setOnPostOfficeCard] = useRecoilState(postofficeCardAtom);
-
+  const [onPostofficeCard, setOnPostOfficeCard] =
+    useRecoilState(postofficeCardAtom)
 
   // 마이룸으로 이동
   const onConfirm = () => {
-    if (location === "house") {
-      const roomId = userInfo.roomId
-      navigate(`${urlPath}/room/${roomId}`)
-    } else if (location === "postOffice") {
-      setOnPostOfficeCard(true)
-      setConfirmEnteringLocation(false)
-    setIsArrived(false)
-
     // 기본 값 설정
     setDefaultCameraPosition([2, 10, 10])
     setDefaultCameraZoom(0.18)
 
     // 초기화
     setIsInitialRender(true)
+    if (location === "house") {
+      const roomId = userInfo.roomId
+      navigate(`${urlPath}/room/${roomId}`)
+    } else if (location === "postOffice") {
+      setOnPostOfficeCard(true)
+      setConfirmEnteringLocation(false)
+      setIsArrived(false)
+
       // 우체국으로 이동
     } else if (location === "otherRoom") {
       const possibleRooms = [1, 3, 4, 6, 19, 21]
-      let randomRoom 
-      
+      let randomRoom
       // do {
       //   randomRoom = possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
       // } while (randomRoom === userInfo.roomId)
       let randRoomId
 
-      getRandomRoom( 
-      (response) => {
-        randRoomId = response.data.data;
-        
-        navigate(`${urlPath}/random/${randRoomId}`)
-      },
-      (error) => {
-        console.log("Error with Random Room...", error);
-      })
+      getRandomRoom(
+        (response) => {
+          randRoomId = response.data.data
 
+          navigate(`${urlPath}/random/${randRoomId}`)
+        },
+        (error) => {
+          console.log("Error with Random Room...", error)
+        }
+      )
+    } else if (location === "Test") {
+      navigate(`${urlPath}/yourstamp`)
+      setIsArrived(false)
+    } else if (location === "Insta") {
+      window.open("https://www.instagram.com/dingdong_letter/")
+      setIsArrived(false)
+    } else if (location === "Twitter") {
+      window.open("https://twitter.com/dingdong_letter")
+      setIsArrived(false)
     }
 
     setConfirmEnteringLocation(false)
@@ -158,7 +166,6 @@ const ConfirmEnteringDefaultModal = ({
     // 함수 실행
     typeWords()
   }, [])
-
 
   // -----------
 

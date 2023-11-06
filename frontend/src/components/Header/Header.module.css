@@ -1,6 +1,6 @@
 .wrap {
   position: absolute;
-  z-index: 3;
+  z-index: 2;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -71,7 +71,7 @@
   position: absolute;
   top: 80px;
   right: 4%;
-  z-index: 3;
+  z-index: 2;
 }
 
 /* 내 방의 경우 */
@@ -117,7 +117,7 @@
   align-items: center;
   width: 300px;
   height: 120px;
-  font-family: Pretendard-SemiBold;
+  /* font-family: Pretendard-SemiBold; */
 }
 
 .HorizontalLine {
@@ -149,7 +149,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Pretendard-SemiBold";
+  /* font-family: "Pretendard-SemiBold"; */
 }
 
 /* 헤더 햄버거 모달 CSS */
@@ -203,14 +203,14 @@
   width: 90%;
 
   font-size: 25px;
-  font-family: "Pretendard-SemiBold";
+  /* font-family: "Pretendard-SemiBold"; */
 }
 
 .ContentContainer {
   width: 90%;
   height: 90%;
   font-size: 15px;
-  font-family: "Pretendard-Medium";
+  /* font-family: "Pretendard-Medium"; */
   font-size: 18px;
   color: #2c2c2c;
   display: flex;
@@ -249,8 +249,8 @@
 }
 
 .AlarmX {
-  width: 15px;
-  height: 15px;
+  width: 28px;
+  height: 28px;
 }
 
 .AlarmModal {
@@ -261,13 +261,14 @@
 
 .NoAlarm {
   color: #fff;
-  font-family: "Pretendard-Bold";
+  /* font-family: "Pretendard-Bold"; */
   font-size: 20px;
   width: 300px;
   display: flex;
   justify-content: center;
 }
 
+/* 문의하기 */
 .RemoveOverlay {
   width: 100vw;
   height: 100vh;
@@ -300,9 +301,22 @@
 .InquiryTitle {
   color: #2C2C2C;
   font-size: 30px;
-  font-family: "Pretendard-Bold";
+  /* font-family: "Pretendard-Bold"; */
   text-align: center;
   margin: 15px 0 15px 0;
+}
+
+.LineContainer {
+  width: 100%;
+  margin-bottom: 10px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.InquiryLine {
+  width: 80%;
+  border: 1px solid rgba(194, 194, 194, 0.5);
 }
 
 .InquiryContentContainer {
@@ -316,7 +330,7 @@
   width: 80%;
   height: 170px;
   
-  font-family: "Pretendard-Medium";
+  /* font-family: "Pretendard-Medium"; */
   font-size: 18px;
   padding: 10px;
 
@@ -331,7 +345,7 @@
   margin-top: 5px;
   margin-right: 10%;
   font-size: 15px;
-  font-family: "Pretendard-SemiBold";
+  /* font-family: "Pretendard-SemiBold"; */
 }
 
 .InquiryButtonContainer {
@@ -344,13 +358,14 @@
 .InquiryButton {
   width: 80%;
   height: 50px;
-  background: #F2CBE4;
+  background: #02C26F;
   border-radius: 10px;
   margin: 15px 0 15px 0;
+  box-shadow: 0px 4px 0px #009152;
 
   text-align: center;
   line-height: 50px;
   font-size: 20px;
-  font-family: "Pretendard-Bold";
-  color: #2C2C2C;
+  /* font-family: "Pretendard-Bold"; */
+  color: #FFFFFF;
 }

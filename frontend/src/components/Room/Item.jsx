@@ -3,7 +3,12 @@ import { SkeletonUtils } from "three-stdlib";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useGrid } from "./UseGrid";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { ItemRotateState, ItemsState, draggedItemState, mobileCheckState } from "./Atom";
+import {
+  ItemRotateState,
+  ItemsState,
+  draggedItemState,
+  mobileCheckState,
+} from "./Atom";
 export const Item = ({
   item,
   onClick,
@@ -19,9 +24,11 @@ export const Item = ({
     rotation: itemRotation,
     categoryId,
   } = item;
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
   const rotation = isDragging ? draggedItemRotation : itemRotation;
-  const { scene } = useGLTF(`${urlPath}/assets/models/editRoomItems/${furnitureId}.glb`);
+  const { scene } = useGLTF(
+    `${urlPath}/assets/models/editRoomItems/${furnitureId}.glb`
+  );
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const width = rotation === 1 || rotation === 3 ? size[2] : size[0];
   const height = rotation === 1 || rotation === 3 ? size[0] : size[2];
@@ -32,7 +39,7 @@ export const Item = ({
   const draggedItem = useRecoilValue(draggedItemState);
   const value = useRecoilValue(ItemRotateState);
   const mobileCheck = useRecoilValue(mobileCheckState);
-  
+
   useEffect(() => {
     setItems((prev) => {
       const newItems = prev.map((item, index) => {
@@ -68,18 +75,19 @@ export const Item = ({
             }
           >
             <primitive
+            
               object={clone}
               // position-x={rotation ? 0 : 0.12}
               position-y={0.44}
-              position-z={rotation? 0 :0.12}
+              position-z={rotation ? 0 : 0.12}
               // 벽에 있는 아이템 관련
               rotation-y={(rotation * Math.PI) / 2}
             />
             {isDragging && (
               <mesh
-              position-x={rotation ? 0.02 : 0}
-              position-y={0.12}
-              position-z={rotation? 0 : 0.13}
+                position-x={rotation ? 0.02 : 0}
+                position-y={0.12}
+                position-z={rotation ? 0 : 0.13}
               >
                 <boxGeometry
                   args={[
@@ -110,10 +118,11 @@ export const Item = ({
             }
           >
             <primitive
+            
               object={clone}
               // position-x={rotation ? 0 : 0.12}
               position-y={0.44}
-              position-z={rotation? 0 :0.12}
+              position-z={rotation ? 0 : 0.12}
               // 벽에 있는 아이템 관련
               rotation-y={(rotation * Math.PI) / 2}
             />
@@ -121,7 +130,7 @@ export const Item = ({
               <mesh
                 position-x={rotation ? 0.02 : 0}
                 position-y={0.12}
-                position-z={rotation? 0 : 0.13}
+                position-z={rotation ? 0 : 0.13}
               >
                 <boxGeometry
                   args={[
@@ -150,9 +159,13 @@ export const Item = ({
             )}
           >
             {/* 물체 클릭 시 바닥 면 가능 불가능 색상 및 회전 각 prop 받기 */}
-            <primitive object={clone} rotation-y={(rotation * Math.PI) / 2} />
+            <primitive
+              object={clone}
+              rotation-y={(rotation * Math.PI) / 2}
+            
+            />
             {isDragging && (
-              <mesh position-y={0.02}>
+              <mesh position-y={0.02} >
                 <boxGeometry
                   args={[(width * 0.48) / 2, 0, (height * 0.48) / 2]}
                 />
@@ -173,9 +186,13 @@ export const Item = ({
             )}
           >
             {/* 물체 클릭 시 바닥 면 가능 불가능 색상 및 회전 각 prop 받기 */}
-            <primitive object={clone} rotation-y={(rotation * Math.PI) / 2} />
+            <primitive
+              object={clone}
+              rotation-y={(rotation * Math.PI) / 2}
+            
+            />
             {isDragging && (
-              <mesh position-y={0.02}>
+              <mesh position-y={0.02} >
                 <boxGeometry
                   args={[(width * 0.48) / 2, 0, (height * 0.48) / 2]}
                 />

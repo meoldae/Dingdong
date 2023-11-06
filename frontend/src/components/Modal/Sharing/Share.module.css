@@ -42,7 +42,7 @@
   resize: none;
   overflow: auto;
   box-shadow: none;
-  font-family: Pretendard-Medium;
+  /* font-family: Pretendard-Medium; */
   /* background-color: wheat;   */
 }
 
@@ -69,8 +69,13 @@ textarea:focus {
   z-index: 300000;
   position: absolute;
   bottom: 0;
-  /* background-color: white; */
+  background-color: white;
+
   min-width: 100%;
+  padding-bottom: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  /* height: ; */
 }
 
 .shareRoom {
@@ -79,9 +84,11 @@ textarea:focus {
   z-index: 300000;
   position: absolute;
   bottom: 0;
-  /* background-color: white; */
+  background-color: white;
   min-width: 100%;
-  color: #fff;
+  padding-bottom: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .shareItem {
@@ -97,4 +104,8 @@ textarea:focus {
 
 .color {
   color: white;
+}
+
+.black{
+  color: black;
 }

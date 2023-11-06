@@ -11,12 +11,15 @@ const PostofficeReceiveLetter = () => {
   const { letterId } = useParams(); 
 
   const [letterData, setLetterData] = useState(null);
+  const [letterStamp, setLetterStamp] = useState(null);
 
   useEffect(() => { 
     getLetterSNSDetail(
       letterId,
       (response) => {
-        setLetterData(response.data.data);   
+        setLetterData(response.data.data); 
+        setLetterStamp(response.data.data.stampUrl.split("/").pop().split('.')[0]);
+        console.log(response.data.data.stampUrl.split("/").pop().split('.')[0]);
       },
       (error) => {
         console.error('Error:', error);
@@ -32,22 +35,25 @@ const PostofficeReceiveLetter = () => {
   } 
 
   return (
-    <div className={styles.Container} style={{ fontFamily: "GangwonEduAll-Light" }}>
+    <div className={`${styles.Container} ${styles[letterStamp]}`} style={{ fontFamily: "GangwonEduAll-Light" }}>
       <div className={styles.PostImage}>
-        <div className={styles.sendLetterContainer}>
+        <div className={`${styles.sendLetterContainer} `}>
           <Card className={styles.sendLetterBox}>
             <div className={styles.xmarkImg}></div>
+            <img className={styles.poststampFrame}
+                  src={`${urlPath}/assets/images/poststamp_frame.png`}
+              />  
             <img
               className={styles.topPostCardImg}
-              src={letterData?.stampUrl ?? ""}
+              src={`${urlPath}/assets/images/post/${letterStamp}.png`}
             />
-            <div className={styles.ToUser}>
+            <div className={styles.ToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>
               To. {letterData?.letterTo ?? ""}
             </div>
             <div className={styles.letterContent}>
-            <span dangerouslySetInnerHTML={{ __html: letterData?.description.replaceAll('\n', '<br />') }} />
+              <span style={{ whiteSpace: 'normal', wordWrap: 'break-word', width: '310px' }} dangerouslySetInnerHTML={{ __html: letterData?.description.replaceAll('\n', '<br />') }} />
             </div>
-            <div className={styles.footerContainer}>
+            <div className={styles.footerContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
               <div className={styles.FromUser}>
                 From. {letterData?.letterFrom ?? ""}
               </div>

@@ -20,6 +20,7 @@ const SignUp = () => {
   const [avatarId, setAvatar] = useState(1);
   const [nickname, setNickname] = useState("");
   const [isValid, setIsValid] = useState(false);
+  const [nicknameMessage, setNicknameMessage] = useState("");
   useEffect(() => {
     GetAvatarList(
       (response) => {
@@ -39,7 +40,6 @@ const SignUp = () => {
   }, []);
 
   const charactersImages = charactersData.map((charData) => charData.glb);
-  console.log(charactersImages)
   const memberId = new URLSearchParams(window.location.search).get("memberId");
   const settings = {
     centerMode: true,
@@ -48,8 +48,8 @@ const SignUp = () => {
     slidesToShow: 1,
     speed: 500,
     arrows: true,
-    prevArrow: <img src={`${urlPath}/assets/icons/leftArrow.png`}/>,
-    nextArrow: <img src={`${urlPath}/assets/icons/rightArrow.png`}/>,
+    prevArrow: <img src={`${urlPath}/assets/icons/leftArrow.png`} />,
+    nextArrow: <img src={`${urlPath}/assets/icons/rightArrow.png`} />,
     // prevArrow: "<button type='button' class='slick-prev'>Previous</button>", // 이전 화살표 모양 설정
     // nextArrow: "<button type='button' class='slick-next'>Next</button>",
     afterChange: (current) => handleSlideChange(current),
@@ -95,34 +95,42 @@ const SignUp = () => {
     );
   }
 
-  const doubleCheckHandler = () => {
+  const doubleCheckHandler = (e) => {
+    setNickname(e.target.value);
+  };
+  useEffect(() => {
     if (nickname === "") {
       setIsValid(false);
-      successMsg("⛔ 닉네임을 입력해주세요");
+      setNicknameMessage("닉네임을 입력해주세요");
       return;
     } else if (nickname.length > 5) {
       setIsValid(false);
-      successMsg("⛔ 닉네임은 5글자 이하로 입력해주세요");
+      setNicknameMessage("닉네임은 5글자 이하로 입력해주세요");
       return;
     } else if (!/^[a-zA-Z0-9가-힣\s]*$/.test(nickname)) {
       setIsValid(false);
-      successMsg("⛔ 올바른 닉네임을 입력해주세요");
+      setNicknameMessage("올바른 닉네임을 입력해주세요");
       return;
     }
 
     DoubleCheck(
       nickname,
       (success) => {
-        setIsValid(true);
-        successMsg("✅ 사용 가능한 닉네임 입니다!");
-      },
-      (error) => {
-        setIsValid(false);
-        successMsg("❌ 이미 사용중인 닉네임 입니다!");
+        if (success.data.code === "FAILED") {
+          setIsValid(false);
+          setNicknameMessage("이미 사용중인 닉네임 입니다!");
+        } else {
+          setIsValid(true);
+          setNicknameMessage("사용 가능한 닉네임 입니다!");
+        }
       }
+      // (error) => {
+      //   setIsValid(false);
+      //   setNicknameMessage("이미 사용중인 닉네임 입니다!");
+      //   console.log(error);
+      // }
     );
-  };
-
+  }, [nickname]);
   return (
     <div className={styles.Container}>
       <div className={styles.titleContainer}>
@@ -142,27 +150,49 @@ const SignUp = () => {
           ))}
         </Slider>
       </div>
+      {isValid ? (
+        <div className={styles.alertMessageSuccess}>
+          <span>{nicknameMessage}</span>
+        </div>
+      ) : (
+        <div className={styles.alertMessageError}>
+          <span>{nicknameMessage}</span>
+        </div>
+      )}
 
       <div>
-        <div className={styles.nicknameContainer}>
-          <input
-            type="text"
-            value={nickname.trim()}
-            onChange={(e) => setNickname(e.target.value)}
-            placeholder="닉네임을 입력해주세요"
-            className={styles.nicknameInput}
-            maxLength={6}
-          />
-          <div className={styles.doubleCheck} onClick={doubleCheckHandler}>
-            중복확인
+        {isValid ? (
+          <div className={styles.nicknameContainer}>
+            <input
+              type="text"
+              value={nickname.trim()}
+              onChange={(e) => doubleCheckHandler(e)}
+              placeholder=""
+              className={styles.nicknameInputSuccess}
+              maxLength={6}
+            />
+
+            <img src={`${urlPath}/assets/icons/success.png`} />
           </div>
-        </div>
+        ) : (
+          <div className={styles.nicknameContainer}>
+            <input
+              type="text"
+              value={nickname.trim()}
+              onChange={(e) => doubleCheckHandler(e)}
+              placeholder=""
+              className={styles.nicknameInputError}
+              maxLength={6}
+            />
+            <img src={`${urlPath}/assets/icons/error.png`} />
+          </div>
+        )}
 
         <div className={styles.doSignUpContainer}>
           <DefaultBtn
             btnName={"입주하기"}
             onClick={doSignUp}
-            color={"#049463"}
+            color={"#02C26F"}
           />
         </div>
       </div>

@@ -7,12 +7,17 @@ import { motion } from "framer-motion"
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import {
   ArriveAtom,
+  ConfirmEnteringInstaAtom,
   ConfirmEnteringOtherRoomAtom,
   ConfirmEnteringPostOfficeAtom,
   ConfirmEnteringRankAtom,
   ConfirmEnteringRoomAtom,
   ConfirmEnteringStoreAtom,
+  ConfirmEnteringTestAtom,
+  ConfirmEnteringTwitterAtom,
   ConfirmEnteringWorldAtom,
+  InstaPortalPositionAtom,
+  InstaPortalVisibleAtom,
   OtherRoomPortalPositionAtom,
   OtherRoomPortalVisibleAtom,
   PostOfficePortalPositionAtom,
@@ -22,6 +27,10 @@ import {
   RoomPortalPositionAtom,
   StorePortalPositionAtom,
   StorePortalVisibleAtom,
+  TestPortalPositionAtom,
+  TestPortalVisibleAtom,
+  TwitterPortalPositionAtom,
+  TwitterPortalVisibleAtom,
   WorldPortalPositionAtom,
   WorldPortalVisibleAtom,
 } from "../../atom/SinglePlayAtom"
@@ -59,6 +68,7 @@ import SingleHeader from "./SingleHeader"
 import RankingInformation from "../../components/Modal/Ranking/RankingInformation"
 
 const SingleMainPage = () => {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   // 카메라 설정
   const setDefaultCameraPosition = useSetRecoilState(DefaultPosition)
   const setDefaultCameraZoom = useSetRecoilState(DefaultZoom)
@@ -84,6 +94,18 @@ const SingleMainPage = () => {
     ConfirmEnteringRankAtom
   )
 
+  const [confirmEnteringTest, setConfirmEnteringTest] = useRecoilState(
+    ConfirmEnteringTestAtom
+  )
+
+  const [confirmEnteringInsta, setConfirmEnteringInsta] = useRecoilState(
+    ConfirmEnteringInstaAtom
+  )
+
+  const [confirmEnteringTwitter, setConfirmEnteringTwitter] = useRecoilState(
+    ConfirmEnteringTwitterAtom
+  )
+
   // 포탈 생성 여부
   const [roomPortalVisible, setRoomPortalVisible] = useRecoilState(
     RoomPortalVisibleAtom
@@ -103,6 +125,15 @@ const SingleMainPage = () => {
   const [rankPortalVisible, setRankPortalVisible] = useRecoilState(
     RankPortalVisibleAtom
   )
+  const [testPortalVisible, setTestPortalVisible] = useRecoilState(
+    TestPortalVisibleAtom
+  )
+  const [instaPortalVisible, setInstaPortalVisible] = useRecoilState(
+    InstaPortalVisibleAtom
+  )
+  const [twitterPortalVisible, setTwitterPortalVisible] = useRecoilState(
+    TwitterPortalVisibleAtom
+  )
 
   // 포탈 위치
   const roomPortalPosition = useRecoilValue(RoomPortalPositionAtom)
@@ -111,6 +142,9 @@ const SingleMainPage = () => {
   const otherRoomPortalPosition = useRecoilValue(OtherRoomPortalPositionAtom)
   // const worldPortalPosition = useRecoilValue(WorldPortalPositionAtom)
   const rankPortalPosition = useRecoilValue(RankPortalPositionAtom)
+  const testPortalPosition = useRecoilValue(TestPortalPositionAtom)
+  const instaPortalPosition = useRecoilValue(InstaPortalPositionAtom)
+  const twitterPortalPosition = useRecoilValue(TwitterPortalPositionAtom)
 
   // 랭킹모달 상태관리
   const closeRanking = () => {
@@ -284,6 +318,51 @@ const SingleMainPage = () => {
               portalVisible={setRankPortalVisible}
             />
           )}
+
+          {testPortalVisible ? (
+            <DefaultPortal
+              setConfirmEnteringLocation={setConfirmEnteringTest}
+              portalPosition={testPortalPosition}
+              setPortalVisible={setTestPortalVisible}
+              adjustedAngle={[0, 3, 5]}
+              adjustedZoom={0.35}
+            />
+          ) : (
+            <DefaultPortalRing
+              portalPosition={testPortalPosition}
+              portalVisible={setTestPortalVisible}
+            />
+          )}
+
+          {instaPortalVisible ? (
+            <DefaultPortal
+              setConfirmEnteringLocation={setConfirmEnteringInsta}
+              portalPosition={instaPortalPosition}
+              setPortalVisible={setInstaPortalVisible}
+              adjustedAngle={[0, 3, 5]}
+              adjustedZoom={0.35}
+            />
+          ) : (
+            <DefaultPortalRing
+              portalPosition={instaPortalPosition}
+              portalVisible={setInstaPortalVisible}
+            />
+          )}
+
+          {twitterPortalVisible ? (
+            <DefaultPortal
+              setConfirmEnteringLocation={setConfirmEnteringTwitter}
+              portalPosition={twitterPortalPosition}
+              setPortalVisible={setTwitterPortalVisible}
+              adjustedAngle={[0, 5, 7]}
+              adjustedZoom={0.35}
+            />
+          ) : (
+            <DefaultPortalRing
+              portalPosition={twitterPortalPosition}
+              portalVisible={setTwitterPortalVisible}
+            />
+          )}
         </Canvas>
         {/* 가이드 페이지 */}
         {guide && (
@@ -419,7 +498,7 @@ const SingleMainPage = () => {
             <div className={styles.overlay} onClick={() => closeRanking()} />
             <div className={styles.rankingModalContainer}>
               <img
-                src={'/assets/icons/information-circle.png'}
+                src={`${urlPath}/assets/icons/information-circle.png`}
                 className={styles.Infromation}
                 onClick={() => setIsRankingInformation(true)}
               />
@@ -431,11 +510,68 @@ const SingleMainPage = () => {
         {/* 랭킹정보모달 */}
         {isRankingInformation && (
           <>
-            <div className={styles.InformationOverlay} onClick={() => setIsRankingInformation(false)} />
+            <div
+              className={styles.InformationOverlay}
+              onClick={() => setIsRankingInformation(false)}
+            />
             <div className={styles.RankingInformationContainer}>
               <RankingInformation />
             </div>
           </>
+        )}
+
+        {confirmEnteringTest && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
+            <div className={styles.confirmModal}>
+              {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
+              <ConfirmEnteringDefaultModal
+                modalContent={"우표 유형 테스트 하러 가기"}
+                setConfirmEnteringLocation={setConfirmEnteringTest}
+                location={"Test"}
+                flag={"1"}
+              />
+            </div>
+          </motion.div>
+        )}
+
+        {confirmEnteringInsta && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
+            <div className={styles.confirmModal}>
+              {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
+              <ConfirmEnteringDefaultModal
+                modalContent={"딩동 인스타그램 구경하기"}
+                setConfirmEnteringLocation={setConfirmEnteringInsta}
+                location={"Insta"}
+                flag={"1"}
+              />
+            </div>
+          </motion.div>
+        )}
+
+        {confirmEnteringTwitter && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
+            <div className={styles.confirmModal}>
+              {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
+              <ConfirmEnteringDefaultModal
+                modalContent={"딩동 트위터 구경하기"}
+                setConfirmEnteringLocation={setConfirmEnteringTwitter}
+                location={"Twitter"}
+                flag={"1"}
+              />
+            </div>
+          </motion.div>
         )}
       </div>
     </>

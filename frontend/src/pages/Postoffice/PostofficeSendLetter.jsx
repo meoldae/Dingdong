@@ -1,30 +1,29 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { userAtom } from "@/atom/UserAtom"
-import DefaultBtn from "../../components/Button/Default/DefaultBtn"
+import DefaultPostBtn from "../../components/Button/DefaultPost/DefaultPostBtn"
 import Card from "../../components/UI/Card"
 import styles from "./PostofficeSendLetter.module.css"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useSetRecoilState, useRecoilValue } from "recoil"
 import { postofficeSendLetterAtom } from "../../atom/PostAtom"
 import { sendLetterSNS } from "../../api/Letter"
 import { v4 as uuidv4 } from "uuid"
-import toast from "react-hot-toast"
 import { successMsg } from "@/utils/customToast"
+import DefaultModal from "../../components/Modal/Default/DefaultModal"
 
 const PostofficeSendLetter = ({ card }) => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
   const [content, setContent] = useState("")
   const [contentCount, setContentCount] = useState(0)
-  const [isSending, setIsSending] = useState(false)
-
   const [toValue, setToValue] = useState("")
   const [fromValue, setFromValue] = useState("")
-  const [onPostofficeSendLetter, setOnPostofficeSendLetter] = useRecoilState(
-    postofficeSendLetterAtom
-  )
-  const userInfo = useRecoilValue(userAtom)
-  const sendClick = () => {
-    if (isSending) return
+  const [isFinishSendLetter, setIsFinishSendLetter] = useState(false)
 
+  const setOnPostofficeSendLetter = useSetRecoilState(postofficeSendLetterAtom)
+
+  const userInfo = useRecoilValue(userAtom)
+
+  const sendClick = () => {
     if (!toValue.trim() || !fromValue.trim() || !content.trim()) {
       successMsg("❌ 편지를 작성해주세요.")
       return
@@ -45,22 +44,21 @@ const PostofficeSendLetter = ({ card }) => {
       if (!window.Kakao.isInitialized()) {
         window.Kakao.init(JS_KEY)
       }
-      // console.log(response)
       let currentUrl = window.location.href
       const kakaoUrl = currentUrl.endsWith("/")
         ? `${currentUrl}letter/${newID}`
         : `${currentUrl}/letter/${newID}`
-      // console.log(kakaoUrl)
       window.Kakao.Share.sendCustom({
         templateId: 100120,
         templateArgs: {
-          THU: "https://ding-dong.s3.ap-northeast-2.amazonaws.com/StampLogo.png",
+          THU: `https://ding-dong.s3.ap-northeast-2.amazonaws.com/Letter${letterData.sta}.png`,
           TITLE: `딩동! ${letterData.letterFrom}님이 보낸 편지를 확인해보세요.`,
           DESC: `From. ${letterData.letterFrom}`,
           MOBILE_LINK: kakaoUrl,
           WEB_LINK: kakaoUrl,
         },
       })
+      setIsFinishSendLetter(false)
       setOnPostofficeSendLetter(false)
       successMsg("💌 편지를 보냈어요!")
     })
@@ -77,30 +75,34 @@ const PostofficeSendLetter = ({ card }) => {
     setFromValue(event.target.value)
   }
 
+  const finishHandler = () => {
+    setIsFinishSendLetter(false)
+    setOnPostofficeSendLetter(false)
+  }
+
   return (
     <>
       <div
         className={styles.overlays}
-        onClick={() => {
-          setOnPostofficeSendLetter(false)
-        }}
+        onClick={() => setIsFinishSendLetter(true)}
       />
       <div className={styles.overlay}>
         <div className={styles.sendLetterContainer} id="sendLetter">
-          <Card className={styles.sendLetterBox}>
-            <div
-              className={styles.xmarkImg}
-              onClick={() => {
-                setOnPostofficeSendLetter(false)
-              }}
-            >
-              <img src={`${urlPath}/assets/icons/Pink_X-mark.png`} alt="" />
-            </div>
+          <div
+            className={styles.xmarkImg}
+            onClick={() => setIsFinishSendLetter(true)}
+          >
+            <img src={`${urlPath}/assets/icons/grayXmark.png`} alt="" />
+          </div>
+          <Card className={`${styles.sendLetterBox} ${styles[card.order]}`}>
+            <img className={styles.poststampFrame}
+              src={`${urlPath}/assets/images/poststamp_frame.png`}
+            />
             <img
               className={styles.topPostCardImg}
               src={`${urlPath}/assets/images/post/${card.src}`}
             />
-            <div className={styles.ToUser}>
+            <div className={styles.ToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>
               To.
               <input
                 type="text"
@@ -108,6 +110,7 @@ const PostofficeSendLetter = ({ card }) => {
                 onChange={handleToInputChange}
                 placeholder="입력하세요."
                 maxLength="7"
+                style={{ fontFamily: "GangwonEduAll-Light" }}
               />
             </div>
             <div className={styles.letterContent}>
@@ -117,10 +120,11 @@ const PostofficeSendLetter = ({ card }) => {
                 placeholder="편지 내용을 작성하세요."
                 maxLength={199}
                 spellCheck="false"
+                style={{ fontFamily: "GangwonEduAll-Light" }}
               />
             </div>
-            <div className={styles.contentCount}>{contentCount}/200</div>
-            <div className={styles.footerContainer}>
+            <div className={styles.contentCount} style={{ fontFamily: "GangwonEduAll-Light" }}>{contentCount}/200</div>
+            <div className={styles.footerContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
               <div className={styles.FromUser}>
                 From.
                 <input
@@ -129,17 +133,35 @@ const PostofficeSendLetter = ({ card }) => {
                   placeholder="입력하세요."
                   onChange={handleFromInputChange}
                   maxLength="7"
+                  style={{ fontFamily: "GangwonEduAll-Light" }}
                 />
               </div>
             </div>
           </Card>
-          <DefaultBtn
+          <DefaultPostBtn
             btnName={"편지 보내기"}
             onClick={sendClick}
-            color={"#fff"}
+            color={card.order}
           />
         </div>
       </div>
+
+      {/* 편지보내기 종료모달 */}
+      {isFinishSendLetter && (
+        <>
+          <div className={styles.finishOverlay} onClick={() => setIsFinishSendLetter(false)}>
+            <div className={styles.finishContainer}>
+              <DefaultModal
+                content={"편지 보내기를 종료하시겠습니까?"}
+                ok={"네"}
+                cancel={"아니오"}
+                okClick={() => finishHandler()}
+                cancelClick={() => setIsFinishSendLetter(false)}
+              />
+            </div>
+          </div>
+        </>
+      )}
     </>
   )
 }

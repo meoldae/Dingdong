@@ -12,7 +12,8 @@ import {
 
 const PopUpContent = (props) => {
   const [furnitureList, setFurnitureList] = useState([])
-  const imagePath = "/assets"
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+  const imagePath = `${urlPath}/assets`
   const [pageNo, setPageNo] = useState(0)
   const target = useRef()
   const [loading, setLoading] = useState(false)
@@ -22,7 +23,6 @@ const PopUpContent = (props) => {
   const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState)
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState)
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const addFurniture = (furnitureId) => {
     if (draggedItem === null) {
       // console.log(furnitureId)

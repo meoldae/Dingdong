@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { sendLetter, sendGuestLetter } from "@/api/Letter"
 import { userAtom } from "@/atom/UserAtom"
 import { roomInfoAtom } from "@/atom/RoomInfoAtom"
-import DefaultBtn from "../../Button/Default/DefaultBtn"
+import DefaultPostBtn from "../../Button/DefaultPost/DefaultPostBtn"
 import Card from "../../UI/Card"
 import styles from "./SendLetter.module.css"
 import { useRecoilValue } from "recoil"
 import { successMsg } from "@/utils/customToast"
+import DefaultModal from "../Default/DefaultModal"
 
 const SendLetter = ({ onClose, card }) => {
   const [content, setContent] = useState("")
   const [contentCount, setContentCount] = useState(0)
   const [isSending, setIsSending] = useState(false)
+  const [isFinishSendLetter, setIsFinishSendLetter] = useState(false)
 
   const userInfo = useRecoilValue(userAtom)
   const [userNickname, setUserNickname] = useState(userInfo.nickname || "")
@@ -26,6 +28,7 @@ const SendLetter = ({ onClose, card }) => {
 
   const cancelClick = () => {
     onClose()
+    setIsFinishSendLetter(false)
   }
 
   const sendClick = () => {
@@ -77,7 +80,7 @@ const SendLetter = ({ onClose, card }) => {
 
   const handleOutsideClick = (event) => {
     if (event.target === event.currentTarget) {
-      onClose()
+      setIsFinishSendLetter(true)
     }
   }
 
@@ -87,56 +90,78 @@ const SendLetter = ({ onClose, card }) => {
   }
 
   return (
-    <div className={styles.overlay} onClick={handleOutsideClick}>
-      <div className={styles.sendLetterContainer}>
-        <Card className={styles.sendLetterBox}>
-          <div className={styles.xmarkImg} onClick={cancelClick}>
-            <img src={`${urlPath}/assets/icons/Pink_X-mark.png`} alt="" />
+    <>
+      <div className={styles.overlay} onClick={handleOutsideClick}>
+        <div className={styles.sendLetterContainer}>
+          <div className={styles.xmarkImg} onClick={() => setIsFinishSendLetter(true)}>
+            <img src={`${urlPath}/assets/icons/grayXmark.png`} alt="" />
           </div>
-          <img
-            className={styles.topPostCardImg}
-            src={`${urlPath}/assets/images/post/${card.src}`}
-          />
-          <div className={styles.ToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>To. {roomInfo}</div>
-          <div className={styles.letterContent}>
-            <textarea
-              value={content}
-              onChange={(e) => handleCheckContentCount(e)}
-              placeholder="편지 내용을 작성하세요."
-              maxLength={199}
-              spellCheck="false"
-              style={{ fontFamily: "GangwonEduAll-Light" }}
+          <Card className={`${styles.sendLetterBox} ${styles[card.order]}`}>  
+            <img className={styles.poststampFrame}
+                src={`${urlPath}/assets/images/poststamp_frame.png`}
+            />  
+            <img
+              className={styles.topPostCardImg}
+              src={`${urlPath}/assets/images/post/${card.src}`}
             />
-          </div>
-          <div className={styles.contentCount} style={{ fontFamily: "GangwonEduAll-Light" }}>{contentCount}/200</div>
-          <div className={styles.footerContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
-            {/* <div className={styles.anonymous}>
-              <span>체크박스</span>
-              <span>익명의 이웃</span>
-            </div> */}
-            <div className={styles.FromUser}>
-              From.
-              {userInfo.nickname ? (
-                userInfo.nickname
-              ) : (
-                <textarea
-                  value={userNickname}
-                  onChange={(e) => setUserNickname(e.target.value)}
-                  placeholder="닉네임을 입력하세요."
-                  maxLength={8}
-                  style={{ fontFamily: "GangwonEduAll-Light" }}
-                />
-              )}
+            <div className={styles.ToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>To. {roomInfo}</div>
+            <div className={styles.letterContent}>
+              <textarea
+                value={content}
+                onChange={(e) => handleCheckContentCount(e)}
+                placeholder="편지 내용을 작성하세요."
+                maxLength={199}
+                spellCheck="false"
+                style={{ fontFamily: "GangwonEduAll-Light"}}
+              />
+            </div>
+            <div className={styles.contentCount} style={{ fontFamily: "GangwonEduAll-Light" }}>{contentCount}/200</div>
+            <div className={styles.footerContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
+              {/* <div className={styles.anonymous}>
+                <span>체크박스</span>
+                <span>익명의 이웃</span>
+              </div> */}
+              <div className={styles.FromUser}>
+                From.
+                {userInfo.nickname ? (
+                  userInfo.nickname
+                ) : (
+                  <textarea
+                    value={userNickname}
+                    onChange={(e) => setUserNickname(e.target.value)}
+                    placeholder="닉네임을 입력하세요."
+                    maxLength={8}
+                    style={{ fontFamily: "GangwonEduAll-Light" }}
+                  />
+                )}
+              </div>
+            </div>
+          </Card>
+          <DefaultPostBtn
+            btnName={"편지 보내기"}
+            onClick={sendClick}
+            color={card.order}
+          />
+        </div>
+      </div>
+
+      {/* 편지보내기 종료모달 */}
+      {isFinishSendLetter && (
+        <>
+          <div className={styles.finishOverlay} onClick={() => setIsFinishSendLetter(false)}>
+            <div className={styles.finishContainer}>
+              <DefaultModal
+                content={"편지 작성을 종료하시겠습니까?"}
+                ok={"네"}
+                cancel={"아니오"}
+                okClick={cancelClick}
+                cancelClick={() => setIsFinishSendLetter(false)}
+              />
             </div>
           </div>
-        </Card>
-        <DefaultBtn
-          btnName={"편지 보내기"}
-          onClick={sendClick}
-          color={"#fff"}
-        />
-      </div>
-    </div>
+        </>
+      )}
+    </>
   )
 }
 

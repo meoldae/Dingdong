@@ -2,16 +2,24 @@
   position: relative;
   max-width: 450px;
   height: 100vh;
-  height: 100svh;
 }
 
 .postCardContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: auto;
   overflow: auto;
   height: 350px;
 }
+
+.greenLine {
+  height: 2px;
+  width: 90%;
+  background-color: #02C26F; 
+  margin: -10px auto 5px auto; 
+}
+
 .postCardCenter{
   display: flex;
   align-items: center;
@@ -40,9 +48,69 @@
   margin-right: 10px;
 } */
 
-.postCard.selected {
+/* .postCard.selected {
   border-radius: 5px;
   box-shadow: 1px 2px 10px 2px pink;
+} */
+
+[className$="Selected"] {
+  transition: all 0.3s;
+  transform: scale(1.05); 
+}
+
+.heartSelected {
+  background-color: #FFD2E1;
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px 2px #f32196;
+  /* filter: brightness(1.1); */
+}
+
+.thunderSelected {
+  background-color: #ffdec2;
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px 2px #ff8548;
+}
+
+.starSelected {
+  background-color: #fff0ca;
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px 2px #ffcd58;
+}
+
+.puzzleSelected {
+  background-color: #DFEED1;
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px 2px #8ce584;
+}
+
+.dingdongSelected {
+  background-color: #83C3FF;
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px 2px #2c3afa;
+}
+
+.cloverSelected {
+  background-color: #BDEAD5;
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px 2px #42b988;
+}
+
+.cloudSelected {
+  background-color: #D2CCFF;
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px 2px #8879f7;
+}
+
+.flowerSelected {
+  background-color: #FED6F1;
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px 2px #de4cb3;
+}
+
+.rocketSelected {
+  background-color: #BFBFBF;
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px 2px #ff4f4f;
 }
 
 .postCardComment {

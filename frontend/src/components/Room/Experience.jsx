@@ -303,10 +303,18 @@ const Experience = ({ setRoomDrag }) => {
   return (
     <>
       <Environment preset="sunset" />
-      <ambientLight intensity={0.3} />
+      <ambientLight intensity={0.1} />
+      <directionalLight
+        position={[7,7,10]}
+        intensity={0.5}
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+        shadow-camera-near={0.5}
+        shadow-camera-far={500}
+      />
       <OrbitControls
         ref={controls}
-        minDistance={5}
+        enableZoom={false}
         maxDistance={20}
         minPolarAngle={0}
         maxPolarAngle={Math.PI / 2}
@@ -317,7 +325,6 @@ const Experience = ({ setRoomDrag }) => {
       />
       {/* <Room name={"office"}/> */}
       {items && items.map(renderItem)}
-
       {/* 바닥 평면 */}
       <mesh
         rotation-x={-Math.PI / 2}

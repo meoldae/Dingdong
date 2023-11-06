@@ -317,7 +317,7 @@ const Header = ({ checkMyRoom }) => {
           />
           <div className={styles.HamburgerModal}>
             <div className={styles.XContainer}>
-              <img src={'/assets/icons/Pink_X-mark.png'} className={styles.XImage} onClick={() => setIsHamburger(false)} />
+              <img src={`${urlPath}/assets/icons/Pink_X-mark.png`} className={styles.XImage} onClick={() => setIsHamburger(false)} />
             </div>
             <div className={styles.NameContainer}>
               <div className={styles.Name}>{menuUserName}</div>
@@ -405,6 +405,9 @@ const Header = ({ checkMyRoom }) => {
           />
           <div className={styles.InquiryContainer}>
             <div className={styles.InquiryTitle}>문의하기</div>
+            <div className={styles.LineContainer}>
+              <div className={styles.InquiryLine} />
+            </div>
             <div className={styles.InquiryContentContainer}>
               <textarea
                 className={styles.InquiryContent}
