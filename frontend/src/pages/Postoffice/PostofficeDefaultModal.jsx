@@ -1,5 +1,5 @@
 // 라이브러리
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 // 컴포넌트
 import Card from "../../components/UI/Card";
@@ -14,7 +14,7 @@ import styles from "./PostofficeDefaultModal.module.css"
 const PostDefaultModal = (props) => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
-  const [onPostofficeCard, setOnPostOfficeCard] = useRecoilState(postofficeCardAtom);
+  const setOnPostOfficeCard = useSetRecoilState(postofficeCardAtom);
   
   return (
     <>
