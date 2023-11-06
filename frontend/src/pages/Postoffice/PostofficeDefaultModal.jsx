@@ -12,9 +12,9 @@ import styles from "./PostofficeDefaultModal.module.css"
 
 
 const PostDefaultModal = (props) => {
-  const [onPostofficeCard, setOnPostOfficeCard] =
-    useRecoilState(postofficeCardAtom);
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
+  const [onPostofficeCard, setOnPostOfficeCard] = useRecoilState(postofficeCardAtom);
   
   return (
     <>
