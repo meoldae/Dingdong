@@ -1,30 +1,24 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { userAtom } from "@/atom/UserAtom"
 import DefaultPostBtn from "../../components/Button/DefaultPost/DefaultPostBtn"
 import Card from "../../components/UI/Card"
 import styles from "./PostofficeSendLetter.module.css"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useSetRecoilState, useRecoilValue } from "recoil"
 import { postofficeSendLetterAtom } from "../../atom/PostAtom"
 import { sendLetterSNS } from "../../api/Letter"
 import { v4 as uuidv4 } from "uuid"
-import toast from "react-hot-toast"
 import { successMsg } from "@/utils/customToast"
 
 const PostofficeSendLetter = ({ card }) => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const [content, setContent] = useState("")
   const [contentCount, setContentCount] = useState(0)
-  const [isSending, setIsSending] = useState(false)
 
   const [toValue, setToValue] = useState("")
   const [fromValue, setFromValue] = useState("")
-  const [onPostofficeSendLetter, setOnPostofficeSendLetter] = useRecoilState(
-    postofficeSendLetterAtom
-  )
+  const setOnPostofficeSendLetter = useSetRecoilState(postofficeSendLetterAtom)
   const userInfo = useRecoilValue(userAtom)
   const sendClick = () => {
-    if (isSending) return
-
     if (!toValue.trim() || !fromValue.trim() || !content.trim()) {
       successMsg("❌ 편지를 작성해주세요.")
       return
