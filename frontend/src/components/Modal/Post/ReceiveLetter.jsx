@@ -16,22 +16,23 @@ const RecevieLetter = (props) => {
   const [isFinishReceiveLetter, setIsFinishReceiveLetter] = useState(false)
   // 신고하기 모달 상태관리
   const [isReport, setIsReport] = useState(false)
+  const [letterStamp, setLetterStamp] = useState(null);
 
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
-
+  
   useEffect(() => {
     const fetchLetterDetail = async () => {
       try {
-        getLetterDetail(letterId, (response) => {
+        await getLetterDetail(letterId, (response) => {
           if (response.data.code === "SUCCESS") {
             setLetterDetail(response.data.data)
+            setLetterStamp(response.data.data.stampImgUrl.split("/").pop().split('.')[0])
           }
         })
       } catch (error) {
         console.error("Error fetching letter details:", error)
       }
     }
-
     fetchLetterDetail()
   }, [])
 
@@ -60,10 +61,13 @@ const RecevieLetter = (props) => {
       <div className={styles.overlay} onClick={() => setIsFinishReceiveLetter(true)}>
         {letterDetail ? (
           <div className={styles.receiveLetterContainer}>
-            <Card className={styles.receiveLetterBox}>
-              <div className={styles.xmarkImg} onClick={() => setIsFinishReceiveLetter(true)}>
-                <img src={`${urlPath}/assets/icons/Pink_X-mark.png`} alt="" />
-              </div>
+            {/* <div className={styles.xmarkImg} onClick={() => setIsFinishReceiveLetter(true)}>
+              <img src={`${urlPath}/assets/icons/grayXmark.png`} alt="" />
+            </div> */}
+            <Card className={`${styles.receiveLetterBox} ${styles[letterStamp]}`}>
+              <img className={styles.poststampFrame}
+                  src={`${urlPath}/assets/images/poststamp_frame.png`}
+              />  
               <img
                 className={styles.topPostCardImg}
                 src={`${urlPath}/assets/images/post/${letterDetail?.stampImgUrl
@@ -74,7 +78,7 @@ const RecevieLetter = (props) => {
                 To. {letterDetail?.letterTo}
               </div>
               <div className={styles.letterContent} style={{ fontFamily: "GangwonEduAll-Light" }}>
-              <span dangerouslySetInnerHTML={{ __html: letterDetail?.description.replaceAll('\n', '<br />') }} />
+              <span style={{ whiteSpace: 'normal', wordWrap: 'break-word', width: '310px' }} dangerouslySetInnerHTML={{ __html: letterDetail?.description.replaceAll('\n', '<br />') }} />
               </div>
               <div className={styles.footerContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
                 <div className={styles.report} onClick={() => setIsReport(true)}>

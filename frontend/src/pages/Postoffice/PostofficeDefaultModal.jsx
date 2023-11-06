@@ -1,33 +1,58 @@
+// 라이브러리
+import { useState } from "react";
+import { useSetRecoilState } from "recoil";
+
+// 컴포넌트
 import Card from "../../components/UI/Card";
+import DefaultModal from "../../components/Modal/Default/DefaultModal";
+
+// Atom
 import { postofficeCardAtom } from "../../atom/PostAtom";
+
+// 스타일
 import styles from "./PostofficeDefaultModal.module.css"
-import { useRecoilState } from "recoil";
+
+
 const PostDefaultModal = (props) => {
-  const [onPostofficeCard, setOnPostOfficeCard] =
-    useRecoilState(postofficeCardAtom); 
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
+  const setOnPostOfficeCard = useSetRecoilState(postofficeCardAtom);
+
+  // 우표함 종료확인 모달 상태관리
+  const [isFinishPostCardBox, setIsFinishPostCardBox] = useState(false)
+
+  // 우표함 종료함수
+  const finishPostCardBoxHandler = () => {
+    setOnPostOfficeCard(false)
+    setIsFinishPostCardBox(false)
+  }
   
   return (
     <>
-      <div className={styles.overlay} onClick={()=>{setOnPostOfficeCard(false)}}/>
-      {onPostofficeCard ? (
-        <Card className={styles.containerOther}>
-          <div className={styles.xmarkImg} onClick={()=>{setOnPostOfficeCard(false)}}>
-            <img src={`${urlPath}/assets/icons/x.png`} />
+      <div className={styles.overlay} onClick={() => setIsFinishPostCardBox(true)}/>
+      <Card className={styles.container}>
+        <div className={styles.xmarkImg} onClick={() => setIsFinishPostCardBox(true)}>
+          <img src={`${urlPath}/assets/icons/x.png`} />
+        </div>
+        <div className={styles.containerTitle}>{props.PostDefaultTitle}</div>
+        <div className={styles.horizontalRule}></div>
+        <div className={props.className}>{props.children}</div>
+      </Card>
+
+      {/* 우표함 종료확인 모달 */}
+      {isFinishPostCardBox && (
+        <>
+          <div className={styles.finishOverlay} onClick={() => setIsFinishPostCardBox(false)} />
+          <div className={styles.finishContainer}>
+            <DefaultModal
+              content={"우표 선택을 종료하시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={() => finishPostCardBoxHandler()}
+              cancelClick={() => setIsFinishPostCardBox(false)}
+            />
           </div>
-          <div className={styles.containerTitle}>{props.PostDefaultTitle}</div>
-          <div className={styles.horizontalRule}></div>
-          <div className={props.className}>{props.children}</div>
-        </Card>
-      ) : (
-        <Card className={styles.containerMy}>
-          <div className={styles.xmarkImg} onClick={()=>{setOnPostOfficeCard(false)}}>
-            <img src={`${urlPath}/assets/icons/x.png`} />
-          </div>
-          <div className={styles.containerTitle}>{props.PostDefaultTitle}</div>
-          <div className={styles.horizontalRule}></div>
-          <div className={props.className}>{props.children}</div>
-        </Card>
+        </>
       )}
     </>
   )
