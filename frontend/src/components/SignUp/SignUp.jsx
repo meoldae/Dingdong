@@ -116,15 +116,19 @@ const SignUp = () => {
     DoubleCheck(
       nickname,
       (success) => {
-        setIsValid(true);
-        setNicknameMessage("사용 가능한 닉네임 입니다!");
-        console.log(success);
-      },
-      (error) => {
-        setIsValid(false);
-        setNicknameMessage("이미 사용중인 닉네임 입니다!");
-        console.log(error);
+        if (success.data.code === "FAILED") {
+          setIsValid(false);
+          setNicknameMessage("이미 사용중인 닉네임 입니다!");
+        } else {
+          setIsValid(true);
+          setNicknameMessage("사용 가능한 닉네임 입니다!");
+        }
       }
+      // (error) => {
+      //   setIsValid(false);
+      //   setNicknameMessage("이미 사용중인 닉네임 입니다!");
+      //   console.log(error);
+      // }
     );
   }, [nickname]);
   return (

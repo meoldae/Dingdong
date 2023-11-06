@@ -29,8 +29,8 @@
   font-size: 40px;
   margin-top: 20px;
   height: 10%;
-  margin-left: 15%;
-  /* text-align: center; */
+  /* margin-left: 15%; */
+  text-align: center;
 }
 .subContainer {
   display: flex;
