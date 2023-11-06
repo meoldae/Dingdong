@@ -128,7 +128,7 @@ const SharePage = ({shareModal, canvasRef}) => {
         )}
         <h2>{formattedDate}</h2>
         <div>
-          <textarea className={styles.textarea} placeholder="본인의 이야기를 작성해보세요!" spellCheck="false" maxLength={33} onChange={(e)=>{setText(e.target.value)}}/>
+          <textarea className={styles.textarea} placeholder="본인의 이야기를 작성해보세요!" spellCheck="false" maxLength={33} onChange={(e)=>{setText(e.target.value)}} style={{fontFamily: "GangwonEduAll-Light"}}/>
         </div>
       </div>
     </div>
