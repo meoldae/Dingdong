@@ -57,6 +57,7 @@ const PostofficeSendLetter = ({ card }) => {
           WEB_LINK: kakaoUrl,
         },
       })
+      setIsFinishSendLetter(false)
       setOnPostofficeSendLetter(false)
       successMsg("💌 편지를 보냈어요!")
     })
