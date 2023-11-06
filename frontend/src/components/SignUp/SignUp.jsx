@@ -170,6 +170,7 @@ const SignUp = () => {
               placeholder=""
               className={styles.nicknameInputSuccess}
               maxLength={6}
+              style={{ fontFamily: "GmarketSansMedium" }}
             />
 
             <img src={`${urlPath}/assets/icons/success.png`} />
