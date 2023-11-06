@@ -26,12 +26,12 @@
 
 .Title {
   font-size: 35px;
-  font-family: "Pretendard-Bold";
+  /* font-family: "Pretendard-Bold"; */
 }
 
 .SemiTitle {
   font-size: 15px;
-  font-family: "Pretendard-SemiBold";
+  /* font-family: "Pretendard-SemiBold"; */
   margin-top: 20px;
   margin-bottom: 10px;
 }
@@ -59,7 +59,7 @@
   border: 3px solid #f1c4e1;
   border-radius: 10px;
   padding-left: 10px;
-  font-family: "Pretendard-Regular";
+  /* font-family: "Pretendard-Regular"; */
   font-size: 15px;
 }
 
@@ -85,7 +85,7 @@
   height: 60px;
   background: #f1c4e1;
   border-radius: 10px;
-  font-family: "Pretendard-Medium";
+  /* font-family: "Pretendard-Medium"; */
   font-size: 25px;
   text-align: center;
   line-height: 60px;

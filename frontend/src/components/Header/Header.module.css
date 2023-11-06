@@ -117,7 +117,7 @@
   align-items: center;
   width: 300px;
   height: 120px;
-  font-family: Pretendard-SemiBold;
+  /* font-family: Pretendard-SemiBold; */
 }
 
 .HorizontalLine {
@@ -149,7 +149,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Pretendard-SemiBold";
+  /* font-family: "Pretendard-SemiBold"; */
 }
 
 /* 헤더 햄버거 모달 CSS */
@@ -203,14 +203,14 @@
   width: 90%;
 
   font-size: 25px;
-  font-family: "Pretendard-SemiBold";
+  /* font-family: "Pretendard-SemiBold"; */
 }
 
 .ContentContainer {
   width: 90%;
   height: 90%;
   font-size: 15px;
-  font-family: "Pretendard-Medium";
+  /* font-family: "Pretendard-Medium"; */
   font-size: 18px;
   color: #2c2c2c;
   display: flex;
@@ -261,7 +261,7 @@
 
 .NoAlarm {
   color: #fff;
-  font-family: "Pretendard-Bold";
+  /* font-family: "Pretendard-Bold"; */
   font-size: 20px;
   width: 300px;
   display: flex;
@@ -301,7 +301,7 @@
 .InquiryTitle {
   color: #2C2C2C;
   font-size: 30px;
-  font-family: "Pretendard-Bold";
+  /* font-family: "Pretendard-Bold"; */
   text-align: center;
   margin: 15px 0 15px 0;
 }
@@ -330,7 +330,7 @@
   width: 80%;
   height: 170px;
   
-  font-family: "Pretendard-Medium";
+  /* font-family: "Pretendard-Medium"; */
   font-size: 18px;
   padding: 10px;
 
@@ -345,7 +345,7 @@
   margin-top: 5px;
   margin-right: 10%;
   font-size: 15px;
-  font-family: "Pretendard-SemiBold";
+  /* font-family: "Pretendard-SemiBold"; */
 }
 
 .InquiryButtonContainer {
@@ -366,6 +366,6 @@
   text-align: center;
   line-height: 50px;
   font-size: 20px;
-  font-family: "Pretendard-Bold";
+  /* font-family: "Pretendard-Bold"; */
   color: #FFFFFF;
 }

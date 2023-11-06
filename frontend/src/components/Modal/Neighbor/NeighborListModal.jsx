@@ -14,7 +14,7 @@ const NeighborListModal = ({ imgName, nickname, gohome, remove, status }) => {
       <div className={styles.InfoContainer}>
         <div
           style={{
-            fontFamily: "Pretendard-SemiBold",
+            // fontFamily: "Pretendard-SemiBold",
             fontSize: "20px",
             marginLeft: "15px",
           }}

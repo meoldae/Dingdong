@@ -13,7 +13,7 @@
 .ContentContainer {
   height: 50px;
 
-  font-family: Pretendard-SemiBold;
+  /* font-family: Pretendard-SemiBold; */
   font-size: 15px;
 
   display: flex;
@@ -40,5 +40,5 @@
   justify-content: center;
   
   font-size: 15px;
-  font-family: "Pretendard-SemiBold";
+  /* font-family: "Pretendard-SemiBold"; */
 }

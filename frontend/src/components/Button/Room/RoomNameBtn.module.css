@@ -8,8 +8,8 @@
   display: flex; /* Flexbox 레이아웃 */
   align-items: center; /* 세로 중앙 정렬 */
   justify-content: center; /* 가로 중앙 정렬 */
-  font-family: -apple-system, sans-serif; /* 폰트 스타일 */
-  font-size: 20px; /* 글자 크기 */
+  /* font-family: -apple-system, sans-serif; 폰트 스타일 */
+  font-size: 18px; /* 글자 크기 */
   font-weight: 700; /* 글자 굵기 */
   letter-spacing: -0.24px; /* 자간 조정 */
   margin: 0; /* 외부 여백 없음 */

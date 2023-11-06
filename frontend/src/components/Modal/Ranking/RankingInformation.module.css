@@ -16,7 +16,7 @@
 
 .Title {
   font-size: 25px;
-  font-family: "Pretendard-Bold";
+  /* font-family: "Pretendard-Bold"; */
 }
 
 .DivisionLine {
@@ -33,7 +33,7 @@
 
 .SemiTitle {
   font-size: 20px;
-  font-family: "Pretendard-SemiBold";
+  /* font-family: "Pretendard-SemiBold"; */
 
   margin-bottom: 10px;
 }
