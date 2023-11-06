@@ -186,8 +186,6 @@ const SingleHeader = ({ checkMyRoom }) => {
         </div>
       </div>
 
-      
-      
       {/* 햄버거 바 */}
       {isHamburger && (
         <>
