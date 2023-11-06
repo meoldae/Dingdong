@@ -24,6 +24,9 @@
 .letterBox {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3열로 설정 */
+  grid-auto-rows: 120px; /* 모든 행의 높이를 150px로 설정 */
+  /* gap: 10px; */
+
 }
 
 .test {
