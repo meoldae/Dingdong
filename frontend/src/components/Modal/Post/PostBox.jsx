@@ -14,7 +14,7 @@ const PostBox = (props) => {
   const [loading, setLoading] = useState(false);
   const letterBoxRef = useRef();
   const observerRef = useRef();
-  console.log(letters);
+
   const onSuccess = (response) => {
     setLetters((prevLetters) => [
       ...prevLetters,

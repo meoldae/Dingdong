@@ -52,9 +52,9 @@
 }
 
 .horizontalRule {
-  width: 95%;
+  width: 90%;
   height: 2px;
-  background-color: #fff;
+  background-color: #02C26F;
   border-radius: 5px;
   margin-bottom: 10px;
 }
