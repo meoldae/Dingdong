@@ -4,6 +4,7 @@ import { useSetRecoilState } from "recoil";
 
 // 컴포넌트
 import Card from "../../components/UI/Card";
+import DefaultModal from "../../components/Modal/Default/DefaultModal";
 
 // Atom
 import { postofficeCardAtom } from "../../atom/PostAtom";
@@ -22,9 +23,9 @@ const PostDefaultModal = (props) => {
   
   return (
     <>
-      <div className={styles.overlay} onClick={()=>{setOnPostOfficeCard(false)}}/>
+      <div className={styles.overlay} onClick={() => setIsFinishPostCardBox(true)}/>
       <Card className={styles.container}>
-        <div className={styles.xmarkImg} onClick={()=>{setOnPostOfficeCard(false)}}>
+        <div className={styles.xmarkImg} onClick={() => setIsFinishPostCardBox(true)}>
           <img src={`${urlPath}/assets/icons/x.png`} />
         </div>
         <div className={styles.containerTitle}>{props.PostDefaultTitle}</div>
@@ -35,9 +36,9 @@ const PostDefaultModal = (props) => {
       {/* 우표함 종료확인 모달 */}
       {isFinishPostCardBox && (
         <>
-          <div />
-          <div>
-            
+          <div className={styles.finishOverlay} onClick={() => setIsFinishPostCardBox(false)} />
+          <div className={styles.finishContainer}>
+            <DefaultModal />
           </div>
         </>
       )}

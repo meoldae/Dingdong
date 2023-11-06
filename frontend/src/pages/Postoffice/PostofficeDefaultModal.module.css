@@ -50,3 +50,17 @@
   background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 */
   z-index: 2;
 }
+
+.finishOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 */
+  z-index: 3;
+}
+
+.finishContainer {
+  z-index: 4;
+}
