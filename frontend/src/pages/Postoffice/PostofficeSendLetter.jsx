@@ -11,13 +11,16 @@ import { successMsg } from "@/utils/customToast"
 
 const PostofficeSendLetter = ({ card }) => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
   const [content, setContent] = useState("")
   const [contentCount, setContentCount] = useState(0)
-
   const [toValue, setToValue] = useState("")
   const [fromValue, setFromValue] = useState("")
+
   const setOnPostofficeSendLetter = useSetRecoilState(postofficeSendLetterAtom)
+  
   const userInfo = useRecoilValue(userAtom)
+
   const sendClick = () => {
     if (!toValue.trim() || !fromValue.trim() || !content.trim()) {
       successMsg("❌ 편지를 작성해주세요.")
