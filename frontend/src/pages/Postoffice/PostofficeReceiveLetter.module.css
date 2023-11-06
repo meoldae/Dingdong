@@ -97,7 +97,7 @@
   display: flex;
   margin: 10px 0 0 20px;
   justify-content: start;
-  font-family: "GangwonEduAll-Light";
+  /* font-family: "GangwonEduAll-Light"; */
   font-size: 35px;
   margin-left: 0%;
 }
@@ -113,7 +113,7 @@
   word-break: break-all;
 }
 
-.letterContent textarea {
+/* .letterContent textarea {
   width: 100%;
   height: 100%;
   background-color: transparent;
@@ -130,22 +130,22 @@
 
 .letterContent textarea::-webkit-scrollbar {
   display: none;
-}
+} */
 
-.contentCount {
+/* .contentCount {
   font-family: "GangwonEduAll-Light";
   font-size: 20px;
   width: 100%;
   display: flex;
   justify-content: flex-end;
-}
+} */
 
 .footerContainer {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-family: "GangwonEduAll-Light";
+  /* font-family: "GangwonEduAll-Light"; */
   align-items: center;
   margin-top: 15px;
 }
@@ -163,21 +163,21 @@
   width: 60%;
 }
 
-.FromUser textarea {
-  /* width: 60%; */
+/* .FromUser textarea {
+  width: 60%;
   vertical-align: middle;
-  padding-top: 4px; /* 상단 패딩 추가 */
+  padding-top: 4px;
   height: 100%;
   background-color: transparent;
   border: none;
   resize: none;
 
-  /* padding: 5px; */
+  padding: 5px;
   font-size: 25px;
   font-family: "GangwonEduAll-Light";
   outline: none;
   text-align: center;
-}
+} */
 
 .heart {
   background: linear-gradient(180deg, #FFD2E1 0%, #FF3A89 100%);

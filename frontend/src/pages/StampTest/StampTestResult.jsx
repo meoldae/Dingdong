@@ -35,7 +35,7 @@ const StampTestResult = () => {
   }
 
   return (
-    <div className={styles.Container}>
+    <div className={styles.Container} style={{ fontFamily: "GangwonEduAll-Light" }}>
       <div className={styles.PostImage}>
         <img className={styles.PostImagePng}
             src={resultSrcUrl}  alt={resultSrcUrl}

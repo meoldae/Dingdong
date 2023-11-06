@@ -102,7 +102,7 @@ const PostofficeSendLetter = ({ card }) => {
               className={styles.topPostCardImg}
               src={`${urlPath}/assets/images/post/${card.src}`}
             />
-            <div className={styles.ToUser}>
+            <div className={styles.ToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>
               To.
               <input
                 type="text"
@@ -110,6 +110,7 @@ const PostofficeSendLetter = ({ card }) => {
                 onChange={handleToInputChange}
                 placeholder="입력하세요."
                 maxLength="7"
+                style={{ fontFamily: "GangwonEduAll-Light" }}
               />
             </div>
             <div className={styles.letterContent}>
@@ -119,10 +120,11 @@ const PostofficeSendLetter = ({ card }) => {
                 placeholder="편지 내용을 작성하세요."
                 maxLength={199}
                 spellCheck="false"
+                style={{ fontFamily: "GangwonEduAll-Light" }}
               />
             </div>
-            <div className={styles.contentCount}>{contentCount}/200</div>
-            <div className={styles.footerContainer}>
+            <div className={styles.contentCount} style={{ fontFamily: "GangwonEduAll-Light" }}>{contentCount}/200</div>
+            <div className={styles.footerContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
               <div className={styles.FromUser}>
                 From.
                 <input
@@ -131,6 +133,7 @@ const PostofficeSendLetter = ({ card }) => {
                   placeholder="입력하세요."
                   onChange={handleFromInputChange}
                   maxLength="7"
+                  style={{ fontFamily: "GangwonEduAll-Light" }}
                 />
               </div>
             </div>

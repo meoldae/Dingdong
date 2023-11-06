@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  font-family: "GangwonEduAll-Light";
+  /* font-family: "GangwonEduAll-Light"; */
   background: linear-gradient(180deg, #9ED0FF 0%, #FFFFFF 100%);
 }
 
