@@ -10,7 +10,7 @@ const StampTestStart = (props) => {
     navigate(`${urlPath}/`)
   }
   return (
-    <div className={styles.Container}>
+    <div className={styles.Container} style={{ fontFamily: "GangwonEduAll-Light" }}>
       <img 
         src={`${urlPath}/assets/images/Stamp_Test_Start.png`}
         style={{ 
