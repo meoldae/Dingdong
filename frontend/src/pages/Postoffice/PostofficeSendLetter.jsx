@@ -51,7 +51,7 @@ const PostofficeSendLetter = ({ card }) => {
       window.Kakao.Share.sendCustom({
         templateId: 100120,
         templateArgs: {
-          THU: `https://ding-dong.s3.ap-northeast-2.amazonaws.com/Letter${letterData.sta}.png`,
+          THU: `https://ding-dong.s3.ap-northeast-2.amazonaws.com/Letter${letterData.stampId}.png`,
           TITLE: `딩동! ${letterData.letterFrom}님이 보낸 편지를 확인해보세요.`,
           DESC: `From. ${letterData.letterFrom}`,
           MOBILE_LINK: kakaoUrl,
