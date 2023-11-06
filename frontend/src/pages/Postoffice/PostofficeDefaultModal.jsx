@@ -20,6 +20,12 @@ const PostDefaultModal = (props) => {
 
   // 우표함 종료확인 모달 상태관리
   const [isFinishPostCardBox, setIsFinishPostCardBox] = useState(false)
+
+  // 우표함 종료함수
+  const finishPostCardBoxHandler = () => {
+    setOnPostOfficeCard(false)
+    setIsFinishPostCardBox(false)
+  }
   
   return (
     <>
@@ -38,7 +44,13 @@ const PostDefaultModal = (props) => {
         <>
           <div className={styles.finishOverlay} onClick={() => setIsFinishPostCardBox(false)} />
           <div className={styles.finishContainer}>
-            <DefaultModal />
+            <DefaultModal
+              content={"우표 선택을 종료하시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={() => finishPostCardBoxHandler()}
+              cancelClick={() => setIsFinishPostCardBox(false)}
+            />
           </div>
         </>
       )}
