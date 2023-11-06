@@ -1,7 +1,16 @@
-import Card from "../../components/UI/Card";
-import { postofficeCardAtom } from "../../atom/PostAtom";
-import styles from "./PostofficeDefaultModal.module.css"
+// 라이브러리
 import { useRecoilState } from "recoil";
+
+// 컴포넌트
+import Card from "../../components/UI/Card";
+
+// Atom
+import { postofficeCardAtom } from "../../atom/PostAtom";
+
+// 스타일
+import styles from "./PostofficeDefaultModal.module.css"
+
+
 const PostDefaultModal = (props) => {
   const [onPostofficeCard, setOnPostOfficeCard] =
     useRecoilState(postofficeCardAtom);
