@@ -405,6 +405,9 @@ const Header = ({ checkMyRoom }) => {
           />
           <div className={styles.InquiryContainer}>
             <div className={styles.InquiryTitle}>문의하기</div>
+            <div className={styles.LineContainer}>
+              <div className={styles.InquiryLine} />
+            </div>
             <div className={styles.InquiryContentContainer}>
               <textarea
                 className={styles.InquiryContent}
