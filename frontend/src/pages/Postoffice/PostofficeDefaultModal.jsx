@@ -10,7 +10,7 @@ const PostDefaultModal = (props) => {
   return (
     <>
       <div className={styles.overlay} onClick={()=>{setOnPostOfficeCard(false)}}/>
-        <Card className={styles.containerOther}>
+        <Card className={styles.container}>
           <div className={styles.xmarkImg} onClick={()=>{setOnPostOfficeCard(false)}}>
             <img src={`${urlPath}/assets/icons/x.png`} />
           </div>
