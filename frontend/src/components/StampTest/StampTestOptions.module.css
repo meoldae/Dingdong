@@ -7,12 +7,12 @@
   align-items: center;
   justify-content: space-around;
   /* font-family: "GangwonEduAll-Light"; */
-  background: linear-gradient(180deg, #9ED0FF 0%, #FFFFFF 100%);
+  background: linear-gradient(180deg, #9ed0ff 0%, #ffffff 100%);
 }
- 
+
 .ContentContainer {
   width: 320px;
-  height: 70%;
+  height: 65%;
   background: #fff;
   border-radius: 10px;
   display: flex;
@@ -38,7 +38,7 @@
 .Answer {
   width: 240px;
   height: 75px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 10px;
   font-size: 24px;
   margin-bottom: 10px;
@@ -48,8 +48,8 @@
   justify-content: center;
   text-align: center;
   white-space: pre-line;
-  background: #FFFFFF;
-  border: 2px solid #2998FE;
+  background: #ffffff;
+  border: 2px solid #2998fe;
   border-radius: 10px;
   box-shadow: 0px 4px 0px #9ad0ff;
 }
