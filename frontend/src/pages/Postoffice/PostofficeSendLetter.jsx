@@ -45,12 +45,10 @@ const PostofficeSendLetter = ({ card }) => {
       if (!window.Kakao.isInitialized()) {
         window.Kakao.init(JS_KEY)
       }
-      // console.log(response)
       let currentUrl = window.location.href
       const kakaoUrl = currentUrl.endsWith("/")
         ? `${currentUrl}letter/${newID}`
         : `${currentUrl}/letter/${newID}`
-      // console.log(kakaoUrl)
       window.Kakao.Share.sendCustom({
         templateId: 100120,
         templateArgs: {
