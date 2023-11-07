@@ -2,10 +2,9 @@
 importScripts("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js");
 
-importScripts('swenv.js'); 
+importScripts('./dist/public/swenv.js'); 
 
 const firebaseConfig = {
-  // apiKey: 'AIzaSyB5eBZtGAmShRKylzvR0NJDZxc9zfWuJe4',
   apiKey: process.env.VITE_APP_FCM_API_KEY,
   authDomain: process.env.VITE_APP_AUTH_DOMAIN,
   projectId: process.env.VITE_APP_PROJECT_ID,
