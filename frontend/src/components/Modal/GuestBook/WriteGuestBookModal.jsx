@@ -69,11 +69,13 @@ const WriteGuestBookModal = () => {
       fetchWriteGuestBook(
         params,
         (success) => {
-          setIsGusetBookVisible(false)
-          setIsWriteGuestBookVisible(true)
+          setIsWriteGuestBookVisible(false)
+          setIsGusetBookVisible(true)
+          successMsg("✅ 방명록을 남겼습니다!")
         },
         (error) => {
           console.log("Error at writeGuestBook...", error)
+          successMsg("❌ 방명록 작성 중에 문제가 발생했습니다.")
         }
       )
     }

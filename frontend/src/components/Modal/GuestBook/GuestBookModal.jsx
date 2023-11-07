@@ -17,6 +17,9 @@ import { fetchListGuestBook, fetchDetailGuestBook } from "../../../api/GuestBook
 // 스타일
 import styles from "./GuestBookModal.module.css"
 
+// 컴포넌트
+import { successMsg } from "../../../utils/customToast"
+
 const GuestBookModal = () => {
   // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -42,6 +45,7 @@ const GuestBookModal = () => {
         setGuestBookList(success.data.data)
       },
       (error) => {
+        successMsg("❌ 방명록 리스트를 가져오는데 실패했습니다.")
         console.log('Error at ListGuestBook...', error)
       }
     )
@@ -97,15 +101,23 @@ const GuestBookModal = () => {
       <div className={styles.Container}>
         <div className={styles.Title}>To. {roomInfo}</div>
         <div className={styles.ContentContainer}>
-          {guestBookList.map((item) => (
-            <div key={item.id} style={{ width: "100px", height: "100px" }} onClick={() => detailGuestBookHandler(item.id)}>
-              <ContentItem
-                content={item.description}
-                rotate={item.rotate}
-                colorNum={item.color}
-              />
+          {guestBookList.length === 0  ? (
+            <div
+              style={{ width: "300px", height: "290px", textAlign: "center", lineHeight: "290px" }}
+            >
+              방명록이 비어있습니다.
             </div>
-          ))}
+          ) : (
+            guestBookList.map((item) => (
+              <div key={item.id} style={{ width: "100px", height: "100px" }} onClick={() => detailGuestBookHandler(item.id)}>
+                <ContentItem
+                  content={item.description}
+                  rotate={item.rotate}
+                  colorNum={item.color}
+                />
+              </div>
+            ))
+          )}
         </div>
         <div className={styles.FooterContainer}>
           <div className={styles.WriteButton} onClick={() => isWriteGuestBookHandler()}>
