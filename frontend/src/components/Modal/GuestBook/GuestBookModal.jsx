@@ -1,8 +1,12 @@
 // 라이브러리
+import { useEffect, useState } from "react"
 import { useSetRecoilState } from "recoil"
 
 // Atom
 import { isGuestBookVisibleAtom, isWriteGuestBookVisibleAtom }  from "../../../atom/GuestBookAtom"
+
+// API
+import { fetchListGuestBook } from "../../../api/GuestBook"
 
 // 스타일
 import styles from "./GuestBookModal.module.css"
@@ -11,9 +15,27 @@ const GuestBookModal = () => {
   // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
+  // 방명록 리스트 상태관리
+  const [guestBookList, setGuestBookList] = useState([])
+
   // 리코일 상태관리
   const setIsGuestBookVisible = useSetRecoilState(isGuestBookVisibleAtom)
   const setIsWriteGuestBookVisible = useSetRecoilState(isWriteGuestBookVisibleAtom)
+
+  // 방명록 리스트 가져오기
+  useEffect(() => {
+    const nowRoomId = window.location.pathname.match(/\d+/g)[0]
+
+    fetchListGuestBook(
+      nowRoomId,
+      (success) => {
+        setGuestBookList(success.data.data)
+      },
+      (error) => {
+        console.log('Error at ListGuestBook...', error)
+      }
+    )
+  }, [])
 
   // 색상 아이템
   const colorList = [
@@ -50,11 +72,15 @@ const GuestBookModal = () => {
       <div className={styles.Container}>
         <div className={styles.Title}>To. 다영시치</div>
         <div className={styles.ContentContainer}>
-          <ContentItem
-            content={"이건 테스트를 위한 더미 내용입니다. 진짜 신기하죠? 우와오아와와와와!"}
-            rotate={5}
-            colorNum={0}
-          />
+          {guestBookList.map((item) => (
+            <div key={item.id} style={{ width: "100px", height: "100px" }}>
+              <ContentItem
+                content={item.description}
+                rotate={item.rotate}
+                colorNum={item.color}
+              />
+            </div>
+          ))}
         </div>
         <div className={styles.FooterContainer}>
           <div className={styles.WriteButton} onClick={() => isWriteGuestBookHandler()}>
