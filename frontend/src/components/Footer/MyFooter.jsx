@@ -7,6 +7,7 @@ import PostBox from "../Modal/Post/PostBox"
 import ReceiveLetter from "../Modal/Post/ReceiveLetter"
 import GuestBookModal from "../Modal/GuestBook/GuestBookModal"
 import WriteGuestBookModal from "../Modal/GuestBook/WriteGuestBookModal"
+import DefaultModal from "../Modal/Default/DefaultModal"
 
 // 스타일
 import styles from "./Footer.module.css"
@@ -18,7 +19,12 @@ import {
 } from "../../atom/PostAtom"
 import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom"
 import { ItemsState, buildModeState } from "../Room/Atom"
-import { isGuestBookVisibleAtom, isWriteGuestBookVisibleAtom }  from "../../atom/GuestBookAtom"
+import {
+  isGuestBookVisibleAtom,
+  isWriteGuestBookVisibleAtom,
+  isFinishGuestBookVisibleAtom,
+  isFinishWriteGuestBookVisibleAtom
+}  from "../../atom/GuestBookAtom"
 
 
 const MyFooter = () => {
@@ -34,7 +40,9 @@ const MyFooter = () => {
     isReceiveLetterVisibleAtom
   )
   const [popUpStatus, setPopUpStatus] = useRecoilState(popUpStatusAtom)
+  // 방명록
   const [isGuestBookVisible, setIsGuestBookVisible] = useRecoilState(isGuestBookVisibleAtom)
+  const [isFinishGuestBookVisible, setIsFinishGuestBookVisible] = useRecoilState(isFinishGuestBookVisibleAtom)
   const [isWriteGuestBookVisible, setIsWriteGuestBookVisible] = useRecoilState(isWriteGuestBookVisibleAtom)
 
   const handleSelectButtonClick = () => {
@@ -53,6 +61,12 @@ const MyFooter = () => {
   const closeWriteGuestBookModalHandler = () => {
     setIsWriteGuestBookVisible(false)
     setIsGuestBookVisible(true)
+  }
+
+  // 방명록 리스트 종료 모달 함수
+  const finishGuestBookListHandler = () => {
+    setIsFinishGuestBookVisible(false)
+    setIsGuestBookVisible(false)
   }
 
   return (
@@ -99,9 +113,25 @@ const MyFooter = () => {
       {/* 방명록 리스트 모달 */}
       {isGuestBookVisible && (
         <>
-          <div className={styles.Overlay} onClick={() => setIsGuestBookVisible(false)} />
+          <div className={styles.Overlay} onClick={() => setIsFinishGuestBookVisible(true)} />
           <div className={styles.GuestBookContainer}>
             <GuestBookModal />
+          </div>
+        </>
+      )}
+
+      {/* 방명록 리스트 종료 모달 */}
+      {isFinishGuestBookVisible && (
+        <>
+          <div className={styles.OverOverlay} onClick={() => setIsFinishGuestBookVisible(false)} />
+          <div className={styles.OverGuestBookContainer}>
+            <DefaultModal
+              content={"방명록을 종료하시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={() => finishGuestBookListHandler()}
+              cancelClick={() => setIsFinishGuestBookVisible(false)}
+            />
           </div>
         </>
       )}
