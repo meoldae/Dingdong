@@ -24,6 +24,7 @@ const DetailGuestBookModal = () => {
     "linear-gradient(180deg, #FFFFFF 0%, #696969 100%)", // 6: 검정색
   ]
 
+  // 시간 변경 함수
   const changeTimeHandler = (time) => {
     const writedTime = new Date(time)
     const nowTime = new Date()
