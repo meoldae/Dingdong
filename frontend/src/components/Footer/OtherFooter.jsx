@@ -1,8 +1,15 @@
+// 라이브러리
 import { useEffect, useState } from "react"
+
+// 컴포넌트
 import PostCardBox from "../Modal/Post/PostCardBox"
 import RoomBtn from "../Button/Room/RoomBtn"
 import SendLetter from "../Modal/Post/SendLetter"
+
+// 스타일
 import style from "./Footer.module.css"
+
+// API
 import { isHeartCheck, updateHeart } from "@/api/Room"
 
 const OtherFooter = (props) => {
