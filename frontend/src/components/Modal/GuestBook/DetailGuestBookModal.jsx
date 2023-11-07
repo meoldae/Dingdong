@@ -24,6 +24,16 @@ const DetailGuestBookModal = () => {
     "linear-gradient(180deg, #FFFFFF 0%, #696969 100%)", // 6: 검정색
   ]
 
+  const changeTimeHandler = (time) => {
+    const writedTime = new Date(time)
+    const nowTime = new Date()
+
+    const diffTime = nowTime - writedTime
+    const hoursDiff = diffTime / (1000 * 60 * 60)
+
+    return `${Math.floor(hoursDiff)}시간 전 작성`
+  }
+
   return (
     <>
       <div className={styles.Container}>
@@ -37,7 +47,7 @@ const DetailGuestBookModal = () => {
           </div>
         </div>
         <div className={styles.TimeContainer}>
-          <div className={styles.Time}>{guestBookDetailContent.writeTime}</div>
+          <div className={styles.Time}>{changeTimeHandler(guestBookDetailContent.writeTime)}</div>
         </div>
       </div>
     </>
