@@ -65,16 +65,14 @@ function RoomPage() {
   const today = new Date();
   const [time, setTime] = useState();
   useEffect(() => {
-  
     const myRoomId = userInfo.roomId;
     setIsMyRoom(roomId == myRoomId);
     fetchRoomData(
       roomId,
-      (response) => {
-        console.log(response.data.data)
+      (response) => { 
         setItems(response.data.data.roomFurnitureList);
         setNickName(response.data.data.nickname);
-        //setAvatarId(response.data.data.avatarId)
+        setAvatarId(response.data.data.avatarId)
       },
       (error) => {
         console.error("Error at fetching RoomData...", error);

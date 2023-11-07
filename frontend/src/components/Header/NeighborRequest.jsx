@@ -1,7 +1,7 @@
 // 라이브러리
 import { useEffect, useState } from "react"
 import { useRecoilValue } from "recoil";
-import { roomInfoAtom } from "@/atom/RoomInfoAtom";
+import { roomInfoAtom, roomAvatarAtom } from "@/atom/RoomInfoAtom";
 
 // 스타일
 import styles from "./Header.module.css"
@@ -25,10 +25,10 @@ const NeighborRequest = () => {
   const [neighborFlag, setNeighborFlag] = useState(false)
   const [isAddNeighbor, setIsAddNeighbor] = useState(false)
   const nickname = useRecoilValue(roomInfoAtom);
+  const avatarId = useRecoilValue(roomAvatarAtom);
 
-  useEffect(() => {
-    console.log(nickname);
-
+  useEffect(() => { 
+    console.log(avatarId);
     neighborCheck(
       roomId,
       (response) => {
@@ -76,11 +76,11 @@ const NeighborRequest = () => {
   return (
     <>
       <div className={styles.ShareOther}>
-        {/* {!neighborFlag ? (
-          <RoomBtn img={`${userInfo.avatarId}_addUser`} onClick={() => setIsAddNeighbor(true)} />
+        {!neighborFlag ? (
+          <RoomBtn img={`${avatarId}_addUser`} onClick={() => setIsAddNeighbor(true)} />
         ) : (
-          <RoomBtn img={`${userInfo.avatarId}_neighbor`} onClick={() => setIsAddNeighbor(true)} />
-        )} */}
+          <RoomBtn img={`${avatarId}_neighbor`} onClick={() => setIsAddNeighbor(true)} />
+        )}
       </div>
 
       {isAddNeighbor && (
