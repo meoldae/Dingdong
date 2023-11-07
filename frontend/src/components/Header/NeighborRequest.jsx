@@ -1,5 +1,7 @@
 // 라이브러리
 import { useEffect, useState } from "react"
+import { useRecoilValue } from "recoil";
+import { roomInfoAtom } from "@/atom/RoomInfoAtom";
 
 // 스타일
 import styles from "./Header.module.css"
@@ -22,8 +24,11 @@ const NeighborRequest = () => {
   const [roomId, setRoomId] = useState(window.location.pathname.match(/\d+/g))
   const [neighborFlag, setNeighborFlag] = useState(false)
   const [isAddNeighbor, setIsAddNeighbor] = useState(false)
+  const nickname = useRecoilValue(roomInfoAtom);
 
   useEffect(() => {
+    console.log(nickname);
+
     neighborCheck(
       roomId,
       (response) => {
@@ -71,11 +76,11 @@ const NeighborRequest = () => {
   return (
     <>
       <div className={styles.ShareOther}>
-        {!neighborFlag ? (
-          <RoomBtn img={"addUser"} onClick={() => setIsAddNeighbor(true)} />
+        {/* {!neighborFlag ? (
+          <RoomBtn img={`${userInfo.avatarId}_addUser`} onClick={() => setIsAddNeighbor(true)} />
         ) : (
-          <RoomBtn img={"Neighbor"} onClick={() => setIsAddNeighbor(true)} />
-        )}
+          <RoomBtn img={`${userInfo.avatarId}_neighbor`} onClick={() => setIsAddNeighbor(true)} />
+        )} */}
       </div>
 
       {isAddNeighbor && (
