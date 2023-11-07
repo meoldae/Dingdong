@@ -3,11 +3,16 @@ import { useEffect, useState } from "react"
 import { useRecoilValue, useSetRecoilState } from "recoil"
 
 // Atom
-import { isGuestBookVisibleAtom, isWriteGuestBookVisibleAtom }  from "../../../atom/GuestBookAtom"
+import {
+  isGuestBookVisibleAtom,
+  isWriteGuestBookVisibleAtom,
+  isDetailGuestBookVisibleAtom,
+  guestBookDetailContentAtom
+}  from "../../../atom/GuestBookAtom"
 import { roomInfoAtom } from "../../../atom/RoomInfoAtom"
 
 // API
-import { fetchListGuestBook } from "../../../api/GuestBook"
+import { fetchListGuestBook, fetchDetailGuestBook } from "../../../api/GuestBook"
 
 // 스타일
 import styles from "./GuestBookModal.module.css"
@@ -24,6 +29,8 @@ const GuestBookModal = () => {
   // 리코일 상태관리
   const setIsGuestBookVisible = useSetRecoilState(isGuestBookVisibleAtom)
   const setIsWriteGuestBookVisible = useSetRecoilState(isWriteGuestBookVisibleAtom)
+  const setIsDetailGuestBookVisible = useSetRecoilState(isDetailGuestBookVisibleAtom)
+  const setGuestBookDetailContent = useSetRecoilState(guestBookDetailContentAtom)
 
   // 방명록 리스트 가져오기
   useEffect(() => {
@@ -71,8 +78,18 @@ const GuestBookModal = () => {
   }
 
   // 방명록 상세 함수
-  const detailGuestBookHandler = () => {
-    console.log(1)
+  const detailGuestBookHandler = (id) => {
+    fetchDetailGuestBook(
+      id,
+      (success) => {
+        setGuestBookDetailContent(success.data.data)
+        setIsGuestBookVisible(false)
+        setIsDetailGuestBookVisible(true)
+      },
+      (error) => {
+        console.log("Error at Detail GuestBook...", error)
+      }
+    )
   }
 
   return (
@@ -81,7 +98,7 @@ const GuestBookModal = () => {
         <div className={styles.Title}>To. {roomInfo}</div>
         <div className={styles.ContentContainer}>
           {guestBookList.map((item) => (
-            <div key={item.id} style={{ width: "100px", height: "100px" }} onClick={() => detailGuestBookHandler()}>
+            <div key={item.id} style={{ width: "100px", height: "100px" }} onClick={() => detailGuestBookHandler(item.id)}>
               <ContentItem
                 content={item.description}
                 rotate={item.rotate}
