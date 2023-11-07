@@ -11,7 +11,7 @@ export default defineConfig({
       registerType: "autoUpdate",
       injectRegister: "auto",
       workbox: {
-        importScripts: ["service-worker.js", "firebase-messaging-sw.js"], // 이게 제일 중요
+        importScripts: ["service-worker.js", "feDev/firebase-messaging-sw.js"], // 이게 제일 중요
       },
       devOptions: {
         enabled: true,
