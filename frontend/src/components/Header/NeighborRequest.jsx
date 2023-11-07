@@ -27,8 +27,7 @@ const NeighborRequest = () => {
   const nickname = useRecoilValue(roomInfoAtom);
   const avatarId = useRecoilValue(roomAvatarAtom);
 
-  useEffect(() => { 
-    console.log(avatarId);
+  useEffect(() => {  
     neighborCheck(
       roomId,
       (response) => {
