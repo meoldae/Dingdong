@@ -49,6 +49,9 @@ const DetailGuestBookModal = () => {
         <div className={styles.TimeContainer}>
           <div className={styles.Time}>{changeTimeHandler(guestBookDetailContent.writeTime)}</div>
         </div>
+        <div className={styles.FooterContainer}>
+          <div className={styles.Footer}>From. {guestBookDetailContent.nickname}</div>
+        </div>
       </div>
     </>
   )
