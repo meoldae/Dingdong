@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil"
 import RoomBtn from "../Button/Room/RoomBtn"
 import PostBox from "../Modal/Post/PostBox"
 import ReceiveLetter from "../Modal/Post/ReceiveLetter"
-import GuestBookModal from "../Modal/GuestBook/GuestBook"
+import GuestBookModal from "../Modal/GuestBook/GuestBookModal"
 
 // 스타일
 import styles from "./Footer.module.css"
