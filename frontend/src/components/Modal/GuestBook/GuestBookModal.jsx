@@ -1,9 +1,10 @@
 // 라이브러리
 import { useEffect, useState } from "react"
-import { useSetRecoilState } from "recoil"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 
 // Atom
 import { isGuestBookVisibleAtom, isWriteGuestBookVisibleAtom }  from "../../../atom/GuestBookAtom"
+import { roomInfoAtom } from "../../../atom/RoomInfoAtom"
 
 // API
 import { fetchListGuestBook } from "../../../api/GuestBook"
@@ -14,6 +15,8 @@ import styles from "./GuestBookModal.module.css"
 const GuestBookModal = () => {
   // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+  // 방 사용자 정보
+  const roomInfo = useRecoilValue(roomInfoAtom)
 
   // 방명록 리스트 상태관리
   const [guestBookList, setGuestBookList] = useState([])
@@ -70,7 +73,7 @@ const GuestBookModal = () => {
   return (
     <>
       <div className={styles.Container}>
-        <div className={styles.Title}>To. 다영시치</div>
+        <div className={styles.Title}>To. {roomInfo}</div>
         <div className={styles.ContentContainer}>
           {guestBookList.map((item) => (
             <div key={item.id} style={{ width: "100px", height: "100px" }}>
