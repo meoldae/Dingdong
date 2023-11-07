@@ -32,5 +32,12 @@ export const isFinishDetailGuestBookVisibleAtom = atom({
 
 export const guestBookDetailContentAtom = atom({
   key: "guestBookDetailContent",
-  default: [],
+  default: {
+    color: 0,
+    description: "",
+    id: 0,
+    nickname: "",
+    rotate: 0,
+    writeTime: ""
+  },
 })
