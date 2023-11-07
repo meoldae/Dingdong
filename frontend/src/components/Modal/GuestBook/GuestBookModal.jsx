@@ -2,7 +2,7 @@
 import { useRecoilState } from "recoil"
 
 // Atom
-import { isGuestBookVisibleAtom }  from "../../../atom/GuestBookAtom"
+import { isGuestBookVisibleAtom, isWriteGuestBookVisibleAtom }  from "../../../atom/GuestBookAtom"
 
 // 스타일
 import styles from "./GuestBookModal.module.css"
@@ -13,6 +13,7 @@ const GuestBookModal = () => {
 
   // 리코일 상태관리
   const [isGuestBookVisible, setIsGuestBookVisible] = useRecoilState(isGuestBookVisibleAtom)
+  const [isWriteGuestBookVisible, setIsWriteGuestBookVisible] = useRecoilState(isWriteGuestBookVisibleAtom)
 
   // 색상 아이템
   const colorList = [
@@ -41,6 +42,7 @@ const GuestBookModal = () => {
   // 방명록 작성 상태관리
   const isWriteGuestBookHandler = () => {
     setIsGuestBookVisible(false)
+    setIsWriteGuestBookVisible(true)
   }
 
   return (
