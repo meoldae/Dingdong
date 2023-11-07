@@ -1,6 +1,6 @@
 .wrap {
   position: absolute;
-  z-index: 3;
+  z-index: 2;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -71,7 +71,7 @@
   position: absolute;
   top: 80px;
   right: 4%;
-  z-index: 3;
+  z-index: 2;
 }
 
 /* 내 방의 경우 */

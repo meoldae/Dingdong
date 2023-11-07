@@ -169,7 +169,8 @@ const SignUp = () => {
               onChange={(e) => doubleCheckHandler(e)}
               placeholder=""
               className={styles.nicknameInputSuccess}
-              maxLength={6}
+              maxLength={4}
+              style={{ fontFamily: "GmarketSansMedium" }}
             />
 
             <img src={`${urlPath}/assets/icons/success.png`} />
