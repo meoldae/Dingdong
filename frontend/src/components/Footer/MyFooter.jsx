@@ -44,6 +44,7 @@ const MyFooter = () => {
   const [isGuestBookVisible, setIsGuestBookVisible] = useRecoilState(isGuestBookVisibleAtom)
   const [isFinishGuestBookVisible, setIsFinishGuestBookVisible] = useRecoilState(isFinishGuestBookVisibleAtom)
   const [isWriteGuestBookVisible, setIsWriteGuestBookVisible] = useRecoilState(isWriteGuestBookVisibleAtom)
+  const [isFinishWriteGuestBookVisible, setIsFinishWriteGuestBookVisible] = useRecoilState(isFinishWriteGuestBookVisibleAtom)
 
   const handleSelectButtonClick = () => {
     // console.log(1)
@@ -67,6 +68,13 @@ const MyFooter = () => {
   const finishGuestBookListHandler = () => {
     setIsFinishGuestBookVisible(false)
     setIsGuestBookVisible(false)
+  }
+
+  // 방명록 작성 종료 모달 함수
+  const finishWriteGuestBookHandler = () => {
+    setIsFinishWriteGuestBookVisible(false)
+    setIsWriteGuestBookVisible(false)
+    setIsGuestBookVisible(true)
   }
 
   return (
@@ -139,9 +147,25 @@ const MyFooter = () => {
       {/* 방명록 작성 모달 */}
       {isWriteGuestBookVisible && (
         <>
-          <div className={styles.Overlay} onClick={() => closeWriteGuestBookModalHandler()} />
+          <div className={styles.Overlay} onClick={() => setIsFinishWriteGuestBookVisible(true)} />
           <div className={styles.GuestBookContainer}>
             <WriteGuestBookModal />
+          </div>
+        </>
+      )}
+
+      {/* 방명록 작성 종료 모달 */}
+      {isFinishWriteGuestBookVisible && (
+        <>
+          <div className={styles.OverOverlay} onClick={() => setIsFinishWriteGuestBookVisible(false)} />
+          <div className={styles.OverGuestBookContainer}>
+            <DefaultModal
+              content={"방명록 작성을 종료하시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={() => finishWriteGuestBookHandler()}
+              cancelClick={() => setIsFinishWriteGuestBookVisible(false)}
+            />
           </div>
         </>
       )}
