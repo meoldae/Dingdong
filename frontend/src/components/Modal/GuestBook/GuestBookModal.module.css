@@ -27,6 +27,13 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
+
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .Item {
