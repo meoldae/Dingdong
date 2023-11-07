@@ -1,10 +1,10 @@
 // React
-import React, { useEffect, useState } from "react"
-import styles from "./SingleMainPage.module.css"
-import { motion } from "framer-motion"
+import React, { useEffect, useState } from "react";
+import styles from "./SingleMainPage.module.css";
+import { motion } from "framer-motion";
 
 // Recoil
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   ArriveAtom,
   ConfirmEnteringInstaAtom,
@@ -33,152 +33,189 @@ import {
   TwitterPortalVisibleAtom,
   WorldPortalPositionAtom,
   WorldPortalVisibleAtom,
-} from "../../atom/SinglePlayAtom"
-import { RoomPortalVisibleAtom } from "../../atom/SinglePlayAtom"
+} from "../../atom/SinglePlayAtom";
+import { RoomPortalVisibleAtom } from "../../atom/SinglePlayAtom";
 
 // Three.js 기본 세팅
-import { Canvas } from "@react-three/fiber"
-import { OrbitControls } from "@react-three/drei"
-import CustomCamera from "../../components/Default/CustomCamera"
-import DirectionalLight from "../../components/Default/DirectionLight"
-import Map from "../../components/Default/Map"
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import CustomCamera from "../../components/Default/CustomCamera";
+import DirectionalLight from "../../components/Default/DirectionLight";
+import Map from "../../components/Default/Map";
 
 // Three.js
-import Model from "../../components/Item/MainItems/Character"
-import House from "../../components/Item/MainItems/tempItems/House"
-import Spot from "../../components/Item/MainItems/tempItems/Spot"
+import Model from "../../components/Item/MainItems/Character";
+import House from "../../components/Item/MainItems/tempItems/House";
+import Spot from "../../components/Item/MainItems/tempItems/Spot";
 
 // 각 건물 포탈
-import DefaultPortal from "../../components/Item/MainItems/Portals/DefaultPortal"
-import DefaultPortalRing from "../../components/Item/MainItems/Portals/DefaultPortalRing"
+import DefaultPortal from "../../components/Item/MainItems/Portals/DefaultPortal";
+import DefaultPortalRing from "../../components/Item/MainItems/Portals/DefaultPortalRing";
 
 // React 컴포넌트
-import ConfirmEnteringDefaultModal from "../../components/Modal/Confirm/ConfirmEnteringDefaultModal"
-import PhysicsModel from "../../components/Item/MainItems/PhysicsModel"
-import RankingModal from "../../components/Modal/Ranking/RankingModal"
-import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom"
+import ConfirmEnteringDefaultModal from "../../components/Modal/Confirm/ConfirmEnteringDefaultModal";
+import PhysicsModel from "../../components/Item/MainItems/PhysicsModel";
+import RankingModal from "../../components/Modal/Ranking/RankingModal";
+import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom";
 import {
   postofficeCardAtom,
   postofficeSendLetterAtom,
-} from "../../atom/PostAtom"
-import PostofficeCardBox from "../Postoffice/PostofficeCardBox"
-import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter"
-import GuidePage from "../../components/UI/GuidePage"
-import SingleHeader from "./SingleHeader"
-import RankingInformation from "../../components/Modal/Ranking/RankingInformation"
+} from "../../atom/PostAtom";
+import PostofficeCardBox from "../Postoffice/PostofficeCardBox";
+import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter";
+import GuidePage from "../../components/UI/GuidePage";
+import SingleHeader from "./SingleHeader";
+import RankingInformation from "../../components/Modal/Ranking/RankingInformation";
+
+// FCM 설정
+import { getMessaging, getToken} from "firebase/messaging";
+import { setFCMTokenAtServer } from "@/api/FCM"
+
+// 여기까지 FCM
 
 const SingleMainPage = () => {
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
   // 카메라 설정
-  const setDefaultCameraPosition = useSetRecoilState(DefaultPosition)
-  const setDefaultCameraZoom = useSetRecoilState(DefaultZoom)
+  const setDefaultCameraPosition = useSetRecoilState(DefaultPosition);
+  const setDefaultCameraZoom = useSetRecoilState(DefaultZoom);
 
   // 도착 여부
-  const setIsArrived = useSetRecoilState(ArriveAtom)
+  const setIsArrived = useSetRecoilState(ArriveAtom);
 
   // 장소 입장 확인 여부
   const [confirmEnteringRoom, setConfirmEnteringRoom] = useRecoilState(
     ConfirmEnteringRoomAtom
-  )
+  );
   const [confirmEnteringPostOffice, setConfirmEnteringPostOffice] =
-    useRecoilState(ConfirmEnteringPostOfficeAtom)
+    useRecoilState(ConfirmEnteringPostOfficeAtom);
   const [confirmEnteringStore, setConfirmEnteringStore] = useRecoilState(
     ConfirmEnteringStoreAtom
-  )
+  );
   const [confirmEnteringOtherRoom, setConfirmEnteringOtherRoom] =
-    useRecoilState(ConfirmEnteringOtherRoomAtom)
+    useRecoilState(ConfirmEnteringOtherRoomAtom);
   // const [confirmEnteringWorld, setConfirmEnteringWorld] = useRecoilState(
   //   ConfirmEnteringWorldAtom
   // )
   const [confirmEnteringRank, setConfirmEnteringRank] = useRecoilState(
     ConfirmEnteringRankAtom
-  )
+  );
 
   const [confirmEnteringTest, setConfirmEnteringTest] = useRecoilState(
     ConfirmEnteringTestAtom
-  )
+  );
 
   const [confirmEnteringInsta, setConfirmEnteringInsta] = useRecoilState(
     ConfirmEnteringInstaAtom
-  )
+  );
 
   const [confirmEnteringTwitter, setConfirmEnteringTwitter] = useRecoilState(
     ConfirmEnteringTwitterAtom
-  )
+  );
 
   // 포탈 생성 여부
   const [roomPortalVisible, setRoomPortalVisible] = useRecoilState(
     RoomPortalVisibleAtom
-  )
+  );
   const [postOfficePortalVisible, setPostOfficePortalVisible] = useRecoilState(
     PostOfficePortalVisibleAtom
-  )
+  );
   const [storePortalVisible, setStorePortalVisible] = useRecoilState(
     StorePortalVisibleAtom
-  )
+  );
   const [otherRoomPortalVisible, setOtherRoomPortalVisible] = useRecoilState(
     OtherRoomPortalVisibleAtom
-  )
+  );
   // const [worldPortalVisible, setWorldPortalVisible] = useRecoilState(
   //   WorldPortalVisibleAtom
   // )
   const [rankPortalVisible, setRankPortalVisible] = useRecoilState(
     RankPortalVisibleAtom
-  )
+  );
   const [testPortalVisible, setTestPortalVisible] = useRecoilState(
     TestPortalVisibleAtom
-  )
+  );
   const [instaPortalVisible, setInstaPortalVisible] = useRecoilState(
     InstaPortalVisibleAtom
-  )
+  );
   const [twitterPortalVisible, setTwitterPortalVisible] = useRecoilState(
     TwitterPortalVisibleAtom
-  )
+  );
 
   // 포탈 위치
-  const roomPortalPosition = useRecoilValue(RoomPortalPositionAtom)
-  const postOfficePortalPosition = useRecoilValue(PostOfficePortalPositionAtom)
-  const storePortalPosition = useRecoilValue(StorePortalPositionAtom)
-  const otherRoomPortalPosition = useRecoilValue(OtherRoomPortalPositionAtom)
+  const roomPortalPosition = useRecoilValue(RoomPortalPositionAtom);
+  const postOfficePortalPosition = useRecoilValue(PostOfficePortalPositionAtom);
+  const storePortalPosition = useRecoilValue(StorePortalPositionAtom);
+  const otherRoomPortalPosition = useRecoilValue(OtherRoomPortalPositionAtom);
   // const worldPortalPosition = useRecoilValue(WorldPortalPositionAtom)
-  const rankPortalPosition = useRecoilValue(RankPortalPositionAtom)
-  const testPortalPosition = useRecoilValue(TestPortalPositionAtom)
-  const instaPortalPosition = useRecoilValue(InstaPortalPositionAtom)
-  const twitterPortalPosition = useRecoilValue(TwitterPortalPositionAtom)
+  const rankPortalPosition = useRecoilValue(RankPortalPositionAtom);
+  const testPortalPosition = useRecoilValue(TestPortalPositionAtom);
+  const instaPortalPosition = useRecoilValue(InstaPortalPositionAtom);
+  const twitterPortalPosition = useRecoilValue(TwitterPortalPositionAtom);
 
   // 랭킹모달 상태관리
   const closeRanking = () => {
-    setIsArrived(false)
-    setConfirmEnteringRank(false)
-    setDefaultCameraPosition([2, 10, 10])
-    setDefaultCameraZoom(0.18)
-  }
+    setIsArrived(false);
+    setConfirmEnteringRank(false);
+    setDefaultCameraPosition([2, 10, 10]);
+    setDefaultCameraZoom(0.18);
+  };
 
   // 우체국 도착 상태관리
   const [onPostofficeCard, setOnPostOfficeCard] =
-    useRecoilState(postofficeCardAtom)
+    useRecoilState(postofficeCardAtom);
   const [onPostofficeSendLetter, setOnPostofficeSendLetter] = useRecoilState(
     postofficeSendLetterAtom
-  )
-  const [selectedPostCard, setSelectedPostCard] = useState(null)
+  );
+  const [selectedPostCard, setSelectedPostCard] = useState(null);
 
   const handleSelectButtonClick = (selectedCard) => {
-    setSelectedPostCard(selectedCard)
-    setOnPostOfficeCard(false)
-    setOnPostofficeSendLetter(true)
-  }
-  const [guide, setGuide] = useState(false)
+    setSelectedPostCard(selectedCard);
+    setOnPostOfficeCard(false);
+    setOnPostofficeSendLetter(true);
+  };
+  const [guide, setGuide] = useState(false);
   // 가이드 관리
   useEffect(() => {
     if (localStorage.getItem("guideVisible")) {
-      setGuide(false)
+      setGuide(false);
     } else {
-      setGuide(true)
+      setGuide(true);
     }
-  }, [])
+  }, []);
 
   // 랭킹정보 모달 상태관리
-  const [isRankingInformation, setIsRankingInformation] = useState(false)
+  const [isRankingInformation, setIsRankingInformation] = useState(false);
+
+  // FCM 설정
+  const messaging = getMessaging();
+
+  useEffect(() => {
+    Notification.requestPermission()
+    .then((permission) => {
+      if (permission === "granted") {
+        // console.log('Push Permission Accepted')
+      
+        if (localStorage.getItem("FCMToken") === null) {
+          getToken(messaging, { vapidKey: import.meta.env.VITE_APP_VAPID })
+          .then((currentToken) => {
+            if (currentToken) {
+              // localStorage.setItem("FCMToken", currentToken);
+              setFCMTokenAtServer(currentToken);
+            } else {
+              console.log('No registration token available. Request permission to generate one.');
+            }
+          }).catch((err) => {
+            console.log('An error occurred while retrieving token. ', err);
+          });
+        }
+      }
+    })
+    .catch((error) => {
+      console.log("Error with Permission Request", error);
+    })
+  }, [guide])
+  
+  // 여기까지 FCM
 
   return (
     <>
@@ -234,8 +271,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringRoom}
               portalPosition={roomPortalPosition}
               setPortalVisible={setRoomPortalVisible}
-              adjustedAngle={[16, 5, 1]}
-              adjustedZoom={0.24}
+              adjustedAngle={[0, 4, 12]}
+              adjustedZoom={0.35}
             />
           ) : (
             <DefaultPortalRing
@@ -249,8 +286,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringPostOffice}
               portalPosition={postOfficePortalPosition}
               setPortalVisible={setPostOfficePortalVisible}
-              adjustedAngle={[-4, 4, 4]}
-              adjustedZoom={0.24}
+              adjustedAngle={[-2, 4, 7]}
+              adjustedZoom={0.3}
             />
           ) : (
             <DefaultPortalRing
@@ -259,7 +296,7 @@ const SingleMainPage = () => {
             />
           )}
 
-          {storePortalVisible ? (
+          {/* {storePortalVisible ? (
             <DefaultPortal
               setConfirmEnteringLocation={setConfirmEnteringStore}
               portalPosition={storePortalPosition}
@@ -272,7 +309,7 @@ const SingleMainPage = () => {
               portalPosition={storePortalPosition}
               portalVisible={setStorePortalVisible}
             />
-          )}
+          )} */}
 
           {otherRoomPortalVisible ? (
             <DefaultPortal
@@ -280,7 +317,7 @@ const SingleMainPage = () => {
               portalPosition={otherRoomPortalPosition}
               setPortalVisible={setOtherRoomPortalVisible}
               adjustedAngle={[14, 4, 1]}
-              adjustedZoom={0.23}
+              adjustedZoom={0.35}
             />
           ) : (
             <DefaultPortalRing
@@ -309,8 +346,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringRank}
               portalPosition={rankPortalPosition}
               setPortalVisible={setRankPortalVisible}
-              adjustedAngle={[0, 5.5, -23]}
-              adjustedZoom={0.32}
+              adjustedAngle={[20, 5.5, 5]}
+              adjustedZoom={0.37}
             />
           ) : (
             <DefaultPortalRing
@@ -324,8 +361,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringTest}
               portalPosition={testPortalPosition}
               setPortalVisible={setTestPortalVisible}
-              adjustedAngle={[0, 3, 5]}
-              adjustedZoom={0.35}
+              adjustedAngle={[0, 4, 7]}
+              adjustedZoom={0.4}
             />
           ) : (
             <DefaultPortalRing
@@ -339,8 +376,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringInsta}
               portalPosition={instaPortalPosition}
               setPortalVisible={setInstaPortalVisible}
-              adjustedAngle={[0, 3, 5]}
-              adjustedZoom={0.35}
+              adjustedAngle={[0, 4, 7]}
+              adjustedZoom={0.4}
             />
           ) : (
             <DefaultPortalRing
@@ -354,8 +391,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringTwitter}
               portalPosition={twitterPortalPosition}
               setPortalVisible={setTwitterPortalVisible}
-              adjustedAngle={[0, 5, 7]}
-              adjustedZoom={0.35}
+              adjustedAngle={[0, 4, 7]}
+              adjustedZoom={0.4}
             />
           ) : (
             <DefaultPortalRing
@@ -368,8 +405,8 @@ const SingleMainPage = () => {
         {guide && (
           <GuidePage
             onClick={() => {
-              localStorage.setItem("guideVisible", true)
-              setGuide(false)
+              localStorage.setItem("guideVisible", true);
+              setGuide(false);
             }}
           />
         )}
@@ -409,6 +446,7 @@ const SingleMainPage = () => {
             </div>
           </motion.div>
         )}
+
         {confirmEnteringStore && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -575,7 +613,7 @@ const SingleMainPage = () => {
         )}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SingleMainPage
+export default SingleMainPage;
