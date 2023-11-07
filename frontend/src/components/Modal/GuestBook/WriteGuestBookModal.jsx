@@ -69,8 +69,8 @@ const WriteGuestBookModal = () => {
       fetchWriteGuestBook(
         params,
         (success) => {
-          setIsGusetBookVisible(false)
-          setIsWriteGuestBookVisible(true)
+          setIsWriteGuestBookVisible(false)
+          setIsGusetBookVisible(true)
         },
         (error) => {
           console.log("Error at writeGuestBook...", error)

@@ -35,6 +35,7 @@ const GuestBookModal = () => {
   // 방명록 리스트 가져오기
   useEffect(() => {
     const nowRoomId = window.location.pathname.match(/\d+/g)[0]
+    console.log(nowRoomId)
 
     fetchListGuestBook(
       nowRoomId,
@@ -97,15 +98,23 @@ const GuestBookModal = () => {
       <div className={styles.Container}>
         <div className={styles.Title}>To. {roomInfo}</div>
         <div className={styles.ContentContainer}>
-          {guestBookList.map((item) => (
-            <div key={item.id} style={{ width: "100px", height: "100px" }} onClick={() => detailGuestBookHandler(item.id)}>
-              <ContentItem
-                content={item.description}
-                rotate={item.rotate}
-                colorNum={item.color}
-              />
+          {guestBookList.length === 0  ? (
+            <div
+              style={{ width: "300px", height: "290px", textAlign: "center", lineHeight: "290px" }}
+            >
+              방명록이 비어있습니다.
             </div>
-          ))}
+          ) : (
+            guestBookList.map((item) => (
+              <div key={item.id} style={{ width: "100px", height: "100px" }} onClick={() => detailGuestBookHandler(item.id)}>
+                <ContentItem
+                  content={item.description}
+                  rotate={item.rotate}
+                  colorNum={item.color}
+                />
+              </div>
+            ))
+          )}
         </div>
         <div className={styles.FooterContainer}>
           <div className={styles.WriteButton} onClick={() => isWriteGuestBookHandler()}>

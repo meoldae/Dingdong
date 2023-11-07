@@ -8,6 +8,9 @@ import { roomInfoAtom } from "../../../atom/RoomInfoAtom"
 // 스타일
 import styles from './DetailGuestBookModal.module.css'
 
+// 컴포넌트
+import { successMsg } from "../../../utils/customToast"
+
 const DetailGuestBookModal = () => {
   // 리코일 상태관리
   const guestBookDetailContent = useRecoilValue(guestBookDetailContentAtom)
@@ -24,6 +27,7 @@ const DetailGuestBookModal = () => {
     "linear-gradient(180deg, #FFFFFF 0%, #696969 100%)", // 6: 검정색
   ]
 
+  // 시간 변경 함수
   const changeTimeHandler = (time) => {
     const writedTime = new Date(time)
     const nowTime = new Date()
@@ -32,6 +36,11 @@ const DetailGuestBookModal = () => {
     const hoursDiff = diffTime / (1000 * 60 * 60)
 
     return `${Math.floor(hoursDiff)}시간 전 작성`
+  }
+
+  // 방명록 신고하기 함수
+  const reportHandler = () => {
+    successMsg("⛔ 준비 중인 기능입니다.")
   }
 
   return (
@@ -50,6 +59,7 @@ const DetailGuestBookModal = () => {
           <div className={styles.Time}>{changeTimeHandler(guestBookDetailContent.writeTime)}</div>
         </div>
         <div className={styles.FooterContainer}>
+          <div className={styles.Report} onClick={() => reportHandler()}>신고하기</div>
           <div className={styles.Footer}>From. {guestBookDetailContent.nickname}</div>
         </div>
       </div>
