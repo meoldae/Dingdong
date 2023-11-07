@@ -80,33 +80,35 @@ const OtherFooter = (props) => {
   }
 
   return (
-    <div className={styles.wrap}>
-      <div className={styles.secondFooter}>
-        <div className={styles.background}>
-          <RoomBtn
-            img={isHeart ? "fullHeart" : "emptyheart"}
-            onClick={updateHeartStatus}
+    <>
+      <div className={styles.wrap}>
+        <div className={styles.secondFooter}>
+          <div className={styles.background}>
+            <RoomBtn
+              img={isHeart ? "fullHeart" : "emptyheart"}
+              onClick={updateHeartStatus}
+            />
+          </div>
+        </div>
+        <div className={styles.footer}>
+          <div className={styles.background}>
+            <RoomBtn img={"worldMap"} onClick={goSingleMap} />
+          </div>
+          <div className={styles.background}>
+            <RoomBtn img={"post"} onClick={openModal} />
+          </div>
+        </div>
+        {isModalVisible && (
+          <PostCardBox
+            cancelClick={closeModal}
+            onSelectButtonClick={handleSelectButtonClick}
           />
-        </div>
+        )}
+        {isSendLetterModalVisible && (
+          <SendLetter onClose={closeSendLetterModal} card={selectedPostCard} />
+        )}
       </div>
-      <div className={styles.footer}>
-        <div className={styles.background}>
-          <RoomBtn img={"worldMap"} onClick={goSingleMap} />
-        </div>
-        <div className={styles.background}>
-          <RoomBtn img={"post"} onClick={openModal} />
-        </div>
-      </div>
-      {isModalVisible && (
-        <PostCardBox
-          cancelClick={closeModal}
-          onSelectButtonClick={handleSelectButtonClick}
-        />
-      )}
-      {isSendLetterModalVisible && (
-        <SendLetter onClose={closeSendLetterModal} card={selectedPostCard} />
-      )}
-    </div>
+    </>
   )
 }
 
