@@ -1,5 +1,5 @@
 // 라이브러리
-import { useRecoilState } from "recoil"
+import { useRecoilState, useSetRecoilState } from "recoil"
 
 // Atom
 import { isGuestBookVisibleAtom, isWriteGuestBookVisibleAtom }  from "../../../atom/GuestBookAtom"
@@ -12,7 +12,7 @@ const GuestBookModal = () => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   // 리코일 상태관리
-  const [isGuestBookVisible, setIsGuestBookVisible] = useRecoilState(isGuestBookVisibleAtom)
+  const setIsGuestBookVisible = useSetRecoilState(isGuestBookVisibleAtom)
   const [isWriteGuestBookVisible, setIsWriteGuestBookVisible] = useRecoilState(isWriteGuestBookVisibleAtom)
 
   // 색상 아이템
