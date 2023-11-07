@@ -24,7 +24,7 @@ const OtherFooter = (props) => {
   const [selectedPostCard, setSelectedPostCard] = useState(null)
   const [isHeart, setIsHeart] = useState(false)
 
-  // 하트 표시 함수
+  // 방 좋아요 체크 함수
   useEffect(() => {
     isHeartCheck(
       props.props,
@@ -53,14 +53,15 @@ const OtherFooter = (props) => {
   const closeSendLetterModal = () => {
     setIsSendLetterModalVisible(false)
   }
-  // ---
-
+  
   const handleSelectButtonClick = (selectedCard) => {
     setSelectedPostCard(selectedCard)
     closeModal()
     openSendLetterModal()
   }
+  // ---
 
+  // 방 좋아요 업데이트 함수
   const updateHeartStatus = () => {
     updateHeart(
       props.props,
@@ -73,9 +74,11 @@ const OtherFooter = (props) => {
     )
   }
 
+  // 싱글맵 이동 함수
   const goSingleMap= () =>{
     window.location.replace(`${urlPath}/`)
   }
+
   return (
     <div className={styles.wrap}>
       <div className={styles.secondFooter}>
