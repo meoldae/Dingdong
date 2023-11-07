@@ -1,8 +1,13 @@
 import { atom, useRecoilValue, useSetRecoilState } from "recoil";
 
-const roomInfoAtom = atom({
+export const roomInfoAtom = atom({
     key: "roomInfoAtom",
     default: ""
 });
 
-export { roomInfoAtom };
+export const roomAvatarAtom = atom({
+    key: "roomAvatarAtom",
+    default: ""
+});
+
+ 
