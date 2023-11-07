@@ -19,3 +19,13 @@ export const isFinishWriteGuestBookVisibleAtom = atom({
   key: "isFinishWriteGuestBookAtom",
   default: false,
 })
+
+export const isDetailGuestBookVisibleAtom = atom({
+  key: "isDetailGuestBookAtom",
+  default: false,
+})
+
+export const isFinishDetailGuestBookVisibleAtom = atom({
+  key: "isFinishDetailGuestBookAtom",
+  default: false,
+})
