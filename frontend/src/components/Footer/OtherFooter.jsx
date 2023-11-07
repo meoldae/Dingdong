@@ -7,19 +7,24 @@ import RoomBtn from "../Button/Room/RoomBtn"
 import SendLetter from "../Modal/Post/SendLetter"
 
 // 스타일
-import style from "./Footer.module.css"
+import styles from "./Footer.module.css"
 
 // API
 import { isHeartCheck, updateHeart } from "@/api/Room"
 
+
 const OtherFooter = (props) => {
+  // url경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
+  // 상태관리
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isSendLetterModalVisible, setIsSendLetterModalVisible] =
     useState(false)
   const [selectedPostCard, setSelectedPostCard] = useState(null)
   const [isHeart, setIsHeart] = useState(false)
 
+  // 하트 표시 함수
   useEffect(() => {
     isHeartCheck(
       props.props,
@@ -32,6 +37,7 @@ const OtherFooter = (props) => {
     )
   }, [isHeart])
 
+  // 편지 들어내면 삭제할 함수 ---
   const openModal = () => {
     setIsModalVisible(true)
   }
@@ -47,6 +53,7 @@ const OtherFooter = (props) => {
   const closeSendLetterModal = () => {
     setIsSendLetterModalVisible(false)
   }
+  // ---
 
   const handleSelectButtonClick = (selectedCard) => {
     setSelectedPostCard(selectedCard)
@@ -70,20 +77,20 @@ const OtherFooter = (props) => {
     window.location.replace(`${urlPath}/`)
   }
   return (
-    <div className={style.wrap}>
-      <div className={style.secondFooter}>
-        <div className={style.background}>
+    <div className={styles.wrap}>
+      <div className={styles.secondFooter}>
+        <div className={styles.background}>
           <RoomBtn
             img={isHeart ? "fullHeart" : "emptyheart"}
             onClick={updateHeartStatus}
           />
         </div>
       </div>
-      <div className={style.footer}>
-        <div className={style.background}>
+      <div className={styles.footer}>
+        <div className={styles.background}>
           <RoomBtn img={"worldMap"} onClick={goSingleMap} />
         </div>
-        <div className={style.background}>
+        <div className={styles.background}>
           <RoomBtn img={"post"} onClick={openModal} />
         </div>
       </div>
