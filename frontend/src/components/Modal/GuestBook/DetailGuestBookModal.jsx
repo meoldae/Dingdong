@@ -13,7 +13,6 @@ const DetailGuestBookModal = () => {
   // 현재 방 번호
   const nowRoomId = window.location.pathname.match(/\d+/g)[0]
   const nowUserId = JSON.parse(localStorage.getItem("userAtom")).roomId
-  console.log(nowRoomId, nowUserId)
 
   // 리코일 상태관리
   const guestBookDetailContent = useRecoilValue(guestBookDetailContentAtom)
