@@ -1,18 +1,27 @@
+// 라이브러리
+import { useRecoilState } from "recoil"
+
+// 컴포넌트
 import RoomBtn from "../Button/Room/RoomBtn"
 import PostBox from "../Modal/Post/PostBox"
 import ReceiveLetter from "../Modal/Post/ReceiveLetter"
+
+// 스타일
 import style from "./Footer.module.css"
-import { useRecoilState } from "recoil"
+
+// 아톰
 import {
   isPostBoxVisibleAtom,
   isReceiveLetterVisibleAtom,
 } from "../../atom/PostAtom"
 import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom"
 import { ItemsState, buildModeState } from "../Room/Atom"
-import { useNavigate } from "react-router-dom"
 
 const MyFooter = () => {
+  // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
+  // 리코일 상태관리
   const [editMode, setEditMode] = useRecoilState(buildModeState)
   const [items, setItems] = useRecoilState(ItemsState)
   const [isPostBoxVisible, setIsPostBoxVisible] =
@@ -33,6 +42,7 @@ const MyFooter = () => {
   const goSingleMap = () => {
     window.location.replace(`${urlPath}/`)
   }
+
   return (
     <div className={style.wrap}>
       <div className={style.secondFooter}>
@@ -53,15 +63,19 @@ const MyFooter = () => {
           <RoomBtn img={"postBox"} onClick={() => setIsPostBoxVisible(true)} />
         </div>
       </div>
+
       {isPostBoxVisible && (
         <PostBox
           cancelClick={() => setIsPostBoxVisible(false)}
           onSelectButtonClick={handleSelectButtonClick}
         />
       )}
+
       {isReceiveLetterVisible && (
         <ReceiveLetter cancelClick={() => setIsReceiveLetterVisible(false)} />
       )}
+
+      {}
     </div>
   )
 }
