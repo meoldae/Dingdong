@@ -1,5 +1,5 @@
 // 라이브러리
-import { useRecoilState } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil"
 
 // 컴포넌트
 import RoomBtn from "../Button/Room/RoomBtn"
@@ -9,6 +9,7 @@ import GuestBookModal from "../Modal/GuestBook/GuestBookModal"
 import WriteGuestBookModal from "../Modal/GuestBook/WriteGuestBookModal"
 import DefaultModal from "../Modal/Default/DefaultModal"
 import DetailGuestBookModal from "../Modal/GuestBook/DetailGuestBookModal"
+import { successMsg } from "../../utils/customToast"
 
 // 스타일
 import styles from "./Footer.module.css"
@@ -26,8 +27,13 @@ import {
   isFinishGuestBookVisibleAtom,
   isFinishWriteGuestBookVisibleAtom,
   isDetailGuestBookVisibleAtom,
-  isFinishDetailGuestBookVisibleAtom
+  isFinishDetailGuestBookVisibleAtom,
+  reportGuestBookAtom,
+  guestBookDetailContentAtom
 }  from "../../atom/GuestBookAtom"
+
+// API
+import { fetchReportGuestBook } from "../../api/GuestBook"
 
 
 const MyFooter = () => {
@@ -50,6 +56,9 @@ const MyFooter = () => {
   const [isFinishWriteGuestBookVisible, setIsFinishWriteGuestBookVisible] = useRecoilState(isFinishWriteGuestBookVisibleAtom)
   const [isDetailGuestBookVisible, setIsDetailGuestBookVisible] = useRecoilState(isDetailGuestBookVisibleAtom)
   const [isFinishDetailGuestBookVisible, setIsFinishDetailGuestBookVisible] = useRecoilState(isFinishDetailGuestBookVisibleAtom)
+  const [isReportGuestBook, setIsReportGuestBook] = useRecoilState(reportGuestBookAtom)
+  const guestBookDetailContent = useRecoilValue(guestBookDetailContentAtom)
+
 
   const handleSelectButtonClick = () => {
     // console.log(1)
@@ -61,12 +70,6 @@ const MyFooter = () => {
   }
   const goSingleMap = () => {
     window.location.replace(`${urlPath}/`)
-  }
-  
-  // 방명록 작성 모달 종료함수
-  const closeWriteGuestBookModalHandler = () => {
-    setIsWriteGuestBookVisible(false)
-    setIsGuestBookVisible(true)
   }
 
   // 방명록 리스트 종료 모달 함수
@@ -87,6 +90,23 @@ const MyFooter = () => {
     setIsFinishDetailGuestBookVisible(false)
     setIsDetailGuestBookVisible(false)
     setIsGuestBookVisible(true)
+  }
+
+  // 방명록 신고하기 함수
+  const reportGuestBookHandler = () => {
+    fetchReportGuestBook(
+      guestBookDetailContent.id,
+      (success) => {
+        setIsReportGuestBook(false)
+        setIsDetailGuestBookVisible(false)
+        setIsGuestBookVisible(true)
+        successMsg("✅ 신고하기가 완료됐습니다!")
+      },
+      (error) => {
+        successMsg("❌ 신고하기에 실패했습니다!")
+        console.log('Error at Report GuestBook...', error)
+      }
+    )
   }
 
   return (
@@ -203,6 +223,22 @@ const MyFooter = () => {
               cancel={"아니오"}
               okClick={() => finishDetailGuestBookHandler()}
               cancelClick={() => setIsFinishDetailGuestBookVisible(false)}
+            />
+          </div>
+        </>
+      )}
+
+      {/* 신고하기 모달 */}
+      {isReportGuestBook &&  (
+        <>
+          <div className={styles.OverOverlay} onClick={() => setIsReportGuestBook(false)} />
+          <div className={styles.OverGuestBookContainer}>
+            <DefaultModal
+              content={"정말 신고하시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={() => reportGuestBookHandler()}
+              cancelClick={() => setIsReportGuestBook(false)}
             />
           </div>
         </>
