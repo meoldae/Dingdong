@@ -17,6 +17,9 @@ import { fetchListGuestBook, fetchDetailGuestBook } from "../../../api/GuestBook
 // 스타일
 import styles from "./GuestBookModal.module.css"
 
+// 컴포넌트
+import { successMsg } from "../../../utils/customToast"
+
 const GuestBookModal = () => {
   // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -42,6 +45,7 @@ const GuestBookModal = () => {
         setGuestBookList(success.data.data)
       },
       (error) => {
+        successMsg("❌ 방명록 리스트를 가져오는데 실패했습니다.")
         console.log('Error at ListGuestBook...', error)
       }
     )
