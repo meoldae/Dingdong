@@ -98,23 +98,23 @@ const MyFooter = () => {
 
       {/* 방명록 리스트 모달 */}
       {isGuestBookVisible && (
-          <>
-            <div className={styles.Overlay} onClick={() => setIsGuestBookVisible(false)} />
-            <div className={styles.GuestBookContainer}>
-              <GuestBookModal />
-            </div>
-          </>
-        )}
+        <>
+          <div className={styles.Overlay} onClick={() => setIsGuestBookVisible(false)} />
+          <div className={styles.GuestBookContainer}>
+            <GuestBookModal />
+          </div>
+        </>
+      )}
 
-        {/* 방명록 작성 모달 */}
-        {isWriteGuestBookVisible && (
-          <>
-            <div className={styles.Overlay} onClick={() => closeWriteGuestBookModalHandler()} />
-            <div className={styles.GuestBookContainer}>
-              <WriteGuestBookModal />
-            </div>
-          </>
-        )}
+      {/* 방명록 작성 모달 */}
+      {isWriteGuestBookVisible && (
+        <>
+          <div className={styles.Overlay} onClick={() => closeWriteGuestBookModalHandler()} />
+          <div className={styles.GuestBookContainer}>
+            <WriteGuestBookModal />
+          </div>
+        </>
+      )}
     </>
   )
 }
