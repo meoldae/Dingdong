@@ -8,6 +8,7 @@ import ReceiveLetter from "../Modal/Post/ReceiveLetter"
 import GuestBookModal from "../Modal/GuestBook/GuestBookModal"
 import WriteGuestBookModal from "../Modal/GuestBook/WriteGuestBookModal"
 import DefaultModal from "../Modal/Default/DefaultModal"
+import DetailGuestBookModal from "../Modal/GuestBook/DetailGuestBookModal"
 
 // 스타일
 import styles from "./Footer.module.css"
@@ -186,7 +187,7 @@ const MyFooter = () => {
         <>
           <div className={styles.Overlay} onClick={() => setIsFinishDetailGuestBookVisible(true)} />
           <div className={styles.GuestBookContainer}>
-            방명록 상세 모달
+            <DetailGuestBookModal />
           </div>
         </>
       )}
