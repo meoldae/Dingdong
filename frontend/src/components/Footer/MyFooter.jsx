@@ -5,9 +5,10 @@ import { useRecoilState } from "recoil"
 import RoomBtn from "../Button/Room/RoomBtn"
 import PostBox from "../Modal/Post/PostBox"
 import ReceiveLetter from "../Modal/Post/ReceiveLetter"
+import GuestBookModal from "../Modal/GuestBook/GuestBook"
 
 // 스타일
-import style from "./Footer.module.css"
+import styles from "./Footer.module.css"
 
 // 아톰
 import {
@@ -16,6 +17,7 @@ import {
 } from "../../atom/PostAtom"
 import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom"
 import { ItemsState, buildModeState } from "../Room/Atom"
+import { isGuestBookVisibleAtom }  from "../../atom/GuestBookAtom"
 
 const MyFooter = () => {
   // url 경로
@@ -30,6 +32,7 @@ const MyFooter = () => {
     isReceiveLetterVisibleAtom
   )
   const [popUpStatus, setPopUpStatus] = useRecoilState(popUpStatusAtom)
+  const [isGuestBookVisible, setIsGuestBookVisible] = useRecoilState(isGuestBookVisibleAtom)
 
   const handleSelectButtonClick = () => {
     // console.log(1)
@@ -44,39 +47,55 @@ const MyFooter = () => {
   }
 
   return (
-    <div className={style.wrap}>
-      <div className={style.secondFooter}>
-        <div className={style.background}>
-          <RoomBtn img={"roomEdit"} onClick={() => roomEditClickEvent()} />
+    <>
+      <div className={styles.wrap}>
+        <div className={styles.secondFooter}>
+          <div className={styles.background}>
+            <RoomBtn img={"roomEdit"} onClick={() => roomEditClickEvent()} />
+          </div>
         </div>
-      </div>
-      <div className={style.footer}>
-        <div className={style.background}>
-          <RoomBtn
-            img={"worldMap"}
-            onClick={() => {
-              goSingleMap()
-            }}
+        <div className={styles.footer}>
+          <div className={styles.background}>
+            <RoomBtn
+              img={"worldMap"}
+              onClick={() => {
+                goSingleMap()
+              }}
+            />
+          </div>
+
+          {/* 편지함선택버튼 */}
+          {/* <div className={style.background}>
+            <RoomBtn img={"postBox"} onClick={() => setIsPostBoxVisible(true)} />
+          </div> */}
+
+          {/* 방명록 */}
+          <div className={styles.background}>
+            <RoomBtn img={"postBox"} onClick={() => setIsGuestBookVisible(true)} />
+          </div>
+        </div>
+
+        {isPostBoxVisible && (
+          <PostBox
+            cancelClick={() => setIsPostBoxVisible(false)}
+            onSelectButtonClick={handleSelectButtonClick}
           />
-        </div>
-        <div className={style.background}>
-          <RoomBtn img={"postBox"} onClick={() => setIsPostBoxVisible(true)} />
-        </div>
+        )}
+
+        {isReceiveLetterVisible && (
+          <ReceiveLetter cancelClick={() => setIsReceiveLetterVisible(false)} />
+        )}
       </div>
 
-      {isPostBoxVisible && (
-        <PostBox
-          cancelClick={() => setIsPostBoxVisible(false)}
-          onSelectButtonClick={handleSelectButtonClick}
-        />
-      )}
-
-      {isReceiveLetterVisible && (
-        <ReceiveLetter cancelClick={() => setIsReceiveLetterVisible(false)} />
-      )}
-
-      {}
-    </div>
+      {isGuestBookVisible && (
+          <>
+            <div className={styles.Overlay} />
+            <div className={styles.GuestBookContainer}>
+              <GuestBookModal />
+            </div>
+          </>
+        )}
+    </>
   )
 }
 
