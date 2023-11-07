@@ -50,6 +50,7 @@ const DetailGuestBookModal = () => {
           <div className={styles.Time}>{changeTimeHandler(guestBookDetailContent.writeTime)}</div>
         </div>
         <div className={styles.FooterContainer}>
+          <div className={styles.Report}>신고하기</div>
           <div className={styles.Footer}>From. {guestBookDetailContent.nickname}</div>
         </div>
       </div>
