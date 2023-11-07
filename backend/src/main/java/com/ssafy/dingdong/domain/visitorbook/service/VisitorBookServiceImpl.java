@@ -31,7 +31,7 @@ public class VisitorBookServiceImpl implements VisitorBookService{
 
     @Override
     public VisitorBookResponseDto getVisitorBookDetail(Long visitorBookId) {
-        VisitorBook visitorBook = visitorBookRepository.findById(visitorBookId).orElseThrow(() -> new CustomException(ExceptionStatus.VISITRROOM_NOT_FOUND));
+        VisitorBook visitorBook = visitorBookRepository.findById(visitorBookId).orElseThrow(() -> new CustomException(ExceptionStatus.VISITORBOOK_NOT_FOUND));
         String nickname = memberService.getMemberById(visitorBook.getWriteFrom()).nickname();
         VisitorBookResponseDto result = VisitorBookResponseDto.builder()
                 .id(visitorBook.getId())
@@ -56,5 +56,17 @@ public class VisitorBookServiceImpl implements VisitorBookService{
         String writeTo = roomService.getMemberIdByRoomId(requestDto.getRoomId());
         VisitorBook visitorBook = VisitorBook.build(requestDto, memberId, writeTo, ipAddress);
         visitorBookRepository.save(visitorBook);
+    }
+
+    @Override
+    public String getVisitorBookFromById(Long visitorBookId) {
+        VisitorBook result = visitorBookRepository.findById(visitorBookId)
+                .orElseThrow(() -> new CustomException(ExceptionStatus.VISITORBOOK_NOT_FOUND));
+        return result.getWriteFrom();
+    }
+
+    @Override
+    public void reportVisitorBook(Long visitorBookId) {
+        visitorBookRepository.updateIsReportById(visitorBookId);
     }
 }
