@@ -62,12 +62,6 @@ const MyFooter = () => {
   const goSingleMap = () => {
     window.location.replace(`${urlPath}/`)
   }
-  
-  // 방명록 작성 모달 종료함수
-  const closeWriteGuestBookModalHandler = () => {
-    setIsWriteGuestBookVisible(false)
-    setIsGuestBookVisible(true)
-  }
 
   // 방명록 리스트 종료 모달 함수
   const finishGuestBookListHandler = () => {
