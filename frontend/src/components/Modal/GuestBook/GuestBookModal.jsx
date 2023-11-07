@@ -99,7 +99,11 @@ const GuestBookModal = () => {
         <div className={styles.Title}>To. {roomInfo}</div>
         <div className={styles.ContentContainer}>
           {guestBookList.length === 0  ? (
-            <div>방명록이 비어있습니다.</div>
+            <div
+              style={{ width: "300px", height: "290px", textAlign: "center", lineHeight: "290px" }}
+            >
+              방명록이 비어있습니다.
+            </div>
           ) : (
             guestBookList.map((item) => (
               <div key={item.id} style={{ width: "100px", height: "100px" }} onClick={() => detailGuestBookHandler(item.id)}>
