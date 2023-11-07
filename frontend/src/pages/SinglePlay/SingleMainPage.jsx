@@ -67,10 +67,6 @@ import GuidePage from "../../components/UI/GuidePage";
 import SingleHeader from "./SingleHeader";
 import RankingInformation from "../../components/Modal/Ranking/RankingInformation";
 
-// FCM 설정
-import { getMessaging, getToken} from "firebase/messaging";
-import { setFCMTokenAtServer } from "@/api/FCM"
-
 // 여기까지 FCM
 
 const SingleMainPage = () => {
@@ -185,37 +181,6 @@ const SingleMainPage = () => {
 
   // 랭킹정보 모달 상태관리
   const [isRankingInformation, setIsRankingInformation] = useState(false);
-
-  // FCM 설정
-  const messaging = getMessaging();
-
-  useEffect(() => {
-    Notification.requestPermission()
-    .then((permission) => {
-      if (permission === "granted") {
-        // console.log('Push Permission Accepted')
-      
-        if (localStorage.getItem("FCMToken") === null) {
-          getToken(messaging, { vapidKey: import.meta.env.VITE_APP_VAPID })
-          .then((currentToken) => {
-            if (currentToken) {
-              // localStorage.setItem("FCMToken", currentToken);
-              setFCMTokenAtServer(currentToken);
-            } else {
-              console.log('No registration token available. Request permission to generate one.');
-            }
-          }).catch((err) => {
-            console.log('An error occurred while retrieving token. ', err);
-          });
-        }
-      }
-    })
-    .catch((error) => {
-      console.log("Error with Permission Request", error);
-    })
-  }, [guide])
-  
-  // 여기까지 FCM
 
   return (
     <>

@@ -31,6 +31,10 @@ import {
 } from "../../api/Neighbor"
 import { fetchLogout, fetchUserSecession } from "../../api/User"
 import { fetchInquiry } from "../../api/Cs"
+import { setFCMTokenAtServer } from "@/api/FCM"
+
+// FCM 
+import { getMessaging, getToken} from "firebase/messaging";
 
 
 const Header = ({ checkMyRoom }) => {
@@ -64,6 +68,8 @@ const Header = ({ checkMyRoom }) => {
   const [isRealSecession, setIsRealSecession] = useState(false)
   // 내 방가기 상태관리
   // const [isMyRoom, setIsMyRoom] = useState(false)
+  // Push 알림 토글
+  const [isPossiblePush, setIsPossiblePush] = useState(false)
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
@@ -92,6 +98,10 @@ const Header = ({ checkMyRoom }) => {
         console.log("Error at neighbor request...", error)
       }
     )
+    const fcmToken = localStorage.getItem("FCMToken");
+    if (fcmToken !== null) {
+      setIsPossiblePush(true);
+    }
   }, [])
 
   // 이웃요청 수락함수
@@ -232,6 +242,41 @@ const Header = ({ checkMyRoom }) => {
   // 메뉴에 보일 이름
   const menuUserName = JSON.parse(localStorage.getItem("userAtom")).nickname
 
+  // FCM 설정
+  const messaging = getMessaging();
+
+  const pushToggleChange = async () => {
+    if (!Notification) {
+      return;
+    }
+
+    if (isPossiblePush === false) {
+      setIsPossiblePush(true)
+      const permission = await Notification.requestPermission();
+      if (permission === "denied") {
+        setIsPossiblePush(false)
+      } else {
+        getToken(messaging, { vapidKey: import.meta.env.VITE_APP_VAPID })
+        .then((currentToken) => {
+          if (currentToken) {
+            setFCMTokenAtServer(currentToken);
+          } else {
+            setIsPossiblePush(false);
+            console.log('No registration token available. Request permission to generate one.');
+            return null;
+          }
+        }).catch((err) => {
+          setIsPossiblePush(false);
+          console.log('An error occurred while retrieving token. ', err);
+          return null;
+        });
+      }
+    } else if (isPossiblePush === true) {
+      setIsPossiblePush(false);
+      localStorage.removeItem("FCMToken");
+    }
+  }
+
   return (
     <>
       <div className={styles.wrap}>
@@ -336,8 +381,16 @@ const Header = ({ checkMyRoom }) => {
               <div className={styles.MenuButton} onClick={() => setIsRealLogout(true)} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
                 로그아웃
               </div>
-              <div className={styles.MenuButton} onClick={() => setIsRealSecession(true)}>
+              <div className={styles.MenuButton} onClick={() => setIsRealSecession(true)} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
                 회원탈퇴
+              </div>
+              <div className={`${styles.MenuButton} ${styles.toggleContainer} `} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
+                푸시 알림
+                
+                <div className={`${styles.toggleSwitch} ${isPossiblePush == "true" ? styles.checkedToggle : null}`} onClick={pushToggleChange}>
+                  <div className={`${styles.toggleButton} ${isPossiblePush == "true" ? styles.checkedToggleSwitch : null}`}/> 
+                </div>
+
               </div>
             </div>
           </div>
