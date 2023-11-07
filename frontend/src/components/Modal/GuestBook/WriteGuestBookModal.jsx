@@ -1,11 +1,15 @@
 // 라이브러리
 import { useState } from 'react'
+import { useSetRecoilState } from 'recoil'
 
 // 컴포넌트
 import { successMsg } from '../../../utils/customToast'
 
 // API
 import { fetchWriteGuestBook } from '../../../api/GuestBook'
+
+// Atom
+import { isGuestBookVisibleAtom, isWriteGuestBookVisibleAtom }  from "../../../atom/GuestBookAtom"
 
 // 스타일
 import styles from './WriteGuestBookModal.module.css'
@@ -17,6 +21,10 @@ const WriteGuestBookModal = () => {
   const [contentLength, setContentLength] = useState(0)
   // 색상코드 상태관리
   const [isColor, setIsColor] = useState(0)
+
+  // 리코일 상태관리
+  const setIsGusetBookVisible = useSetRecoilState(isGuestBookVisibleAtom)
+  const setIsWriteGuestBookVisible = useSetRecoilState(isWriteGuestBookVisibleAtom)
 
   // 방명록 작성 내용 함수
   const checkContentHandler = (event) => {
@@ -57,7 +65,8 @@ const WriteGuestBookModal = () => {
       fetchWriteGuestBook(
         params,
         (success) => {
-          console.log(success)
+          setIsGusetBookVisible(false)
+          setIsWriteGuestBookVisible(true)
         },
         (error) => {
           console.log("Error at writeGuestBook...", error)
