@@ -1,5 +1,6 @@
 // 라이브러리
 import { useEffect, useState } from "react"
+import { useRecoilState } from "recoil"
 
 // 컴포넌트
 import PostCardBox from "../Modal/Post/PostCardBox"
@@ -12,6 +13,16 @@ import styles from "./Footer.module.css"
 // API
 import { isHeartCheck, updateHeart } from "@/api/Room"
 
+// Atom
+import {
+  isGuestBookVisibleAtom,
+  isWriteGuestBookVisibleAtom,
+  isFinishGuestBookVisibleAtom,
+  isFinishWriteGuestBookVisibleAtom,
+  isDetailGuestBookVisibleAtom,
+  isFinishDetailGuestBookVisibleAtom
+}  from "../../atom/GuestBookAtom"
+
 
 const OtherFooter = (props) => {
   // url경로
@@ -23,6 +34,14 @@ const OtherFooter = (props) => {
     useState(false)
   const [selectedPostCard, setSelectedPostCard] = useState(null)
   const [isHeart, setIsHeart] = useState(false)
+
+  // 리코일 상태관리
+  const [isGuestBookVisible, setIsGuestBookVisible] = useRecoilState(isGuestBookVisibleAtom)
+  const [isFinishGuestBookVisible, setIsFinishGuestBookVisible] = useRecoilState(isFinishGuestBookVisibleAtom)
+  const [isWriteGuestBookVisible, setIsWriteGuestBookVisible] = useRecoilState(isWriteGuestBookVisibleAtom)
+  const [isFinishWriteGuestBookVisible, setIsFinishWriteGuestBookVisible] = useRecoilState(isFinishWriteGuestBookVisibleAtom)
+  const [isDetailGuestBookVisible, setIsDetailGuestBookVisible] = useRecoilState(isDetailGuestBookVisibleAtom)
+  const [isFinishDetailGuestBookVisible, setIsFinishDetailGuestBookVisible] = useRecoilState(isFinishDetailGuestBookVisibleAtom)
 
   // 방 좋아요 체크 함수
   useEffect(() => {
@@ -79,6 +98,26 @@ const OtherFooter = (props) => {
     window.location.replace(`${urlPath}/`)
   }
 
+  // 방명록 리스트 종료 모달 함수
+  const finishGuestBookListHandler = () => {
+    setIsFinishGuestBookVisible(false)
+    setIsGuestBookVisible(false)
+  }
+
+  // 방명록 작성 종료 모달 함수
+  const finishWriteGuestBookHandler = () => {
+    setIsFinishWriteGuestBookVisible(false)
+    setIsWriteGuestBookVisible(false)
+    setIsGuestBookVisible(true)
+  }
+
+  // 방명록 상세 작성 모달 함수
+  const finishDetailGuestBookHandler = () => {
+    setIsFinishDetailGuestBookVisible(false)
+    setIsDetailGuestBookVisible(false)
+    setIsGuestBookVisible(true)
+  }
+
   return (
     <>
       <div className={styles.wrap}>
@@ -94,8 +133,15 @@ const OtherFooter = (props) => {
           <div className={styles.background}>
             <RoomBtn img={"worldMap"} onClick={goSingleMap} />
           </div>
-          <div className={styles.background}>
+
+          {/* 우표함선택버튼 */}
+          {/* <div className={styles.background}>
             <RoomBtn img={"post"} onClick={openModal} />
+          </div> */}
+
+          {/* 방명록 */}
+          <div className={styles.background}>
+            <RoomBtn img={"post"} onClick={() => setIsGuestBookVisible(true)} />
           </div>
         </div>
         {isModalVisible && (
@@ -108,6 +154,84 @@ const OtherFooter = (props) => {
           <SendLetter onClose={closeSendLetterModal} card={selectedPostCard} />
         )}
       </div>
+
+      {/* 방명록 리스트 모달 */}
+      {isGuestBookVisible && (
+        <>
+          <div className={styles.Overlay} onClick={() => setIsFinishGuestBookVisible(true)} />
+          <div className={styles.GuestBookContainer}>
+            <GuestBookModal />
+          </div>
+        </>
+      )}
+
+      {/* 방명록 리스트 종료 모달 */}
+      {isFinishGuestBookVisible && (
+        <>
+          <div className={styles.OverOverlay} onClick={() => setIsFinishGuestBookVisible(false)} />
+          <div className={styles.OverGuestBookContainer}>
+            <DefaultModal
+              content={"방명록을 종료하시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={() => finishGuestBookListHandler()}
+              cancelClick={() => setIsFinishGuestBookVisible(false)}
+            />
+          </div>
+        </>
+      )}
+
+      {/* 방명록 작성 모달 */}
+      {isWriteGuestBookVisible && (
+        <>
+          <div className={styles.Overlay} onClick={() => setIsFinishWriteGuestBookVisible(true)} />
+          <div className={styles.GuestBookContainer}>
+            <WriteGuestBookModal />
+          </div>
+        </>
+      )}
+
+      {/* 방명록 작성 종료 모달 */}
+      {isFinishWriteGuestBookVisible && (
+        <>
+          <div className={styles.OverOverlay} onClick={() => setIsFinishWriteGuestBookVisible(false)} />
+          <div className={styles.OverGuestBookContainer}>
+            <DefaultModal
+              content={"방명록 작성을 종료하시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={() => finishWriteGuestBookHandler()}
+              cancelClick={() => setIsFinishWriteGuestBookVisible(false)}
+            />
+          </div>
+        </>
+      )}
+
+      {/* 방명록 상세 모달 */}
+      {isDetailGuestBookVisible && (
+        <>
+          <div className={styles.Overlay} onClick={() => setIsFinishDetailGuestBookVisible(true)} />
+          <div className={styles.GuestBookContainer}>
+            <DetailGuestBookModal />
+          </div>
+        </>
+      )}
+
+      {/* 방명록 상세 종료 모달 */}
+      {isFinishDetailGuestBookVisible && (
+        <>
+          <div className={styles.OverOverlay} onClick={() => setIsFinishDetailGuestBookVisible(false)} />
+          <div className={styles.OverGuestBookContainer}>
+            <DefaultModal
+              content={"방명록 상세를 그만 보시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={() => finishDetailGuestBookHandler()}
+              cancelClick={() => setIsFinishDetailGuestBookVisible(false)}
+            />
+          </div>
+        </>
+      )}
     </>
   )
 }
