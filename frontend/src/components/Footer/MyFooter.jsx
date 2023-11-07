@@ -17,7 +17,7 @@ import {
 } from "../../atom/PostAtom"
 import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom"
 import { ItemsState, buildModeState } from "../Room/Atom"
-import { isGuestBookVisibleAtom }  from "../../atom/GuestBookAtom"
+import { isGuestBookVisibleAtom, isWriteGuestBookVisibleAtom }  from "../../atom/GuestBookAtom"
 
 const MyFooter = () => {
   // url 경로
@@ -33,6 +33,7 @@ const MyFooter = () => {
   )
   const [popUpStatus, setPopUpStatus] = useRecoilState(popUpStatusAtom)
   const [isGuestBookVisible, setIsGuestBookVisible] = useRecoilState(isGuestBookVisibleAtom)
+  const [isWriteGuestBookVisible, setIsWriteGuestBookVisible] = useRecoilState(isWriteGuestBookVisibleAtom)
 
   const handleSelectButtonClick = () => {
     // console.log(1)
@@ -44,6 +45,12 @@ const MyFooter = () => {
   }
   const goSingleMap = () => {
     window.location.replace(`${urlPath}/`)
+  }
+  
+  // 방명록 작성 모달 종료함수
+  const closeWriteGuestBookModalHandler = () => {
+    setIsWriteGuestBookVisible(false)
+    setIsGuestBookVisible(true)
   }
 
   return (
@@ -87,12 +94,21 @@ const MyFooter = () => {
         )}
       </div>
 
+      {/* 방명록 리스트 모달 */}
       {isGuestBookVisible && (
           <>
-            <div className={styles.Overlay} />
+            <div className={styles.Overlay} onClick={() => setIsGuestBookVisible(false)} />
             <div className={styles.GuestBookContainer}>
               <GuestBookModal />
             </div>
+          </>
+        )}
+
+        {/* 방명록 작성 모달 */}
+        {isWriteGuestBookVisible && (
+          <>
+            <div className={styles.Overlay} onClick={() => closeWriteGuestBookModalHandler()} />
+            <div>방명록 작성</div>
           </>
         )}
     </>
