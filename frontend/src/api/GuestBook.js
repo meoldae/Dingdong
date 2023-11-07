@@ -15,4 +15,9 @@ const fetchDetailGuestBook = async (guestBookId, success, fail) => {
     await HttpJson.get(`visitorbook/detail/${guestBookId}`).then(success).catch(fail);
 };
 
-export { fetchWriteGuestBook, fetchListGuestBook, fetchDetailGuestBook };
+// 방명록 신고
+const fetchReportGuestBook = async (guestBookId, success, fail) => {
+    await HttpJson.post(`report/visitorbook/${guestBookId}`).then(success).catch(fail);
+};
+
+export { fetchWriteGuestBook, fetchListGuestBook, fetchDetailGuestBook, fetchReportGuestBook };

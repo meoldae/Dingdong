@@ -1,20 +1,23 @@
 // 라이브러리
-import { useRecoilValue } from "recoil"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 
 // Atom
-import { guestBookDetailContentAtom } from '../../../atom/GuestBookAtom'
+import { guestBookDetailContentAtom, reportGuestBookAtom } from '../../../atom/GuestBookAtom'
 import { roomInfoAtom } from "../../../atom/RoomInfoAtom"
 
 // 스타일
 import styles from './DetailGuestBookModal.module.css'
 
-// 컴포넌트
-import { successMsg } from "../../../utils/customToast"
 
 const DetailGuestBookModal = () => {
+  // 현재 방 번호
+  const nowRoomId = window.location.pathname.match(/\d+/g)[0]
+  const nowUserId = JSON.parse(localStorage.getItem("userAtom")).roomId
+
   // 리코일 상태관리
   const guestBookDetailContent = useRecoilValue(guestBookDetailContentAtom)
   const roomInfo = useRecoilValue(roomInfoAtom)
+  const setIsReportGuestBookVisible = useSetRecoilState(reportGuestBookAtom)
 
   // 컬러 리스트
   const colorList = [
@@ -38,11 +41,6 @@ const DetailGuestBookModal = () => {
     return `${Math.floor(hoursDiff)}시간 전 작성`
   }
 
-  // 방명록 신고하기 함수
-  const reportHandler = () => {
-    successMsg("⛔ 준비 중인 기능입니다.")
-  }
-
   return (
     <>
       <div className={styles.Container}>
@@ -59,7 +57,7 @@ const DetailGuestBookModal = () => {
           <div className={styles.Time}>{changeTimeHandler(guestBookDetailContent.writeTime)}</div>
         </div>
         <div className={styles.FooterContainer}>
-          <div className={styles.Report} onClick={() => reportHandler()}>신고하기</div>
+          {nowRoomId == nowUserId && <div className={styles.Report} onClick={() => setIsReportGuestBookVisible(true)}>신고하기</div>}
           <div className={styles.Footer}>From. {guestBookDetailContent.nickname}</div>
         </div>
       </div>
