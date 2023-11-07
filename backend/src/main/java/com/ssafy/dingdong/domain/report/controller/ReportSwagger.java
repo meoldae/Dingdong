@@ -9,4 +9,6 @@ public interface ReportSwagger {
 
     CommonResponse createLetterReport (Authentication authentication, Long letterId);
     CommonResponse createChatReport (Authentication authentication, Long chatId);
+    CommonResponse createVisitorBookReport (Authentication authentication, Long reportBookId);
+
 }

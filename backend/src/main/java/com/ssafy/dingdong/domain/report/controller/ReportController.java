@@ -1,6 +1,6 @@
 package com.ssafy.dingdong.domain.report.controller;
 
-import com.ssafy.dingdong.domain.report.service.ReportServiceService;
+import com.ssafy.dingdong.domain.report.service.ReportService;
 import com.ssafy.dingdong.global.response.CommonResponse;
 import com.ssafy.dingdong.global.response.ResponseService;
 import com.ssafy.dingdong.global.response.ResponseStatus;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ReportController implements ReportSwagger{
 
-    private final ReportServiceService reportService;
+    private final ReportService reportService;
     private final ResponseService responseService;
 
 
@@ -32,6 +32,14 @@ public class ReportController implements ReportSwagger{
     public CommonResponse createChatReport(Authentication authentication, @PathVariable Long chatId) {
         String memberId = authentication.getName();
         reportService.createChatReport(memberId, chatId);
+        return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
+    }
+
+    @Override
+    @PostMapping("/visitorbook/{visitorBookId}")
+    public CommonResponse createVisitorBookReport(Authentication authentication, @PathVariable Long visitorBookId) {
+        String memberId = authentication.getName();
+        reportService.createVisitorBookReport(memberId, visitorBookId);
         return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
     }
 }
