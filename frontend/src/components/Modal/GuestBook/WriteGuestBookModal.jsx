@@ -1,6 +1,6 @@
 // 라이브러리
 import { useState } from 'react'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 // 컴포넌트
 import { successMsg } from '../../../utils/customToast'
@@ -10,11 +10,15 @@ import { fetchWriteGuestBook } from '../../../api/GuestBook'
 
 // Atom
 import { isGuestBookVisibleAtom, isWriteGuestBookVisibleAtom }  from "../../../atom/GuestBookAtom"
+import { roomInfoAtom } from "../../../atom/RoomInfoAtom"
 
 // 스타일
 import styles from './WriteGuestBookModal.module.css'
 
 const WriteGuestBookModal = () => {
+  // 방 사용자 정보
+  const roomInfo = useRecoilValue(roomInfoAtom)
+
   // 방명록 작성 내용
   const [content, setContent] = useState("")
   // 방명록 작성 내용 길이
@@ -78,7 +82,7 @@ const WriteGuestBookModal = () => {
   return (
     <>
       <div className={styles.Container}>
-        <div className={styles.Title}>To. 다영시치</div>
+        <div className={styles.Title}>To. {roomInfo}</div>
         <div className={styles.ContentContainer}>
           <textarea
             value={content}
