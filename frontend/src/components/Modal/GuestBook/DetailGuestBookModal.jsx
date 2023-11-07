@@ -12,6 +12,11 @@ import styles from './DetailGuestBookModal.module.css'
 import { successMsg } from "../../../utils/customToast"
 
 const DetailGuestBookModal = () => {
+  // 현재 방 번호
+  const nowRoomId = window.location.pathname.match(/\d+/g)[0]
+  const nowUserId = JSON.parse(localStorage.getItem("userAtom")).roomId
+  console.log(nowRoomId, nowUserId)
+
   // 리코일 상태관리
   const guestBookDetailContent = useRecoilValue(guestBookDetailContentAtom)
   const roomInfo = useRecoilValue(roomInfoAtom)
@@ -59,7 +64,7 @@ const DetailGuestBookModal = () => {
           <div className={styles.Time}>{changeTimeHandler(guestBookDetailContent.writeTime)}</div>
         </div>
         <div className={styles.FooterContainer}>
-          <div className={styles.Report} onClick={() => reportHandler()}>신고하기</div>
+          {nowRoomId == nowUserId && <div className={styles.Report} onClick={() => reportHandler()}>신고하기</div>}
           <div className={styles.Footer}>From. {guestBookDetailContent.nickname}</div>
         </div>
       </div>
