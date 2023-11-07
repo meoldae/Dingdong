@@ -1,6 +1,12 @@
 // 라이브러리
 import { useState } from 'react'
 
+// 컴포넌트
+import { successMsg } from '../../../utils/customToast'
+
+// API
+import { fetchWriteGuestBook } from '../../../api/GuestBook'
+
 // 스타일
 import styles from './WriteGuestBookModal.module.css'
 
@@ -29,6 +35,37 @@ const WriteGuestBookModal = () => {
     "linear-gradient(180deg, #FFFFFF 0%, #696969 100%)", // 6: 검정색
   ]
 
+  // 랜덤 각도 생성 함수
+  const randomDegree = (min, max) => {
+    return Math.floor(Math.random() * (max-min+1)) + min
+  }
+
+  // 방명록 작성 함수
+  const WriteGuestBookHandler = () => {
+    if (content === "") {
+      successMsg("❌ 내용을 작성해주세요!")
+    } else {
+      const nowRoomId = window.location.pathname.match(/\d+/g)[0]
+      const degree = randomDegree(-10, 10)
+      const params = {
+        "roomId": nowRoomId,
+        "description": content,
+        "color": isColor,
+        "rotate": degree,
+      }
+
+      fetchWriteGuestBook(
+        params,
+        (success) => {
+          console.log(success)
+        },
+        (error) => {
+          console.log("Error at writeGuestBook...", error)
+        }
+      )
+    }
+  }
+
   return (
     <>
       <div className={styles.Container}>
@@ -56,7 +93,11 @@ const WriteGuestBookModal = () => {
           </div>
         </div>
         <div className={styles.ButtonContainer}>
-          <div className={styles.Button} style={{ background: `${colorList[isColor]}` }}>방명록 남기기</div>
+          <div
+            className={styles.Button}
+            style={{ background: `${colorList[isColor]}` }}
+            onClick={() => WriteGuestBookHandler()}
+          >방명록 남기기</div>
         </div>
       </div>
     </>
