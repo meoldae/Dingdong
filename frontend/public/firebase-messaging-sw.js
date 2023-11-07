@@ -2,20 +2,24 @@
 importScripts("https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js");
 
-importScripts('swenv.js'); 
-
-const firebaseConfig = {
-  // apiKey: 'AIzaSyB5eBZtGAmShRKylzvR0NJDZxc9zfWuJe4',
-  apiKey: process.env.VITE_APP_FCM_API_KEY,
-  authDomain: process.env.VITE_APP_AUTH_DOMAIN,
-  projectId: process.env.VITE_APP_PROJECT_ID,
-  storageBucket: process.env.VITE_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.VITE_APP_MESSAGING_SENDER_ID,
-  appId: process.env.VITE_APP_APP_ID
-}
+// const firebaseConfig = {
+//   apiKey: "AIzaSyB5eBZtGAmShRKylzvR0NJDZxc9zfWuJe4",
+//   authDomain: "dingdong-b8c54.firebaseapp.com",
+//   projectId: "dingdong-b8c54",
+//   storageBucket: "dingdong-b8c54.appspot.com",
+//   messagingSenderId: "121655847297",
+//   appId: "1:121655847297:web:eb5bec5168566e9d2b2080"
+// };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp({
+  apiKey: "AIzaSyB5eBZtGAmShRKylzvR0NJDZxc9zfWuJe4",
+  authDomain: "dingdong-b8c54.firebaseapp.com",
+  projectId: "dingdong-b8c54",
+  storageBucket: "dingdong-b8c54.appspot.com",
+  messagingSenderId: "121655847297",
+  appId: "1:121655847297:web:eb5bec5168566e9d2b2080"
+});
 
 const messaging = firebase.messaging(app);
 

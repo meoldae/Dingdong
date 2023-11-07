@@ -1,12 +1,12 @@
-import React, { useEffect } from "react"
+import React, { useEffect } from "react";
 
-import { useRecoilValue, useSetRecoilState } from "recoil"
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import {
   DefaultPosition,
   DefaultZoom,
-} from "../../../../atom/DefaultSettingAtom"
-import { CharacterPositionAtom } from "../../../../atom/DefaultSettingAtom"
-import { ArriveAtom } from "../../../../atom/SinglePlayAtom"
+} from "../../../../atom/DefaultSettingAtom";
+import { CharacterPositionAtom } from "../../../../atom/DefaultSettingAtom";
+import { ArriveAtom } from "../../../../atom/SinglePlayAtom";
 
 const DefaultPortal = ({
   setConfirmEnteringLocation,
@@ -16,41 +16,41 @@ const DefaultPortal = ({
   adjustedZoom,
 }) => {
   // Canvas 기본 세팅
-  const setDefaultCamPosition = useSetRecoilState(DefaultPosition)
-  const setDefaultZoom = useSetRecoilState(DefaultZoom)
+  const setDefaultCamPosition = useSetRecoilState(DefaultPosition);
+  const setDefaultZoom = useSetRecoilState(DefaultZoom);
 
   // 캐릭터 실시간 위치
-  const characterPosition = useRecoilValue(CharacterPositionAtom)
+  const characterPosition = useRecoilValue(CharacterPositionAtom);
 
   // 도착 후 움직임 제어
-  const setIsArrived = useSetRecoilState(ArriveAtom)
+  const setIsArrived = useSetRecoilState(ArriveAtom);
 
   // 포탈
-  const PortalSize = [1, 1]
+  const PortalSize = [1, 1];
 
   useEffect(() => {
     // 포탈 영역 내부에 있는지 확인
     const isInsideX =
-      Math.abs(portalPosition[0] - characterPosition[0]) <= PortalSize[0] / 2
+      Math.abs(portalPosition[0] - characterPosition[0]) <= PortalSize[0] / 2;
     const isInsideZ =
-      Math.abs(portalPosition[2] - characterPosition[2]) <= PortalSize[1] / 2
+      Math.abs(portalPosition[2] - characterPosition[2]) <= PortalSize[1] / 2;
 
-    const isInside = isInsideX && isInsideZ
+    const isInside = isInsideX && isInsideZ;
 
     if (isInside) {
       // 카메라 세팅
-      setDefaultCamPosition(adjustedAngle)
-      setDefaultZoom(adjustedZoom)
+      setDefaultCamPosition(adjustedAngle);
+      setDefaultZoom(adjustedZoom);
 
       // 캐릭터 움직임 제어
-      setIsArrived(true)
+      setIsArrived(true);
 
       // 입장
-      setConfirmEnteringLocation(true)
-      setPortalVisible(false)
+      setConfirmEnteringLocation(true);
+      setPortalVisible(false);
     } else {
     }
-  }, [characterPosition])
+  }, [characterPosition]);
 
   return (
     <mesh position={portalPosition}>
@@ -59,7 +59,7 @@ const DefaultPortal = ({
       {/* args: [위 반지름, 아래 반지름, 높이, 방사형 세그먼트 수] */}
       <meshStandardMaterial color={"yellow"} />
     </mesh>
-  )
-}
+  );
+};
 
-export default DefaultPortal
+export default DefaultPortal;
