@@ -91,11 +91,12 @@ public class RoomServiceImpl implements RoomService {
 
 		Long heartCount = roomHeartRepository.getCountByRoomId(findRoom.getRoomId());
 		return RoomResponseAllDetailDto.builder()
-			.nickname(member.getNickname())
-			.roomId(findRoom.getRoomId())
-			.heartCount(heartCount)
-			.roomFurnitureList(roomFurnitureList)
-			.build();
+				.nickname(member.getNickname())
+				.avatarId(member.getAvatarId())
+				.roomId(findRoom.getRoomId())
+				.heartCount(heartCount)
+				.roomFurnitureList(roomFurnitureList)
+				.build();
 	}
 
 	@Override
