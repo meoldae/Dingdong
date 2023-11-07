@@ -1,5 +1,5 @@
 // 라이브러리
-import { useRecoilState, useSetRecoilState } from "recoil"
+import { useSetRecoilState } from "recoil"
 
 // Atom
 import { isGuestBookVisibleAtom, isWriteGuestBookVisibleAtom }  from "../../../atom/GuestBookAtom"
@@ -13,7 +13,7 @@ const GuestBookModal = () => {
 
   // 리코일 상태관리
   const setIsGuestBookVisible = useSetRecoilState(isGuestBookVisibleAtom)
-  const [isWriteGuestBookVisible, setIsWriteGuestBookVisible] = useRecoilState(isWriteGuestBookVisibleAtom)
+  const setIsWriteGuestBookVisible = useSetRecoilState(isWriteGuestBookVisibleAtom)
 
   // 색상 아이템
   const colorList = [
