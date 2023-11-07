@@ -142,7 +142,8 @@ function RoomPage() {
           <div className={`${styles.newcanvas} ${styles[time]}`} id="newcanvas">
             <Canvas
               className={styles.canvasCont}
-              // shadows
+              shadows
+              dpr={[1, 2]}
               gl={{ preserveDrawingBuffer: true, antialias: true, pixelRatio: Math.min(2, window.devicePixelRatio) }}
               camera={{ fov: 45, zoom: 1.1 }}
               ref={canvasRef}

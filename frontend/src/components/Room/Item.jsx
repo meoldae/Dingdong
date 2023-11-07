@@ -9,6 +9,7 @@ import {
   draggedItemState,
   mobileCheckState,
 } from "./Atom";
+import { LinearFilter  } from "three";
 export const Item = ({
   item,
   onClick,
@@ -27,8 +28,10 @@ export const Item = ({
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
   const rotation = isDragging ? draggedItemRotation : itemRotation;
   const { scene } = useGLTF(
-    `${urlPath}/assets/models/editRoomItems/${furnitureId}.glb`
+    `${urlPath}/assets/models/editRoomItems/${furnitureId}.glb`,true
   );
+  scene.children[0].castShadow = true
+
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const width = rotation === 1 || rotation === 3 ? size[2] : size[0];
   const height = rotation === 1 || rotation === 3 ? size[0] : size[2];
@@ -39,6 +42,17 @@ export const Item = ({
   const draggedItem = useRecoilValue(draggedItemState);
   const value = useRecoilValue(ItemRotateState);
   const mobileCheck = useRecoilValue(mobileCheckState);
+  useEffect(()=>{
+    scene.traverse((child)=>{
+      console.log(child)
+      if(child.isMesh && child.material && child.material.map){
+        child.material.map.minFilter = LinearFilter
+        child.material.map.magFilter = LinearFilter
+        child.material.map.needsUpdate = true;
+
+      }
+    })
+  },[scene])
 
   useEffect(() => {
     setItems((prev) => {
@@ -75,8 +89,9 @@ export const Item = ({
             }
           >
             <primitive
-            
               object={clone}
+              receiveShadow
+              castShadow
               // position-x={rotation ? 0 : 0.12}
               position-y={0.44}
               position-z={rotation ? 0 : 0.12}
@@ -118,7 +133,8 @@ export const Item = ({
             }
           >
             <primitive
-            
+              receiveShadow
+              castShadow
               object={clone}
               // position-x={rotation ? 0 : 0.12}
               position-y={0.44}
@@ -161,11 +177,12 @@ export const Item = ({
             {/* 물체 클릭 시 바닥 면 가능 불가능 색상 및 회전 각 prop 받기 */}
             <primitive
               object={clone}
+              receiveShadow
+              castShadow
               rotation-y={(rotation * Math.PI) / 2}
-            
             />
             {isDragging && (
-              <mesh position-y={0.02} >
+              <mesh position-y={0.02}>
                 <boxGeometry
                   args={[(width * 0.48) / 2, 0, (height * 0.48) / 2]}
                 />
@@ -187,12 +204,13 @@ export const Item = ({
           >
             {/* 물체 클릭 시 바닥 면 가능 불가능 색상 및 회전 각 prop 받기 */}
             <primitive
+              receiveShadow
+              castShadow
               object={clone}
               rotation-y={(rotation * Math.PI) / 2}
-            
             />
             {isDragging && (
-              <mesh position-y={0.02} >
+              <mesh position-y={0.02}>
                 <boxGeometry
                   args={[(width * 0.48) / 2, 0, (height * 0.48) / 2]}
                 />

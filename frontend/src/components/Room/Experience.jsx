@@ -1,4 +1,14 @@
-import { Environment, Grid, OrbitControls } from "@react-three/drei";
+import {
+  Environment,
+  Cloud,
+  Clouds,
+  Grid,
+  OrbitControls,
+  Sky,
+  SoftShadows,
+  SpotLight,
+  Stars,
+} from "@react-three/drei";
 import { useEffect, useState, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Item } from "./Item";
@@ -16,8 +26,8 @@ import {
   mobileCheckState,
 } from "./Atom";
 import { gsap } from "gsap";
-import { DoubleSide } from "three";
-
+import { DoubleSide, PlaneGeometry } from "three";
+import * as THREE from "three";
 const Experience = ({ setRoomDrag }) => {
   const buildMode = useRecoilValue(buildModeState);
   const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState);
@@ -264,7 +274,6 @@ const Experience = ({ setRoomDrag }) => {
   // 카메라 관련 로직
   const controls = useRef();
   const state = useThree((state) => state);
-
   // 편집 모드일 때 카메라 고정
   useEffect(() => {
     if (buildMode) {
@@ -300,13 +309,70 @@ const Experience = ({ setRoomDrag }) => {
   useFrame((state) => {
     state.camera.lookAt(0, 1, 0);
   });
+  // const shadowCameraRef = useRef();
+
+  // const lightRef = useRef();
+  // useEffect(() => {
+  //   shadowCameraRef.current = new THREE.CameraHelper(
+  //     lightRef.current.shadow.camera
+  //   );
+  //   state.scene.add(shadowCameraRef.current);
+  //   return () => {
+  //     state.scene.remove(shadowCameraRef.current);
+  //   };
+  // }, [lightRef.current]);
   return (
     <>
-      <Environment preset="sunset" />
-      <ambientLight intensity={0.1} />
+      {/* <Environment preset="sunset" /> */}
+      <Stars
+        radius={100}
+        depth={50}
+        count={20000}
+        factor={5}
+        saturation={2}
+        fade
+        speed={1.5}
+      />
+      {/* <Clouds material={THREE.MeshBasicMaterial}>
+        <Cloud segments={40} bounds={[10, 2, 2]} position={[-100,-50,-100]} volume={10} color="white" />
+        <Cloud seed={1} scale={1} volume={1} color="lightgray" position={[-100,-50,-100]} fade={1000} />
+        <Cloud segments={40} bounds={[10, 2, 2]} position={[-150,-50,-200]} volume={10} color="white" />
+        <Cloud seed={1} scale={1} volume={1} color="lightgray" position={[-150,-50,-200]} fade={1000} />
+        <Cloud segments={40} bounds={[10, 2, 2]} position={[-200,-80,-150]} volume={10} color="white" />
+        <Cloud seed={1} scale={1} volume={1} color="lightgray" position={[-200,-80,-150]} fade={1000} />
+        <Cloud segments={40} bounds={[10, 2, 2]} position={[-100,-40,-100]} volume={5} color="white" />
+        <Cloud seed={1} scale={1} volume={1} color="lightgray" position={[-100,-50,-100]} fade={1000} />
+        <Cloud segments={1} bounds={[10, 2, 2]} position={[-100,-40,-100]} volume={5} color="white" />
+        <Cloud seed={1} scale={1} volume={1} color="lightgray" position={[-100,-50,-100]} fade={1000} />
+        <Cloud segments={40} bounds={[10, 2, 2]} position={[-100,-50,-100]} volume={10} color="white" />
+        <Cloud seed={1} scale={1} volume={1} color="lightgray" position={[-100,-50,-100]} fade={1000} />
+        <Cloud segments={40} bounds={[10, 2, 2]} position={[-100,-50,-100]} volume={10} color="white" />
+        <Cloud seed={1} scale={1} volume={1} color="lightgray" position={[-100,-50,-100]} fade={1000} />
+      </Clouds> */}
+      <hemisphereLight
+        intensity={2}
+        color="##6C5378"
+        groundColor="#7080CC"
+        position={[2, 6, 10]}
+      />
+      <ambientLight intensity={0.3} />
       <directionalLight
-        position={[7,7,10]}
-        intensity={0.5}
+        // castShadow
+        position={[7, 6, 10]}
+        color={"white"}
+        intensity={1}
+        // distance={100}
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+        shadow-camera-near={0.5}
+        shadow-camera-far={500}
+        // ref={lightRef}
+      />
+      <directionalLight
+        position={[1, 10, 1]}
+        castShadow
+        color={"whteblue"}
+        intensity={0.4}
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
         shadow-camera-near={0.5}
@@ -327,9 +393,10 @@ const Experience = ({ setRoomDrag }) => {
       {items && items.map(renderItem)}
       {/* 바닥 평면 */}
       <mesh
+        receiveShadow
         rotation-x={-Math.PI / 2}
         // visible={false}
-        position-y={-0.001}
+        position-y={-0.251}
         onClick={() => {
           if (!mobileCheck) {
             if (
@@ -384,16 +451,17 @@ const Experience = ({ setRoomDrag }) => {
           }
         }}
       >
-        <planeGeometry args={[4.8, 4.8]} />
+        <boxGeometry args={[4.8, 4.8, 0.5]} />
         <meshStandardMaterial color="#f0f0f0" />
       </mesh>
-
       {/* 왼쪽 평면 */}
       <mesh
+        receiveShadow
         rotation-y={Math.PI / 2}
-        position-x={-2.394}
+        position-x={-2.65}
         // visible={false}
-        position-y={1.92}
+        position-y={1.67}
+        position-z={-0.25}
         onClick={() => {
           if (!mobileCheck) {
             if (
@@ -448,15 +516,15 @@ const Experience = ({ setRoomDrag }) => {
           }
         }}
       >
-        <planeGeometry args={[4.8, 3.84]} />
+        <boxGeometry args={[5.3, 4.34, 0.5]} />
         <meshStandardMaterial color="#f0f0f0" side={DoubleSide} />
       </mesh>
-
       {/* 오른쪽 평면 */}
       <mesh
-        position-z={-2.394}
+        receiveShadow
+        position-z={-2.65}
         // visible={false}
-        position-y={1.92}
+        position-y={1.67}
         onClick={() => {
           if (!mobileCheck) {
             if (
@@ -511,7 +579,7 @@ const Experience = ({ setRoomDrag }) => {
           }
         }}
       >
-        <planeGeometry args={[4.8, 3.84]} />
+        <boxGeometry args={[4.8, 4.34, 0.5]} />
         <meshStandardMaterial color="#f0f0f0" side={DoubleSide} />
       </mesh>
       {buildMode && (
