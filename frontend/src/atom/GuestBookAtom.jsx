@@ -29,3 +29,8 @@ export const isFinishDetailGuestBookVisibleAtom = atom({
   key: "isFinishDetailGuestBookAtom",
   default: false,
 })
+
+export const guestBookDetailContentAtom = atom({
+  key: "guestBookDetailContent",
+  default: [],
+})
