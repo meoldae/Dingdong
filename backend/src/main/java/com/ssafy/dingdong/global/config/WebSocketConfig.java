@@ -18,16 +18,16 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     private final StompExceptionHandler stompExceptionHandler;
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/sub");
-        registry.setApplicationDestinationPrefixes("/pub");
+        registry.enableSimpleBroker("/topic");
+        registry.setApplicationDestinationPrefixes("/app");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry
-                .setErrorHandler(stompExceptionHandler)
+//                .setErrorHandler(stompExceptionHandler)
                 .addEndpoint("/ws")
-                .addInterceptors()
+//                .addInterceptors()
                 .setAllowedOriginPatterns("*")
                 .withSockJS();
     }

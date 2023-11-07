@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,7 +15,9 @@ public class MultiController {
     private final SimpMessagingTemplate messagingTemplate;
 
     @MessageMapping("/move/{channelId}")
-    public void moveCharacter(@DestinationVariable String channelId, MoveRequest request) {
-        messagingTemplate.convertAndSend("/sub/move/" + channelId, request);
+    public void moveCharacter(@DestinationVariable Long channelId, MoveRequest request) {
+        messagingTemplate.convertAndSend("/topic/move/" + channelId, request);
     }
+
+
 }
