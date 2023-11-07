@@ -23,7 +23,9 @@ import {
   isGuestBookVisibleAtom,
   isWriteGuestBookVisibleAtom,
   isFinishGuestBookVisibleAtom,
-  isFinishWriteGuestBookVisibleAtom
+  isFinishWriteGuestBookVisibleAtom,
+  isDetailGuestBookVisibleAtom,
+  isFinishDetailGuestBookVisibleAtom
 }  from "../../atom/GuestBookAtom"
 
 
@@ -45,6 +47,8 @@ const MyFooter = () => {
   const [isFinishGuestBookVisible, setIsFinishGuestBookVisible] = useRecoilState(isFinishGuestBookVisibleAtom)
   const [isWriteGuestBookVisible, setIsWriteGuestBookVisible] = useRecoilState(isWriteGuestBookVisibleAtom)
   const [isFinishWriteGuestBookVisible, setIsFinishWriteGuestBookVisible] = useRecoilState(isFinishWriteGuestBookVisibleAtom)
+  const [isDetailGuestBookVisible, setIsDetailGuestBookVisible] = useRecoilState(isDetailGuestBookVisibleAtom)
+  const [isFinishDetailGuestBookVisible, setIsFinishDetailGuestBookVisible] = useRecoilState(isFinishDetailGuestBookVisibleAtom)
 
   const handleSelectButtonClick = () => {
     // console.log(1)
