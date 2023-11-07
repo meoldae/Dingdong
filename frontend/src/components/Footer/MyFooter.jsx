@@ -81,6 +81,13 @@ const MyFooter = () => {
     setIsGuestBookVisible(true)
   }
 
+  // 방명록 상세 작성 모달 함수
+  const finishDetailGuestBookHandler = () => {
+    setIsFinishDetailGuestBookVisible(false)
+    setIsDetailGuestBookVisible(false)
+    setIsGuestBookVisible(true)
+  }
+
   return (
     <>
       <div className={styles.wrap}>
@@ -169,6 +176,32 @@ const MyFooter = () => {
               cancel={"아니오"}
               okClick={() => finishWriteGuestBookHandler()}
               cancelClick={() => setIsFinishWriteGuestBookVisible(false)}
+            />
+          </div>
+        </>
+      )}
+
+      {/* 방명록 상세 모달 */}
+      {isDetailGuestBookVisible && (
+        <>
+          <div className={styles.Overlay} onClick={() => setIsFinishDetailGuestBookVisible(true)} />
+          <div className={styles.GuestBookContainer}>
+            방명록 상세 모달
+          </div>
+        </>
+      )}
+
+      {/* 방명록 상세 종료 모달 */}
+      {isFinishDetailGuestBookVisible && (
+        <>
+          <div className={styles.OverOverlay} onClick={() => setIsFinishDetailGuestBookVisible(false)} />
+          <div className={styles.OverGuestBookContainer}>
+            <DefaultModal
+              content={"방명록 상세를 그만 보시겠습니까?"}
+              ok={"네"}
+              cancel={"아니오"}
+              okClick={() => finishDetailGuestBookHandler()}
+              cancelClick={() => setIsFinishDetailGuestBookVisible(false)}
             />
           </div>
         </>
