@@ -41,3 +41,8 @@ export const guestBookDetailContentAtom = atom({
     writeTime: ""
   },
 })
+
+export const reportGuestBookAtom = atom({
+  key: "reportGuestBook",
+  default: false,
+})
