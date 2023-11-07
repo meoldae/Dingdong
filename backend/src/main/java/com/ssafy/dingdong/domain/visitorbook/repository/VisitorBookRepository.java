@@ -18,6 +18,7 @@ public interface VisitorBookRepository extends JpaRepository<VisitorBook, Long> 
             "FROM VisitorBook v " +
             "Join Member m ON v.writeFrom=m.memberId "+
             "AND v.isReport = false " +
+            "WHERE v.writeTo = :memberId " +
             "ORDER BY v.writeTime DESC")
     List<VisitorBookResponseDto> findAllByWriteToAndIsReportFalseOrderByWriteTime(@Param("memberId") String memberId);
 
