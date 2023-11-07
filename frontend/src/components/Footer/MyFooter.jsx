@@ -6,6 +6,7 @@ import RoomBtn from "../Button/Room/RoomBtn"
 import PostBox from "../Modal/Post/PostBox"
 import ReceiveLetter from "../Modal/Post/ReceiveLetter"
 import GuestBookModal from "../Modal/GuestBook/GuestBookModal"
+import WriteGuestBookModal from "../Modal/GuestBook/WriteGuestBookModal"
 
 // 스타일
 import styles from "./Footer.module.css"
@@ -18,6 +19,7 @@ import {
 import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom"
 import { ItemsState, buildModeState } from "../Room/Atom"
 import { isGuestBookVisibleAtom, isWriteGuestBookVisibleAtom }  from "../../atom/GuestBookAtom"
+
 
 const MyFooter = () => {
   // url 경로
@@ -108,7 +110,9 @@ const MyFooter = () => {
         {isWriteGuestBookVisible && (
           <>
             <div className={styles.Overlay} onClick={() => closeWriteGuestBookModalHandler()} />
-            <div>방명록 작성</div>
+            <div className={styles.GuestBookContainer}>
+              <WriteGuestBookModal />
+            </div>
           </>
         )}
     </>
