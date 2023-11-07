@@ -70,13 +70,18 @@ const GuestBookModal = () => {
     setIsWriteGuestBookVisible(true)
   }
 
+  // 방명록 상세 함수
+  const detailGuestBookHandler = () => {
+    console.log(1)
+  }
+
   return (
     <>
       <div className={styles.Container}>
         <div className={styles.Title}>To. {roomInfo}</div>
         <div className={styles.ContentContainer}>
           {guestBookList.map((item) => (
-            <div key={item.id} style={{ width: "100px", height: "100px" }}>
+            <div key={item.id} style={{ width: "100px", height: "100px" }} onClick={() => detailGuestBookHandler()}>
               <ContentItem
                 content={item.description}
                 rotate={item.rotate}
