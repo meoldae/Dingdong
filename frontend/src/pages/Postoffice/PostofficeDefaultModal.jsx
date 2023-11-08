@@ -29,7 +29,6 @@ const PostDefaultModal = (props) => {
   
   return (
     <>
-      <div className={styles.overlay} onClick={() => setIsFinishPostCardBox(true)}/>
       <Card className={styles.container}>
         <div className={styles.xmarkImg} onClick={() => setIsFinishPostCardBox(true)}>
           <img src={`${urlPath}/assets/icons/x.png`} />
