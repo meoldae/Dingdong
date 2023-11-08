@@ -1,5 +1,6 @@
 package com.ssafy.dingdong.domain.letter.service;
 
+import com.ssafy.dingdong.domain.FCM.service.FCMService;
 import com.ssafy.dingdong.domain.letter.dto.request.LetterRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.request.LetterSNSRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterListResponseDto;
@@ -34,6 +35,7 @@ public class LetterServiceImpl implements LetterService {
     private final LetterRepository letterRepository;
     private final LetterSNSRepository letterSNSRepository;
     private final StampRepository stampRepository;
+    private final FCMService fcmService;
     private final EncryptUtils encryptUtils;
 
     @Override
@@ -64,6 +66,7 @@ public class LetterServiceImpl implements LetterService {
 
         Letter letter = Letter.build(requestDto, memberId, letterTo, false, stamp, "");
         letterRepository.save(letter);
+        fcmService.send(memberId, letterTo, 0);
     }
 
     @Override
