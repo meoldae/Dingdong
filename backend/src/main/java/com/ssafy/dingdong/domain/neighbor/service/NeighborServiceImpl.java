@@ -10,6 +10,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ssafy.dingdong.domain.FCM.service.FCMService;
 import com.ssafy.dingdong.domain.member.dto.response.MemberMainDto;
 import com.ssafy.dingdong.domain.member.service.MemberService;
 import com.ssafy.dingdong.domain.neighbor.dto.request.NeighborRequest;
@@ -35,6 +36,7 @@ public class NeighborServiceImpl implements NeighborService{
 	private final MemberService memberService;
 	private final RoomRepository roomRepository;
 	private final RoomService roomService;
+	private final FCMService fcmService;
 
 	@Override
 	@Transactional
@@ -70,6 +72,7 @@ public class NeighborServiceImpl implements NeighborService{
 				neighborRepository.save(request);
 			}
 		);
+		fcmService.send(applicantId, acceptorId, 1);
 	}
 
 	@Override
