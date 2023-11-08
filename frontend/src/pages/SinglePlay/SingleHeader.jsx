@@ -23,7 +23,7 @@ import {
 } from "../../api/Neighbor"
 import { fetchLogout, fetchUserSecession } from "../../api/User"
 import { fetchInquiry } from "../../api/Cs"
-import { setFCMTokenAtServer } from "@/api/FCM"
+import { setFCMTokenAtServer, deleteFCMTokenAtServer } from "@/api/FCM"
 
 // Atom
 import { userAtom } from "../../atom/UserAtom"
@@ -210,6 +210,7 @@ const SingleHeader = ({ checkMyRoom }) => {
       }
     } else if (isPossiblePush === true) {
       setIsPossiblePush(false);
+      deleteFCMTokenAtServer();
       localStorage.removeItem("FCMToken");
     }
   }
