@@ -20,7 +20,7 @@ import {
 // 토스트
 import { successMsg } from "@/utils/customToast"
 
-const NeighborRequest = () => {
+const NeighborRequest = () => { 
   const [roomId, setRoomId] = useState(window.location.pathname.match(/\d+/g))
   const [neighborFlag, setNeighborFlag] = useState(false)
   const [isAddNeighbor, setIsAddNeighbor] = useState(false)

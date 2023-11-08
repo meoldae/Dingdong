@@ -1,5 +1,6 @@
 // 라이브러리
 import { useRecoilState, useRecoilValue } from "recoil"
+import { useEffect, useState } from "react"
 
 // 컴포넌트
 import RoomBtn from "../Button/Room/RoomBtn"
@@ -14,7 +15,11 @@ import { successMsg } from "../../utils/customToast"
 // 스타일
 import styles from "./Footer.module.css"
 
+// API
+import { isHeartCheck, updateHeart } from "@/api/Room"
+
 // 아톰
+import { roomHeartAtom } from "../../atom/RoomInfoAtom"
 import {
   isPostBoxVisibleAtom,
   isReceiveLetterVisibleAtom,
@@ -36,11 +41,12 @@ import {
 import { fetchReportGuestBook } from "../../api/GuestBook"
 
 
-const MyFooter = () => {
+const MyFooter = (props) => {
   // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   // 리코일 상태관리
+  const [isHeart, setIsHeart] = useState(false)
   const [editMode, setEditMode] = useRecoilState(buildModeState)
   const [items, setItems] = useRecoilState(ItemsState)
   const [isPostBoxVisible, setIsPostBoxVisible] =
@@ -49,6 +55,9 @@ const MyFooter = () => {
     isReceiveLetterVisibleAtom
   )
   const [popUpStatus, setPopUpStatus] = useRecoilState(popUpStatusAtom)
+ 
+  const [heartCount, setHeartCount] = useRecoilState(roomHeartAtom)
+
   // 방명록
   const [isGuestBookVisible, setIsGuestBookVisible] = useRecoilState(isGuestBookVisibleAtom)
   const [isFinishGuestBookVisible, setIsFinishGuestBookVisible] = useRecoilState(isFinishGuestBookVisibleAtom)
@@ -58,7 +67,34 @@ const MyFooter = () => {
   const [isFinishDetailGuestBookVisible, setIsFinishDetailGuestBookVisible] = useRecoilState(isFinishDetailGuestBookVisibleAtom)
   const [isReportGuestBook, setIsReportGuestBook] = useRecoilState(reportGuestBookAtom)
   const guestBookDetailContent = useRecoilValue(guestBookDetailContentAtom)
+  
+  // 방 좋아요 체크 함수
+  useEffect(() => {
+    isHeartCheck(
+      props.props,
+      (response) => {
+        setIsHeart(response.data.data == "Y")
+      },
+      (error) => {
+        console.log("Error with HeartFlag... ", error)
+      }
+    )
+  }, [isHeart])
 
+    // 방 좋아요 업데이트 함수
+    const updateHeartStatus = () => {
+      updateHeart(
+        props.props,
+        (response) => { 
+          const isHeartNow = response.data.data === "Y";
+          setIsHeart(isHeartNow);
+          setHeartCount(prevCount => isHeartNow ? prevCount + 1 : prevCount - 1);
+        },
+        (error) => {
+          console.log("Error with Room Heart... ", error)
+        }
+      )
+    }
 
   const handleSelectButtonClick = () => {
     // console.log(1)
@@ -112,10 +148,19 @@ const MyFooter = () => {
   return (
     <>
       <div className={styles.wrap}>
-        <div className={styles.secondFooter}>
+        <div className={styles.thirdFooter}>
           <div className={styles.background}>
             <RoomBtn img={"roomEdit"} onClick={() => roomEditClickEvent()} />
-          </div>
+          </div> 
+        </div>
+        <div className={styles.secondFooter}>
+          <div className={styles.background}>
+            <RoomBtn 
+                img={isHeart ? "fullHeart" : "emptyheart"}
+                onClick={updateHeartStatus}
+                heartCount={heartCount}
+              />
+          </div> 
         </div>
         <div className={styles.footer}>
           <div className={styles.background}>

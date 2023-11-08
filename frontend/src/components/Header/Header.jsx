@@ -1,6 +1,6 @@
 // 라이브러리
 import { useEffect, useState } from "react"
-import { useRecoilValue } from "recoil"
+import { useRecoilValue, useRecoilState } from "recoil"
 import { useNavigate } from "react-router-dom"
 
 // 스타일
@@ -20,7 +20,7 @@ import RoomNameBtn from "../Button/Room/RoomNameBtn"
 
 // Atom
 import { userAtom } from "../../atom/UserAtom"
-import { roomInfoAtom } from "../../atom/RoomInfoAtom"
+import { roomInfoAtom, roomHeartAtom } from "../../atom/RoomInfoAtom"
 
 // API
 import {
@@ -75,6 +75,7 @@ const Header = ({ checkMyRoom }) => {
   const userInfo = useRecoilValue(userAtom)
   const roomInfo = useRecoilValue(roomInfoAtom)
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+  const [heartCount, setHeartCount] = useRecoilState(roomHeartAtom)
 
   // 유저요청 가져오기
   useEffect(() => {

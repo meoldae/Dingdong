@@ -10,4 +10,8 @@ export const roomAvatarAtom = atom({
     default: ""
 });
 
+export const roomHeartAtom = atom({
+    key: "roomHeartAtom",
+    default: ""
+});
  
