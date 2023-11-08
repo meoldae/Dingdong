@@ -8,6 +8,7 @@ import {
   ItemsState,
   buildModeState,
   draggedItemState,
+  lightColorState,
   roomColorState,
 } from "../../components/Room/Atom";
 import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom";
@@ -65,7 +66,8 @@ function RoomPage() {
   const roomId = window.location.pathname.match(/\d+/g);
   const today = new Date();
   const [time, setTime] = useState();
-  const [color,setColor] = useRecoilState(roomColorState);
+  const [roomColor,setroomColor] = useRecoilState(roomColorState);
+  const [lightColor,setLightColor] = useRecoilState(lightColorState);
   useEffect(() => {
     const myRoomId = userInfo.roomId;
     setIsMyRoom(roomId == myRoomId);
