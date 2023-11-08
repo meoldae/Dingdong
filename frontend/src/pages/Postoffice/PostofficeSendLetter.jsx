@@ -1,67 +1,100 @@
+// 라이브러리
 import { useState } from "react"
+import { useSetRecoilState, useRecoilValue } from "recoil"
+
+// Atom
 import { userAtom } from "@/atom/UserAtom"
+import { finishPostofficeSendLetterAtom, selectedPostCardAtom, postofficeSendLetterAtom } from "../../atom/PostAtom"
+import { selectedUserListAtom } from "../../atom/PostOfficeAtom"
+
+// 컴포넌트
 import DefaultPostBtn from "../../components/Button/DefaultPost/DefaultPostBtn"
 import Card from "../../components/UI/Card"
-import styles from "./PostofficeSendLetter.module.css"
-import { useSetRecoilState, useRecoilValue } from "recoil"
-import { postofficeSendLetterAtom } from "../../atom/PostAtom"
-import { sendLetterSNS } from "../../api/Letter"
-import { v4 as uuidv4 } from "uuid"
 import { successMsg } from "@/utils/customToast"
-import DefaultModal from "../../components/Modal/Default/DefaultModal"
 
-const PostofficeSendLetter = ({ card }) => {
+// API
+import { sendLetterPostOffice } from "../../api/Letter"
+
+// 스타일
+import styles from "./PostofficeSendLetter.module.css"
+
+// 기타
+import { v4 as uuidv4 } from "uuid"
+
+
+const PostofficeSendLetter = () => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   const [content, setContent] = useState("")
   const [contentCount, setContentCount] = useState(0)
   const [toValue, setToValue] = useState("")
   const [fromValue, setFromValue] = useState("")
-  const [isFinishSendLetter, setIsFinishSendLetter] = useState(false)
 
-  const setOnPostofficeSendLetter = useSetRecoilState(postofficeSendLetterAtom)
+  const setSelectedPostCardItem = useRecoilValue(selectedPostCardAtom)
+  const setSelectedUser = useRecoilValue(selectedUserListAtom)
+  const setFinishPostOfficeSendLetter = useSetRecoilState(finishPostofficeSendLetterAtom)
+  const setOnPostOfficeSendLetter = useSetRecoilState(postofficeSendLetterAtom)
 
   const userInfo = useRecoilValue(userAtom)
 
+  // 카카오톡 공유하기
+  // const sendClick = () => {
+  //   if (!toValue.trim() || !fromValue.trim() || !content.trim()) {
+  //     successMsg("❌ 편지를 작성해주세요.")
+  //     return
+  //   }
+
+  //   const newID = String(uuidv4())
+  //   const letterData = {
+  //     letterId: newID,
+  //     letterTo: toValue,
+  //     letterFrom: fromValue,
+  //     description: content.replaceAll("<br>","\r\n"),
+  //     stampId: card.idx,
+  //     roomId: userInfo.roomId,
+  //   }
+
+  //   const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY
+  //   sendLetterSNS(letterData, (response) => {
+  //     if (!window.Kakao.isInitialized()) {
+  //       window.Kakao.init(JS_KEY)
+  //     }
+  //     let currentUrl = window.location.href
+  //     const kakaoUrl = currentUrl.endsWith("/")
+  //       ? `${currentUrl}letter/${newID}`
+  //       : `${currentUrl}/letter/${newID}`
+  //     window.Kakao.Share.sendCustom({
+  //       templateId: 100120,
+  //       templateArgs: {
+  //         THU: `https://ding-dong.s3.ap-northeast-2.amazonaws.com/Letter${letterData.stampId}.png`,
+  //         TITLE: `딩동! ${letterData.letterFrom}님이 보낸 편지를 확인해보세요.`,
+  //         DESC: `From. ${letterData.letterFrom}`,
+  //         MOBILE_LINK: kakaoUrl,
+  //         WEB_LINK: kakaoUrl,
+  //       },
+  //     })
+  //     setIsFinishSendLetter(false)
+  //     setOnPostofficeSendLetter(false)
+  //     successMsg("💌 편지를 보냈어요!")
+  //   })
+  // }
+
   const sendClick = () => {
-    if (!toValue.trim() || !fromValue.trim() || !content.trim()) {
-      successMsg("❌ 편지를 작성해주세요.")
-      return
+    const params = {
+      "description": content,
+      "stampId": setSelectedPostCardItem.idx,
+      "memberIdList": setSelectedUser,
     }
-
-    const newID = String(uuidv4())
-    const letterData = {
-      letterId: newID,
-      letterTo: toValue,
-      letterFrom: fromValue,
-      description: content.replaceAll("<br>","\r\n"),
-      stampId: card.idx,
-      roomId: userInfo.roomId,
-    }
-
-    const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY
-    sendLetterSNS(letterData, (response) => {
-      if (!window.Kakao.isInitialized()) {
-        window.Kakao.init(JS_KEY)
+    sendLetterPostOffice(
+      params,
+      (success) => {
+        setOnPostOfficeSendLetter(false)
+        successMsg("💌 편지를 보냈습니다!")
+      },
+      (error) => {
+        console.log("Error at Send Letter Post Office...", error)
       }
-      let currentUrl = window.location.href
-      const kakaoUrl = currentUrl.endsWith("/")
-        ? `${currentUrl}letter/${newID}`
-        : `${currentUrl}/letter/${newID}`
-      window.Kakao.Share.sendCustom({
-        templateId: 100120,
-        templateArgs: {
-          THU: `https://ding-dong.s3.ap-northeast-2.amazonaws.com/Letter${letterData.stampId}.png`,
-          TITLE: `딩동! ${letterData.letterFrom}님이 보낸 편지를 확인해보세요.`,
-          DESC: `From. ${letterData.letterFrom}`,
-          MOBILE_LINK: kakaoUrl,
-          WEB_LINK: kakaoUrl,
-        },
-      })
-      setIsFinishSendLetter(false)
-      setOnPostofficeSendLetter(false)
-      successMsg("💌 편지를 보냈어요!")
-    })
+    )
   }
 
   const handleCheckContentCount = (event) => {
@@ -75,32 +108,23 @@ const PostofficeSendLetter = ({ card }) => {
     setFromValue(event.target.value)
   }
 
-  const finishHandler = () => {
-    setIsFinishSendLetter(false)
-    setOnPostofficeSendLetter(false)
-  }
-
   return (
     <>
-      <div
-        className={styles.overlays}
-        onClick={() => setIsFinishSendLetter(true)}
-      />
       <div className={styles.overlay}>
         <div className={styles.sendLetterContainer} id="sendLetter">
           <div
             className={styles.xmarkImg}
-            onClick={() => setIsFinishSendLetter(true)}
+            onClick={() => setFinishPostOfficeSendLetter(true)}
           >
             <img src={`${urlPath}/assets/icons/grayXmark.png`} alt="" />
           </div>
-          <Card className={`${styles.sendLetterBox} ${styles[card.order]}`}>
+          <Card className={`${styles.sendLetterBox} ${styles[setSelectedPostCardItem.order]}`}>
             <img className={styles.poststampFrame}
               src={`${urlPath}/assets/images/poststamp_frame.png`}
             />
             <img
               className={styles.topPostCardImg}
-              src={`${urlPath}/assets/images/post/${card.src}`}
+              src={`${urlPath}/assets/images/post/${setSelectedPostCardItem.src}`}
             />
             <div className={styles.ToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>
               To.
@@ -141,27 +165,10 @@ const PostofficeSendLetter = ({ card }) => {
           <DefaultPostBtn
             btnName={"편지 보내기"}
             onClick={sendClick}
-            color={card.order}
+            color={setSelectedPostCardItem.order}
           />
         </div>
       </div>
-
-      {/* 편지보내기 종료모달 */}
-      {isFinishSendLetter && (
-        <>
-          <div className={styles.finishOverlay} onClick={() => setIsFinishSendLetter(false)}>
-            <div className={styles.finishContainer}>
-              <DefaultModal
-                content={"편지 보내기를 종료하시겠습니까?"}
-                ok={"네"}
-                cancel={"아니오"}
-                okClick={() => finishHandler()}
-                cancelClick={() => setIsFinishSendLetter(false)}
-              />
-            </div>
-          </div>
-        </>
-      )}
     </>
   )
 }

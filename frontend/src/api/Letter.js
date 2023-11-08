@@ -12,7 +12,6 @@ const getLetterDetail = async (param, success, fail) => {
     HttpJson.get(`letter/${param}`).then(success).catch(fail);
 }
 
-
 const reportLetter = async (param, success, fail) => {
     HttpJson.post(`report/letter/${param}`).then(success).catch(fail)
 }
@@ -23,5 +22,10 @@ const sendLetterSNS = async (param, success, fail) =>{
 const getLetterSNSDetail = async (param, success, fail) => {
     HttpJson.get(`letter/sns/${param}`).then(success).catch(fail);
 }
-export { sendLetter, sendGuestLetter, getLetterDetail, reportLetter, sendLetterSNS, getLetterSNSDetail };
+
+const sendLetterPostOffice = async (params, success, fail) => {
+    HttpJson.post(`letter/all`, params).then(success).catch(fail);
+}
+
+export { sendLetter, sendGuestLetter, getLetterDetail, reportLetter, sendLetterSNS, getLetterSNSDetail, sendLetterPostOffice };
 
