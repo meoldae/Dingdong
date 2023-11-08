@@ -66,19 +66,19 @@ function RoomPage() {
   const roomId = window.location.pathname.match(/\d+/g);
   const today = new Date();
   const [time, setTime] = useState();
-  const [roomColor,setroomColor] = useRecoilState(roomColorState);
+  const [roomColor,setRoomColor] = useRecoilState(roomColorState);
   const [lightColor,setLightColor] = useRecoilState(lightColorState);
+
   useEffect(() => {
     const myRoomId = userInfo.roomId;
     setIsMyRoom(roomId == myRoomId);
     fetchRoomData(
       roomId,
       (response) => { 
-        console.log(response)
         setItems(response.data.data.roomFurnitureList);
         setNickName(response.data.data.nickname);
-        // 최초에 들어왔을 때, 방 색상 가져오기
-        // setColor(response.data.data.);
+        setRoomColor(response.data.data.wallColor);
+        setLightColor(response.data.data.lightColor);
         setAvatarId(response.data.data.avatarId);
         setHeartCount(response.data.data.heartCount);
       },
