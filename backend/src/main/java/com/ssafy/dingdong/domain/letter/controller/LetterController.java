@@ -1,5 +1,6 @@
 package com.ssafy.dingdong.domain.letter.controller;
 
+import com.ssafy.dingdong.domain.letter.dto.request.LetterAllRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.request.LetterRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.request.LetterSNSRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterListResponseDto;
@@ -61,6 +62,15 @@ public class LetterController implements LetterSwagger {
 
         return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
     }
+
+    @Override
+    @PostMapping("/all")
+    public CommonResponse sendAuthLetterALL(Authentication authentication, @RequestBody LetterAllRequestDto requestDto) {
+        String memberId = authentication.getName();
+        letterService.sendLetterALL(memberId, requestDto);
+        return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
+    }
+
 
     @Override
     @PostMapping("/guest")
