@@ -4,7 +4,7 @@ import { useSetRecoilState, useRecoilValue } from "recoil"
 
 // Atom
 import { userAtom } from "@/atom/UserAtom"
-import { postofficeSendLetterAtom } from "../../atom/PostAtom"
+import { postofficeSendLetterAtom, finishPostofficeSendLetterAtom } from "../../atom/PostAtom"
 
 // 컴포넌트
 import DefaultPostBtn from "../../components/Button/DefaultPost/DefaultPostBtn"
@@ -30,6 +30,7 @@ const PostofficeSendLetter = ({ card }) => {
   const [fromValue, setFromValue] = useState("")
 
   const setOnPostofficeSendLetter = useSetRecoilState(postofficeSendLetterAtom)
+  const setFinishPostOfficeSendLetter = useSetRecoilState(finishPostofficeSendLetterAtom)
 
   const userInfo = useRecoilValue(userAtom)
 
@@ -87,15 +88,11 @@ const PostofficeSendLetter = ({ card }) => {
 
   return (
     <>
-      <div
-        className={styles.overlays}
-        onClick={() => setIsFinishSendLetter(true)}
-      />
       <div className={styles.overlay}>
         <div className={styles.sendLetterContainer} id="sendLetter">
           <div
             className={styles.xmarkImg}
-            onClick={() => setIsFinishSendLetter(true)}
+            onClick={() => setFinishPostOfficeSendLetter(true)}
           >
             <img src={`${urlPath}/assets/icons/grayXmark.png`} alt="" />
           </div>
