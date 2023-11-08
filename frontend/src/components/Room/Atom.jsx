@@ -51,3 +51,7 @@ export const roomColorState = atom({
   key:"roomColorState",
   default: "#f0f0f0",
 })
+export const lightColorState = atom({
+  key:"roomColorState",
+  default: "#f0f0f0",
+})

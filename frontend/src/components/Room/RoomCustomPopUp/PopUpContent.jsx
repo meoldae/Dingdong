@@ -8,6 +8,7 @@ import {
   ItemsState,
   dragPositionState,
   draggedItemState,
+  lightColorState,
   roomColorState,
 } from "../Atom"
 
@@ -24,7 +25,8 @@ const PopUpContent = (props) => {
   const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState)
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState)
-  const [color, setColor] = useRecoilState(roomColorState);
+  const [roomColor, setRoomColor] = useRecoilState(roomColorState);
+  const [lightColor, setLightColor] =useRecoilState(lightColorState);
   const addFurniture = (furnitureId, check) => {
     // 색상 변경 로직 추가
     if(check === 7){

@@ -25,6 +25,7 @@ import {
   checkState,
   dragPositionState,
   draggedItemState,
+  lightColorState,
   mobileCheckState,
   roomColorState,
 } from "./Atom";
@@ -42,8 +43,12 @@ const Experience = ({ setRoomDrag }) => {
     useRecoilState(ItemRotateState);
   const check = useRecoilValue(checkState);
   const mobileCheck = useRecoilValue(mobileCheckState);
-  const [color, setColor] = useRecoilState(roomColorState);
-  //setColor("white")
+  const [roomColor, setRoomColor] = useRecoilState(roomColorState);
+  const [lightColor, setLightColor] = useRecoilState(lightColorState);
+  // setColor("#D8BFD8")
+  // FFDAB9
+// AFEEEE
+//D8BFD8
   // onPlaneClicked 이벤트에 예외처리
   useEffect(() => {
     if (draggedItem === null) {
@@ -313,18 +318,10 @@ const Experience = ({ setRoomDrag }) => {
   useFrame((state) => {
     state.camera.lookAt(0, 1, 0);
   });
-  // const shadowCameraRef = useRef();
 
-  // const lightRef = useRef();
-  // useEffect(() => {
-  //   shadowCameraRef.current = new THREE.CameraHelper(
-  //     lightRef.current.shadow.camera
-  //   );
-  //   state.scene.add(shadowCameraRef.current);
-  //   return () => {
-  //     state.scene.remove(shadowCameraRef.current);
-  //   };
-  // }, [lightRef.current]);
+  useEffect(()=>{
+
+  },[lightColor,roomColor])
   return (
     <>
       {/* <Environment preset="s nset" /> */}
@@ -340,11 +337,12 @@ const Experience = ({ setRoomDrag }) => {
       />
       {/* 조명들 */}
       <pointLight
-      color={"gold"}
-      intensity={20}
-      // distance={8}
-      // receiveShadow
-      position={[3,4,1]}/>
+        color={"gold"}
+        intensity={20}
+        // distance={8}
+        // receiveShadow
+        position={[3, 4, 1]}
+      />
       <hemisphereLight
         intensity={1}
         color="skyblue"
@@ -368,9 +366,20 @@ const Experience = ({ setRoomDrag }) => {
       />
       <directionalLight
         position={[3, 10, 3]}
-        // castShadow
         color={"blue"}
         intensity={1}
+        // distance={100}
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+        shadow-camera-near={0.5}
+        shadow-camera-far={500}
+        // ref={lightRef}
+      />
+      <directionalLight
+        position={[3, 10, 3]}
+        // castShadow
+        color={lightColor}
+        intensity={2.5}
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
         shadow-camera-near={0.5}
@@ -451,13 +460,13 @@ const Experience = ({ setRoomDrag }) => {
         }}
       >
         <boxGeometry args={[4.8, 4.8, 0.4]} />
-        <meshStandardMaterial color={color}  />
+        <meshStandardMaterial color={roomColor} />
       </mesh>
       {/* 왼쪽 평면 */}
       <mesh
         receiveShadow
         rotation-y={Math.PI / 2}
-        position-x={-2.60}
+        position-x={-2.6}
         // visible={false}
         position-y={1.71}
         position-z={-0.2}
@@ -516,12 +525,12 @@ const Experience = ({ setRoomDrag }) => {
         }}
       >
         <boxGeometry args={[5.2, 4.32, 0.4]} />
-        <meshStandardMaterial color={color} side={DoubleSide} />
+        <meshStandardMaterial color={roomColor} side={DoubleSide} />
       </mesh>
       {/* 오른쪽 평면 */}
       <mesh
         receiveShadow
-        position-z={-2.60}
+        position-z={-2.6}
         // visible={false}
         position-y={1.71}
         onClick={() => {
@@ -579,7 +588,7 @@ const Experience = ({ setRoomDrag }) => {
         }}
       >
         <boxGeometry args={[4.8, 4.32, 0.4]} />
-        <meshStandardMaterial color={color} side={DoubleSide} />
+        <meshStandardMaterial color={roomColor} side={DoubleSide} />
       </mesh>
       {buildMode && (
         <>
