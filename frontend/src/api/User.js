@@ -38,6 +38,10 @@ const fetchUserSecession = async (success, fail) => {
   await HttpJson.delete(`member`).then(success).catch(fail)
 }
 
+const fetchSerchNickname = async (name, success, fail) => {
+  await HttpJson.get(`member/range/${name}`).then(success).catch(fail)
+}
+
 export {
   CreateUser,
   GetAvatarList,
@@ -48,4 +52,5 @@ export {
   DoubleCheck,
   fetchLogout,
   fetchUserSecession,
+  fetchSerchNickname,
 }

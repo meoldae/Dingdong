@@ -66,6 +66,7 @@ import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter";
 import GuidePage from "../../components/UI/GuidePage";
 import SingleHeader from "./SingleHeader";
 import RankingInformation from "../../components/Modal/Ranking/RankingInformation";
+import PostOfficeModal from "../../components/Modal/PostOffice/PostOfficeModal";
 
 // 여기까지 FCM
 
@@ -469,10 +470,12 @@ const SingleMainPage = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
+              <div className={styles.InformationOverlay} />
               <div className={styles.postofficemodalcontainer}>
-                <PostofficeCardBox
+                {/* <PostofficeCardBox
                   onSelectButtonClick={handleSelectButtonClick}
-                />
+                /> */}
+                <PostOfficeModal />
               </div>
             </motion.div>
           </>
