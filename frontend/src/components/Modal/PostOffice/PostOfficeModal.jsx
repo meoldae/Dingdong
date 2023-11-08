@@ -71,11 +71,15 @@ const PostOfficeModal = () => {
           </div>
         </div>
         <div className={styles.ContentContainer}>
-          {searchResult.map((item) => (
-            <div key={item.memberId}>
-              <SearchResultItem avatarId={item.avatarId} nickname={item.nickname} />
-            </div>
-          ))}
+          {searchResult.length === 0 ? (
+            <div style={{ width: "240px", textAlign: "center", fontSize: "12px" }}>검색 결과가 없습니다.</div>
+          ) : (
+            searchResult.map((item) => (
+              <div key={item.memberId}>
+                <SearchResultItem avatarId={item.avatarId} nickname={item.nickname} />
+              </div>
+            ))
+          )}
         </div>
         <div className={styles.Button} style={{ fontFamily: "GmarketSansMedium" }}>선택완료</div>
       </div>
