@@ -20,7 +20,7 @@ import PopUp from "../../components/Room/RoomCustomPopUp/PopUp";
 import SharePage from "../../components/Modal/Sharing/SharePage";
 import SharingModalList from "../../components/Modal/Sharing/SharingModalList";
 import { userAtom } from "../../atom/UserAtom";
-import { roomInfoAtom } from "@/atom/RoomInfoAtom";
+import { roomInfoAtom, roomAvatarAtom } from "@/atom/RoomInfoAtom";
 import { useNavigate } from "react-router-dom";
 import history from "../../components/UI/history";
 import RandomBtn from "../../components/Button/Room/RandomBtn";
@@ -59,6 +59,7 @@ function RoomPage() {
   const [shareModal, setShareModal] = useState(false);
   const userInfo = useRecoilValue(userAtom);
   const [nickName, setNickName] = useRecoilState(roomInfoAtom);
+  const [avatarId, setAvatarId] = useRecoilState(roomAvatarAtom);
   const [roomDrag, setRoomDrag] = useState(false);
   const roomId = window.location.pathname.match(/\d+/g);
   const today = new Date();
@@ -68,9 +69,10 @@ function RoomPage() {
     setIsMyRoom(roomId == myRoomId);
     fetchRoomData(
       roomId,
-      (response) => {
+      (response) => { 
         setItems(response.data.data.roomFurnitureList);
         setNickName(response.data.data.nickname);
+        setAvatarId(response.data.data.avatarId)
       },
       (error) => {
         console.error("Error at fetching RoomData...", error);
