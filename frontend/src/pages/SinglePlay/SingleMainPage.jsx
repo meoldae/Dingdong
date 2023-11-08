@@ -1,10 +1,57 @@
 // React
 import React, { useEffect, useState } from "react"
-import styles from "./SingleMainPage.module.css"
 import { motion } from "framer-motion"
-
-// Recoil
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
+
+// 스타일
+import styles from "./SingleMainPage.module.css"
+
+// Three.js 기본 세팅
+import { Canvas } from "@react-three/fiber"
+import { OrbitControls } from "@react-three/drei"
+import CustomCamera from "../../components/Default/CustomCamera"
+import DirectionalLight from "../../components/Default/DirectionLight"
+import Map from "../../components/Default/Map"
+
+// Three.js
+import Model from "../../components/Item/MainItems/Character"
+import House from "../../components/Item/MainItems/tempItems/House"
+import Spot from "../../components/Item/MainItems/tempItems/Spot"
+
+// 각 건물 포탈
+import DefaultPortal from "../../components/Item/MainItems/Portals/DefaultPortal"
+import DefaultPortalRing from "../../components/Item/MainItems/Portals/DefaultPortalRing"
+
+// React 컴포넌트
+import ConfirmEnteringDefaultModal from "../../components/Modal/Confirm/ConfirmEnteringDefaultModal"
+import PhysicsModel from "../../components/Item/MainItems/PhysicsModel"
+import RankingModal from "../../components/Modal/Ranking/RankingModal"
+import PostofficeCardBox from "../Postoffice/PostofficeCardBox"
+import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter"
+import GuidePage from "../../components/UI/GuidePage"
+import SingleHeader from "./SingleHeader"
+import RankingInformation from "../../components/Modal/Ranking/RankingInformation"
+import PostOfficeModal from "../../components/Modal/PostOffice/PostOfficeModal"
+import DefaultModal from "../../components/Modal/Default/DefaultModal"
+import PostBox from "../../components/Modal/Post/PostBox"
+import ReceiveLetter from "../../components/Modal/Post/ReceiveLetter"
+
+// Atom
+import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom"
+import {
+  postofficeCardAtom,
+  postofficeSendLetterAtom,
+  finishPostofficeCardAtom,
+  finishPostofficeSendLetterAtom,
+  isPostBoxVisibleAtom,
+  isFinishPostBoxVisibleAtom,
+  isReceiveLetterVisibleAtom,
+  isFinishReceiveLetterVisibleAtom
+} from "../../atom/PostAtom"
+import {
+  isPostOfficeVisibleAtom,
+  isFinishPostOfficeVisibleAtom,
+} from "../../atom/PostOfficeAtom"
 import {
   ArriveAtom,
   ConfirmEnteringInstaAtom,
@@ -39,46 +86,6 @@ import {
 } from "../../atom/SinglePlayAtom"
 import { RoomPortalVisibleAtom } from "../../atom/SinglePlayAtom"
 
-// Three.js 기본 세팅
-import { Canvas } from "@react-three/fiber"
-import { OrbitControls } from "@react-three/drei"
-import CustomCamera from "../../components/Default/CustomCamera"
-import DirectionalLight from "../../components/Default/DirectionLight"
-import Map from "../../components/Default/Map"
-
-// Three.js
-import Model from "../../components/Item/MainItems/Character"
-import House from "../../components/Item/MainItems/tempItems/House"
-import Spot from "../../components/Item/MainItems/tempItems/Spot"
-
-// 각 건물 포탈
-import DefaultPortal from "../../components/Item/MainItems/Portals/DefaultPortal"
-import DefaultPortalRing from "../../components/Item/MainItems/Portals/DefaultPortalRing"
-
-// React 컴포넌트
-import ConfirmEnteringDefaultModal from "../../components/Modal/Confirm/ConfirmEnteringDefaultModal"
-import PhysicsModel from "../../components/Item/MainItems/PhysicsModel"
-import RankingModal from "../../components/Modal/Ranking/RankingModal"
-import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom"
-import {
-  postofficeCardAtom,
-  postofficeSendLetterAtom,
-  finishPostofficeCardAtom,
-  finishPostofficeSendLetterAtom,
-} from "../../atom/PostAtom"
-import {
-  isPostOfficeVisibleAtom,
-  isFinishPostOfficeVisibleAtom,
-} from "../../atom/PostOfficeAtom"
-import PostofficeCardBox from "../Postoffice/PostofficeCardBox"
-import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter"
-import GuidePage from "../../components/UI/GuidePage"
-import SingleHeader from "./SingleHeader"
-import RankingInformation from "../../components/Modal/Ranking/RankingInformation"
-import PostOfficeModal from "../../components/Modal/PostOffice/PostOfficeModal"
-import DefaultModal from "../../components/Modal/Default/DefaultModal"
-
-// 여기까지 FCM
 
 const SingleMainPage = () => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -194,6 +201,12 @@ const SingleMainPage = () => {
     useRecoilState(finishPostofficeSendLetterAtom)
   const [guide, setGuide] = useState(false)
 
+  // 우체통 도착 상태관리
+  const [isPostBoxVisible, setIsPostBoxVisible] = useRecoilState(isPostBoxVisibleAtom)
+  const [isFinishPostBoxVisible, setIsFinishPostBoxVisible] = useRecoilState(isFinishPostBoxVisibleAtom)
+  const [isReceiveLetterVisible, setIsReceiveLetterVisible] = useRecoilState(isReceiveLetterVisibleAtom)
+  const [isFinishReceiveLetterVisible, setIsFinishReceiveLetterVisible] = useRecoilState(isFinishReceiveLetterVisibleAtom)
+
   // 가이드 관리
   useEffect(() => {
     if (localStorage.getItem("guideVisible")) {
@@ -222,6 +235,19 @@ const SingleMainPage = () => {
   const finishPostOfficeSendLetter = () => {
     setIsFinishPostOfficeSendLetter(false)
     setOnPostofficeSendLetter(false)
+  }
+
+  // 편지함 종료 확인 함수
+  const finishPostBoxHandler = () => {
+    setIsFinishPostBoxVisible(false)
+    setIsPostBoxVisible(false)
+  }
+
+  // 편지상세 종료 확인 함수
+  const finishReceiveLetterHandler = () => {
+    setIsFinishReceiveLetterVisible(false)
+    setIsReceiveLetterVisible(false)
+    setIsPostBoxVisible(true)
   }
 
   return (
@@ -627,6 +653,82 @@ const SingleMainPage = () => {
                 cancel={"아니오"}
                 okClick={() => finishPostOfficeSendLetter()}
                 cancelClick={() => setIsFinishPostOfficeSendLetter(false)}
+              />
+            </div>
+          </>
+        )}
+
+        {/* 편지함 모달 */}
+        {isPostBoxVisible && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            >
+              <div
+                className={styles.InformationOverlay}
+                onClick={() => setIsFinishPostBoxVisible(true)}
+              />
+              <div className={styles.postofficemodalcontainer}>
+                <PostBox />
+              </div>
+            </motion.div>
+          </>
+        )}
+
+        {/* 편지함 종료 모달 */}
+        {isFinishPostBoxVisible && (
+          <>
+            <div
+              className={styles.OverOverlay}
+              onClick={() => setIsFinishPostBoxVisible(false)}
+            />
+            <div className={styles.FinishOverContainer}>
+              <DefaultModal
+                content={"편지함을 종료하시겠습니까?"}
+                ok={"네"}
+                cancel={"아니오"}
+                okClick={() => finishPostBoxHandler()}
+                cancelClick={() => setIsFinishPostBoxVisible(false)}
+              />
+            </div>
+          </>
+        )}
+
+        {/* 편지상세 모달 */}
+        {isReceiveLetterVisible && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            >
+              <div
+                className={styles.InformationOverlay}
+                onClick={() => setIsFinishReceiveLetterVisible(true)}
+              />
+              <div className={styles.postofficemodalcontainer}>
+                <ReceiveLetter />
+              </div>
+            </motion.div>
+          </>
+        )}
+
+        {/* 편지상세 종료 모달 */}
+        {isFinishReceiveLetterVisible && (
+          <>
+            <div
+              className={styles.OverOverlay}
+              onClick={() => setIsFinishReceiveLetterVisible(false)}
+            />
+            <div className={styles.FinishOverContainer}>
+              <DefaultModal
+                content={"편지를 종료하시겠습니까?"}
+                ok={"네"}
+                cancel={"아니오"}
+                okClick={() => finishReceiveLetterHandler()}
+                cancelClick={() => setIsFinishReceiveLetterVisible(false)}
               />
             </div>
           </>

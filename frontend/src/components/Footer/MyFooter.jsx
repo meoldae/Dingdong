@@ -4,8 +4,6 @@ import { useEffect, useState } from "react"
 
 // 컴포넌트
 import RoomBtn from "../Button/Room/RoomBtn"
-import PostBox from "../Modal/Post/PostBox"
-import ReceiveLetter from "../Modal/Post/ReceiveLetter"
 import GuestBookModal from "../Modal/GuestBook/GuestBookModal"
 import WriteGuestBookModal from "../Modal/GuestBook/WriteGuestBookModal"
 import DefaultModal from "../Modal/Default/DefaultModal"
@@ -20,10 +18,6 @@ import { isHeartCheck, updateHeart } from "@/api/Room"
 
 // 아톰
 import { roomHeartAtom } from "../../atom/RoomInfoAtom"
-import {
-  isPostBoxVisibleAtom,
-  isReceiveLetterVisibleAtom,
-} from "../../atom/PostAtom"
 import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom"
 import { ItemsState, buildModeState } from "../Room/Atom"
 import {
@@ -49,13 +43,7 @@ const MyFooter = (props) => {
   const [isHeart, setIsHeart] = useState(false)
   const [editMode, setEditMode] = useRecoilState(buildModeState)
   const [items, setItems] = useRecoilState(ItemsState)
-  const [isPostBoxVisible, setIsPostBoxVisible] =
-    useRecoilState(isPostBoxVisibleAtom)
-  const [isReceiveLetterVisible, setIsReceiveLetterVisible] = useRecoilState(
-    isReceiveLetterVisibleAtom
-  )
   const [popUpStatus, setPopUpStatus] = useRecoilState(popUpStatusAtom)
- 
   const [heartCount, setHeartCount] = useRecoilState(roomHeartAtom)
 
   // 방명록
@@ -81,25 +69,22 @@ const MyFooter = (props) => {
     )
   }, [isHeart])
 
-    // 방 좋아요 업데이트 함수
-    const updateHeartStatus = () => {
-      updateHeart(
-        props.props,
-        (response) => { 
-          const isHeartNow = response.data.data === "Y";
-          setIsHeart(isHeartNow);
-          setHeartCount(prevCount => isHeartNow ? prevCount + 1 : prevCount - 1);
-          console.log(heartCount)
-        },
-        (error) => {
-          console.log("Error with Room Heart... ", error)
-        }
-      )
-    }
-
-  const handleSelectButtonClick = () => {
-    // console.log(1)
+  // 방 좋아요 업데이트 함수
+  const updateHeartStatus = () => {
+    updateHeart(
+      props.props,
+      (response) => { 
+        const isHeartNow = response.data.data === "Y";
+        setIsHeart(isHeartNow);
+        setHeartCount(prevCount => isHeartNow ? prevCount + 1 : prevCount - 1);
+        console.log(heartCount)
+      },
+      (error) => {
+        console.log("Error with Room Heart... ", error)
+      }
+    )
   }
+
   const roomEditClickEvent = () => {
     setItems(items)
     setPopUpStatus(!popUpStatus)
@@ -174,17 +159,6 @@ const MyFooter = (props) => {
             <RoomBtn img={"postBox"} onClick={() => setIsGuestBookVisible(true)} />
           </div>
         </div>
-
-        {isPostBoxVisible && (
-          <PostBox
-            cancelClick={() => setIsPostBoxVisible(false)}
-            onSelectButtonClick={handleSelectButtonClick}
-          />
-        )}
-
-        {isReceiveLetterVisible && (
-          <ReceiveLetter cancelClick={() => setIsReceiveLetterVisible(false)} />
-        )}
       </div>
 
       {/* 방명록 리스트 모달 */}
