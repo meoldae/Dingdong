@@ -1,5 +1,6 @@
 package com.ssafy.dingdong.domain.multi.repository;
 
+import com.ssafy.dingdong.domain.multi.dto.request.JoinOutRequest;
 import com.ssafy.dingdong.domain.multi.dto.request.UserSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -21,8 +22,6 @@ public class MultiRepository {
     private final RedisTemplate<String, Object> redisTemplate;
     private ValueOperations<String, Object> valueOperations;
     private HashOperations<String, String, Object> hashOperations;
-
-    private final String USER = "user:";
     private final String CHANNEL_PREFIX = "channel:";
 
     @PostConstruct
@@ -31,13 +30,31 @@ public class MultiRepository {
         hashOperations = multiUserTemplate.opsForHash();
     }
 
-    public void saveUser(UserSession userSession) {
+    public void saveUser(JoinOutRequest request) {
+        String key = request.getRoomId().toString();
+        String channelKey = CHANNEL_PREFIX + request.getChannelId().toString();
+
+        Map<String, String> userProperties = new HashMap<>();
+        userProperties.put("channelId", request.getChannelId().toString());
+        userProperties.put("nickname", request.getNickname());
+        userProperties.put("avatarId", request.getAvatarId().toString());
+        userProperties.put("roomId", request.getRoomId().toString());
+        userProperties.put("x", String.valueOf(request.getX()));
+        userProperties.put("y", String.valueOf(request.getY()));
+        userProperties.put("z", String.valueOf(request.getZ()));
+
+        hashOperations.put(channelKey, key, userProperties);
+    }
+
+    public void updateUser(UserSession userSession) {
         String key = userSession.getRoomId().toString();
         String channelKey = CHANNEL_PREFIX + userSession.getChannelId().toString();
 
         Map<String, String> userProperties = new HashMap<>();
         userProperties.put("channelId", userSession.getChannelId().toString());
         userProperties.put("nickname", userSession.getNickname());
+        userProperties.put("avatarId", userSession.getAvatarId().toString());
+        userProperties.put("roomId", userSession.getRoomId().toString());
         userProperties.put("x", String.valueOf(userSession.getX()));
         userProperties.put("y", String.valueOf(userSession.getY()));
         userProperties.put("z", String.valueOf(userSession.getZ()));
@@ -45,12 +62,13 @@ public class MultiRepository {
         hashOperations.put(channelKey, key, userProperties);
     }
 
-    public void deleteUser(UserSession userSession) {
-        String channelKey = CHANNEL_PREFIX + userSession.getChannelId().toString();
-        hashOperations.delete(channelKey, userSession.getRoomId().toString());
+    public void deleteUser(JoinOutRequest request) {
+        String channelKey = CHANNEL_PREFIX + request.getChannelId().toString();
+        hashOperations.delete(channelKey, request.getRoomId().toString());
     }
 
     public Map<String, Object> findMultiUserList(String channelNo) {
         return hashOperations.entries(CHANNEL_PREFIX + channelNo);
     }
+
 }

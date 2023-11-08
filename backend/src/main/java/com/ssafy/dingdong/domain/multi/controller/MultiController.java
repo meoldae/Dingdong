@@ -1,6 +1,6 @@
 package com.ssafy.dingdong.domain.multi.controller;
 
-import com.ssafy.dingdong.domain.multi.dto.request.MoveRequest;
+import com.ssafy.dingdong.domain.multi.dto.request.JoinOutRequest;
 import com.ssafy.dingdong.domain.multi.dto.request.UserSession;
 import com.ssafy.dingdong.domain.multi.repository.MultiRepository;
 import com.ssafy.dingdong.domain.multi.service.MultiService;
@@ -28,27 +28,31 @@ public class MultiController {
     private final MultiRepository multiRepository;
     private final MultiService multiService;
     private final ResponseService responseService;
+
     @MessageMapping("/move/{channelId}")
-    public void moveCharacter(@DestinationVariable Long channelId, MoveRequest request) {
-        log.info("request={}", request);
-        messagingTemplate.convertAndSend("/sub/move/" + channelId, request);
+    public void moveCharacter(@DestinationVariable Long channelId, UserSession userSession) {
+        log.info("request={}", userSession);
+        messagingTemplate.convertAndSend("/sub/move/" + channelId, userSession);
+        multiRepository.updateUser(userSession);
     }
 
     @MessageMapping("/join/{channelId}")
-    public void joinChannel(@DestinationVariable Long channelId, UserSession userSession) {
-        log.info("join OK={}", userSession);
-        // Redis에 사용자 정보를 저장
-        multiRepository.saveUser(userSession);
+    public void joinChannel(@DestinationVariable Long channelId, JoinOutRequest request) {
+        log.info("join OK={}", request);
 
         // 새로운 사용자 정보를 해당 채널의 모든 사용자에게 알림
-        messagingTemplate.convertAndSend("/sub/channel/" + channelId, userSession);
+        messagingTemplate.convertAndSend("/sub/channel/" + channelId, request);
+
+        // Redis에 사용자 정보를 저장
+        multiRepository.saveUser(request);
     }
 
     @MessageMapping("/out/{channelId}")
-    public void outChannel(@DestinationVariable Long channelId, UserSession userSession) {
-        log.info("OUT OK={}", userSession);
+    public void outChannel(@DestinationVariable Long channelId, JoinOutRequest request) {
+        log.info("OUT OK={}", request);
         // Redis에 사용자 정보를 저장
-        multiRepository.deleteUser(userSession);
+        multiRepository.deleteUser(request);
+        messagingTemplate.convertAndSend("/sub/channel/" + channelId, request);
     }
 
     @GetMapping("/multi/{channelId}")

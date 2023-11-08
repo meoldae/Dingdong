@@ -15,4 +15,5 @@ public class MultiServiceImpl implements MultiService {
     public Map<String, Object> getMultiUser(String channelId) {
         return multiRepository.findMultiUserList(channelId);
     }
+
 }

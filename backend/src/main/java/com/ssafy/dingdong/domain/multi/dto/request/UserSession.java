@@ -12,6 +12,7 @@ public class UserSession {
     private Integer channelId;
     private String nickname;
 
+    private Long avatarId;
     private Long roomId;
     private double x;
     private double y;
