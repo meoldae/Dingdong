@@ -188,6 +188,15 @@
   padding: 10px 0 10px 0;
 }
 
+.exitButton {
+  padding: 10px 0 10px 0;
+  margin-left: auto;
+  margin-right: 10%;
+  color: gray; 
+  font-size: small;
+  color: lightgray; 
+}
+
 /* 알림 모달 */
 .AlarmContainer {
   top: 40%;
