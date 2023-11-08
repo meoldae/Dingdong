@@ -12,23 +12,23 @@ export const Experience = () => {
   const [position, setPosition] = useState([0, 0, 0]);
 
   // STOMP 소켓 연결을 설정합니다.
-  useEffect(() => {
-    client.current = new StompJs.Client({
-      webSocketFactory: () => new SockJS("/ws"),
-      onConnect: () => {
-        console.log("Connected to the WS server");
-      },
-      onDisconnect: () => {
-        console.log("Disconnected from the WS server");
-      },
-    });
+  // useEffect(() => {
+  //   client.current = new StompJs.Client({
+  //     webSocketFactory: () => new SockJS("/ws"),
+  //     onConnect: () => {
+  //       console.log("Connected to the WS server");
+  //     },
+  //     onDisconnect: () => {
+  //       console.log("Disconnected from the WS server");
+  //     },
+  //   });
 
-    client.current.activate();
+  //   client.current.activate();
 
-    return () => {
-      client.current.deactivate();
-    };
-  }, []);
+  //   return () => {
+  //     client.current.deactivate();
+  //   };
+  // }, []);
 
   // 위치 정보를 서버로 전송하는 함수
   const publishMove = (x, y, z) => {

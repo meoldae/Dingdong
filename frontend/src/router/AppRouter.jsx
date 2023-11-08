@@ -50,40 +50,22 @@ const AppRouter = () => {
             <Route path={`${urlPath}/`} element={<SingleMainPage />} />
             {/* <Route path="/single" element={<SingleMainPage />} /> */}
             <Route path={`${urlPath}/room/:roomId`} element={<AppRoom />} />
-            <Route
-              path={`${urlPath}/random/:roomId`}
-              element={<AppRandomRoom />}
-            />
-            <Route
-              path={`${urlPath}/usersetting`}
-              element={<AppUserSetting />}
-            />
+            <Route path={`${urlPath}/random/:roomId`} element={<AppRandomRoom />} />
+            <Route path={`${urlPath}/usersetting`} element={<AppUserSetting />} />
             <Route path={`${urlPath}/postoffice`} element={<PostPage />} />
+            <Route path={`${urlPath}/multiPage`} element={<MultiPage />} />
           </Route>
 
           <Route element={<AuthRoute authentication="NotUser" />}>
             <Route path={`${urlPath}/login`} element={<AppLogin />} />
-            <Route
-              path={`${urlPath}/oauth2/redirect`}
-              element={<AppRedirect />}
-            />
+            <Route path={`${urlPath}/oauth2/redirect`} element={<AppRedirect />} />
             <Route path={`${urlPath}/signup`} element={<AppSignUp />} />
             <Route path={`${urlPath}/tutorial`} element={<TutorialPage />} />
             <Route path={`${urlPath}/yourstamp`} element={<StampTest />} />
-            <Route
-              path={`${urlPath}/yourstamp/result`}
-              element={<StampTestResult />}
-            />
-            <Route
-              path={`${urlPath}/invite/:roomId`}
-              element={<InviteRoomPage />}
-            />
-            <Route
-              path={`${urlPath}/letter/:letterId`}
-              element={<LetterSNSReceivePage />}
-            />
+            <Route path={`${urlPath}/yourstamp/result`} element={<StampTestResult />} />
+            <Route path={`${urlPath}/invite/:roomId`} element={<InviteRoomPage />} />
+            <Route path={`${urlPath}/letter/:letterId`} element={<LetterSNSReceivePage />} />
             <Route path={`${urlPath}/multi`} element={<MultiPlayPage />} />
-            <Route path={`${urlPath}/multiPage`} element={<MultiPage />} />
           </Route>
           <Route path={`${urlPath}/*`} element={<AppNotFound />} />
         </Routes>
