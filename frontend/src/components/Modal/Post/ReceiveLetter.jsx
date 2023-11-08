@@ -23,8 +23,6 @@ const RecevieLetter = (props) => {
 
   // 편지 디테일 정보 상태관리
   const [letterDetail, setLetterDetail] = useState(null)
-  // 편지함 종료모달 상태관리
-  const [isFinishReceiveLetter, setIsFinishReceiveLetter] = useState(false)
   // 신고하기 모달 상태관리
   const [isReport, setIsReport] = useState(false)
   const [letterStamp, setLetterStamp] = useState(null);
@@ -111,23 +109,6 @@ const RecevieLetter = (props) => {
         )
         }
       </div>
-
-      {/* 받은편지 종료모달 */}
-      {isFinishReceiveLetter && (
-        <>
-          <div className={styles.finishOverlay} onClick={() => setIsFinishReceiveLetter(false)}>
-            <div className={styles.finishContainer}>
-              <DefaultModal
-                content={"편지를 종료하시겠습니까?"}
-                ok={"네"}
-                cancel={"아니오"}
-                okClick={() => props.cancelClick()}
-                cancelClick={() => setIsFinishReceiveLetter(false)}
-              />
-            </div>
-          </div>
-        </>
-      )}
 
       {/* 신고하기 모달 */}
       {isReport && (
