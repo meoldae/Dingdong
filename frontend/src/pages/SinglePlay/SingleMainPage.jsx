@@ -34,6 +34,7 @@ import RankingInformation from "../../components/Modal/Ranking/RankingInformatio
 import PostOfficeModal from "../../components/Modal/PostOffice/PostOfficeModal"
 import DefaultModal from "../../components/Modal/Default/DefaultModal"
 import PostBox from "../../components/Modal/Post/PostBox"
+import ReceiveLetter from "../../components/Modal/Post/ReceiveLetter"
 
 // Atom
 import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom"
@@ -44,6 +45,8 @@ import {
   finishPostofficeSendLetterAtom,
   isPostBoxVisibleAtom,
   isFinishPostBoxVisibleAtom,
+  isReceiveLetterVisibleAtom,
+  isFinishReceiveLetterVisibleAtom
 } from "../../atom/PostAtom"
 import {
   isPostOfficeVisibleAtom,
@@ -201,6 +204,8 @@ const SingleMainPage = () => {
   // 우체통 도착 상태관리
   const [isPostBoxVisible, setIsPostBoxVisible] = useRecoilState(isPostBoxVisibleAtom)
   const [isFinishPostBoxVisible, setIsFinishPostBoxVisible] = useRecoilState(isFinishPostBoxVisibleAtom)
+  const [isReceiveLetterVisible, setIsReceiveLetterVisible] = useRecoilState(isReceiveLetterVisibleAtom)
+  const [isFinishReceiveLetterVisible, setIsFinishReceiveLetterVisible] = useRecoilState(isFinishReceiveLetterVisibleAtom)
 
   // 가이드 관리
   useEffect(() => {
@@ -236,6 +241,13 @@ const SingleMainPage = () => {
   const finishPostBoxHandler = () => {
     setIsFinishPostBoxVisible(false)
     setIsPostBoxVisible(false)
+  }
+
+  // 편지상세 종료 확인 함수
+  const finishReceiveLetterHandler = () => {
+    setIsFinishReceiveLetterVisible(false)
+    setIsReceiveLetterVisible(false)
+    setIsPostBoxVisible(true)
   }
 
   return (
@@ -679,6 +691,44 @@ const SingleMainPage = () => {
                 cancel={"아니오"}
                 okClick={() => finishPostBoxHandler()}
                 cancelClick={() => setIsFinishPostBoxVisible(false)}
+              />
+            </div>
+          </>
+        )}
+
+        {/* 편지상세 모달 */}
+        {isReceiveLetterVisible && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            >
+              <div
+                className={styles.InformationOverlay}
+                onClick={() => setIsFinishReceiveLetterVisible(true)}
+              />
+              <div className={styles.postofficemodalcontainer}>
+                <ReceiveLetter />
+              </div>
+            </motion.div>
+          </>
+        )}
+
+        {/* 편지상세 종료 모달 */}
+        {isFinishReceiveLetterVisible && (
+          <>
+            <div
+              className={styles.OverOverlay}
+              onClick={() => setIsFinishReceiveLetterVisible(false)}
+            />
+            <div className={styles.FinishOverContainer}>
+              <DefaultModal
+                content={"편지를 종료하시겠습니까?"}
+                ok={"네"}
+                cancel={"아니오"}
+                okClick={() => finishReceiveLetterHandler()}
+                cancelClick={() => setIsFinishReceiveLetterVisible(false)}
               />
             </div>
           </>
