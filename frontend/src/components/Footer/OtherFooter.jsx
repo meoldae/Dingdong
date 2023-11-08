@@ -27,7 +27,7 @@ import {
   isFinishDetailGuestBookVisibleAtom
 }  from "../../atom/GuestBookAtom"
 
-
+import { roomHeartAtom } from "../../atom/RoomInfoAtom"
 const OtherFooter = (props) => {
   // url경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -38,6 +38,7 @@ const OtherFooter = (props) => {
     useState(false)
   const [selectedPostCard, setSelectedPostCard] = useState(null)
   const [isHeart, setIsHeart] = useState(false)
+  const [heartCount, setHeartCount] = useRecoilState(roomHeartAtom)
 
   // 리코일 상태관리
   const [isGuestBookVisible, setIsGuestBookVisible] = useRecoilState(isGuestBookVisibleAtom)
@@ -89,7 +90,10 @@ const OtherFooter = (props) => {
     updateHeart(
       props.props,
       (response) => {
-        setIsHeart(response.data.data == "Y")
+        const isHeartNow = response.data.data === "Y";
+        setIsHeart(isHeartNow);
+        setHeartCount(prevCount => isHeartNow ? prevCount + 1 : prevCount - 1);
+        console.log(heartCount)
       },
       (error) => {
         console.log("Error with Room Heart... ", error)

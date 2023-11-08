@@ -18,7 +18,7 @@ const RoomBtn = ({ heartCount, img, onClick }) => {
       <div className={styles.circle} onClick={onClick}>
         {/* img버튼 상세 표기 */}
         {/* addUser / heart / post / postBox / roomEdit / share / worldMap / neighborList */}
-        <img src={`${imagePath}${img}.png`} className={`${img.includes('addUser') || img.includes('neighbor') ? styles.iconImageNeighbor : styles.iconImage}`} />
+        <img src={`${imagePath}${img}.png`} className={`${img.includes('crop') || img.includes('addUser') || img.includes('neighbor') ? styles.iconImageNeighbor : styles.iconImage}`} />
         {img.includes('Heart') && <span className={styles.textFullHeart}>{heartCount}</span>}
         {img.includes('heart') && <span className={styles.textEmptyHeart}>{heartCount}</span>}
       </div>

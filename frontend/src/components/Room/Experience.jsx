@@ -1,4 +1,16 @@
-import { Environment, Grid, OrbitControls } from "@react-three/drei";
+import {
+  Environment,
+  Cloud,
+  Clouds,
+  Grid,
+  OrbitControls,
+  Sky,
+  SoftShadows,
+  SpotLight,
+  Stars,
+  Sparkles,
+  Lightformer,
+} from "@react-three/drei";
 import { useEffect, useState, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Item } from "./Item";
@@ -14,10 +26,10 @@ import {
   dragPositionState,
   draggedItemState,
   mobileCheckState,
+  roomColorState,
 } from "./Atom";
 import { gsap } from "gsap";
-import { DoubleSide } from "three";
-
+import { DoubleSide, PlaneGeometry } from "three";
 const Experience = ({ setRoomDrag }) => {
   const buildMode = useRecoilValue(buildModeState);
   const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState);
@@ -30,6 +42,8 @@ const Experience = ({ setRoomDrag }) => {
     useRecoilState(ItemRotateState);
   const check = useRecoilValue(checkState);
   const mobileCheck = useRecoilValue(mobileCheckState);
+  const [color, setColor] = useRecoilState(roomColorState);
+  //setColor("white")
   // onPlaneClicked 이벤트에 예외처리
   useEffect(() => {
     if (draggedItem === null) {
@@ -264,17 +278,16 @@ const Experience = ({ setRoomDrag }) => {
   // 카메라 관련 로직
   const controls = useRef();
   const state = useThree((state) => state);
-
   // 편집 모드일 때 카메라 고정
   useEffect(() => {
     if (buildMode) {
-      state.camera.position.set(15, 15, 15);
+      state.camera.position.set(15, 10, 15);
       if (controls.current) {
         controls.current.target.set(0, 0, 0);
         controls.current.update();
       }
     } else {
-      state.camera.position.set(15, 15, 15);
+      state.camera.position.set(15, 10, 15);
     }
   }, [buildMode]);
   // 일반 모드일 때 카메라 회전 후 원상복귀
@@ -284,7 +297,7 @@ const Experience = ({ setRoomDrag }) => {
     gsap.to(state.camera.position, {
       duration: 0.5,
       x: 15,
-      y: 15,
+      y: 10,
       z: 15,
       onUpdate: () => state.camera.updateProjectionMatrix(),
     });
@@ -300,18 +313,70 @@ const Experience = ({ setRoomDrag }) => {
   useFrame((state) => {
     state.camera.lookAt(0, 1, 0);
   });
+  // const shadowCameraRef = useRef();
+
+  // const lightRef = useRef();
+  // useEffect(() => {
+  //   shadowCameraRef.current = new THREE.CameraHelper(
+  //     lightRef.current.shadow.camera
+  //   );
+  //   state.scene.add(shadowCameraRef.current);
+  //   return () => {
+  //     state.scene.remove(shadowCameraRef.current);
+  //   };
+  // }, [lightRef.current]);
   return (
     <>
-      <Environment preset="sunset" />
+      {/* <Environment preset="s nset" /> */}
+      {/* 별 */}
+      <Stars
+        radius={100}
+        depth={50}
+        count={20000}
+        factor={5}
+        saturation={2}
+        fade
+        speed={1.5}
+      />
+      {/* 조명들 */}
+      <pointLight
+      color={"gold"}
+      intensity={20}
+      // distance={8}
+      // receiveShadow
+      position={[3,4,1]}/>
+      <hemisphereLight
+        intensity={1}
+        color="skyblue"
+        groundColor="white"
+        position={[0, 5, 0]}
+        // castShadow
+      />
       <ambientLight intensity={0.1} />
+
       <directionalLight
-        position={[7,7,10]}
-        intensity={0.5}
+        castShadow
+        position={[1, 2, 1]}
+        color={"white"}
+        intensity={2.5}
+        // distance={100}
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+        shadow-camera-near={0.5}
+        shadow-camera-far={500}
+        // ref={lightRef}
+      />
+      <directionalLight
+        position={[3, 10, 3]}
+        // castShadow
+        color={"blue"}
+        intensity={1}
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
         shadow-camera-near={0.5}
         shadow-camera-far={500}
       />
+      {/* 컨트롤 */}
       <OrbitControls
         ref={controls}
         enableZoom={false}
@@ -323,13 +388,14 @@ const Experience = ({ setRoomDrag }) => {
         // enableRotate={false}
         onEnd={animateCameraPosition}
       />
-      {/* <Room name={"office"}/> */}
+      {/* 아이템들 */}
       {items && items.map(renderItem)}
       {/* 바닥 평면 */}
       <mesh
+        receiveShadow
         rotation-x={-Math.PI / 2}
         // visible={false}
-        position-y={-0.001}
+        position-y={-0.251}
         onClick={() => {
           if (!mobileCheck) {
             if (
@@ -384,16 +450,17 @@ const Experience = ({ setRoomDrag }) => {
           }
         }}
       >
-        <planeGeometry args={[4.8, 4.8]} />
-        <meshStandardMaterial color="#f0f0f0" />
+        <boxGeometry args={[4.8, 4.8, 0.4]} />
+        <meshStandardMaterial color={color}  />
       </mesh>
-
       {/* 왼쪽 평면 */}
       <mesh
+        receiveShadow
         rotation-y={Math.PI / 2}
-        position-x={-2.394}
+        position-x={-2.60}
         // visible={false}
-        position-y={1.92}
+        position-y={1.71}
+        position-z={-0.2}
         onClick={() => {
           if (!mobileCheck) {
             if (
@@ -448,15 +515,15 @@ const Experience = ({ setRoomDrag }) => {
           }
         }}
       >
-        <planeGeometry args={[4.8, 3.84]} />
-        <meshStandardMaterial color="#f0f0f0" side={DoubleSide} />
+        <boxGeometry args={[5.2, 4.32, 0.4]} />
+        <meshStandardMaterial color={color} side={DoubleSide} />
       </mesh>
-
       {/* 오른쪽 평면 */}
       <mesh
-        position-z={-2.394}
+        receiveShadow
+        position-z={-2.60}
         // visible={false}
-        position-y={1.92}
+        position-y={1.71}
         onClick={() => {
           if (!mobileCheck) {
             if (
@@ -511,13 +578,14 @@ const Experience = ({ setRoomDrag }) => {
           }
         }}
       >
-        <planeGeometry args={[4.8, 3.84]} />
-        <meshStandardMaterial color="#f0f0f0" side={DoubleSide} />
+        <boxGeometry args={[4.8, 4.32, 0.4]} />
+        <meshStandardMaterial color={color} side={DoubleSide} />
       </mesh>
       {buildMode && (
         <>
-          <Grid
+          {/* <Grid
             args={[4.8, 4.8]}
+            position-y={-0.05}
             fadeStrength={6}
             sectionSize={2.4}
             cellSize={0.24}
@@ -527,7 +595,7 @@ const Experience = ({ setRoomDrag }) => {
             fadeStrength={6}
             sectionSize={2.4}
             cellSize={0.24}
-            position-z={-2.393}
+            position-z={-2.399}
             position-y={1.92}
             rotation-x={Math.PI / 2}
           />
@@ -537,9 +605,9 @@ const Experience = ({ setRoomDrag }) => {
             sectionSize={2.4}
             cellSize={0.24}
             position-y={1.92}
-            position-x={-2.393}
+            position-x={-2.399}
             rotation-z={-Math.PI / 2}
-          />
+          /> */}
         </>
       )}
     </>

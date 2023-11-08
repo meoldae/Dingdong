@@ -8,6 +8,7 @@ import {
   ItemsState,
   buildModeState,
   draggedItemState,
+  roomColorState,
 } from "../../components/Room/Atom";
 import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom";
 import Header from "../../components/Header/Header";
@@ -64,6 +65,7 @@ function RoomPage() {
   const roomId = window.location.pathname.match(/\d+/g);
   const today = new Date();
   const [time, setTime] = useState();
+  const [color,setColor] = useRecoilState(roomColorState);
   useEffect(() => {
     const myRoomId = userInfo.roomId;
     setIsMyRoom(roomId == myRoomId);
@@ -73,6 +75,8 @@ function RoomPage() {
         console.log(response)
         setItems(response.data.data.roomFurnitureList);
         setNickName(response.data.data.nickname);
+        // 최초에 들어왔을 때, 방 색상 가져오기
+        // setColor(response.data.data.);
         setAvatarId(response.data.data.avatarId);
         setHeartCount(response.data.data.heartCount);
       },
@@ -146,7 +150,8 @@ function RoomPage() {
           <div className={`${styles.newcanvas} ${styles[time]}`} id="newcanvas">
             <Canvas
               className={styles.canvasCont}
-              // shadows
+              shadows
+              dpr={[1, 2]}
               gl={{ preserveDrawingBuffer: true, antialias: true, pixelRatio: Math.min(2, window.devicePixelRatio) }}
               camera={{ fov: 45, zoom: 1.1 }}
               ref={canvasRef}
