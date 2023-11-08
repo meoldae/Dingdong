@@ -15,6 +15,11 @@ export const isReceiveLetterVisibleAtom = atom({
   default: false,
 })
 
+export const isFinishReceiveLetterVisibleAtom = atom({
+  key: "isFinishReceiveLetterAtom",
+  default: false,
+})
+
 export const isCancelVisibleAtom = atom({
   key: "isCancelAtom",
   default: false,
