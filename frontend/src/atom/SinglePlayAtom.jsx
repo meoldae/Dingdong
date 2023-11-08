@@ -43,6 +43,10 @@ export const ConfirmEnteringTwitterAtom = atom({
   key: "ConfirmEnteringTwitterAtom",
   default: false,
 });
+export const ConfirmEnteringPostBoxAtom = atom({
+  key: "ConfirmEnteringPostBoxAtom",
+  default: false,
+});
 
 // 포탈
 export const RoomPortalVisibleAtom = atom({
@@ -124,4 +128,13 @@ export const TwitterPortalVisibleAtom = atom({
 export const TwitterPortalPositionAtom = atom({
   key: "TwitterPortalPositionAtom",
   default: [6.9, 0.03, 10],
+});
+
+export const PostBoxPortalVisibleAtom = atom({
+  key: "PostBoxPortalVisibleAtom",
+  default: true,
+});
+export const PostBoxPortalPositionAtom = atom({
+  key: "PostBoxPortalPositionAtom",
+  default: [1.3, 0.03, 0],
 });
