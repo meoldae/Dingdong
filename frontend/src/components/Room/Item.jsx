@@ -46,11 +46,7 @@ export const Item = ({
   useEffect(()=>{
     scene.traverse((child)=>{
       if(child.isMesh && child.material && child.material.map){
-        const toonMaterial = new MeshToonMaterial({
-          color: child.material.color,
-          map: child.material.map,
-        })
-        child.material = toonMaterial;
+
         child.material.map.minFilter = LinearFilter
         child.material.map.magFilter = LinearFilter
         child.material.map.needsUpdate = true;

@@ -8,6 +8,8 @@ import {
   SoftShadows,
   SpotLight,
   Stars,
+  Sparkles,
+  Lightformer,
 } from "@react-three/drei";
 import { useEffect, useState, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
@@ -41,7 +43,7 @@ const Experience = ({ setRoomDrag }) => {
   const check = useRecoilValue(checkState);
   const mobileCheck = useRecoilValue(mobileCheckState);
   const [color, setColor] = useRecoilState(roomColorState);
-
+  setColor("white")
   // onPlaneClicked 이벤트에 예외처리
   useEffect(() => {
     if (draggedItem === null) {
@@ -279,13 +281,13 @@ const Experience = ({ setRoomDrag }) => {
   // 편집 모드일 때 카메라 고정
   useEffect(() => {
     if (buildMode) {
-      state.camera.position.set(15, 15, 15);
+      state.camera.position.set(15, 10, 15);
       if (controls.current) {
         controls.current.target.set(0, 0, 0);
         controls.current.update();
       }
     } else {
-      state.camera.position.set(15, 15, 15);
+      state.camera.position.set(15, 10, 15);
     }
   }, [buildMode]);
   // 일반 모드일 때 카메라 회전 후 원상복귀
@@ -295,7 +297,7 @@ const Experience = ({ setRoomDrag }) => {
     gsap.to(state.camera.position, {
       duration: 0.5,
       x: 15,
-      y: 15,
+      y: 10,
       z: 15,
       onUpdate: () => state.camera.updateProjectionMatrix(),
     });
@@ -326,6 +328,7 @@ const Experience = ({ setRoomDrag }) => {
   return (
     <>
       {/* <Environment preset="s nset" /> */}
+      {/* 별 */}
       <Stars
         radius={100}
         depth={50}
@@ -335,34 +338,27 @@ const Experience = ({ setRoomDrag }) => {
         fade
         speed={1.5}
       />
-      {/* <Clouds material={THREE.MeshBasicMaterial}>
-        <Cloud segments={40} bounds={[10, 2, 2]} position={[-100,-50,-100]} volume={10} color="white" />
-        <Cloud seed={1} scale={1} volume={1} color="lightgray" position={[-100,-50,-100]} fade={1000} />
-        <Cloud segments={40} bounds={[10, 2, 2]} position={[-150,-50,-200]} volume={10} color="white" />
-        <Cloud seed={1} scale={1} volume={1} color="lightgray" position={[-150,-50,-200]} fade={1000} />
-        <Cloud segments={40} bounds={[10, 2, 2]} position={[-200,-80,-150]} volume={10} color="white" />
-        <Cloud seed={1} scale={1} volume={1} color="lightgray" position={[-200,-80,-150]} fade={1000} />
-        <Cloud segments={40} bounds={[10, 2, 2]} position={[-100,-40,-100]} volume={5} color="white" />
-        <Cloud seed={1} scale={1} volume={1} color="lightgray" position={[-100,-50,-100]} fade={1000} />
-        <Cloud segments={1} bounds={[10, 2, 2]} position={[-100,-40,-100]} volume={5} color="white" />
-        <Cloud seed={1} scale={1} volume={1} color="lightgray" position={[-100,-50,-100]} fade={1000} />
-        <Cloud segments={40} bounds={[10, 2, 2]} position={[-100,-50,-100]} volume={10} color="white" />
-        <Cloud seed={1} scale={1} volume={1} color="lightgray" position={[-100,-50,-100]} fade={1000} />
-        <Cloud segments={40} bounds={[10, 2, 2]} position={[-100,-50,-100]} volume={10} color="white" />
-        <Cloud seed={1} scale={1} volume={1} color="lightgray" position={[-100,-50,-100]} fade={1000} />
-      </Clouds> */}
+      {/* 조명들 */}
+      <pointLight
+      color={"gold"}
+      intensity={20}
+      // distance={8}
+      // receiveShadow
+      position={[3,4,1]}/>
       <hemisphereLight
-        intensity={2.5}
-        color="white"
-        groundColor="#7080CC"
-        position={[2, 6, 10]}
-      />
-      <ambientLight intensity={0.3} />
-      <directionalLight
+        intensity={1}
+        color="skyblue"
+        groundColor="white"
+        position={[0, 5, 0]}
         // castShadow
-        position={[7, 6, 10]}
+      />
+      <ambientLight intensity={0.1} />
+
+      <directionalLight
+        castShadow
+        position={[1, 2, 1]}
         color={"white"}
-        intensity={1.2}
+        intensity={2.5}
         // distance={100}
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
@@ -371,15 +367,16 @@ const Experience = ({ setRoomDrag }) => {
         // ref={lightRef}
       />
       <directionalLight
-        position={[1, 10, 1]}
-        castShadow
-        color={"whteblue"}
-        intensity={0.3}
+        position={[3, 10, 3]}
+        // castShadow
+        color={"blue"}
+        intensity={1}
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
         shadow-camera-near={0.5}
         shadow-camera-far={500}
       />
+      {/* 컨트롤 */}
       <OrbitControls
         ref={controls}
         enableZoom={false}
@@ -391,7 +388,7 @@ const Experience = ({ setRoomDrag }) => {
         // enableRotate={false}
         onEnd={animateCameraPosition}
       />
-      {/* <Room name={"office"}/> */}
+      {/* 아이템들 */}
       {items && items.map(renderItem)}
       {/* 바닥 평면 */}
       <mesh
@@ -462,7 +459,7 @@ const Experience = ({ setRoomDrag }) => {
         rotation-y={Math.PI / 2}
         position-x={-2.60}
         // visible={false}
-        position-y={1.72}
+        position-y={1.71}
         position-z={-0.2}
         onClick={() => {
           if (!mobileCheck) {
@@ -518,7 +515,7 @@ const Experience = ({ setRoomDrag }) => {
           }
         }}
       >
-        <boxGeometry args={[5.2, 4.34, 0.4]} />
+        <boxGeometry args={[5.2, 4.32, 0.4]} />
         <meshStandardMaterial color={color} side={DoubleSide} />
       </mesh>
       {/* 오른쪽 평면 */}
@@ -526,7 +523,7 @@ const Experience = ({ setRoomDrag }) => {
         receiveShadow
         position-z={-2.60}
         // visible={false}
-        position-y={1.72}
+        position-y={1.71}
         onClick={() => {
           if (!mobileCheck) {
             if (
@@ -581,13 +578,14 @@ const Experience = ({ setRoomDrag }) => {
           }
         }}
       >
-        <boxGeometry args={[4.8, 4.34, 0.4]} />
+        <boxGeometry args={[4.8, 4.32, 0.4]} />
         <meshStandardMaterial color={color} side={DoubleSide} />
       </mesh>
       {buildMode && (
         <>
           <Grid
             args={[4.8, 4.8]}
+            position-y={-0.05}
             fadeStrength={6}
             sectionSize={2.4}
             cellSize={0.24}
@@ -597,7 +595,7 @@ const Experience = ({ setRoomDrag }) => {
             fadeStrength={6}
             sectionSize={2.4}
             cellSize={0.24}
-            position-z={-2.393}
+            position-z={-2.399}
             position-y={1.92}
             rotation-x={Math.PI / 2}
           />
@@ -607,7 +605,7 @@ const Experience = ({ setRoomDrag }) => {
             sectionSize={2.4}
             cellSize={0.24}
             position-y={1.92}
-            position-x={-2.393}
+            position-x={-2.399}
             rotation-z={-Math.PI / 2}
           />
         </>
