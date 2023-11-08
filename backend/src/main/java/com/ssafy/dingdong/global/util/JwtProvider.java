@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
 
 import com.ssafy.dingdong.domain.member.entity.Member;
@@ -112,5 +113,9 @@ public class JwtProvider {
 		String accessToken = request.getHeader("Authorization");
 		accessToken = accessToken.replace("Bearer ", "");
 		return accessToken;
+	}
+
+	public String extractJwt(final StompHeaderAccessor accessor) {
+		return accessor.getFirstNativeHeader("Authorization");
 	}
 }

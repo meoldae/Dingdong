@@ -1,5 +1,6 @@
 package com.ssafy.dingdong.domain.letter.controller;
 
+import com.ssafy.dingdong.domain.letter.dto.request.LetterAllRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.request.LetterRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.request.LetterSNSRequestDto;
 import com.ssafy.dingdong.global.response.CommonResponse;
@@ -17,6 +18,7 @@ public interface LetterSwagger {
     DataResponse getLetterDetail(Authentication authentication, Long letterId);
 
     CommonResponse sendAuthLetter(Authentication authentication, LetterRequestDto requestDto);
+    CommonResponse sendAuthLetterALL(Authentication authentication, LetterAllRequestDto requestDto);
     CommonResponse sendGuestLetter(LetterRequestDto requestDto, HttpServletRequest request);
     CommonResponse sendSnsLetter(Authentication authentication, LetterSNSRequestDto requestDto);
 

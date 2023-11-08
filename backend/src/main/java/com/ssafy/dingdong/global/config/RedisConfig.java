@@ -7,7 +7,11 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class RedisConfig {
@@ -42,6 +46,25 @@ public class RedisConfig {
 		// Hash
 		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
 		redisTemplate.setHashValueSerializer(new StringRedisSerializer());
+
+		// Others
+		redisTemplate.setDefaultSerializer(new StringRedisSerializer());
+
+		return redisTemplate;
+	}
+
+	@Bean
+	public RedisTemplate<String, Map<String, Object>> multiUserTemplate() {
+		RedisTemplate<String, Map<String, Object>> redisTemplate = new RedisTemplate<>();
+		redisTemplate.setConnectionFactory(redisConnectionFactory());
+
+		// Key : Value
+		redisTemplate.setKeySerializer(new StringRedisSerializer());
+		redisTemplate.setValueSerializer(new StringRedisSerializer());
+
+		// Hash
+		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+		redisTemplate.setHashValueSerializer(new Jackson2JsonRedisSerializer<>(HashMap.class));
 
 		// Others
 		redisTemplate.setDefaultSerializer(new StringRedisSerializer());

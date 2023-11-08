@@ -49,7 +49,6 @@ public class MemberRedisRepository {
 	public void deleteTokenByMemberId(String memberId) {
 		valueOperations.getAndDelete(ACCESS_TOKEN + memberId);
 		valueOperations.getAndDelete(REFRESH_TOKEN + memberId);
-
 	}
 
 	public Optional<Object> findAccessTokenByMemberId(String memberId) {

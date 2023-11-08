@@ -1,5 +1,6 @@
 package com.ssafy.dingdong.domain.letter.service;
 
+import com.ssafy.dingdong.domain.letter.dto.request.LetterAllRequestDto;
 import com.ssafy.dingdong.domain.FCM.service.FCMService;
 import com.ssafy.dingdong.domain.letter.dto.request.LetterRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.request.LetterSNSRequestDto;
@@ -13,6 +14,7 @@ import com.ssafy.dingdong.domain.letter.entity.Stamp;
 import com.ssafy.dingdong.domain.letter.repository.LetterRepository;
 import com.ssafy.dingdong.domain.letter.repository.LetterSNSRepository;
 import com.ssafy.dingdong.domain.letter.repository.StampRepository;
+import com.ssafy.dingdong.domain.member.service.MemberService;
 import com.ssafy.dingdong.domain.room.service.RoomService;
 import com.ssafy.dingdong.global.exception.CustomException;
 import com.ssafy.dingdong.global.exception.ExceptionStatus;
@@ -24,7 +26,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Log4j2
 @Service
@@ -32,6 +37,7 @@ import java.util.List;
 public class LetterServiceImpl implements LetterService {
 
     private final RoomService roomService;
+    private final MemberService memberService;
     private final LetterRepository letterRepository;
     private final LetterSNSRepository letterSNSRepository;
     private final StampRepository stampRepository;
@@ -67,6 +73,25 @@ public class LetterServiceImpl implements LetterService {
         Letter letter = Letter.build(requestDto, memberId, letterTo, false, stamp, "");
         letterRepository.save(letter);
         fcmService.send(memberId, letterTo, 0);
+    }
+
+    @Override
+    public void sendLetterALL(String memberId, LetterAllRequestDto requestDto) {
+        Stamp stamp = stampRepository.findById(requestDto.getStampId())
+                .orElseThrow(() -> new CustomException(ExceptionStatus.NOT_FOUND_STAMP));
+        requestDto.setDescription(encryptUtils.encrypt(requestDto.getDescription()));
+        List<Letter> letters = requestDto.getMemberIdList().stream()
+                .map(id -> Letter.builder()
+                        .anonymousFlag(false)
+                        .nickName(memberService.getMemberById(memberId).nickname())
+                        .description(requestDto.getDescription())
+                        .letterFrom(memberId)
+                        .letterTo(id)
+                        .stamp(stamp)
+                        .ipAddress("")
+                        .build())
+                .collect(Collectors.toList());
+        letterRepository.saveAll(letters);
     }
 
     @Override
