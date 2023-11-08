@@ -168,14 +168,8 @@ const SingleMainPage = () => {
   const [onPostofficeSendLetter, setOnPostofficeSendLetter] = useRecoilState(postofficeSendLetterAtom);
   const [isFinishPostOfficeCard, setIsFinishPostOfficeCard] = useRecoilState(finishPostofficeCardAtom)
   const [isFinishPostOfficeSendLetter, setIsFinishPostOfficeSendLetter] = useRecoilState(finishPostofficeSendLetterAtom)
-  const [selectedPostCard, setSelectedPostCard] = useState(null);
-
-  const handleSelectButtonClick = (selectedCard) => {
-    setSelectedPostCard(selectedCard);
-    setOnPostOfficeCard(false);
-    setOnPostofficeSendLetter(true);
-  };
   const [guide, setGuide] = useState(false);
+
   // 가이드 관리
   useEffect(() => {
     if (localStorage.getItem("guideVisible")) {
@@ -527,9 +521,7 @@ const SingleMainPage = () => {
             >
               <div className={styles.InformationOverlay} onClick={() => setIsFinishPostOfficeCard(true)} />
               <div className={styles.postofficemodalcontainer}>
-                <PostofficeCardBox
-                  onSelectButtonClick={handleSelectButtonClick}
-                />
+                <PostofficeCardBox />
               </div>
             </motion.div>
           </>
@@ -561,7 +553,7 @@ const SingleMainPage = () => {
             >
               <div className={styles.InformationOverlay} onClick={() => setIsFinishPostOfficeSendLetter(true)} />
               <div className={styles.postofficemodalcontainer}>
-                <PostofficeSendLetter card={selectedPostCard} />
+                <PostofficeSendLetter />
               </div>
             </motion.div>
           </>
