@@ -27,14 +27,14 @@ public interface NeighborRepository extends JpaRepository<Neighbor, Long> {
 		 + "   AND n.cancelTime IS NULL")
 	List<Neighbor> findAllRequestByMemberId(@Param("memberId") UUID memberId);
 
-	@Query(" SELECT "
-		 + "   CASE WHEN n.acceptorId = :memberId THEN n.applicantId"
-		 + "        WHEN n.applicantId = :memberId THEN n.acceptorId"
-		 + "    END"
-		 + "   FROM Neighbor n"
-		 + "  WHERE n.connectTime IS NOT NULL "
-		 + "    AND n.cancelTime IS NULL"
-		 + "    AND ( n.acceptorId = :memberId OR n.applicantId = :memberId ) ")
+	@Query(" SELECT DISTINCT"
+		+ "   CASE WHEN n.acceptorId = :memberId THEN n.applicantId"
+		+ "        WHEN n.applicantId = :memberId THEN n.acceptorId"
+		+ "    END AS neighborId "
+		+ "   FROM Neighbor n"
+		+ "  WHERE n.connectTime IS NOT NULL "
+		+ "    AND n.cancelTime IS NULL"
+		+ "    AND ( n.acceptorId = :memberId OR n.applicantId = :memberId ) ")
 	List<UUID> findAllByMemberId(@Param("memberId") UUID memberId);
 
 	@Query(" SELECT n"
