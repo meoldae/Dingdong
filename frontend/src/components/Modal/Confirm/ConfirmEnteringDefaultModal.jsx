@@ -96,6 +96,7 @@ const ConfirmEnteringDefaultModal = ({
     // 편지함 확인 로직
     else if (location === "PostBox") {
       setIsPostBoxVisible(true)
+      setIsArrived(false)
     }
 
     setConfirmEnteringLocation(false)
