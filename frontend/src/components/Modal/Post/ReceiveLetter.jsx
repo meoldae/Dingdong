@@ -14,8 +14,7 @@ import styles from "./ReceiveLetter.module.css"
 import { letterIdAtom } from "@/atom/LetterAtom"
 
 // API
-import { getLetterDetail } from "@/api/Letter"
-import { reportLetter } from "../../../api/Letter"
+import { getLetterDetail, reportLetter } from "@/api/Letter"
 
 
 const RecevieLetter = (props) => {
