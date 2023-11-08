@@ -51,6 +51,13 @@
   margin-left: 5px;
 }
 
+.Search input {
+  border: none;
+  outline: none;
+  background: #F3F3F3;
+  margin-left: 5px;
+}
+
 .Cancel {
   width: 20px;
   height: 30px;
