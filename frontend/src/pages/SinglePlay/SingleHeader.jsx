@@ -23,9 +23,13 @@ import {
 } from "../../api/Neighbor"
 import { fetchLogout, fetchUserSecession } from "../../api/User"
 import { fetchInquiry } from "../../api/Cs"
+import { setFCMTokenAtServer } from "@/api/FCM"
 
 // Atom
 import { userAtom } from "../../atom/UserAtom"
+
+// FCM 
+import { getMessaging, getToken} from "firebase/messaging";
 
 
 const SingleHeader = ({ checkMyRoom }) => {
@@ -49,6 +53,8 @@ const SingleHeader = ({ checkMyRoom }) => {
   const [isRealLogout, setIsRealLogout] = useState(false)
   // 회원탈퇴 확인 모달 상태관리
   const [isRealSecession, setIsRealSecession] = useState(false)
+  // Push 알림 토글
+  const [isPossiblePush, setIsPossiblePush] = useState(false)
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
@@ -77,6 +83,10 @@ const SingleHeader = ({ checkMyRoom }) => {
         console.log("Error at neighbor request...", error)
       }
     )
+    const fcmToken = localStorage.getItem("FCMToken");
+    if (fcmToken !== null) {
+      setIsPossiblePush(true);
+    }
   }, [])
 
   // 이웃요청 수락함수
@@ -162,6 +172,48 @@ const SingleHeader = ({ checkMyRoom }) => {
     setIsInquiry(true)
   }
 
+  // FCM 설정
+  const messaging = getMessaging();
+
+  const getPermissionRequest = async () => {
+    const permission = await Notification.requestPermission();
+    return permission;
+  }
+
+  // FCM 알림 권한 설정
+  const pushToggleChange = async () => {
+    if (!Notification) {
+      return;
+    }
+
+    if (isPossiblePush === false) {
+      setIsPossiblePush(true)
+      const permission = await getPermissionRequest();
+      if (permission === "denied") {
+        console.log("Permission : ", permission);
+        setIsPossiblePush(false)
+      } else {
+        getToken(messaging, { vapidKey: import.meta.env.VITE_APP_VAPID })
+        .then((currentToken) => {
+          if (currentToken) {
+            setFCMTokenAtServer(currentToken);
+          } else {
+            setIsPossiblePush(false);
+            console.log('No registration token available. Request permission to generate one.');
+            return null;
+          }
+        }).catch((err) => {
+          setIsPossiblePush(false);
+          console.log('An error occurred while retrieving token. ', err);
+          return null;
+        });
+      }
+    } else if (isPossiblePush === true) {
+      setIsPossiblePush(false);
+      localStorage.removeItem("FCMToken");
+    }
+  }
+
   return (
     <>
       <div className={styles.wrap}>
@@ -236,6 +288,14 @@ const SingleHeader = ({ checkMyRoom }) => {
               </div>
               <div className={styles.MenuButton} onClick={() => setIsRealSecession(true)}>
                 회원탈퇴
+              </div>
+              <div className={`${styles.MenuButton} ${styles.toggleContainer} `} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
+                푸시 알림
+                
+                <div className={`${styles.toggleSwitch} ${isPossiblePush === true ? styles.checkedToggle : ''}`} onClick={pushToggleChange}>
+                  <div className={`${styles.toggleButton} ${isPossiblePush === true ? styles.checkedToggleSwitch : ''}`}/> 
+                </div>
+
               </div>
             </div>
           </div>
