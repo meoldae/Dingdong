@@ -1,28 +1,34 @@
-import { useRecoilState } from "recoil";
-import DefaultPostBtn from "../../components/Button/DefaultPost/DefaultPostBtn";
-import styles from "./PostofficeCardBox.module.css";
-import PostofficeDefaultModal from "./PostofficeDefaultModal";
+// 라이브러리
 import { useState } from "react";
-import { postofficeSendLetterAtom } from "../../atom/PostAtom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+
+// 컴포넌트
+import DefaultPostBtn from "../../components/Button/DefaultPost/DefaultPostBtn";
+import PostofficeDefaultModal from "./PostofficeDefaultModal";
 import toast from "react-hot-toast";
 
-const PostofficeCardBox = (props) => {
-  const [selectedCard, setSelectedCard] = useState(null);
-  const [cardComment, setCardComment] = useState();
-  const [onPostofficeSendLetter, setOnPostofficeSendLetter] = useRecoilState(
-    postofficeSendLetterAtom
-  );
+// 스타일
+import styles from "./PostofficeCardBox.module.css";
+
+// Atom
+import { postofficeSendLetterAtom, selectedPostCardAtom, postofficeCardAtom } from "../../atom/PostAtom";
+
+const PostofficeCardBox = () => {
+  const [cardComment, setCardComment] = useState("");
+  const setOnPostofficeSendLetter = useSetRecoilState(postofficeSendLetterAtom);
+  const setOnPostOfficeCard = useSetRecoilState(postofficeCardAtom)
+  const [selectedPostCardItem, setSelectedPostCardItem] = useRecoilState(selectedPostCardAtom)
 
   const handleCardClick = (cardIdx, cardSrc, comment) => {
-    setSelectedCard({ idx: cardIdx + 1, src: cardSrc, order: numberToString(cardIdx + 1) });
+    setSelectedPostCardItem({ idx: cardIdx + 1, src: cardSrc, order: numberToString(cardIdx + 1) })
     setCardComment(comment);
   };
 
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
   const handleSelectButtonClick = () => {
-    if (selectedCard) {
-      props.onSelectButtonClick(selectedCard);
-      setOnPostofficeSendLetter(true);
+    if (selectedPostCardItem) {
+      setOnPostOfficeCard(false)
+      setOnPostofficeSendLetter(true)
     } else {
       toast.error("우표를 선택해주세요!");
     }
@@ -64,7 +70,7 @@ const PostofficeCardBox = (props) => {
             <div className={styles.postCardCenter} key={card.src}>
               <img
                 className={
-                  selectedCard?.src === card.src
+                  selectedPostCardItem?.src === card.src
                     ? `${styles.postCard} ${styles.selected} ${styles[`${card.src.split(".")[0]}Selected`]}`
                     : styles.postCard
                 }

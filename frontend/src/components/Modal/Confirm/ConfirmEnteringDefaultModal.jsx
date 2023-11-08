@@ -1,14 +1,19 @@
+// 라이브러리
 import React, { useState, useEffect } from "react"
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 import { useNavigate } from "react-router-dom"
-import {
-  ArriveAtom,
-  ConfirmEnteringRoomAtom,
-} from "../../../atom/SinglePlayAtom"
+
+// Atom
+import { ArriveAtom } from "../../../atom/SinglePlayAtom"
 import { DefaultPosition, DefaultZoom } from "../../../atom/DefaultSettingAtom"
-import styles from "./ConfirmEnteringDefaultModal.module.css"
 import { userAtom } from "../../../atom/UserAtom"
-import { postofficeCardAtom } from "../../../atom/PostAtom"
+import { isPostOfficeVisibleAtom } from "../../../atom/PostOfficeAtom"
+import { isPostBoxVisibleAtom } from "../../../atom/PostAtom"
+
+// 스타일
+import styles from "./ConfirmEnteringDefaultModal.module.css"
+
+// API
 import { getRandomRoom } from "@/api/Room"
 
 const ConfirmEnteringDefaultModal = ({
@@ -38,8 +43,10 @@ const ConfirmEnteringDefaultModal = ({
   const userInfo = useRecoilValue(userAtom)
 
   // 우체국 상태 관리
-  const [onPostofficeCard, setOnPostOfficeCard] =
-    useRecoilState(postofficeCardAtom)
+  const setIsPostOfficeVisible = useSetRecoilState(isPostOfficeVisibleAtom)
+
+  // 우체통 상태 관리
+  const setIsPostBoxVisible = useSetRecoilState(isPostBoxVisibleAtom)
 
   // 마이룸으로 이동
   const onConfirm = () => {
@@ -53,7 +60,7 @@ const ConfirmEnteringDefaultModal = ({
       const roomId = userInfo.roomId
       navigate(`${urlPath}/room/${roomId}`)
     } else if (location === "postOffice") {
-      setOnPostOfficeCard(true)
+      setIsPostOfficeVisible(true)
       setConfirmEnteringLocation(false)
       setIsArrived(false)
 
@@ -84,6 +91,11 @@ const ConfirmEnteringDefaultModal = ({
       setIsArrived(false)
     } else if (location === "Twitter") {
       window.open("https://twitter.com/dingdong_letter")
+      setIsArrived(false)
+    }
+    // 편지함 확인 로직
+    else if (location === "PostBox") {
+      setIsPostBoxVisible(true)
       setIsArrived(false)
     }
 

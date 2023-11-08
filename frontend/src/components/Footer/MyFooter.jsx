@@ -1,10 +1,9 @@
 // 라이브러리
 import { useRecoilState, useRecoilValue } from "recoil"
+import { useEffect, useState } from "react"
 
 // 컴포넌트
 import RoomBtn from "../Button/Room/RoomBtn"
-import PostBox from "../Modal/Post/PostBox"
-import ReceiveLetter from "../Modal/Post/ReceiveLetter"
 import GuestBookModal from "../Modal/GuestBook/GuestBookModal"
 import WriteGuestBookModal from "../Modal/GuestBook/WriteGuestBookModal"
 import DefaultModal from "../Modal/Default/DefaultModal"
@@ -14,11 +13,11 @@ import { successMsg } from "../../utils/customToast"
 // 스타일
 import styles from "./Footer.module.css"
 
+// API
+import { isHeartCheck, updateHeart } from "@/api/Room"
+
 // 아톰
-import {
-  isPostBoxVisibleAtom,
-  isReceiveLetterVisibleAtom,
-} from "../../atom/PostAtom"
+import { roomHeartAtom } from "../../atom/RoomInfoAtom"
 import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom"
 import { ItemsState, buildModeState } from "../Room/Atom"
 import {
@@ -36,19 +35,17 @@ import {
 import { fetchReportGuestBook } from "../../api/GuestBook"
 
 
-const MyFooter = () => {
+const MyFooter = (props) => {
   // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   // 리코일 상태관리
+  const [isHeart, setIsHeart] = useState(false)
   const [editMode, setEditMode] = useRecoilState(buildModeState)
   const [items, setItems] = useRecoilState(ItemsState)
-  const [isPostBoxVisible, setIsPostBoxVisible] =
-    useRecoilState(isPostBoxVisibleAtom)
-  const [isReceiveLetterVisible, setIsReceiveLetterVisible] = useRecoilState(
-    isReceiveLetterVisibleAtom
-  )
   const [popUpStatus, setPopUpStatus] = useRecoilState(popUpStatusAtom)
+  const [heartCount, setHeartCount] = useRecoilState(roomHeartAtom)
+
   // 방명록
   const [isGuestBookVisible, setIsGuestBookVisible] = useRecoilState(isGuestBookVisibleAtom)
   const [isFinishGuestBookVisible, setIsFinishGuestBookVisible] = useRecoilState(isFinishGuestBookVisibleAtom)
@@ -58,11 +55,36 @@ const MyFooter = () => {
   const [isFinishDetailGuestBookVisible, setIsFinishDetailGuestBookVisible] = useRecoilState(isFinishDetailGuestBookVisibleAtom)
   const [isReportGuestBook, setIsReportGuestBook] = useRecoilState(reportGuestBookAtom)
   const guestBookDetailContent = useRecoilValue(guestBookDetailContentAtom)
+  
+  // 방 좋아요 체크 함수
+  useEffect(() => {
+    isHeartCheck(
+      props.props,
+      (response) => {
+        setIsHeart(response.data.data == "Y")
+      },
+      (error) => {
+        console.log("Error with HeartFlag... ", error)
+      }
+    )
+  }, [isHeart])
 
-
-  const handleSelectButtonClick = () => {
-    // console.log(1)
+  // 방 좋아요 업데이트 함수
+  const updateHeartStatus = () => {
+    updateHeart(
+      props.props,
+      (response) => { 
+        const isHeartNow = response.data.data === "Y";
+        setIsHeart(isHeartNow);
+        setHeartCount(prevCount => isHeartNow ? prevCount + 1 : prevCount - 1);
+        console.log(heartCount)
+      },
+      (error) => {
+        console.log("Error with Room Heart... ", error)
+      }
+    )
   }
+
   const roomEditClickEvent = () => {
     setItems(items)
     setPopUpStatus(!popUpStatus)
@@ -115,7 +137,7 @@ const MyFooter = () => {
         <div className={styles.secondFooter}>
           <div className={styles.background}>
             <RoomBtn img={"roomEdit"} onClick={() => roomEditClickEvent()} />
-          </div>
+          </div> 
         </div>
         <div className={styles.footer}>
           <div className={styles.background}>
@@ -137,17 +159,6 @@ const MyFooter = () => {
             <RoomBtn img={"postBox"} onClick={() => setIsGuestBookVisible(true)} />
           </div>
         </div>
-
-        {isPostBoxVisible && (
-          <PostBox
-            cancelClick={() => setIsPostBoxVisible(false)}
-            onSelectButtonClick={handleSelectButtonClick}
-          />
-        )}
-
-        {isReceiveLetterVisible && (
-          <ReceiveLetter cancelClick={() => setIsReceiveLetterVisible(false)} />
-        )}
       </div>
 
       {/* 방명록 리스트 모달 */}

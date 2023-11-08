@@ -8,6 +8,8 @@ import {
   ItemsState,
   buildModeState,
   draggedItemState,
+  lightColorState,
+  roomColorState,
 } from "../../components/Room/Atom";
 import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom";
 import Header from "../../components/Header/Header";
@@ -20,10 +22,9 @@ import PopUp from "../../components/Room/RoomCustomPopUp/PopUp";
 import SharePage from "../../components/Modal/Sharing/SharePage";
 import SharingModalList from "../../components/Modal/Sharing/SharingModalList";
 import { userAtom } from "../../atom/UserAtom";
-import { roomInfoAtom, roomAvatarAtom } from "@/atom/RoomInfoAtom";
+import { roomInfoAtom, roomAvatarAtom, roomHeartAtom } from "@/atom/RoomInfoAtom";
 import { useNavigate } from "react-router-dom";
-import history from "../../components/UI/history";
-import RandomBtn from "../../components/Button/Room/RandomBtn";
+import history from "../../components/UI/history"; 
 
 function RoomPage() {
   // 브라우저 뒤로가기 버튼 처리
@@ -60,10 +61,14 @@ function RoomPage() {
   const userInfo = useRecoilValue(userAtom);
   const [nickName, setNickName] = useRecoilState(roomInfoAtom);
   const [avatarId, setAvatarId] = useRecoilState(roomAvatarAtom);
+  const [heartCount, setHeartCount] = useRecoilState(roomHeartAtom);
   const [roomDrag, setRoomDrag] = useState(false);
   const roomId = window.location.pathname.match(/\d+/g);
   const today = new Date();
   const [time, setTime] = useState();
+  const [roomColor,setRoomColor] = useRecoilState(roomColorState);
+  const [lightColor,setLightColor] = useRecoilState(lightColorState);
+
   useEffect(() => {
     const myRoomId = userInfo.roomId;
     setIsMyRoom(roomId == myRoomId);
@@ -72,7 +77,10 @@ function RoomPage() {
       (response) => { 
         setItems(response.data.data.roomFurnitureList);
         setNickName(response.data.data.nickname);
-        setAvatarId(response.data.data.avatarId)
+        setRoomColor(response.data.data.wallColor);
+        setLightColor(response.data.data.lightColor);
+        setAvatarId(response.data.data.avatarId);
+        setHeartCount(response.data.data.heartCount);
       },
       (error) => {
         console.error("Error at fetching RoomData...", error);
@@ -144,7 +152,8 @@ function RoomPage() {
           <div className={`${styles.newcanvas} ${styles[time]}`} id="newcanvas">
             <Canvas
               className={styles.canvasCont}
-              // shadows
+              shadows
+              dpr={[1, 2]}
               gl={{ preserveDrawingBuffer: true, antialias: true, pixelRatio: Math.min(2, window.devicePixelRatio) }}
               camera={{ fov: 45, zoom: 1.1 }}
               ref={canvasRef}
@@ -153,7 +162,7 @@ function RoomPage() {
               <Experience setRoomDrag={setRoomDrag} />
             </Canvas>
           </div>
-          {isMyRoom ? <MyFooter /> : <OtherFooter props={roomId[0]} />}
+          {isMyRoom ? <MyFooter props={roomId[0]}/> : <OtherFooter props={roomId[0]} />}
           {/* {popUpStatus ? <PopUp/> : '' } */}
           <PopUp />
         </div>

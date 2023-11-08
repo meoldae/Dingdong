@@ -4,6 +4,23 @@
   width: 100%;
   bottom: 10px;
 }
+.textOverlay {
+  position: absolute;
+  top: 0; /* 상단에 위치시키려면 0, 중앙이나 하단에 위치시키려면 값을 조절하세요 */
+  left: 0; /* 좌측에 위치시키려면 0, 중앙이나 우측에 위치시키려면 값을 조절하세요 */
+  z-index: 10; /* 이미지 위에 텍스트가 오도록 z-index 값을 조정하세요 */
+  /* 기타 스타일링: 글자 색, 크기 등 */
+}
+
+
+.thirdFooter {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: end;
+  bottom: 135px;
+  right: 0;
+}
 
 .secondFooter {
   display: flex;

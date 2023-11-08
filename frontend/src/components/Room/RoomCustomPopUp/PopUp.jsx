@@ -9,9 +9,12 @@ import {
   buildModeState,
   canDropState,
   checkState,
+  colorChangeState,
   dragPositionState,
   draggedItemState,
+  lightColorState,
   mobileCheckState,
+  roomColorState,
 } from "../Atom";
 import { updateFurnitureList } from "../../../api/Furniture";
 import { userAtom } from "../../../atom/UserAtom";
@@ -23,9 +26,16 @@ const PopUp = () => {
   const [editMode, setEditMode] = useRecoilState(buildModeState);
   const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState);
   const [animationState, setAnimationState] = useState("opening");
-
+  const [lightColor, setLightColor] = useRecoilState(lightColorState);
+  const [roomColor, setRoomColor] = useRecoilState(roomColorState);
+  const [colorChange, setColorChange] = useRecoilState(colorChangeState);
   const changeMenu = (image, menuIndex) => {
     setTabStatus(menuIndex);
+    if(menuIndex === 7){
+      setColorChange(true);
+    } else{
+      setColorChange(false);
+    }
   };
   const [items, setItems] = useRecoilState(ItemsState);
   const [check, setCheck] = useRecoilState(checkState);
@@ -33,6 +43,8 @@ const PopUp = () => {
   const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState);
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState);
+  const [lightCheck, setLightCheck] = useState(null);
+  const [roomCheck, setRoomCheck] = useState(null);
   const userInfo = useRecoilValue(userAtom);
   const mobileCheck = useRecoilValue(mobileCheckState);
   const myRoomId = userInfo.roomId;
@@ -44,11 +56,30 @@ const PopUp = () => {
       setCheck(items);
     }
   }, [check, items]);
+
+  useEffect(()=>{
+    if(roomCheck){
+      return;
+    }else{
+      setRoomCheck(roomColor);
+    }
+  },[roomCheck, roomColor])
+  useEffect(()=>{
+    if(lightCheck){
+      return;
+    }else{
+      setLightCheck(lightColor);
+    }
+  },[lightCheck, lightColor])
+
   const popUpClose = () => {
     setAnimationState("closing");
     setEditMode(false);
     setItems(check);
+    setLightColor(lightCheck);
+    setRoomColor(roomCheck);
     setTabStatus(0);
+    setColorChange(false);
     setTimeout(() => {
       // toast.error("취소되었습니다!");
       setAnimationState("opening"); // 초기화
@@ -57,6 +88,8 @@ const PopUp = () => {
   };
   const roomCustomSave = () => {
     setCheck(null);
+    setLightCheck(null);
+    setRoomCheck(null);
     const updatedItem = items.map((item) => {
       const { size, defaultPosition, categoryId, gridPosition, ...rest } = item;
       return rest;
@@ -64,12 +97,15 @@ const PopUp = () => {
     const roomItem = {
       roomId: myRoomId,
       updateFurnitureList: updatedItem,
+      wallColor: roomColor,
+      lightColor: lightColor,
     };
     updateFurnitureList(roomItem, (response) => {})
       .then((res) => {
         toast.success("저장되었습니다!");
         setEditMode(false);
         setPopUpStatus(false);
+        setColorChange(false);
       })
       .catch((res) => {
         toast.error("에러가 발생했습니다!");
@@ -215,6 +251,9 @@ const PopUp = () => {
                 />
               </li>
             ))}
+            <li>
+              <img src={imagePath + "roler.png"} onClick={()=>changeMenu(0,7)} />
+            </li>
           </ul>
 
           <div className={styles.content}>

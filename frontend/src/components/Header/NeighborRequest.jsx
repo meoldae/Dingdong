@@ -20,7 +20,7 @@ import {
 // 토스트
 import { successMsg } from "@/utils/customToast"
 
-const NeighborRequest = () => {
+const NeighborRequest = () => { 
   const [roomId, setRoomId] = useState(window.location.pathname.match(/\d+/g))
   const [neighborFlag, setNeighborFlag] = useState(false)
   const [isAddNeighbor, setIsAddNeighbor] = useState(false)
@@ -75,12 +75,15 @@ const NeighborRequest = () => {
   return (
     <>
       <div className={styles.ShareOther}>
-        {!neighborFlag ? (
+      {avatarId && (
+        !neighborFlag ? (
           <RoomBtn img={`${avatarId}_addUser`} onClick={() => setIsAddNeighbor(true)} />
         ) : (
           <RoomBtn img={`${avatarId}_neighbor`} onClick={() => setIsAddNeighbor(true)} />
-        )}
+        )
+      )}
       </div>
+
 
       {isAddNeighbor && (
         <>
