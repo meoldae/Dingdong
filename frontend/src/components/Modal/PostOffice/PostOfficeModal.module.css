@@ -17,10 +17,45 @@
   text-align: center;
   line-height: 50px;
   font-size: 25px;
-  font-family: "GmarketSansMedium";
 }
 
 .Line {
-  width: 80%;
+  width: 240px;
   border: 0.5px solid #02C26F;
+  margin-bottom: 10px;
+}
+
+.SearchContainer {
+  width: 240px;
+  height: 30px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.Search {
+  width: 210px;
+  height: 30px;
+  border-radius: 10px;
+
+  background: #F3F3F3;
+
+  display: flex;
+  align-items: center;
+}
+
+.Search img {
+  width: 15px;
+  height: 15px;
+
+  margin-left: 5px;
+}
+
+.Cancel {
+  width: 20px;
+  height: 30px;
+
+  font-size: 10px;
+
+  line-height: 30px;
 }
