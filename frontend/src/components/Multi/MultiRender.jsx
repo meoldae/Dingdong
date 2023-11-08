@@ -1,48 +1,48 @@
-import { useRef, useEffect, useState } from "react";
-import { Environment, OrbitControls, useCursor } from "@react-three/drei";
-import { MultiCharacter } from "./MultiPlayer";
-import * as StompJs from "@stomp/stompjs";
-import * as SockJS from "sockjs-client";
-import * as THREE from "three";
-import { useRecoilState } from "recoil";
-import { userAtom } from "../../atom/UserAtom";
-import { MultiUsers } from "../../atom/MultiAtom";
+import { useRef, useEffect, useState } from "react"
+import { Environment, OrbitControls, useCursor } from "@react-three/drei"
+import { MultiCharacter } from "./MultiCharacter"
+import * as StompJs from "@stomp/stompjs"
+import * as SockJS from "sockjs-client"
+import * as THREE from "three"
+import { useRecoilState } from "recoil"
+import { userAtom } from "../../atom/UserAtom"
+import { MultiUsers } from "../../atom/MultiAtom"
 
-export const Experience = () => {
-  const [onFloor, setOnFloor] = useState(false);
-  useCursor(onFloor);
-  const client = useRef({});
-  const [position, setPosition] = useState([0, 0, 0]);
+export const MultiRender = () => {
+  // 맵 클릭 함수
+  const [onFloor, setOnFloor] = useState(false)
+  useCursor(onFloor)
 
-  const [users, setUsers] = useRecoilState(MultiUsers);
-  const [me, setMe] = useRecoilState(userAtom);
-  console.log(me);
+  // Socket 통신
+  const client = useRef({})
+
+  const [users, setUsers] = useRecoilState(MultiUsers)
+  const [me, setMe] = useRecoilState(userAtom)
 
   // STOMP 소켓 연결을 설정합니다.
   useEffect(() => {
     client.current = new StompJs.Client({
       webSocketFactory: () => new SockJS("/ws"),
       onConnect: () => {
-        console.log("Connected to the WS server");
+        console.log("Connected to the WS server")
       },
       onDisconnect: () => {
-        console.log("Disconnected from the WS server");
+        console.log("Disconnected from the WS server")
       },
-    });
+    })
 
-    client.current.activate();
+    client.current.activate()
 
     return () => {
-      client.current.deactivate();
-    };
-  }, []);
+      client.current.deactivate()
+    }
+  }, [])
 
   // 위치 정보를 서버로 전송하는 함수
   const publishMove = (x, y, z) => {
-    setPosition([x, y, z]);
     if (!client.current.connected) {
-      console.error("STOMP client is not connected.");
-      return;
+      console.error("STOMP client is not connected.")
+      return
     }
     const data = {
       channelId: 1,
@@ -52,21 +52,19 @@ export const Experience = () => {
       x: x,
       y: y,
       z: z,
-    };
+    }
 
     client.current.publish({
       destination: "/pub/move/1",
       body: JSON.stringify(data),
-    });
-  };
-
-  console.log(users);
+    })
+  }
 
   return (
     <>
       <Environment preset="sunset" />
       <ambientLight intensity={0.3} />
-      <OrbitControls />
+      <OrbitControls enabled={false} />
 
       <mesh
         rotation-x={-Math.PI / 2}
@@ -84,10 +82,10 @@ export const Experience = () => {
         <MultiCharacter
           key={idx}
           id={idx}
-          // avatar={users[idx].avatarId}
+          avatarId={users[idx].avatarId}
           position={new THREE.Vector3(users[idx].x, users[idx].y, users[idx].z)}
         />
       ))}
     </>
-  );
-};
+  )
+}
