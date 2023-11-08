@@ -9,8 +9,8 @@ import { fetchSerchNickname } from "../../../api/User"
 import styles from "./PostOfficeModal.module.css"
 
 // Atom
-import { selectedUserListAtom } from "../../../atom/PostOfficeAtom"
-import { postofficeCardAtom, postofficeSendLetterAtom } from "../../../atom/PostAtom"
+import { selectedUserListAtom, isPostOfficeVisibleAtom } from "../../../atom/PostOfficeAtom"
+import { postofficeCardAtom } from "../../../atom/PostAtom"
 
 const PostOfficeModal = () => {
   // url 경로
@@ -21,7 +21,7 @@ const PostOfficeModal = () => {
   const [searchResult, setSearchResult] = useState([])
   const [memberIdList, setMemberIdList] = useRecoilState(selectedUserListAtom)
   const setPostOfficeCard = useSetRecoilState(postofficeCardAtom)
-  const setPostOfficeSendLetter = useSetRecoilState(postofficeSendLetterAtom)
+  const setIsPostOfficeVisible = useSetRecoilState(isPostOfficeVisibleAtom)
 
   // 닉네임 검색 함수
   const searchNicknameHandler = (event) => {
@@ -72,8 +72,8 @@ const PostOfficeModal = () => {
 
   // 선택완료 버튼 함수
   const finishCheckUser = () => {
-    setPostOfficeCard(false)
-    setPostOfficeSendLetter(true)
+    setIsPostOfficeVisible(false)
+    setPostOfficeCard(true)
   }
 
   return (
