@@ -18,8 +18,10 @@ import { getLetterDetail, reportLetter } from "@/api/Letter"
 
 
 const RecevieLetter = (props) => {
+  // 선택한 편지 ID
   const letterId = useRecoilValue(letterIdAtom)
 
+  // 편지 디테일 정보 상태관리
   const [letterDetail, setLetterDetail] = useState(null)
   // 편지함 종료모달 상태관리
   const [isFinishReceiveLetter, setIsFinishReceiveLetter] = useState(false)
@@ -27,8 +29,10 @@ const RecevieLetter = (props) => {
   const [isReport, setIsReport] = useState(false)
   const [letterStamp, setLetterStamp] = useState(null);
 
+  // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   
+  // 편지 상세 정보를 가져오는 함수
   useEffect(() => {
     const fetchLetterDetail = async () => {
       try {
@@ -45,6 +49,7 @@ const RecevieLetter = (props) => {
     fetchLetterDetail()
   }, [])
 
+  // 신고하기 함수
   const reportHandler = () => {
     reportLetter(
       letterId,
