@@ -9,7 +9,8 @@ import {
   draggedItemState,
   mobileCheckState,
 } from "./Atom";
-import { LinearFilter  } from "three";
+import { LinearFilter,MeshToonMaterial,MeshBasicMaterial  } from "three";
+
 export const Item = ({
   item,
   onClick,
@@ -44,12 +45,15 @@ export const Item = ({
   const mobileCheck = useRecoilValue(mobileCheckState);
   useEffect(()=>{
     scene.traverse((child)=>{
-      console.log(child)
       if(child.isMesh && child.material && child.material.map){
+        const toonMaterial = new MeshToonMaterial({
+          color: child.material.color,
+          map: child.material.map,
+        })
+        child.material = toonMaterial;
         child.material.map.minFilter = LinearFilter
         child.material.map.magFilter = LinearFilter
         child.material.map.needsUpdate = true;
-
       }
     })
   },[scene])
@@ -141,7 +145,8 @@ export const Item = ({
               position-z={rotation ? 0 : 0.12}
               // 벽에 있는 아이템 관련
               rotation-y={(rotation * Math.PI) / 2}
-            />
+            >
+            </primitive>
             {isDragging && (
               <mesh
                 position-x={rotation ? 0.02 : 0}

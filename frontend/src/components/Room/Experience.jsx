@@ -24,10 +24,10 @@ import {
   dragPositionState,
   draggedItemState,
   mobileCheckState,
+  roomColorState,
 } from "./Atom";
 import { gsap } from "gsap";
 import { DoubleSide, PlaneGeometry } from "three";
-import * as THREE from "three";
 const Experience = ({ setRoomDrag }) => {
   const buildMode = useRecoilValue(buildModeState);
   const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState);
@@ -40,6 +40,8 @@ const Experience = ({ setRoomDrag }) => {
     useRecoilState(ItemRotateState);
   const check = useRecoilValue(checkState);
   const mobileCheck = useRecoilValue(mobileCheckState);
+  const [color, setColor] = useRecoilState(roomColorState);
+
   // onPlaneClicked 이벤트에 예외처리
   useEffect(() => {
     if (draggedItem === null) {
@@ -323,7 +325,7 @@ const Experience = ({ setRoomDrag }) => {
   // }, [lightRef.current]);
   return (
     <>
-      {/* <Environment preset="sunset" /> */}
+      {/* <Environment preset="s nset" /> */}
       <Stars
         radius={100}
         depth={50}
@@ -350,8 +352,8 @@ const Experience = ({ setRoomDrag }) => {
         <Cloud seed={1} scale={1} volume={1} color="lightgray" position={[-100,-50,-100]} fade={1000} />
       </Clouds> */}
       <hemisphereLight
-        intensity={2}
-        color="##6C5378"
+        intensity={2.5}
+        color="white"
         groundColor="#7080CC"
         position={[2, 6, 10]}
       />
@@ -360,7 +362,7 @@ const Experience = ({ setRoomDrag }) => {
         // castShadow
         position={[7, 6, 10]}
         color={"white"}
-        intensity={1}
+        intensity={1.2}
         // distance={100}
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
@@ -372,7 +374,7 @@ const Experience = ({ setRoomDrag }) => {
         position={[1, 10, 1]}
         castShadow
         color={"whteblue"}
-        intensity={0.4}
+        intensity={0.3}
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
         shadow-camera-near={0.5}
@@ -451,17 +453,17 @@ const Experience = ({ setRoomDrag }) => {
           }
         }}
       >
-        <boxGeometry args={[4.8, 4.8, 0.5]} />
-        <meshStandardMaterial color="#f0f0f0" />
+        <boxGeometry args={[4.8, 4.8, 0.4]} />
+        <meshStandardMaterial color={color}  />
       </mesh>
       {/* 왼쪽 평면 */}
       <mesh
         receiveShadow
         rotation-y={Math.PI / 2}
-        position-x={-2.65}
+        position-x={-2.60}
         // visible={false}
-        position-y={1.67}
-        position-z={-0.25}
+        position-y={1.72}
+        position-z={-0.2}
         onClick={() => {
           if (!mobileCheck) {
             if (
@@ -516,15 +518,15 @@ const Experience = ({ setRoomDrag }) => {
           }
         }}
       >
-        <boxGeometry args={[5.3, 4.34, 0.5]} />
-        <meshStandardMaterial color="#f0f0f0" side={DoubleSide} />
+        <boxGeometry args={[5.2, 4.34, 0.4]} />
+        <meshStandardMaterial color={color} side={DoubleSide} />
       </mesh>
       {/* 오른쪽 평면 */}
       <mesh
         receiveShadow
-        position-z={-2.65}
+        position-z={-2.60}
         // visible={false}
-        position-y={1.67}
+        position-y={1.72}
         onClick={() => {
           if (!mobileCheck) {
             if (
@@ -579,8 +581,8 @@ const Experience = ({ setRoomDrag }) => {
           }
         }}
       >
-        <boxGeometry args={[4.8, 4.34, 0.5]} />
-        <meshStandardMaterial color="#f0f0f0" side={DoubleSide} />
+        <boxGeometry args={[4.8, 4.34, 0.4]} />
+        <meshStandardMaterial color={color} side={DoubleSide} />
       </mesh>
       {buildMode && (
         <>

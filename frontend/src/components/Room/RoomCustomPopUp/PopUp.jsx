@@ -83,6 +83,7 @@ const PopUp = () => {
     "carpets.png",
     "wallHanging.png",
     "props.png",
+    "roler.png"
   ];
 
   return (

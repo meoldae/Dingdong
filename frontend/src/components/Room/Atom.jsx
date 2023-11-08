@@ -47,3 +47,7 @@ export const mobileCheckState = atom({
     ),
 });
 
+export const roomColorState = atom({
+  key:"roomColorState",
+  default: "#f0f0f0",
+})

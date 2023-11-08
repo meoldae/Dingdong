@@ -8,6 +8,7 @@ import {
   ItemsState,
   dragPositionState,
   draggedItemState,
+  roomColorState,
 } from "../Atom"
 
 const PopUpContent = (props) => {
@@ -23,7 +24,12 @@ const PopUpContent = (props) => {
   const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState)
   const [draggedItemRotation, setDraggedItemRotation] =
     useRecoilState(ItemRotateState)
-  const addFurniture = (furnitureId) => {
+  const [color, setColor] = useRecoilState(roomColorState);
+  const addFurniture = (furnitureId, check) => {
+    // 색상 변경 로직 추가
+    if(check === 7){
+      return;
+    }
     if (draggedItem === null) {
       // console.log(furnitureId)
       getFurnitureDetail(
@@ -119,7 +125,7 @@ const PopUpContent = (props) => {
           <img
             key={index}
             src={imagePath + `/models/roomitemspng/${item["furnitureId"]}.png`}
-            onClick={() => addFurniture(item["furnitureId"])}
+            onClick={() => addFurniture(item["furnitureId"] , item.categoryId)}
           />
         ))}
       </div>
