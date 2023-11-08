@@ -89,6 +89,7 @@ const MyFooter = (props) => {
           const isHeartNow = response.data.data === "Y";
           setIsHeart(isHeartNow);
           setHeartCount(prevCount => isHeartNow ? prevCount + 1 : prevCount - 1);
+          console.log(heartCount)
         },
         (error) => {
           console.log("Error with Room Heart... ", error)
@@ -148,18 +149,9 @@ const MyFooter = (props) => {
   return (
     <>
       <div className={styles.wrap}>
-        <div className={styles.thirdFooter}>
-          <div className={styles.background}>
-            <RoomBtn img={"roomEdit"} onClick={() => roomEditClickEvent()} />
-          </div> 
-        </div>
         <div className={styles.secondFooter}>
           <div className={styles.background}>
-            <RoomBtn 
-                img={isHeart ? "fullHeart" : "emptyheart"}
-                onClick={updateHeartStatus}
-                heartCount={heartCount}
-              />
+            <RoomBtn img={"roomEdit"} onClick={() => roomEditClickEvent()} />
           </div> 
         </div>
         <div className={styles.footer}>

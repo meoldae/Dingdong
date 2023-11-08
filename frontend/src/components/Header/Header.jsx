@@ -22,7 +22,7 @@ import RoomNameBtn from "../Button/Room/RoomNameBtn";
 import { userAtom } from "../../atom/UserAtom";
 import { roomInfoAtom, roomHeartAtom } from "../../atom/RoomInfoAtom";
 
-// API
+// API 
 import {
   fetchNeighborRequest,
   responseNeighborRequest,
@@ -77,7 +77,7 @@ const Header = ({ checkMyRoom }) => {
   const [heartCount, setHeartCount] = useRecoilState(roomHeartAtom);
 
   // 유저요청 가져오기
-  useEffect(() => {
+  useEffect(() => { 
     // 이웃 리스트
     fetchNeighborList(
       (success) => {
@@ -312,8 +312,7 @@ const Header = ({ checkMyRoom }) => {
                 </RoomNameBtn>
                 <div className={styles.heartPosition}>
                   <img src={`${urlPath}/assets/icons/fullHeart.png`}/>
-                  {/* 여기다가 좋아요 숫자 넣어주시면 됩니당 */}
-                  <p>{2}</p>
+                  <p>{heartCount}</p>
                 </div>
               </div>
               {/* </div> */}

@@ -592,7 +592,7 @@ const Experience = ({ setRoomDrag }) => {
       </mesh>
       {buildMode && (
         <>
-          <Grid
+          {/* <Grid
             args={[4.8, 4.8]}
             position-y={-0.05}
             fadeStrength={6}
@@ -616,7 +616,7 @@ const Experience = ({ setRoomDrag }) => {
             position-y={1.92}
             position-x={-2.399}
             rotation-z={-Math.PI / 2}
-          />
+          /> */}
         </>
       )}
     </>
