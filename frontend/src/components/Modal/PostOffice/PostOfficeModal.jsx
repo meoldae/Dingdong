@@ -1,6 +1,6 @@
 // 라이브러리
 import { useState } from "react"
-import { useRecoilState } from "recoil"
+import { useRecoilState, useSetRecoilState } from "recoil"
 
 // API
 import { fetchSerchNickname } from "../../../api/User"
@@ -10,6 +10,7 @@ import styles from "./PostOfficeModal.module.css"
 
 // Atom
 import { selectedUserListAtom } from "../../../atom/PostOfficeAtom"
+import { postofficeCardAtom, postofficeSendLetterAtom } from "../../../atom/PostAtom"
 
 const PostOfficeModal = () => {
   // url 경로
@@ -19,6 +20,8 @@ const PostOfficeModal = () => {
   const [searchText, setSearchText] = useState("")
   const [searchResult, setSearchResult] = useState([])
   const [memberIdList, setMemberIdList] = useRecoilState(selectedUserListAtom)
+  const setPostOfficeCard = useSetRecoilState(postofficeCardAtom)
+  const setPostOfficeSendLetter = useSetRecoilState(postofficeSendLetterAtom)
 
   // 닉네임 검색 함수
   const searchNicknameHandler = (event) => {
@@ -67,6 +70,12 @@ const PostOfficeModal = () => {
     )
   }
 
+  // 선택완료 버튼 함수
+  const finishCheckUser = () => {
+    setPostOfficeCard(false)
+    setPostOfficeSendLetter(true)
+  }
+
   return (
     <>
       <div className={styles.Container}>
@@ -105,7 +114,13 @@ const PostOfficeModal = () => {
             ))
           )}
         </div>
-        <div className={styles.Button} style={{ fontFamily: "GmarketSansMedium" }}>선택완료</div>
+        <div
+          className={styles.Button}
+          style={{ fontFamily: "GmarketSansMedium" }}
+          onClick={() => finishCheckUser()}
+        >
+          선택완료
+        </div>
       </div>
     </>
   )
