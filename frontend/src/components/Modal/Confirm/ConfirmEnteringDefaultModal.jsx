@@ -1,15 +1,20 @@
+// 라이브러리
 import React, { useState, useEffect } from "react"
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 import { useNavigate } from "react-router-dom"
-import {
-  ArriveAtom,
-  ConfirmEnteringRoomAtom,
-} from "../../../atom/SinglePlayAtom"
+
+// Atom
+import { ArriveAtom } from "../../../atom/SinglePlayAtom"
 import { DefaultPosition, DefaultZoom } from "../../../atom/DefaultSettingAtom"
-import styles from "./ConfirmEnteringDefaultModal.module.css"
 import { userAtom } from "../../../atom/UserAtom"
-import { postofficeCardAtom } from "../../../atom/PostAtom"
+import { isPostOfficeVisibleAtom } from "../../../atom/PostOfficeAtom"
+
+// 스타일
+import styles from "./ConfirmEnteringDefaultModal.module.css"
+
+// API
 import { getRandomRoom } from "@/api/Room"
+
 
 const ConfirmEnteringDefaultModal = ({
   modalContent,
@@ -38,8 +43,7 @@ const ConfirmEnteringDefaultModal = ({
   const userInfo = useRecoilValue(userAtom)
 
   // 우체국 상태 관리
-  const [onPostofficeCard, setOnPostOfficeCard] =
-    useRecoilState(postofficeCardAtom)
+  const setIsPostOfficeVisible = useSetRecoilState(isPostOfficeVisibleAtom)
 
   // 마이룸으로 이동
   const onConfirm = () => {
@@ -53,7 +57,7 @@ const ConfirmEnteringDefaultModal = ({
       const roomId = userInfo.roomId
       navigate(`${urlPath}/room/${roomId}`)
     } else if (location === "postOffice") {
-      setOnPostOfficeCard(true)
+      setIsPostOfficeVisible(true)
       setConfirmEnteringLocation(false)
       setIsArrived(false)
 
