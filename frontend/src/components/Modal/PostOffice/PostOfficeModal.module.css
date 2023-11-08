@@ -1,0 +1,26 @@
+.Container {
+  width: 300px;
+  height: 450px;
+  border-radius: 10px;
+
+  background: #FFFFFF;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Title {
+  width: 300px;
+  height: 50px;
+
+  text-align: center;
+  line-height: 50px;
+  font-size: 25px;
+  font-family: "GmarketSansMedium";
+}
+
+.Line {
+  width: 80%;
+  border: 0.5px solid #02C26F;
+}

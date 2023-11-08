@@ -4,7 +4,10 @@ import styles from "./PostOfficeModal.module.css"
 const PostOfficeModal = () => {
   return (
     <>
-      <div>우체국 검색 모달</div>
+      <div className={styles.Container}>
+        <div className={styles.Title}>우체국</div>
+        <div className={styles.Line} />
+      </div>
     </>
   )
 }
