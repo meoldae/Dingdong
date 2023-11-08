@@ -96,6 +96,8 @@ public class RoomServiceImpl implements RoomService {
 				.roomId(findRoom.getRoomId())
 				.heartCount(heartCount)
 				.roomFurnitureList(roomFurnitureList)
+				.lightColor(findRoom.getLightColor())
+				.wallColor(findRoom.getWallColor())
 				.build();
 	}
 
@@ -141,10 +143,15 @@ public class RoomServiceImpl implements RoomService {
 			roomFurniture -> roomFurnitureMap.put(roomFurniture.getRoomFurnitureId(), roomFurniture)
 		);
 
+		Room room = roomRepository.findByMemberId(memberId).orElseThrow(
+			() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
+		);
+
+		room.updateColor(roomUpdateRequestDto.getLightColor(), roomUpdateRequestDto.getWallColor());
+
 		Long roomId = roomUpdateRequestDto.getRoomId();
 		roomUpdateRequestDto.getUpdateFurnitureList().stream().forEach(
 			updateFurniture -> {
-				log.info(updateFurniture);
 				if (updateFurniture.roomFurnitureId() == -1) {
 					RoomFurniture newRoomFurniture = RoomFurniture.builder()
 						.roomId(roomId)

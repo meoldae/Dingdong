@@ -1,5 +1,6 @@
 package com.ssafy.dingdong.domain.letter.entity;
 
+import com.ssafy.dingdong.domain.letter.dto.request.LetterAllRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.request.LetterRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,5 +1,6 @@
 package com.ssafy.dingdong.domain.letter.service;
 
+import com.ssafy.dingdong.domain.letter.dto.request.LetterAllRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.request.LetterRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.request.LetterSNSRequestDto;
 import com.ssafy.dingdong.domain.letter.dto.response.LetterListResponseDto;
@@ -17,7 +18,7 @@ public interface LetterService {
     LetterResponseDto getLetterDetail(String memberId, Long letterId);
 
     void sendLetter(String memberId, LetterRequestDto requestDto);
-
+    void sendLetterALL(String memberId, LetterAllRequestDto requestDto);
     void sendGuestLetter(LetterRequestDto requestDto, String ipAddress, String memberId);
 
     void reportLetter(Long letterId);
