@@ -59,6 +59,15 @@ import DefaultPortalRing from "../../components/Item/MainItems/Portals/DefaultPo
 import ConfirmEnteringDefaultModal from "../../components/Modal/Confirm/ConfirmEnteringDefaultModal"
 import PhysicsModel from "../../components/Item/MainItems/PhysicsModel"
 import RankingModal from "../../components/Modal/Ranking/RankingModal"
+import PostofficeCardBox from "../Postoffice/PostofficeCardBox"
+import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter"
+import GuidePage from "../../components/UI/GuidePage"
+import SingleHeader from "./SingleHeader"
+import RankingInformation from "../../components/Modal/Ranking/RankingInformation"
+import PostOfficeModal from "../../components/Modal/PostOffice/PostOfficeModal"
+import DefaultModal from "../../components/Modal/Default/DefaultModal"
+
+// Atom
 import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom"
 import {
   postofficeCardAtom,
@@ -70,15 +79,7 @@ import {
   isPostOfficeVisibleAtom,
   isFinishPostOfficeVisibleAtom,
 } from "../../atom/PostOfficeAtom"
-import PostofficeCardBox from "../Postoffice/PostofficeCardBox"
-import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter"
-import GuidePage from "../../components/UI/GuidePage"
-import SingleHeader from "./SingleHeader"
-import RankingInformation from "../../components/Modal/Ranking/RankingInformation"
-import PostOfficeModal from "../../components/Modal/PostOffice/PostOfficeModal"
-import DefaultModal from "../../components/Modal/Default/DefaultModal"
 
-// 여기까지 FCM
 
 const SingleMainPage = () => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
