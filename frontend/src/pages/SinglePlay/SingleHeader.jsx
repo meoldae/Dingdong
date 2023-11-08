@@ -287,9 +287,6 @@ const SingleHeader = ({ checkMyRoom }) => {
               <div className={styles.MenuButton} onClick={() => setIsRealLogout(true)} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
                 로그아웃
               </div>
-              <div className={styles.MenuButton} onClick={() => setIsRealSecession(true)}>
-                회원탈퇴
-              </div>
               <div className={`${styles.MenuButton} ${styles.toggleContainer} `} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
                 푸시 알림
                 
@@ -299,6 +296,9 @@ const SingleHeader = ({ checkMyRoom }) => {
 
               </div>
             </div>
+              <div className={styles.exitButton} onClick={() => setIsRealSecession(true)}>
+                회원 탈퇴
+              </div> 
           </div>
         </>
       )}
