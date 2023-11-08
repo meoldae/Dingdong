@@ -15,7 +15,6 @@ import styles from "./ConfirmEnteringDefaultModal.module.css"
 // API
 import { getRandomRoom } from "@/api/Room"
 
-
 const ConfirmEnteringDefaultModal = ({
   modalContent,
   setConfirmEnteringLocation,
@@ -89,6 +88,9 @@ const ConfirmEnteringDefaultModal = ({
     } else if (location === "Twitter") {
       window.open("https://twitter.com/dingdong_letter")
       setIsArrived(false)
+    }
+    // 편지함 확인 로직
+    else if (location === "PostBox") {
     }
 
     setConfirmEnteringLocation(false)
