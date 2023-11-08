@@ -43,7 +43,7 @@ const Experience = ({ setRoomDrag }) => {
   const check = useRecoilValue(checkState);
   const mobileCheck = useRecoilValue(mobileCheckState);
   const [color, setColor] = useRecoilState(roomColorState);
-  // setColor("blue")
+  //setColor("white")
   // onPlaneClicked 이벤트에 예외처리
   useEffect(() => {
     if (draggedItem === null) {
