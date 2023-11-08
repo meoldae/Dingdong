@@ -1,7 +1,5 @@
 package com.ssafy.dingdong.domain.FCM.service;
 
-import java.util.concurrent.ExecutionException;
-
 import com.ssafy.dingdong.domain.FCM.dto.request.FCMTokenDto;
 
 public interface FCMService {
@@ -9,5 +7,5 @@ public interface FCMService {
 
 	void deleteFCMToken(String memberId);
 
-	String send(String targetId, String title, String content);
+	String send(String senderId, String targetId, int flag);
 }

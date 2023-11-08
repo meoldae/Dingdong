@@ -10,6 +10,7 @@ import com.google.firebase.messaging.WebpushConfig;
 import com.google.firebase.messaging.WebpushNotification;
 import com.ssafy.dingdong.domain.FCM.dto.request.FCMTokenDto;
 import com.ssafy.dingdong.domain.FCM.repository.FCMRedisRepository;
+import com.ssafy.dingdong.domain.member.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -20,6 +21,10 @@ import lombok.extern.log4j.Log4j2;
 public class FCMServiceImpl implements FCMService {
 
 	private final FCMRedisRepository fcmRedisRepository;
+	private final MemberService memberService;
+	private final static String[] titles = {"딩동! 편지왔어요", "딩동! 놀러왔어요"};
+	private final static String[] contents = {"님이 편지를 보냈어요!", "님이 이웃 맺기를 원해요!"};
+
 
 	@Override
 	public void saveFCMToken(FCMTokenDto fcmTokenDto, String memberId) {
@@ -32,7 +37,9 @@ public class FCMServiceImpl implements FCMService {
 	}
 
 	@Override
-	public String send(String targetId, String title, String content) {
+	public String send(String senderId, String targetId, int flag) {
+
+		String nickname = memberService.getMemberById(senderId).nickname();
 		String fcmToken = fcmRedisRepository.findFCMTokenByMemberId(targetId).orElse("NOT");
 
 		Message message = Message.builder()
@@ -40,8 +47,8 @@ public class FCMServiceImpl implements FCMService {
 			.setWebpushConfig(WebpushConfig.builder().putHeader("ttl", "300")
 				.setNotification(
 					new WebpushNotification(
-						title,
-						content)).build()
+						titles[flag],
+						nickname + contents[flag])).build()
 			).build();
 
 		String response = null;
