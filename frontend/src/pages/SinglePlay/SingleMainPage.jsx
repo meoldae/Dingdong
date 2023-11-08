@@ -1,43 +1,10 @@
 // React
 import React, { useEffect, useState } from "react"
-import styles from "./SingleMainPage.module.css"
 import { motion } from "framer-motion"
-
-// Recoil
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
-import {
-  ArriveAtom,
-  ConfirmEnteringInstaAtom,
-  ConfirmEnteringOtherRoomAtom,
-  ConfirmEnteringPostBoxAtom,
-  ConfirmEnteringPostOfficeAtom,
-  ConfirmEnteringRankAtom,
-  ConfirmEnteringRoomAtom,
-  ConfirmEnteringStoreAtom,
-  ConfirmEnteringTestAtom,
-  ConfirmEnteringTwitterAtom,
-  ConfirmEnteringWorldAtom,
-  InstaPortalPositionAtom,
-  InstaPortalVisibleAtom,
-  OtherRoomPortalPositionAtom,
-  OtherRoomPortalVisibleAtom,
-  PostBoxPortalPositionAtom,
-  PostBoxPortalVisibleAtom,
-  PostOfficePortalPositionAtom,
-  PostOfficePortalVisibleAtom,
-  RankPortalPositionAtom,
-  RankPortalVisibleAtom,
-  RoomPortalPositionAtom,
-  StorePortalPositionAtom,
-  StorePortalVisibleAtom,
-  TestPortalPositionAtom,
-  TestPortalVisibleAtom,
-  TwitterPortalPositionAtom,
-  TwitterPortalVisibleAtom,
-  WorldPortalPositionAtom,
-  WorldPortalVisibleAtom,
-} from "../../atom/SinglePlayAtom"
-import { RoomPortalVisibleAtom } from "../../atom/SinglePlayAtom"
+
+// 스타일
+import styles from "./SingleMainPage.module.css"
 
 // Three.js 기본 세팅
 import { Canvas } from "@react-three/fiber"
@@ -79,6 +46,39 @@ import {
   isPostOfficeVisibleAtom,
   isFinishPostOfficeVisibleAtom,
 } from "../../atom/PostOfficeAtom"
+import {
+  ArriveAtom,
+  ConfirmEnteringInstaAtom,
+  ConfirmEnteringOtherRoomAtom,
+  ConfirmEnteringPostBoxAtom,
+  ConfirmEnteringPostOfficeAtom,
+  ConfirmEnteringRankAtom,
+  ConfirmEnteringRoomAtom,
+  ConfirmEnteringStoreAtom,
+  ConfirmEnteringTestAtom,
+  ConfirmEnteringTwitterAtom,
+  ConfirmEnteringWorldAtom,
+  InstaPortalPositionAtom,
+  InstaPortalVisibleAtom,
+  OtherRoomPortalPositionAtom,
+  OtherRoomPortalVisibleAtom,
+  PostBoxPortalPositionAtom,
+  PostBoxPortalVisibleAtom,
+  PostOfficePortalPositionAtom,
+  PostOfficePortalVisibleAtom,
+  RankPortalPositionAtom,
+  RankPortalVisibleAtom,
+  RoomPortalPositionAtom,
+  StorePortalPositionAtom,
+  StorePortalVisibleAtom,
+  TestPortalPositionAtom,
+  TestPortalVisibleAtom,
+  TwitterPortalPositionAtom,
+  TwitterPortalVisibleAtom,
+  WorldPortalPositionAtom,
+  WorldPortalVisibleAtom,
+} from "../../atom/SinglePlayAtom"
+import { RoomPortalVisibleAtom } from "../../atom/SinglePlayAtom"
 
 
 const SingleMainPage = () => {
