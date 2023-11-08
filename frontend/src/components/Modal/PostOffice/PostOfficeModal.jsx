@@ -1,3 +1,6 @@
+// 스타일
+import styles from "./PostOfficeModal.module.css"
+
 const PostOfficeModal = () => {
   return (
     <>
