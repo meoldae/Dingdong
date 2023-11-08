@@ -60,6 +60,7 @@ import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom";
 import {
   postofficeCardAtom,
   postofficeSendLetterAtom,
+  finishPostofficeCardAtom
 } from "../../atom/PostAtom";
 import { isPostOfficeVisibleAtom, isFinishPostOfficeVisibleAtom } from "../../atom/PostOfficeAtom"
 import PostofficeCardBox from "../Postoffice/PostofficeCardBox";
@@ -167,6 +168,7 @@ const SingleMainPage = () => {
   const [onPostofficeSendLetter, setOnPostofficeSendLetter] = useRecoilState(
     postofficeSendLetterAtom
   );
+  const [isFinishPostOfficeCard, setIsFinishPostOfficeCard] = useRecoilState(finishPostofficeCardAtom)
   const [selectedPostCard, setSelectedPostCard] = useState(null);
 
   const handleSelectButtonClick = (selectedCard) => {
@@ -191,6 +193,12 @@ const SingleMainPage = () => {
   const finishPostOfficeHandler = () => {
     setIsFinishPostOfficeVisible(false)
     setIsPostOfficeVisible(false)
+  }
+
+  // 우표선택 종료 확인 함수
+  const finishPostOfficeCardHandler = () => {
+    setIsFinishPostOfficeCard(false)
+    setOnPostOfficeCard(false)
   }
 
   return (
@@ -512,13 +520,29 @@ const SingleMainPage = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
-              <div className={styles.InformationOverlay} />
+              <div className={styles.InformationOverlay} onClick={() => setIsFinishPostOfficeCard(true)} />
               <div className={styles.postofficemodalcontainer}>
                 <PostofficeCardBox
                   onSelectButtonClick={handleSelectButtonClick}
                 />
               </div>
             </motion.div>
+          </>
+        )}
+
+        {/* 우표선택 모달 종료 */}
+        {isFinishPostOfficeCard && (
+          <>
+            <div className={styles.OverOverlay} onClick={() => setIsFinishPostOfficeCard(false)} />
+            <div className={styles.FinishOverContainer}>
+              <DefaultModal
+                content={"우표 선택을 종료하시겠습니까?"}
+                ok={"네"}
+                cancel={"아니오"}
+                okClick={() => finishPostOfficeCardHandler()}
+                cancelClick={() => setIsFinishPostOfficeCard(false)}
+              />
+            </div>
           </>
         )}
 
