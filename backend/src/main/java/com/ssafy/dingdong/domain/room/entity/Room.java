@@ -28,6 +28,8 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roomId;
     private String memberId;
+    private String lightColor;
+    private String wallColor;
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "roomId")
@@ -39,5 +41,10 @@ public class Room {
             .heartCount(heartCount)
             .roomFurnitureList(this.roomFurnitureList)
             .build();
+    }
+
+    public void updateColor(String lightColor, String wallColor){
+        this.lightColor = lightColor;
+        this.wallColor = wallColor;
     }
 }
