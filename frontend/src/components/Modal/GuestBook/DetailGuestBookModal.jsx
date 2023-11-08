@@ -58,7 +58,7 @@ const DetailGuestBookModal = () => {
         </div>
         <div className={styles.FooterContainer}>
           {nowRoomId == nowUserId && <div className={styles.Report} onClick={() => setIsReportGuestBookVisible(true)}>신고하기</div>}
-          <div className={styles.Footer}>From. {guestBookDetailContent.nickname}</div>
+          <div className={styles.Footer} style={nowRoomId == nowUserId ? { width: "300px", textAlign: "end" } : {}}>From. {guestBookDetailContent.nickname}</div>
         </div>
       </div>
     </>
