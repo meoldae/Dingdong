@@ -1,4 +1,5 @@
 .circle {
+  position: relative;
   width: 55px;
   height: 55px;
   border-radius: 50%;
@@ -10,4 +11,20 @@
 
 .iconImage {
   width: 40px;
+}
+
+.iconImageNeighbor {
+  width: 43px;
+}
+
+.textFullHeart {
+  position: absolute;
+  color: #ffffff;
+  font-size: 16px; 
+}
+
+.textEmptyHeart {
+  position: absolute;
+  color: #000000;
+  font-size: 16px; 
 }

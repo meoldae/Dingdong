@@ -14,7 +14,6 @@ import StampTestResult from "../pages/StampTest/StampTestResult"
 import MainPage from "../pages/Main/MainPage"
 import SingleMainPage from "../pages/SinglePlay/SingleMainPage"
 import TutorialPage from "../pages/SinglePlay/TutorialPage"
-import PostPage from "../pages/Post/PostPage"
 import InviteRoomPage from "../pages/Room/InviteRoomPage"
 import LoadingPage from "../components/UI/LoadingPage"
 import LetterSNSReceivePage from "../pages/Postoffice/PostofficeReceiveLetter"
@@ -50,7 +49,6 @@ const AppRouter = () => {
             <Route path={`${urlPath}/room/:roomId`} element={<AppRoom />} />
             <Route path={`${urlPath}/random/:roomId`} element={<AppRandomRoom />} />
             <Route path={`${urlPath}/usersetting`} element={<AppUserSetting />} />
-            <Route path={`${urlPath}/postoffice`} element={<PostPage />} />
           </Route>
 
           <Route element={<AuthRoute authentication="NotUser" />}>

@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 const imagePath = `${urlPath}/assets/icons/`
 
-const RoomBtn = ({ img, onClick }) => {
+const RoomBtn = ({ heartCount, img, onClick }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.1}}
@@ -18,7 +18,9 @@ const RoomBtn = ({ img, onClick }) => {
       <div className={styles.circle} onClick={onClick}>
         {/* img버튼 상세 표기 */}
         {/* addUser / heart / post / postBox / roomEdit / share / worldMap / neighborList */}
-        <img src={`${imagePath}${img}.png`} className={styles.iconImage} />
+        <img src={`${imagePath}${img}.png`} className={`${img.includes('addUser') || img.includes('neighbor') ? styles.iconImageNeighbor : styles.iconImage}`} />
+        {img.includes('Heart') && <span className={styles.textFullHeart}>{heartCount}</span>}
+        {img.includes('heart') && <span className={styles.textEmptyHeart}>{heartCount}</span>}
       </div>
     </motion.div>
   )

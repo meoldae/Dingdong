@@ -21,10 +21,9 @@ import PopUp from "../../components/Room/RoomCustomPopUp/PopUp";
 import SharePage from "../../components/Modal/Sharing/SharePage";
 import SharingModalList from "../../components/Modal/Sharing/SharingModalList";
 import { userAtom } from "../../atom/UserAtom";
-import { roomInfoAtom } from "@/atom/RoomInfoAtom";
+import { roomInfoAtom, roomAvatarAtom, roomHeartAtom } from "@/atom/RoomInfoAtom";
 import { useNavigate } from "react-router-dom";
-import history from "../../components/UI/history";
-import RandomBtn from "../../components/Button/Room/RandomBtn";
+import history from "../../components/UI/history"; 
 
 function RoomPage() {
   // 브라우저 뒤로가기 버튼 처리
@@ -60,6 +59,8 @@ function RoomPage() {
   const [shareModal, setShareModal] = useState(false);
   const userInfo = useRecoilValue(userAtom);
   const [nickName, setNickName] = useRecoilState(roomInfoAtom);
+  const [avatarId, setAvatarId] = useRecoilState(roomAvatarAtom);
+  const [heartCount, setHeartCount] = useRecoilState(roomHeartAtom);
   const [roomDrag, setRoomDrag] = useState(false);
   const roomId = window.location.pathname.match(/\d+/g);
   const today = new Date();
@@ -70,11 +71,14 @@ function RoomPage() {
     setIsMyRoom(roomId == myRoomId);
     fetchRoomData(
       roomId,
-      (response) => {
+      (response) => { 
+        console.log(response)
         setItems(response.data.data.roomFurnitureList);
         setNickName(response.data.data.nickname);
         // 최초에 들어왔을 때, 방 색상 가져오기
         // setColor(response.data.data.);
+        setAvatarId(response.data.data.avatarId);
+        setHeartCount(response.data.data.heartCount);
       },
       (error) => {
         console.error("Error at fetching RoomData...", error);
@@ -156,7 +160,7 @@ function RoomPage() {
               <Experience setRoomDrag={setRoomDrag} />
             </Canvas>
           </div>
-          {isMyRoom ? <MyFooter /> : <OtherFooter props={roomId[0]} />}
+          {isMyRoom ? <MyFooter props={roomId[0]}/> : <OtherFooter props={roomId[0]} />}
           {/* {popUpStatus ? <PopUp/> : '' } */}
           <PopUp />
         </div>
