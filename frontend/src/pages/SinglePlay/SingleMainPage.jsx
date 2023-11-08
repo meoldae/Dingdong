@@ -33,6 +33,7 @@ import SingleHeader from "./SingleHeader"
 import RankingInformation from "../../components/Modal/Ranking/RankingInformation"
 import PostOfficeModal from "../../components/Modal/PostOffice/PostOfficeModal"
 import DefaultModal from "../../components/Modal/Default/DefaultModal"
+import PostBox from "../../components/Modal/Post/PostBox"
 
 // Atom
 import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom"
@@ -41,6 +42,8 @@ import {
   postofficeSendLetterAtom,
   finishPostofficeCardAtom,
   finishPostofficeSendLetterAtom,
+  isPostBoxVisibleAtom,
+  isFinishPostBoxVisibleAtom,
 } from "../../atom/PostAtom"
 import {
   isPostOfficeVisibleAtom,
@@ -195,6 +198,10 @@ const SingleMainPage = () => {
     useRecoilState(finishPostofficeSendLetterAtom)
   const [guide, setGuide] = useState(false)
 
+  // 우체통 도착 상태관리
+  const [isPostBoxVisible, setIsPostBoxVisible] = useRecoilState(isPostBoxVisibleAtom)
+  const [isFinishPostBoxVisible, setIsFinishPostBoxVisible] = useRecoilState(isFinishPostBoxVisibleAtom)
+
   // 가이드 관리
   useEffect(() => {
     if (localStorage.getItem("guideVisible")) {
@@ -223,6 +230,12 @@ const SingleMainPage = () => {
   const finishPostOfficeSendLetter = () => {
     setIsFinishPostOfficeSendLetter(false)
     setOnPostofficeSendLetter(false)
+  }
+
+  // 편지함 종료 확인 함수
+  const finishPostBoxHandler = () => {
+    setIsFinishPostBoxVisible(false)
+    setIsPostBoxVisible(false)
   }
 
   return (
@@ -628,6 +641,44 @@ const SingleMainPage = () => {
                 cancel={"아니오"}
                 okClick={() => finishPostOfficeSendLetter()}
                 cancelClick={() => setIsFinishPostOfficeSendLetter(false)}
+              />
+            </div>
+          </>
+        )}
+
+        {/* 편지함 모달 */}
+        {isPostBoxVisible && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            >
+              <div
+                className={styles.InformationOverlay}
+                onClick={() => setIsFinishPostBoxVisible(true)}
+              />
+              <div className={styles.postofficemodalcontainer}>
+                <PostBox />
+              </div>
+            </motion.div>
+          </>
+        )}
+
+        {/* 편지함 종료 모달 */}
+        {isFinishPostBoxVisible && (
+          <>
+            <div
+              className={styles.OverOverlay}
+              onClick={() => setIsFinishPostBoxVisible(false)}
+            />
+            <div className={styles.FinishOverContainer}>
+              <DefaultModal
+                content={"편지함을 종료하시겠습니까?"}
+                ok={"네"}
+                cancel={"아니오"}
+                okClick={() => finishPostBoxHandler()}
+                cancelClick={() => setIsFinishPostBoxVisible(false)}
               />
             </div>
           </>
