@@ -34,3 +34,8 @@ export const finishPostofficeSendLetterAtom = atom({
   key:"finishPostofficeSendLetterAtom",
   default: false,
 })
+
+export const selectedPostCardAtom = atom({
+  key: "selectedPostCardAtom",
+  default: null,
+})
