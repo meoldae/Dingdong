@@ -12,6 +12,9 @@ import styles from "./PostOfficeModal.module.css"
 import { selectedUserListAtom, isPostOfficeVisibleAtom } from "../../../atom/PostOfficeAtom"
 import { postofficeCardAtom } from "../../../atom/PostAtom"
 
+// 컴포넌트
+import { successMsg } from "../../../utils/customToast"
+
 const PostOfficeModal = () => {
   // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -72,8 +75,12 @@ const PostOfficeModal = () => {
 
   // 선택완료 버튼 함수
   const finishCheckUser = () => {
-    setIsPostOfficeVisible(false)
-    setPostOfficeCard(true)
+    if (memberIdList.length === 0) {
+      successMsg("❌ 선택된 유저가 없습니다.")
+    } else {
+      setIsPostOfficeVisible(false)
+      setPostOfficeCard(true)
+    }
   }
 
   return (
