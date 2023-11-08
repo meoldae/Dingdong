@@ -319,9 +319,9 @@ const Experience = ({ setRoomDrag }) => {
     state.camera.lookAt(0, 1, 0);
   });
 
-  useEffect(()=>{
+  // useEffect(()=>{
 
-  },[lightColor,roomColor])
+  // },[lightColor,roomColor])
   return (
     <>
       {/* <Environment preset="s nset" /> */}
@@ -337,7 +337,7 @@ const Experience = ({ setRoomDrag }) => {
       />
       {/* 조명들 */}
       <pointLight
-        color={"gold"}
+        color={lightColor}
         intensity={20}
         // distance={8}
         // receiveShadow
@@ -356,7 +356,7 @@ const Experience = ({ setRoomDrag }) => {
         castShadow
         position={[1, 2, 1]}
         color={"white"}
-        intensity={2.5}
+        intensity={2}
         // distance={100}
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
@@ -366,8 +366,8 @@ const Experience = ({ setRoomDrag }) => {
       />
       <directionalLight
         position={[3, 10, 3]}
-        color={"blue"}
-        intensity={1}
+        color={lightColor}
+        intensity={0.5}
         // distance={100}
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
@@ -379,7 +379,7 @@ const Experience = ({ setRoomDrag }) => {
         position={[3, 10, 3]}
         // castShadow
         color={lightColor}
-        intensity={2.5}
+        intensity={2}
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
         shadow-camera-near={0.5}

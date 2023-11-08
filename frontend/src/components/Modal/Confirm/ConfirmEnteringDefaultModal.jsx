@@ -8,13 +8,13 @@ import { ArriveAtom } from "../../../atom/SinglePlayAtom"
 import { DefaultPosition, DefaultZoom } from "../../../atom/DefaultSettingAtom"
 import { userAtom } from "../../../atom/UserAtom"
 import { isPostOfficeVisibleAtom } from "../../../atom/PostOfficeAtom"
+import { isPostBoxVisibleAtom } from "../../../atom/PostAtom"
 
 // 스타일
 import styles from "./ConfirmEnteringDefaultModal.module.css"
 
 // API
 import { getRandomRoom } from "@/api/Room"
-
 
 const ConfirmEnteringDefaultModal = ({
   modalContent,
@@ -44,6 +44,9 @@ const ConfirmEnteringDefaultModal = ({
 
   // 우체국 상태 관리
   const setIsPostOfficeVisible = useSetRecoilState(isPostOfficeVisibleAtom)
+
+  // 우체통 상태 관리
+  const setIsPostBoxVisible = useSetRecoilState(isPostBoxVisibleAtom)
 
   // 마이룸으로 이동
   const onConfirm = () => {
@@ -88,6 +91,11 @@ const ConfirmEnteringDefaultModal = ({
       setIsArrived(false)
     } else if (location === "Twitter") {
       window.open("https://twitter.com/dingdong_letter")
+      setIsArrived(false)
+    }
+    // 편지함 확인 로직
+    else if (location === "PostBox") {
+      setIsPostBoxVisible(true)
       setIsArrived(false)
     }
 
