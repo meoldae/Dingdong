@@ -149,7 +149,7 @@ const OtherFooter = (props) => {
 
           {/* 방명록 */}
           <div className={styles.background}>
-            <RoomBtn img={"post"} onClick={() => setIsGuestBookVisible(true)} />
+            <RoomBtn img={"guestbook"} onClick={() => setIsGuestBookVisible(true)} />
           </div>
         </div>
         {isModalVisible && (

@@ -156,7 +156,7 @@ const MyFooter = (props) => {
 
           {/* 방명록 */}
           <div className={styles.background}>
-            <RoomBtn img={"postBox"} onClick={() => setIsGuestBookVisible(true)} />
+            <RoomBtn img={"guestbook"} onClick={() => setIsGuestBookVisible(true)} />
           </div>
         </div>
       </div>
