@@ -7,7 +7,9 @@ import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +20,7 @@ public interface VisitorBookRepository extends JpaRepository<VisitorBook, Long> 
             "FROM VisitorBook v " +
             "Join Member m ON v.writeFrom=m.memberId "+
             "AND v.isReport = false " +
+            "WHERE v.writeTo = :memberId " +
             "ORDER BY v.writeTime DESC")
     List<VisitorBookResponseDto> findAllByWriteToAndIsReportFalseOrderByWriteTime(@Param("memberId") String memberId);
 
@@ -29,4 +32,8 @@ public interface VisitorBookRepository extends JpaRepository<VisitorBook, Long> 
             "WHERE v.writeTo = :memberId AND v.id = :visitorBookId")
     Optional<VisitorBookResponseDto> findByVisitorBookId(@Param("visitorBookId") Long visitorBookId);
 
+    @Modifying
+    @Transactional
+    @Query("UPDATE VisitorBook v SET v.isReport = true where v.id = :visitorBookId")
+    void updateIsReportById(@org.springframework.data.repository.query.Param("visitorBookId") Long visitorBookId);
 }

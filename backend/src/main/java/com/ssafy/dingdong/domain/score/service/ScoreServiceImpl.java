@@ -12,6 +12,8 @@ import com.ssafy.dingdong.domain.score.enums.ScoreType;
 import com.ssafy.dingdong.domain.score.repository.ScoreRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -82,7 +84,8 @@ public class ScoreServiceImpl implements ScoreService{
 
         for (ScoreType type : ScoreType.values()) {
             Optional<LocalDateTime> time = scoreRepository.findLatestRecordTime();
-            List<Score> scores = scoreRepository.findLatestByType(type, time);
+            Pageable limit = PageRequest.of(0, 3);
+            List<Score> scores = scoreRepository.findLatestByType(type, time, limit);
             List<ScoreResponseDto> list = new ArrayList<>();
             for(Score score : scores) {
                 if (score != null) {

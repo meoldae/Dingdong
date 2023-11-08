@@ -2,6 +2,7 @@ package com.ssafy.dingdong.domain.score.repository;
 
 import com.ssafy.dingdong.domain.score.entity.Score;
 import com.ssafy.dingdong.domain.score.enums.ScoreType;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,7 +17,7 @@ public interface ScoreRepository extends JpaRepository<Score, Long> {
             "WHERE s.type = :type " +
             "AND DATE_FORMAT(s.recordTime, '%Y-%m-%d %H:%i') = DATE_FORMAT(:dateTime, '%Y-%m-%d %H:%i') " +
             "ORDER BY s.recordCount DESC")
-    List<Score> findLatestByType(ScoreType type, Optional<LocalDateTime> dateTime);
+    List<Score> findLatestByType(ScoreType type, Optional<LocalDateTime> dateTime, Pageable pageable);
 
     @Query("SELECT MAX(s.recordTime) FROM Score s")
     Optional<LocalDateTime> findLatestRecordTime();
