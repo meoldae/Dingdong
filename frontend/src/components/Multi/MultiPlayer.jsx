@@ -7,13 +7,17 @@ import React, { useEffect, useMemo, useRef, useState } from "react"
 import { useGLTF, useAnimations } from "@react-three/drei"
 import { useFrame, useGraph } from "@react-three/fiber"
 import { SkeletonUtils } from "three-stdlib"
+import { useRecoilValue } from "recoil"
+import { userAtom } from "../../atom/UserAtom"
 const MOVEMENT_SPEED = 0.032
-export function MultiCharacter(props) {
+export function MultiCharacter({ id, ...props }) {
   const position = useMemo(() => props.position, [])
   const group = useRef()
   const { scene, materials, animations } = useGLTF(
     "/assets/models/characters/1.glb"
-  ) //
+  )
+
+  console.log(id)
 
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]) // 스켈레톤 유틸(npm i three-stdlib)을 통해 장면(scene)을 복제
   const { nodes } = useGraph(clone) // 복제한 장면을 node로 사용 (여러 개의 장면(캐릭터)을 쓸 수 있음)
@@ -21,6 +25,8 @@ export function MultiCharacter(props) {
   const { actions } = useAnimations(animations, group)
 
   const [animation, setAnimation] = useState("Idle")
+
+  const user = useRecoilValue(userAtom).roomId
 
   // 애니메이션 변경
   useEffect(() => {
@@ -47,12 +53,12 @@ export function MultiCharacter(props) {
       setAnimation("Idle")
     }
 
-    // if (id === user) {
-    //   state.camera.position.x = group.current.position.x + 2
-    //   state.camera.position.y = group.current.position.y + 10
-    //   state.camera.position.z = group.current.position.z + 10
-    //   state.camera.lookAt(group.current.position) // 카메라가 유저 위치를 따라다님
-    // }
+    if (user === id) {
+      state.camera.position.x = group.current.position.x + 2
+      state.camera.position.y = group.current.position.y + 10
+      state.camera.position.z = group.current.position.z + 10
+      state.camera.lookAt(group.current.position) // 카메라가 유저 위치를 따라다님
+    }
   })
 
   return (
