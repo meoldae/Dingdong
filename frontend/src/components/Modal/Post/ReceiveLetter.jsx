@@ -1,12 +1,22 @@
-import Card from "../../UI/Card"
-import styles from "./ReceiveLetter.module.css"
-import { letterIdAtom } from "@/atom/LetterAtom"
+// 라이브러리
 import { useRecoilValue } from "recoil"
 import { useState, useEffect } from "react"
-import { getLetterDetail } from "@/api/Letter"
+
+// 컴포넌트
+import Card from "../../UI/Card"
 import { successMsg } from "../../../utils/customToast"
-import { reportLetter } from "../../../api/Letter"
 import DefaultModal from "../Default/DefaultModal"
+
+// 스타일
+import styles from "./ReceiveLetter.module.css"
+
+// Atom
+import { letterIdAtom } from "@/atom/LetterAtom"
+
+// API
+import { getLetterDetail } from "@/api/Letter"
+import { reportLetter } from "../../../api/Letter"
+
 
 const RecevieLetter = (props) => {
   const letterId = useRecoilValue(letterIdAtom)
