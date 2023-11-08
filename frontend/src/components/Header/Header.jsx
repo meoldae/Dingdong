@@ -36,9 +36,6 @@ import { setFCMTokenAtServer, deleteFCMTokenAtServer } from "@/api/FCM"
 // FCM 
 import { getMessaging, getToken} from "firebase/messaging";
 
-// FCM
-import { getMessaging, getToken } from "firebase/messaging";
-
 const Header = ({ checkMyRoom }) => {
   const navigate = useNavigate();
 
