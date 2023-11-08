@@ -33,7 +33,7 @@ public class FCMServiceImpl implements FCMService {
 
 	@Override
 	public void deleteFCMToken(String memberId) {
-
+		fcmRedisRepository.deleteFCMToken(memberId);
 	}
 
 	@Override
