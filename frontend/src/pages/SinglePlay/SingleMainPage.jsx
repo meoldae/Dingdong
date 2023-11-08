@@ -61,12 +61,14 @@ import {
   postofficeCardAtom,
   postofficeSendLetterAtom,
 } from "../../atom/PostAtom";
+import { isPostOfficeVisibleAtom, isFinishPostOfficeVisibleAtom } from "../../atom/PostOfficeAtom"
 import PostofficeCardBox from "../Postoffice/PostofficeCardBox";
 import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter";
 import GuidePage from "../../components/UI/GuidePage";
 import SingleHeader from "./SingleHeader";
 import RankingInformation from "../../components/Modal/Ranking/RankingInformation";
 import PostOfficeModal from "../../components/Modal/PostOffice/PostOfficeModal";
+import DefaultModal from "../../components/Modal/Default/DefaultModal";
 
 // 여기까지 FCM
 
@@ -158,6 +160,8 @@ const SingleMainPage = () => {
   };
 
   // 우체국 도착 상태관리
+  const [isPostOfficeVisible, setIsPostOfficeVisible] = useRecoilState(isPostOfficeVisibleAtom)
+  const [isFinishPostOfficeVisible, setIsFinishPostOfficeVisible] = useRecoilState(isFinishPostOfficeVisibleAtom)
   const [onPostofficeCard, setOnPostOfficeCard] =
     useRecoilState(postofficeCardAtom);
   const [onPostofficeSendLetter, setOnPostofficeSendLetter] = useRecoilState(
@@ -182,6 +186,12 @@ const SingleMainPage = () => {
 
   // 랭킹정보 모달 상태관리
   const [isRankingInformation, setIsRankingInformation] = useState(false);
+
+  // 우체국 종료 확인 함수
+  const finishPostOfficeHandler = () => {
+    setIsFinishPostOfficeVisible(false)
+    setIsPostOfficeVisible(false)
+  }
 
   return (
     <>
@@ -404,7 +414,7 @@ const SingleMainPage = () => {
             <div className={styles.confirmModal}>
               {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
               <ConfirmEnteringDefaultModal
-                modalContent={"카카오톡으로 마음을 담은 편지 보내기"}
+                modalContent={"우체국에 입장하기"}
                 setConfirmEnteringLocation={setConfirmEnteringPostOffice}
                 location={"postOffice"}
                 flag={"1"}
@@ -462,7 +472,39 @@ const SingleMainPage = () => {
           </div>
         )}
       
-        {/* 우체국모달 */}
+        {/* 우체국 모달 */}
+        {isPostOfficeVisible && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            >
+              <div className={styles.InformationOverlay} onClick={() => setIsFinishPostOfficeVisible(true)} />
+              <div className={styles.postofficemodalcontainer}>
+                <PostOfficeModal />
+              </div>
+            </motion.div>
+          </>
+        )}
+
+        {/* 우체국 종료 모달 */}
+        {isFinishPostOfficeVisible && (
+          <>
+            <div className={styles.OverOverlay} onClick={() => setIsFinishPostOfficeVisible(false)} />
+            <div className={styles.FinishOverContainer}>
+              <DefaultModal
+                content={"우체국을 종료하시겠습니까?"}
+                ok={"네"}
+                cancel={"아니오"}
+                okClick={() => finishPostOfficeHandler()}
+                cancelClick={() => setIsFinishPostOfficeVisible(false)}
+              />
+            </div>
+          </>
+        )}
+
+        {/* 우표선택 모달 */}
         {onPostofficeCard && (
           <>
             <motion.div
@@ -472,15 +514,15 @@ const SingleMainPage = () => {
             >
               <div className={styles.InformationOverlay} />
               <div className={styles.postofficemodalcontainer}>
-                {/* <PostofficeCardBox
+                <PostofficeCardBox
                   onSelectButtonClick={handleSelectButtonClick}
-                /> */}
-                <PostOfficeModal />
+                />
               </div>
             </motion.div>
           </>
         )}
-        
+
+        {/* 편지보내기 모달 */}
         {onPostofficeSendLetter && (
           <>
             <motion.div
