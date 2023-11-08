@@ -28,10 +28,13 @@ import {
   responseNeighborRequest,
   fetchNeighborList,
   deleteNeighbor,
-} from "../../api/Neighbor";
-import { fetchLogout, fetchUserSecession } from "../../api/User";
-import { fetchInquiry } from "../../api/Cs";
-import { setFCMTokenAtServer } from "@/api/FCM";
+} from "../../api/Neighbor"
+import { fetchLogout, fetchUserSecession } from "../../api/User"
+import { fetchInquiry } from "../../api/Cs"
+import { setFCMTokenAtServer, deleteFCMTokenAtServer } from "@/api/FCM"
+
+// FCM 
+import { getMessaging, getToken} from "firebase/messaging";
 
 // FCM
 import { getMessaging, getToken } from "firebase/messaging";
@@ -282,6 +285,7 @@ const Header = ({ checkMyRoom }) => {
       }
     } else if (isPossiblePush === true) {
       setIsPossiblePush(false);
+      deleteFCMTokenAtServer();
       localStorage.removeItem("FCMToken");
     }
   };
