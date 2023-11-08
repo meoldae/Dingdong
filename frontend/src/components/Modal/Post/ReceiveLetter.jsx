@@ -70,45 +70,42 @@ const RecevieLetter = (props) => {
 
   return (
     <>
-      <div className={styles.overlay} onClick={() => setIsFinishReceiveLetter(true)}>
-        {letterDetail ? (
-          <div className={styles.receiveLetterContainer}>
-            {/* <div className={styles.xmarkImg} onClick={() => setIsFinishReceiveLetter(true)}>
-              <img src={`${urlPath}/assets/icons/grayXmark.png`} alt="" />
-            </div> */}
-            <Card className={`${styles.receiveLetterBox} ${styles[letterStamp]}`}>
-              <img className={styles.poststampFrame}
-                  src={`${urlPath}/assets/images/poststamp_frame.png`}
-              />  
-              <img
-                className={styles.topPostCardImg}
-                src={`${urlPath}/assets/images/post/${letterDetail?.stampImgUrl
-                  .split("/")
-                  .pop()}`}
-              />
-              <div className={styles.letterToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>
-                To. {letterDetail?.letterTo}
+      {letterDetail ? (
+        <div className={styles.receiveLetterContainer}>
+          {/* <div className={styles.xmarkImg} onClick={() => setIsFinishReceiveLetter(true)}>
+            <img src={`${urlPath}/assets/icons/grayXmark.png`} alt="" />
+          </div> */}
+          <Card className={`${styles.receiveLetterBox} ${styles[letterStamp]}`}>
+            <img className={styles.poststampFrame}
+                src={`${urlPath}/assets/images/poststamp_frame.png`}
+            />  
+            <img
+              className={styles.topPostCardImg}
+              src={`${urlPath}/assets/images/post/${letterDetail?.stampImgUrl
+                .split("/")
+                .pop()}`}
+            />
+            <div className={styles.letterToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>
+              To. {letterDetail?.letterTo}
+            </div>
+            <div className={styles.letterContent} style={{ fontFamily: "GangwonEduAll-Light" }}>
+            <span style={{ whiteSpace: 'normal', wordWrap: 'break-word', width: '310px' }} dangerouslySetInnerHTML={{ __html: letterDetail?.description.replaceAll('\n', '<br />') }} />
+            </div>
+            <div className={styles.footerContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
+              <div className={styles.report} onClick={() => setIsReport(true)}>
+                신고하기
               </div>
-              <div className={styles.letterContent} style={{ fontFamily: "GangwonEduAll-Light" }}>
-              <span style={{ whiteSpace: 'normal', wordWrap: 'break-word', width: '310px' }} dangerouslySetInnerHTML={{ __html: letterDetail?.description.replaceAll('\n', '<br />') }} />
+              <div className={styles.FromUser}>
+                From. {letterDetail?.letterFrom}
               </div>
-              <div className={styles.footerContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
-                <div className={styles.report} onClick={() => setIsReport(true)}>
-                  신고하기
-                </div>
-                <div className={styles.FromUser}>
-                  From. {letterDetail?.letterFrom}
-                </div>
-              </div>
-            </Card>
-          </div>
-        ):(
-          <div>
-            편지가 없습니다.
-          </div>
-        )
-        }
-      </div>
+            </div>
+          </Card>
+        </div>
+      ):(
+        <div>
+          편지가 없습니다.
+        </div>
+      )}
 
       {/* 신고하기 모달 */}
       {isReport && (
