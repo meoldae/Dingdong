@@ -9,3 +9,8 @@ export const isPostOfficeVisibleAtom = atom({
   key: "isPostOfficeVisible",
   default: false,
 })
+
+export const isFinishPostOfficeVisibleAtom = atom({
+  key: "isFinishPostOfficeVisible",
+  default: false,
+})
