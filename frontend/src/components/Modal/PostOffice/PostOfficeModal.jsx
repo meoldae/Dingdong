@@ -13,6 +13,7 @@ const PostOfficeModal = () => {
 
   // 닉네임 검색 상태관리
   const [searchText, setSearchText] = useState("")
+  const [searchResult, setSearchResult] = useState([])
 
   // 닉네임 검색 함수
   const searchNicknameHandler = (event) => {
@@ -22,11 +23,27 @@ const PostOfficeModal = () => {
     fetchSerchNickname(
       newText,
       (success) => {
-        console.log(success)
+        console.log(success.data.data)
+        setSearchResult(success.data.data)
       },
       (error) => {
         console.log("Error at Search Nickname...", error)
       }
+    )
+  }
+
+  // 검색 결과 아이템
+  const SearchResultItem = ({ avatarId, nickname }) => {
+    return (
+      <div className={styles.ItemContainer}>
+        <div className={styles.ItemAvatar}>
+          <img src={`${urlPath}/assets/icons/${avatarId}_crop.png`} />
+        </div>
+        <div className={styles.Nickname} style={{ fontFamily: "GmarketSansMedium" }}>{nickname}</div>
+        <div className={styles.CheckButton}>
+          <img src={`${urlPath}/assets/icons/postOffice_plus.png`} />
+        </div>
+      </div>
     )
   }
 
@@ -45,8 +62,22 @@ const PostOfficeModal = () => {
               onChange={(e) => searchNicknameHandler(e)}
             />
           </div>
-          <div className={styles.Cancel} style={{ fontFamily: "GmarketSansMedium" }}>취소</div>
+          <div
+            className={styles.Cancel}
+            style={{ fontFamily: "GmarketSansMedium" }}
+            onClick={() => setSearchText("")}
+          >
+            취소
+          </div>
         </div>
+        <div className={styles.ContentContainer}>
+          {searchResult.map((item) => (
+            <div key={item.memberId}>
+              <SearchResultItem avatarId={item.avatarId} nickname={item.nickname} />
+            </div>
+          ))}
+        </div>
+        <div className={styles.Button} style={{ fontFamily: "GmarketSansMedium" }}>선택완료</div>
       </div>
     </>
   )
