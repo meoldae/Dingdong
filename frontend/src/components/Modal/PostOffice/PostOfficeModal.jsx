@@ -1,11 +1,15 @@
 // 라이브러리
 import { useState } from "react"
+import { useRecoilState } from "recoil"
 
 // API
 import { fetchSerchNickname } from "../../../api/User"
 
 // 스타일
 import styles from "./PostOfficeModal.module.css"
+
+// Atom
+import { selectedUserListAtom } from "../../../atom/PostOfficeAtom"
 
 const PostOfficeModal = () => {
   // url 경로
@@ -14,7 +18,7 @@ const PostOfficeModal = () => {
   // 닉네임 검색 상태관리
   const [searchText, setSearchText] = useState("")
   const [searchResult, setSearchResult] = useState([])
-  const [memberIdList, setMemberIdList] = useState([])
+  const [memberIdList, setMemberIdList] = useRecoilState(selectedUserListAtom)
 
   // 닉네임 검색 함수
   const searchNicknameHandler = (event) => {
