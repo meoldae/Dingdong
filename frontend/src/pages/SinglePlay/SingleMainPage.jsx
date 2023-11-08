@@ -60,7 +60,8 @@ import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom";
 import {
   postofficeCardAtom,
   postofficeSendLetterAtom,
-  finishPostofficeCardAtom
+  finishPostofficeCardAtom,
+  finishPostofficeSendLetterAtom
 } from "../../atom/PostAtom";
 import { isPostOfficeVisibleAtom, isFinishPostOfficeVisibleAtom } from "../../atom/PostOfficeAtom"
 import PostofficeCardBox from "../Postoffice/PostofficeCardBox";
@@ -163,12 +164,10 @@ const SingleMainPage = () => {
   // 우체국 도착 상태관리
   const [isPostOfficeVisible, setIsPostOfficeVisible] = useRecoilState(isPostOfficeVisibleAtom)
   const [isFinishPostOfficeVisible, setIsFinishPostOfficeVisible] = useRecoilState(isFinishPostOfficeVisibleAtom)
-  const [onPostofficeCard, setOnPostOfficeCard] =
-    useRecoilState(postofficeCardAtom);
-  const [onPostofficeSendLetter, setOnPostofficeSendLetter] = useRecoilState(
-    postofficeSendLetterAtom
-  );
+  const [onPostofficeCard, setOnPostOfficeCard] = useRecoilState(postofficeCardAtom);
+  const [onPostofficeSendLetter, setOnPostofficeSendLetter] = useRecoilState(postofficeSendLetterAtom);
   const [isFinishPostOfficeCard, setIsFinishPostOfficeCard] = useRecoilState(finishPostofficeCardAtom)
+  const [isFinishPostOfficeSendLetter, setIsFinishPostOfficeSendLetter] = useRecoilState(finishPostofficeSendLetterAtom)
   const [selectedPostCard, setSelectedPostCard] = useState(null);
 
   const handleSelectButtonClick = (selectedCard) => {
@@ -199,6 +198,12 @@ const SingleMainPage = () => {
   const finishPostOfficeCardHandler = () => {
     setIsFinishPostOfficeCard(false)
     setOnPostOfficeCard(false)
+  }
+
+  // 편지작성 종료 확인 함수
+  const finishPostOfficeSendLetter = () => {
+    setIsFinishPostOfficeSendLetter(false)
+    setOnPostofficeSendLetter(false)
   }
 
   return (
@@ -554,10 +559,27 @@ const SingleMainPage = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
+              <div className={styles.InformationOverlay} onClick={() => setIsFinishPostOfficeSendLetter(true)} />
               <div className={styles.postofficemodalcontainer}>
                 <PostofficeSendLetter card={selectedPostCard} />
               </div>
             </motion.div>
+          </>
+        )}
+
+        {/* 편지보내기 종료 모달 */}
+        {isFinishPostOfficeSendLetter && (
+          <>
+            <div className={styles.OverOverlay} onClick={() => setIsFinishPostOfficeSendLetter(false)} />
+            <div className={styles.FinishOverContainer}>
+              <DefaultModal
+                content={"편지 작성을 종료하시겠습니까?"}
+                ok={"네"}
+                cancel={"아니오"}
+                okClick={() => finishPostOfficeSendLetter()}
+                cancelClick={() => setIsFinishPostOfficeSendLetter(false)}
+              />
+            </div>
           </>
         )}
 
