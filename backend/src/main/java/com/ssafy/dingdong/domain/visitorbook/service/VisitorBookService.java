@@ -12,5 +12,6 @@ public interface VisitorBookService {
     VisitorBookResponseDto getVisitorBookDetail(Long visitorBookId);
     void sendVisitorBook(String memberId, VisitorBookRequestDto requestDto);
     void sendVisitorBookGuest(String memberId, String ipAddress, VisitorBookRequestDto requestDto);
-
+    String getVisitorBookFromById(Long visitorBookId);
+    void reportVisitorBook(Long visitorBookId);
 }

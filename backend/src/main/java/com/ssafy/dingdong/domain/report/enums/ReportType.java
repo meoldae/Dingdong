@@ -4,6 +4,6 @@ import lombok.Getter;
 
 @Getter
 public enum ReportType {
-    LETTER, CHAT
+    LETTER, CHAT, VISITORBOOK
 }
 

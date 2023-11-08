@@ -4,6 +4,7 @@ import com.ssafy.dingdong.domain.letter.service.LetterService;
 import com.ssafy.dingdong.domain.report.entity.Report;
 import com.ssafy.dingdong.domain.report.enums.ReportType;
 import com.ssafy.dingdong.domain.report.repository.ReportRepository;
+import com.ssafy.dingdong.domain.visitorbook.service.VisitorBookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -11,10 +12,11 @@ import org.springframework.stereotype.Service;
 @Log4j2
 @Service
 @RequiredArgsConstructor
-public class ReportServiceImpl implements ReportServiceService {
+public class ReportServiceImpl implements ReportService {
 
     private final ReportRepository reportRepository;
     private final LetterService letterService;
+    private final VisitorBookService visitorBookService;
 
 
     @Override
@@ -40,6 +42,14 @@ public class ReportServiceImpl implements ReportServiceService {
 
     @Override
     public void createChatReport(String memberId, Long chatId) {
-        //추후 로직 구현
+        //채팅 기능 추가 후 구현 예정
+    }
+
+    @Override
+    public void createVisitorBookReport(String memberId, Long visitorBookId) {
+        String visitorBookFrom = visitorBookService.getVisitorBookFromById(visitorBookId);
+        Report report = Report.build(memberId, visitorBookFrom, ReportType.VISITORBOOK, visitorBookId);
+        reportRepository.save(report);
+        visitorBookService.reportVisitorBook(visitorBookId);
     }
 }
