@@ -1,9 +1,18 @@
+// 라이브러리
 import { useState, useEffect, useRef } from "react";
-import Letter from "../../PostBox/Letter";
-import styles from "./PostBox.module.css";
-import PostDefaultModal from "./PostDefaultModal";
 import { useRecoilValue } from "recoil";
+
+// 컴포넌트
+import Letter from "../../PostBox/Letter";
+import PostDefaultModal from "./PostDefaultModal";
+
+// 스타일
+import styles from "./PostBox.module.css";
+
+// Atom
 import { isPostBoxVisibleAtom } from "@/atom/PostAtom";
+
+// API
 import { fetchLetterData } from "@/api/User";
 
 const PostBox = (props) => {
