@@ -470,6 +470,7 @@ const SingleMainPage = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
+              <div className={styles.InformationOverlay} />
               <div className={styles.postofficemodalcontainer}>
                 {/* <PostofficeCardBox
                   onSelectButtonClick={handleSelectButtonClick}
