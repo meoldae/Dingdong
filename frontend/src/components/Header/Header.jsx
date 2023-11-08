@@ -1,6 +1,6 @@
 // 라이브러리
 import { useEffect, useState } from "react"
-import { useRecoilValue } from "recoil"
+import { useRecoilValue, useRecoilState } from "recoil"
 import { useNavigate } from "react-router-dom"
 
 // 스타일
@@ -20,7 +20,7 @@ import RoomNameBtn from "../Button/Room/RoomNameBtn"
 
 // Atom
 import { userAtom } from "../../atom/UserAtom"
-import { roomInfoAtom } from "../../atom/RoomInfoAtom"
+import { roomInfoAtom, roomHeartAtom } from "../../atom/RoomInfoAtom"
 
 // API
 import {
@@ -75,6 +75,7 @@ const Header = ({ checkMyRoom }) => {
   const userInfo = useRecoilValue(userAtom)
   const roomInfo = useRecoilValue(roomInfoAtom)
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+  const [heartCount, setHeartCount] = useRecoilState(roomHeartAtom)
 
   // 유저요청 가져오기
   useEffect(() => {
@@ -245,6 +246,11 @@ const Header = ({ checkMyRoom }) => {
   // FCM 설정
   const messaging = getMessaging();
 
+  const getPermissionRequest = async () => {
+    const permission = await Notification.requestPermission();
+    return permission;
+  }
+
   const pushToggleChange = async () => {
     if (!Notification) {
       return;
@@ -252,8 +258,9 @@ const Header = ({ checkMyRoom }) => {
 
     if (isPossiblePush === false) {
       setIsPossiblePush(true)
-      const permission = await Notification.requestPermission();
+      const permission = await getPermissionRequest();
       if (permission === "denied") {
+        console.log("Permission : ", permission);
         setIsPossiblePush(false)
       } else {
         getToken(messaging, { vapidKey: import.meta.env.VITE_APP_VAPID })
@@ -387,8 +394,8 @@ const Header = ({ checkMyRoom }) => {
               <div className={`${styles.MenuButton} ${styles.toggleContainer} `} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
                 푸시 알림
                 
-                <div className={`${styles.toggleSwitch} ${isPossiblePush == "true" ? styles.checkedToggle : null}`} onClick={pushToggleChange}>
-                  <div className={`${styles.toggleButton} ${isPossiblePush == "true" ? styles.checkedToggleSwitch : null}`}/> 
+                <div className={`${styles.toggleSwitch} ${isPossiblePush === true ? styles.checkedToggle : ''}`} onClick={pushToggleChange}>
+                  <div className={`${styles.toggleButton} ${isPossiblePush === true ? styles.checkedToggleSwitch : ''}`}/> 
                 </div>
 
               </div>
