@@ -20,6 +20,11 @@ export const postofficeCardAtom = atom({
   default: false,
 })
 
+export const finishPostofficeCardAtom = atom({
+  key:"finishpPostofficeCardAtom",
+  default: false,
+})
+
 export const postofficeSendLetterAtom = atom({
   key:"postofficeSendLetterAtom",
   default: false,
