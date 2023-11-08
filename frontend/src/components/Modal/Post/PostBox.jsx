@@ -95,7 +95,7 @@ const PostBox = (props) => {
         >
           {letters.length?
           <div className={styles.letterBox} ref={letterBoxRef}>
-            {letters.map((letter, index) => (
+            {letters.map((letter) => (
               <Letter
                 key={letter.id}
                 id={letter.id}
