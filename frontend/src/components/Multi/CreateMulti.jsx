@@ -16,7 +16,13 @@ function CreateMulti() {
   const [moveList, setMoveList] = useState([]);
 
   // Recoil 상태 관리 라이브러리를 사용하여 전역 상태인 users를 가져오고 업데이트하는 함수를 가져옵니다.
-  const [users, setUsers] = useRecoilState(MultiUsers);
+  const [users, setUsers] = useRecoilState(MultiUsers)
+
+  const hostUser = useRecoilValue(userAtom)
+
+  console.log(hostUser.nickname)
+  console.log(hostUser.roomId)
+  console.log(hostUser.avatarId)
 
   const userInfo = useRecoilValue(userAtom);
   const userParam = {
@@ -41,7 +47,7 @@ function CreateMulti() {
 
   // useRef를 사용하여 소켓 클라이언트 인스턴스를 참조합니다.
   // 이는 컴포넌트가 리렌더링될 때마다 유지되어야 하기 때문입니다.
-  const client = useRef({});
+  const client = useRef({})
 
   const updateUserPosition = () => {
     const updatedUserParam = {
@@ -80,8 +86,8 @@ function CreateMulti() {
     client.current.publish({
       destination: "/pub/join/1",
       body: JSON.stringify(user),
-    });
-  };
+    })
+  }
 
   // 사용자 퇴장
   const publishOut = (user) => {
@@ -142,7 +148,7 @@ function CreateMulti() {
       </div>
       <button onClick={handleSubmit}>의견 보내기</button>
     </div>
-  );
+  )
 }
 
 export default CreateMulti;

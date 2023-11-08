@@ -1,15 +1,15 @@
-import { useRef, useEffect, useState } from "react";
-import { Environment, OrbitControls, useCursor } from "@react-three/drei";
-import { MultiCharacter } from "./MultiPlayer";
-import * as StompJs from "@stomp/stompjs";
-import * as SockJS from "sockjs-client";
-import * as THREE from "three";
+import { useRef, useEffect, useState } from "react"
+import { Environment, OrbitControls, useCursor } from "@react-three/drei"
+import { MultiCharacter } from "./MultiPlayer"
+import * as StompJs from "@stomp/stompjs"
+import * as SockJS from "sockjs-client"
+import * as THREE from "three"
 
 export const Experience = () => {
-  const [onFloor, setOnFloor] = useState(false);
-  useCursor(onFloor);
-  const client = useRef({});
-  const [position, setPosition] = useState([0, 0, 0]);
+  const [onFloor, setOnFloor] = useState(false)
+  useCursor(onFloor)
+  const client = useRef({})
+  const [position, setPosition] = useState([0, 0, 0])
 
   // STOMP 소켓 연결을 설정합니다.
   // useEffect(() => {
@@ -32,17 +32,17 @@ export const Experience = () => {
 
   // 위치 정보를 서버로 전송하는 함수
   const publishMove = (x, y, z) => {
-    setPosition([x, y, z]);
+    setPosition([x, y, z])
     if (!client.current.connected) {
-      console.error("STOMP client is not connected.");
-      return;
+      console.error("STOMP client is not connected.")
+      return
     }
 
     client.current.publish({
       destination: "/pub/move/1",
       body: JSON.stringify({ x, y, z }),
-    });
-  };
+    })
+  }
 
   return (
     <>
@@ -67,5 +67,5 @@ export const Experience = () => {
         position={new THREE.Vector3(position[0], position[1], position[2])}
       />
     </>
-  );
-};
+  )
+}

@@ -1,6 +1,6 @@
-import { Canvas } from "@react-three/fiber";
-import CreateMulti from "./CreateMulti";
-import { Experience } from "./Experience";
+import { Canvas } from "@react-three/fiber"
+import CreateMulti from "./CreateMulti"
+import { Experience } from "./Experience"
 
 export const MultiPage = () => {
   return (
@@ -10,5 +10,5 @@ export const MultiPage = () => {
         <Experience />
       </Canvas>
     </>
-  );
-};
+  )
+}
