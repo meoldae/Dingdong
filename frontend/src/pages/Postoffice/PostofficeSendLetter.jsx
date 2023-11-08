@@ -1,14 +1,25 @@
+// 라이브러리
 import { useState } from "react"
+import { useSetRecoilState, useRecoilValue } from "recoil"
+
+// Atom
 import { userAtom } from "@/atom/UserAtom"
+import { postofficeSendLetterAtom } from "../../atom/PostAtom"
+
+// 컴포넌트
 import DefaultPostBtn from "../../components/Button/DefaultPost/DefaultPostBtn"
 import Card from "../../components/UI/Card"
-import styles from "./PostofficeSendLetter.module.css"
-import { useSetRecoilState, useRecoilValue } from "recoil"
-import { postofficeSendLetterAtom } from "../../atom/PostAtom"
-import { sendLetterSNS } from "../../api/Letter"
-import { v4 as uuidv4 } from "uuid"
 import { successMsg } from "@/utils/customToast"
-import DefaultModal from "../../components/Modal/Default/DefaultModal"
+
+// API
+import { sendLetterSNS } from "../../api/Letter"
+
+// 스타일
+import styles from "./PostofficeSendLetter.module.css"
+
+// 기타
+import { v4 as uuidv4 } from "uuid"
+
 
 const PostofficeSendLetter = ({ card }) => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -17,7 +28,6 @@ const PostofficeSendLetter = ({ card }) => {
   const [contentCount, setContentCount] = useState(0)
   const [toValue, setToValue] = useState("")
   const [fromValue, setFromValue] = useState("")
-  const [isFinishSendLetter, setIsFinishSendLetter] = useState(false)
 
   const setOnPostofficeSendLetter = useSetRecoilState(postofficeSendLetterAtom)
 
@@ -73,11 +83,6 @@ const PostofficeSendLetter = ({ card }) => {
   }
   const handleFromInputChange = (event) => {
     setFromValue(event.target.value)
-  }
-
-  const finishHandler = () => {
-    setIsFinishSendLetter(false)
-    setOnPostofficeSendLetter(false)
   }
 
   return (
@@ -145,23 +150,6 @@ const PostofficeSendLetter = ({ card }) => {
           />
         </div>
       </div>
-
-      {/* 편지보내기 종료모달 */}
-      {isFinishSendLetter && (
-        <>
-          <div className={styles.finishOverlay} onClick={() => setIsFinishSendLetter(false)}>
-            <div className={styles.finishContainer}>
-              <DefaultModal
-                content={"편지 보내기를 종료하시겠습니까?"}
-                ok={"네"}
-                cancel={"아니오"}
-                okClick={() => finishHandler()}
-                cancelClick={() => setIsFinishSendLetter(false)}
-              />
-            </div>
-          </div>
-        </>
-      )}
     </>
   )
 }
