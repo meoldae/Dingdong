@@ -32,8 +32,12 @@ const WriteGuestBookModal = () => {
 
   // 방명록 작성 내용 함수
   const checkContentHandler = (event) => {
-    setContent(event.target.value)
-    setContentLength(event.target.value.length)
+    const inputValue = event.target.value
+
+    if (inputValue.length <= 100) {
+      setContent(event.target.value)
+      setContentLength(event.target.value.length)
+    }
   }
 
   // 색상 아이템
