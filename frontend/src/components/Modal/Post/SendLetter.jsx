@@ -84,10 +84,6 @@ const SendLetter = ({ onClose, card }) => {
     }
   }
 
-  const handleCheckContentCount = (event) => {
-    
-  }
-
   // 편지 작성 글자수 체크함수
   const checkMaxLength = (event, checker) => {
     const inputValue = event.target.value
