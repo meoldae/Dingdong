@@ -1,5 +1,5 @@
 // 라이브러리
-import { useRecoilValue } from "recoil"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 import { useState, useEffect } from "react"
 
 // 컴포넌트
@@ -12,6 +12,7 @@ import styles from "./ReceiveLetter.module.css"
 
 // Atom
 import { letterIdAtom } from "@/atom/LetterAtom"
+import { isReceiveLetterVisibleAtom } from "../../../atom/PostAtom"
 
 // API
 import { getLetterDetail, reportLetter } from "@/api/Letter"
@@ -26,6 +27,9 @@ const RecevieLetter = (props) => {
   // 신고하기 모달 상태관리
   const [isReport, setIsReport] = useState(false)
   const [letterStamp, setLetterStamp] = useState(null);
+
+  // 편지 상세 상태관리
+  const setIsReceiveLetterVisible = useSetRecoilState(isReceiveLetterVisibleAtom)
 
   // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -52,20 +56,14 @@ const RecevieLetter = (props) => {
     reportLetter(
       letterId,
       (success) => {
-        props.cancelClick()
-        setIsFinishReceiveLetter(false)
+        setIsReport(false)
+        setIsReceiveLetterVisible(false)
         successMsg("🚫 신고하기 완료!")
       },
       (error) => {
         'Error at reportLetter...', error
       }
     )
-  }
-
-  // 신고하기 모달종료 함수
-  const repostFinishHandler = () => {
-    setIsReport(false)
-    setIsFinishReceiveLetter(false)
   }
 
   return (
@@ -110,14 +108,14 @@ const RecevieLetter = (props) => {
       {/* 신고하기 모달 */}
       {isReport && (
         <>
-          <div className={styles.finishOverlay} onClick={() => repostFinishHandler()}>
+          <div className={styles.finishOverlay} onClick={() => setIsReport(false)}>
             <div className={styles.finishContainer}>
               <DefaultModal
                 content={"신고하시겠습니까?"}
                 ok={"네"}
                 cancel={"아니오"}
                 okClick={() => reportHandler()}
-                cancelClick={() => repostFinishHandler()}
+                cancelClick={() => setIsReport(false)}
               />
             </div>
           </div>
