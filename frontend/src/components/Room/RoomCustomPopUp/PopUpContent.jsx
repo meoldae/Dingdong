@@ -18,6 +18,7 @@ import {
   SliderPicker,
   HuePicker,
   AlphaPicker,
+  CirclePicker,
 } from "react-color";
 const PopUpContent = (props) => {
   const [furnitureList, setFurnitureList] = useState([]);
@@ -128,22 +129,58 @@ const PopUpContent = (props) => {
     fetchList();
   }, [pageNo]);
   const wallColors = [
-    "#FE6F5E", "#FFC0CB", "#FFD1DC", "#FFA07A", "#FED8B1", "#FFE4B5",
-    "#FFD7B5", "#FDD5B1", "#FFE5B4", "#98FF98", "#90EE90", "#C2D6A0",
-    "#B4F8C8", "#E3F9A6", "#A0E8AF", "#CDEB8B", "#77DD77", "#A2CD5A",
-    "#AFEEEE", "#E0FFFF", "#B0E0E6", "#87CEFA", "#CAE4FE", "#B4CFEC",
-    "#ADD8E6", "#A4D3EE", "#89CFF0", "#D9E3F0", "#E6E6FA", "#CDB6CD",
-    "#BDB0D0", "#D8BFD8", "#DDA0DD", "#B39EB5", "#A2A2D0", "#D2B9D3",
-    "#FFB7C5", "#DEB887", "#D3D3D3", "#F5F5CC", "#FAFAC8", "#F2F2F2",
-    "#CFCFC4", "#9A9EAB", "#FFF0F5", "#EAD1DC", "#f0f0f0", "#ffffff"
+    "#ffffff",
+    "#fefae0",
+    "#D9E3F0",
+    "#d0f4de",
+    "#eeef20",
+    "#fec5bb",
+    "#ffc8dd",
+    "#d6c6ff",
+    "#c77dff",
+    "#caf0f8",
+    "#4ea8de",
+    "#e9c46a",
+    "#a3b18a",
+    "#b7b7a4",
+    "#8b5e34",
+    "#14213d",
   ];
 
   const lightColors = [
-    "#FF6347","#FF0000","#DC143C","#B22222","#FF4500","#FF8C00","#FFA500","#FF7F50",
-    "#FFFF00","#FFFFE0","#FFFACD","#FFD700","#008000","#00FF00","#7CFC00","#ADFF2F", "#0000FF",
-    "#0000CD","#ADD8E6","#87CEEB","#4B0082","#191970","#000080","#6A5ACD","#800080", "#8A2BE2",
-    "#9370DB","#DDA0DD","#FFC0CB","#FF69B4","#FF1493","#ffffff"
-  ]
+    "#FF6347",
+    "#FF0000",
+    "#DC143C",
+    "#B22222",
+    "#FF4500",
+    "#FF8C00",
+    "#FFA500",
+    "#FF7F50",
+    "#FFFF00",
+    "#FFFFE0",
+    "#FFFACD",
+    "#FFD700",
+    "#008000",
+    "#00FF00",
+    "#7CFC00",
+    "#ADFF2F",
+    "#0000FF",
+    "#0000CD",
+    "#ADD8E6",
+    "#87CEEB",
+    "#4B0082",
+    "#191970",
+    "#000080",
+    "#6A5ACD",
+    "#800080",
+    "#8A2BE2",
+    "#9370DB",
+    "#DDA0DD",
+    "#FFC0CB",
+    "#FF69B4",
+    "#FF1493",
+    "#ffffff",
+  ];
   return (
     <div className={styles.furnitureContainer}>
       {furnitureList.map((item, index) => (
@@ -158,20 +195,23 @@ const PopUpContent = (props) => {
           <>
             <div className={styles.colorsetting}>
               <h3>벽 색상을 변경해봐요!</h3>
-              <GithubPicker
+              <CirclePicker
                 colors={wallColors}
-                width="90%"
+                circleSize={30}
+                width="300px"
+                circleSpacing={7}
                 onChange={(e) => setRoomColor(e.hex)}
               />
               <h3>조명을 바꿔봐요!</h3>
-              <GithubPicker
-              colors={lightColors}
-              width="90%"
-                onChange={(e) => {
-                  setLightColor(e.hex);
-                }}
-              />
             </div>
+            <SliderPicker
+              className={styles.my}
+              color={lightColor}
+              onChange={(e) => {
+                console.log(e)
+                setLightColor(e.hex);
+              }}
+            />
           </>
         ) : null}
       </div>

@@ -70,8 +70,8 @@
 
 .ContentContainer {
   width: 240px;
-  height: 280px;
-  margin-bottom: 15px;
+  height: 260px;
+  margin-bottom: 10px;
 
   overflow-y: auto;
   scrollbar-width: none;
@@ -86,7 +86,6 @@
   width: 240px;
   height: 30px;
   margin-bottom: 10px;
-
   display: flex;
 }
 
@@ -131,6 +130,25 @@
   height: 20px;
 }
 
+.CheckedUserContainer {
+  width: 240px;
+  height: 20px;
+  margin-bottom: 10px;
+
+  font-size: 10px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.CheckedUserContainer::-webkit-scrollbar {
+  display: none;
+}
+
 .Button {
   width: 240px;
   height: 35px;
@@ -142,4 +160,14 @@
   text-align: center;
   line-height: 35px;
   font-size: 20px;
+}
+
+.checkedUserNickname {
+  background-color: #02C26F;
+  display: flex;
+  align-items: center;
+  margin: 0 5px 0 5px;
+  padding: 3px 8px 3px 8px;
+  border-radius: 10px;
+  color: white;
 }

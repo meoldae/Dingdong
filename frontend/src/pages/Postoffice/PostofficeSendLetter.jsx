@@ -5,7 +5,7 @@ import { useSetRecoilState, useRecoilValue } from "recoil"
 // Atom
 import { userAtom } from "@/atom/UserAtom"
 import { finishPostofficeSendLetterAtom, selectedPostCardAtom, postofficeSendLetterAtom } from "../../atom/PostAtom"
-import { selectedUserListAtom } from "../../atom/PostOfficeAtom"
+import { selectedUserListAtom, selectedUserNicknameListAtom } from "../../atom/PostOfficeAtom"
 
 // 컴포넌트
 import DefaultPostBtn from "../../components/Button/DefaultPost/DefaultPostBtn"
@@ -19,7 +19,7 @@ import { sendLetterPostOffice } from "../../api/Letter"
 import styles from "./PostofficeSendLetter.module.css"
 
 // 기타
-import { v4 as uuidv4 } from "uuid"
+// import { v4 as uuidv4 } from "uuid"
 
 
 const PostofficeSendLetter = () => {
@@ -27,11 +27,10 @@ const PostofficeSendLetter = () => {
 
   const [content, setContent] = useState("")
   const [contentCount, setContentCount] = useState(0)
-  const [toValue, setToValue] = useState("")
-  const [fromValue, setFromValue] = useState("")
 
   const setSelectedPostCardItem = useRecoilValue(selectedPostCardAtom)
   const setSelectedUser = useRecoilValue(selectedUserListAtom)
+  const setSelectedUserNickname = useRecoilValue(selectedUserNicknameListAtom)
   const setFinishPostOfficeSendLetter = useSetRecoilState(finishPostofficeSendLetterAtom)
   const setOnPostOfficeSendLetter = useSetRecoilState(postofficeSendLetterAtom)
 
@@ -97,15 +96,13 @@ const PostofficeSendLetter = () => {
     )
   }
 
-  const handleCheckContentCount = (event) => {
-    setContent(event.target.value)
-    setContentCount(event.target.value.length)
-  }
-  const handleToInputChange = (event) => {
-    setToValue(event.target.value)
-  }
-  const handleFromInputChange = (event) => {
-    setFromValue(event.target.value)
+  // 글자수 체크 함수
+  const checkMaxLength = (event) => {
+    const inputValue = event.target.value
+    if (inputValue.length <= 200) {
+      setContent(inputValue)
+      setContentCount(inputValue.length)
+    }
   }
 
   return (
@@ -127,22 +124,28 @@ const PostofficeSendLetter = () => {
               src={`${urlPath}/assets/images/post/${setSelectedPostCardItem.src}`}
             />
             <div className={styles.ToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>
-              To.
-              <input
-                type="text"
-                value={toValue}
-                onChange={handleToInputChange}
-                placeholder="입력하세요."
-                maxLength="7"
-                style={{ fontFamily: "GangwonEduAll-Light" }}
-              />
+              {setSelectedUserNickname.length === 1 ? (
+                <>
+                  To. {setSelectedUserNickname[0]}
+                </>
+              ) : (
+                <div className={styles.ToUsersContainer}>
+                  <div>
+                    To. {setSelectedUserNickname[0]}
+                  </div>
+                  <div style={{ fontSize: "10px", lineHeight: "50px" }}>
+                    외 {setSelectedUserNickname.length - 1}명
+                  </div>
+                </div>
+              )}
+              
             </div>
             <div className={styles.letterContent}>
               <textarea
                 value={content}
-                onChange={(e) => handleCheckContentCount(e)}
+                onChange={(e) => checkMaxLength(e)}
                 placeholder="편지 내용을 작성하세요."
-                maxLength={199}
+                maxLength={200}
                 spellCheck="false"
                 style={{ fontFamily: "GangwonEduAll-Light" }}
               />
@@ -150,15 +153,7 @@ const PostofficeSendLetter = () => {
             <div className={styles.contentCount} style={{ fontFamily: "GangwonEduAll-Light" }}>{contentCount}/200</div>
             <div className={styles.footerContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
               <div className={styles.FromUser}>
-                From.
-                <input
-                  type="text"
-                  value={fromValue}
-                  placeholder="입력하세요."
-                  onChange={handleFromInputChange}
-                  maxLength="7"
-                  style={{ fontFamily: "GangwonEduAll-Light" }}
-                />
+                From. {userInfo.nickname}
               </div>
             </div>
           </Card>
