@@ -32,14 +32,33 @@ const DetailGuestBookModal = () => {
 
   // 시간 변경 함수
   const changeTimeHandler = (time) => {
-    const writedTime = new Date(time)
-    const nowTime = new Date()
-
-    const diffTime = nowTime - writedTime
-    const hoursDiff = diffTime / (1000 * 60 * 60)
-
-    return `${Math.floor(hoursDiff)}시간 전 작성`
-  }
+    const writedTime = new Date(time);
+    const nowTime = new Date();
+  
+    const diffTime = nowTime - writedTime;
+  
+    // 시간, 일, 주, 월, 년 단위로 변환
+    const minutesDiff = diffTime / (1000 * 60);
+    const hoursDiff = minutesDiff / 60;
+    const daysDiff = hoursDiff / 24;
+    const weeksDiff = daysDiff / 7;
+    const monthsDiff = daysDiff / 30;
+    const yearsDiff = daysDiff / 365;
+  
+    // 가장 적절한 단위로 결과 반환
+    if (yearsDiff > 1) {
+      return `${Math.floor(yearsDiff)}년 전 작성`;
+    } else if (monthsDiff > 1) {
+      return `${Math.floor(monthsDiff)}개월 전 작성`;
+    } else if (weeksDiff > 1) {
+      return `${Math.floor(weeksDiff)}주 전 작성`;
+    } else if (daysDiff > 1) {
+      return `${Math.floor(daysDiff)}일 전 작성`;
+    } else {
+      return `${Math.floor(hoursDiff)}시간 전 작성`;
+    }
+  };
+  
 
   return (
     <>
