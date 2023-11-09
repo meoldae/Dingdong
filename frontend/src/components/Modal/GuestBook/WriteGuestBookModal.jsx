@@ -90,7 +90,7 @@ const WriteGuestBookModal = () => {
             value={content}
             onChange={(e) => checkContentHandler(e)}
             placeholder='방명록을 남겨보세요!&#10;최대 100자까지 작성할 수 있습니다!'
-            maxLength={99}
+            maxLength={100}
             spellCheck="false"
             style={{ fontFamily: "GangwonEduAll-Light", background: `${colorList[isColor]}` }}
           />
