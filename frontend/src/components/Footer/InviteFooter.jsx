@@ -48,13 +48,13 @@ const OtherFooter = (props) => {
             <div className={styles.circle} onClick={onHomeHandler}>
               <div className={styles.button}>
                 <img src={`${urlPath}/assets/icons/post.png`} className={styles.iconImage}/>
-                <div className={styles.buttonContent}>딩동 즐기러 가기</div>
+                <div className={styles.buttonContent}>딩동 시작하기</div>
               </div>
             </div>
             <div className={styles.circle} onClick={openModal}>
               <div className={styles.button}>
                 <img src={`${urlPath}/assets/icons/post.png`} className={styles.iconImage}/>
-                <div className={styles.buttonContent}>편지 남기기</div>
+                <div className={styles.buttonContent}>방명록 남기기</div>
               </div>
             </div>
           </div>
