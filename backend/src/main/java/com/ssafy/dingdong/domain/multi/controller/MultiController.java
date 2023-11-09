@@ -66,7 +66,7 @@ public class MultiController {
         // Redis에 사용자 정보를 저장
         messagingTemplate.convertAndSend("/sub/action/" + channelId, result);
 
-        multiRepository.updateAction(userSession);
+//        multiRepository.updateAction(userSession);
     }
 
     @GetMapping("/multi/{channelId}")
