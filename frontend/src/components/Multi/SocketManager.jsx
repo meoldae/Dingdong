@@ -1,22 +1,30 @@
-import { useRef, useState, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
+import { Environment, OrbitControls, useCursor } from "@react-three/drei"
+import { MultiCharacter } from "./MultiCharacter"
 import * as StompJs from "@stomp/stompjs"
 import * as SockJS from "sockjs-client"
-import { useRecoilState, useRecoilValue } from "recoil"
-import { MultiUsers } from "../../atom/MultiAtom"
+import * as THREE from "three"
+import { useRecoilState } from "recoil"
 import { userAtom } from "../../atom/UserAtom"
-import { fetchMultiUser } from "../../api/User"
+import { MultiUsers } from "../../atom/MultiAtom"
 import axios from "axios"
 
-function CreateMulti() {
-  const [users, setUsers] = useRecoilState(MultiUsers)
+export const MultiRender = () => {
+  // 맵 클릭 함수
+  const [onFloor, setOnFloor] = useState(false)
+  useCursor(onFloor)
 
-  const userInfo = useRecoilValue(userAtom)
+  // Socket 통신
+  const client = useRef({})
+
+  const [users, setUsers] = useRecoilState(MultiUsers)
+  const [me, setMe] = useRecoilState(userAtom)
 
   const userParam = {
     channelId: 1,
-    nickname: userInfo.nickname,
-    roomId: userInfo.roomId,
-    avatarId: userInfo.avatarId,
+    nickname: me.nickname,
+    roomId: me.roomId,
+    avatarId: me.avatarId,
     x: Math.random() * 3,
     y: 0,
     z: Math.random() * 3,
@@ -25,28 +33,39 @@ function CreateMulti() {
   const fetchUserList = async () => {
     try {
       const response = await axios.get(
-        `http://ding-dong/dev/api/multi/${userParam.channelId}`
+        `https://ding-dong.kr/dev/api/multi/${userParam.channelId}`
       )
       setUsers(response.data.data)
     } catch (error) {
-      console.error("There was an error!", error)
+      console.error("There was an error fetching users!", error)
     }
   }
 
-  const client = useRef({})
-
-  // 첫 연결 하는 순간
+  // 연결
   const connect = () => {
     client.current = new StompJs.Client({
-      webSocketFactory: () => new SockJS("/ws"),
+      webSocketFactory: () => new SockJS("https://ding-dong.kr/dev/ws"),
       onConnect: () => {
         console.log("Connected to the WS server")
         subscribe()
         publishJoin(userParam)
       },
+      onDisconnect: () => {
+        console.log("Disconnected from the WS server")
+      },
     })
 
     client.current.activate()
+  }
+
+  // 연결 끊기
+  const disconnect = () => {
+    publishOut({
+      ...userParam,
+      status: 0,
+    })
+
+    client.current.deactivate()
   }
 
   // 사용자 입장
@@ -69,7 +88,6 @@ function CreateMulti() {
   }
 
   const subscribe = () => {
-    // 캐릭터 이동 채널
     client.current.subscribe("/sub/move/1", (message) => {
       if (message.body) {
         const jsonBody = JSON.parse(message.body)
@@ -86,11 +104,11 @@ function CreateMulti() {
               },
             }
           }
+          return currentList
         })
       }
     })
 
-    // 유저 리스트 채널
     client.current.subscribe("/sub/channel/1", (message) => {
       if (message.body) {
         const newUser = JSON.parse(message.body)
@@ -98,13 +116,10 @@ function CreateMulti() {
         setUsers((currentList) => {
           const updatedList = { ...currentList }
 
-          // 상태가 1인 경우, 새로운 유저를 추가합니다.
-          if (newUser.status == 1) {
+          if (newUser.status === 1) {
             const { status, ...userInfoWithoutStatus } = newUser
             updatedList[newUser.roomId] = userInfoWithoutStatus
-          }
-          // 상태가 0인 경우, 해당 유저를 리스트에서 삭제합니다.
-          else if (newUser.status == 0) {
+          } else if (newUser.status === 0) {
             delete updatedList[newUser.roomId]
           }
 
@@ -114,19 +129,98 @@ function CreateMulti() {
     })
   }
 
-  const disconnect = () => {
-    console.log("Disconnected from the WS server")
-    publishOut(userParam)
-
-    client.current.deactivate()
-  }
-
-  // 페이지 접속 시 실행
   useEffect(() => {
     connect()
     fetchUserList()
+
     return () => disconnect()
   }, [])
-}
 
-export default CreateMulti
+  // 위치 정보를 서버로 전송하는 함수
+  const publishMove = (x, y, z) => {
+    if (!client.current.connected) {
+      console.error("STOMP client is not connected.")
+      return
+    }
+    const data = {
+      channelId: 1,
+      nickname: me.nickname,
+      roomId: me.roomId,
+      avatarId: me.avatarId,
+      x: x,
+      y: y,
+      z: z,
+    }
+
+    client.current.publish({
+      destination: "/pub/move/1",
+      body: JSON.stringify(data),
+    })
+  }
+
+  return (
+    <>
+      <Environment preset="sunset" />
+      <ambientLight intensity={0.3} />
+      <OrbitControls enabled={false} />
+
+      <mesh
+        rotation-x={-Math.PI / 2}
+        position-y={-0.001}
+        onClick={(e) => publishMove(e.point.x, 0, e.point.z)}
+        onPointerEnter={() => setOnFloor(true)}
+        onPointerLeave={() => setOnFloor(false)}
+        position-x={8 / 2}
+        position-z={8 / 2}
+      >
+        <planeGeometry args={[60, 60]} />
+        <meshStandardMaterial color="F0F0F0" />
+      </mesh>
+      {Object.keys(users).map((idx) => (
+        <group key={idx}>
+          <MultiCharacter
+            id={idx}
+            avatarId={users[idx].avatarId}
+            position={
+              new THREE.Vector3(users[idx].x, users[idx].y, users[idx].z)
+            }
+          />
+          <Html
+            position={[users[idx].x, users[idx].y + 2, users[idx].z]}
+            center
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100px",
+                height: "40px",
+                color: "white",
+                fontWeight: "bold",
+                borderRadius: "30px",
+              }}
+            >
+              {users[idx].nickname}
+            </div>
+            {/* <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100px",
+                height: "40px",
+                color: "white",
+                fontWeight: "bold",
+                // background: "white",
+                borderRadius: "30px",
+              }}
+            >
+              {users[idx].nickname}
+            </div> */}
+          </Html>
+        </group>
+      ))}
+    </>
+  )
+}

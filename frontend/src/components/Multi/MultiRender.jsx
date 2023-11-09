@@ -1,12 +1,13 @@
 import { useRef, useEffect, useState } from "react"
-import { Environment, OrbitControls, useCursor } from "@react-three/drei"
+import { Environment, OrbitControls, useCursor, Html } from "@react-three/drei"
 import { MultiCharacter } from "./MultiCharacter"
 import * as StompJs from "@stomp/stompjs"
 import * as SockJS from "sockjs-client"
 import * as THREE from "three"
-import { useRecoilState } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil"
 import { userAtom } from "../../atom/UserAtom"
-import { MultiUsers } from "../../atom/MultiAtom"
+import { MultiUsers, actionState } from "../../atom/MultiAtom"
+import axios from "axios"
 
 export const MultiRender = () => {
   // 맵 클릭 함수
@@ -19,12 +20,36 @@ export const MultiRender = () => {
   const [users, setUsers] = useRecoilState(MultiUsers)
   const [me, setMe] = useRecoilState(userAtom)
 
-  // STOMP 소켓 연결을 설정합니다.
-  useEffect(() => {
+  let userParam = {
+    channelId: 1,
+    nickname: me.nickname,
+    roomId: me.roomId,
+    avatarId: me.avatarId,
+    x: Math.random() * 3,
+    y: 0,
+    z: Math.random() * 3,
+    actionId: 0,
+  }
+
+  const fetchUserList = async () => {
+    try {
+      const response = await axios.get(
+        `https://ding-dong.kr/dev/api/multi/${userParam.channelId}`
+      )
+      setUsers(response.data.data)
+    } catch (error) {
+      console.error("There was an error fetching users!", error)
+    }
+  }
+
+  // 연결
+  const connect = () => {
     client.current = new StompJs.Client({
-      webSocketFactory: () => new SockJS("/ws"),
+      webSocketFactory: () => new SockJS("https://ding-dong.kr/dev/ws"),
       onConnect: () => {
         console.log("Connected to the WS server")
+        subscribe()
+        publishJoin(userParam)
       },
       onDisconnect: () => {
         console.log("Disconnected from the WS server")
@@ -32,31 +57,143 @@ export const MultiRender = () => {
     })
 
     client.current.activate()
+  }
 
-    return () => {
-      client.current.deactivate()
-    }
+  // 연결 끊기
+  const disconnect = () => {
+    publishOut({
+      ...userParam,
+      status: 0,
+    })
+
+    client.current.deactivate()
+  }
+
+  // 사용자 입장
+  const publishJoin = (user) => {
+    if (!client.current.connected) return
+    const param = { ...user, status: 1 }
+    client.current.publish({
+      destination: "/pub/join/1",
+      body: JSON.stringify(param),
+    })
+  }
+
+  // 사용자 퇴장
+  const publishOut = (user) => {
+    const param = { ...user, status: 0 }
+    client.current.publish({
+      destination: "/pub/out/1",
+      body: JSON.stringify(param),
+    })
+  }
+
+  const subscribe = () => {
+    client.current.subscribe("/sub/move/1", (message) => {
+      if (message.body) {
+        const jsonBody = JSON.parse(message.body)
+        setUsers((currentList) => {
+          const user = currentList[jsonBody.roomId]
+          if (user) {
+            return {
+              ...currentList,
+              [jsonBody.roomId]: {
+                ...user,
+                x: jsonBody.x,
+                y: jsonBody.y,
+                z: jsonBody.z,
+              },
+            }
+          }
+          return currentList
+        })
+      }
+    })
+
+    client.current.subscribe("/sub/channel/1", (message) => {
+      if (message.body) {
+        const newUser = JSON.parse(message.body)
+
+        setUsers((currentList) => {
+          const updatedList = { ...currentList }
+
+          if (newUser.status === 1) {
+            const { status, ...userInfoWithoutStatus } = newUser
+            updatedList[newUser.roomId] = userInfoWithoutStatus
+          } else if (newUser.status === 0) {
+            delete updatedList[newUser.roomId]
+          }
+
+          return updatedList
+        })
+      }
+    })
+
+    client.current.subscribe("/sub/action/1", (message) => {
+      if (message.body) {
+        const jsonBody = JSON.parse(message.body)
+        setUsers((currentList) => {
+          const user = currentList[jsonBody.roomId]
+          if (user) {
+            return {
+              ...currentList,
+              [jsonBody.roomId]: {
+                ...user,
+                actionId: jsonBody.actionId,
+              },
+            }
+          }
+          return currentList
+        })
+      }
+    })
+  }
+
+  useEffect(() => {
+    connect()
+    fetchUserList()
+
+    return () => disconnect()
   }, [])
 
   // 위치 정보를 서버로 전송하는 함수
   const publishMove = (x, y, z) => {
-    if (!client.current.connected) {
-      console.error("STOMP client is not connected.")
-      return
-    }
-    const data = {
-      channelId: 1,
-      nickname: me.nickname,
-      roomId: me.roomId,
-      avatarId: me.avatarId,
+    userParam = {
+      ...userParam,
       x: x,
       y: y,
       z: z,
     }
+    if (!client.current.connected) {
+      console.error("STOMP client is not connected.")
+      return
+    }
 
     client.current.publish({
       destination: "/pub/move/1",
-      body: JSON.stringify(data),
+      body: JSON.stringify(userParam),
+    })
+  }
+
+  // const actionState = useRecoilValue(actionState)
+
+  // useEffect(() => {
+
+  // }, [])
+
+  const publishActions = (action) => {
+    userParam = {
+      ...userParam,
+      actionId: action,
+    }
+    if (!client.current.connected) {
+      console.error("STOMP client is not connected.")
+      return
+    }
+
+    client.current.publish({
+      destination: "/pub/action/1",
+      body: JSON.stringify(userParam),
     })
   }
 
@@ -79,12 +216,16 @@ export const MultiRender = () => {
         <meshStandardMaterial color="F0F0F0" />
       </mesh>
       {Object.keys(users).map((idx) => (
-        <MultiCharacter
-          key={idx}
-          id={idx}
-          avatarId={users[idx].avatarId}
-          position={new THREE.Vector3(users[idx].x, users[idx].y, users[idx].z)}
-        />
+        <group key={idx}>
+          <MultiCharacter
+            id={idx}
+            avatarId={users[idx].avatarId}
+            position={
+              new THREE.Vector3(users[idx].x, users[idx].y, users[idx].z)
+            }
+            nickname={users[idx].nickname}
+          />
+        </group>
       ))}
     </>
   )

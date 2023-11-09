@@ -5,3 +5,8 @@ export const MultiUsers = atom({
   key: "MultiUsers",
   default: {},
 })
+
+export const actionState = atom({
+  key: "actionState",
+  default: false,
+})
