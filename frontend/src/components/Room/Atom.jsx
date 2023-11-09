@@ -49,11 +49,11 @@ export const mobileCheckState = atom({
 
 export const roomColorState = atom({
   key:"roomColorState",
-  default: "#f0f0f0",
+  default: null,
 })
 export const lightColorState = atom({
   key:"lightColorState",
-  default: "#f0f0f0",
+  default: null,
 })
 
 export const colorChangeState = atom({
