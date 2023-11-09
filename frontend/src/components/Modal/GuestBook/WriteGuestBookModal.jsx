@@ -1,44 +1,47 @@
 // 라이브러리
-import { useState } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useState } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 // 컴포넌트
-import { successMsg } from '../../../utils/customToast'
+import { successMsg } from "../../../utils/customToast";
 
 // API
-import { fetchWriteGuestBook } from '../../../api/GuestBook'
+import { fetchGuesteWriteGuestBook, fetchWriteGuestBook } from "../../../api/GuestBook";
 
 // Atom
-import { isGuestBookVisibleAtom, isWriteGuestBookVisibleAtom }  from "../../../atom/GuestBookAtom"
-import { roomInfoAtom } from "../../../atom/RoomInfoAtom"
+import {
+  isGuestBookVisibleAtom,
+  isWriteGuestBookVisibleAtom,
+} from "../../../atom/GuestBookAtom";
+import { roomInfoAtom } from "../../../atom/RoomInfoAtom";
 
 // 스타일
-import styles from './WriteGuestBookModal.module.css'
+import styles from "./WriteGuestBookModal.module.css";
 
-const WriteGuestBookModal = () => {
-  // url 경로
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
-
+const WriteGuestBookModal = ({ check }) => {
   // 방 사용자 정보
-  const roomInfo = useRecoilValue(roomInfoAtom)
+  const roomInfo = useRecoilValue(roomInfoAtom);
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   // 방명록 작성 내용
   const [content, setContent] = useState("")
   // 색상코드 상태관리
-  const [isColor, setIsColor] = useState(0)
+  const [isColor, setIsColor] = useState(0);
 
   // 리코일 상태관리
-  const setIsGusetBookVisible = useSetRecoilState(isGuestBookVisibleAtom)
-  const setIsWriteGuestBookVisible = useSetRecoilState(isWriteGuestBookVisibleAtom)
+  const setIsGusetBookVisible = useSetRecoilState(isGuestBookVisibleAtom);
+  const setIsWriteGuestBookVisible = useSetRecoilState(
+    isWriteGuestBookVisibleAtom
+  );
 
   // 방명록 작성 내용 함수
   const checkContentHandler = (event) => {
-    const inputValue = event.target.value
+    const inputValue = event.target.value;
 
     if (inputValue.length <= 100) {
       setContent(event.target.value)
     }
-  }
+  };
 
   // 색상 아이템
   const colorList = [
@@ -53,37 +56,50 @@ const WriteGuestBookModal = () => {
 
   // 랜덤 각도 생성 함수
   const randomDegree = (min, max) => {
-    return Math.floor(Math.random() * (max-min+1)) + min
-  }
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
 
   // 방명록 작성 함수
   const WriteGuestBookHandler = () => {
     if (content === "") {
-      successMsg("❌ 내용을 작성해주세요!")
+      successMsg("❌ 내용을 작성해주세요!");
     } else {
       const nowRoomId = window.location.pathname.match(/\d+/g)[0]
       const degree = randomDegree(-15, 15)
       const params = {
-        "roomId": nowRoomId,
-        "description": content,
-        "color": isColor,
-        "rotate": degree,
+        roomId: nowRoomId,
+        description: content,
+        color: isColor,
+        rotate: degree,
+      };
+      if (check) {
+        fetchGuesteWriteGuestBook(
+          params,
+          (success) =>{
+            setIsWriteGuestBookVisible(false);
+            setIsGusetBookVisible(true);
+            successMsg("✅ 방명록을 남겼습니다!");
+          },(error) =>{
+            console.log("Error at writeGuestBook...", error);
+            successMsg("❌ 방명록 작성 중에 문제가 발생했습니다.");
+          }
+        )
+      } else {
+        fetchWriteGuestBook(
+          params,
+          (success) => {
+            setIsWriteGuestBookVisible(false);
+            setIsGusetBookVisible(true);
+            successMsg("✅ 방명록을 남겼습니다!");
+          },
+          (error) => {
+            console.log("Error at writeGuestBook...", error);
+            successMsg("❌ 방명록 작성 중에 문제가 발생했습니다.");
+          }
+        );
       }
-
-      fetchWriteGuestBook(
-        params,
-        (success) => {
-          setIsWriteGuestBookVisible(false)
-          setIsGusetBookVisible(true)
-          successMsg("✅ 방명록을 남겼습니다!")
-        },
-        (error) => {
-          console.log("Error at writeGuestBook...", error)
-          successMsg("❌ 방명록 작성 중에 문제가 발생했습니다.")
-        }
-      )
     }
-  }
+  };
 
   return (
     <>
@@ -93,7 +109,7 @@ const WriteGuestBookModal = () => {
           <textarea
             value={content}
             onChange={(e) => checkContentHandler(e)}
-            placeholder='방명록을 남겨보세요!&#10;최대 100자까지 작성할 수 있습니다!'
+            placeholder="방명록을 남겨보세요!&#10;최대 100자까지 작성할 수 있습니다!"
             maxLength={100}
             spellCheck="false"
             style={{
@@ -125,11 +141,13 @@ const WriteGuestBookModal = () => {
             className={styles.Button}
             style={{ background: `${colorList[isColor]}` }}
             onClick={() => WriteGuestBookHandler()}
-          >방명록 남기기</div>
+          >
+            방명록 남기기
+          </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default WriteGuestBookModal
+export default WriteGuestBookModal;
