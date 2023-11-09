@@ -97,15 +97,20 @@ const PostofficeSendLetter = () => {
     )
   }
 
-  const handleCheckContentCount = (event) => {
-    setContent(event.target.value)
-    setContentCount(event.target.value.length)
-  }
-  const handleToInputChange = (event) => {
-    setToValue(event.target.value)
-  }
-  const handleFromInputChange = (event) => {
-    setFromValue(event.target.value)
+  // 글자수 체크 함수
+  const checkMaxLength = (event, checker) => {
+    const inputValue = event.target.value
+
+    if (checker === "to" && inputValue.length <= 5) {
+      setToValue(inputValue)
+    }
+    if (checker === "from" && inputValue.length <= 5) {
+      setFromValue(inputValue)
+    }
+    if (checker === "content" && inputValue.length <= 200) {
+      setContent(inputValue)
+    setContentCount(inputValue.length)
+    }
   }
 
   return (
@@ -131,18 +136,18 @@ const PostofficeSendLetter = () => {
               <input
                 type="text"
                 value={toValue}
-                onChange={handleToInputChange}
+                onChange={(e) => checkMaxLength(e, "to")}
                 placeholder="입력하세요."
-                maxLength="7"
+                maxLength={5}
                 style={{ fontFamily: "GangwonEduAll-Light" }}
               />
             </div>
             <div className={styles.letterContent}>
               <textarea
                 value={content}
-                onChange={(e) => handleCheckContentCount(e)}
+                onChange={(e) => checkMaxLength(e, "content")}
                 placeholder="편지 내용을 작성하세요."
-                maxLength={199}
+                maxLength={200}
                 spellCheck="false"
                 style={{ fontFamily: "GangwonEduAll-Light" }}
               />
@@ -155,8 +160,8 @@ const PostofficeSendLetter = () => {
                   type="text"
                   value={fromValue}
                   placeholder="입력하세요."
-                  onChange={handleFromInputChange}
-                  maxLength="7"
+                  onChange={(e) => checkMaxLength(e, "from")}
+                  maxLength={5}
                   style={{ fontFamily: "GangwonEduAll-Light" }}
                 />
               </div>
