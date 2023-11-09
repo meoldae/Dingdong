@@ -17,25 +17,27 @@ import TutorialPage from "../pages/SinglePlay/TutorialPage"
 import InviteRoomPage from "../pages/Room/InviteRoomPage"
 import LoadingPage from "../components/UI/LoadingPage"
 import LetterSNSReceivePage from "../pages/Postoffice/PostofficeReceiveLetter"
+
 import Error from "../components/UI/Error"
-import ReactGA from "react-ga4";
+import ReactGA from "react-ga4"
+import { MultiPage } from "../components/Multi/MultiPage"
 // const Room = lazy(() => import("../pages/SinglePlay/SingleMainPage"))
 
 const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
-const gaTrackingId = import.meta.env.VITE_APP_GA_TRACKING_ID;
-ReactGA.initialize(gaTrackingId); 
+const gaTrackingId = import.meta.env.VITE_APP_GA_TRACKING_ID
+ReactGA.initialize(gaTrackingId)
 
 const Analytics = () => {
-  const location = useLocation();
+  const location = useLocation()
 
   useEffect(() => {
-    ReactGA.set({ page: location.pathname });
-    ReactGA.send("pageview");
-  }, [location]);
+    ReactGA.set({ page: location.pathname })
+    ReactGA.send("pageview")
+  }, [location])
 
-  return null;
-};
+  return null
+}
 
 const AppRouter = () => {
   return (
@@ -49,6 +51,7 @@ const AppRouter = () => {
             <Route path={`${urlPath}/room/:roomId`} element={<AppRoom />} />
             <Route path={`${urlPath}/random/:roomId`} element={<AppRandomRoom />} />
             <Route path={`${urlPath}/usersetting`} element={<AppUserSetting />} />
+            <Route path={`${urlPath}/multiPage`} element={<MultiPage />} />
           </Route>
 
           <Route element={<AuthRoute authentication="NotUser" />}>
