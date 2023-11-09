@@ -515,7 +515,7 @@ const Header = ({ checkMyRoom }) => {
                 placeholder="문의할 내용을 작성해주세요."
                 value={inquiryText}
                 onChange={(e) => setInquiryText(e.target.value)}
-                maxLength={199}
+                maxLength={200}
               />
             </div>
             <div className={styles.InquiryTextLength}>
