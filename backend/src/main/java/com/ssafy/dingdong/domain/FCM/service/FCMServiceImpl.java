@@ -42,22 +42,24 @@ public class FCMServiceImpl implements FCMService {
 		String nickname = memberService.getMemberById(senderId).nickname();
 		String fcmToken = fcmRedisRepository.findFCMTokenByMemberId(targetId).orElse("NOT");
 
-		Message message = Message.builder()
-			.setToken(fcmToken)
-			.setWebpushConfig(WebpushConfig.builder().putHeader("ttl", "300")
-				.setNotification(
-					new WebpushNotification(
-						titles[flag],
-						nickname + contents[flag])).build()
-			).build();
-
 		String response = null;
 
-		try {
-			response = FirebaseMessaging.getInstance().sendAsync(message).get();
-		} catch (InterruptedException | ExecutionException e) {
-			throw new RuntimeException(e);
+		if (!fcmToken.equals("NOT")) {
+			Message message = Message.builder()
+				.setToken(fcmToken)
+				.setWebpushConfig(WebpushConfig.builder().putHeader("ttl", "300")
+					.setNotification(
+						new WebpushNotification(
+							titles[flag],
+							nickname + contents[flag])).build()
+				).build();
+			try {
+				response = FirebaseMessaging.getInstance().sendAsync(message).get();
+			} catch (InterruptedException | ExecutionException e) {
+				throw new RuntimeException(e);
+			}
 		}
+
 		return response;
 	}
 }
