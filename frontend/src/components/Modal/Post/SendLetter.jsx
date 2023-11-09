@@ -85,8 +85,21 @@ const SendLetter = ({ onClose, card }) => {
   }
 
   const handleCheckContentCount = (event) => {
-    setContent(event.target.value)
-    setContentCount(event.target.value.length)
+    
+  }
+
+  // 편지 작성 글자수 체크함수
+  const checkMaxLength = (event, checker) => {
+    const inputValue = event.target.value
+
+    if (checker === "content" && inputValue.length <= 200) {
+      setContent(event.target.value)
+      setContentCount(event.target.value.length)
+    }
+
+    if (checker === "nickname" && inputValue.length <= 5) {
+      setUserNickname(event.target.value)
+    }
   }
 
   return (
@@ -108,7 +121,7 @@ const SendLetter = ({ onClose, card }) => {
             <div className={styles.letterContent}>
               <textarea
                 value={content}
-                onChange={(e) => handleCheckContentCount(e)}
+                onChange={(e) => checkMaxLength(e, "content")}
                 placeholder="편지 내용을 작성하세요."
                 maxLength={200}
                 spellCheck="false"
@@ -128,7 +141,7 @@ const SendLetter = ({ onClose, card }) => {
                 ) : (
                   <textarea
                     value={userNickname}
-                    onChange={(e) => setUserNickname(e.target.value)}
+                    onChange={(e) => checkMaxLength(e, "nickname")}
                     placeholder="닉네임을 입력하세요."
                     maxLength={5}
                     style={{ fontFamily: "GangwonEduAll-Light" }}
