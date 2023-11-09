@@ -1,114 +1,121 @@
-import { Canvas } from "@react-three/fiber"
-import Experience from "../../components/Room/Experience"
-import { fetchRoomData } from "../../api/User"
-import { Suspense, useState, useEffect, useRef } from "react"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { Canvas } from "@react-three/fiber";
+import Experience from "../../components/Room/Experience";
+import { fetchRoomData } from "../../api/User";
+import { Suspense, useState, useEffect, useRef } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   ItemRotateState,
   ItemsState,
   buildModeState,
   draggedItemState,
-} from "../../components/Room/Atom"
-import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom"
-import Header from "../../components/Header/Header"
-import MyFooter from "../../components/Footer/MyFooter"
-import Share from "../../components/Header/Share"
-import OtherFooter from "../../components/Footer/OtherFooter"
-import NeighborRequest from "../../components/Header/NeighborRequest"
-import styles from "./RoomPage.module.css"
-import PopUp from "../../components/Room/RoomCustomPopUp/PopUp"
-import SharePage from "../../components/Modal/Sharing/SharePage"
-import SharingModalList from "../../components/Modal/Sharing/SharingModalList"
-import { userAtom } from "../../atom/UserAtom"
-import { roomInfoAtom } from "@/atom/RoomInfoAtom"
-import { useNavigate } from "react-router-dom"
-import history from "../../components/UI/history"
-import RandomBtn from "../../components/Button/Room/RandomBtn"
-import { getRandomRoom } from "@/api/Room"
+  lightColorState,
+  roomColorState,
+} from "../../components/Room/Atom";
+import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom";
+import Header from "../../components/Header/Header";
+import MyFooter from "../../components/Footer/MyFooter";
+import Share from "../../components/Header/Share";
+import OtherFooter from "../../components/Footer/OtherFooter";
+import NeighborRequest from "../../components/Header/NeighborRequest";
+import styles from "./RoomPage.module.css";
+import PopUp from "../../components/Room/RoomCustomPopUp/PopUp";
+import SharePage from "../../components/Modal/Sharing/SharePage";
+import SharingModalList from "../../components/Modal/Sharing/SharingModalList";
+import { userAtom } from "../../atom/UserAtom";
+import { roomInfoAtom } from "@/atom/RoomInfoAtom";
+import { useNavigate } from "react-router-dom";
+import history from "../../components/UI/history";
+import RandomBtn from "../../components/Button/Room/RandomBtn";
+import { getRandomRoom } from "@/api/Room";
 
 function RandomRoomPage() {
   // 브라우저 뒤로가기 버튼 처리
-  const [locationKeys, setLocationKeys] = useState([])
-  const navigate = useNavigate()
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+  const [locationKeys, setLocationKeys] = useState([]);
+  const navigate = useNavigate();
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
 
   useEffect(() => {
     return history.listen((location) => {
       if (history.action === "PUSH") {
-        setLocationKeys([location.key])
-        window.location.replace(`${urlPath}/`)
+        setLocationKeys([location.key]);
+        window.location.replace(`${urlPath}/`);
       }
 
       if (history.action === "POP") {
         if (locationKeys[1] === location.key) {
-          setLocationKeys(([_, ...keys]) => keys)
-          window.location.replace(`${urlPath}/`)
+          setLocationKeys(([_, ...keys]) => keys);
+          window.location.replace(`${urlPath}/`);
         } else {
-          setLocationKeys((keys) => [location.key, ...keys])
+          setLocationKeys((keys) => [location.key, ...keys]);
         }
       }
-    })
-  }, [locationKeys, history])
+    });
+  }, [locationKeys, history]);
 
   // 마이룸 로직
-  const [editMode, setEditMode] = useRecoilState(buildModeState)
-  const [items, setItems] = useRecoilState(ItemsState)
-  const [isMyRoom, setIsMyRoom] = useState(false)
-  const [drag, setDrag] = useRecoilState(draggedItemState)
-  const popUpStatus = useRecoilValue(popUpStatusAtom)
-  const canvasRef = useRef()
-  const [shareModal, setShareModal] = useState(false)
-  const userInfo = useRecoilValue(userAtom)
-  const [nickName, setNickName] = useRecoilState(roomInfoAtom)
-  const [roomDrag, setRoomDrag] = useState(false)
-  const roomId = window.location.pathname.match(/\d+/g)
-  const today = new Date()
-  const [time, setTime] = useState()
+  const [editMode, setEditMode] = useRecoilState(buildModeState);
+  const [items, setItems] = useRecoilState(ItemsState);
+  const [isMyRoom, setIsMyRoom] = useState(false);
+  const [drag, setDrag] = useRecoilState(draggedItemState);
+  const popUpStatus = useRecoilValue(popUpStatusAtom);
+  const canvasRef = useRef();
+  const [shareModal, setShareModal] = useState(false);
+  const userInfo = useRecoilValue(userAtom);
+  const [nickName, setNickName] = useRecoilState(roomInfoAtom);
+  const [roomDrag, setRoomDrag] = useState(false);
+  const roomId = window.location.pathname.match(/\d+/g);
+  const today = new Date();
+  const [time, setTime] = useState();
+  const [roomColor, setRoomColor] = useRecoilState(roomColorState);
+  const [lightColor, setLightColor] = useRecoilState(lightColorState);
   useEffect(() => {
-    const myRoomId = userInfo.roomId
-    setIsMyRoom(roomId == myRoomId)
+    const myRoomId = userInfo.roomId;
+    setIsMyRoom(roomId == myRoomId);
 
     fetchRoomData(
       roomId,
       (response) => {
-        setItems(response.data.data.roomFurnitureList)
-        setNickName(response.data.data.nickname)
+        setItems(response.data.data.roomFurnitureList);
+        setNickName(response.data.data.nickname);
+        setRoomColor(response.data.data.wallColor);
+        setLightColor(response.data.data.lightColor);
       },
       (error) => {
-        console.error("Error at fetching RoomData...", error)
+        console.error("Error at fetching RoomData...", error);
         if (error.response && error.response.status === 400) {
-          navigate(`${urlPath}/notfound`);  
+          navigate(`${urlPath}/notfound`);
         }
       }
-    )
-  }, [isMyRoom, navigate])
+    );
+  }, [isMyRoom, navigate]);
 
   const randomVisit = () => {
     const roomId = window.location.pathname.match(/\d+/g)
       ? Number(window.location.pathname.match(/\d+/g)[0])
-      : null
-    const myRoomId = userInfo.roomId
+      : null;
+    const myRoomId = userInfo.roomId;
     // 선택 가능한 방 번호 목록
-    const possibleRooms = [1, 3, 4, 6, 19, 21]
+    const possibleRooms = [1, 3, 4, 6, 19, 21];
     // let randomRoom
 
     // do {
     //   randomRoom =
     //     possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
     // } while (randomRoom === roomId || randomRoom === myRoomId)
-    let randRoomId
+    let randRoomId;
 
-    getRandomRoom( 
-    (response) => {
-      randRoomId = response.data.data;
-      
-      window.location.replace(`${urlPath}/random/${randRoomId}`)
-      // navigate(`${urlPath}/random/${randRoomId}`)
-    },
-    (error) => {
-      console.log("Error with Random Room...", error);
-    })
-  }
+    getRandomRoom(
+      (response) => {
+        randRoomId = response.data.data;
+
+        window.location.replace(`${urlPath}/random/${randRoomId}`);
+        // navigate(`${urlPath}/random/${randRoomId}`)
+      },
+      (error) => {
+        console.log("Error with Random Room...", error);
+      }
+    );
+  };
 
   useEffect(() => {
     const checkTime = today.getHours();
@@ -126,6 +133,7 @@ function RandomRoomPage() {
       setTime("dinner");
     }
   }, []);
+  console.log(isMyRoom);
   return (
     <>
       {roomDrag && <div className={styles.roomDrag} />}
@@ -146,7 +154,7 @@ function RandomRoomPage() {
               <div
                 className={styles.back}
                 onClick={() => {
-                  setShareModal(false)
+                  setShareModal(false);
                 }}
               />
               <SharePage shareModal={shareModal} canvasRef={canvasRef} />
@@ -178,7 +186,7 @@ function RandomRoomPage() {
         </div>
       )}
     </>
-  )
+  );
 }
 
-export default RandomRoomPage
+export default RandomRoomPage;
