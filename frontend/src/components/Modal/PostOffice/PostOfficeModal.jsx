@@ -30,6 +30,9 @@ const PostOfficeModal = () => {
   const [memberNicknameList, setMemberNicknameList] = useRecoilState(selectedUserNicknameListAtom)
   const setPostOfficeCard = useSetRecoilState(postofficeCardAtom)
   const setIsPostOfficeVisible = useSetRecoilState(isPostOfficeVisibleAtom)
+  
+  // 선택 완료 이전 임시 상태 저장
+  const [tempMemberList, setTempMemberList] = useState([])
 
   // 닉네임 검색 함수
   const searchNicknameHandler = (event) => {
@@ -49,18 +52,11 @@ const PostOfficeModal = () => {
 
   // memberId & nickname 토글 함수
   const toggleMemberIdHandler = (memberId, nickname) => {
-    setMemberIdList(prev => {
-      if (prev.includes(memberId)) {
-        return prev.filter(id => id !== memberId)
+    setTempMemberList(prev => {
+      if (prev.some(member => member.memberId === memberId)) {
+        return prev.filter(prevMember => prevMember.memberId !== memberId);
       } else {
-        return [...prev, memberId]
-      }
-    })
-    setMemberNicknameList(prev => {
-      if (prev.includes(nickname)) {
-        return prev.filter(name => name !== nickname)
-      } else {
-        return [...prev, nickname]
+        return [...prev, { memberId, nickname }];
       }
     })
   }
@@ -68,13 +64,13 @@ const PostOfficeModal = () => {
   // 검색 결과 아이템
   const SearchResultItem = ({ avatarId, nickname, memberId }) => {
     return (
-      <div className={styles.ItemContainer}>
+      <div className={styles.ItemContainer} onClick={() => toggleMemberIdHandler(memberId, nickname)}>
         <div className={styles.ItemAvatar}>
           <img src={`${urlPath}/assets/icons/${avatarId}_crop.png`} />
         </div>
         <div className={styles.Nickname} style={{ fontFamily: "GmarketSansMedium" }}>{nickname}</div>
-        <div className={styles.CheckButton} onClick={() => toggleMemberIdHandler(memberId, nickname)}>
-          {memberIdList.includes(memberId) ? (
+        <div className={styles.CheckButton} >
+          {tempMemberList.some(item => item.memberId === memberId && item.nickname === nickname) ? (
             <img src={`${urlPath}/assets/icons/postOffice_check.png`} />
           ) : (
             <img src={`${urlPath}/assets/icons/postOffice_plus.png`} />
@@ -87,9 +83,13 @@ const PostOfficeModal = () => {
 
   // 선택완료 버튼 함수
   const finishCheckUser = () => {
-    if (memberIdList.length === 0) {
+    if (tempMemberList.length === 0) {
       successMsg("❌ 선택된 유저가 없습니다.")
     } else {
+      const tempMemberIdList = tempMemberList.map(item => item.memberId);
+      const tempMemberNicknameList = tempMemberList.map(item => item.nickname);
+      setMemberIdList(tempMemberIdList)
+      setMemberNicknameList(tempMemberNicknameList)
       setIsPostOfficeVisible(false)
       setPostOfficeCard(true)
     }
@@ -134,15 +134,24 @@ const PostOfficeModal = () => {
           )}
         </div>
         <div className={styles.CheckedUserContainer}>
-          {memberNicknameList.length === 0 ? (
+          {tempMemberList.length === 0 ? (
             <></>
           ) : (
-              memberNicknameList.map((item, index) => (
-                <div key={index}>
-                  {item},&nbsp;
+              tempMemberList.map((item, index) => (
+                <div key={index} className={styles.checkedUserNickname} onClick={() => toggleMemberIdHandler(item.memberId, item.nickname)} >
+                  {item.nickname} &nbsp;×
                 </div>
               ))
           )}
+          {/* {tempMemberNicknameList.length === 0 ? (
+            <></>
+          ) : (
+              tempMemberNicknameList.map((item, index) => (
+                <div key={index} className={styles.checkedUserNickname} onClick={() => {console.log(item) }} >
+                  {item} &nbsp;×
+                </div>
+              ))
+          )} */}
         </div>
         <div
           className={styles.Button}
