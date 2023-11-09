@@ -156,7 +156,7 @@ const PostofficeSendLetter = () => {
                   value={fromValue}
                   placeholder="입력하세요."
                   onChange={handleFromInputChange}
-                  maxLength="7"
+                  maxLength={5}
                   style={{ fontFamily: "GangwonEduAll-Light" }}
                 />
               </div>
