@@ -436,6 +436,34 @@ const SingleMainPage = () => {
             rotation={[0, 0, 0]}
             size={[0.5, 0.3]}
           />
+          {/* 간판 */}
+          <PhysicsModel //좌
+            position={[-6.5, 0.005, -3]}
+            rotation={[0, Math.PI / 4.8, 0]}
+            size={[3, 0.3]}
+          />
+
+          {/* 분수대 */}
+          <PhysicsModel // 좌
+            position={[-1.7, 0.005, 26]}
+            rotation={[0, Math.PI / 3, 0]}
+            size={[3.5, 0.3]}
+          />
+          <PhysicsModel // 우
+            position={[1.3, 0.005, 26]}
+            rotation={[0, Math.PI / -5, 0]}
+            size={[2.8, 0.3]}
+          />
+          <PhysicsModel // 좌 하
+            position={[-1.3, 0.005, 30]}
+            rotation={[0, Math.PI / -5, 0]}
+            size={[4, 0.3]}
+          />
+          <PhysicsModel // 우 하
+            position={[1.8, 0.005, 29.5]}
+            rotation={[0, Math.PI / 3, 0]}
+            size={[3.5, 0.3]}
+          />
           {/* 이정표 */}
           <PhysicsModel // 이웃마을
             position={[-1.3, 0.005, 5.2]}
