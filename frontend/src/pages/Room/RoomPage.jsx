@@ -91,21 +91,6 @@ function RoomPage() {
     );
   }, [isMyRoom, navigate]);
 
-  const randomVisit = () => {
-    const roomId = window.location.pathname.match(/\d+/g)
-      ? Number(window.location.pathname.match(/\d+/g)[0])
-      : null;
-    const myRoomId = userInfo.roomId;
-    const possibleRooms = [1, 3, 4, 6, 19, 21];
-    let randomRoom;
-
-    do {
-      randomRoom =
-        possibleRooms[Math.floor(Math.random() * possibleRooms.length)];
-    } while (randomRoom === roomId || randomRoom === myRoomId);
-    window.location.replace(`${urlPath}/room/${randomRoom}`);
-  };
-
   useEffect(() => {
     const checkTime = today.getHours();
 
