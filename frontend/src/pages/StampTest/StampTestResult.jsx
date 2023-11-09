@@ -16,7 +16,7 @@ const StampTestResult = () => {
   const resultIndex = Number(result)
 
   const onHomeHandler = (e) => {
-    navigate(`${urlPath}/`)
+    window.location.replace(`${urlPath}/`)
   }
   const onTestHandler = (e) => {
     navigate(`${urlPath}/yourstamp`)
