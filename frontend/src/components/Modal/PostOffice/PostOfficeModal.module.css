@@ -71,7 +71,6 @@
 .ContentContainer {
   width: 240px;
   height: 280px;
-  margin-bottom: 15px;
 
   overflow-y: auto;
   scrollbar-width: none;
@@ -129,6 +128,24 @@
 .CheckButton img {
   width: 20px;
   height: 20px;
+}
+
+.CheckedUserContainer {
+  width: 240px;
+  height: 15px;
+  margin-bottom: 10px;
+
+  font-size: 10px;
+
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.CheckedUserContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .Button {
