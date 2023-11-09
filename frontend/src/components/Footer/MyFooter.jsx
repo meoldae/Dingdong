@@ -149,11 +149,6 @@ const MyFooter = (props) => {
             />
           </div>
 
-          {/* 편지함선택버튼 */}
-          {/* <div className={style.background}>
-            <RoomBtn img={"postBox"} onClick={() => setIsPostBoxVisible(true)} />
-          </div> */}
-
           {/* 방명록 */}
           <div className={styles.background}>
             <RoomBtn img={"guestbook"} onClick={() => setIsGuestBookVisible(true)} />
