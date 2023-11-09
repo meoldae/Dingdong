@@ -252,7 +252,7 @@ const PopUp = () => {
               </li>
             ))}
             <li>
-              <img src={imagePath + "roler.png"} onClick={()=>changeMenu(0,7)} />
+              <img className={styles.roller} src={imagePath + "painting-brush.png"} onClick={()=>changeMenu(0,7)} />
             </li>
           </ul>
 
