@@ -28,13 +28,14 @@
 
 .ContentContainer textarea {
   width: 250px;
-  height: 250px;
+  height: 200px;
   border-radius: 10px;
   resize: none;
   border: none;
 
   text-align: center;
   font-size: 15px;
+  padding-top: 50px;
 }
 
 .ColorContainer {

@@ -16,13 +16,14 @@ import { roomInfoAtom } from "../../../atom/RoomInfoAtom"
 import styles from './WriteGuestBookModal.module.css'
 
 const WriteGuestBookModal = () => {
+  // url 경로
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
   // 방 사용자 정보
   const roomInfo = useRecoilValue(roomInfoAtom)
 
   // 방명록 작성 내용
   const [content, setContent] = useState("")
-  // 방명록 작성 내용 길이
-  const [contentLength, setContentLength] = useState(0)
   // 색상코드 상태관리
   const [isColor, setIsColor] = useState(0)
 
@@ -36,7 +37,6 @@ const WriteGuestBookModal = () => {
 
     if (inputValue.length <= 100) {
       setContent(event.target.value)
-      setContentLength(event.target.value.length)
     }
   }
 
@@ -62,7 +62,7 @@ const WriteGuestBookModal = () => {
       successMsg("❌ 내용을 작성해주세요!")
     } else {
       const nowRoomId = window.location.pathname.match(/\d+/g)[0]
-      const degree = randomDegree(-10, 10)
+      const degree = randomDegree(-15, 15)
       const params = {
         "roomId": nowRoomId,
         "description": content,
@@ -96,7 +96,12 @@ const WriteGuestBookModal = () => {
             placeholder='방명록을 남겨보세요!&#10;최대 100자까지 작성할 수 있습니다!'
             maxLength={100}
             spellCheck="false"
-            style={{ fontFamily: "GangwonEduAll-Light", background: `${colorList[isColor]}` }}
+            style={{
+              fontFamily: "GangwonEduAll-Light",
+              background: `url(${urlPath}/assets/icons/postit.png)`,
+              backgroundSize: "250px 250px",
+              backgroundRepeat: "no-repeat"
+            }}
           />
         </div>
         <div className={styles.ColorContainer}>
