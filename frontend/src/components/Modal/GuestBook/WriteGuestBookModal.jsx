@@ -114,7 +114,7 @@ const WriteGuestBookModal = ({ check }) => {
             spellCheck="false"
             style={{
               fontFamily: "GangwonEduAll-Light",
-              background: `url(${urlPath}/assets/icons/postit.png)`,
+              backgroundImage: `url(${urlPath}/assets/icons/postit${isColor}.png)`,
               backgroundSize: "250px 250px",
               backgroundRepeat: "no-repeat"
             }}
