@@ -130,7 +130,7 @@ const SendLetter = ({ onClose, card }) => {
                     value={userNickname}
                     onChange={(e) => setUserNickname(e.target.value)}
                     placeholder="닉네임을 입력하세요."
-                    maxLength={8}
+                    maxLength={5}
                     style={{ fontFamily: "GangwonEduAll-Light" }}
                   />
                 )}
