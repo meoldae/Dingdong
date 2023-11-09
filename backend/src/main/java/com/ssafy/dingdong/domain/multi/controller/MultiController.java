@@ -63,7 +63,7 @@ public class MultiController {
         log.info("Action OK={}", request);
 
         // Redis에 사용자 정보를 저장
-        messagingTemplate.convertAndSend("/sub/channel/" + channelId, request);
+        messagingTemplate.convertAndSend("/sub/action/" + channelId, request);
     }
 
     @GetMapping("/multi/{channelId}")
