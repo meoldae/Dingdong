@@ -126,14 +126,6 @@ const PostofficeSendLetter = () => {
             />
             <div className={styles.ToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>
               💌딩동!
-              {/* <input
-                type="text"
-                value={toValue}
-                onChange={(e) => checkMaxLength(e, "to")}
-                placeholder="입력하세요."
-                maxLength={5}
-                style={{ fontFamily: "GangwonEduAll-Light" }}
-              /> */}
             </div>
             <div className={styles.letterContent}>
               <textarea
