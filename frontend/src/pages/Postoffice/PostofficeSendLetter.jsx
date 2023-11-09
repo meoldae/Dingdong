@@ -124,7 +124,21 @@ const PostofficeSendLetter = () => {
               src={`${urlPath}/assets/images/post/${setSelectedPostCardItem.src}`}
             />
             <div className={styles.ToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>
-              To. {setSelectedUserNickname[0]}
+              {setSelectedUserNickname.length === 1 ? (
+                <>
+                  To. {setSelectedUserNickname[0]}
+                </>
+              ) : (
+                <div className={styles.ToUsersContainer}>
+                  <div>
+                    To. {setSelectedUserNickname[0]}
+                  </div>
+                  <div style={{ fontSize: "10px", lineHeight: "50px" }}>
+                    외 {setSelectedUserNickname.length - 1}명
+                  </div>
+                </div>
+              )}
+              
             </div>
             <div className={styles.letterContent}>
               <textarea

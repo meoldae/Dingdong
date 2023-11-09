@@ -94,7 +94,12 @@
   display: flex;
   justify-content: start;
   font-family: "GangwonEduAll-Light";
-  font-size: 30px;
+  font-size: 28px;
+}
+
+.ToUsersContainer {
+  display: flex;
+  flex-direction: row;
 }
 
 .letterContent {
@@ -150,7 +155,7 @@
 
 .FromUser {
   margin: 0 0 10px 10px;
-  font-size: 30px;
+  font-size: 28px;
   display: flex;
 }
 
