@@ -73,7 +73,6 @@ const WriteGuestBookModal = ({ check }) => {
         rotate: degree,
       };
       if (check) {
-        console.log(params)
         fetchGuesteWriteGuestBook(
           params,
           (success) =>{
