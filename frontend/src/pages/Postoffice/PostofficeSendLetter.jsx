@@ -5,7 +5,7 @@ import { useSetRecoilState, useRecoilValue } from "recoil"
 // Atom
 import { userAtom } from "@/atom/UserAtom"
 import { finishPostofficeSendLetterAtom, selectedPostCardAtom, postofficeSendLetterAtom } from "../../atom/PostAtom"
-import { selectedUserListAtom } from "../../atom/PostOfficeAtom"
+import { selectedUserListAtom, selectedUserNicknameListAtom } from "../../atom/PostOfficeAtom"
 
 // 컴포넌트
 import DefaultPostBtn from "../../components/Button/DefaultPost/DefaultPostBtn"
@@ -27,11 +27,10 @@ const PostofficeSendLetter = () => {
 
   const [content, setContent] = useState("")
   const [contentCount, setContentCount] = useState(0)
-  const [toValue, setToValue] = useState("")
-  const [fromValue, setFromValue] = useState("")
 
   const setSelectedPostCardItem = useRecoilValue(selectedPostCardAtom)
   const setSelectedUser = useRecoilValue(selectedUserListAtom)
+  const setSelectedUserNickname = useRecoilValue(selectedUserNicknameListAtom)
   const setFinishPostOfficeSendLetter = useSetRecoilState(finishPostofficeSendLetterAtom)
   const setOnPostOfficeSendLetter = useSetRecoilState(postofficeSendLetterAtom)
 
@@ -125,7 +124,7 @@ const PostofficeSendLetter = () => {
               src={`${urlPath}/assets/images/post/${setSelectedPostCardItem.src}`}
             />
             <div className={styles.ToUser} style={{ fontFamily: "GangwonEduAll-Light" }}>
-              💌딩동!
+              To. {setSelectedUserNickname[0]}
             </div>
             <div className={styles.letterContent}>
               <textarea
