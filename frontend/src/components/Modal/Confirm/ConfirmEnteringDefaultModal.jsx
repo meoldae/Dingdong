@@ -59,12 +59,11 @@ const ConfirmEnteringDefaultModal = ({
     if (location === "house") {
       const roomId = userInfo.roomId
       navigate(`${urlPath}/room/${roomId}`)
+      // 우체국으로 이동
     } else if (location === "postOffice") {
       setIsPostOfficeVisible(true)
       setConfirmEnteringLocation(false)
       setIsArrived(false)
-
-      // 우체국으로 이동
     } else if (location === "otherRoom") {
       const possibleRooms = [1, 3, 4, 6, 19, 21]
       let randomRoom
