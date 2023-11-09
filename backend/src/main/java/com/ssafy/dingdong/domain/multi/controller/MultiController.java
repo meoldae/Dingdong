@@ -1,5 +1,6 @@
 package com.ssafy.dingdong.domain.multi.controller;
 
+import com.ssafy.dingdong.domain.multi.dto.request.ActionRequest;
 import com.ssafy.dingdong.domain.multi.dto.request.JoinOutRequest;
 import com.ssafy.dingdong.domain.multi.dto.request.UserSession;
 import com.ssafy.dingdong.domain.multi.repository.MultiRepository;
@@ -50,8 +51,18 @@ public class MultiController {
     @MessageMapping("/out/{channelId}")
     public void outChannel(@DestinationVariable Long channelId, JoinOutRequest request) {
         log.info("OUT OK={}", request);
+
         // Redis에 사용자 정보를 저장
         multiRepository.deleteUser(request);
+        messagingTemplate.convertAndSend("/sub/channel/" + channelId, request);
+    }
+
+    // 사용자 상호작용
+    @MessageMapping("/action/{channelId}")
+    public void actionChannel(@DestinationVariable Long channelId, ActionRequest request) {
+        log.info("Action OK={}", request);
+
+        // Redis에 사용자 정보를 저장
         messagingTemplate.convertAndSend("/sub/channel/" + channelId, request);
     }
 
