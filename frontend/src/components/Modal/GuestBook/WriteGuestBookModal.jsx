@@ -42,13 +42,13 @@ const WriteGuestBookModal = () => {
 
   // 색상 아이템
   const colorList = [
-    "linear-gradient(180deg, #FFFFFF 0%, #FF6E8A 100%)", // 0: 빨간색
-    "linear-gradient(180deg, #FFFFFF 0%, #FF9E2C 100%)", // 1: 주황색
-    "linear-gradient(180deg, #FFFFFF 0%, #FFC745 100%)", // 2: 노란색
-    "linear-gradient(180deg, #FFFFFF 0%, #27D674 100%)", // 3: 초록색
-    "linear-gradient(180deg, #FFFFFF 0%, #64B1FF 100%)", // 4: 파란색
-    "linear-gradient(180deg, #FFFFFF 0%, #CB9DFF 100%)", // 5: 보라색
-    "linear-gradient(180deg, #FFFFFF 0%, #696969 100%)", // 6: 검정색
+    "#FFD2E1", // 0: 빨간색
+    "#FFDEC2", // 1: 주황색
+    "#FFF0CA", // 2: 노란색
+    "#DFEED1", // 3: 연두색
+    "#83C3FF", // 4: 파란색
+    "#D2CCFF", // 5: 보라색
+    "#BFBFBF", // 6: 검정색
   ]
 
   // 랜덤 각도 생성 함수
@@ -111,7 +111,11 @@ const WriteGuestBookModal = () => {
                 key={index}
                 className={styles.ColorCircle}
                 onClick={() => setIsColor(index)}
-                style={{ background: color }}
+                style={{
+                  background: color,
+                  width: isColor === index ? "30px" : "25px",
+                  height: isColor === index ? "30px" : "25px"
+                }}
               />
             ))}
           </div>
