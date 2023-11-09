@@ -363,6 +363,76 @@ const SingleMainPage = () => {
             size={[3.5, 0.3]}
           />
 
+          {/* 이웃마을 경계 */}
+          <PhysicsModel // 뒤
+            position={[-8.7, 0.005, 2.9]}
+            rotation={[0, 0, 0]}
+            size={[6.8, 0.3]}
+          />
+          <PhysicsModel // 우 상
+            position={[-5.1, 0.005, 4]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[2.8, 0.3]}
+          />
+          <PhysicsModel // 우 하
+            position={[-5.1, 0.005, 9]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[2.2, 0.3]}
+          />
+          <PhysicsModel // 앞
+            position={[-8.7, 0.005, 10]}
+            rotation={[0, 0, 0]}
+            size={[6.8, 0.3]}
+          />
+          <PhysicsModel // 좌
+            position={[-12.2, 0.005, 6]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[6, 0.3]}
+          />
+
+          <PhysicsModel // 집
+            position={[-9.5, 0.005, 6]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[6, 0.3]}
+          />
+          <PhysicsModel // 노랑차
+            position={[-5.8, 0.005, 5]}
+            rotation={[0, 0, 0]}
+            size={[1, 0.3]}
+          />
+          <PhysicsModel // 빨간차
+            position={[-7.7, 0.005, 5]}
+            rotation={[0, 0, 0]}
+            size={[1, 0.3]}
+          />
+          <PhysicsModel // 분홍차
+            position={[-7.9, 0.005, 8]}
+            rotation={[0, 0, 0]}
+            size={[1, 0.3]}
+          />
+          <PhysicsModel // 파랑차
+            position={[-6, 0.005, 8]}
+            rotation={[0, 0, 0]}
+            size={[1, 0.3]}
+          />
+
+          {/* 이정표 */}
+          <PhysicsModel // 이웃마을
+            position={[-1.3, 0.005, 5.2]}
+            rotation={[0, 0, 0]}
+            size={[0.2, 0.3]}
+          />
+          <PhysicsModel // 우체국
+            position={[4.1, 0.005, 5.2]}
+            rotation={[0, 0, 0]}
+            size={[0.2, 0.3]}
+          />
+          <PhysicsModel // 시상대
+            position={[-2, 0.005, 15]}
+            rotation={[0, 0, 0]}
+            size={[0.2, 0.3]}
+          />
+
           {/* 포탈 */}
           {roomPortalVisible ? (
             <DefaultPortal
