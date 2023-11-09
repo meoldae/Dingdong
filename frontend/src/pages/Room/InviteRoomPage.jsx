@@ -3,7 +3,7 @@ import Experience from "../../components/Room/Experience"
 import { fetchRoomData } from "../../api/User"
 import { Suspense, useState, useEffect, useRef } from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
-import {  ItemsState, draggedItemState, } from "../../components/Room/Atom"
+import { ItemsState, lightColorState, roomColorState, draggedItemState } from "../../components/Room/Atom"
 import InviteFooter from "../../components/Footer/InviteFooter"
 import styles from "./RoomPage.module.css"
 import InviteHeader from "../../components/Header/InviteHeader"
@@ -20,6 +20,8 @@ function InviteRoomPage() {
   const userInfo = useRecoilValue(userAtom)
   const today = new Date();
   const [time, setTime] = useState();
+  const [roomColor, setRoomColor] = useRecoilState(roomColorState);
+  const [lightColor, setLightColor] = useRecoilState(lightColorState  );
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const [drag, setDrag] = useRecoilState(draggedItemState);
   const [roomDrag, setRoomDrag] = useState(false);
@@ -38,6 +40,8 @@ function InviteRoomPage() {
     fetchRoomData(
       roomId,
       (response) => {
+        setRoomColor(response.data.data.wallColor);
+        setLightColor(response.data.data.lightColor);
         setItems(response.data.data.roomFurnitureList)
         setNickName(response.data.data.nickname)
       },
