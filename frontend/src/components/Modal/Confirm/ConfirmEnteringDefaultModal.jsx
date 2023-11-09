@@ -67,8 +67,8 @@ const ConfirmEnteringDefaultModal = ({
       setConfirmEnteringLocation(false)
       setIsArrived(false)
     } else if (location === "otherRoom") {
-      const possibleRooms = [1, 3, 4, 6, 19, 21]
-      let randomRoom
+      // const possibleRooms = [1, 3, 4, 6, 19, 21]
+      // let randomRoom
       // do {
       //   randomRoom = possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
       // } while (randomRoom === userInfo.roomId)
