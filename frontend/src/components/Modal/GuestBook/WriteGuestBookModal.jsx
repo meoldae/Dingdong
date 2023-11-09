@@ -62,7 +62,7 @@ const WriteGuestBookModal = () => {
       successMsg("❌ 내용을 작성해주세요!")
     } else {
       const nowRoomId = window.location.pathname.match(/\d+/g)[0]
-      const degree = randomDegree(-10, 10)
+      const degree = randomDegree(-15, 15)
       const params = {
         "roomId": nowRoomId,
         "description": content,
