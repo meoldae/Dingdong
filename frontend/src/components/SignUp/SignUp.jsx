@@ -169,7 +169,7 @@ const SignUp = () => {
               onChange={(e) => doubleCheckHandler(e)}
               placeholder=""
               className={styles.nicknameInputSuccess}
-              maxLength={4}
+              maxLength={5}
               style={{ fontFamily: "GmarketSansMedium" }}
             />
 
