@@ -113,7 +113,8 @@
 
 .report {
   margin: 0 0 10px 10px;
-  font-size: 20px;
+  font-size: 15px;
+  color: #FF0000;
 }
 
 .FromUser {

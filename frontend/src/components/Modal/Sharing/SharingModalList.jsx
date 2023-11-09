@@ -128,7 +128,7 @@ function SharingModalList(props) {
       window.Kakao.Share.sendCustom({
         templateId: 100120,
         templateArgs: {
-          THU: "https://ding-dong.s3.ap-northeast-2.amazonaws.com/StampLogo.png",
+          THU: "https://ding-dong.s3.ap-northeast-2.amazonaws.com/StampTestLogo.png",
           TITLE: "나에게 어울리는 우표는?",
           DESC: "어울리는 우표를 찾아 친구에게 편지를 보내보세요.",
           MOBILE_LINK: currentUrl,
