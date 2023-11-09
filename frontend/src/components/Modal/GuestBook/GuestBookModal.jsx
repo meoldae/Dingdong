@@ -66,7 +66,10 @@ const GuestBookModal = () => {
   const ContentItem = ({ content, rotate, colorNum }) => {
     return (
       <div className={styles.Item}>
-        <div className={styles.Content} style={{ transform: `rotate(${rotate}deg)`, background: `${colorList[colorNum]}` }}>
+        <div
+          className={styles.Content}
+          style={{ transform: `rotate(${rotate}deg)`, background: `url(${urlPath}/assets/icons/postit.png)`, backgroundSize: "80px 80px" }}
+        >
           <div className={styles.temp}>
             {content}
           </div>
