@@ -137,7 +137,7 @@ public class NeighborServiceImpl implements NeighborService{
 
 		String acceptorId = room.getMemberId();
 		String[] result = {"F"};
-		neighborRepository.findByApplicantIdAndAcceptorId(UUID.fromString(applicantId), UUID.fromString(acceptorId)).ifPresentOrElse(
+		neighborRepository.isNeighborByApplicantIdAndAcceptorId(UUID.fromString(applicantId), UUID.fromString(acceptorId)).ifPresentOrElse(
 			neighbor -> {
 				if (neighbor.getConnectTime() != null && neighbor.getCancelTime() == null) {
 					result[0] = "Y";
