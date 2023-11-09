@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 import { ArriveAtom } from "../../../atom/SinglePlayAtom"
 import { DefaultPosition, DefaultZoom } from "../../../atom/DefaultSettingAtom"
 import { userAtom } from "../../../atom/UserAtom"
-import { isPostOfficeVisibleAtom } from "../../../atom/PostOfficeAtom"
+import { isPostOfficeVisibleAtom, selectedUserListAtom } from "../../../atom/PostOfficeAtom"
 import { isPostBoxVisibleAtom } from "../../../atom/PostAtom"
 
 // 스타일
@@ -44,6 +44,7 @@ const ConfirmEnteringDefaultModal = ({
 
   // 우체국 상태 관리
   const setIsPostOfficeVisible = useSetRecoilState(isPostOfficeVisibleAtom)
+  const setSelectedUserList = useSetRecoilState(selectedUserListAtom)
 
   // 우체통 상태 관리
   const setIsPostBoxVisible = useSetRecoilState(isPostBoxVisibleAtom)
@@ -61,6 +62,7 @@ const ConfirmEnteringDefaultModal = ({
       navigate(`${urlPath}/room/${roomId}`)
       // 우체국으로 이동
     } else if (location === "postOffice") {
+      setSelectedUserList([])
       setIsPostOfficeVisible(true)
       setConfirmEnteringLocation(false)
       setIsArrived(false)
