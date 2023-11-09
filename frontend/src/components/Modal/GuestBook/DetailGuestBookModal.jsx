@@ -13,6 +13,9 @@ import styles from "./DetailGuestBookModal.module.css";
 import { useEffect, useState } from "react";
 
 const DetailGuestBookModal = () => {
+  // url 경로
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
   // 현재 방 번호
   const [nowUserId, setNowUserId] = useState();
   const nowRoomId = window.location.pathname.match(/\d+/g)[0];
@@ -28,17 +31,6 @@ const DetailGuestBookModal = () => {
   const guestBookDetailContent = useRecoilValue(guestBookDetailContentAtom);
   const roomInfo = useRecoilValue(roomInfoAtom);
   const setIsReportGuestBookVisible = useSetRecoilState(reportGuestBookAtom);
-
-  // 컬러 리스트
-  const colorList = [
-    "linear-gradient(180deg, #FFFFFF 0%, #FF6E8A 100%)", // 0: 빨간색
-    "linear-gradient(180deg, #FFFFFF 0%, #FF9E2C 100%)", // 1: 주황색
-    "linear-gradient(180deg, #FFFFFF 0%, #FFC745 100%)", // 2: 노란색
-    "linear-gradient(180deg, #FFFFFF 0%, #27D674 100%)", // 3: 초록색
-    "linear-gradient(180deg, #FFFFFF 0%, #64B1FF 100%)", // 4: 파란색
-    "linear-gradient(180deg, #FFFFFF 0%, #CB9DFF 100%)", // 5: 보라색
-    "linear-gradient(180deg, #FFFFFF 0%, #696969 100%)", // 6: 검정색
-  ];
 
   // 시간 변경 함수
   const changeTimeHandler = (time) => {
@@ -78,7 +70,9 @@ const DetailGuestBookModal = () => {
             className={styles.Content}
             style={{
               fontFamily: "GangwonEduAll-Light",
-              background: `${colorList[guestBookDetailContent.color]}`,
+              backgroundImage: `url(${urlPath}/assets/icons/postit${guestBookDetailContent.color}.png)`,
+              backgroundSize: "250px 250px",
+              backgroundRepeat: "no-repeat"
             }}
           >
             {guestBookDetailContent.description}
