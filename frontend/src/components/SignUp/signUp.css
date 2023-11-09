@@ -19,12 +19,12 @@
 } */
 .slick-slide{
   /* width: auto; */
-  height: 50vh;
+  /* height: 50vh; */
 }
 
 .slick-slide img {
   object-fit: contain;
   /* width: auto; */
-  height: 50vh;
+  height: 45vh;
   box-sizing: border-box;
 }
