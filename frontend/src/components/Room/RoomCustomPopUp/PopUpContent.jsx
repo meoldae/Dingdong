@@ -38,6 +38,7 @@ const PopUpContent = (props) => {
   // console.log(lightColor)
   // console.log(roomColor)
   const addFurniture = (furnitureId, check) => {
+    console.log(furnitureId)
     // 색상 변경 로직 추가
 
     if (draggedItem === null) {
