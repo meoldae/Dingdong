@@ -15,6 +15,6 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
 	Optional<Room> findByRoomId(Long roomId);
 
-	@Query(value = "SELECT room_id FROM room WHERE member_id != :memberId ORDER BY RAND() DESC LIMIT 1", nativeQuery = true)
-	Optional<Long> getRandomRoomId(@Param("memberId") String memberId);
+	@Query(value = "SELECT * FROM room WHERE member_id != :memberId ORDER BY RAND() DESC LIMIT 1", nativeQuery = true)
+	Optional<Room> getRandomRoomId(@Param("memberId") String memberId);
 }
