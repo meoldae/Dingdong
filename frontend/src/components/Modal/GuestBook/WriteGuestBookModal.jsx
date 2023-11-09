@@ -24,8 +24,6 @@ const WriteGuestBookModal = () => {
 
   // 방명록 작성 내용
   const [content, setContent] = useState("")
-  // 방명록 작성 내용 길이
-  const [contentLength, setContentLength] = useState(0)
   // 색상코드 상태관리
   const [isColor, setIsColor] = useState(0)
 
@@ -39,7 +37,6 @@ const WriteGuestBookModal = () => {
 
     if (inputValue.length <= 100) {
       setContent(event.target.value)
-      setContentLength(event.target.value.length)
     }
   }
 
