@@ -110,7 +110,7 @@ const SendLetter = ({ onClose, card }) => {
                 value={content}
                 onChange={(e) => handleCheckContentCount(e)}
                 placeholder="편지 내용을 작성하세요."
-                maxLength={199}
+                maxLength={200}
                 spellCheck="false"
                 style={{ fontFamily: "GangwonEduAll-Light"}}
               />
