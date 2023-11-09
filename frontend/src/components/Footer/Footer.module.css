@@ -51,7 +51,7 @@
 
 .circle {
   width: 220px;
-  height: 55px;
+  height: 60px;
   border-radius: 50px 50px;
   background: #ffffff;
   display: flex;
@@ -60,6 +60,7 @@
   margin-bottom: 15px;
   box-shadow: 0px 0px 10px 1px rgb(200, 200, 200);
 }
+
 
 .button {
   width: 100%;
@@ -76,9 +77,12 @@
   width: 40px;
 }
 
+
 .buttonContent {
+  display: flex;
+  align-items: center;
   width: 155px;
-  text-align: center;
+  margin-left: 15px;
 }
 
 .Overlay {

@@ -38,7 +38,6 @@ const GuestBookModal = () => {
   // 방명록 리스트 가져오기
   useEffect(() => {
     const nowRoomId = window.location.pathname.match(/\d+/g)[0]
-
     fetchListGuestBook(
       nowRoomId,
       (success) => {
