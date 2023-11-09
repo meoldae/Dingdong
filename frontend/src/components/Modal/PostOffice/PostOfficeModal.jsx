@@ -9,7 +9,11 @@ import { fetchSerchNickname } from "../../../api/User"
 import styles from "./PostOfficeModal.module.css"
 
 // Atom
-import { selectedUserListAtom, isPostOfficeVisibleAtom } from "../../../atom/PostOfficeAtom"
+import {
+  selectedUserListAtom,
+  isPostOfficeVisibleAtom,
+  selectedUserNicknameListAtom
+} from "../../../atom/PostOfficeAtom"
 import { postofficeCardAtom } from "../../../atom/PostAtom"
 
 // 컴포넌트
@@ -23,6 +27,7 @@ const PostOfficeModal = () => {
   const [searchText, setSearchText] = useState("")
   const [searchResult, setSearchResult] = useState([])
   const [memberIdList, setMemberIdList] = useRecoilState(selectedUserListAtom)
+  const [memberNicknameList, setMemberNicknameList] = useRecoilState(selectedUserNicknameListAtom)
   const setPostOfficeCard = useSetRecoilState(postofficeCardAtom)
   const setIsPostOfficeVisible = useSetRecoilState(isPostOfficeVisibleAtom)
 
