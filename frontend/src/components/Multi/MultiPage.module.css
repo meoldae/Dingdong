@@ -4,12 +4,15 @@
   height: 100vh;
   height: 100svh;
 }
-
-.actionsBtn {
+.BtnList {
+  display: flex;
   position: absolute;
   z-index: 1;
   right: 0;
   bottom: 0;
   padding: 10px;
+}
+.actionsBtn {
   background: red;
+  padding: 10px;
 }

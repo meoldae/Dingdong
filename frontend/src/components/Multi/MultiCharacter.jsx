@@ -2,14 +2,15 @@ import React, { useEffect, useMemo, useRef, useState } from "react"
 import { useGLTF, useAnimations } from "@react-three/drei"
 import { useFrame, useGraph } from "@react-three/fiber"
 import { SkeletonUtils } from "three-stdlib"
-import { useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil"
 import { userAtom } from "../../atom/UserAtom"
 import { Html } from "@react-three/drei"
+import { MultiUsers } from "../../atom/MultiAtom"
 
 const MOVEMENT_SPEED = 0.032
 const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
-export function MultiCharacter({ id, avatarId, nickname, ...props }) {
+export function MultiCharacter({ id, avatarId, nickname, actionId, ...props }) {
   const position = useMemo(() => props.position, [])
   const group = useRef()
   const avatarKey = ["f", "f_1", "f_7", "f_12", "m_5", "m_11", "m_12"]
@@ -24,21 +25,44 @@ export function MultiCharacter({ id, avatarId, nickname, ...props }) {
 
   const { actions } = useAnimations(animations, group)
 
-  const [animation, setAnimation] = useState("Idle")
-
   const user = useRecoilValue(userAtom)
 
-  // 애니메이션 변경
-  useEffect(() => {
-    actions[animation].reset().fadeIn(0.32).play() // 변경된 애니메이션 재생
-    return () => actions[animation]?.fadeOut(0.32) // 기존 애니메이션 정지
-  }, [animation]) // 애니메이션 변경 시 실행
+  const [users, setUsers] = useRecoilState(MultiUsers)
 
-  useEffect(() => {})
+  const [isMoving, setIsMoving] = useState(true)
+
+  const actionList = [0, { Win: 2800 }, { Sad: 4000 }, { "Song Jump": 3000 }]
+
+  useEffect(() => {
+    if (actionId != 0) {
+      const actionName = Object.keys(actionList[actionId])[0]
+      const actionTime = Object.values(actionList[actionId])[0]
+      setIsMoving(false)
+      actions.Idle.stop()
+      actions.Run.stop()
+      actions[actionName].play()
+
+      setTimeout(() => {
+        setIsMoving(true)
+        actions[actionName].stop()
+        actions.Idle.play()
+      }, actionTime)
+
+      setUsers((prevUsers) => {
+        const newUsers = { ...prevUsers }
+        if (newUsers[id]) {
+          newUsers[id] = { ...newUsers[id], actionId: "0" }
+        }
+        return newUsers
+      })
+    }
+  }, [actionId])
 
   useFrame((state) => {
     // 이동 중
-    if (group.current.position.distanceTo(props.position) > 0.1) {
+    if (isMoving && group.current.position.distanceTo(props.position) > 0.1) {
+      actions.Idle.stop()
+      actions.Run.play()
       const direction = group.current.position
         .clone()
         .sub(props.position)
@@ -46,14 +70,12 @@ export function MultiCharacter({ id, avatarId, nickname, ...props }) {
         .multiplyScalar(MOVEMENT_SPEED)
 
       group.current.position.sub(direction)
-      group.current.lookAt(props.position) // 클릭한 포지션의 방향을 바라보도록 설정
-
-      setAnimation("Run")
-      // console.log(group.current.position)
+      group.current.lookAt(props.position)
 
       // 정지
     } else {
-      setAnimation("Idle")
+      actions.Run.stop()
+      actions.Idle.play()
     }
 
     if (user.roomId == id) {

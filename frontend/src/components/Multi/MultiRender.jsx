@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react"
+import React, { useRef, useEffect, useState, useImperativeHandle } from "react"
 import { Environment, OrbitControls, useCursor, Html } from "@react-three/drei"
 import { MultiCharacter } from "./MultiCharacter"
 import * as StompJs from "@stomp/stompjs"
@@ -9,7 +9,7 @@ import { userAtom } from "../../atom/UserAtom"
 import { MultiUsers, actionState } from "../../atom/MultiAtom"
 import axios from "axios"
 
-export const MultiRender = () => {
+export const MultiRender = React.forwardRef((props, ref) => {
   // 맵 클릭 함수
   const [onFloor, setOnFloor] = useState(false)
   useCursor(onFloor)
@@ -175,11 +175,9 @@ export const MultiRender = () => {
     })
   }
 
-  // const actionState = useRecoilValue(actionState)
-
-  // useEffect(() => {
-
-  // }, [])
+  useImperativeHandle(ref, () => ({
+    publishActions: (action) => publishActions(action),
+  }))
 
   const publishActions = (action) => {
     userParam = {
@@ -224,9 +222,10 @@ export const MultiRender = () => {
               new THREE.Vector3(users[idx].x, users[idx].y, users[idx].z)
             }
             nickname={users[idx].nickname}
+            actionId={users[idx].actionId}
           />
         </group>
       ))}
     </>
   )
-}
+})
