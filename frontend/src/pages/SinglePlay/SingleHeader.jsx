@@ -241,9 +241,12 @@ const SingleHeader = ({ checkMyRoom }) => {
                 onClick={() => setIsHamburger(true)}
                 className={styles.HamburgerButton}
               />
+              <div className={styles.Name}>
+
               <RoomNameBtn >
                 딩동 마을
               </RoomNameBtn >
+              </div>
               {/* </div> */}
               <img src={bell} onClick={() => setIsAlarm(true)} />
             </>
