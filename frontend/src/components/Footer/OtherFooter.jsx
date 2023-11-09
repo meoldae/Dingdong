@@ -142,14 +142,9 @@ const OtherFooter = (props) => {
             <RoomBtn img={"worldMap"} onClick={goSingleMap} />
           </div>
 
-          {/* 우표함선택버튼 */}
-          {/* <div className={styles.background}>
-            <RoomBtn img={"post"} onClick={openModal} />
-          </div> */}
-
           {/* 방명록 */}
           <div className={styles.background}>
-            <RoomBtn img={"post"} onClick={() => setIsGuestBookVisible(true)} />
+            <RoomBtn img={"guestbook"} onClick={() => setIsGuestBookVisible(true)} />
           </div>
         </div>
         {isModalVisible && (
