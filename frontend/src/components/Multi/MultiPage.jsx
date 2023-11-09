@@ -1,7 +1,8 @@
 import { Canvas } from "@react-three/fiber"
 import { MultiRender } from "./MultiRender"
 import styles from "./MultiPage.module.css"
-import { useRef } from "react"
+import { Suspense, useRef } from "react"
+import { Physics } from "@react-three/rapier"
 
 export const MultiPage = () => {
   const multiRenderRef = useRef()
@@ -25,9 +26,12 @@ export const MultiPage = () => {
           춤추기
         </div>
       </div>
-
       <Canvas shadows camera={{ position: [2, 8, 15], fov: 30 }}>
-        <MultiRender ref={multiRenderRef} />
+        <Suspense>
+          <Physics debug>
+            <MultiRender ref={multiRenderRef} />
+          </Physics>
+        </Suspense>
       </Canvas>
     </div>
   )

@@ -8,6 +8,7 @@ import { useRecoilState, useRecoilValue } from "recoil"
 import { userAtom } from "../../atom/UserAtom"
 import { MultiUsers, actionState } from "../../atom/MultiAtom"
 import axios from "axios"
+import { RigidBody } from "@react-three/rapier"
 
 export const MultiRender = React.forwardRef((props, ref) => {
   // 맵 클릭 함수
@@ -200,19 +201,20 @@ export const MultiRender = React.forwardRef((props, ref) => {
       <Environment preset="sunset" />
       <ambientLight intensity={0.3} />
       <OrbitControls enabled={false} />
-
-      <mesh
-        rotation-x={-Math.PI / 2}
-        position-y={-0.001}
-        onClick={(e) => publishMove(e.point.x, 0, e.point.z)}
-        onPointerEnter={() => setOnFloor(true)}
-        onPointerLeave={() => setOnFloor(false)}
-        position-x={8 / 2}
-        position-z={8 / 2}
-      >
-        <planeGeometry args={[60, 60]} />
-        <meshStandardMaterial color="F0F0F0" />
-      </mesh>
+      <RigidBody colliders="trimesh" type="fixed">
+        <mesh
+          rotation-x={-Math.PI / 2}
+          position-y={-0.001}
+          onClick={(e) => publishMove(e.point.x, 0, e.point.z)}
+          onPointerEnter={() => setOnFloor(true)}
+          onPointerLeave={() => setOnFloor(false)}
+          position-x={8 / 2}
+          position-z={8 / 2}
+        >
+          <planeGeometry args={[60, 60]} />
+          <meshStandardMaterial color="F0F0F0" />
+        </mesh>
+      </RigidBody>
       {Object.keys(users).map((idx) => (
         <group key={idx}>
           <MultiCharacter

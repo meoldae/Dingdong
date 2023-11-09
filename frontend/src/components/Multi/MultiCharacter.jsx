@@ -6,6 +6,7 @@ import { useRecoilState, useRecoilValue } from "recoil"
 import { userAtom } from "../../atom/UserAtom"
 import { Html } from "@react-three/drei"
 import { MultiUsers } from "../../atom/MultiAtom"
+import { CapsuleCollider, RigidBody } from "@react-three/rapier"
 
 const MOVEMENT_SPEED = 0.032
 const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -19,9 +20,9 @@ export function MultiCharacter({ id, avatarId, nickname, actionId, ...props }) {
     `${urlPath}/assets/models/characters/${avatarId}.glb`
   )
 
-  const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]) // 스켈레톤 유틸(npm i three-stdlib)을 통해 장면(scene)을 복제
+  const clone = useMemo(() => SkeletonUtils.clone(scene), [scene])
 
-  const { nodes } = useGraph(clone) // 복제한 장면을 node로 사용 (여러 개의 장면(캐릭터)을 쓸 수 있음)
+  const { nodes } = useGraph(clone)
 
   const { actions } = useAnimations(animations, group)
 
@@ -31,19 +32,23 @@ export function MultiCharacter({ id, avatarId, nickname, actionId, ...props }) {
 
   const [isMoving, setIsMoving] = useState(true)
 
-  const actionList = [0, { Win: 2800 }, { Sad: 4000 }, { "Song Jump": 3000 }]
+  const [isPlay, setIsPlay] = useState(false)
+
+  const actionList = [0, { Win: 2800 }, { Sad: 4000 }, { "Song Jump": 7000 }]
 
   useEffect(() => {
-    if (actionId != 0) {
-      const actionName = Object.keys(actionList[actionId])[0]
-      const actionTime = Object.values(actionList[actionId])[0]
+    if (actionId != 0 && !isPlay) {
       setIsMoving(false)
+      setIsPlay(true)
       actions.Idle.stop()
       actions.Run.stop()
+      const actionName = Object.keys(actionList[actionId])[0]
+      const actionTime = Object.values(actionList[actionId])[0]
       actions[actionName].play()
 
       setTimeout(() => {
         setIsMoving(true)
+        setIsPlay(false)
         actions[actionName].stop()
         actions.Idle.play()
       }, actionTime)
