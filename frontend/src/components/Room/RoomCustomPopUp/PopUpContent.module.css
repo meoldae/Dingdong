@@ -40,4 +40,14 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    width: 100%;
+}
+
+.colorsetting h3{
+    margin: 10px;
+}
+
+.my{
+    width: 80%;
+    margin-left: 10%;
 }

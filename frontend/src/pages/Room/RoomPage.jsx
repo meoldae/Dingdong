@@ -68,7 +68,7 @@ function RoomPage() {
   const [time, setTime] = useState();
   const [roomColor,setRoomColor] = useRecoilState(roomColorState);
   const [lightColor,setLightColor] = useRecoilState(lightColorState);
-
+  
   useEffect(() => {
     const myRoomId = userInfo.roomId;
     setIsMyRoom(roomId == myRoomId);
