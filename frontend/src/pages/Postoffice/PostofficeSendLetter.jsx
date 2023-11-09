@@ -133,7 +133,7 @@ const PostofficeSendLetter = () => {
                 value={toValue}
                 onChange={handleToInputChange}
                 placeholder="입력하세요."
-                maxLength="7"
+                maxLength={5}
                 style={{ fontFamily: "GangwonEduAll-Light" }}
               />
             </div>
@@ -142,7 +142,7 @@ const PostofficeSendLetter = () => {
                 value={content}
                 onChange={(e) => handleCheckContentCount(e)}
                 placeholder="편지 내용을 작성하세요."
-                maxLength={199}
+                maxLength={200}
                 spellCheck="false"
                 style={{ fontFamily: "GangwonEduAll-Light" }}
               />
