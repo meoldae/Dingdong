@@ -47,13 +47,20 @@ const PostOfficeModal = () => {
     )
   }
 
-  // memberId 토글 함수
-  const toggleMemberIdHandler = (memberId) => {
+  // memberId & nickname 토글 함수
+  const toggleMemberIdHandler = (memberId, nickname) => {
     setMemberIdList(prev => {
       if (prev.includes(memberId)) {
         return prev.filter(id => id !== memberId)
       } else {
         return [...prev, memberId]
+      }
+    })
+    setMemberNicknameList(prev => {
+      if (prev.includes(nickname)) {
+        return prev.filter(name => name !== nickname)
+      } else {
+        return [...prev, nickname]
       }
     })
   }
@@ -66,7 +73,7 @@ const PostOfficeModal = () => {
           <img src={`${urlPath}/assets/icons/${avatarId}_crop.png`} />
         </div>
         <div className={styles.Nickname} style={{ fontFamily: "GmarketSansMedium" }}>{nickname}</div>
-        <div className={styles.CheckButton} onClick={() => toggleMemberIdHandler(memberId)}>
+        <div className={styles.CheckButton} onClick={() => toggleMemberIdHandler(memberId, nickname)}>
           {memberIdList.includes(memberId) ? (
             <img src={`${urlPath}/assets/icons/postOffice_check.png`} />
           ) : (
@@ -124,6 +131,17 @@ const PostOfficeModal = () => {
                 />
               </div>
             ))
+          )}
+        </div>
+        <div className={styles.CheckedUserContainer}>
+          {memberNicknameList.length === 0 ? (
+            <></>
+          ) : (
+              memberNicknameList.map((item, index) => (
+                <div key={index}>
+                  {item},&nbsp;
+                </div>
+              ))
           )}
         </div>
         <div
