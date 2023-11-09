@@ -240,9 +240,16 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public Long getRandomRoomId(String memberId) {
-		return roomRepository.getRandomRoomId(memberId).orElseThrow(
+		Room room = roomRepository.getRandomRoomId(memberId).orElseThrow(
 			() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
 		);
+		while (room.getRoomFurnitureList().size() <= 3) {
+			room = roomRepository.getRandomRoomId(memberId).orElseThrow(
+				() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
+			);
+		}
+
+		return room.getRoomId();
 	}
 
 }
