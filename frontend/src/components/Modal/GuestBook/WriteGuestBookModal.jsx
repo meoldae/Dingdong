@@ -21,11 +21,10 @@ import styles from "./WriteGuestBookModal.module.css";
 const WriteGuestBookModal = ({ check }) => {
   // 방 사용자 정보
   const roomInfo = useRecoilValue(roomInfoAtom);
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   // 방명록 작성 내용
-  const [content, setContent] = useState("");
-  // 방명록 작성 내용 길이
-  const [contentLength, setContentLength] = useState(0);
+  const [content, setContent] = useState("")
   // 색상코드 상태관리
   const [isColor, setIsColor] = useState(0);
 
@@ -40,8 +39,7 @@ const WriteGuestBookModal = ({ check }) => {
     const inputValue = event.target.value;
 
     if (inputValue.length <= 100) {
-      setContent(event.target.value);
-      setContentLength(event.target.value.length);
+      setContent(event.target.value)
     }
   };
 
@@ -66,8 +64,8 @@ const WriteGuestBookModal = ({ check }) => {
     if (content === "") {
       successMsg("❌ 내용을 작성해주세요!");
     } else {
-      const nowRoomId = window.location.pathname.match(/\d+/g)[0];
-      const degree = randomDegree(-10, 10);
+      const nowRoomId = window.location.pathname.match(/\d+/g)[0]
+      const degree = randomDegree(-15, 15)
       const params = {
         roomId: nowRoomId,
         description: content,
@@ -117,7 +115,9 @@ const WriteGuestBookModal = ({ check }) => {
             spellCheck="false"
             style={{
               fontFamily: "GangwonEduAll-Light",
-              background: `${colorList[isColor]}`,
+              background: `url(${urlPath}/assets/icons/postit.png)`,
+              backgroundSize: "250px 250px",
+              backgroundRepeat: "no-repeat"
             }}
           />
         </div>
