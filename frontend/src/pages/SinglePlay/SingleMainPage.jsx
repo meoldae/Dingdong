@@ -281,7 +281,7 @@ const SingleMainPage = () => {
           {/* <Spot /> */}
           {/* <House /> */}
 
-          {/* 경계 */}
+          {/* 외곽 경계 */}
           <PhysicsModel // 상
             position={[0, 0.005, -17]}
             rotation={[0, 0, 0]}
@@ -301,6 +301,66 @@ const SingleMainPage = () => {
             position={[24.6, 0.005, 14]}
             rotation={[0, Math.PI / 2, 0]}
             size={[62, 0.3]}
+          />
+
+          {/* 집 경계 */}
+          <PhysicsModel // 집 뒤
+            position={[0.3, 0.005, -8]}
+            rotation={[0, 0, 0]}
+            size={[8, 0.3]}
+          />
+          <PhysicsModel //좌
+            position={[-4, 0.005, -4]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[6, 0.3]}
+          />
+
+          <PhysicsModel //우
+            position={[4.5, 0.005, -4]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[6, 0.3]}
+          />
+          <PhysicsModel // 집 앞 왼쪽
+            position={[-2.2, 0.005, -0.6]}
+            rotation={[0, 0, 0]}
+            size={[2.6, 0.3]}
+          />
+          <PhysicsModel // 집 앞 오른쪽
+            position={[3, 0.005, -0.6]}
+            rotation={[0, 0, 0]}
+            size={[2.6, 0.3]}
+          />
+          <PhysicsModel //  우체통
+            position={[2.2, 0.005, 0.3]}
+            rotation={[0, 0, 0]}
+            size={[0.2, 0.3]}
+          />
+
+          {/* 우체국 경계 */}
+          <PhysicsModel //뒤
+            position={[12, 0.005, -7.8]}
+            rotation={[0, 0, 0]}
+            size={[9.6, 0.3]}
+          />
+          <PhysicsModel //좌
+            position={[6.7, 0.005, -5.3]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[5.8, 0.3]}
+          />
+          <PhysicsModel //우
+            position={[16.7, 0.005, -5.3]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[5.8, 0.3]}
+          />
+          <PhysicsModel //앞 좌
+            position={[7.7, 0.005, -2]}
+            rotation={[0, 0, 0]}
+            size={[2, 0.3]}
+          />
+          <PhysicsModel //앞 우
+            position={[15, 0.005, -2]}
+            rotation={[0, 0, 0]}
+            size={[3.5, 0.3]}
           />
 
           {/* 포탈 */}
