@@ -1,5 +1,6 @@
 package com.ssafy.dingdong.domain.multi.repository;
 
+import com.ssafy.dingdong.domain.multi.dto.request.ActionRequest;
 import com.ssafy.dingdong.domain.multi.dto.request.JoinOutRequest;
 import com.ssafy.dingdong.domain.multi.dto.request.UserSession;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +40,7 @@ public class MultiRepository {
         userProperties.put("nickname", request.getNickname());
         userProperties.put("avatarId", request.getAvatarId().toString());
         userProperties.put("roomId", request.getRoomId().toString());
+        userProperties.put("actionId", request.getActionId().toString());
         userProperties.put("x", String.valueOf(request.getX()));
         userProperties.put("y", String.valueOf(request.getY()));
         userProperties.put("z", String.valueOf(request.getZ()));
@@ -55,6 +57,7 @@ public class MultiRepository {
         userProperties.put("nickname", userSession.getNickname());
         userProperties.put("avatarId", userSession.getAvatarId().toString());
         userProperties.put("roomId", userSession.getRoomId().toString());
+        userProperties.put("actionId", userSession.getActionId().toString());
         userProperties.put("x", String.valueOf(userSession.getX()));
         userProperties.put("y", String.valueOf(userSession.getY()));
         userProperties.put("z", String.valueOf(userSession.getZ()));
@@ -71,4 +74,20 @@ public class MultiRepository {
         return hashOperations.entries(CHANNEL_PREFIX + channelNo);
     }
 
+    public void updateAction(UserSession userSession) {
+        String key = userSession.getRoomId().toString();
+        String channelKey = CHANNEL_PREFIX + userSession.getChannelId().toString();
+
+        Map<String, String> userProperties = new HashMap<>();
+        userProperties.put("channelId", userSession.getChannelId().toString());
+        userProperties.put("nickname", userSession.getNickname());
+        userProperties.put("avatarId", userSession.getAvatarId().toString());
+        userProperties.put("roomId", userSession.getRoomId().toString());
+        userProperties.put("actionId", userSession.getActionId().toString());
+        userProperties.put("x", String.valueOf(userSession.getX()));
+        userProperties.put("y", String.valueOf(userSession.getY()));
+        userProperties.put("z", String.valueOf(userSession.getZ()));
+
+        hashOperations.put(channelKey, key, userProperties);
+    }
 }
