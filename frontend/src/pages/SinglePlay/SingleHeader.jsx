@@ -215,6 +215,15 @@ const SingleHeader = ({ checkMyRoom }) => {
     }
   }
 
+  // 문의하기 200자 체크함수
+  const checkMaxLength = (event) => {
+    const inputValue = event.target.value
+    
+    if (inputValue.length <= 200) {
+      setInquiryText(event.target.value)
+    }
+  }
+
   return (
     <>
       <div className={styles.wrap}>
@@ -350,7 +359,7 @@ const SingleHeader = ({ checkMyRoom }) => {
               className={styles.InquiryContent}
               placeholder="문의할 내용을 작성해주세요."
               value={inquiryText}
-              onChange={(e) => setInquiryText(e.target.value)}
+              onChange={(e) => checkMaxLength(e)}
               maxLength={200}
             />
             <div className={styles.InquiryTextLength}>
