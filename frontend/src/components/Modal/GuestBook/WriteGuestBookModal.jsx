@@ -16,6 +16,9 @@ import { roomInfoAtom } from "../../../atom/RoomInfoAtom"
 import styles from './WriteGuestBookModal.module.css'
 
 const WriteGuestBookModal = () => {
+  // url 경로
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
   // 방 사용자 정보
   const roomInfo = useRecoilValue(roomInfoAtom)
 
@@ -96,7 +99,7 @@ const WriteGuestBookModal = () => {
             placeholder='방명록을 남겨보세요!&#10;최대 100자까지 작성할 수 있습니다!'
             maxLength={100}
             spellCheck="false"
-            style={{ fontFamily: "GangwonEduAll-Light", background: `${colorList[isColor]}` }}
+            style={{ fontFamily: "GangwonEduAll-Light", background: `url(${urlPath}/assets/icons/postit.png)`, backgroundSize: "250px 250px", backgroundRepeat: "no-repeat" }}
           />
         </div>
         <div className={styles.ColorContainer}>
