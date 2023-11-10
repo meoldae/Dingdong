@@ -144,7 +144,6 @@ const Character = () => {
         if (!hasCollision) {
           // 충돌이 발생하지 않으면, 움직임 적용
           position.add(new THREE.Vector3(dx, 0, dz))
-          // console.log("move", position)
           // 위치 이동
           setPosition(position.clone())
 
