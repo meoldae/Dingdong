@@ -132,11 +132,6 @@ const SignUp = () => {
           setNicknameMessage("사용 가능한 닉네임 입니다!");
         }
       }
-      // (error) => {
-      //   setIsValid(false);
-      //   setNicknameMessage("이미 사용중인 닉네임 입니다!");
-      //   console.log(error);
-      // }
     );
   }, [nickname]);
 
