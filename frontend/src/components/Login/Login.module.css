@@ -1,3 +1,15 @@
+/* 로고 기울기 애니메이션 */
+@keyframes tilt {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+/* 슬로건 크기 변화 애니메이션 */
+@keyframes pulsate {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -19,11 +31,13 @@
   flex-direction: column;
   align-items: center;
 }
-.logo img{
+
+.logo img {
   margin-top: 10px;
+  animation: tilt 2s ease-in-out infinite;
 }
 
-.slogan{
+.slogan {
   position: absolute;
   /* width: 90%; */
   top: 43%;
