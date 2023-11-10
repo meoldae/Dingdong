@@ -33,14 +33,15 @@
 .newcanvas.dawn {
   width: 100%;
   height: 100%;
-  background: linear-gradient(#6C5378 ,#7080CC);
+  background: linear-gradient(#6c5378, #7080cc);
   background-size: 100% 100vh;
   height: 100%;
-  height: 100svh;}
+  height: 100svh;
+}
 
 .newcanvas.morning {
   width: 100%;
-  background: linear-gradient(#F49494,#F9EDCE);
+  background: linear-gradient(#f49494, #f9edce);
   background-size: 100% 100vh;
   height: 100%;
   height: 100svh;
@@ -48,7 +49,7 @@
 
 .newcanvas.afternoon {
   width: 100%;
-  background: linear-gradient(#479CEA,#FFF4CE);
+  background: linear-gradient(#479cea, #fff4ce);
   background-size: 100% 100vh;
   height: 100%;
   height: 100svh;
@@ -56,7 +57,7 @@
 
 .newcanvas.dinner {
   width: 100%;
-  background: linear-gradient(#6071D3  ,#F8D8D4);
+  background: linear-gradient(#6071d3, #f8d8d4);
   background-size: 100% 100vh;
   height: 100%;
   height: 100svh;
@@ -87,7 +88,7 @@
 }
 
 .buttonContainer {
-  z-index:3;
+  z-index: 3;
   position: absolute;
   bottom: 140px;
   display: flex;
@@ -95,7 +96,6 @@
   transform: translate(-50%);
   justify-content: center;
 }
-
 
 .randomImage {
   width: 25px;
@@ -115,4 +115,14 @@
   width: 100%;
   height: 100%;
   z-index: 10;
+}
+
+.headerContainer {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  padding-top: 10px;
 }
