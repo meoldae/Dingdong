@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PostCardBox from "../Modal/Post/PostCardBox";
 import RoomBtn from "../Button/Room/RoomBtn";
 import SendLetter from "../Modal/Post/SendLetter";
-import styles from "./Footer.module.css";
+import styles from "./InviteFooter.module.css";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import {
