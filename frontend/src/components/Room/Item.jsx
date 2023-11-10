@@ -29,7 +29,7 @@ export const Item = ({
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
   const rotation = isDragging ? draggedItemRotation : itemRotation;
   const { scene } = useGLTF(
-    `${urlPath}/assets/models/roomitems/${furnitureId}.glb`,true
+    `${urlPath}/assets/models/furnitureItems/${furnitureId}.glb`,true
   );
   scene.children[0].castShadow = true
 
