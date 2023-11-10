@@ -190,7 +190,6 @@ const SingleHeader = ({ checkMyRoom }) => {
       setIsPossiblePush(true)
       const permission = await getPermissionRequest();
       if (permission === "denied") {
-        console.log("Permission : ", permission);
         setIsPossiblePush(false)
       } else {
         getToken(messaging, { vapidKey: import.meta.env.VITE_APP_VAPID })
@@ -215,6 +214,15 @@ const SingleHeader = ({ checkMyRoom }) => {
     }
   }
 
+  // 문의하기 200자 체크함수
+  const checkMaxLength = (event) => {
+    const inputValue = event.target.value
+    
+    if (inputValue.length <= 200) {
+      setInquiryText(event.target.value)
+    }
+  }
+
   return (
     <>
       <div className={styles.wrap}>
@@ -232,9 +240,12 @@ const SingleHeader = ({ checkMyRoom }) => {
                 onClick={() => setIsHamburger(true)}
                 className={styles.HamburgerButton}
               />
+              <div className={styles.Name}>
+
               <RoomNameBtn >
                 딩동 마을
               </RoomNameBtn >
+              </div>
               {/* </div> */}
               <img src={bell} onClick={() => setIsAlarm(true)} />
             </>
@@ -350,8 +361,8 @@ const SingleHeader = ({ checkMyRoom }) => {
               className={styles.InquiryContent}
               placeholder="문의할 내용을 작성해주세요."
               value={inquiryText}
-              onChange={(e) => setInquiryText(e.target.value)}
-              maxLength={199}
+              onChange={(e) => checkMaxLength(e)}
+              maxLength={200}
             />
             <div className={styles.InquiryTextLength}>
               {inquiryText.length}/200

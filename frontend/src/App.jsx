@@ -27,7 +27,7 @@ const AppWrapper = () => {
   onMessage(messaging, (payload) => {
     if (payload.notification.title === "딩동! 편지왔어요") {
       successMsg(`💌 ${payload.notification.body}`)
-    } else {
+    } else if (payload.notification.title === "딩동! 놀러왔어요") {
       successMsg(`🔔 ${payload.notification.body}`)
     }
   })

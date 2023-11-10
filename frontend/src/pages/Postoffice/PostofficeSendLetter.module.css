@@ -94,8 +94,12 @@
   display: flex;
   justify-content: start;
   font-family: "GangwonEduAll-Light";
-  font-size: 35px;
+  font-size: 28px;
+}
 
+.ToUsersContainer {
+  display: flex;
+  flex-direction: row;
 }
 
 .letterContent {
@@ -151,28 +155,12 @@
 
 .FromUser {
   margin: 0 0 10px 10px;
-  font-size: 35px;
+  font-size: 28px;
   display: flex;
 }
 
 .FromUserDiv {
   width: 60%;
-}
-
-.FromUser textarea {
-  /* width: 60%; */
-  vertical-align: middle;
-  padding-top: 4px; /* 상단 패딩 추가 */
-  height: 100%;
-  background-color: transparent;
-  border: none;
-  resize: none;
-
-  /* padding: 5px; */
-  font-size: 25px;
-  font-family: "GangwonEduAll-Light";
-  outline: none;
-  text-align:center;
 }
 
 .finishOverlay{

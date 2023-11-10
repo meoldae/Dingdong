@@ -259,7 +259,6 @@ const Header = ({ checkMyRoom }) => {
       setIsPossiblePush(true);
       const permission = await getPermissionRequest();
       if (permission === "denied") {
-        console.log("Permission : ", permission);
         setIsPossiblePush(false);
       } else {
         getToken(messaging, { vapidKey: import.meta.env.VITE_APP_VAPID })
@@ -286,6 +285,15 @@ const Header = ({ checkMyRoom }) => {
       localStorage.removeItem("FCMToken");
     }
   };
+
+  // 문의하기 200자 체크함수
+  const checkMaxLength = (event) => {
+    const inputValue = event.target.value
+    
+    if (inputValue.length <= 200) {
+      setInquiryText(event.target.value)
+    }
+  }
 
   return (
     <>
@@ -514,8 +522,8 @@ const Header = ({ checkMyRoom }) => {
                 className={styles.InquiryContent}
                 placeholder="문의할 내용을 작성해주세요."
                 value={inquiryText}
-                onChange={(e) => setInquiryText(e.target.value)}
-                maxLength={199}
+                onChange={(e) => checkMaxLength(e)}
+                maxLength={200}
               />
             </div>
             <div className={styles.InquiryTextLength}>

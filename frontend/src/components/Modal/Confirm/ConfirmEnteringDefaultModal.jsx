@@ -7,7 +7,11 @@ import { useNavigate } from "react-router-dom"
 import { ArriveAtom } from "../../../atom/SinglePlayAtom"
 import { DefaultPosition, DefaultZoom } from "../../../atom/DefaultSettingAtom"
 import { userAtom } from "../../../atom/UserAtom"
-import { isPostOfficeVisibleAtom } from "../../../atom/PostOfficeAtom"
+import {
+  isPostOfficeVisibleAtom,
+  selectedUserListAtom,
+  selectedUserNicknameListAtom
+} from "../../../atom/PostOfficeAtom"
 import { isPostBoxVisibleAtom } from "../../../atom/PostAtom"
 
 // 스타일
@@ -44,6 +48,8 @@ const ConfirmEnteringDefaultModal = ({
 
   // 우체국 상태 관리
   const setIsPostOfficeVisible = useSetRecoilState(isPostOfficeVisibleAtom)
+  const setSelectedUserList = useSetRecoilState(selectedUserListAtom)
+  const setSelectUserNicknameList = useSetRecoilState(selectedUserNicknameListAtom)
 
   // 우체통 상태 관리
   const setIsPostBoxVisible = useSetRecoilState(isPostBoxVisibleAtom)
@@ -59,15 +65,16 @@ const ConfirmEnteringDefaultModal = ({
     if (location === "house") {
       const roomId = userInfo.roomId
       navigate(`${urlPath}/room/${roomId}`)
+      // 우체국으로 이동
     } else if (location === "postOffice") {
+      setSelectedUserList([])
+      setSelectUserNicknameList([])
       setIsPostOfficeVisible(true)
       setConfirmEnteringLocation(false)
       setIsArrived(false)
-
-      // 우체국으로 이동
     } else if (location === "otherRoom") {
-      const possibleRooms = [1, 3, 4, 6, 19, 21]
-      let randomRoom
+      // const possibleRooms = [1, 3, 4, 6, 19, 21]
+      // let randomRoom
       // do {
       //   randomRoom = possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
       // } while (randomRoom === userInfo.roomId)

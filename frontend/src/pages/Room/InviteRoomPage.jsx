@@ -3,7 +3,7 @@ import Experience from "../../components/Room/Experience"
 import { fetchRoomData } from "../../api/User"
 import { Suspense, useState, useEffect, useRef } from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
-import { ItemsState } from "../../components/Room/Atom"
+import { ItemsState, lightColorState, roomColorState, draggedItemState } from "../../components/Room/Atom"
 import InviteFooter from "../../components/Footer/InviteFooter"
 import styles from "./RoomPage.module.css"
 import InviteHeader from "../../components/Header/InviteHeader"
@@ -20,7 +20,11 @@ function InviteRoomPage() {
   const userInfo = useRecoilValue(userAtom)
   const today = new Date();
   const [time, setTime] = useState();
+  const [roomColor, setRoomColor] = useRecoilState(roomColorState);
+  const [lightColor, setLightColor] = useRecoilState(lightColorState  );
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+  const [drag, setDrag] = useRecoilState(draggedItemState);
+  const [roomDrag, setRoomDrag] = useState(false);
 
   const onRoomHandler = (e) => {
     navigate(`${urlPath}/room/${roomId}`);
@@ -36,6 +40,8 @@ function InviteRoomPage() {
     fetchRoomData(
       roomId,
       (response) => {
+        setRoomColor(response.data.data.wallColor);
+        setLightColor(response.data.data.lightColor);
         setItems(response.data.data.roomFurnitureList)
         setNickName(response.data.data.nickname)
       },
@@ -65,22 +71,45 @@ function InviteRoomPage() {
     }
   }, []);
 
+  // return (
+  //   <div className={`${styles.container}`}>
+  //     <div className={`${styles.newcanvas} ${styles[time]}`}>
+  //       <InviteHeader checkMyRoom={"invite"} />
+  //       <Canvas
+  //         shadows
+  //         gl={{ preserveDrawingBuffer: true, antialias: true }}
+  //         camera={{ fov: 40, zoom: 1.0 }}
+  //         ref={canvasRef}
+  //       >
+  //         <Experience setRoomDrag={setRoomDrag}/>
+  //       </Canvas>
+  //       <InviteFooter props={roomId[0]} />
+  //     </div>
+  //   </div>
+  // )
   return (
-    <div className={`${styles.container}`}>
-      <div className={`${styles.newcanvas} ${styles[time]}`}>
-        <InviteHeader checkMyRoom={"invite"} />
-        <Canvas
-          shadows
-          gl={{ preserveDrawingBuffer: true, antialias: true }}
-          camera={{ fov: 40, zoom: 1.0 }}
-          ref={canvasRef}
-        >
-          <Experience />
-        </Canvas>
-        <InviteFooter props={roomId[0]} />
-      </div>
-    </div>
-  )
+    <>
+      {roomDrag && <div className={styles.roomDrag} />}
+      {time && (
+        <div className={`${styles.container}`}>
+          <div className={`${styles.newcanvas} ${styles[time]}`} id="newcanvas">
+            <Canvas
+              className={styles.canvasCont}
+              shadows
+              dpr={[1, 2]}
+              gl={{ preserveDrawingBuffer: true, antialias: true, pixelRatio: Math.min(2, window.devicePixelRatio) }}
+              camera={{ fov: 45, zoom: 1.1 }}
+              ref={canvasRef}
+              flat={true}
+            >
+              <Experience setRoomDrag={setRoomDrag} />
+            </Canvas>
+          </div>
+          <InviteFooter props={roomId[0]} /> 
+        </div>
+      )}
+    </>
+  );
 }
 
 export default InviteRoomPage

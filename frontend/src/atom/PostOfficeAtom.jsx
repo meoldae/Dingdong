@@ -5,6 +5,11 @@ export const selectedUserListAtom = atom({
   default: [],
 })
 
+export const selectedUserNicknameListAtom = atom({
+  key: "selectedUserNicknameAtom",
+  default: [],
+})
+
 export const isPostOfficeVisibleAtom = atom({
   key: "isPostOfficeVisible",
   default: false,
