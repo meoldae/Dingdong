@@ -6,7 +6,6 @@ import { useRecoilState, useRecoilValue } from "recoil"
 import { userAtom } from "../../atom/UserAtom"
 import { Html } from "@react-three/drei"
 import { MultiUsers } from "../../atom/MultiAtom"
-import { CapsuleCollider, RigidBody } from "@react-three/rapier"
 
 const MOVEMENT_SPEED = 0.032
 const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -34,38 +33,40 @@ export function MultiCharacter({ id, avatarId, nickname, actionId, ...props }) {
 
   const [isPlay, setIsPlay] = useState(false)
 
-  const actionList = [0, { Win: 2800 }, { Sad: 4000 }, { "Song Jump": 7000 }]
+  const actionList = [0, { Win: 2800 }, { Sad: 5700 }, { "Song Jump": 6500 }]
+
+  const actionName = Object.keys(actionList[actionId])[0]
+  const actionTime = Object.values(actionList[actionId])[0]
 
   useEffect(() => {
     if (actionId != 0 && !isPlay) {
-      setIsMoving(false)
       setIsPlay(true)
-      actions.Idle.stop()
-      actions.Run.stop()
-      const actionName = Object.keys(actionList[actionId])[0]
-      const actionTime = Object.values(actionList[actionId])[0]
-      actions[actionName].play()
-
+      setIsMoving(false)
       setTimeout(() => {
         setIsMoving(true)
         setIsPlay(false)
-        actions[actionName].stop()
-        actions.Idle.play()
+        setUsers((prevUsers) => {
+          const newUsers = { ...prevUsers }
+          if (newUsers[id]) {
+            newUsers[id] = { ...newUsers[id], actionId: "0" }
+          }
+          return newUsers
+        })
       }, actionTime)
-
-      setUsers((prevUsers) => {
-        const newUsers = { ...prevUsers }
-        if (newUsers[id]) {
-          newUsers[id] = { ...newUsers[id], actionId: "0" }
-        }
-        return newUsers
-      })
+    } else {
+      setIsPlay(false)
     }
   }, [actionId])
 
   useFrame((state) => {
+    if (actionName == undefined) {
+      actions["Win"].stop()
+      actions["Song Jump"].stop()
+      actions["Sad"].stop()
+    }
     // 이동 중
     if (isMoving && group.current.position.distanceTo(props.position) > 0.1) {
+      setIsPlay(false)
       actions.Idle.stop()
       actions.Run.play()
       const direction = group.current.position
@@ -79,8 +80,14 @@ export function MultiCharacter({ id, avatarId, nickname, actionId, ...props }) {
 
       // 정지
     } else {
-      actions.Run.stop()
-      actions.Idle.play()
+      if (isPlay) {
+        actions[actionName].play()
+        actions.Run.stop()
+        actions.Idle.stop()
+      } else {
+        actions.Run.stop()
+        actions.Idle.play()
+      }
     }
 
     if (user.roomId == id) {
