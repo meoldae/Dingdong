@@ -72,7 +72,7 @@ function SharingModalList(props) {
 
   const shareTwitter = (e) => {
     if (props.shareMode === "room") {
-      const text = `딩동! ${userInfo.nickname}님의 방에 편지를 보내주세요.`
+      const text = `딩동! ${userInfo.nickname}님의 방을 방문해보세요!`
       window.open(
         "https://twitter.com/intent/tweet?text=" +
           text +
@@ -83,12 +83,12 @@ function SharingModalList(props) {
       )
       // props.setSharingAtom(false)
     } else if (props.shareMode === "start") {
-      const text = "나에게 어울리는 우표는?"
+      const text = "딩동! 나에게 어울리는 우표는?"
       window.open(
         "https://twitter.com/intent/tweet?text=" + text + "&url=" + url
       )
     } else if (props.shareMode === "result") {
-      const text = "나에게 어울리는 우표 확인하기"
+      const text = "딩동! 나에게 어울리는 우표는? #딩동우표찾기"
       window.open(
         "https://twitter.com/intent/tweet?text=" + text + "&url=" + url
       )
