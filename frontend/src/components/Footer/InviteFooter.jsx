@@ -69,7 +69,7 @@ const OtherFooter = (props) => {
               <div className={styles.circle} onClick={onHomeHandler}>
                 <div className={styles.button}>
                   <img
-                    src={`${urlPath}/assets/icons/post.png`}
+                    src={`${urlPath}/assets/images/house.png`}
                     className={styles.iconImage}
                   />
                   <div className={styles.buttonContent}>딩동 시작하기</div>
