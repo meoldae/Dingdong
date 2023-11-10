@@ -36,7 +36,7 @@ const PopUpContent = (props) => {
   const [roomColor, setRoomColor] = useRecoilState(roomColorState);
   const [lightColor, setLightColor] = useRecoilState(lightColorState);
   const [colorChange, setColorChange] = useRecoilState(colorChangeState);
-  
+
   const addFurniture = (furnitureId, check) => {
     // 색상 변경 로직 추가
     if (draggedItem === null) {
@@ -204,7 +204,6 @@ const PopUpContent = (props) => {
               className={styles.my}
               color={lightColor}
               onChange={(e) => {
-                console.log(e)
                 setLightColor(e.hex);
               }}
             />
