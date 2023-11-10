@@ -128,7 +128,7 @@ function RandomRoomPage() {
       setTime("dinner");
     }
   }, []);
-  console.log(isMyRoom);
+
   return (
     <>
       {roomDrag && <div className={styles.roomDrag} />}

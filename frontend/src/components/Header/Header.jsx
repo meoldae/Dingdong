@@ -259,7 +259,6 @@ const Header = ({ checkMyRoom }) => {
       setIsPossiblePush(true);
       const permission = await getPermissionRequest();
       if (permission === "denied") {
-        console.log("Permission : ", permission);
         setIsPossiblePush(false);
       } else {
         getToken(messaging, { vapidKey: import.meta.env.VITE_APP_VAPID })
