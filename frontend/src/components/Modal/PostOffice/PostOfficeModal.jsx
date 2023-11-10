@@ -107,7 +107,7 @@ const PostOfficeModal = () => {
             <input
               type="text"
               value={searchText}
-              placeholder="검색"
+              placeholder="닉네임 검색"
               onChange={(e) => searchNicknameHandler(e)}
             />
           </div>
