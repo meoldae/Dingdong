@@ -73,8 +73,11 @@ export function MultiCharacter({
       actions["Sad"].stop()
     }
     // 이동 중
+
     if (isMoving && group.current.position.distanceTo(props.position) > 0.1) {
-      setUserPosition(group.current.position)
+      if (nickname == user.nickname) {
+        setUserPosition(group.current.position)
+      }
       setIsPlay(false)
       actions.Idle.stop()
       actions.Run.play()
