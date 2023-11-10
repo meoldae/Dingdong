@@ -65,7 +65,6 @@ const OtherFooter = (props) => {
       <div className={styles.wrap}>
         <div className={styles.inviteFooter}>
           <div className={styles.background}>
-            <div>
               <div className={styles.circle} onClick={onHomeHandler}>
                 <div className={styles.button}>
                   <img
@@ -89,7 +88,6 @@ const OtherFooter = (props) => {
                   <div className={styles.buttonContent}>방명록 남기기</div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </div>
