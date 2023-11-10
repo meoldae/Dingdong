@@ -4,18 +4,16 @@ import { useState, useEffect } from "react"
 
 // 컴포넌트
 import Card from "../../UI/Card"
-import { successMsg } from "../../../utils/customToast"
-import DefaultModal from "../Default/DefaultModal"
 
 // 스타일
 import styles from "./ReceiveLetter.module.css"
 
 // Atom
 import { letterIdAtom } from "@/atom/LetterAtom"
-import { isReceiveLetterVisibleAtom } from "../../../atom/PostAtom"
+import { isReceiveLetterVisibleAtom , reportPostVisibleAtom } from "../../../atom/PostAtom"
 
 // API
-import { getLetterDetail, reportLetter } from "@/api/Letter"
+import { getLetterDetail } from "@/api/Letter"
 
 
 const RecevieLetter = (props) => {
@@ -24,12 +22,10 @@ const RecevieLetter = (props) => {
 
   // 편지 디테일 정보 상태관리
   const [letterDetail, setLetterDetail] = useState(null)
-  // 신고하기 모달 상태관리
-  const [isReport, setIsReport] = useState(false)
   const [letterStamp, setLetterStamp] = useState(null);
 
-  // 편지 상세 상태관리
-  const setIsReceiveLetterVisible = useSetRecoilState(isReceiveLetterVisibleAtom)
+  // 신고하기 상태관리
+  const setReportPostVisible = useSetRecoilState(reportPostVisibleAtom)
 
   // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -51,28 +47,10 @@ const RecevieLetter = (props) => {
     fetchLetterDetail()
   }, [])
 
-  // 신고하기 함수
-  const reportHandler = () => {
-    reportLetter(
-      letterId,
-      (success) => {
-        setIsReport(false)
-        setIsReceiveLetterVisible(false)
-        successMsg("🚫 신고하기 완료!")
-      },
-      (error) => {
-        'Error at reportLetter...', error
-      }
-    )
-  }
-
   return (
     <>
       {letterDetail ? (
         <div className={styles.receiveLetterContainer}>
-          {/* <div className={styles.xmarkImg} onClick={() => setIsFinishReceiveLetter(true)}>
-            <img src={`${urlPath}/assets/icons/grayXmark.png`} alt="" />
-          </div> */}
           <Card className={`${styles.receiveLetterBox} ${styles[letterStamp]}`}>
             <img className={styles.poststampFrame}
                 src={`${urlPath}/assets/images/poststamp_frame.png`}
@@ -90,7 +68,7 @@ const RecevieLetter = (props) => {
             <span style={{ whiteSpace: 'normal', wordWrap: 'break-word', width: '310px' }} dangerouslySetInnerHTML={{ __html: letterDetail?.description.replaceAll('\n', '<br />') }} />
             </div>
             <div className={styles.footerContainer} style={{ fontFamily: "GangwonEduAll-Light" }}>
-              <div className={styles.report} onClick={() => setIsReport(true)}>
+              <div className={styles.report} onClick={() => setReportPostVisible(true)}>
                 신고하기
               </div>
               <div className={styles.FromUser}>
