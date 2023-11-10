@@ -50,16 +50,16 @@ const OtherFooter = (props) => {
   };
 
   const finishDetailGuestBookHandler = () => {
-    setIsFinishDetailGuestBookVisible(false)
-    setIsDetailGuestBookVisible(false)
-    setIsGuestBookVisible(true)
-  }
+    setIsFinishDetailGuestBookVisible(false);
+    setIsDetailGuestBookVisible(false);
+    setIsGuestBookVisible(true);
+  };
 
   const finishWriteGuestBookHandler = () => {
-    setIsFinishWriteGuestBookVisible(false)
-    setIsWriteGuestBookVisible(false)
-    setIsGuestBookVisible(true)
-  }
+    setIsFinishWriteGuestBookVisible(false);
+    setIsWriteGuestBookVisible(false);
+    setIsGuestBookVisible(true);
+  };
   return (
     <>
       <div className={styles.wrap}>
@@ -97,7 +97,7 @@ const OtherFooter = (props) => {
         <>
           <div
             className={styles.Overlay}
-            onClick={() => setIsFinishGuestBookVisible(true)}
+            onClick={() => setIsGuestBookVisible(false)}
           />
           <div className={styles.GuestBookContainer}>
             <GuestBookModal />
@@ -157,7 +157,11 @@ const OtherFooter = (props) => {
         <>
           <div
             className={styles.Overlay}
-            onClick={() => setIsFinishDetailGuestBookVisible(true)}
+            onClick={() => {
+              setIsDetailGuestBookVisible(false);
+              setIsGuestBookVisible(true);
+
+            }}
           />
           <div className={styles.GuestBookContainer}>
             <DetailGuestBookModal />
