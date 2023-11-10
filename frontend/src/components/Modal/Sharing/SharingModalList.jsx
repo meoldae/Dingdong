@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import SharingModalListItem from "./SharingModalListItem"
 import { kakao, twitter, urlCopy, save } from "./sharingIcon"
 import { useRecoilValue } from "recoil"
@@ -13,9 +13,6 @@ function SharingModalList(props) {
   const kakaoUrl = useRecoilValue(kakaoUrlAtom)
   const userInfo = useRecoilValue(userAtom)
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
-  // console.log(recoilText);
-  const baseURL = "https://ding-dong.s3.ap-northeast-2.amazonaws.com/"
-  // const userNickname = useRecoilValue(userNicknameAtom);
   const url = encodeURI(window.location.href)
   const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY
   const isSafari = () => {
