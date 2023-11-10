@@ -188,7 +188,7 @@ const PopUpContent = (props) => {
       {furnitureList.map((item, index) => (
         <img
           key={index}
-          src={imagePath + `/models/roomitemspng/${item["furnitureId"]}.png`}
+          src={imagePath + `/models/furnitureItemsPng/${item["furnitureId"]}.png`}
           onClick={() => addFurniture(item["furnitureId"], item.categoryId)}
         />
       ))}
