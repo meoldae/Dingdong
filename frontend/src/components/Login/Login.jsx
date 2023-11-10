@@ -21,12 +21,11 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
-      {/* <div id="matterCanvasCon">
-        <LoginMatter />
-      </div> */}
       <div className={styles.logo}>
-        <img src={`${urlPath}/assets/images/logo.png`} alt="" />
-        <img src={`${urlPath}/assets/images/slogun.png`}/>
+        <img src={`${urlPath}/assets/images/logo.png`} alt="로고" />
+      </div>
+      <div className={styles.slogan}>
+        <img src={`${urlPath}/assets/images/slogun.png`} alt="슬로건"/>
       </div>
 
       <div className={styles.buttons}>

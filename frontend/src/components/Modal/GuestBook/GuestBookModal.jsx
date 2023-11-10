@@ -57,6 +57,7 @@ const GuestBookModal = () => {
         <div
           className={styles.Content}
           style={{
+            fontFamily: "GangwonEduAll-Light",
             transform: `rotate(${rotate}deg)`,
             backgroundImage: `url(${urlPath}/assets/icons/postit${colorNum}.png)`,
             backgroundSize: "80px 80px"
