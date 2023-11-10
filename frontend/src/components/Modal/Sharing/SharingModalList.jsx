@@ -33,7 +33,6 @@ function SharingModalList(props) {
         .writeText(currentUrl) // 수정된 currentUrl을 클립보드에 복사
         .then(() => {
           if (props.shareMode === "room") {
-            // console.log(currentUrl)
             alert(`나의 방 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
           } else if (props.shareMode === "start") {
             alert(
