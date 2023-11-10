@@ -12,7 +12,7 @@ const DefaultBtn = ({ btnName, onClick, color }) => {
       onClick={onClick}
       style={checkColor()}
     >
-      <img src={`${urlPath}/assets/images/house.png`} alt="" />
+      <img src={`${urlPath}/assets/images/house.png`} alt="" style={{height: '50px', width: '60px'}}/>
       <p className={styles.ButtonContent}>{btnName}</p>
     </div>
   )
