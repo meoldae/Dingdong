@@ -10,6 +10,8 @@ import { useSetRecoilState } from "recoil";
 import { userAtom } from "@/atom/UserAtom";
 import { successMsg } from "../../utils/customToast";
 import "./signUp.css";
+
+
 const SignUp = () => {
   const navigate = useNavigate();
   const setLoginInfo = useSetRecoilState(userAtom);
@@ -21,6 +23,7 @@ const SignUp = () => {
   const [nickname, setNickname] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [nicknameMessage, setNicknameMessage] = useState("");
+  
   useEffect(() => {
     GetAvatarList(
       (response) => {
@@ -129,13 +132,9 @@ const SignUp = () => {
           setNicknameMessage("사용 가능한 닉네임 입니다!");
         }
       }
-      // (error) => {
-      //   setIsValid(false);
-      //   setNicknameMessage("이미 사용중인 닉네임 입니다!");
-      //   console.log(error);
-      // }
     );
   }, [nickname]);
+
   return (
     <div className={styles.Container}>
       <div className={styles.titleContainer}>
@@ -205,4 +204,5 @@ const SignUp = () => {
     </div>
   );
 };
+
 export default SignUp;

@@ -19,7 +19,6 @@ const PostofficeReceiveLetter = () => {
       (response) => {
         setLetterData(response.data.data); 
         setLetterStamp(response.data.data.stampUrl.split("/").pop().split('.')[0]);
-        console.log(response.data.data.stampUrl.split("/").pop().split('.')[0]);
       },
       (error) => {
         console.error('Error:', error);

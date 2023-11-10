@@ -93,7 +93,6 @@ const OtherFooter = (props) => {
         const isHeartNow = response.data.data === "Y";
         setIsHeart(isHeartNow);
         setHeartCount(prevCount => isHeartNow ? prevCount + 1 : prevCount - 1);
-        console.log(heartCount)
       },
       (error) => {
         console.log("Error with Room Heart... ", error)
