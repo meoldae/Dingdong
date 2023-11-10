@@ -28,7 +28,7 @@ export const MultiPage = () => {
       </div>
       <Canvas shadows camera={{ position: [2, 8, 15], fov: 30, zoom: 0.72 }}>
         <Suspense>
-          <Physics debug>
+          <Physics>
             <MultiRender ref={multiRenderRef} />
           </Physics>
         </Suspense>

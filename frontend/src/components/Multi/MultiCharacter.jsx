@@ -6,6 +6,8 @@ import { useRecoilState, useRecoilValue } from "recoil"
 import { userAtom } from "../../atom/UserAtom"
 import { Html } from "@react-three/drei"
 import { MultiUsers } from "../../atom/MultiAtom"
+import { useLoader } from "@react-three/fiber"
+import { TextureLoader, PlaneGeometry, MeshBasicMaterial, Mesh } from "three"
 
 const MOVEMENT_SPEED = 0.032
 const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -25,6 +27,11 @@ export function MultiCharacter({
 
   const { scene, materials, animations } = useGLTF(
     `${urlPath}/assets/models/characters/${avatarId}.glb`
+  )
+
+  const texture = useLoader(
+    TextureLoader,
+    `${urlPath}/assets/icons/location.png`
   )
 
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene])
@@ -113,6 +120,16 @@ export function MultiCharacter({
 
   return (
     <group ref={group} {...props} dispose={null} position={position}>
+      {closeCharacters[id] && (
+        <mesh position={[0, 2.3, 0]} scale={[1, 1, 1]}>
+          <planeGeometry attach="geometry" args={[1, 1]} />
+          <meshBasicMaterial
+            attach="material"
+            map={texture}
+            transparent={true}
+          />
+        </mesh>
+      )}
       <Html position-y={1.7} center>
         <div
           style={{
@@ -128,10 +145,10 @@ export function MultiCharacter({
             // background: "white",
           }}
         >
-          {closeCharacters[id] && <span> {closeCharacters[id]}</span>}
           {nickname}
         </div>
       </Html>
+
       <group name="Scene">
         <group name="rig">
           <primitive object={nodes.root} />

@@ -27,9 +27,9 @@ export const MultiRender = React.forwardRef((props, ref) => {
     nickname: me.nickname,
     roomId: me.roomId,
     avatarId: me.avatarId,
-    x: Math.random() * 3,
+    x: Math.random() * 2,
     y: 0,
-    z: Math.random() * 3,
+    z: Math.random() * 2,
     actionId: 0,
   }
 
