@@ -13,8 +13,8 @@ const GuidePage = ({ onClick }) => {
       <div className={styles.guideContent}>
         {`Tip! 길을 따라가며 딩동 마을의\n 다양한 컨텐츠를 즐겨보세요! `}
       </div>
-      <div className={styles.guideButton}>
-        <button onClick={onClick}>시작하기</button>
+      <div className={styles.guideButton} onClick={onClick}>
+        <div>시작하기</div>
       </div>
     </div>
   )

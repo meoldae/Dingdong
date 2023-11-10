@@ -6,6 +6,9 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 // 스타일
 import styles from "./SingleMainPage.module.css";
 
+// API
+import { reportLetter } from "../../api/Letter"
+
 // Three.js 기본 세팅
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
@@ -35,6 +38,7 @@ import PostOfficeModal from "../../components/Modal/PostOffice/PostOfficeModal";
 import DefaultModal from "../../components/Modal/Default/DefaultModal";
 import PostBox from "../../components/Modal/Post/PostBox";
 import ReceiveLetter from "../../components/Modal/Post/ReceiveLetter";
+import { successMsg } from "../../utils/customToast";
 
 // Atom
 import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom";
@@ -47,6 +51,7 @@ import {
   isFinishPostBoxVisibleAtom,
   isReceiveLetterVisibleAtom,
   isFinishReceiveLetterVisibleAtom,
+  reportPostVisibleAtom
 } from "../../atom/PostAtom";
 import {
   isPostOfficeVisibleAtom,
@@ -85,6 +90,8 @@ import {
   WorldPortalVisibleAtom,
 } from "../../atom/SinglePlayAtom";
 import { RoomPortalVisibleAtom } from "../../atom/SinglePlayAtom";
+import { letterIdAtom } from "../../atom/LetterAtom"
+
 
 const SingleMainPage = () => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
@@ -211,6 +218,9 @@ const SingleMainPage = () => {
   );
   const [isFinishReceiveLetterVisible, setIsFinishReceiveLetterVisible] =
     useRecoilState(isFinishReceiveLetterVisibleAtom);
+  const [isReportPostVisible, setIsReportPostVisible] = useRecoilState(reportPostVisibleAtom)
+  // 선택된 편지 ID (신고하기 용)
+  const selectedLetterId = useRecoilValue(letterIdAtom)
 
   // 가이드 관리
   useEffect(() => {
@@ -254,6 +264,22 @@ const SingleMainPage = () => {
     setIsReceiveLetterVisible(false);
     setIsPostBoxVisible(true);
   };
+
+  // 신고하기 모달 함수
+  const reportPostHandler = () => {
+    reportLetter(
+      selectedLetterId,
+      (success) => {
+        setIsReportPostVisible(false)
+        setIsReceiveLetterVisible(false)
+        successMsg("✅ 신고가 정상적으로 접수됐습니다!")
+      },
+      (error) => {
+        successMsg("❌ 신고하기에 실패했습니다.")
+        console.log("Error at Report Post...", error)
+      }
+    )
+  }
 
   return (
     <>
@@ -918,6 +944,25 @@ const SingleMainPage = () => {
                 cancel={"아니오"}
                 okClick={() => finishReceiveLetterHandler()}
                 cancelClick={() => setIsFinishReceiveLetterVisible(false)}
+              />
+            </div>
+          </>
+        )}
+
+        {/* 신고하기 모달 */}
+        {isReportPostVisible && (
+          <>
+            <div
+              className={styles.OverOverlay}
+              onClick={() => setIsReportPostVisible(false)}
+            />
+            <div className={styles.FinishOverContainer}>
+              <DefaultModal
+                content={"신고하시겠습니까?"}
+                ok={"네"}
+                cancel={"아니오"}
+                okClick={() => reportPostHandler()}
+                cancelClick={() => setIsReportPostVisible(false)}
               />
             </div>
           </>

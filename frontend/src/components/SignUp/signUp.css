@@ -12,14 +12,10 @@
   margin-top: 20px;
 }
 
-/* .slick-list{
-  width: auto;
-  height: 50vh;
 
-} */
 .slick-slide{
-  /* width: auto; */
-  /* height: 50vh; */
+  width: auto;
+  height: 45vh;
 }
 
 .slick-slide img {
@@ -28,3 +24,4 @@
   height: 45vh;
   box-sizing: border-box;
 }
+

@@ -74,9 +74,10 @@ const DetailGuestBookModal = () => {
               backgroundSize: "250px 250px",
               backgroundRepeat: "no-repeat"
             }}
-          >
-            {guestBookDetailContent.description}
-          </div>
+            dangerouslySetInnerHTML={{ __html: guestBookDetailContent?.description.replaceAll('\n', '<br />') }}
+          />
+            {/* {guestBookDetailContent.description}
+          </div> */}
         </div>
         <div className={styles.TimeContainer}>
           <div className={styles.Time}>
