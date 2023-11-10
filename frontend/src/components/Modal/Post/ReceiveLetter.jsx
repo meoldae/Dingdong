@@ -104,23 +104,6 @@ const RecevieLetter = (props) => {
           편지가 없습니다.
         </div>
       )}
-
-      {/* 신고하기 모달 */}
-      {isReport && (
-        <>
-          <div className={styles.finishOverlay} onClick={() => setIsReport(false)}>
-            <div className={styles.finishContainer}>
-              <DefaultModal
-                content={"신고하시겠습니까?"}
-                ok={"네"}
-                cancel={"아니오"}
-                okClick={() => reportHandler()}
-                cancelClick={() => setIsReport(false)}
-              />
-            </div>
-          </div>
-        </>
-      )}
     </>
   )
 }
