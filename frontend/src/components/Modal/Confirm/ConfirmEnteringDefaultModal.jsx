@@ -10,9 +10,9 @@ import { userAtom } from "../../../atom/UserAtom"
 import {
   isPostOfficeVisibleAtom,
   selectedUserListAtom,
-  selectedUserNicknameListAtom
+  selectedUserNicknameListAtom,
 } from "../../../atom/PostOfficeAtom"
-import { isPostBoxVisibleAtom } from "../../../atom/PostAtom"
+import { isPostBoxVisibleAtom, selectedPostCardAtom } from "../../../atom/PostAtom"
 
 // 스타일
 import styles from "./ConfirmEnteringDefaultModal.module.css"
@@ -50,6 +50,7 @@ const ConfirmEnteringDefaultModal = ({
   const setIsPostOfficeVisible = useSetRecoilState(isPostOfficeVisibleAtom)
   const setSelectedUserList = useSetRecoilState(selectedUserListAtom)
   const setSelectUserNicknameList = useSetRecoilState(selectedUserNicknameListAtom)
+  const setSelectPostCard = useSetRecoilState(selectedPostCardAtom)
 
   // 우체통 상태 관리
   const setIsPostBoxVisible = useSetRecoilState(isPostBoxVisibleAtom)
@@ -69,6 +70,7 @@ const ConfirmEnteringDefaultModal = ({
     } else if (location === "postOffice") {
       setSelectedUserList([])
       setSelectUserNicknameList([])
+      setSelectPostCard([])
       setIsPostOfficeVisible(true)
       setConfirmEnteringLocation(false)
       setIsArrived(false)

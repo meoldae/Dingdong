@@ -49,3 +49,8 @@ export const selectedPostCardAtom = atom({
   key: "selectedPostCardAtom",
   default: null,
 })
+
+export const reportPostVisibleAtom = atom({
+  key: "reportPostVisibleAtom",
+  default: false,
+})

@@ -18,7 +18,6 @@ const SendLetter = ({ onClose, card }) => {
   const userInfo = useRecoilValue(userAtom)
   const [userNickname, setUserNickname] = useState(userInfo.nickname || "")
 
-  // console.log(userInfo);
   const roomInfo = useRecoilValue(roomInfoAtom)
 
   const url = new URL(window.location.href)
@@ -47,10 +46,8 @@ const SendLetter = ({ onClose, card }) => {
       stampId: card.idx,
       roomId: roomId,
     }
-    // console.log(param)
 
     if (!userInfo.accessToken) {
-      // console.log("비회원 편지 전송")
       sendGuestLetter(
         param,
         (response) => {
@@ -63,7 +60,7 @@ const SendLetter = ({ onClose, card }) => {
         }
       )
     } else {
-      // console.log("회원 편지 전송")
+
       sendLetter(
         param,
         (response) => {

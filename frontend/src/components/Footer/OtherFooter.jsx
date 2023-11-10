@@ -93,7 +93,6 @@ const OtherFooter = (props) => {
         const isHeartNow = response.data.data === "Y";
         setIsHeart(isHeartNow);
         setHeartCount(prevCount => isHeartNow ? prevCount + 1 : prevCount - 1);
-        console.log(heartCount)
       },
       (error) => {
         console.log("Error with Room Heart... ", error)
@@ -161,7 +160,7 @@ const OtherFooter = (props) => {
       {/* 방명록 리스트 모달 */}
       {isGuestBookVisible && (
         <>
-          <div className={styles.Overlay} onClick={() => setIsFinishGuestBookVisible(true)} />
+          <div className={styles.Overlay} onClick={() => setIsGuestBookVisible(false)} />
           <div className={styles.GuestBookContainer}>
             <GuestBookModal />
           </div>
@@ -213,7 +212,8 @@ const OtherFooter = (props) => {
       {/* 방명록 상세 모달 */}
       {isDetailGuestBookVisible && (
         <>
-          <div className={styles.Overlay} onClick={() => setIsFinishDetailGuestBookVisible(true)} />
+          <div className={styles.Overlay} onClick={() => {setIsDetailGuestBookVisible(false)
+          setIsGuestBookVisible(true)}} />
           <div className={styles.GuestBookContainer}>
             <DetailGuestBookModal />
           </div>

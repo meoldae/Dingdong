@@ -6,6 +6,9 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 // 스타일
 import styles from "./SingleMainPage.module.css";
 
+// API
+import { reportLetter } from "../../api/Letter"
+
 // Three.js 기본 세팅
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
@@ -35,6 +38,7 @@ import PostOfficeModal from "../../components/Modal/PostOffice/PostOfficeModal";
 import DefaultModal from "../../components/Modal/Default/DefaultModal";
 import PostBox from "../../components/Modal/Post/PostBox";
 import ReceiveLetter from "../../components/Modal/Post/ReceiveLetter";
+import { successMsg } from "../../utils/customToast";
 
 // Atom
 import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom";
@@ -47,6 +51,7 @@ import {
   isFinishPostBoxVisibleAtom,
   isReceiveLetterVisibleAtom,
   isFinishReceiveLetterVisibleAtom,
+  reportPostVisibleAtom
 } from "../../atom/PostAtom";
 import {
   isPostOfficeVisibleAtom,
@@ -85,6 +90,8 @@ import {
   WorldPortalVisibleAtom,
 } from "../../atom/SinglePlayAtom";
 import { RoomPortalVisibleAtom } from "../../atom/SinglePlayAtom";
+import { letterIdAtom } from "../../atom/LetterAtom"
+
 
 const SingleMainPage = () => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
@@ -211,6 +218,9 @@ const SingleMainPage = () => {
   );
   const [isFinishReceiveLetterVisible, setIsFinishReceiveLetterVisible] =
     useRecoilState(isFinishReceiveLetterVisibleAtom);
+  const [isReportPostVisible, setIsReportPostVisible] = useRecoilState(reportPostVisibleAtom)
+  // 선택된 편지 ID (신고하기 용)
+  const selectedLetterId = useRecoilValue(letterIdAtom)
 
   // 가이드 관리
   useEffect(() => {
@@ -255,6 +265,22 @@ const SingleMainPage = () => {
     setIsPostBoxVisible(true);
   };
 
+  // 신고하기 모달 함수
+  const reportPostHandler = () => {
+    reportLetter(
+      selectedLetterId,
+      (success) => {
+        setIsReportPostVisible(false)
+        setIsReceiveLetterVisible(false)
+        successMsg("✅ 신고가 정상적으로 접수됐습니다!")
+      },
+      (error) => {
+        successMsg("❌ 신고하기에 실패했습니다.")
+        console.log("Error at Report Post...", error)
+      }
+    )
+  }
+
   return (
     <>
       <div className={styles.canvasContainer}>
@@ -281,7 +307,7 @@ const SingleMainPage = () => {
           {/* <Spot /> */}
           {/* <House /> */}
 
-          {/* 경계 */}
+          {/* 외곽 경계 */}
           <PhysicsModel // 상
             position={[0, 0.005, -17]}
             rotation={[0, 0, 0]}
@@ -301,6 +327,187 @@ const SingleMainPage = () => {
             position={[24.6, 0.005, 14]}
             rotation={[0, Math.PI / 2, 0]}
             size={[62, 0.3]}
+          />
+
+          {/* 집 경계 */}
+          <PhysicsModel // 집 뒤
+            position={[0.3, 0.005, -8]}
+            rotation={[0, 0, 0]}
+            size={[8, 0.3]}
+          />
+          <PhysicsModel //좌
+            position={[-4, 0.005, -4]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[6, 0.3]}
+          />
+
+          <PhysicsModel //우
+            position={[4.5, 0.005, -4]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[6, 0.3]}
+          />
+          <PhysicsModel // 집 앞 왼쪽
+            position={[-2.2, 0.005, -0.6]}
+            rotation={[0, 0, 0]}
+            size={[2.6, 0.3]}
+          />
+          <PhysicsModel // 집 앞 오른쪽
+            position={[3, 0.005, -0.6]}
+            rotation={[0, 0, 0]}
+            size={[2.6, 0.3]}
+          />
+          <PhysicsModel //  우체통
+            position={[2.2, 0.005, 0.3]}
+            rotation={[0, 0, 0]}
+            size={[0.2, 0.3]}
+          />
+
+          {/* 우체국 경계 */}
+          <PhysicsModel //뒤
+            position={[12, 0.005, -7.8]}
+            rotation={[0, 0, 0]}
+            size={[9.6, 0.3]}
+          />
+          <PhysicsModel //좌
+            position={[6.7, 0.005, -5.3]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[5.8, 0.3]}
+          />
+          <PhysicsModel //우
+            position={[16.7, 0.005, -5.3]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[5.8, 0.3]}
+          />
+          <PhysicsModel //앞 좌
+            position={[7.7, 0.005, -2]}
+            rotation={[0, 0, 0]}
+            size={[2, 0.3]}
+          />
+          <PhysicsModel //앞 우
+            position={[15, 0.005, -2]}
+            rotation={[0, 0, 0]}
+            size={[3.5, 0.3]}
+          />
+
+          {/* 이웃마을 경계 */}
+          <PhysicsModel // 뒤
+            position={[-8.7, 0.005, 2.9]}
+            rotation={[0, 0, 0]}
+            size={[6.8, 0.3]}
+          />
+          <PhysicsModel // 우 상
+            position={[-5.1, 0.005, 4]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[2.8, 0.3]}
+          />
+          <PhysicsModel // 우 하
+            position={[-5.1, 0.005, 9]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[2.2, 0.3]}
+          />
+          <PhysicsModel // 앞
+            position={[-8.7, 0.005, 10]}
+            rotation={[0, 0, 0]}
+            size={[6.8, 0.3]}
+          />
+          <PhysicsModel // 좌
+            position={[-12.2, 0.005, 6]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[6, 0.3]}
+          />
+
+          <PhysicsModel // 집
+            position={[-9.5, 0.005, 6]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[6, 0.3]}
+          />
+          <PhysicsModel // 노랑차
+            position={[-5.8, 0.005, 5]}
+            rotation={[0, 0, 0]}
+            size={[1, 0.3]}
+          />
+          <PhysicsModel // 빨간차
+            position={[-7.7, 0.005, 5]}
+            rotation={[0, 0, 0]}
+            size={[1, 0.3]}
+          />
+          <PhysicsModel // 분홍차
+            position={[-7.9, 0.005, 8]}
+            rotation={[0, 0, 0]}
+            size={[1, 0.3]}
+          />
+          <PhysicsModel // 파랑차
+            position={[-6, 0.005, 8]}
+            rotation={[0, 0, 0]}
+            size={[1, 0.3]}
+          />
+          
+          {/* 시상대 */}
+          <PhysicsModel // 우
+            position={[-9.3, 0.005, 17]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[2.3, 0.3]}
+          />
+          <PhysicsModel // 좌
+            position={[-10.5, 0.005, 17]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[2.3, 0.3]}
+          />
+          <PhysicsModel // 뒤
+            position={[-9.6, 0.005, 15]}
+            rotation={[0, 0, 0]}
+            size={[0.5, 0.3]}
+          />
+          <PhysicsModel // 뒤
+            position={[-9.8, 0.005, 18]}
+            rotation={[0, 0, 0]}
+            size={[0.5, 0.3]}
+          />
+
+          {/* 간판 */}
+          <PhysicsModel //좌
+            position={[-6.5, 0.005, -3]}
+            rotation={[0, Math.PI / 4.8, 0]}
+            size={[3, 0.3]}
+          />
+
+          {/* 분수대 */}
+          <PhysicsModel // 좌
+            position={[-1.7, 0.005, 26]}
+            rotation={[0, Math.PI / 3, 0]}
+            size={[3.5, 0.3]}
+          />
+          <PhysicsModel // 우
+            position={[1.3, 0.005, 26]}
+            rotation={[0, Math.PI / -5, 0]}
+            size={[2.8, 0.3]}
+          />
+          <PhysicsModel // 좌 하
+            position={[-1.5, 0.005, 29.5]}
+            rotation={[0, Math.PI / -4, 0]}
+            size={[4, 0.3]}
+          />
+          <PhysicsModel // 우 하
+            position={[1.8, 0.005, 29.5]}
+            rotation={[0, Math.PI / 3, 0]}
+            size={[3.5, 0.3]}
+          />
+
+          {/* 이정표 */}
+          <PhysicsModel // 이웃마을
+            position={[-1.3, 0.005, 5.2]}
+            rotation={[0, 0, 0]}
+            size={[0.2, 0.3]}
+          />
+          <PhysicsModel // 우체국
+            position={[4.1, 0.005, 5.2]}
+            rotation={[0, 0, 0]}
+            size={[0.2, 0.3]}
+          />
+          <PhysicsModel // 시상대
+            position={[-2, 0.005, 15]}
+            rotation={[0, 0, 0]}
+            size={[0.2, 0.3]}
           />
 
           {/* 포탈 */}
@@ -737,6 +944,25 @@ const SingleMainPage = () => {
                 cancel={"아니오"}
                 okClick={() => finishReceiveLetterHandler()}
                 cancelClick={() => setIsFinishReceiveLetterVisible(false)}
+              />
+            </div>
+          </>
+        )}
+
+        {/* 신고하기 모달 */}
+        {isReportPostVisible && (
+          <>
+            <div
+              className={styles.OverOverlay}
+              onClick={() => setIsReportPostVisible(false)}
+            />
+            <div className={styles.FinishOverContainer}>
+              <DefaultModal
+                content={"신고하시겠습니까?"}
+                ok={"네"}
+                cancel={"아니오"}
+                okClick={() => reportPostHandler()}
+                cancelClick={() => setIsReportPostVisible(false)}
               />
             </div>
           </>

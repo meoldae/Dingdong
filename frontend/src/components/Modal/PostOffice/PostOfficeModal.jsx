@@ -38,16 +38,17 @@ const PostOfficeModal = () => {
   const searchNicknameHandler = (event) => {
     const newText = event.target.value
     setSearchText(newText)
-
-    fetchSerchNickname(
-      newText,
-      (success) => {
-        setSearchResult(success.data.data)
-      },
-      (error) => {
-        // console.log("Error at Search Nickname...", error)
-      }
-    )
+    if (newText.length !== 0) {
+      fetchSerchNickname(
+        newText,
+        (success) => {
+          setSearchResult(success.data.data)
+        },
+        (error) => {
+          // console.log("Error at Search Nickname...", error)
+        }
+      )
+    } 
   }
 
   // memberId & nickname 토글 함수
@@ -106,7 +107,7 @@ const PostOfficeModal = () => {
             <input
               type="text"
               value={searchText}
-              placeholder="검색"
+              placeholder="닉네임 검색"
               onChange={(e) => searchNicknameHandler(e)}
             />
           </div>
@@ -143,15 +144,6 @@ const PostOfficeModal = () => {
                 </div>
               ))
           )}
-          {/* {tempMemberNicknameList.length === 0 ? (
-            <></>
-          ) : (
-              tempMemberNicknameList.map((item, index) => (
-                <div key={index} className={styles.checkedUserNickname} onClick={() => {console.log(item) }} >
-                  {item} &nbsp;×
-                </div>
-              ))
-          )} */}
         </div>
         <div
           className={styles.Button}
