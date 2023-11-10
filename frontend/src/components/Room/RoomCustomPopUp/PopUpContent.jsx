@@ -19,6 +19,7 @@ import {
   HuePicker,
   AlphaPicker,
   CirclePicker,
+  CompactPicker,
 } from "react-color";
 const PopUpContent = (props) => {
   const [furnitureList, setFurnitureList] = useState([]);
@@ -36,7 +37,9 @@ const PopUpContent = (props) => {
   const [roomColor, setRoomColor] = useRecoilState(roomColorState);
   const [lightColor, setLightColor] = useRecoilState(lightColorState);
   const [colorChange, setColorChange] = useRecoilState(colorChangeState);
-
+  const [colorCheck, setColorCheck] = useState(false);
+  const [wall, setWall] = useState("click");
+  const [light, setLight] = useState("none");
   const addFurniture = (furnitureId, check) => {
     // 색상 변경 로직 추가
     if (draggedItem === null) {
@@ -144,69 +147,96 @@ const PopUpContent = (props) => {
   ];
 
   const lightColors = [
-    "#FF6347",
-    "#FF0000",
-    "#DC143C",
-    "#B22222",
-    "#FF4500",
-    "#FF8C00",
-    "#FFA500",
-    "#FF7F50",
-    "#FFFF00",
-    "#FFFFE0",
-    "#FFFACD",
-    "#FFD700",
-    "#008000",
-    "#00FF00",
-    "#7CFC00",
-    "#ADFF2F",
-    "#0000FF",
-    "#0000CD",
-    "#ADD8E6",
-    "#87CEEB",
-    "#4B0082",
-    "#191970",
-    "#000080",
-    "#6A5ACD",
-    "#800080",
-    "#8A2BE2",
-    "#9370DB",
-    "#DDA0DD",
-    "#FFC0CB",
-    "#FF69B4",
-    "#FF1493",
-    "#ffffff",
+    "#b80000",
+    "#db3e00",
+    "#fccb00",
+    "#008b02",
+    "#006b76",
+    "#1273de",
+    "#004dcf",
+    "#5300eb",
+    "#F36B59",
+    "#7a706c",
+    "#023664",
+    "#000000",
+    "#ececec",
+    "#D9E3F0",
+    "#ffc8dd",
+    "#eb9694",
+    "#fad0c3",
+    "#fef3bd",
+    "#c1e1c5",
+    "#bedadc",
+    "#c4def6",
+    "#bed3f3",
+    "#d4c4fb",
+    "#A8B3D7",
   ];
+
+  const handleColorChangeWall = () =>{
+    setColorCheck(true);
+    setWall("click");
+    setLight("none");
+  }
+  const handleColorChangeLight = () =>{
+    setColorCheck(false);
+    setLight("click");
+    setWall("none");
+  }
   return (
     <div className={styles.furnitureContainer}>
       {furnitureList.map((item, index) => (
         <img
           key={index}
-          src={imagePath + `/models/furnitureItemsPng/${item["furnitureId"]}.png`}
+          src={imagePath + `/models/roomitemspng/${item["furnitureId"]}.png`}
           onClick={() => addFurniture(item["furnitureId"], item.categoryId)}
         />
       ))}
       <div className={styles.endPoint} ref={target}>
         {colorChange ? (
           <>
-            <div className={styles.colorsetting}>
-              <h3>벽 색상을 변경해봐요!</h3>
-              <CirclePicker
-                colors={wallColors}
-                circleSize={30}
-                width="300px"
-                circleSpacing={7}
-                onChange={(e) => setRoomColor(e.hex)}
-              />
-              <h3>조명을 바꿔봐요!</h3>
+            <div className={styles.btn}>
+              <div
+                onClick={() => {
+                  handleColorChangeWall();
+                }}
+                className={`${styles.btndiv} ${styles[wall]}`}
+              >
+                벽지
+              </div>
+              <div
+                onClick={() => {
+                  handleColorChangeLight();
+                }}
+                className={`${styles.btndiv} ${styles[light]}`}
+              >
+                조명
+              </div>
             </div>
-            <SliderPicker
-              className={styles.my}
-              color={lightColor}
-              onChange={(e) => {
-                setLightColor(e.hex);
-              }}
-            />
+            <div className={styles.colorsetting}>
+              {colorCheck ? (
+                <>
+                  <h3>벽을 색칠해봐요!</h3>
+                  <CirclePicker
+                    className={styles.border}
+                    colors={wallColors}
+                    circleSize={30}
+                    width="300px"
+                    circleSpacing={7}
+                    onChange={(e) => setRoomColor(e.hex)}
+                  />
+                </>
+              ) : (
+                <>
+                  <h3>조명을 바꿔봐요!</h3>
+                  <GithubPicker
+                    colors={lightColors}
+                    width="300px"
+                    onChange={(e) => setLightColor(e.hex)}
+                  />
+                </>
+              )}
+            </div>
           </>
         ) : null}
       </div>
