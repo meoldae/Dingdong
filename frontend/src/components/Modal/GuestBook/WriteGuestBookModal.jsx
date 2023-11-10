@@ -68,7 +68,7 @@ const WriteGuestBookModal = ({ check }) => {
       const degree = randomDegree(-15, 15)
       const params = {
         roomId: nowRoomId,
-        description: content,
+        description: content.replaceAll("<br>","\r\n"),
         color: isColor,
         rotate: degree,
       };
