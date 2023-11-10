@@ -143,15 +143,6 @@ const PostOfficeModal = () => {
                 </div>
               ))
           )}
-          {/* {tempMemberNicknameList.length === 0 ? (
-            <></>
-          ) : (
-              tempMemberNicknameList.map((item, index) => (
-                <div key={index} className={styles.checkedUserNickname} onClick={() => {console.log(item) }} >
-                  {item} &nbsp;×
-                </div>
-              ))
-          )} */}
         </div>
         <div
           className={styles.Button}
