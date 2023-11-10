@@ -96,8 +96,13 @@ const SignUp = () => {
   }
 
   const doubleCheckHandler = (e) => {
-    setNickname(e.target.value);
+    const inputValue = e.target.value
+    
+    if (inputValue.length <= 5) {
+      setNickname(e.target.value);
+    }
   };
+
   useEffect(() => {
     if (nickname === "") {
       setIsValid(false);

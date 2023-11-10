@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom"
 const StampTestStart = (props) => {
   const navigate = useNavigate()
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
-  const onHomeHandler = (e) => {
-    navigate(`${urlPath}/`)
+  const onHomeHandler = (e) => { 
+    window.location.replace(`${urlPath}/`)
   }
   return (
     <div
