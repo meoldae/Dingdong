@@ -21,7 +21,7 @@ const PhysicsModel = ({ position, rotation, size }) => {
         visible="none"
         transparent
         opacity={0.2}
-        color={"red"}
+        color={"none"}
       />
     </mesh>
   )
