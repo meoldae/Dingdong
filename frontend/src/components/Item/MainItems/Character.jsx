@@ -90,7 +90,6 @@ const Character = () => {
 
     if (characterRef.current) {
       const distance = position.distanceTo(destination)
-      // console.log(distance)
 
       // 싱글 플레이
       if (isArrived) {
