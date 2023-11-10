@@ -23,13 +23,13 @@ import {
 } from "../../api/Neighbor"
 import { fetchLogout, fetchUserSecession } from "../../api/User"
 import { fetchInquiry } from "../../api/Cs"
-import { setFCMTokenAtServer, deleteFCMTokenAtServer } from "@/api/FCM"
+// import { setFCMTokenAtServer, deleteFCMTokenAtServer } from "@/api/FCM"
 
 // Atom
 import { userAtom } from "../../atom/UserAtom"
 
 // FCM 
-import { getMessaging, getToken} from "firebase/messaging";
+// import { getMessaging, getToken} from "firebase/messaging";
 
 
 const SingleHeader = ({ checkMyRoom }) => {
@@ -173,46 +173,46 @@ const SingleHeader = ({ checkMyRoom }) => {
   }
 
   // FCM 설정
-  const messaging = getMessaging();
+  // const messaging = getMessaging();
 
-  const getPermissionRequest = async () => {
-    const permission = await Notification.requestPermission();
-    return permission;
-  }
+  // const getPermissionRequest = async () => {
+  //   const permission = await Notification.requestPermission();
+  //   return permission;
+  // }
 
   // FCM 알림 권한 설정
-  const pushToggleChange = async () => {
-    if (!Notification) {
-      return;
-    }
+  // const pushToggleChange = async () => {
+  //   if (!Notification) {
+  //     return;
+  //   }
 
-    if (isPossiblePush === false) {
-      setIsPossiblePush(true)
-      const permission = await getPermissionRequest();
-      if (permission === "denied") {
-        setIsPossiblePush(false)
-      } else {
-        getToken(messaging, { vapidKey: import.meta.env.VITE_APP_VAPID })
-        .then((currentToken) => {
-          if (currentToken) {
-            setFCMTokenAtServer(currentToken);
-          } else {
-            setIsPossiblePush(false);
-            console.log('No registration token available. Request permission to generate one.');
-            return null;
-          }
-        }).catch((err) => {
-          setIsPossiblePush(false);
-          console.log('An error occurred while retrieving token. ', err);
-          return null;
-        });
-      }
-    } else if (isPossiblePush === true) {
-      setIsPossiblePush(false);
-      deleteFCMTokenAtServer();
-      localStorage.removeItem("FCMToken");
-    }
-  }
+  //   if (isPossiblePush === false) {
+  //     setIsPossiblePush(true)
+  //     const permission = await getPermissionRequest();
+  //     if (permission === "denied") {
+  //       setIsPossiblePush(false)
+  //     } else {
+  //       getToken(messaging, { vapidKey: import.meta.env.VITE_APP_VAPID })
+  //       .then((currentToken) => {
+  //         if (currentToken) {
+  //           setFCMTokenAtServer(currentToken);
+  //         } else {
+  //           setIsPossiblePush(false);
+  //           console.log('No registration token available. Request permission to generate one.');
+  //           return null;
+  //         }
+  //       }).catch((err) => {
+  //         setIsPossiblePush(false);
+  //         console.log('An error occurred while retrieving token. ', err);
+  //         return null;
+  //       });
+  //     }
+  //   } else if (isPossiblePush === true) {
+  //     setIsPossiblePush(false);
+  //     deleteFCMTokenAtServer();
+  //     localStorage.removeItem("FCMToken");
+  //   }
+  // }
 
   // 문의하기 200자 체크함수
   const checkMaxLength = (event) => {

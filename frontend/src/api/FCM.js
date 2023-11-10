@@ -60,4 +60,4 @@ const setFCMTokenAtServer = (token) => {
 //     }
 // }
 
-export { app, messaging, createToken, deleteToken, firebaseConfig, getFirebaseToken, setFCMTokenAtServer, deleteFCMTokenAtServer };
+// export { app, messaging, createToken, deleteToken, firebaseConfig, getFirebaseToken, setFCMTokenAtServer, deleteFCMTokenAtServer };
