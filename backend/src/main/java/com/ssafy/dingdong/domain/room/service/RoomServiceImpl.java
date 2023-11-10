@@ -105,6 +105,8 @@ public class RoomServiceImpl implements RoomService {
 	public Long createRoom(String memberId) {
 		Room room = Room.builder()
 			.memberId(memberId)
+			.lightColor("#FFFFFF")
+			.wallColor("#D9E3F0")
 			.build();
 		roomRepository.save(room);
 		return room.getRoomId();
