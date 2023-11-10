@@ -10,6 +10,8 @@ import { useSetRecoilState } from "recoil";
 import { userAtom } from "@/atom/UserAtom";
 import { successMsg } from "../../utils/customToast";
 import "./signUp.css";
+
+
 const SignUp = () => {
   const navigate = useNavigate();
   const setLoginInfo = useSetRecoilState(userAtom);
@@ -21,6 +23,7 @@ const SignUp = () => {
   const [nickname, setNickname] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [nicknameMessage, setNicknameMessage] = useState("");
+  
   useEffect(() => {
     GetAvatarList(
       (response) => {
