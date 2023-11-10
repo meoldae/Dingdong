@@ -66,9 +66,12 @@
 .btndiv {
     border: 0;
     width: 50%;
+    height: 35px;
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    align-items: center;
+    /* margin-top: 10px; */
+    font-size: 17px;
 }
 
 .btndiv.none{
