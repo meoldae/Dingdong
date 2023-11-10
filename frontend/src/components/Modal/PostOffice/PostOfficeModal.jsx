@@ -38,16 +38,17 @@ const PostOfficeModal = () => {
   const searchNicknameHandler = (event) => {
     const newText = event.target.value
     setSearchText(newText)
-
-    fetchSerchNickname(
-      newText,
-      (success) => {
-        setSearchResult(success.data.data)
-      },
-      (error) => {
-        // console.log("Error at Search Nickname...", error)
-      }
-    )
+    if (newText.length !== 0) {
+      fetchSerchNickname(
+        newText,
+        (success) => {
+          setSearchResult(success.data.data)
+        },
+        (error) => {
+          // console.log("Error at Search Nickname...", error)
+        }
+      )
+    } 
   }
 
   // memberId & nickname 토글 함수
