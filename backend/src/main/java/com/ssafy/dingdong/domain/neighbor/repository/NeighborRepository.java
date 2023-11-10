@@ -16,6 +16,13 @@ public interface NeighborRepository extends JpaRepository<Neighbor, Long> {
 
 	Optional<Neighbor> findByApplicantIdAndAcceptorId(UUID applicantId, UUID acceptorId);
 
+	@Query("SELECT DISTINCT n "
+		+ "  FROM Neighbor n"
+		+ "  WHERE n.connectTime IS NOT NULL "
+		+ "   AND n.cancelTime IS NULL "
+		+ "   AND ( (n.acceptorId = :acceptorId AND n.applicantId = :applicantId) OR ( n.applicantId = :acceptorId AND n.acceptorId = :applicantId ) ) ")
+	Optional<Neighbor> isNeighborByApplicantIdAndAcceptorId(UUID applicantId, UUID acceptorId);
+
 	Optional<Neighbor> findByNeighborId(Long neighborId);
 
 	void deleteByNeighborId(Long neighborId);

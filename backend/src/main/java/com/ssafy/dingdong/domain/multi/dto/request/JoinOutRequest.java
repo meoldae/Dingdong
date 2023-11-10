@@ -10,6 +10,7 @@ public class JoinOutRequest {
 
     private Long avatarId;
     private Long roomId;
+    private Integer actionId;
     private double x;
     private double y;
     private double z;

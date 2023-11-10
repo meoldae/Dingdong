@@ -59,11 +59,14 @@ public class MultiController {
 
     // 사용자 상호작용
     @MessageMapping("/action/{channelId}")
-    public void actionChannel(@DestinationVariable Long channelId, ActionRequest request) {
-        log.info("Action OK={}", request);
+    public void actionChannel(@DestinationVariable Long channelId, UserSession userSession) {
+        log.info("Action OK={}", userSession);
 
+        ActionRequest result = new ActionRequest(channelId, userSession.getRoomId(), userSession.getActionId());
         // Redis에 사용자 정보를 저장
-        messagingTemplate.convertAndSend("/sub/channel/" + channelId, request);
+        messagingTemplate.convertAndSend("/sub/action/" + channelId, result);
+
+//        multiRepository.updateAction(userSession);
     }
 
     @GetMapping("/multi/{channelId}")
