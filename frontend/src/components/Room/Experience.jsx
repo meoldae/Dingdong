@@ -47,8 +47,8 @@ const Experience = ({ setRoomDrag }) => {
   const [lightColor, setLightColor] = useRecoilState(lightColorState);
   // setColor("#D8BFD8")
   // FFDAB9
-// AFEEEE
-//D8BFD8
+  // AFEEEE
+  //D8BFD8
   // onPlaneClicked 이벤트에 예외처리
   useEffect(() => {
     if (draggedItem === null) {
@@ -188,7 +188,10 @@ const Experience = ({ setRoomDrag }) => {
       if (item.categoryId === 3 && item.rotation) {
         if (otherItem.position[0] - otherWidth / 2 <= 0) {
           if (
-            dragPosition[1] - thick / 2 < otherThick &&
+            dragPosition[1] - thick / 2 <
+              otherItem.position[1] + otherThick / 2 &&
+            dragPosition[1] + thick / 2 >
+              otherItem.position[1] - otherThick / 2 &&
             dragPosition[2] + height / 2 >
               otherItem.position[2] - otherHeight / 2 &&
             dragPosition[2] - height / 2 <
@@ -202,7 +205,10 @@ const Experience = ({ setRoomDrag }) => {
       if (item.categoryId === 3 && !item.rotation) {
         if (otherItem.position[2] - otherHeight / 2 <= 0) {
           if (
-            dragPosition[1] - thick / 2 < otherThick &&
+            dragPosition[1] - thick / 2 <
+              otherItem.position[1] + otherThick / 2 &&
+            dragPosition[1] + thick / 2 >
+              otherItem.position[1] - otherThick / 2 &&
             dragPosition[0] + width / 2 >
               otherItem.position[0] - otherWidth / 2 &&
             dragPosition[0] - width / 2 < otherItem.position[0] + otherWidth / 2
