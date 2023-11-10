@@ -10,7 +10,15 @@ import { MultiUsers } from "../../atom/MultiAtom"
 const MOVEMENT_SPEED = 0.032
 const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
-export function MultiCharacter({ id, avatarId, nickname, actionId, ...props }) {
+export function MultiCharacter({
+  id,
+  avatarId,
+  nickname,
+  actionId,
+  closeCharacters,
+  setUserPosition,
+  ...props
+}) {
   const position = useMemo(() => props.position, [])
   const group = useRef()
   const avatarKey = ["f", "f_1", "f_7", "f_12", "m_5", "m_11", "m_12"]
@@ -66,6 +74,7 @@ export function MultiCharacter({ id, avatarId, nickname, actionId, ...props }) {
     }
     // 이동 중
     if (isMoving && group.current.position.distanceTo(props.position) > 0.1) {
+      setUserPosition(group.current.position)
       setIsPlay(false)
       actions.Idle.stop()
       actions.Run.play()
@@ -105,6 +114,7 @@ export function MultiCharacter({ id, avatarId, nickname, actionId, ...props }) {
         <div
           style={{
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             width: "100px",
@@ -115,6 +125,7 @@ export function MultiCharacter({ id, avatarId, nickname, actionId, ...props }) {
             // background: "white",
           }}
         >
+          {closeCharacters[id] && <span> {closeCharacters[id]}</span>}
           {nickname}
         </div>
       </Html>

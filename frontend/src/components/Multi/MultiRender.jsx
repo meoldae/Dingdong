@@ -9,6 +9,7 @@ import { userAtom } from "../../atom/UserAtom"
 import { MultiUsers, actionState } from "../../atom/MultiAtom"
 import axios from "axios"
 import { RigidBody } from "@react-three/rapier"
+import { useFrame } from "@react-three/fiber"
 
 export const MultiRender = React.forwardRef((props, ref) => {
   // 맵 클릭 함수
@@ -196,6 +197,64 @@ export const MultiRender = React.forwardRef((props, ref) => {
     })
   }
 
+  const [closeCharacters, setCloseCharacters] = useState({})
+
+  // 캐릭터가 멈췄을 때 반영하는 코드 (과부화 방지)
+  // useEffect(() => {
+  //   const checkDistances = () => {
+  //     const newCloseCharacters = {}
+  //     const userPosition = new THREE.Vector3(
+  //       users[me.roomId].x,
+  //       users[me.roomId].y,
+  //       users[me.roomId].z
+  //     )
+
+  //     Object.values(users).forEach((user) => {
+  //       if (user.roomId !== me.roomId) {
+  //         const otherUserPosition = new THREE.Vector3(user.x, user.y, user.z)
+  //         const distance = userPosition.distanceTo(otherUserPosition)
+
+  //         // 가까운 경우에만 newCloseCharacters에 추가
+  //         if (distance < 2) {
+  //           newCloseCharacters[user.roomId] = user.roomId
+  //         }
+  //       }
+  //     })
+
+  //     // 상태를 완전히 새로운 객체로 업데이트하여 멀어진 캐릭터들을 제거
+  //     setCloseCharacters(newCloseCharacters)
+  //   }
+
+  //   const intervalId = setInterval(checkDistances, 1000) // 매 1초마다 거리 체크
+
+  //   return () => {
+  //     clearInterval(intervalId)
+  //   }
+  // }, [users, me])
+
+  // 처음 포지션 다시 설정해야함
+  const [userPosition, setUserPosition] = useState(new THREE.Vector3(0, 0, 0))
+
+  useFrame(() => {
+    const newCloseCharacters = {}
+
+    // 모든 사용자를 순회하며 거리를 체크합니다.
+    Object.values(users).forEach((user) => {
+      if (user.roomId !== me.roomId) {
+        const otherUserPosition = new THREE.Vector3(user.x, user.y, user.z)
+        const distance = userPosition.distanceTo(otherUserPosition)
+
+        // 가까운 경우에만 newCloseCharacters에 추가합니다.
+        if (distance < 5) {
+          newCloseCharacters[user.roomId] = user.roomId
+        }
+      }
+    })
+
+    // 상태를 업데이트합니다.
+    setCloseCharacters(newCloseCharacters)
+  })
+
   return (
     <>
       <Environment preset="sunset" />
@@ -225,6 +284,8 @@ export const MultiRender = React.forwardRef((props, ref) => {
             }
             nickname={users[idx].nickname}
             actionId={users[idx].actionId}
+            closeCharacters={closeCharacters}
+            setUserPosition={setUserPosition}
           />
         </group>
       ))}
