@@ -39,7 +39,7 @@
   font-size: 20px;
 }
 
-.heartRoom{
+.heartRoom {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,7 +47,7 @@
   flex-direction: column;
 }
 
-.heartPosition{
+.heartPosition {
   position: absolute;
   top: 75px;
   display: flex;
@@ -55,17 +55,17 @@
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.85); /* 흰색 배경에 50% 투명도 */
   border-radius: 40em;
-  width: 25%; 
-  box-sizing: border-box; 
+  width: 25%;
+  box-sizing: border-box;
 }
 
-.heartPosition img{
+.heartPosition img {
   width: 24px;
   height: auto;
   /* margin: 5px; */
 }
 
-.heartPosition p{
+.heartPosition p {
   margin: 5px 10px 0 10px;
   /* margin-top: 5px; */
 }
@@ -256,7 +256,7 @@
   padding: 10px 0 10px 0;
   margin-left: auto;
   margin-right: 10%;
-  color: lightgray; 
+  color: lightgray;
   font-size: small;
 }
 
@@ -333,12 +333,12 @@
   transform: translate(-50%, -50%);
   z-index: 8;
 
-  background: #FFF;
+  background: #fff;
   border-radius: 10px;
 }
 
 .InquiryTitle {
-  color: #2C2C2C;
+  color: #2c2c2c;
   font-size: 30px;
   /* font-family: "Pretendard-Bold"; */
   text-align: center;
@@ -368,7 +368,7 @@
 .InquiryContent {
   width: 80%;
   height: 170px;
-  
+
   /* font-family: "Pretendard-Medium"; */
   font-size: 18px;
   padding: 10px;
@@ -379,7 +379,7 @@
 }
 
 .InquiryTextLength {
-  color: #2C2C2C;
+  color: #2c2c2c;
   text-align: end;
   margin-top: 5px;
   margin-right: 10%;
@@ -397,7 +397,7 @@
 .InquiryButton {
   width: 80%;
   height: 50px;
-  background: #02C26F;
+  background: #02c26f;
   border-radius: 10px;
   margin: 15px 0 15px 0;
   box-shadow: 0px 4px 0px #009152;
@@ -406,7 +406,7 @@
   line-height: 50px;
   font-size: 20px;
   /* font-family: "Pretendard-Bold"; */
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .toggleSwitch {
@@ -420,8 +420,7 @@
   margin-left: 40px;
 }
 
-.toggleButton 
- {
+.toggleButton {
   width: 20px;
   height: 20px;
   position: absolute;
@@ -429,11 +428,11 @@
   left: 4px;
   transform: translateY(-50%);
   border-radius: 50%;
-  background: #02C26F;
+  background: #02c26f;
 }
 
 .checkedToggle {
-  background: #02C26F;
+  background: #02c26f;
 }
 
 .checkedToggleSwitch {
@@ -441,7 +440,8 @@
   background: #fff;
 }
 
-.toggleSwitch, .toggleButton {
+.toggleSwitch,
+.toggleButton {
   transition: all 0.2s ease-in;
 }
 
@@ -450,3 +450,25 @@
   align-items: center;
 }
 
+.userName {
+  background-color: #ffffff;
+  border-radius: 40em;
+  border-style: none;
+  box-shadow: #adcfff 0 -8px 12px inset;
+  box-sizing: border-box;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.24px;
+  margin: 0;
+  outline: none;
+  padding: 1rem 1.3rem;
+  text-align: center;
+  text-decoration: none;
+  width: 50%;
+  height: 50px;
+  margin-top: 20px;
+}

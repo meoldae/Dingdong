@@ -65,11 +65,10 @@ const OtherFooter = (props) => {
       <div className={styles.wrap}>
         <div className={styles.inviteFooter}>
           <div className={styles.background}>
-            <div>
               <div className={styles.circle} onClick={onHomeHandler}>
                 <div className={styles.button}>
                   <img
-                    src={`${urlPath}/assets/icons/post.png`}
+                    src={`${urlPath}/assets/images/house.png`}
                     className={styles.iconImage}
                   />
                   <div className={styles.buttonContent}>딩동 시작하기</div>
@@ -89,7 +88,6 @@ const OtherFooter = (props) => {
                   <div className={styles.buttonContent}>방명록 남기기</div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </div>

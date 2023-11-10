@@ -4,14 +4,15 @@ import react from "@vitejs/plugin-react"
 import { VitePWA } from "vite-plugin-pwa"
 
 export default defineConfig({
-  base: "/",
+  base: "/feDev",
   plugins: [
     react(),
     VitePWA({
       registerType: "autoUpdate",
       injectRegister: "auto",
       workbox: {
-        importScripts: ["service-worker.js", "firebase-messaging-sw.js"], // 이게 제일 중요
+        // importScripts: ["service-worker.js", "firebase-messaging-sw.js"], // 이게 제일 중요
+        importScripts: ["service-worker.js"], // 인앱브라우저 문제
       },
       devOptions: {
         enabled: true,
