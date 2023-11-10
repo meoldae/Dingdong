@@ -196,6 +196,7 @@ const PopUpContent = (props) => {
                 circleSize={30}
                 width="300px"
                 circleSpacing={7}
+                className={styles.border}
                 onChange={(e) => setRoomColor(e.hex)}
               />
               <h3>조명을 바꿔봐요!</h3>
