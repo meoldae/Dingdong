@@ -136,6 +136,7 @@ const SignUp = () => {
       // }
     );
   }, [nickname]);
+
   return (
     <div className={styles.Container}>
       <div className={styles.titleContainer}>
@@ -205,4 +206,5 @@ const SignUp = () => {
     </div>
   );
 };
+
 export default SignUp;
