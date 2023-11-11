@@ -86,7 +86,7 @@ pipeline {
         // 미사용 리소스 전부 삭제
         stage("Unused Resources Cleaning") {
             steps {
-                sh "docker system prune -a"
+                sh "docker system prune -a -f"
             }
         }
     }
