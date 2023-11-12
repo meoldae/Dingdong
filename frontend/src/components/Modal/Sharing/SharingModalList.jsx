@@ -88,7 +88,7 @@ function SharingModalList(props) {
         "https://twitter.com/intent/tweet?text=" + text + "&url=" + url
       )
     } else if (props.shareMode === "result") {
-      const text = "딩동! 나에게 어울리는 우표는? #딩동우표찾기"
+      const text = "딩동! 나에게 어울리는 우표는?"
       window.open(
         "https://twitter.com/intent/tweet?text=" + text + "&url=" + url
       )
