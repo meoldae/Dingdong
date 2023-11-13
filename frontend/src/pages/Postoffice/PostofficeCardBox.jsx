@@ -52,7 +52,7 @@ const PostofficeCardBox = () => {
   const cards = [
     { src: "heart.png", comment: "두근거리는 사랑을 전달해보세요!" },
     { src: "thunder.png", comment: "에너지를 전달해보세요!" },
-    { src: "star.png", comment: "반짝 빛나는 마음을 전달해해보세요!" },
+    { src: "star.png", comment: "반짝 빛나는 마음을 전달해보세요!" },
     { src: "puzzle.png", comment: "추억의 조각을 전달해보세요!" },
     { src: "dingdong.png", comment: "딩동! 특별한 마음을 전달해보세요!" },
     { src: "clover.png", comment: "행운의 마음을 전달해보세요!" },
