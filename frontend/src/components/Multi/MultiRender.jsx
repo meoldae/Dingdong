@@ -8,8 +8,8 @@ import { useRecoilState, useRecoilValue } from "recoil"
 import { userAtom } from "../../atom/UserAtom"
 import { MultiUsers, actionState } from "../../atom/MultiAtom"
 import axios from "axios"
-import { RigidBody } from "@react-three/rapier"
 import { useFrame } from "@react-three/fiber"
+import { useNavigate } from "react-router-dom"
 
 export const MultiRender = React.forwardRef((props, ref) => {
   // 맵 클릭 함수
@@ -31,6 +31,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
     y: 0,
     z: Math.random() * 2,
     actionId: 0,
+    chat: "",
   }
 
   const fetchUserList = async () => {
@@ -149,13 +150,49 @@ export const MultiRender = React.forwardRef((props, ref) => {
         })
       }
     })
+
+    client.current.subscribe("/sub/chat/1", (message) => {
+      if (message.body) {
+        const jsonBody = JSON.parse(message.body)
+        setUsers((currentList) => {
+          const user = currentList[jsonBody.roomId]
+          if (user) {
+            return {
+              ...currentList,
+              [jsonBody.roomId]: {
+                ...user,
+                chat: jsonBody.message,
+              },
+            }
+          }
+          return currentList
+        })
+      }
+    })
   }
 
+  const navigate = useNavigate()
+
   useEffect(() => {
+    const handleBeforeUnload = () => {
+      disconnect()
+    }
+
+    window.addEventListener("beforeunload", handleBeforeUnload)
+
+    // 페이지 전환 감지
+    const unlisten = navigate(() => {
+      disconnect()
+    })
+
     connect()
     fetchUserList()
 
-    return () => disconnect()
+    return () => {
+      disconnect()
+      window.removeEventListener("beforeunload", handleBeforeUnload)
+      unlisten() // 페이지 전환 리스너 해제
+    }
   }, [])
 
   // 위치 정보를 서버로 전송하는 함수
@@ -179,6 +216,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     publishActions: (action) => publishActions(action),
+    publishChat: (chatInput) => publishChat(chatInput),
   }))
 
   const publishActions = (action) => {
@@ -193,6 +231,22 @@ export const MultiRender = React.forwardRef((props, ref) => {
 
     client.current.publish({
       destination: "/pub/action/1",
+      body: JSON.stringify(userParam),
+    })
+  }
+
+  const publishChat = (chatInput) => {
+    userParam = {
+      ...userParam,
+      chat: chatInput,
+    }
+    if (!client.current.connected) {
+      console.error("STOMP client is not connected.")
+      return
+    }
+
+    client.current.publish({
+      destination: "/pub/chat/1",
       body: JSON.stringify(userParam),
     })
   }
@@ -245,7 +299,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
         const distance = userPosition.distanceTo(otherUserPosition)
 
         // 가까운 경우에만 newCloseCharacters에 추가합니다.
-        if (distance < 5) {
+        if (distance < 4) {
           newCloseCharacters[user.roomId] = user.roomId
         }
       }
@@ -260,20 +314,21 @@ export const MultiRender = React.forwardRef((props, ref) => {
       <Environment preset="sunset" />
       <ambientLight intensity={0.3} />
       <OrbitControls enabled={false} />
-      <RigidBody colliders="trimesh" type="fixed">
-        <mesh
-          rotation-x={-Math.PI / 2}
-          position-y={-0.001}
-          onClick={(e) => publishMove(e.point.x, 0, e.point.z)}
-          onPointerEnter={() => setOnFloor(true)}
-          onPointerLeave={() => setOnFloor(false)}
-          position-x={8 / 2}
-          position-z={8 / 2}
-        >
-          <planeGeometry args={[60, 60]} />
-          <meshStandardMaterial color="F0F0F0" />
-        </mesh>
-      </RigidBody>
+
+      <mesh
+        name="floor"
+        rotation-x={-Math.PI / 2}
+        position-y={-0.001}
+        onClick={(e) => publishMove(e.point.x, 0, e.point.z)}
+        onPointerEnter={() => setOnFloor(true)}
+        onPointerLeave={() => setOnFloor(false)}
+        position-x={8 / 2}
+        position-z={8 / 2}
+      >
+        <planeGeometry args={[60, 60]} />
+        <meshStandardMaterial color="F0F0F0" />
+      </mesh>
+
       {Object.keys(users).map((idx) => (
         <group key={idx}>
           <MultiCharacter
@@ -286,6 +341,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
             actionId={users[idx].actionId}
             closeCharacters={closeCharacters}
             setUserPosition={setUserPosition}
+            chat={users[idx].chat}
           />
         </group>
       ))}

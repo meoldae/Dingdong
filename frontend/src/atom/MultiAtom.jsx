@@ -10,3 +10,8 @@ export const actionState = atom({
   key: "actionState",
   default: false,
 })
+
+export const RoomModalOpen = atom({
+  key: "RoomModalOpen",
+  default: false,
+})
