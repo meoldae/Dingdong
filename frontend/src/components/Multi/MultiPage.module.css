@@ -16,8 +16,8 @@
   align-items: center;
 
   position: absolute;
-  bottom: 5%;
-  right: 5%;
+  bottom: 8%;
+  right: 2%;
 
   z-index: 2;
 }
@@ -55,8 +55,8 @@
   position: absolute;
 
   z-index: 100000001;
-  right: 5.5%;
-  bottom: 12%;
+  right: 2.5%;
+  bottom: 15%;
 }
 
 .actionsBtn {
@@ -98,3 +98,42 @@
   transform: translate(-50%, -50%);
   width: 100%;
 }
+
+.chatInputContainer {
+  width: 100%;
+  height: 30px;
+
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  z-index: 2;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.chatInputContainer input {
+  width: 80%;
+  height: 30px;
+  border: #02C26F 2px solid;
+  border-radius: 10px;
+  padding-left: 5px;
+  outline: none;
+}
+
+.SendButton {
+  width: 50px;
+  height: 30px;
+  border-radius: 10px;
+
+  background: #02C26F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.SendButton img {
+  width: 20px;
+  height: 20px;
+}
+
