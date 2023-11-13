@@ -59,7 +59,7 @@ public class MultiRepository {
         userProperties.put("avatarId", userSession.getAvatarId().toString());
         userProperties.put("roomId", userSession.getRoomId().toString());
         userProperties.put("actionId", userSession.getActionId().toString());
-        userProperties.put("char", userSession.getChat());
+        userProperties.put("chat", userSession.getChat());
         userProperties.put("x", String.valueOf(userSession.getX()));
         userProperties.put("y", String.valueOf(userSession.getY()));
         userProperties.put("z", String.valueOf(userSession.getZ()));
