@@ -10,3 +10,9 @@ export const actionState = atom({
   key: "actionState",
   default: false,
 })
+
+// Floating Button
+export const isFloatingButtonVisibleAtom = atom({
+  key: "isFloatingButtonAtom",
+  default: false,
+})
