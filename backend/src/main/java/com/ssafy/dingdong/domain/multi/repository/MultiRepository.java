@@ -1,6 +1,5 @@
 package com.ssafy.dingdong.domain.multi.repository;
 
-import com.ssafy.dingdong.domain.multi.dto.request.ActionRequest;
 import com.ssafy.dingdong.domain.multi.dto.request.JoinOutRequest;
 import com.ssafy.dingdong.domain.multi.dto.request.UserSession;
 import lombok.RequiredArgsConstructor;
