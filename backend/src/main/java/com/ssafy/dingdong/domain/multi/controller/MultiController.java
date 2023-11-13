@@ -74,7 +74,7 @@ public class MultiController {
 
         ActionRequest result = new ActionRequest(channelId, userSession.getRoomId(), userSession.getActionId());
         // Redis에 사용자 정보를 저장
-        messagingTemplate.convertAndSend("/sub/action/" + channelId, result);
+        messagingTemplate.convertAndSend("/sub/chat/" + channelId, result);
     }
 
     @GetMapping("/multi/{channelId}")
