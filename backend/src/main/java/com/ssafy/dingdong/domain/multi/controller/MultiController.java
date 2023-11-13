@@ -68,6 +68,14 @@ public class MultiController {
 
 //        multiRepository.updateAction(userSession);
     }
+    @MessageMapping("/chat/{channelId}")
+    public void chatChannel(@DestinationVariable Long channelId,
+                            UserSession userSession) {
+
+        ActionRequest result = new ActionRequest(channelId, userSession.getRoomId(), userSession.getActionId());
+        // Redis에 사용자 정보를 저장
+        messagingTemplate.convertAndSend("/sub/action/" + channelId, result);
+    }
 
     @GetMapping("/multi/{channelId}")
     public DataResponse getMultiUsers(Authentication authentication,
@@ -75,4 +83,5 @@ public class MultiController {
         Map<String, Object> userList = multiRepository.findMultiUserList(channelId);
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, userList);
     }
+
 }
