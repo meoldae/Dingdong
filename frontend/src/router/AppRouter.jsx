@@ -8,7 +8,6 @@ import AppNotFound from "../pages/NotFound/NotFoundPage"
 import AppLogin from "../pages/User/LoginPage"
 import AppSignUp from "../pages/User/SignUpPage"
 import AppRedirect from "../pages/User/RedirectPage"
-import AppUserSetting from "../pages/User/UserSettingPage"
 import StampTest from "../pages/StampTest/StampTest"
 import StampTestResult from "../pages/StampTest/StampTestResult"
 import MainPage from "../pages/Main/MainPage"
@@ -50,7 +49,6 @@ const AppRouter = () => {
             {/* <Route path="/single" element={<SingleMainPage />} /> */}
             <Route path={`${urlPath}/room/:roomId`} element={<AppRoom />} />
             <Route path={`${urlPath}/random/:roomId`} element={<AppRandomRoom />} />
-            <Route path={`${urlPath}/usersetting`} element={<AppUserSetting />} />
             <Route path={`${urlPath}/multiPage`} element={<MultiPage />} />
           </Route>
 

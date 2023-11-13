@@ -38,7 +38,6 @@ const GuestBookModal = () => {
   // 방명록 리스트 가져오기
   useEffect(() => {
     const nowRoomId = window.location.pathname.match(/\d+/g)[0]
-
     fetchListGuestBook(
       nowRoomId,
       (success) => {
@@ -51,22 +50,19 @@ const GuestBookModal = () => {
     )
   }, [])
 
-  // 색상 아이템
-  const colorList = [
-    "linear-gradient(180deg, #FFFFFF 0%, #FF6E8A 100%)", // 0: 빨간색
-    "linear-gradient(180deg, #FFFFFF 0%, #FF9E2C 100%)", // 1: 주황색
-    "linear-gradient(180deg, #FFFFFF 0%, #FFC745 100%)", // 2: 노란색
-    "linear-gradient(180deg, #FFFFFF 0%, #27D674 100%)", // 3: 초록색
-    "linear-gradient(180deg, #FFFFFF 0%, #64B1FF 100%)", // 4: 파란색
-    "linear-gradient(180deg, #FFFFFF 0%, #CB9DFF 100%)", // 5: 보라색
-    "linear-gradient(180deg, #FFFFFF 0%, #696969 100%)", // 6: 검정색
-  ]
-
   // 콘텐츠 아이템
   const ContentItem = ({ content, rotate, colorNum }) => {
     return (
       <div className={styles.Item}>
-        <div className={styles.Content} style={{ transform: `rotate(${rotate}deg)`, background: `${colorList[colorNum]}` }}>
+        <div
+          className={styles.Content}
+          style={{
+            fontFamily: "GangwonEduAll-Light",
+            transform: `rotate(${rotate}deg)`,
+            backgroundImage: `url(${urlPath}/assets/icons/postit${colorNum}.png)`,
+            backgroundSize: "80px 80px"
+          }}
+        >
           <div className={styles.temp}>
             {content}
           </div>

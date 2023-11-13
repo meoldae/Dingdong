@@ -9,7 +9,11 @@ import { fetchSerchNickname } from "../../../api/User"
 import styles from "./PostOfficeModal.module.css"
 
 // Atom
-import { selectedUserListAtom, isPostOfficeVisibleAtom } from "../../../atom/PostOfficeAtom"
+import {
+  selectedUserListAtom,
+  isPostOfficeVisibleAtom,
+  selectedUserNicknameListAtom
+} from "../../../atom/PostOfficeAtom"
 import { postofficeCardAtom } from "../../../atom/PostAtom"
 
 // 컴포넌트
@@ -23,32 +27,37 @@ const PostOfficeModal = () => {
   const [searchText, setSearchText] = useState("")
   const [searchResult, setSearchResult] = useState([])
   const [memberIdList, setMemberIdList] = useRecoilState(selectedUserListAtom)
+  const [memberNicknameList, setMemberNicknameList] = useRecoilState(selectedUserNicknameListAtom)
   const setPostOfficeCard = useSetRecoilState(postofficeCardAtom)
   const setIsPostOfficeVisible = useSetRecoilState(isPostOfficeVisibleAtom)
+  
+  // 선택 완료 이전 임시 상태 저장
+  const [tempMemberList, setTempMemberList] = useState([])
 
   // 닉네임 검색 함수
   const searchNicknameHandler = (event) => {
     const newText = event.target.value
     setSearchText(newText)
-
-    fetchSerchNickname(
-      newText,
-      (success) => {
-        setSearchResult(success.data.data)
-      },
-      (error) => {
-        // console.log("Error at Search Nickname...", error)
-      }
-    )
+    if (newText.length !== 0) {
+      fetchSerchNickname(
+        newText,
+        (success) => {
+          setSearchResult(success.data.data)
+        },
+        (error) => {
+          // console.log("Error at Search Nickname...", error)
+        }
+      )
+    } 
   }
 
-  // memberId 토글 함수
-  const toggleMemberIdHandler = (memberId) => {
-    setMemberIdList(prev => {
-      if (prev.includes(memberId)) {
-        return prev.filter(id => id !== memberId)
+  // memberId & nickname 토글 함수
+  const toggleMemberIdHandler = (memberId, nickname) => {
+    setTempMemberList(prev => {
+      if (prev.some(member => member.memberId === memberId)) {
+        return prev.filter(prevMember => prevMember.memberId !== memberId);
       } else {
-        return [...prev, memberId]
+        return [...prev, { memberId, nickname }];
       }
     })
   }
@@ -56,13 +65,13 @@ const PostOfficeModal = () => {
   // 검색 결과 아이템
   const SearchResultItem = ({ avatarId, nickname, memberId }) => {
     return (
-      <div className={styles.ItemContainer}>
+      <div className={styles.ItemContainer} onClick={() => toggleMemberIdHandler(memberId, nickname)}>
         <div className={styles.ItemAvatar}>
           <img src={`${urlPath}/assets/icons/${avatarId}_crop.png`} />
         </div>
         <div className={styles.Nickname} style={{ fontFamily: "GmarketSansMedium" }}>{nickname}</div>
-        <div className={styles.CheckButton} onClick={() => toggleMemberIdHandler(memberId)}>
-          {memberIdList.includes(memberId) ? (
+        <div className={styles.CheckButton} >
+          {tempMemberList.some(item => item.memberId === memberId && item.nickname === nickname) ? (
             <img src={`${urlPath}/assets/icons/postOffice_check.png`} />
           ) : (
             <img src={`${urlPath}/assets/icons/postOffice_plus.png`} />
@@ -75,9 +84,13 @@ const PostOfficeModal = () => {
 
   // 선택완료 버튼 함수
   const finishCheckUser = () => {
-    if (memberIdList.length === 0) {
+    if (tempMemberList.length === 0) {
       successMsg("❌ 선택된 유저가 없습니다.")
     } else {
+      const tempMemberIdList = tempMemberList.map(item => item.memberId);
+      const tempMemberNicknameList = tempMemberList.map(item => item.nickname);
+      setMemberIdList(tempMemberIdList)
+      setMemberNicknameList(tempMemberNicknameList)
       setIsPostOfficeVisible(false)
       setPostOfficeCard(true)
     }
@@ -94,7 +107,7 @@ const PostOfficeModal = () => {
             <input
               type="text"
               value={searchText}
-              placeholder="검색"
+              placeholder="닉네임 검색"
               onChange={(e) => searchNicknameHandler(e)}
             />
           </div>
@@ -119,6 +132,17 @@ const PostOfficeModal = () => {
                 />
               </div>
             ))
+          )}
+        </div>
+        <div className={styles.CheckedUserContainer}>
+          {tempMemberList.length === 0 ? (
+            <></>
+          ) : (
+              tempMemberList.map((item, index) => (
+                <div key={index} className={styles.checkedUserNickname} onClick={() => toggleMemberIdHandler(item.memberId, item.nickname)} >
+                  {item.nickname} &nbsp;×
+                </div>
+              ))
           )}
         </div>
         <div

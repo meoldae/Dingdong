@@ -1,8 +1,9 @@
 .MainContainer {
   position: relative;
   max-width: 450px;
-  height: 100vh;
-  height: 100svh;
+  min-width: 400px;
+  /* height: 100vh;
+  height: 100svh; */
 }
 
 .postBoxContainer {

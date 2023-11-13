@@ -1,0 +1,135 @@
+.wrap {
+  position: absolute;
+  z-index: 3;
+  width: 100%;
+  bottom: 10px;
+}
+.textOverlay {
+  position: absolute;
+  top: 0; /* 상단에 위치시키려면 0, 중앙이나 하단에 위치시키려면 값을 조절하세요 */
+  left: 0; /* 좌측에 위치시키려면 0, 중앙이나 우측에 위치시키려면 값을 조절하세요 */
+  z-index: 10; /* 이미지 위에 텍스트가 오도록 z-index 값을 조정하세요 */
+  /* 기타 스타일링: 글자 색, 크기 등 */
+}
+
+
+.thirdFooter {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: end;
+  bottom: 135px;
+  right: 0;
+}
+
+.secondFooter {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: end;
+  bottom: 70px;
+  right: 0;
+}
+
+.footer {
+  display: flex;
+  width: 100%;
+  bottom: 5px;
+  position: absolute;
+  align-items: center;
+  justify-content: space-between;
+  /* margin-top: 20px; */
+}
+
+.inviteFooter {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  width: 150px;
+  height: 30px;
+  border-radius: 10px;
+  background: #02C26F;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  box-shadow: 0px 4px 0px #009152;
+
+  margin: 0px 5px 0px 5px;
+}
+
+
+.button {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-left: 15px;
+}
+
+.button img {
+  width: 20px;
+}
+
+.background {
+  margin-bottom: 100px;
+  display: flex;
+  flex-direction: row;
+}
+
+.iconImage {
+  width: 40px;
+}
+
+
+.buttonContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 115px;
+  color: #FFFFFF;
+}
+
+.Overlay {
+  top: 0;
+  left: 0;
+  width: 450px;
+  height: 100vh;
+  height: 100svh;
+  position: absolute;
+
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 4;
+}
+
+.GuestBookContainer {
+  z-index: 5;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.OverOverlay {
+  top: 0;
+  left: 0;
+  width: 450px;
+  height: 100vh;
+  height: 100svh;
+  position: absolute;
+
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+}
+
+.OverGuestBookContainer {
+  z-index: 6;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

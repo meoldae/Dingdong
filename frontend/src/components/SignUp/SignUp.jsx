@@ -10,6 +10,7 @@ import { useSetRecoilState } from "recoil";
 import { userAtom } from "@/atom/UserAtom";
 import { successMsg } from "../../utils/customToast";
 import "./signUp.css";
+
 const SignUp = () => {
   const navigate = useNavigate();
   const setLoginInfo = useSetRecoilState(userAtom);
@@ -21,6 +22,7 @@ const SignUp = () => {
   const [nickname, setNickname] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [nicknameMessage, setNicknameMessage] = useState("");
+  const [slideCheck, setSlideCheck] = useState(true);
   useEffect(() => {
     GetAvatarList(
       (response) => {
@@ -50,9 +52,7 @@ const SignUp = () => {
     arrows: true,
     prevArrow: <img src={`${urlPath}/assets/icons/leftArrow.png`} />,
     nextArrow: <img src={`${urlPath}/assets/icons/rightArrow.png`} />,
-    // prevArrow: "<button type='button' class='slick-prev'>Previous</button>", // 이전 화살표 모양 설정
-    // nextArrow: "<button type='button' class='slick-next'>Next</button>",
-    afterChange: (current) => handleSlideChange(current),
+
   };
 
   const handleSlideChange = (index) => {
@@ -96,8 +96,13 @@ const SignUp = () => {
   }
 
   const doubleCheckHandler = (e) => {
-    setNickname(e.target.value);
+    const inputValue = e.target.value;
+
+    if (inputValue.length <= 5) {
+      setNickname(e.target.value);
+    }
   };
+
   useEffect(() => {
     if (nickname === "") {
       setIsValid(false);
@@ -113,31 +118,26 @@ const SignUp = () => {
       return;
     }
 
-    DoubleCheck(
-      nickname,
-      (success) => {
-        if (success.data.code === "FAILED") {
-          setIsValid(false);
-          setNicknameMessage("이미 사용중인 닉네임 입니다!");
-        } else {
-          setIsValid(true);
-          setNicknameMessage("사용 가능한 닉네임 입니다!");
-        }
+    DoubleCheck(nickname, (success) => {
+      if (success.data.code === "FAILED") {
+        setIsValid(false);
+        setNicknameMessage("이미 사용중인 닉네임 입니다!");
+      } else {
+        setIsValid(true);
+        setNicknameMessage("사용 가능한 닉네임 입니다!");
       }
-      // (error) => {
-      //   setIsValid(false);
-      //   setNicknameMessage("이미 사용중인 닉네임 입니다!");
-      //   console.log(error);
-      // }
-    );
+    });
   }, [nickname]);
+
+
   return (
     <div className={styles.Container}>
       <div className={styles.titleContainer}>
         <span style={{ color: "#049463" }}>프로필 </span>
         <span style={{ color: "#2C2C2C" }}>설정</span>
       </div>
-      <div className={styles.characterContainer}>
+
+      <div className={styles.characterContainer} onMouseDown={()=>setSlideCheck(false)}>
         <Slider {...settings}>
           {charactersImages.map((charImg, idx) => (
             <img
@@ -149,6 +149,11 @@ const SignUp = () => {
             />
           ))}
         </Slider>
+        {slideCheck && (
+          <div className={styles.imgCheck}>
+            <img src={`${urlPath}/assets/icons/slideleftright.gif`} alt="" />
+          </div>
+        )}
       </div>
       {isValid ? (
         <div className={styles.alertMessageSuccess}>
@@ -169,7 +174,7 @@ const SignUp = () => {
               onChange={(e) => doubleCheckHandler(e)}
               placeholder=""
               className={styles.nicknameInputSuccess}
-              maxLength={4}
+              maxLength={5}
               style={{ fontFamily: "GmarketSansMedium" }}
             />
 
@@ -200,4 +205,5 @@ const SignUp = () => {
     </div>
   );
 };
+
 export default SignUp;

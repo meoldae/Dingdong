@@ -22,7 +22,7 @@ import PopUp from "../../components/Room/RoomCustomPopUp/PopUp";
 import SharePage from "../../components/Modal/Sharing/SharePage";
 import SharingModalList from "../../components/Modal/Sharing/SharingModalList";
 import { userAtom } from "../../atom/UserAtom";
-import { roomInfoAtom } from "@/atom/RoomInfoAtom";
+import { roomInfoAtom, roomAvatarAtom, roomHeartAtom } from "@/atom/RoomInfoAtom";
 import { useNavigate } from "react-router-dom";
 import history from "../../components/UI/history";
 import RandomBtn from "../../components/Button/Room/RandomBtn";
@@ -62,6 +62,8 @@ function RandomRoomPage() {
   const [shareModal, setShareModal] = useState(false);
   const userInfo = useRecoilValue(userAtom);
   const [nickName, setNickName] = useRecoilState(roomInfoAtom);
+  const [avatarId, setAvatarId] = useRecoilState(roomAvatarAtom);
+  const [heartCount, setHeartCount] = useRecoilState(roomHeartAtom);
   const [roomDrag, setRoomDrag] = useState(false);
   const roomId = window.location.pathname.match(/\d+/g);
   const today = new Date();
@@ -77,6 +79,8 @@ function RandomRoomPage() {
       (response) => {
         setItems(response.data.data.roomFurnitureList);
         setNickName(response.data.data.nickname);
+        setAvatarId(response.data.data.avatarId);
+        setHeartCount(response.data.data.heartCount);
         setRoomColor(response.data.data.wallColor);
         setLightColor(response.data.data.lightColor);
       },
@@ -92,16 +96,7 @@ function RandomRoomPage() {
   const randomVisit = () => {
     const roomId = window.location.pathname.match(/\d+/g)
       ? Number(window.location.pathname.match(/\d+/g)[0])
-      : null;
-    const myRoomId = userInfo.roomId;
-    // 선택 가능한 방 번호 목록
-    const possibleRooms = [1, 3, 4, 6, 19, 21];
-    // let randomRoom
-
-    // do {
-    //   randomRoom =
-    //     possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
-    // } while (randomRoom === roomId || randomRoom === myRoomId)
+      : null; 
     let randRoomId;
 
     getRandomRoom(
@@ -133,7 +128,7 @@ function RandomRoomPage() {
       setTime("dinner");
     }
   }, []);
-  console.log(isMyRoom);
+
   return (
     <>
       {roomDrag && <div className={styles.roomDrag} />}

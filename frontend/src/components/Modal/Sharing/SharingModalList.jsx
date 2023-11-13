@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import SharingModalListItem from "./SharingModalListItem"
 import { kakao, twitter, urlCopy, save } from "./sharingIcon"
 import { useRecoilValue } from "recoil"
@@ -13,9 +13,6 @@ function SharingModalList(props) {
   const kakaoUrl = useRecoilValue(kakaoUrlAtom)
   const userInfo = useRecoilValue(userAtom)
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
-  // console.log(recoilText);
-  const baseURL = "https://ding-dong.s3.ap-northeast-2.amazonaws.com/"
-  // const userNickname = useRecoilValue(userNicknameAtom);
   const url = encodeURI(window.location.href)
   const JS_KEY = import.meta.env.VITE_KAKAO_JS_KEY
   const isSafari = () => {
@@ -36,7 +33,6 @@ function SharingModalList(props) {
         .writeText(currentUrl) // 수정된 currentUrl을 클립보드에 복사
         .then(() => {
           if (props.shareMode === "room") {
-            // console.log(currentUrl)
             alert(`나의 방 주소가 복사되었습니다.\n친구들에게 공유해보세요!`)
           } else if (props.shareMode === "start") {
             alert(
@@ -76,7 +72,7 @@ function SharingModalList(props) {
 
   const shareTwitter = (e) => {
     if (props.shareMode === "room") {
-      const text = `딩동! ${userInfo.nickname}님의 방에 편지를 보내주세요.`
+      const text = `딩동! ${userInfo.nickname}님의 방을 방문해보세요!`
       window.open(
         "https://twitter.com/intent/tweet?text=" +
           text +
@@ -87,12 +83,12 @@ function SharingModalList(props) {
       )
       // props.setSharingAtom(false)
     } else if (props.shareMode === "start") {
-      const text = "나에게 어울리는 우표는?"
+      const text = "딩동! 나에게 어울리는 우표는?"
       window.open(
         "https://twitter.com/intent/tweet?text=" + text + "&url=" + url
       )
     } else if (props.shareMode === "result") {
-      const text = "나에게 어울리는 우표 확인하기"
+      const text = "딩동! 나에게 어울리는 우표는? #딩동우표찾기"
       window.open(
         "https://twitter.com/intent/tweet?text=" + text + "&url=" + url
       )
@@ -128,7 +124,7 @@ function SharingModalList(props) {
       window.Kakao.Share.sendCustom({
         templateId: 100120,
         templateArgs: {
-          THU: "https://ding-dong.s3.ap-northeast-2.amazonaws.com/StampLogo.png",
+          THU: "https://ding-dong.s3.ap-northeast-2.amazonaws.com/StampTestLogo.png",
           TITLE: "나에게 어울리는 우표는?",
           DESC: "어울리는 우표를 찾아 친구에게 편지를 보내보세요.",
           MOBILE_LINK: currentUrl,

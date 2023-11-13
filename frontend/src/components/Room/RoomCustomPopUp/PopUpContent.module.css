@@ -40,4 +40,45 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    width: 100%;
+}
+
+.colorsetting h3{
+    margin: 10px;
+}
+
+.my{
+    width: 80%;
+    margin-left: 10%;
+}
+
+.border span div span div{
+    border: 1px solid #c2c2c2;   
+}
+
+.btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+.btndiv {
+    border: 0;
+    width: 50%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: 10px; */
+    font-size: 17px;
+}
+
+.btndiv.none{
+   background-color: #d2d2d2;
+}
+
+.btndiv.click{
+     background-color: #049463;
+     color: white;
 }

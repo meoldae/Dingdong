@@ -18,7 +18,6 @@ const SendLetter = ({ onClose, card }) => {
   const userInfo = useRecoilValue(userAtom)
   const [userNickname, setUserNickname] = useState(userInfo.nickname || "")
 
-  // console.log(userInfo);
   const roomInfo = useRecoilValue(roomInfoAtom)
 
   const url = new URL(window.location.href)
@@ -47,10 +46,8 @@ const SendLetter = ({ onClose, card }) => {
       stampId: card.idx,
       roomId: roomId,
     }
-    // console.log(param)
 
     if (!userInfo.accessToken) {
-      // console.log("비회원 편지 전송")
       sendGuestLetter(
         param,
         (response) => {
@@ -63,7 +60,7 @@ const SendLetter = ({ onClose, card }) => {
         }
       )
     } else {
-      // console.log("회원 편지 전송")
+
       sendLetter(
         param,
         (response) => {
@@ -84,9 +81,18 @@ const SendLetter = ({ onClose, card }) => {
     }
   }
 
-  const handleCheckContentCount = (event) => {
-    setContent(event.target.value)
-    setContentCount(event.target.value.length)
+  // 편지 작성 글자수 체크함수
+  const checkMaxLength = (event, checker) => {
+    const inputValue = event.target.value
+
+    if (checker === "content" && inputValue.length <= 200) {
+      setContent(event.target.value)
+      setContentCount(event.target.value.length)
+    }
+
+    if (checker === "nickname" && inputValue.length <= 5) {
+      setUserNickname(event.target.value)
+    }
   }
 
   return (
@@ -108,9 +114,9 @@ const SendLetter = ({ onClose, card }) => {
             <div className={styles.letterContent}>
               <textarea
                 value={content}
-                onChange={(e) => handleCheckContentCount(e)}
+                onChange={(e) => checkMaxLength(e, "content")}
                 placeholder="편지 내용을 작성하세요."
-                maxLength={199}
+                maxLength={200}
                 spellCheck="false"
                 style={{ fontFamily: "GangwonEduAll-Light"}}
               />
@@ -128,9 +134,9 @@ const SendLetter = ({ onClose, card }) => {
                 ) : (
                   <textarea
                     value={userNickname}
-                    onChange={(e) => setUserNickname(e.target.value)}
+                    onChange={(e) => checkMaxLength(e, "nickname")}
                     placeholder="닉네임을 입력하세요."
-                    maxLength={8}
+                    maxLength={5}
                     style={{ fontFamily: "GangwonEduAll-Light" }}
                   />
                 )}
