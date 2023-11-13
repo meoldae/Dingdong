@@ -11,6 +11,12 @@ export const actionState = atom({
   default: false,
 })
 
+// Floating Button
+export const isFloatingButtonVisibleAtom = atom({
+  key: "isFloatingButtonAtom",
+  default: false,
+})
+
 export const RoomModalOpen = atom({
   key: "RoomModalOpen",
   default: false,

@@ -1,16 +1,22 @@
 import { Canvas } from "@react-three/fiber"
 import { MultiRender } from "./MultiRender"
 import styles from "./MultiPage.module.css"
+import { isFloatingButtonVisibleAtom } from "../../atom/MultiAtom"
 import { useRef, useState } from "react"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState } from "recoil"
 import { RoomModalOpen } from "../../atom/MultiAtom"
 import { motion } from "framer-motion"
 import ConfirmEnteringDefaultModal from "../Modal/Confirm/ConfirmEnteringDefaultModal"
 
+
 export const MultiPage = () => {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
   const [chatInput, setChatInput] = useState("")
   const [roomModalOpen, setRoomModalOpen] = useRecoilState(RoomModalOpen)
   const multiRenderRef = useRef()
+
+  const [isFloatingButtonVisible, setIsFloatingButtonVisible] = useRecoilState(isFloatingButtonVisibleAtom)
 
   const chatButtonClick = () => {
     if (multiRenderRef.current?.publishChat) {
@@ -23,6 +29,8 @@ export const MultiPage = () => {
     if (multiRenderRef.current?.publishActions) {
       multiRenderRef.current.publishActions(action)
     }
+
+    setIsFloatingButtonVisible(false)
   }
 
   const handleInputKeyDown = (e) => {
@@ -31,6 +39,7 @@ export const MultiPage = () => {
       chatButtonClick()
     }
   }
+
   return (
     <div className={styles.container}>
       {roomModalOpen && (
@@ -60,17 +69,37 @@ export const MultiPage = () => {
         />
         <button onClick={chatButtonClick}>Send</button>
       </div>
-      <div className={styles.BtnList}>
-        <div className={styles.actionsBtn} onClick={() => handleButtonClick(1)}>
-          기뻐하기
-        </div>
-        <div className={styles.actionsBtn} onClick={() => handleButtonClick(2)}>
-          슬퍼하기
-        </div>
-        <div className={styles.actionsBtn} onClick={() => handleButtonClick(3)}>
-          춤추기
-        </div>
+      <div className={styles.FloatingButton} onClick={() => setIsFloatingButtonVisible(true)}>
+        <img
+          src={`${urlPath}/assets/icons/white_plus.png`}
+          className={`${styles.PlusButton} ${isFloatingButtonVisible ? styles.Rotate : styles.RotateBack}`}
+        />
       </div>
+      {isFloatingButtonVisible && (
+        <>
+        <div className={styles.Overlay} onClick={() => setIsFloatingButtonVisible(false)} />
+        <div className={styles.BtnList}>
+          <div className={styles.actionsBtn} onClick={() => handleButtonClick(1)}>
+            <div className={styles.FloatContent}>기뻐하기</div>
+            <div className={styles.IconButton}>
+              <img src={`${urlPath}/assets/icons/smile.png`} className={styles.FloatIcon} />
+            </div>
+          </div>
+          <div className={styles.actionsBtn} onClick={() => handleButtonClick(2)}>
+            <div className={styles.FloatContent}>슬퍼하기</div>
+            <div className={styles.IconButton}>
+              <img src={`${urlPath}/assets/icons/sad.png`} className={styles.FloatIcon} />
+            </div>
+          </div>
+          <div className={styles.actionsBtn} onClick={() => handleButtonClick(3)}>
+            <div className={styles.FloatContent}>춤추기</div>
+            <div className={styles.IconButton}>
+              <img src={`${urlPath}/assets/icons/dance.png`} className={styles.FloatIcon} />
+            </div>
+          </div>
+        </div>
+        </>
+      )}
       <Canvas shadows camera={{ position: [2, 8, 15], fov: 30, zoom: 0.72 }}>
         <MultiRender ref={multiRenderRef} />
       </Canvas>
