@@ -16,7 +16,6 @@ import { useFrame } from "@react-three/fiber"
 import { useNavigate } from "react-router-dom"
 
 export const MultiRender = React.forwardRef((props, ref) => {
-  const roomModalOpen = useRecoilValue(RoomModalOpen)
   // 맵 클릭 함수
   const [onFloor, setOnFloor] = useState(false)
   useCursor(onFloor)
@@ -285,32 +284,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
   })
 
   const handleFloorClick = (e) => {
-    if (!roomModalOpen) {
-      // Create a raycaster
-      const raycaster = new THREE.Raycaster()
-      const mouse = new THREE.Vector2()
-
-      // Set the mouse coordinates based on the click event
-      mouse.x = (e.point.x / 60) * 2 - 1
-      mouse.y = -(e.point.z / 60) * 2 + 1
-
-      // Set the raycaster's origin and direction
-      raycaster.setFromCamera(mouse, e.camera)
-
-      // Check for intersections with the floor mesh
-      const intersects = raycaster.intersectObject(e.object)
-
-      if (intersects.length > 0) {
-        // The click intersects with the floor mesh
-        console.log(e.point)
-        publishMove(e.point.x, 0, e.point.z)
-      }
-    }
-  }
-
-  const publishCurrentPosition = (nposition) => {
-    console.log(nposition)
-    publishMove(nposition.x, nposition.y, nposition.z)
+    publishMove(e.point.x, 0, e.point.z)
   }
 
   return (
@@ -347,7 +321,6 @@ export const MultiRender = React.forwardRef((props, ref) => {
             actionId={users[idx].actionId}
             closeCharacters={closeCharacters}
             chat={users[idx].chat}
-            publishCurrentPosition={publishCurrentPosition}
           />
         </group>
       ))}
