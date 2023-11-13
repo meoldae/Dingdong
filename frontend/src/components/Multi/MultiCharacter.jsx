@@ -8,6 +8,7 @@ import { Html } from "@react-three/drei"
 import { MultiUsers } from "../../atom/MultiAtom"
 import { useLoader } from "@react-three/fiber"
 import { TextureLoader, PlaneGeometry, MeshBasicMaterial, Mesh } from "three"
+import styles from "./MultiCharacter.module.css"
 
 const MOVEMENT_SPEED = 0.032
 const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -120,32 +121,28 @@ export function MultiCharacter({
 
   return (
     <group ref={group} {...props} dispose={null} position={position}>
-      {closeCharacters[id] && (
-        <mesh position={[0, 2.3, 0]} scale={[1, 1, 1]}>
-          <planeGeometry attach="geometry" args={[1, 1]} />
-          <meshBasicMaterial
-            attach="material"
-            map={texture}
-            transparent={true}
-          />
-        </mesh>
-      )}
       <Html position-y={1.7} center>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100px",
-            height: "40px",
-            color: "black",
-            fontWeight: "bold",
-            borderRadius: "30px",
-            // background: "white",
-          }}
-        >
-          {nickname}
+        <div className={styles.characterContainer}>
+          <div
+            className={styles.nicknameBox}
+            style={{ width: `${nickname.length * 20}px` }}
+          >
+            {nickname}
+          </div>
+          <div
+            className={styles.roomImgBox}
+            onClick={() => {
+              console.log("111")
+            }}
+          >
+            {closeCharacters[id] && (
+              <img
+                src={`${urlPath}/assets/icons/location.png`}
+                alt=""
+                className={styles.roomImg}
+              />
+            )}
+          </div>
         </div>
       </Html>
 
