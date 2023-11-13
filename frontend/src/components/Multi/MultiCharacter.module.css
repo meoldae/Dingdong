@@ -28,7 +28,22 @@
 }
 
 .chatBox {
+  width: 100px;
+  text-align: center;
+
   position: absolute;
-  top: -15 px;
-  background: red;
+  top: -10px;
+  background: #FFFFFF;
+  border-radius: 10px;
+}
+
+.chatBox:after {
+  border-top: 10px solid #FFFFFF;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 0px solid transparent;
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 40%;
 }
