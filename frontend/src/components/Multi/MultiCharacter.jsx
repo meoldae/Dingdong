@@ -5,12 +5,7 @@ import { SkeletonUtils } from "three-stdlib"
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import { userAtom } from "../../atom/UserAtom"
 import { Html } from "@react-three/drei"
-import {
-  MultiUsers,
-  RoomModalOpen,
-  movingState,
-  userPositionAtom,
-} from "../../atom/MultiAtom"
+import { MultiUsers, RoomModalOpen, movingState } from "../../atom/MultiAtom"
 import styles from "./MultiCharacter.module.css"
 
 const MOVEMENT_SPEED = 0.032
@@ -49,8 +44,6 @@ export function MultiCharacter({
   const [isPlay, setIsPlay] = useState(false)
 
   const setRoomModal = useSetRecoilState(RoomModalOpen)
-
-  const [userPosition, setUserPosition] = useRecoilState(userPositionAtom)
 
   const actionList = [0, { Win: 2800 }, { Sad: 5700 }, { "Song Jump": 6500 }]
 
@@ -104,10 +97,6 @@ export function MultiCharacter({
     // 이동 중
 
     if (isMoving && group.current.position.distanceTo(props.position) > 0.1) {
-      if (nickname == user.nickname) {
-        const newPosition = group.current.position.clone()
-        setUserPosition(newPosition)
-      }
       setIsPlay(false)
       actions.Idle.stop()
       actions.Run.play()
@@ -140,7 +129,6 @@ export function MultiCharacter({
       state.camera.lookAt(group.current.position)
     }
   })
-  // console.log(userPosition)
 
   return (
     <group ref={group} {...props} dispose={null} position={position}>
@@ -159,9 +147,8 @@ export function MultiCharacter({
           )}
           <div
             className={styles.roomImgBox}
-            onClick={() => {
-              publishCurrentPosition(userPosition)
-              setIsMoving(false)
+            onClick={(e) => {
+              e.stopPropagation()
               setRoomModal(true)
             }}
           >

@@ -141,10 +141,6 @@ const ConfirmEnteringDefaultModal = ({
 
     // 초기화
     setIsInitialRender(true)
-    // 멀티
-    setIsMoving(true)
-
-    console.log(p)
   }
 
   // 글자가 작성되는 JS -----------
