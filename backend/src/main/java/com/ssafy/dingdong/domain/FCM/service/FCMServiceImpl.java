@@ -43,9 +43,9 @@ public class FCMServiceImpl implements FCMService {
 		String fcmToken = fcmRedisRepository.findFCMTokenByMemberId(targetId).orElse("NOT");
 
 		String response = null;
-
+		Message message = null;
 		if (!fcmToken.equals("NOT")) {
-			Message message = Message.builder()
+			message = Message.builder()
 				.setToken(fcmToken)
 				.setWebpushConfig(WebpushConfig.builder().putHeader("ttl", "300")
 					.setNotification(
@@ -53,13 +53,14 @@ public class FCMServiceImpl implements FCMService {
 							titles[flag],
 							nickname + contents[flag])).build()
 				).build();
+		}
+		if (message != null) {
 			try {
 				response = FirebaseMessaging.getInstance().sendAsync(message).get();
 			} catch (InterruptedException | ExecutionException e) {
 				throw new RuntimeException(e);
 			}
 		}
-
 		return response;
 	}
 }

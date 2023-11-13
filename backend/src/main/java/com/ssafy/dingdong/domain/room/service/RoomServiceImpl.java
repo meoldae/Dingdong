@@ -105,6 +105,8 @@ public class RoomServiceImpl implements RoomService {
 	public Long createRoom(String memberId) {
 		Room room = Room.builder()
 			.memberId(memberId)
+			.lightColor("#FFFFFF")
+			.wallColor("#D9E3F0")
 			.build();
 		roomRepository.save(room);
 		return room.getRoomId();
@@ -240,9 +242,16 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public Long getRandomRoomId(String memberId) {
-		return roomRepository.getRandomRoomId(memberId).orElseThrow(
+		Room room = roomRepository.getRandomRoomId(memberId).orElseThrow(
 			() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
 		);
+		while (room.getRoomFurnitureList().size() <= 4) {
+			room = roomRepository.getRandomRoomId(memberId).orElseThrow(
+				() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
+			);
+		}
+
+		return room.getRoomId();
 	}
 
 }
