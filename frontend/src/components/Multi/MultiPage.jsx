@@ -75,17 +75,6 @@ export const MultiPage = () => {
           className={`${styles.PlusButton} ${isFloatingButtonVisible ? styles.Rotate : styles.RotateBack}`}
         />
       </div>
-      <div className={styles.BtnList}>
-        <div className={styles.actionsBtn} onClick={() => handleButtonClick(1)}>
-          기뻐하기
-        </div>
-        <div className={styles.actionsBtn} onClick={() => handleButtonClick(2)}>
-          슬퍼하기
-        </div>
-        <div className={styles.actionsBtn} onClick={() => handleButtonClick(3)}>
-          춤추기
-        </div>
-      </div>
       {isFloatingButtonVisible && (
         <>
         <div className={styles.Overlay} onClick={() => setIsFloatingButtonVisible(false)} />
