@@ -51,9 +51,9 @@ export const MultiPage = () => {
           <div className={styles.confirmModal}>
             {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
             <ConfirmEnteringDefaultModal
-              modalContent={"나의 방에 입장하기"}
+              modalContent={"~ 방에 입장하기"}
               setConfirmEnteringLocation={setRoomModalOpen}
-              location={"house"}
+              location={"multiRoom"}
               flag={"1"}
             />
           </div>

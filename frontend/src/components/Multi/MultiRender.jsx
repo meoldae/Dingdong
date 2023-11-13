@@ -1,17 +1,22 @@
 import React, { useRef, useEffect, useState, useImperativeHandle } from "react"
-import { Environment, OrbitControls, useCursor, Html } from "@react-three/drei"
+import { Environment, OrbitControls, useCursor } from "@react-three/drei"
 import { MultiCharacter } from "./MultiCharacter"
 import * as StompJs from "@stomp/stompjs"
 import SockJS from "sockjs-client"
 import * as THREE from "three"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { userAtom } from "../../atom/UserAtom"
-import { MultiUsers, actionState } from "../../atom/MultiAtom"
+import {
+  MultiUsers,
+  RoomModalOpen,
+  userPositionAtom,
+} from "../../atom/MultiAtom"
 import axios from "axios"
 import { useFrame } from "@react-three/fiber"
 import { useNavigate } from "react-router-dom"
 
 export const MultiRender = React.forwardRef((props, ref) => {
+  const roomModalOpen = useRecoilValue(RoomModalOpen)
   // 맵 클릭 함수
   const [onFloor, setOnFloor] = useState(false)
   useCursor(onFloor)
@@ -27,9 +32,12 @@ export const MultiRender = React.forwardRef((props, ref) => {
     nickname: me.nickname,
     roomId: me.roomId,
     avatarId: me.avatarId,
-    x: Math.random() * 2,
+    x: 0,
     y: 0,
-    z: Math.random() * 2,
+    z: 0,
+    // x: Math.random() * 2,
+    // y: 0,
+    // z: Math.random() * 2,
     actionId: 0,
     chat: "",
   }
@@ -253,41 +261,8 @@ export const MultiRender = React.forwardRef((props, ref) => {
 
   const [closeCharacters, setCloseCharacters] = useState({})
 
-  // 캐릭터가 멈췄을 때 반영하는 코드 (과부화 방지)
-  // useEffect(() => {
-  //   const checkDistances = () => {
-  //     const newCloseCharacters = {}
-  //     const userPosition = new THREE.Vector3(
-  //       users[me.roomId].x,
-  //       users[me.roomId].y,
-  //       users[me.roomId].z
-  //     )
-
-  //     Object.values(users).forEach((user) => {
-  //       if (user.roomId !== me.roomId) {
-  //         const otherUserPosition = new THREE.Vector3(user.x, user.y, user.z)
-  //         const distance = userPosition.distanceTo(otherUserPosition)
-
-  //         // 가까운 경우에만 newCloseCharacters에 추가
-  //         if (distance < 2) {
-  //           newCloseCharacters[user.roomId] = user.roomId
-  //         }
-  //       }
-  //     })
-
-  //     // 상태를 완전히 새로운 객체로 업데이트하여 멀어진 캐릭터들을 제거
-  //     setCloseCharacters(newCloseCharacters)
-  //   }
-
-  //   const intervalId = setInterval(checkDistances, 1000) // 매 1초마다 거리 체크
-
-  //   return () => {
-  //     clearInterval(intervalId)
-  //   }
-  // }, [users, me])
-
   // 처음 포지션 다시 설정해야함
-  const [userPosition, setUserPosition] = useState(new THREE.Vector3(0, 0, 0))
+  const [userPosition, setUserPosition] = useRecoilState(userPositionAtom)
 
   useFrame(() => {
     const newCloseCharacters = {}
@@ -309,6 +284,35 @@ export const MultiRender = React.forwardRef((props, ref) => {
     setCloseCharacters(newCloseCharacters)
   })
 
+  const handleFloorClick = (e) => {
+    if (!roomModalOpen) {
+      // Create a raycaster
+      const raycaster = new THREE.Raycaster()
+      const mouse = new THREE.Vector2()
+
+      // Set the mouse coordinates based on the click event
+      mouse.x = (e.point.x / 60) * 2 - 1
+      mouse.y = -(e.point.z / 60) * 2 + 1
+
+      // Set the raycaster's origin and direction
+      raycaster.setFromCamera(mouse, e.camera)
+
+      // Check for intersections with the floor mesh
+      const intersects = raycaster.intersectObject(e.object)
+
+      if (intersects.length > 0) {
+        // The click intersects with the floor mesh
+        console.log(e.point)
+        publishMove(e.point.x, 0, e.point.z)
+      }
+    }
+  }
+
+  const publishCurrentPosition = (nposition) => {
+    console.log(nposition)
+    publishMove(nposition.x, nposition.y, nposition.z)
+  }
+
   return (
     <>
       <Environment preset="sunset" />
@@ -319,11 +323,13 @@ export const MultiRender = React.forwardRef((props, ref) => {
         name="floor"
         rotation-x={-Math.PI / 2}
         position-y={-0.001}
-        onClick={(e) => publishMove(e.point.x, 0, e.point.z)}
         onPointerEnter={() => setOnFloor(true)}
         onPointerLeave={() => setOnFloor(false)}
         position-x={8 / 2}
         position-z={8 / 2}
+        onClick={(e) => {
+          handleFloorClick(e)
+        }}
       >
         <planeGeometry args={[60, 60]} />
         <meshStandardMaterial color="F0F0F0" />
@@ -340,8 +346,8 @@ export const MultiRender = React.forwardRef((props, ref) => {
             nickname={users[idx].nickname}
             actionId={users[idx].actionId}
             closeCharacters={closeCharacters}
-            setUserPosition={setUserPosition}
             chat={users[idx].chat}
+            publishCurrentPosition={publishCurrentPosition}
           />
         </group>
       ))}
