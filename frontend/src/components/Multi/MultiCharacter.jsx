@@ -2,12 +2,10 @@ import React, { useEffect, useMemo, useRef, useState } from "react"
 import { useGLTF, useAnimations } from "@react-three/drei"
 import { useFrame, useGraph } from "@react-three/fiber"
 import { SkeletonUtils } from "three-stdlib"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import { userAtom } from "../../atom/UserAtom"
 import { Html } from "@react-three/drei"
-import { MultiUsers } from "../../atom/MultiAtom"
-import { useLoader } from "@react-three/fiber"
-import { TextureLoader, PlaneGeometry, MeshBasicMaterial, Mesh } from "three"
+import { MultiUsers, RoomModalOpen } from "../../atom/MultiAtom"
 import styles from "./MultiCharacter.module.css"
 
 const MOVEMENT_SPEED = 0.032
@@ -20,6 +18,7 @@ export function MultiCharacter({
   actionId,
   closeCharacters,
   setUserPosition,
+  chat,
   ...props
 }) {
   const position = useMemo(() => props.position, [])
@@ -28,11 +27,6 @@ export function MultiCharacter({
 
   const { scene, materials, animations } = useGLTF(
     `${urlPath}/assets/models/characters/${avatarId}.glb`
-  )
-
-  const texture = useLoader(
-    TextureLoader,
-    `${urlPath}/assets/icons/location.png`
   )
 
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene])
@@ -48,6 +42,8 @@ export function MultiCharacter({
   const [isMoving, setIsMoving] = useState(true)
 
   const [isPlay, setIsPlay] = useState(false)
+
+  const setRoomModal = useSetRecoilState(RoomModalOpen)
 
   const actionList = [0, { Win: 2800 }, { Sad: 5700 }, { "Song Jump": 6500 }]
 
@@ -73,6 +69,24 @@ export function MultiCharacter({
       setIsPlay(false)
     }
   }, [actionId])
+
+  useEffect(() => {
+    if (chat) {
+      // 2초 후에 채팅을 숨기기 위한 타이머 설정
+      const hideChatTimer = setTimeout(() => {
+        setUsers((prevUsers) => {
+          const newUsers = { ...prevUsers }
+          if (newUsers[id]) {
+            newUsers[id] = { ...newUsers[id], chat: "" }
+          }
+          return newUsers
+        })
+      }, 2000) // 2000 밀리초 = 2초 (필요에 따라 조절)
+
+      // 컴포넌트가 언마운트되거나 채팅이 변경될 때 타이머를 취소하기 위해 사용
+      return () => clearTimeout(hideChatTimer)
+    }
+  }, [chat])
 
   useFrame((state) => {
     if (actionName == undefined) {
@@ -129,10 +143,16 @@ export function MultiCharacter({
           >
             {nickname}
           </div>
+          {chat && (
+            <div className={styles.chatBox}>
+              <p className={styles.chatText}>{chat}</p>
+            </div>
+          )}
           <div
             className={styles.roomImgBox}
             onClick={() => {
-              console.log("111")
+              setIsMoving(false)
+              setRoomModal(true)
             }}
           >
             {closeCharacters[id] && (
