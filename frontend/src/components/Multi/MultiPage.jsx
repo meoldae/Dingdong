@@ -62,12 +62,14 @@ export const MultiPage = () => {
       <div className={styles.chatInputContainer}>
         <input
           type="text"
-          placeholder="Type your message..."
+          placeholder="채팅을 입력하세요"
           value={chatInput}
           onChange={(e) => setChatInput(e.target.value)}
           onKeyDown={handleInputKeyDown}
         />
-        <button onClick={chatButtonClick}>Send</button>
+        <div onClick={chatButtonClick} className={styles.SendButton}>
+          <img src={`${urlPath}/assets/icons/white_paperplane.png`} />
+        </div>
       </div>
       <div className={styles.FloatingButton} onClick={() => setIsFloatingButtonVisible(true)}>
         <img
