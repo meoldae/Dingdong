@@ -5,7 +5,11 @@ import { SkeletonUtils } from "three-stdlib"
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import { userAtom } from "../../atom/UserAtom"
 import { Html } from "@react-three/drei"
-import { MultiUsers, RoomModalOpen } from "../../atom/MultiAtom"
+import {
+  MultiUsers,
+  RoomModalOpen,
+  userPositionAtom,
+} from "../../atom/MultiAtom"
 import styles from "./MultiCharacter.module.css"
 
 const MOVEMENT_SPEED = 0.032
@@ -38,6 +42,8 @@ export function MultiCharacter({
   const user = useRecoilValue(userAtom)
 
   const [users, setUsers] = useRecoilState(MultiUsers)
+
+  const setUserPosition = useSetRecoilState(userPositionAtom)
 
   const [isMoving, setIsMoving] = useState(true)
 
@@ -97,6 +103,10 @@ export function MultiCharacter({
     // 이동 중
 
     if (isMoving && group.current.position.distanceTo(props.position) > 0.1) {
+      if (nickname == user.nickname) {
+        const newPosition = group.current.position.clone()
+        setUserPosition(newPosition)
+      }
       setIsPlay(false)
       actions.Idle.stop()
       actions.Run.play()
