@@ -33,7 +33,7 @@
   word-wrap: break-word;
 
   position: absolute;
-  top: -20px;
+  bottom: calc(100% + 10px);
   background: #FFFFFF;
   border-radius: 10px;
 }
