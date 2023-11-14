@@ -22,11 +22,7 @@ import styles from "./ConfirmEnteringDefaultModal.module.css"
 
 // API
 import { getRandomRoom } from "@/api/Room"
-import {
-  RoomModalOpen,
-  movingState,
-  userPositionAtom,
-} from "../../../atom/MultiAtom"
+import { RoomModalOpen, userPositionAtom } from "../../../atom/MultiAtom"
 
 const ConfirmEnteringDefaultModal = ({
   modalContent,
@@ -66,7 +62,6 @@ const ConfirmEnteringDefaultModal = ({
   const setIsPostBoxVisible = useSetRecoilState(isPostBoxVisibleAtom)
 
   // 멀티 상태 관리
-  const setIsMoving = useSetRecoilState(movingState)
 
   const p = useRecoilValue(userPositionAtom)
 

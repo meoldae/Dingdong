@@ -5,7 +5,7 @@ import { SkeletonUtils } from "three-stdlib"
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import { userAtom } from "../../atom/UserAtom"
 import { Html } from "@react-three/drei"
-import { MultiUsers, RoomModalOpen, movingState } from "../../atom/MultiAtom"
+import { MultiUsers, RoomModalOpen } from "../../atom/MultiAtom"
 import styles from "./MultiCharacter.module.css"
 
 const MOVEMENT_SPEED = 0.032
@@ -39,7 +39,7 @@ export function MultiCharacter({
 
   const [users, setUsers] = useRecoilState(MultiUsers)
 
-  const [isMoving, setIsMoving] = useRecoilState(movingState)
+  const [isMoving, setIsMoving] = useState(true)
 
   const [isPlay, setIsPlay] = useState(false)
 
