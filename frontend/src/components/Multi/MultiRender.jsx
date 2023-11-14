@@ -286,7 +286,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
 
   const handleFloorClick = (e) => {
     if (isMouseDown) {
-      console.log(e)
+      // console.log(e)
 
       publishMove(e.point.x, 0, e.point.z)
     }
