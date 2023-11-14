@@ -151,8 +151,8 @@ export function MultiCharacter({
             {nickname}
           </div>
           {chat && (
-            <div className={styles.chatBox}>
-              <p className={styles.chatText}>{chat}</p>
+            <div className={styles.chatBox} style={{ maxWidth: "200px" }}>
+              {chat}
             </div>
           )}
           <div

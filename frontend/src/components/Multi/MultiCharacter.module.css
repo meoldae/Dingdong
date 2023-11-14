@@ -30,9 +30,10 @@
 .chatBox {
   width: 100px;
   text-align: center;
+  word-wrap: break-word;
 
   position: absolute;
-  top: -10px;
+  bottom: calc(100% + 10px);
   background: #FFFFFF;
   border-radius: 10px;
 }
