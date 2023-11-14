@@ -54,6 +54,17 @@ const WriteGuestBookModal = ({ check }) => {
     "#BFBFBF", // 6: 검정색
   ]
 
+  // 그림자 색상 아이템
+  const shadowList = [
+    "#91053d",
+    "#C15900",
+    "#916705",
+    "#377300",
+    "#004699",
+    "#4F00B3",
+    "#313332",
+  ]
+
   // 랜덤 각도 생성 함수
   const randomDegree = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -139,7 +150,7 @@ const WriteGuestBookModal = ({ check }) => {
         <div className={styles.ButtonContainer}>
           <div
             className={styles.Button}
-            style={{ background: `${colorList[isColor]}` }}
+            style={{ background: `${colorList[isColor]}`, boxShadow: `0px 4px 2px ${shadowList[isColor]}` }}
             onClick={() => WriteGuestBookHandler()}
           >
             방명록 남기기
