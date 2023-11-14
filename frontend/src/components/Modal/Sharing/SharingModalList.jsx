@@ -183,21 +183,21 @@ function SharingModalList(props) {
     sharetype = [
       { icon: urlCopy, name: "URL복사", click: shareUrl },
       { icon: kakao, name: "카카오톡", click: shareKakao },
-      { icon: twitter, name: "트위터", click: shareTwitter },
+      { icon: twitter, name: "X", click: shareTwitter },
     ]
   } else if (props.shareMode === "result") {
     sharetype = [
       { icon: urlCopy, name: "URL복사", click: shareUrl },
       { icon: save, name: "저장하기", click: saveImgTest },
       { icon: kakao, name: "카카오톡", click: shareKakao },
-      { icon: twitter, name: "트위터", click: shareTwitter },
+      { icon: twitter, name: "X", click: shareTwitter },
     ]
   } else {
     sharetype = [
       { icon: urlCopy, name: "URL복사", click: shareUrl },
       { icon: save, name: "저장하기", click: saveImg },
       { icon: kakao, name: "카카오톡", click: shareKakao },
-      { icon: twitter, name: "트위터", click: shareTwitter },
+      { icon: twitter, name: "X", click: shareTwitter },
     ]
   }
 
@@ -205,7 +205,7 @@ function SharingModalList(props) {
     sharetype = [
       { icon: urlCopy, name: "URL복사", click: shareUrl },
       { icon: kakao, name: "카카오톡", click: shareKakao },
-      { icon: twitter, name: "트위터", click: shareTwitter },
+      { icon: twitter, name: "X", click: shareTwitter },
     ]
   }
 

@@ -541,7 +541,7 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringPostOffice}
               portalPosition={postOfficePortalPosition}
               setPortalVisible={setPostOfficePortalVisible}
-              adjustedAngle={[-9, 5, 10]}
+              adjustedAngle={[-9, 6, 10]}
               adjustedZoom={0.3}
             />
           ) : (
@@ -571,7 +571,7 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringOtherRoom}
               portalPosition={otherRoomPortalPosition}
               setPortalVisible={setOtherRoomPortalVisible}
-              adjustedAngle={[2, 4, 5]}
+              adjustedAngle={[2, 3, 5]}
               adjustedZoom={0.35}
             />
           ) : (
@@ -662,7 +662,7 @@ const SingleMainPage = () => {
               portalPosition={postBoxPortalPosition}
               setPortalVisible={setPostBoxPortalVisible}
               adjustedAngle={[0, 4, 7]}
-              adjustedZoom={0.4}
+              adjustedZoom={0.45}
             />
           ) : (
             <DefaultPortalRing
