@@ -28,14 +28,15 @@
 }
 
 .chatBox {
-  width: 100px;
+  width: 120px;
   text-align: center;
   word-wrap: break-word;
   position: absolute;
   bottom: calc(100% + 10px);
+  right: -50%;
   background: #ffffff;
   border-radius: 10px;
-  padding: 5px;
+  padding: 10px;
 }
 
 .chatBox:after {

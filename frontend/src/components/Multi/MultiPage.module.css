@@ -16,7 +16,7 @@
   align-items: center;
 
   position: absolute;
-  bottom: 10%;
+  bottom: 12%;
   right: 2%;
 
   z-index: 2;
@@ -57,7 +57,7 @@
 
   z-index: 100000001;
   right: 3%;
-  bottom: 16%;
+  bottom: 18%;
 }
 
 .actionsBtn {
@@ -113,20 +113,22 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  z-index: 2;
+  z-index: 100000000;
 
   display: flex;
   justify-content: center;
-  background: #02c26f;
+  background: rgba(2, 194, 111, 0.5);
   padding: 10px;
 }
 
 .chatInputContainer input {
-  width: 80%;
+  width: 70%;
   height: 50px;
-  border: #02c26f 2px solid;
+  border: none;
   border-radius: 10px;
-  padding-left: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-right: 10px;
   outline: none;
   font-size: 15px;
   font-family: "GmarketSansMedium";
@@ -137,7 +139,6 @@
   height: 50px;
   border-radius: 10px;
 
-  background: #02c26f;
   display: flex;
   justify-content: center;
   align-items: center;

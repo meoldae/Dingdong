@@ -309,7 +309,7 @@ const SingleMainPage = () => {
 
           {/* 외곽 경계 */}
           <PhysicsModel // 상
-            position={[0, 0.005, -18.5]}
+            position={[0, 0.005, -12.5]}
             rotation={[0, 0, 0]}
             size={[75, 0.3]}
           />
@@ -369,51 +369,29 @@ const SingleMainPage = () => {
 
           {/* 우체국 경계 */}
           <PhysicsModel //뒤
-            position={[12.3, 0.005, -8.3]}
+            position={[17.5, 0.005, 6.5]}
             rotation={[0, 0, 0]}
             size={[9, 0.3]}
           />
           <PhysicsModel //좌
-            position={[7.8, 0.005, -5.3]}
+            position={[13.2, 0.005, 10]}
             rotation={[0, Math.PI / 2, 0]}
             size={[5.8, 0.3]}
           />
           <PhysicsModel //우
-            position={[17.8, 0.005, -5.3]}
+            position={[23.3, 0.005, 10]}
             rotation={[0, Math.PI / 2, 0]}
             size={[5.8, 0.3]}
           />
           <PhysicsModel //앞 좌
-            position={[8.8, 0.005, -2.4]}
+            position={[14, 0.005, 12.8]}
             rotation={[0, 0, 0]}
             size={[1.5, 0.3]}
           />
           <PhysicsModel //앞 우
-            position={[15, 0.005, -2.4]}
+            position={[20.5, 0.005, 12.8]}
             rotation={[0, 0, 0]}
-            size={[4, 0.3]}
-          />
-
-          {/* 유령 집 경계 */}
-          <PhysicsModel //뒤
-            position={[16.5, 0.005, 7.5]}
-            rotation={[0, 0, 0]}
-            size={[4, 0.3]}
-          />
-          <PhysicsModel //앞
-            position={[16.5, 0.005, 13]}
-            rotation={[0, 0, 0]}
-            size={[4, 0.3]}
-          />
-          <PhysicsModel //우
-            position={[19, 0.005, 10.3]}
-            rotation={[0, Math.PI / 2, 0]}
-            size={[5.6, 0.3]}
-          />
-          <PhysicsModel //좌
-            position={[14.2, 0.005, 10]}
-            rotation={[0, Math.PI / 2, 0]}
-            size={[5.8, 0.3]}
+            size={[5, 0.3]}
           />
 
           {/* 유령 앞 집 경계 */}
@@ -431,11 +409,6 @@ const SingleMainPage = () => {
             position={[19.5, 0.005, 20.5]}
             rotation={[0, Math.PI / 2, 0]}
             size={[5.6, 0.3]}
-          />
-          <PhysicsModel //좌
-            position={[13, 0.005, 20.5]}
-            rotation={[0, Math.PI / 2, 0]}
-            size={[5.8, 0.3]}
           />
 
           {/* 이웃마을 경계 */}
@@ -481,7 +454,7 @@ const SingleMainPage = () => {
             size={[8, 0.3]}
           />
           
-          {/* 마트 경계 */}
+          {/* 시상대 */}
           <PhysicsModel // 뒤
             position={[-16.3, 0.005, 17.5]}
             rotation={[0, 0, 0]}
@@ -501,31 +474,9 @@ const SingleMainPage = () => {
           />
 
           <PhysicsModel // 우
-            position={[-13, 0.005, 20.4]}
+            position={[-17.5, 0.005, 20.4]}
             rotation={[0, Math.PI / 2, 0]}
             size={[6, 0.3]}
-          />
-
-          {/* 시상대 */}
-          <PhysicsModel // 우
-            position={[-4.5, 0.005, 7.5]}
-            rotation={[0, Math.PI / 2, 0]}
-            size={[1, 0.3]}
-          />
-          <PhysicsModel // 좌
-            position={[-7.7, 0.005, 7.5]}
-            rotation={[0, Math.PI / 2, 0]}
-            size={[1, 0.3]}
-          />
-          <PhysicsModel // 앞
-            position={[-6.2, 0.005, 8.3]}
-            rotation={[0, 0, 0]}
-            size={[3.3, 0.3]}
-          />
-          <PhysicsModel // 뒤
-            position={[-6.2, 0.005, 7.3]}
-            rotation={[0, 0, 0]}
-            size={[3.3, 0.3]}
           />
 
           {/* 간판 */}
@@ -590,7 +541,7 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringPostOffice}
               portalPosition={postOfficePortalPosition}
               setPortalVisible={setPostOfficePortalVisible}
-              adjustedAngle={[-2, 4, 7]}
+              adjustedAngle={[-9, 6, 10]}
               adjustedZoom={0.3}
             />
           ) : (
@@ -620,7 +571,7 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringOtherRoom}
               portalPosition={otherRoomPortalPosition}
               setPortalVisible={setOtherRoomPortalVisible}
-              adjustedAngle={[14, 4, 1]}
+              adjustedAngle={[2, 3, 5]}
               adjustedZoom={0.35}
             />
           ) : (
@@ -711,7 +662,7 @@ const SingleMainPage = () => {
               portalPosition={postBoxPortalPosition}
               setPortalVisible={setPostBoxPortalVisible}
               adjustedAngle={[0, 4, 7]}
-              adjustedZoom={0.4}
+              adjustedZoom={0.45}
             />
           ) : (
             <DefaultPortalRing
