@@ -25,7 +25,7 @@ export default defineConfig({
         display: 'standalone',
         icons: [
           {
-            src: "/feDev/assets/icons/pwa_icon.png",
+            src: "/assets/icons/pwa_icon.png",
             sizes: "192x192",
             type: "image/png",
             purpose: "any maskable",
