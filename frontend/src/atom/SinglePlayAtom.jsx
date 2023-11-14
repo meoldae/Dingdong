@@ -53,9 +53,10 @@ export const RoomPortalVisibleAtom = atom({
   key: "HousePortalVisibleAtom",
   default: true,
 });
+
 export const RoomPortalPositionAtom = atom({
   key: "RoomPortalPositionAtom",
-  default: [0, 0.03, -2],
+  default: [0, 0.03, -4.5],
 });
 
 export const PostOfficePortalVisibleAtom = atom({
@@ -64,7 +65,7 @@ export const PostOfficePortalVisibleAtom = atom({
 });
 export const PostOfficePortalPositionAtom = atom({
   key: "PostOfficePortalPositionAtom",
-  default: [9.85, 0.03, -1.5],
+  default: [11, 0.03, -2.5],
 });
 
 export const StorePortalVisibleAtom = atom({
@@ -82,7 +83,7 @@ export const OtherRoomPortalVisibleAtom = atom({
 });
 export const OtherRoomPortalPositionAtom = atom({
   key: "OtherRoomPortalPositionAtom",
-  default: [-8, 0.03, 6.4],
+  default: [-16.2, 0.03, 11],
 });
 
 export const WorldPortalVisibleAtom = atom({
@@ -100,7 +101,7 @@ export const RankPortalVisibleAtom = atom({
 });
 export const RankPortalPositionAtom = atom({
   key: "RankPortalPositionAtom",
-  default: [-8, 0.03, 16.3],
+  default: [-6.2, 0.03, 9.5],
 });
 
 export const TestPortalVisibleAtom = atom({
@@ -109,7 +110,7 @@ export const TestPortalVisibleAtom = atom({
 });
 export const TestPortalPositionAtom = atom({
   key: "TestPortalPositionAtom",
-  default: [3.3, 0.03, 10],
+  default: [4, 0.03, 8.7],
 });
 
 export const InstaPortalVisibleAtom = atom({
@@ -118,7 +119,7 @@ export const InstaPortalVisibleAtom = atom({
 });
 export const InstaPortalPositionAtom = atom({
   key: "InstaPortalPositionAtom",
-  default: [5.1, 0.03, 10],
+  default: [5.9, 0.03, 8.7],
 });
 
 export const TwitterPortalVisibleAtom = atom({
@@ -127,7 +128,7 @@ export const TwitterPortalVisibleAtom = atom({
 });
 export const TwitterPortalPositionAtom = atom({
   key: "TwitterPortalPositionAtom",
-  default: [6.9, 0.03, 10],
+  default: [7.7, 0.03, 8.7],
 });
 
 export const PostBoxPortalVisibleAtom = atom({
@@ -136,5 +137,5 @@ export const PostBoxPortalVisibleAtom = atom({
 });
 export const PostBoxPortalPositionAtom = atom({
   key: "PostBoxPortalPositionAtom",
-  default: [1.3, 0.03, 0],
+  default: [2.7, 0.03, -1.1],
 });
