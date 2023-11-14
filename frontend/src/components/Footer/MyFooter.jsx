@@ -135,7 +135,7 @@ const MyFooter = (props) => {
       <div className={styles.wrap}>
         <div className={styles.secondFooter}>
           <div className={styles.background}>
-            <RoomBtn img={"roomEdit"} onClick={() => roomEditClickEvent()} />
+            <RoomBtn img={"HomeEdit"} onClick={() => roomEditClickEvent()} />
           </div> 
         </div>
         <div className={styles.footer}>
