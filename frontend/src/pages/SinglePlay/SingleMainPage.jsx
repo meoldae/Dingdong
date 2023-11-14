@@ -541,7 +541,7 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringPostOffice}
               portalPosition={postOfficePortalPosition}
               setPortalVisible={setPostOfficePortalVisible}
-              adjustedAngle={[-2, 4, 7]}
+              adjustedAngle={[-9, 5, 10]}
               adjustedZoom={0.3}
             />
           ) : (
@@ -571,7 +571,7 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringOtherRoom}
               portalPosition={otherRoomPortalPosition}
               setPortalVisible={setOtherRoomPortalVisible}
-              adjustedAngle={[14, 4, 1]}
+              adjustedAngle={[2, 4, 5]}
               adjustedZoom={0.35}
             />
           ) : (
