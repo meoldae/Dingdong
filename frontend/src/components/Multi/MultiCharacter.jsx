@@ -13,7 +13,7 @@ import {
 } from "../../atom/MultiAtom"
 import styles from "./MultiCharacter.module.css"
 
-const MOVEMENT_SPEED = 0.032
+const MOVEMENT_SPEED = 0.06
 const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
 export function MultiCharacter({
@@ -149,7 +149,10 @@ export function MultiCharacter({
         <div className={styles.characterContainer}>
           <div
             className={styles.nicknameBox}
-            style={{ width: `${nickname.length * 20}px` }}
+            style={{
+              pointerEvents: "none",
+              width: `${nickname.length * 20}px`,
+            }}
           >
             {nickname}
           </div>
