@@ -1,22 +1,32 @@
 import { Canvas } from "@react-three/fiber"
 import { MultiRender } from "./MultiRender"
 import styles from "./MultiPage.module.css"
-import { isFloatingButtonVisibleAtom } from "../../atom/MultiAtom"
+import {
+  MultiUsers,
+  isFloatingButtonVisibleAtom,
+  otherRoomId,
+} from "../../atom/MultiAtom"
 import { useRef, useState } from "react"
-import { useRecoilState } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil"
 import { RoomModalOpen } from "../../atom/MultiAtom"
-import { motion } from "framer-motion"
-import ConfirmEnteringDefaultModal from "../Modal/Confirm/ConfirmEnteringDefaultModal"
-
+import DefaultModal from "../Modal/Default/DefaultModal"
+import { useNavigate } from "react-router-dom"
+import MultiRoomModal from "./MultiRoomModal"
 
 export const MultiPage = () => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+  const navigate = useNavigate()
+  const multiRenderRef = useRef()
 
   const [chatInput, setChatInput] = useState("")
   const [roomModalOpen, setRoomModalOpen] = useRecoilState(RoomModalOpen)
-  const multiRenderRef = useRef()
 
-  const [isFloatingButtonVisible, setIsFloatingButtonVisible] = useRecoilState(isFloatingButtonVisibleAtom)
+  const users = useRecoilValue(MultiUsers)
+  const otherRoom = useRecoilValue(otherRoomId)
+
+  const [isFloatingButtonVisible, setIsFloatingButtonVisible] = useRecoilState(
+    isFloatingButtonVisibleAtom
+  )
 
   const chatButtonClick = () => {
     if (multiRenderRef.current?.publishChat) {
@@ -40,24 +50,27 @@ export const MultiPage = () => {
     }
   }
 
+  const okClick = () => {
+    setRoomModalOpen(false)
+    navigate(`${urlPath}/room/${otherRoom}`)
+  }
+
+  const cancelClick = () => {
+    setRoomModalOpen(false)
+  }
+
   return (
     <div className={styles.container}>
       {roomModalOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-        >
-          <div className={styles.confirmModal}>
-            {/* 준비중인 곳은 "준비중"으로 넣을 것!  그 외에는 들어가는 곳의 장소명을 넣을 것! */}
-            <ConfirmEnteringDefaultModal
-              modalContent={"~ 방에 입장하기"}
-              setConfirmEnteringLocation={setRoomModalOpen}
-              location={"multiRoom"}
-              flag={"1"}
-            />
-          </div>
-        </motion.div>
+        <div className={styles.confirmModal}>
+          <MultiRoomModal
+            content={`${users[otherRoom].nickname}의 방으로 이동하시겠습니까?`}
+            ok={"확인"}
+            cancel={"취소"}
+            okClick={okClick}
+            cancelClick={cancelClick}
+          />
+        </div>
       )}
       <div className={styles.chatInputContainer}>
         <input
@@ -71,35 +84,61 @@ export const MultiPage = () => {
           <img src={`${urlPath}/assets/icons/white_paperplane.png`} />
         </div>
       </div>
-      <div className={styles.FloatingButton} onClick={() => setIsFloatingButtonVisible(true)}>
+      <div
+        className={styles.FloatingButton}
+        onClick={() => setIsFloatingButtonVisible(true)}
+      >
         <img
           src={`${urlPath}/assets/icons/white_plus.png`}
-          className={`${styles.PlusButton} ${isFloatingButtonVisible ? styles.Rotate : styles.RotateBack}`}
+          className={`${styles.PlusButton} ${
+            isFloatingButtonVisible ? styles.Rotate : styles.RotateBack
+          }`}
         />
       </div>
       {isFloatingButtonVisible && (
         <>
-        <div className={styles.Overlay} onClick={() => setIsFloatingButtonVisible(false)} />
-        <div className={styles.BtnList}>
-          <div className={styles.actionsBtn} onClick={() => handleButtonClick(1)}>
-            <div className={styles.FloatContent}>기뻐하기</div>
-            <div className={styles.IconButton}>
-              <img src={`${urlPath}/assets/icons/smile.png`} className={styles.FloatIcon} />
+          <div
+            className={styles.Overlay}
+            onClick={() => setIsFloatingButtonVisible(false)}
+          />
+          <div className={styles.BtnList}>
+            <div
+              className={styles.actionsBtn}
+              onClick={() => handleButtonClick(1)}
+            >
+              <div className={styles.FloatContent}>기뻐하기</div>
+              <div className={styles.IconButton}>
+                <img
+                  src={`${urlPath}/assets/icons/smile.png`}
+                  className={styles.FloatIcon}
+                />
+              </div>
+            </div>
+            <div
+              className={styles.actionsBtn}
+              onClick={() => handleButtonClick(2)}
+            >
+              <div className={styles.FloatContent}>슬퍼하기</div>
+              <div className={styles.IconButton}>
+                <img
+                  src={`${urlPath}/assets/icons/sad.png`}
+                  className={styles.FloatIcon}
+                />
+              </div>
+            </div>
+            <div
+              className={styles.actionsBtn}
+              onClick={() => handleButtonClick(3)}
+            >
+              <div className={styles.FloatContent}>춤추기</div>
+              <div className={styles.IconButton}>
+                <img
+                  src={`${urlPath}/assets/icons/dance.png`}
+                  className={styles.FloatIcon}
+                />
+              </div>
             </div>
           </div>
-          <div className={styles.actionsBtn} onClick={() => handleButtonClick(2)}>
-            <div className={styles.FloatContent}>슬퍼하기</div>
-            <div className={styles.IconButton}>
-              <img src={`${urlPath}/assets/icons/sad.png`} className={styles.FloatIcon} />
-            </div>
-          </div>
-          <div className={styles.actionsBtn} onClick={() => handleButtonClick(3)}>
-            <div className={styles.FloatContent}>춤추기</div>
-            <div className={styles.IconButton}>
-              <img src={`${urlPath}/assets/icons/dance.png`} className={styles.FloatIcon} />
-            </div>
-          </div>
-        </div>
         </>
       )}
       <Canvas shadows camera={{ position: [2, 8, 15], fov: 30, zoom: 0.72 }}>

@@ -65,7 +65,7 @@ export const PostOfficePortalVisibleAtom = atom({
 });
 export const PostOfficePortalPositionAtom = atom({
   key: "PostOfficePortalPositionAtom",
-  default: [11, 0.03, -2.5],
+  default: [16.3, 0.03, 13.5],
 });
 
 export const StorePortalVisibleAtom = atom({
@@ -101,7 +101,7 @@ export const RankPortalVisibleAtom = atom({
 });
 export const RankPortalPositionAtom = atom({
   key: "RankPortalPositionAtom",
-  default: [-6.2, 0.03, 9.5],
+  default: [-16.5, 0.03, 20.8],
 });
 
 export const TestPortalVisibleAtom = atom({
@@ -110,7 +110,7 @@ export const TestPortalVisibleAtom = atom({
 });
 export const TestPortalPositionAtom = atom({
   key: "TestPortalPositionAtom",
-  default: [4, 0.03, 8.7],
+  default: [14.7, 0.03, 19.5],
 });
 
 export const InstaPortalVisibleAtom = atom({
@@ -119,7 +119,7 @@ export const InstaPortalVisibleAtom = atom({
 });
 export const InstaPortalPositionAtom = atom({
   key: "InstaPortalPositionAtom",
-  default: [5.9, 0.03, 8.7],
+  default: [16.6, 0.03, 19.5],
 });
 
 export const TwitterPortalVisibleAtom = atom({
@@ -128,7 +128,7 @@ export const TwitterPortalVisibleAtom = atom({
 });
 export const TwitterPortalPositionAtom = atom({
   key: "TwitterPortalPositionAtom",
-  default: [7.7, 0.03, 8.7],
+  default: [18.4, 0.03, 19.5],
 });
 
 export const PostBoxPortalVisibleAtom = atom({

@@ -10,7 +10,7 @@
   height: 50px;
   border-radius: 50%;
 
-  background: #02C26F;
+  background: #02c26f;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -83,7 +83,7 @@
   height: 40px;
   border-radius: 50%;
 
-  background: #FFFFFF;
+  background: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,8 +95,11 @@
 }
 
 .confirmModal {
-  z-index: 5;
+  z-index: 1000000000000;
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -114,14 +117,14 @@
 
   display: flex;
   justify-content: center;
-  background: #02C26F;
+  background: #02c26f;
   padding: 10px;
 }
 
 .chatInputContainer input {
   width: 80%;
   height: 50px;
-  border: #02C26F 2px solid;
+  border: #02c26f 2px solid;
   border-radius: 10px;
   padding-left: 5px;
   outline: none;
@@ -134,7 +137,7 @@
   height: 50px;
   border-radius: 10px;
 
-  background: #02C26F;
+  background: #02c26f;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -144,4 +147,3 @@
   width: 30px;
   height: 30px;
 }
-
