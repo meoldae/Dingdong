@@ -1,0 +1,49 @@
+.characterContainer {
+  display: flex;
+}
+
+.nicknameBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  color: black;
+  font-weight: bold;
+  border-radius: 30px;
+  background: "white";
+}
+
+.roomImgBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.roomImg {
+  width: 30px;
+  height: 30px;
+  padding-bottom: 10px;
+}
+
+.chatBox {
+  width: 100px;
+  text-align: center;
+
+  position: absolute;
+  top: -10px;
+  background: #FFFFFF;
+  border-radius: 10px;
+}
+
+.chatBox:after {
+  border-top: 10px solid #FFFFFF;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 0px solid transparent;
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 40%;
+}

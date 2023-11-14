@@ -12,13 +12,17 @@ import {
   selectedUserListAtom,
   selectedUserNicknameListAtom,
 } from "../../../atom/PostOfficeAtom"
-import { isPostBoxVisibleAtom, selectedPostCardAtom } from "../../../atom/PostAtom"
+import {
+  isPostBoxVisibleAtom,
+  selectedPostCardAtom,
+} from "../../../atom/PostAtom"
 
 // 스타일
 import styles from "./ConfirmEnteringDefaultModal.module.css"
 
 // API
 import { getRandomRoom } from "@/api/Room"
+import { RoomModalOpen, userPositionAtom } from "../../../atom/MultiAtom"
 
 const ConfirmEnteringDefaultModal = ({
   modalContent,
@@ -49,11 +53,17 @@ const ConfirmEnteringDefaultModal = ({
   // 우체국 상태 관리
   const setIsPostOfficeVisible = useSetRecoilState(isPostOfficeVisibleAtom)
   const setSelectedUserList = useSetRecoilState(selectedUserListAtom)
-  const setSelectUserNicknameList = useSetRecoilState(selectedUserNicknameListAtom)
+  const setSelectUserNicknameList = useSetRecoilState(
+    selectedUserNicknameListAtom
+  )
   const setSelectPostCard = useSetRecoilState(selectedPostCardAtom)
 
   // 우체통 상태 관리
   const setIsPostBoxVisible = useSetRecoilState(isPostBoxVisibleAtom)
+
+  // 멀티 상태 관리
+
+  const p = useRecoilValue(userPositionAtom)
 
   // 마이룸으로 이동
   const onConfirm = () => {
@@ -107,6 +117,10 @@ const ConfirmEnteringDefaultModal = ({
       setIsPostBoxVisible(true)
       setIsArrived(false)
     }
+
+    // else if (location === "multiRoom") {
+
+    // }
 
     setConfirmEnteringLocation(false)
   }

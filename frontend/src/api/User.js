@@ -42,6 +42,10 @@ const fetchSerchNickname = async (name, success, fail) => {
   await HttpJson.get(`member/range/${name}`).then(success).catch(fail)
 }
 
+const fetchMultiUser = async (channelId, success, fail) => {
+  await HttpJson.get(`multi/${channelId}`).then(success).catch(fail)
+}
+
 export {
   CreateUser,
   GetAvatarList,
@@ -53,4 +57,5 @@ export {
   fetchLogout,
   fetchUserSecession,
   fetchSerchNickname,
+  fetchMultiUser,
 }

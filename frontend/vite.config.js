@@ -39,6 +39,13 @@ export default defineConfig({
     host: "0.0.0.0",
     port: 3000,
     cors: true,
+    // proxy: {
+    //   '/ws': {
+    //     target: 'ws://:8080', 
+    //     ws: true,
+    //     changeOrigin: true, 
+    //   },
+    // }
   },
   resolve: {
     alias: [

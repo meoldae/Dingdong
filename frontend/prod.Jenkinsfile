@@ -58,7 +58,7 @@ pipeline {
         stage("Unused Resources Cleaning") {
             steps {
                 script {
-                    sh "docker system prune -a"
+                    sh "docker system prune -a -f"
                 }
             }
         }

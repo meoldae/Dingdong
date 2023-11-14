@@ -41,6 +41,10 @@ const SignUp = () => {
     );
   }, []);
 
+  const handleSlideChange = (index) => {
+    setAvatar(charactersData[index].id);
+  };
+
   const charactersImages = charactersData.map((charData) => charData.glb);
   const memberId = new URLSearchParams(window.location.search).get("memberId");
   const settings = {
@@ -52,12 +56,10 @@ const SignUp = () => {
     arrows: true,
     prevArrow: <img src={`${urlPath}/assets/icons/leftArrow.png`} />,
     nextArrow: <img src={`${urlPath}/assets/icons/rightArrow.png`} />,
-
+    afterChange: handleSlideChange,
   };
 
-  const handleSlideChange = (index) => {
-    setAvatar(charactersData[index].id);
-  };
+  
 
   async function doSignUp() {
     if (!avatarId || !nickname) {
