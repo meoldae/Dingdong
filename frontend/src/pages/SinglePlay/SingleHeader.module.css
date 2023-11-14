@@ -275,24 +275,43 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 8;
+
+  background: #FFFFFF;
+  border-radius: 10px;
 }
 
 .InquiryTitle {
-  color: #FFF;
+  color: #2c2c2c;
   font-size: 30px;
-  /* font-family: "Pretendard-Bold"; */
   text-align: center;
-  margin-bottom: 15px;
+  margin: 15px 0 15px 0;
+}
+
+.LineContainer {
+  width: 100%;
+  margin-bottom: 10px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.InquiryLine {
+  width: 80%;
+  border: 1px solid rgba(194, 194, 194, 0.5);
+}
+
+.InquiryContentContainer {
+  width: 290px;
+
+  display: flex;
+  justify-content: center;
 }
 
 .InquiryContent {
-  width: 290px;
+  width: 80%;
   height: 170px;
-  background: #FFF;
-  border-radius: 10px;
-  
-  /* font-family: "Pretendard-Medium"; */
-  font-size: 18px;
+
+  font-size: 15px;
   padding: 10px;
 
   outline: none;
@@ -301,24 +320,32 @@
 }
 
 .InquiryTextLength {
-  color: #FFF;
+  color: #2c2c2c;
   text-align: end;
   margin-top: 5px;
+  margin-right: 10%;
   font-size: 15px;
-  /* font-family: "Pretendard-SemiBold"; */
 }
 
-.Inquiry {
+.InquiryButtonContainer {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+
+.InquiryButton {
+  width: 80%;
   height: 50px;
-  background: #F2CBE4;
+  background: #02c26f;
   border-radius: 10px;
-  margin-top: 25px;
+  margin: 15px 0 15px 0;
+  box-shadow: 0px 4px 0px #009152;
 
   text-align: center;
   line-height: 50px;
   font-size: 20px;
-  /* font-family: "Pretendard-Bold"; */
-  color: #2C2C2C;
+  color: #ffffff;
 }
 
 .XContainer {

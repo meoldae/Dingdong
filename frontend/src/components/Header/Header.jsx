@@ -525,6 +525,7 @@ const Header = ({ checkMyRoom }) => {
                 value={inquiryText}
                 onChange={(e) => checkMaxLength(e)}
                 maxLength={200}
+                style={{ fontFamily: "GmarketSansMedium" }}
               />
             </div>
             <div className={styles.InquiryTextLength}>
