@@ -122,11 +122,13 @@
 }
 
 .chatInputContainer input {
-  width: 80%;
+  width: 70%;
   height: 50px;
   border: #02c26f 2px solid;
   border-radius: 10px;
-  padding-left: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-right: 10px;
   outline: none;
   font-size: 15px;
   font-family: "GmarketSansMedium";
