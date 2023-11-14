@@ -22,10 +22,10 @@ export const RoomModalOpen = atom({
   default: false,
 })
 
-export const movingState = atom({
-  key: "movingState",
-  default: true,
-})
+// export const movingState = atom({
+//   key: "movingState",
+//   default: true,
+// })
 
 export const userPositionAtom = atom({
   key: "userPositionAtom",
