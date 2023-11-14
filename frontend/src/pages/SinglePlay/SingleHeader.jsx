@@ -357,18 +357,26 @@ const SingleHeader = ({ checkMyRoom }) => {
           />
           <div className={styles.InquiryContainer}>
             <div className={styles.InquiryTitle}>문의하기</div>
-            <textarea
-              className={styles.InquiryContent}
-              placeholder="문의할 내용을 작성해주세요."
-              value={inquiryText}
-              onChange={(e) => checkMaxLength(e)}
-              maxLength={200}
-            />
+            <div className={styles.LineContainer}>
+              <div className={styles.InquiryLine} />
+            </div>
+            <div className={styles.InquiryContentContainer}>
+              <textarea
+                className={styles.InquiryContent}
+                placeholder="문의할 내용을 작성해주세요."
+                value={inquiryText}
+                onChange={(e) => checkMaxLength(e)}
+                maxLength={200}
+                style={{ fontFamily: "GmarketSansMedium" }}
+              />
+            </div>
             <div className={styles.InquiryTextLength}>
               {inquiryText.length}/200
             </div>
-            <div className={styles.Inquiry} onClick={inquiryHandler}>
-              완료
+            <div className={styles.InquiryButtonContainer}>
+              <div className={styles.InquiryButton} onClick={inquiryHandler}>
+                완료
+              </div>
             </div>
           </div>
         </>
