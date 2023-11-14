@@ -8,6 +8,7 @@ import { Html } from "@react-three/drei"
 import {
   MultiUsers,
   RoomModalOpen,
+  otherRoomId,
   userPositionAtom,
 } from "../../atom/MultiAtom"
 import styles from "./MultiCharacter.module.css"
@@ -50,6 +51,8 @@ export function MultiCharacter({
   const [isPlay, setIsPlay] = useState(false)
 
   const setRoomModal = useSetRecoilState(RoomModalOpen)
+
+  const setOtherRoomId = useSetRecoilState(otherRoomId)
 
   const actionList = [0, { Win: 2800 }, { Sad: 5700 }, { "Song Jump": 6500 }]
 
@@ -160,6 +163,7 @@ export function MultiCharacter({
             onClick={(e) => {
               e.stopPropagation()
               setRoomModal(true)
+              setOtherRoomId(id)
             }}
           >
             {closeCharacters[id] && (
