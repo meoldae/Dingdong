@@ -31,15 +31,15 @@
   width: 100px;
   text-align: center;
   word-wrap: break-word;
-
   position: absolute;
   bottom: calc(100% + 10px);
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 10px;
+  padding: 5px;
 }
 
 .chatBox:after {
-  border-top: 10px solid #FFFFFF;
+  border-top: 10px solid #ffffff;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-bottom: 0px solid transparent;

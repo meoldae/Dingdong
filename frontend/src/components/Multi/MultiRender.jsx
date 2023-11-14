@@ -16,6 +16,7 @@ import { useFrame } from "@react-three/fiber"
 import { useNavigate } from "react-router-dom"
 
 export const MultiRender = React.forwardRef((props, ref) => {
+  const [isMouseDown, setIsMouseDown] = useState(false)
   // 맵 클릭 함수
   const [onFloor, setOnFloor] = useState(false)
   useCursor(onFloor)
@@ -31,12 +32,12 @@ export const MultiRender = React.forwardRef((props, ref) => {
     nickname: me.nickname,
     roomId: me.roomId,
     avatarId: me.avatarId,
-    x: 0,
-    y: 0,
-    z: 0,
-    // x: Math.random() * 2,
+    // x: 0,
     // y: 0,
-    // z: Math.random() * 2,
+    // z: 0,
+    x: Math.random() * 2,
+    y: 0,
+    z: Math.random() * 2,
     actionId: 0,
     chat: "",
   }
@@ -284,6 +285,13 @@ export const MultiRender = React.forwardRef((props, ref) => {
   })
 
   const handleFloorClick = (e) => {
+    if (isMouseDown) {
+      console.log(e)
+
+      publishMove(e.point.x, 0, e.point.z)
+    }
+  }
+  const handleFloorClick2 = (e) => {
     publishMove(e.point.x, 0, e.point.z)
   }
 
@@ -297,12 +305,18 @@ export const MultiRender = React.forwardRef((props, ref) => {
         name="floor"
         rotation-x={-Math.PI / 2}
         position-y={-0.001}
-        onPointerEnter={() => setOnFloor(true)}
+        onPointerMove={(e) => handleFloorClick(e)}
         onPointerLeave={() => setOnFloor(false)}
         position-x={8 / 2}
         position-z={8 / 2}
         onClick={(e) => {
-          handleFloorClick(e)
+          handleFloorClick2(e)
+        }}
+        onPointerDown={() => {
+          setIsMouseDown(true)
+        }}
+        onPointerUp={() => {
+          setIsMouseDown(false)
         }}
       >
         <planeGeometry args={[60, 60]} />
