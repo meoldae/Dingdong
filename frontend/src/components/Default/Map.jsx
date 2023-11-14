@@ -10,7 +10,7 @@ const Map = () => {
   const map = useLoader(
     GLTFLoader,
     // `${urlPath}/assets/models/defaultSettings/Map4.glb`,
-    `${urlPath}/assets/models/defaultSettings/finalMap.glb`,
+    `${urlPath}/assets/models/defaultSettings/finalMap2.glb`,
     (loader) => {
       const draco = new DRACOLoader();
       draco.setDecoderPath(`${urlPath}/assets/draco/`);
