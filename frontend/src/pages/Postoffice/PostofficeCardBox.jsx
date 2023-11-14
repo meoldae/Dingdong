@@ -86,7 +86,7 @@ const PostofficeCardBox = () => {
           <div className={styles.postCardComment}>우표를 선택해보세요!</div>
         )}
         <div className={styles.selectBtn}>
-          <DefaultPostBtn btnName={"선택하기"} onClick={handleSelectButtonClick} color='six' />
+          <DefaultPostBtn btnName={"선택하기"} onClick={() => handleSelectButtonClick()} color='six' />
         </div>
       </PostofficeDefaultModal>
     </div>

@@ -80,7 +80,7 @@ const ConfirmEnteringDefaultModal = ({
     } else if (location === "postOffice") {
       setSelectedUserList([])
       setSelectUserNicknameList([])
-      setSelectPostCard([])
+      setSelectPostCard(null)
       setIsPostOfficeVisible(true)
       setConfirmEnteringLocation(false)
       setIsArrived(false)
