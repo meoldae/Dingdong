@@ -161,16 +161,14 @@ export function MultiCharacter({
               {chat}
             </div>
           )}
-          <div
-            className={styles.roomImgBox}
-            onClick={(e) => {
-              e.stopPropagation()
-              setRoomModal(true)
-              setOtherRoomId(id)
-            }}
-          >
+          <div className={styles.roomImgBox}>
             {closeCharacters[id] && (
               <img
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setRoomModal(true)
+                  setOtherRoomId(id)
+                }}
                 src={`${urlPath}/assets/icons/location.png`}
                 alt=""
                 className={styles.roomImg}
