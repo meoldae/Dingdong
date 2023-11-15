@@ -32,9 +32,12 @@ const InviteRoomPage = () => {
   const navigate = useNavigate()
   const canvasRef = useRef()
 
-  // 상태관리
+  // 리코일상태관리
   const [items, setItems] = useRecoilState(ItemsState)
   const [nickName, setNickName] = useRecoilState(roomInfoAtom)
+
+  // 상태관리
+  const [time, setTime] = useState()
 
   // 방 ID
   const roomId = window.location.pathname.match(/\d+/g)
@@ -44,7 +47,6 @@ const InviteRoomPage = () => {
 
   // 날짜정보
   const today = new Date()
-  const [time, setTime] = useState()
   const [roomColor, setRoomColor] = useRecoilState(roomColorState)
   const [lightColor, setLightColor] = useRecoilState(lightColorState)
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
