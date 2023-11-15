@@ -20,6 +20,7 @@ const reportLetter = async (param, success, fail) => {
     HttpJson.post(`report/letter/${param}`).then(success).catch(fail)
 }
 
+// 편지 보내기 SNS
 const sendLetterSNS = async (param, success, fail) =>{
     HttpJson.post(`letter/sns`, JSON.stringify(param)).then(success).catch(fail)
 }
