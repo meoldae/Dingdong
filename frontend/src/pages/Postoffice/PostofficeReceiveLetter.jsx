@@ -25,6 +25,7 @@ const PostofficeReceiveLetter = () => {
   const [letterData, setLetterData] = useState(null);
   const [letterStamp, setLetterStamp] = useState(null);
 
+  // SNS 편지 상세 정보
   useEffect(() => { 
     getLetterSNSDetail(
       letterId,
