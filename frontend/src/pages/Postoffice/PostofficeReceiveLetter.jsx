@@ -1,18 +1,31 @@
+// 라이브러리
 import React, { useEffect, useState} from "react"
-import SharingModalList from "@/components/Modal/Sharing/SharingModalList"
 import { useNavigate, useParams } from "react-router-dom" 
+
+// 스타일
 import styles from "./PostofficeReceiveLetter.module.css" 
+
+// 컴포넌트
 import Card from "../../components/UI/Card"
+
+// API
 import { getLetterSNSDetail } from "../../api/Letter"; 
 
 const PostofficeReceiveLetter = () => {
+  // 라우터 함수
   const navigate = useNavigate()
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL 
+
+  // url 경로
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
+  // 편지 ID
   const { letterId } = useParams(); 
 
+  // 상태관리
   const [letterData, setLetterData] = useState(null);
   const [letterStamp, setLetterStamp] = useState(null);
 
+  // SNS 편지 상세 정보
   useEffect(() => { 
     getLetterSNSDetail(
       letterId,
@@ -26,10 +39,13 @@ const PostofficeReceiveLetter = () => {
     );
   }, [letterId]); // letterId가 변경될 때마다 호출
 
-  const onHomeHandler = (e) => {
+  // 메인페이지 이동
+  const onHomeHandler = () => {
     navigate(`${urlPath}/`)
   }
-  const onRoomHandler = (e) => {
+
+  // 초대 방으로 이동
+  const onRoomHandler = () => {
     navigate(`${urlPath}/invite/${letterData.roomId}`)
   } 
 

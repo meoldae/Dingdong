@@ -45,11 +45,6 @@
   width: 70%;
 }
 
-.postCard {
-  /* margin-left: 10px; */
-  /* margin-right: 10px; */
-}
-
 [className$="Selected"] {
   transition: all 0.3s;
   transform: scale(1.05); 
@@ -59,7 +54,6 @@
   background-color: #FFD2E1;
   border-radius: 5px;
   box-shadow: 0px 0px 4px 2px #f32196;
-  /* filter: brightness(1.1); */
 }
 
 .thunderSelected {

@@ -23,17 +23,21 @@ import styles from "./PostofficeSendLetter.module.css"
 
 
 const PostofficeSendLetter = () => {
+  // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
+  // 상태관리
   const [content, setContent] = useState("")
   const [contentCount, setContentCount] = useState(0)
 
+  // 리코일 상태관리
   const setSelectedPostCardItem = useRecoilValue(selectedPostCardAtom)
   const setSelectedUser = useRecoilValue(selectedUserListAtom)
   const setSelectedUserNickname = useRecoilValue(selectedUserNicknameListAtom)
   const setFinishPostOfficeSendLetter = useSetRecoilState(finishPostofficeSendLetterAtom)
   const setOnPostOfficeSendLetter = useSetRecoilState(postofficeSendLetterAtom)
 
+  // 유저 정보
   const userInfo = useRecoilValue(userAtom)
 
   // 카카오톡 공유하기
@@ -78,6 +82,7 @@ const PostofficeSendLetter = () => {
   //   })
   // }
 
+  // 편지보내기 함수
   const sendClick = () => {
     const params = {
       "description": content,

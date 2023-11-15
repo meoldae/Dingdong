@@ -5,6 +5,8 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 // 컴포넌트
 import DefaultPostBtn from "../../components/Button/DefaultPost/DefaultPostBtn";
 import PostofficeDefaultModal from "./PostofficeDefaultModal";
+
+// 토스트
 import toast from "react-hot-toast";
 
 // 스타일
@@ -14,17 +16,23 @@ import styles from "./PostofficeCardBox.module.css";
 import { postofficeSendLetterAtom, selectedPostCardAtom, postofficeCardAtom } from "../../atom/PostAtom";
 
 const PostofficeCardBox = () => {
+  // 상태관리
   const [cardComment, setCardComment] = useState("");
+  // 리코일 상태관리
+  const [selectedPostCardItem, setSelectedPostCardItem] = useRecoilState(selectedPostCardAtom)
   const setOnPostofficeSendLetter = useSetRecoilState(postofficeSendLetterAtom);
   const setOnPostOfficeCard = useSetRecoilState(postofficeCardAtom)
-  const [selectedPostCardItem, setSelectedPostCardItem] = useRecoilState(selectedPostCardAtom)
 
+  // 우표선택 함수
   const handleCardClick = (cardIdx, cardSrc, comment) => {
     setSelectedPostCardItem({ idx: cardIdx + 1, src: cardSrc, order: numberToString(cardIdx + 1) })
     setCardComment(comment);
   };
 
+  // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
+
+  // 우표선택 완료 함수
   const handleSelectButtonClick = () => {
     if (selectedPostCardItem) {
       setOnPostOfficeCard(false)
@@ -34,6 +42,7 @@ const PostofficeCardBox = () => {
     }
   };
 
+  // 숫자 -> 문자열 변환 함수
   const numberToString = (num) => {
     switch (num) {
       case 1: return "one";
@@ -49,6 +58,7 @@ const PostofficeCardBox = () => {
     }
   };
   
+  // 카드 내용 리스트
   const cards = [
     { src: "heart.png", comment: "두근거리는 사랑을 전달해보세요!" },
     { src: "thunder.png", comment: "에너지를 전달해보세요!" },
@@ -69,11 +79,7 @@ const PostofficeCardBox = () => {
           {cards.map((card, idx) => (
             <div className={styles.postCardCenter} key={card.src}>
               <img
-                className={
-                  selectedPostCardItem?.src === card.src
-                    ? `${styles.postCard} ${styles.selected} ${styles[`${card.src.split(".")[0]}Selected`]}`
-                    : styles.postCard
-                }
+                className={`${styles.postCard} ${styles.selected} ${styles[`${card.src.split(".")[0]}Selected`]}`}
                 src={`${urlPath}/assets/images/post/${card.src}`}
                 onClick={() => handleCardClick(idx, card.src, card.comment)}
               />
