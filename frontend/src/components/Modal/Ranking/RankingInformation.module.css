@@ -1,0 +1,44 @@
+.Container {
+  width: 300px;
+  height: 500px;
+  background: #FFF;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SemiContainer {
+  width: 90%;
+  height: 90%;
+}
+
+.Title {
+  font-size: 25px;
+  /* font-family: "Pretendard-Bold"; */
+}
+
+.DivisionLine {
+  border: 1px solid rgba(194, 194, 194, 0.5);
+}
+
+.ContentContainer {
+  margin-top: 30px;
+}
+
+.LikeContainer {
+  margin-bottom: 15px;
+}
+
+.SemiTitle {
+  font-size: 20px;
+  /* font-family: "Pretendard-SemiBold"; */
+
+  margin-bottom: 10px;
+}
+
+.Content {
+  margin-top: 10px;
+  font-size: 14px;
+}

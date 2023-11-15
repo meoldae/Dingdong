@@ -1,24 +1,33 @@
 // 라이브러리
 import { useEffect, useState } from "react"
+import { useRecoilValue } from "recoil";
+import { roomInfoAtom, roomAvatarAtom } from "@/atom/RoomInfoAtom";
 
 // 스타일
 import styles from "./Header.module.css"
 
 // 컴포넌트
 import RoomBtn from "../Button/Room/RoomBtn"
+import DefaultModal from "../Modal/Default/DefaultModal"
 
 // API
-import { fetchNeighrborAdd, neighborCheck } from "@/api/Neighbor"
+import {
+  fetchNeighrborAdd,
+  neighborCheck,
+  deleteNeighbor,
+} from "@/api/Neighbor"
 
 // 토스트
 import { successMsg } from "@/utils/customToast"
 
-const NeighborRequest = () => {
+const NeighborRequest = () => { 
   const [roomId, setRoomId] = useState(window.location.pathname.match(/\d+/g))
   const [neighborFlag, setNeighborFlag] = useState(false)
   const [isAddNeighbor, setIsAddNeighbor] = useState(false)
+  const nickname = useRecoilValue(roomInfoAtom);
+  const avatarId = useRecoilValue(roomAvatarAtom);
 
-  useEffect(() => {
+  useEffect(() => {  
     neighborCheck(
       roomId,
       (response) => {
@@ -44,21 +53,39 @@ const NeighborRequest = () => {
         setIsAddNeighbor(false)
         // 1. "이미 요청을 보냈습니다."
         // 2. "이미 이웃입니다."
-        console.log(error.response.data.message)
-        successMsg(`❌ ${error.response.data.message}`)
+        
+        if (error.response.data.message == "이미 이웃입니다." || error.response.data.message == "이미 요청을 보냈습니다.") {
+          successMsg(`❌ ${error.response.data.message}`)
+        }
+      }
+    )
+  }
+
+  const deleteNeighborByRoomId = () => {
+    const input = { roomId: roomId[0] }
+    deleteNeighbor(
+      input,
+      (response) => {
+        successMsg("✅ 요청에 성공했습니다!")
+      },
+      (error) => {
+        console.log("Error in delete Neighbor Method ...", error)
       }
     )
   }
 
   return (
     <>
-      <div className={styles.Share}>
-        {!neighborFlag ? (
-          <RoomBtn img={"addUser"} onClick={() => setIsAddNeighbor(true)} />
+      <div className={styles.ShareOther}>
+      {avatarId && (
+        !neighborFlag ? (
+          <RoomBtn img={`${avatarId}_addUser`} onClick={() => setIsAddNeighbor(true)} />
         ) : (
-          <RoomBtn img={"Neighbor"} onClick={() => setIsAddNeighbor(true)} />
-        )}
+          <RoomBtn img={`${avatarId}_neighbor`} onClick={() => setIsAddNeighbor(true)} />
+        )
+      )}
       </div>
+
 
       {isAddNeighbor && (
         <>
@@ -67,31 +94,27 @@ const NeighborRequest = () => {
             onClick={() => setIsAddNeighbor(false)}
           />
           <div className={styles.AddNeighbor}>
-            <div className={styles.MainContainer}>
-              <div className={styles.TitleContainer}>
-                <div style={{ color: "#2C2C2C" }}>
-                  이웃 요청을 하시겠습니까?
-                </div>
-              </div>
-              <div className={styles.HorizontalLine} />
-              <div className={styles.VerticalLine} />
-              <div className={styles.ButtonContainer}>
-                <div
-                  className={styles.Button}
-                  style={{ color: "#049463" }}
-                  onClick={() => isNeighbor()}
-                >
-                  확인
-                </div>
-                <div
-                  className={styles.Button}
-                  style={{ color: "#2C2C2C" }}
-                  onClick={() => setIsAddNeighbor(false)}
-                >
-                  취소
-                </div>
-              </div>
-            </div>
+            {neighborFlag ? (
+              <>
+                <DefaultModal
+                  content={"이웃을 끊으시겠습니까?"}
+                  ok={"확인"}
+                  cancel={"취소"}
+                  okClick={() => deleteNeighborByRoomId()}
+                  cancelClick={() => setIsAddNeighbor(false)}
+                />
+              </>
+            ) : (
+              <>
+                <DefaultModal
+                  content={"이웃 요청을 하시겠습니까?"}
+                  ok={"확인"}
+                  cancel={"취소"}
+                  okClick={() => isNeighbor()}
+                  cancelClick={() => setIsAddNeighbor(false)}
+                />
+              </>
+            )}
           </div>
         </>
       )}

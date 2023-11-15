@@ -10,8 +10,11 @@
   position: absolute;
   right: -5px;
   top: -5px;
+
+  width: 15px;
+  height: 15px;
 }
 
 .letterTitle {
-  font-size: 20px;
+  font-size: 16px;
 }

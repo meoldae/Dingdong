@@ -2,50 +2,49 @@
   width: 300px;
   height: 185px;
   border-radius: 10px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  border: 1px solid darkgray;
-  background: white;
+
+  background: #FFFFFF;
   z-index: 999;
+}
+
+.xButton {
+  width: 25px;
+  height: 25px;
+
+  position: absolute;
+  right: 5px;
+  top: 5px;
 }
 
 .ContentContainer {
   height: 120px;
   display: flex;
   align-items: center;
-  font-family: Pretendard-SemiBold;
-  font-size: 20px;
-}
-
-.HorizontalLine {
-  width: 250px;
-  border: 1px solid #e8e8e8;
-  position: absolute;
-  top: 120px;
-}
-
-.VerticalLine {
-  height: 40px;
-  border: 1px solid #e8e8e8;
-  position: absolute;
-  top: 133px;
+  /* font-family: Pretendard-SemiBold; */
+  font-size: 18px;
 }
 
 .ButtonContainer {
-  position: absolute;
-  top: 120px;
+  width: 80%;
+
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
 }
 
 .Button {
-  width: 150px;
-  height: 65px;
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Pretendard-SemiBold;
-  font-size: 20px;
+
+  /* font-family: Pretendard-SemiBold; */
+  font-size: 15px;
 }

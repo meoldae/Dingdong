@@ -1,0 +1,217 @@
+.Container {
+  max-width: 450px;
+  min-width: 350px;
+  padding: 10px;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  /* font-family: "GangwonEduAll-Light"; */
+}
+
+.PostImage {
+  /* width: 320px;
+  height: 419px;  */
+  width: 100%;
+  border-radius: 10px;
+  /* margin-top: 10%; */
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.PostImagePng {
+  width: 320px;
+}
+
+.topPostCardImg {
+  width: 20%;
+  position: absolute;
+  top: 25px;
+  right: 25px;
+}
+
+.poststampFrame {
+  width: 180px;
+  height: 130px;
+  position: absolute;
+  top : 16px;
+  right: 16px;
+}
+
+.ButtonContainer {
+  font-size: 24px;
+}
+
+.Button {
+  width: 320px;
+  height: 40%;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 10px;
+  background: #fff;
+  margin-top: 5%;
+  /* margin-bottom: 3%; */
+}
+
+.sendLetterContainer {
+  width: 30vw;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 4;
+}
+
+.sendLetterBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 300px;
+  height: 100%;
+  background: #fff;
+  padding: 20px;
+  /* margin-bottom: 10px; */
+}
+
+.xmarkImg {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.xmarkImg img {
+  width: 5%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ToUser {
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  margin: 10px 0 0 20px;
+  justify-content: start;
+  /* font-family: "GangwonEduAll-Light"; */
+  font-size: 35px;
+  margin-left: 0%;
+}
+
+.letterContent {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  font-size: 25px;
+  margin-top: 15vh;
+  word-break: break-all;
+}
+
+/* .letterContent textarea {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  resize: none;
+
+  padding: 5px;
+  font-size: 25px;
+  font-family: "GangwonEduAll-Light";
+  outline: none;
+  text-align: center;
+  -ms-overflow-style: none;
+}
+
+.letterContent textarea::-webkit-scrollbar {
+  display: none;
+} */
+
+/* .contentCount {
+  font-family: "GangwonEduAll-Light";
+  font-size: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+} */
+
+.footerContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* font-family: "GangwonEduAll-Light"; */
+  align-items: center;
+  margin-top: 15px;
+}
+
+.anonymous {
+  font-size: 20px;
+}
+
+.FromUser {
+  font-size: 35px;
+  display: flex;
+}
+
+.FromUserDiv {
+  width: 60%;
+}
+
+/* .FromUser textarea {
+  width: 60%;
+  vertical-align: middle;
+  padding-top: 4px;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  resize: none;
+
+  padding: 5px;
+  font-size: 25px;
+  font-family: "GangwonEduAll-Light";
+  outline: none;
+  text-align: center;
+} */
+
+.heart {
+  background: linear-gradient(180deg, #FFD2E1 0%, #FF3A89 100%);
+}
+
+.thunder {
+  background: linear-gradient(180deg, #FFDEC2 0%, #FF8D2C 100%);
+}
+
+.star {
+  background: linear-gradient(180deg, #FFF0CA 0%, #FFB813 100%);
+}
+
+.puzzle {
+  background: linear-gradient(180deg, #DFEED1 0%, #79CC2C 100%);
+}
+
+.dingdong {
+  background: linear-gradient(180deg, #E6E3FA 0%, #56A4FF 100%);
+}
+
+.clover {
+  background: linear-gradient(180deg, #C0E4D0 0%, #41B585 100%);
+}
+
+.cloud {
+  background: linear-gradient(180deg, #E1C9FF 0%, #8D34FF 100%);
+}
+
+.flower {
+  background: linear-gradient(180deg, #FED6F1 0%, #FF3EC0 100%);
+}
+
+.rocket {
+  background: linear-gradient(180deg, #BFBFBF 0%, #454545 100%);
+}
+

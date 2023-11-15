@@ -1,3 +1,15 @@
+/* 로고 기울기 애니메이션 */
+@keyframes tilt {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+/* 슬로건 크기 변화 애니메이션 */
+@keyframes pulsate {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -5,16 +17,45 @@
   position: relative;
   width: 100%;
   height: 100%;
+  height: 100svh;
   overflow: hidden;
-  background-color: #fff;
+  background: linear-gradient(#2395FF, #FFFCC0);
 }
+
 .logo {
   position: absolute;
   width: 90%;
-  top: 17%;
+  top: 9%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo img {
+  margin-top: 10px;
+  animation: tilt 2s ease-in-out infinite;
+}
+
+.slogan {
+  position: absolute;
+  /* width: 90%; */
+  top: 43%;
+  display: flex;
+  justify-content: center;
+  /* flex-direction: column; */
+}
+.slogan img{
+  width: 80%;
+}
+.home {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
+
 .logo img {
   width: 95%;
 }
@@ -32,6 +73,7 @@
   top: 80%;
   left: 50%;
   transform: translate(-50%, -50%); */
+  z-index: 1;
 }
 
 .buttons img {
@@ -47,29 +89,11 @@
   padding: 10px;
   width: 264px;
   height: 43px;
-  border-radius: 8px;
   font-size: 18px;
   text-decoration: underline;
   text-underline-position: under;
 }
 
 .testButton:hover {
-  font-weight: bold;
-}
-
-.guestButton {
-  background-color: #000;
-  color: #fff;
-
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 16px;
-  transition: background-color 0.1s;
-  width: 100%;
-}
-
-.guestButton:hover {
-  background-color: #6a6a6a;
+  /* font-weight: bold; */
 }

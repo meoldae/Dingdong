@@ -7,13 +7,12 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -50%);
   z-index: 3;
 
   flex-direction: column;
   align-items: center;
-  background-color: white;
-  border: 1px solid lightcoral;
+  background-color: rgb(255, 255, 255);
 }
 
 .containerMy {
@@ -25,13 +24,11 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -50%);
   z-index: 3;
-
   flex-direction: column;
   align-items: center;
   background-color: white;
-  border: 1px solid lightcoral;
 }
 
 .xmarkImg {
@@ -41,16 +38,23 @@
   margin-bottom: 10px;
 }
 
+.xmarkImg img {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .containerTitle {
-  font-size: 30px;
+  font-size: 24px;
   font-weight: bolder;
   margin-bottom: 10px;
 }
 
 .horizontalRule {
-  width: 95%;
+  width: 90%;
   height: 2px;
-  background-color: #f2cae4;
+  background-color: #02C26F;
   border-radius: 5px;
   margin-bottom: 10px;
 }
@@ -61,6 +65,26 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100svh;
   background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 */
   z-index: 2;
+}
+
+.finishSelectOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 */
+  z-index: 3;
+}
+
+.finishSelectContainer {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 4;
 }

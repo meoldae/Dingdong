@@ -1,0 +1,89 @@
+.Container {
+  width: 300px;
+  height: 450px;
+  border-radius: 10px;
+
+  background: #FFFFFF;
+}
+
+.Title {
+  width: 300px;
+  height: 50px;
+
+  text-align: center;
+  line-height: 50px;
+
+  font-size: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.ContentContainer {
+  width: 300px;
+  height: 300px;
+  margin: 25px 0px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.Item {
+  width: 100px;
+  height: 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Content {
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+  border-radius: 10px;
+
+  font-size: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.temp {
+  width: 65px;
+  height: 50px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.FooterContainer {
+  width: 300px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.WriteButton {
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  margin-right: 7.5px; /* 7.5인 이유 : 50px - 35px (50pxFooter의 중간에 있어서)의 반 값 */
+
+  background: #000000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

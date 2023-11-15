@@ -7,12 +7,10 @@
   justify-content: center;
   align-items: center;
   z-index: 10000;
-  border-radius: 50px;
+  border-radius: 10px;
 }
 
 .modalContent {
-  background-color: #fff;
-  border-radius: 50px;
   display: flex;
   flex-direction: column;
   width: 90%;
@@ -20,34 +18,43 @@
   padding: 20px;
 }
 
-.modalContent img{
-  border-radius: 50px;
-  margin-bottom: 5px;
+.modalContent img {
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.Loading {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .textarea {
-  margin-top: 5px;
-  width: 95%;         
-  height: 50px;          
-  background: transparent; 
-  border: none;           
-  font-size: 20px;        
-  padding: 10px;           
-  resize: none;           
-  overflow: auto;          
-  box-shadow: none;      
+  margin-top: 10px;
+  width: 95%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  padding: 0 10px 0 10px;
+  resize: none;
+  overflow: auto;
+  box-shadow: none;
+  /* font-family: Pretendard-Medium; */
   /* background-color: wheat;   */
 }
 
 textarea:focus {
-  outline: none;         
-  border: none;           
+  outline: none;
+  border: none;
 }
 
-.share{
+.share {
   display: flex;
-  justify-content: space-between; 
-  min-width: 280px;            
+  justify-content: space-between;
+  min-width: 280px;
   /* position: absolute;
   bottom: 10%;
   display: flex;
@@ -56,33 +63,49 @@ textarea:focus {
   min-width: 280px;             */
 }
 
-.shareRoomSafari{
-  display: grid; 
-  grid-template-columns: 1fr 1fr 1fr; 
+.shareRoomSafari {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   z-index: 300000;
   position: absolute;
   bottom: 0;
-  background-color: white; 
-  min-width: 100%;            
-} 
+  background-color: white;
 
-.shareRoom{
-  display: grid; 
-  grid-template-columns: 1fr 1fr 1fr 1fr; 
+  min-width: 100%;
+  padding-bottom: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  /* height: ; */
+}
+
+.shareRoom {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   z-index: 300000;
   position: absolute;
   bottom: 0;
-  background-color: white; 
-  min-width: 100%;            
-} 
+  background-color: white;
+  min-width: 100%;
+  padding-bottom: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
 
-
-.shareItem{
+.shareItem {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.shareItem img{
+.shareItem img {
   padding: 10px 0;
+  width: 50px;
+}
+
+.color {
+  color: white;
+}
+
+.black{
+  color: black;
 }

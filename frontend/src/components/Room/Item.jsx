@@ -3,14 +3,21 @@ import { SkeletonUtils } from "three-stdlib";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useGrid } from "./UseGrid";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { ItemRotateState, ItemsState, draggedItemState } from "./Atom";
+import {
+  ItemRotateState,
+  ItemsState,
+  draggedItemState,
+  mobileCheckState,
+} from "./Atom";
+import { LinearFilter,MeshToonMaterial,MeshBasicMaterial  } from "three";
+
 export const Item = ({
   item,
   onClick,
   isDragging,
   dragPosition,
   canDrop,
-  dragRotation,
+  draggedItemRotation,
 }) => {
   const {
     furnitureId,
@@ -19,35 +26,34 @@ export const Item = ({
     rotation: itemRotation,
     categoryId,
   } = item;
-  const rotation = isDragging ? dragRotation : itemRotation;
-  const { scene } = useGLTF(`/assets/models/roomitems/${furnitureId}.glb`);
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
+  const rotation = isDragging ? draggedItemRotation : itemRotation;
+  const { scene } = useGLTF(
+    `${urlPath}/assets/models/furnitureItems/${furnitureId}.glb`,true
+  );
+  scene.children[0].castShadow = true
+
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
-  const width =
-    rotation === 1 || rotation === 3
-      ? size[2] % 2
-        ? size[2] + 1
-        : size[2]
-      : size[0] % 2
-      ? size[0] + 1
-      : size[0];
-  const height =
-    rotation === 1 || rotation === 3
-      ? size[0] % 2
-        ? size[0] + 1
-        : size[0]
-      : size[2] % 2
-      ? size[2] + 1
-      : size[2];
-  const thick = size[1] % 2 ? size[1] + 2 : size[1] + 1;
+  const width = rotation === 1 || rotation === 3 ? size[2] : size[0];
+  const height = rotation === 1 || rotation === 3 ? size[0] : size[2];
+  const thick = size[1];
   const { gridToVector3, wallLeftGridToVector3, wallRightGridToVector3 } =
     useGrid();
   const [items, setItems] = useRecoilState(ItemsState);
   const draggedItem = useRecoilValue(draggedItemState);
   const value = useRecoilValue(ItemRotateState);
-  const mobileCheck =
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
+  const mobileCheck = useRecoilValue(mobileCheckState);
+  useEffect(()=>{
+    scene.traverse((child)=>{
+      if(child.isMesh && child.material && child.material.map){
+
+        child.material.map.minFilter = LinearFilter
+        child.material.map.magFilter = LinearFilter
+        child.material.map.needsUpdate = true;
+      }
+    })
+  },[scene])
+
   useEffect(() => {
     setItems((prev) => {
       const newItems = prev.map((item, index) => {
@@ -56,7 +62,7 @@ export const Item = ({
             return {
               ...item,
               position: gridPosition,
-              rotation: value,
+              rotation: draggedItemRotation,
             };
           }
         }
@@ -84,17 +90,19 @@ export const Item = ({
           >
             <primitive
               object={clone}
-              position-x={rotation ? 0 : 0.12}
+              receiveShadow
+              castShadow
+              // position-x={rotation ? 0 : 0.12}
               position-y={0.44}
-              position-z={0.12}
+              position-z={rotation ? 0 : 0.12}
               // 벽에 있는 아이템 관련
               rotation-y={(rotation * Math.PI) / 2}
             />
             {isDragging && (
               <mesh
-                position-x={rotation ? 0.02 : 0.12}
+                position-x={rotation ? 0.02 : 0}
                 position-y={0.12}
-                position-z={0.13}
+                position-z={rotation ? 0 : 0.13}
               >
                 <boxGeometry
                   args={[
@@ -125,22 +133,25 @@ export const Item = ({
             }
           >
             <primitive
+              receiveShadow
+              castShadow
               object={clone}
-              position-x={rotation ? 0 : 0.12}
+              // position-x={rotation ? 0 : 0.12}
               position-y={0.44}
-              position-z={0.12}
+              position-z={rotation ? 0 : 0.12}
               // 벽에 있는 아이템 관련
               rotation-y={(rotation * Math.PI) / 2}
-            />
+            >
+            </primitive>
             {isDragging && (
               <mesh
-                position-x={rotation ? 0.02 : 0.12}
+                position-x={rotation ? 0.02 : 0}
                 position-y={0.12}
-                position-z={0.13}
+                position-z={rotation ? 0 : 0.13}
               >
                 <boxGeometry
                   args={[
-                    rotation ? 0 : (width * 0.48) / 2,
+                    rotation ? 0 : width * 0.24,
                     (thick * 0.48) / 2,
                     rotation ? (height * 0.48) / 2 : 0,
                   ]}
@@ -165,7 +176,12 @@ export const Item = ({
             )}
           >
             {/* 물체 클릭 시 바닥 면 가능 불가능 색상 및 회전 각 prop 받기 */}
-            <primitive object={clone} rotation-y={(rotation * Math.PI) / 2} />
+            <primitive
+              object={clone}
+              receiveShadow
+              castShadow
+              rotation-y={(rotation * Math.PI) / 2}
+            />
             {isDragging && (
               <mesh position-y={0.02}>
                 <boxGeometry
@@ -188,7 +204,12 @@ export const Item = ({
             )}
           >
             {/* 물체 클릭 시 바닥 면 가능 불가능 색상 및 회전 각 prop 받기 */}
-            <primitive object={clone} rotation-y={(rotation * Math.PI) / 2} />
+            <primitive
+              receiveShadow
+              castShadow
+              object={clone}
+              rotation-y={(rotation * Math.PI) / 2}
+            />
             {isDragging && (
               <mesh position-y={0.02}>
                 <boxGeometry

@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "option": "TF",
+    "question": "편지를 쓰려고 한다.\n어떤 편지지를 살까?",
+    "answers": [
+      {
+        "id": 1,
+        "type": "T",
+        "content": "인기가 많은 편지지"
+      },
+      {
+        "id": 2,
+        "type": "F",
+        "content": "내 눈에 가장 예쁜 편지지"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "option": "EI",
+    "question": "사고 싶은 편지지가\n높은 곳에 있다면?",
+    "answers": [
+      {
+        "id": 1,
+        "type": "E",
+        "content": "직원에게 꺼내달라고 한다."
+      },
+      {
+        "id": 2,
+        "type": "I",
+        "content": "가까운 곳에 있는\n다른 편지지를 산다."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "option": "EI",
+    "question": "편지지에\n어떤 우표를 붙일까?",
+    "answers": [
+      {
+        "id": 1,
+        "type": "E",
+        "content": "공원에서 피크닉을\n즐기는 사람들"
+      },
+      {
+        "id": 2,
+        "type": "I",
+        "content": "조용한 창가에 있는\n커피와 책"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "option": "TF",
+    "question": "힘들어하는 친구에게\n편지를 보낸다면?",
+    "answers": [
+      {
+        "id": 1,
+        "type": "T",
+        "content": "좋아하는 기프티콘에\n응원 메시지를 담아"
+      },
+      {
+        "id": 2,
+        "type": "F",
+        "content": "예쁜 편지지에\n위로의 말을 담아"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "option": "NS",
+    "question": "편지를 보낼 때\n걱정되는게 있다면?",
+    "answers": [
+      {
+        "id": 1,
+        "type": "N",
+        "content": "편지가 중간에 분실될까봐"
+      },
+      {
+        "id": 2,
+        "type": "S",
+        "content": "나는 걱정되는게 없다!"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "option": "NS",
+    "question": "미래의 나에게\n편지를 적는다면?",
+    "answers": [
+      {
+        "id": 1,
+        "type": "S",
+        "content": "자신에게 조언을 한다."
+      },
+      {
+        "id": 2,
+        "type": "N",
+        "content": "자신에게 질문을 한다."
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "option": "EI",
+    "question": "좋아하는 친구에게\n생일 축하 편지를 받았다.",
+    "answers": [
+      {
+        "id": 1,
+        "type": "E",
+        "content": "주변 친구들에게\n편지를 받았다고 말한다."
+      },
+      {
+        "id": 2,
+        "type": "I",
+        "content": "혼자 조용한 곳에서 읽는다."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "option": "NS",
+    "question": "생일 축하 편지의\n우표가 마음에 든다!",
+    "answers": [
+      {
+        "id": 1,
+        "type": "N",
+        "content": "생일 파티 그림이\n그려진 우표"
+      },
+      {
+        "id": 2,
+        "type": "S",
+        "content": "생일 케이크가\n그려진 우표"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "option": "TF",
+    "question": "편지를 읽은 후\n기억에 남는 것은?",
+    "answers": [
+      {
+        "id": 1,
+        "type": "T",
+        "content": "편지 속 구체적인 내용"
+      },
+      {
+        "id": 2,
+        "type": "F",
+        "content": "편지 속 감정 표현"
+      }
+    ]
+  }
+]

@@ -1,0 +1,173 @@
+.Container {
+  width: 300px;
+  height: 450px;
+  border-radius: 10px;
+
+  background: #FFFFFF;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Title {
+  width: 300px;
+  height: 50px;
+
+  text-align: center;
+  line-height: 50px;
+  font-size: 25px;
+}
+
+.Line {
+  width: 240px;
+  border: 0.5px solid #02C26F;
+  margin-bottom: 10px;
+}
+
+.SearchContainer {
+  width: 240px;
+  height: 30px;
+  margin-bottom: 10px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.Search {
+  width: 210px;
+  height: 30px;
+  border-radius: 10px;
+
+  background: #F3F3F3;
+
+  display: flex;
+  align-items: center;
+}
+
+.Search img {
+  width: 15px;
+  height: 15px;
+
+  margin-left: 5px;
+}
+
+.Search input {
+  border: none;
+  outline: none;
+  background: #F3F3F3;
+  margin-left: 5px;
+}
+
+.Cancel {
+  width: 20px;
+  height: 30px;
+
+  font-size: 10px;
+
+  line-height: 30px;
+}
+
+.ContentContainer {
+  width: 240px;
+  height: 260px;
+  margin-bottom: 10px;
+
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.ItemContainer {
+  width: 240px;
+  height: 30px;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.ItemAvatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ItemAvatar img {
+  width: 20px;
+  height: 20px;
+}
+
+.Nickname {
+  width: 180px;
+  height: 30px;
+  margin-left: 10px;
+
+  line-height: 30px;
+  font-size: 15px;
+}
+
+.CheckButton {
+  width: 20px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.CheckButton img {
+  width: 20px;
+  height: 20px;
+}
+
+.CheckedUserContainer {
+  width: 240px;
+  height: 20px;
+  margin-bottom: 10px;
+
+  font-size: 10px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.CheckedUserContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.Button {
+  width: 240px;
+  height: 35px;
+  border-radius: 10px;
+
+  color: #FFFFFF;
+  background: #02C26F;
+
+  text-align: center;
+  line-height: 35px;
+  font-size: 20px;
+}
+
+.checkedUserNickname {
+  background-color: #02C26F;
+  display: flex;
+  align-items: center;
+  margin: 0 5px 0 5px;
+  padding: 3px 8px 3px 8px;
+  border-radius: 10px;
+  color: white;
+}

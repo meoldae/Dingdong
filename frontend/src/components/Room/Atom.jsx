@@ -5,7 +5,6 @@ export const buildModeState = atom({
   default: false,
 });
 
-
 // 클릭한 녀석 포지션
 export const dragPositionState = atom({
   key: "dragPositionState",
@@ -24,69 +23,40 @@ export const ItemsState = atom({
   default: null,
 });
 
-
 // 클릭한 녀석 회전 상태
 export const ItemRotateState = atom({
   key: "ItemRotateState",
   default: null,
 });
 
+export const checkState = atom({
+  key: "checkState",
+  default: null,
+});
 
+export const canDropState = atom({
+  key:"canDropState",
+  default: false,
+})
 
-// const item = {
-//   sofa: {
-//     name: "sofa",
-//     size: [6, 5, 6],
-//   },
-//   carpet: {
-//     name: "carpet",
-//     size: [10, 0, 10],
-//   },
-//   vase: {
-//     name: "vase",
-//     size: [2, 1, 2],
-//   },
-//   bed: {
-//     name: "bed",
-//     size: [8, 4, 10],
-//   },
-//   clock: {
-//     name: "clock",
-//     size:[3,3,0],
-//   }
-// };
+export const mobileCheckState = atom({
+  key: "mobileCheckState",
+  default:
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    ),
+});
 
-// const map = {
-//   size: [4.8, 4.8],
-//   // gridDivision:2,
-//   item: [
-//     {
-//       ...item.sofa,
-//       gridPosition: [3, 0, 16],
-//       rotation: 1,
-//     },
-//     {
-//       ...item.bed,
-//       gridPosition: [6, 0, 8],
-//       rotation: 1,
-//     },
-//     {
-//       ...item.vase,
-//       gridPosition: [19, 0, 19],
-//       rotation: 1,
-//     },
-//     {
-//       ...item.carpet,
-//       gridPosition: [10, 0, 10],
-//       rotation: 1,
-//       walkable: true,
-//     },
-//     {
-//       ...item.clock,
-//       gridPosition: [10, 5, 10],
-//       rotation: 1,
-//       walkable: true,
-//       wall:true,
-//     }
-//   ],
-// };
+export const roomColorState = atom({
+  key:"roomColorState",
+  default: null,
+})
+export const lightColorState = atom({
+  key:"lightColorState",
+  default: null,
+})
+
+export const colorChangeState = atom({
+  key : "colorChangeState",
+  default: false,
+})

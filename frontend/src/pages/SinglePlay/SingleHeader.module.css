@@ -1,0 +1,423 @@
+.wrap {
+  position: absolute;
+  z-index: 3;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  width: 90%;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.inviteHeader {
+  display: flex;
+  width: 90%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.Name{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+}
+.header img {
+  width: 40px;
+  height: 40px;
+}
+
+.userName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 50px 50px;
+  width: 50%;
+  height: 50px;
+  font-size: 20px;
+}
+
+/* 이웃 리스트 */
+.NeighborList {
+  position: absolute;
+  top: 75px;
+  right: 4%;
+  z-index: 3;
+}
+
+.NeighborListContainer {
+  top: 40%;
+  left: 50%;
+  z-index: 6;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.NeighborItemContainer {
+  height: 260px;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.NeighborItemContainer::-webkit-scrollbar {
+  display: none;
+}
+
+/* 공유하기 이미지 */
+/* 남의 방의 경우 */
+.ShareOther {
+  position: absolute;
+  top: 80px;
+  right: 4%;
+  z-index: 3;
+}
+
+/* 내 방의 경우 */
+.ShareMy {
+  position: absolute;
+  top: 145px;
+  right: 4%;
+  z-index: 3;
+}
+
+/* 이웃 요청 CSS */
+.Overlay {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+}
+
+.AddNeighbor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+
+  width: 300px;
+  height: 185px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.MainContainer {
+  position: relative;
+  font-size: 20px;
+}
+
+.TitleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 120px;
+  /* font-family: Pretendard-SemiBold; */
+}
+
+.HorizontalLine {
+  width: 250px;
+  border: 1px solid #e8e8e8;
+  position: absolute;
+  top: 120px;
+  left: 25px;
+}
+
+.VerticalLine {
+  height: 40px;
+  border: 1px solid #e8e8e8;
+  position: absolute;
+  top: 133px;
+  left: 150px;
+}
+
+.ButtonContainer {
+  display: flex;
+  flex-direction: row;
+  width: 300px;
+  height: 65px;
+}
+
+.Button {
+  width: 150px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* font-family: "Pretendard-SemiBold"; */
+}
+
+/* 헤더 햄버거 모달 CSS */
+.HamburgerButton {
+  z-index: 6;
+}
+
+.HamburgerModal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  background: #fff;
+
+  width: 250px;
+  height: 100vh;
+  height: 100svh;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.ContentContainer {
+  width: 90%;
+  height: 90%;
+  font-size: 15px;
+  /* font-family: "Pretendard-Medium"; */
+  font-size: 18px;
+  color: #2c2c2c;
+  display: flex;
+  flex-direction: column;
+}
+
+.MenuButton {
+  padding: 10px 0 10px 0;
+}
+
+.exitButton {
+  padding: 10px 0 10px 0;
+  margin-left: auto;
+  margin-right: 10%;
+  color: gray; 
+  font-size: small;
+  color: lightgray; 
+}
+
+/* 알림 모달 */
+.AlarmContainer {
+  top: 40%;
+  left: 50%;
+  z-index: 6;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.alarmListContainer {
+  height: 260px;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.alarmListContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.xButtonContainer {
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.AlarmX {
+  width: 15px;
+  height: 15px;
+}
+
+.AlarmModal {
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.NoAlarm {
+  color: #fff;
+  /* font-family: "Pretendard-Bold"; */
+  font-size: 20px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.RemoveOverlay {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 7;
+}
+
+.RemoveNeighborContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 8;
+}
+
+.InquiryContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 8;
+
+  background: #FFFFFF;
+  border-radius: 10px;
+}
+
+.InquiryTitle {
+  color: #2c2c2c;
+  font-size: 30px;
+  text-align: center;
+  margin: 15px 0 15px 0;
+}
+
+.LineContainer {
+  width: 100%;
+  margin-bottom: 10px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.InquiryLine {
+  width: 80%;
+  border: 1px solid rgba(194, 194, 194, 0.5);
+}
+
+.InquiryContentContainer {
+  width: 290px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.InquiryContent {
+  width: 80%;
+  height: 170px;
+
+  font-size: 15px;
+  padding: 10px;
+
+  outline: none;
+  resize: none;
+  border: none;
+}
+
+.InquiryTextLength {
+  color: #2c2c2c;
+  text-align: end;
+  margin-top: 5px;
+  margin-right: 10%;
+  font-size: 15px;
+}
+
+.InquiryButtonContainer {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+
+.InquiryButton {
+  width: 80%;
+  height: 50px;
+  background: #02c26f;
+  border-radius: 10px;
+  margin: 15px 0 15px 0;
+  box-shadow: 0px 4px 0px #009152;
+
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.XContainer {
+  width: 100%;
+  height: 30px;
+  margin-top: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.XImage {
+  width: 15px;
+  height: 15px;
+  margin-right: 15px;
+}
+
+.NameContainer {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Name {
+  width: 90%;
+
+  font-size: 25px;
+  /* font-family: "Pretendard-SemiBold"; */
+}
+
+.toggleSwitch {
+  width: 60px;
+  height: 30px;
+  position: relative;
+  border-radius: 30px;
+  background-color: #fdfdfd;
+  box-shadow: 0 0 16px 3px rgba(0 0 0 / 15%);
+  cursor: pointer;
+  margin-left: 40px;
+}
+
+.toggleButton 
+ {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: #02C26F;
+}
+
+.checkedToggle {
+  background: #02C26F;
+}
+
+.checkedToggleSwitch {
+  left: calc(100% - 40%);
+  background: #fff;
+}
+
+.toggleSwitch, .toggleButton {
+  transition: all 0.2s ease-in;
+}
+
+.toggleContainer {
+  display: flex;
+  align-items: center;
+}

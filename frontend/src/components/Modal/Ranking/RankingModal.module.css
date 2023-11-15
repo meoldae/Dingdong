@@ -1,0 +1,149 @@
+.Container {
+  width: 300px;
+  height: 400px;
+  background: #fff;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.TitleContainer {
+  width: 90%;
+  padding-top: 10%;
+}
+
+.Title {
+  color: #212529;
+  font-size: 40px;
+  /* font-family: "Pretendard-Bold"; */
+}
+
+.ButtonContainer {
+  width: 90%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Button {
+  width: 80px;
+  height: 30px;
+  border-radius: 20px;
+
+  color: #212529;
+  background: #e9ecef;
+
+  text-align: center;
+  line-height: 30px;
+  /* font-family: "Pretendard-Medium"; */
+}
+
+.SelectButton {
+  width: 80px;
+  height: 30px;
+  border-radius: 20px;
+
+  color: #e9ecef;
+  background: #212529;
+
+  text-align: center;
+  line-height: 30px;
+  /* font-family: "Pretendard-Medium"; */
+}
+
+.TimeContainer {
+  width: 90%;
+  text-align: end;
+}
+
+.Time {
+  color: #c0c2c5;
+  font-size: 15px;
+  /* font-family: "Pretendard-Regular"; */
+}
+
+.TypeContainer {
+  width: 90%;
+  height: 40px;
+  margin-top: 2%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  text-align: center;
+  line-height: 40px;
+  background: #f8fafb;
+  border-bottom: 1px solid #eef0f1;
+}
+
+.Type {
+  color: #b2b8bd;
+  width: 80px;
+  text-align: center;
+
+  /* font-family: "Pretendard-SemiBold"; */
+}
+
+.ContentContainer {
+  width: 90%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  border-bottom: 1px solid #eef0f1;
+}
+
+.Content {
+  color: #212529;
+  width: 80px;
+  height: 40px;
+
+  text-align: center;
+  line-height: 40px;
+
+  font-size: 15px;
+  /* font-family: "Pretendard-Medium"; */
+}
+
+.IndexFirst {
+  color: #ffa200;
+  width: 80px;
+  height: 40px;
+
+  text-align: center;
+  line-height: 40px;
+
+  font-size: 18px;
+  /* font-family: "Pretendard-Medium"; */
+}
+
+.IndexSecond {
+  color: #828282;
+  width: 80px;
+  height: 40px;
+
+  text-align: center;
+  line-height: 40px;
+
+  font-size: 18px;
+  /* font-family: "Pretendard-Medium"; */
+}
+
+.IndexThird {
+  color: #c66200;
+  width: 80px;
+  height: 40px;
+
+  text-align: center;
+  line-height: 40px;
+
+  font-size: 18px;
+  /* font-family: "Pretendard-Medium"; */
+}

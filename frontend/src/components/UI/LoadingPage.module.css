@@ -1,0 +1,20 @@
+.Container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.Image {
+  width: 80px;
+  z-index: 11;
+}
+
+.Content {
+  /* font-family: "Pretendard-Bold"; */
+  font-size: 20px;
+  margin-bottom: 20px;
+}

@@ -1,23 +1,34 @@
 import React from "react"
 import SharingModalList from "../Modal/Sharing/SharingModalList"
 import styles from "./StampTestStart.module.css"
+import { useNavigate } from "react-router-dom"
 
 const StampTestStart = (props) => {
+  const navigate = useNavigate()
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+  const onHomeHandler = (e) => { 
+    window.location.replace(`${urlPath}/`)
+  }
   return (
-    <div className={styles.Container}>
+    <div
+      className={styles.Container}
+    >
       <img
-        src={"assets/images/stamp_start.svg"}
-        style={{ 
-          width: "80%",
-          marginBottom: "15px",
-          marginTop: "10%",
+        src={`${urlPath}/assets/images/Stamp_Test_Start.png`}
+        style={{
+          width: "60%",
         }}
       />
       <div className={styles.ContentContainer}>
         <p>당신에게 어울리는</p> <p>우표를 찾아보세요.</p>
       </div>
-      <div onClick={props.onTestModeHanlder} className={styles.StartButton}>
-        시작하기
+      <div>
+        <div onClick={props.onTestModeHanlder} className={styles.StartButton}>
+          테스트 시작하기
+        </div>
+        <div className={styles.StartButton} onClick={onHomeHandler}>
+          딩동 시작하기
+        </div>
       </div>
       <SharingModalList shareMode={"start"} />
     </div>

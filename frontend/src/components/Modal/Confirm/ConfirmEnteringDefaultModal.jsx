@@ -1,20 +1,38 @@
+// 라이브러리
 import React, { useState, useEffect } from "react"
 import { useRecoilValue, useSetRecoilState } from "recoil"
 import { useNavigate } from "react-router-dom"
-import {
-  ArriveAtom,
-  ConfirmEnteringRoomAtom,
-} from "../../../atom/SinglePlayAtom"
+
+// Atom
+import { ArriveAtom } from "../../../atom/SinglePlayAtom"
 import { DefaultPosition, DefaultZoom } from "../../../atom/DefaultSettingAtom"
-import styles from "./ConfirmEnteringDefaultModal.module.css"
 import { userAtom } from "../../../atom/UserAtom"
+import {
+  isPostOfficeVisibleAtom,
+  selectedUserListAtom,
+  selectedUserNicknameListAtom,
+} from "../../../atom/PostOfficeAtom"
+import {
+  isPostBoxVisibleAtom,
+  selectedPostCardAtom,
+} from "../../../atom/PostAtom"
+
+// 스타일
+import styles from "./ConfirmEnteringDefaultModal.module.css"
+
+// API
+import { getRandomRoom } from "@/api/Room"
+import { RoomModalOpen, userPositionAtom } from "../../../atom/MultiAtom"
 
 const ConfirmEnteringDefaultModal = ({
   modalContent,
   setConfirmEnteringLocation,
   location,
+  flag,
 }) => {
   const navigate = useNavigate()
+
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   const [isInitialRender, setIsInitialRender] = useState(true)
 
@@ -30,16 +48,80 @@ const ConfirmEnteringDefaultModal = ({
 
   // 도착 여부
   const setIsArrived = useSetRecoilState(ArriveAtom)
-  const userInfo = useRecoilValue(userAtom);
+  const userInfo = useRecoilValue(userAtom)
+
+  // 우체국 상태 관리
+  const setIsPostOfficeVisible = useSetRecoilState(isPostOfficeVisibleAtom)
+  const setSelectedUserList = useSetRecoilState(selectedUserListAtom)
+  const setSelectUserNicknameList = useSetRecoilState(
+    selectedUserNicknameListAtom
+  )
+  const setSelectPostCard = useSetRecoilState(selectedPostCardAtom)
+
+  // 우체통 상태 관리
+  const setIsPostBoxVisible = useSetRecoilState(isPostBoxVisibleAtom)
+
+  // 멀티 상태 관리
+
+  const p = useRecoilValue(userPositionAtom)
+
   // 마이룸으로 이동
   const onConfirm = () => {
+    // 기본 값 설정
+    setDefaultCameraPosition([2, 10, 10])
+    setDefaultCameraZoom(0.18)
+
+    // 초기화
+    setIsInitialRender(true)
     if (location === "house") {
-      const roomId = userInfo.roomId;
-      navigate(`/room/${roomId}`)
-    } else if (location === "postOffice") {
+      const roomId = userInfo.roomId
+      navigate(`${urlPath}/room/${roomId}`)
       // 우체국으로 이동
-      navigate("/postoffice")
+    } else if (location === "postOffice") {
+      setSelectedUserList([])
+      setSelectUserNicknameList([])
+      setSelectPostCard(null)
+      setIsPostOfficeVisible(true)
+      setConfirmEnteringLocation(false)
+      setIsArrived(false)
+    } else if (location === "otherRoom") {
+      // const possibleRooms = [1, 3, 4, 6, 19, 21]
+      // let randomRoom
+      // do {
+      //   randomRoom = possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
+      // } while (randomRoom === userInfo.roomId)
+      let randRoomId
+
+      getRandomRoom(
+        (response) => {
+          randRoomId = response.data.data
+
+          navigate(`${urlPath}/random/${randRoomId}`)
+        },
+        (error) => {
+          console.log("Error with Random Room...", error)
+        }
+      )
+    } else if (location === "Test") {
+      navigate(`${urlPath}/yourstamp`)
+      setIsArrived(false)
+    } else if (location === "Insta") {
+      window.open("https://www.instagram.com/dingdong_letter/")
+      setIsArrived(false)
+    } else if (location === "Twitter") {
+      window.open("https://twitter.com/dingdong_letter")
+      setIsArrived(false)
     }
+    // 편지함 확인 로직
+    else if (location === "PostBox") {
+      setIsPostBoxVisible(true)
+      setIsArrived(false)
+    }
+
+    // else if (location === "multiRoom") {
+
+    // }
+
     setConfirmEnteringLocation(false)
   }
 
@@ -63,8 +145,7 @@ const ConfirmEnteringDefaultModal = ({
   const [ok, setOk] = useState("")
 
   // 내용
-  const letters =
-    modalContent === "준비중" ? "준비 중입니다..!" : `${modalContent}`
+  const letters = modalContent
   const yesText = ["▶", " ", "예"]
   const noText = ["▶", " ", "아니오"]
   const okText = ["▶", " ", "확인"]
@@ -109,7 +190,7 @@ const ConfirmEnteringDefaultModal = ({
         await wait(speed)
       }
       await wait(delay)
-      if (modalContent === "준비중") {
+      if (flag === "0") {
         await typeOk()
       } else {
         await typeYes()
@@ -120,6 +201,7 @@ const ConfirmEnteringDefaultModal = ({
     // 함수 실행
     typeWords()
   }, [])
+
   // -----------
 
   return (
@@ -129,7 +211,7 @@ const ConfirmEnteringDefaultModal = ({
           <div className={styles.Title}>딩동!</div>
           <div className={styles.Content}>{content}</div>
           <div className={styles.ConfirmContainer}>
-            {modalContent !== "준비중" && (
+            {flag !== "0" && (
               <>
                 <div className={styles.Confirm} onClick={onConfirm}>
                   {yes}

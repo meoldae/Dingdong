@@ -1,8 +1,9 @@
 import useAnimatedModel from "./useAnimatedModel"
 
 const Clover = () => {
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const { isVisible, meshRef, gltf, position } = useAnimatedModel(
-    "assets/models/postCards/clover.glb",
+    `${urlPath}/assets/models/postCards/clover.glb`,
     [0, 0, 3]
   )
   return isVisible ? (

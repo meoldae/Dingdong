@@ -1,46 +1,51 @@
-import React, { useEffect } from "react"
-import resultInfo from "@/assets/json/result.json" 
+import React, { useEffect} from "react"
+import Results from "./result.json" 
 import SharingModalList from "@/components/Modal/Sharing/SharingModalList"
 import { useNavigate } from "react-router-dom" 
-import styles from "./StampTestResult.module.css"
-import Results from "../../assets/json/result.json"
+import styles from "./StampTestResult.module.css" 
 
 const StampTestResult = () => {
   const navigate = useNavigate()
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   // const isLogin = useRecoilValue(isLoginAtom);
 
   let params = new URL(document.URL).searchParams
   let result = params.get("result")
+
   const resultIndex = Number(result)
-  const resultSrcUrl = Results[resultIndex].srcUrl; 
-  const resultPngUrl = Results[resultIndex].pngUrl;
 
   const onHomeHandler = (e) => {
-    navigate("/")
+    window.location.replace(`${urlPath}/`)
   }
   const onTestHandler = (e) => {
-    navigate("/yourstamp")
+    navigate(`${urlPath}/yourstamp`)
   }
 
   useEffect(() => {
-    if (!result || resultIndex > 7) {
-      navigate("/notfound")
+    if (!result || ![0, 1, 2, 3, 4, 5, 6, 7].includes(resultIndex)) {
+      navigate(`${urlPath}/notfound`);
     }
-  }, [])
+  }, [navigate, result, resultIndex]);
+ 
+  const resultSrcUrl = `${urlPath}/assets/StampTest/` + Results[resultIndex]?.srcUrl;
+ 
+  if (!result || ![0, 1, 2, 3, 4, 5, 6, 7].includes(resultIndex)) {
+    return null;
+  }
 
   return (
     <div className={styles.Container}>
       <div className={styles.PostImage}>
-        <img
-            src={resultSrcUrl} alt={resultPngUrl}
+        <img className={styles.PostImagePng}
+            src={resultSrcUrl}  alt={resultSrcUrl}
         />
       </div>
-      <div className={styles.ButtonContainer} onClick={onHomeHandler}>
-        <div className={styles.Button}>나의 우표로 편지 남기기</div>
-        <div className={styles.Button} onClick={onTestHandler}>우표 테스트 다시하기</div>
+      <div className={styles.ButtonContainer}>
+        <div className={styles.Button} onClick={onTestHandler}>테스트 다시하기</div>
+        <div className={styles.Button} onClick={onHomeHandler}>딩동 시작하기</div>
       </div>
-      <SharingModalList shareMode={"result"} resultPngUrl={resultPngUrl} />
+      <SharingModalList shareMode={"result"} resultSrcUrl={resultSrcUrl} />
     </div>
   )
 }

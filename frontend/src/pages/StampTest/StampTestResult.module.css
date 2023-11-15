@@ -1,26 +1,31 @@
 .Container {
   height: 100vh;
-  background: #ffebf4;
+  height: 100svh;
+  background: #FFFFFF;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  font-family: "GangwonEduAll-Bold";
+  justify-content: space-evenly; 
+  background: linear-gradient(180deg, #9ED0FF 0%, #FFFFFF 100%);
 }
 
 .PostImage {
   /* width: 320px;
   height: 419px;  */
   width: 100%;
-  border-radius: 20px;
-  margin-top: 10%;
+  border-radius: 10px;
+  /* margin-top: 10%; */
   text-align: center;
+}
+
+.PostImagePng {
+  width: 320px;
 }
 
 .ButtonContainer {
   margin-top: 2%;
   margin-bottom: 2%;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .Button {
@@ -28,8 +33,11 @@
   height: 40%;
   text-align: center;
   line-height: 50px;
-  border-radius: 15px;
-  background: #fff;
-  margin-top: 5%;
-  margin-bottom: 2%;
+  border-radius: 10px;
+  background: #FFFFFF;
+  margin-top: 2.5%;
+  border: 2px solid #2998FE;
+  border-radius: 10px;
+  box-shadow: 0px 4px 0px #9ad0ff;
+  /* margin-bottom: 3%; */
 }

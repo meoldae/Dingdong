@@ -1,0 +1,81 @@
+.Container {
+  width: 300px;
+  height: 450px;
+  border-radius: 10px;
+
+  background: #FFFFFF;
+}
+
+.Title {
+  width: 300px;
+  height: 50px;
+
+  text-align: center;
+  line-height: 50px;
+
+  font-size: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.ContentContainer {
+  width: 300px;
+  height: 290px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Content {
+  width: 220px;
+  height: 200px;
+  border-radius: 10px;
+
+  text-align: center;
+  font-size: 15px;
+  padding-top: 50px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.TimeContainer {
+  width: 300px;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.Time {
+  width: 80%;
+
+  font-size: 15px;
+  font-family: "GangwonEduAll-Light";
+
+  text-align: end;
+  line-height: 30px;
+}
+
+.FooterContainer {
+  width: 300px;
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Report {
+  width: 80px;
+  margin-left: 25px;
+  font-size: 15px;
+  font-family: "GangwonEduAll-Light";
+  color: #FF0000;
+}
+
+.Footer {
+  width: 280px;
+  margin-right: 25px;
+  font-size: 20px;
+  text-align: end;
+}
