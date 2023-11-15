@@ -1,6 +1,12 @@
 # :love_letter: 딩동! 편지왔어요. 딩동! 놀러왔어요. :house:
+<div align="left">
+  <img src="etc/assets/Logo_square.png" width="300px"/>   <br />
+     <br />
+</div>  
 
-기간 : 2023. 10. 10 ~ 2023. 11. 17 [ 6주 ]
+## 프로젝트 개요
+👑 SSAFY 9기 2학기 자율 프로젝트👑
+2023.10. 10 ~ 2023. 11. 17
 
 ## 팀원 
 <table>
