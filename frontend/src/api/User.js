@@ -27,6 +27,7 @@ const fetchUserInfo = async (success, fail) => {
   await HttpJson.get(`member/login`).then(success).catch(fail)
 }
 
+// 방 정보 가져오기
 const fetchRoomData = async (roomId, success, fail) => {
   await HttpJson.get(`room/${roomId}`).then(success).catch(fail)
 }
