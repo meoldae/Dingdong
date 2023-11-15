@@ -28,12 +28,10 @@
   box-shadow: 0px 4px 2px #377300;
 }
 
-
 .btn.five{
   background: #58A4FE;
   box-shadow: 0px 4px 2px #004699;
 }
-
 
 .btn.six{
   background: #02C26F;
@@ -45,12 +43,10 @@
   box-shadow: 0px 4px 2px #4F00B3;
 }
 
-
 .btn.eight{
   background: #FF41C1;
   box-shadow: 0px 4px 2px #AF0076;
 }
-
 
 .btn.nine{
   background: #454545;
@@ -58,7 +54,6 @@
 }
 
 .word{
-  /* font-family: Pretendard-Medium; */
   font-size: 24px;
-    color: white;
+  color: white;
 }
