@@ -40,7 +40,7 @@ import styles from "./RoomPage.module.css";
 
 
 const RandomRoomPage = () => {
-  // 브라우저 뒤로가기 버튼 처리
+  // 상태관리
   const [locationKeys, setLocationKeys] = useState([]);
   const navigate = useNavigate();
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
