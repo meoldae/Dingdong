@@ -23,6 +23,7 @@ const PostofficeCardBox = () => {
   const setOnPostofficeSendLetter = useSetRecoilState(postofficeSendLetterAtom);
   const setOnPostOfficeCard = useSetRecoilState(postofficeCardAtom)
 
+  // 우표선택 함수
   const handleCardClick = (cardIdx, cardSrc, comment) => {
     setSelectedPostCardItem({ idx: cardIdx + 1, src: cardSrc, order: numberToString(cardIdx + 1) })
     setCardComment(comment);
