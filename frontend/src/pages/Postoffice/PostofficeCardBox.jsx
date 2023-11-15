@@ -18,9 +18,10 @@ import { postofficeSendLetterAtom, selectedPostCardAtom, postofficeCardAtom } fr
 const PostofficeCardBox = () => {
   // 상태관리
   const [cardComment, setCardComment] = useState("");
+  // 리코일 상태관리
+  const [selectedPostCardItem, setSelectedPostCardItem] = useRecoilState(selectedPostCardAtom)
   const setOnPostofficeSendLetter = useSetRecoilState(postofficeSendLetterAtom);
   const setOnPostOfficeCard = useSetRecoilState(postofficeCardAtom)
-  const [selectedPostCardItem, setSelectedPostCardItem] = useRecoilState(selectedPostCardAtom)
 
   const handleCardClick = (cardIdx, cardSrc, comment) => {
     setSelectedPostCardItem({ idx: cardIdx + 1, src: cardSrc, order: numberToString(cardIdx + 1) })
