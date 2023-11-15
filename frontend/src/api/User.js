@@ -32,6 +32,7 @@ const fetchRoomData = async (roomId, success, fail) => {
   await HttpJson.get(`room/${roomId}`).then(success).catch(fail)
 }
 
+// 편지 정보 가져오기
 const fetchLetterData = async (param, success, fail) => {
   await HttpJson.get(`letter?page=${param}`).then(success).catch(fail)
 }
