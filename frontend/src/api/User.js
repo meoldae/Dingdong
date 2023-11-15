@@ -17,6 +17,7 @@ const DoubleCheck = async (param, success, fail) => {
   await HttpJson.get(`member/check/${param}`).then(success).catch(fail)
 }
 
+// 리프레쉬 토큰
 const RefreshToken = async (success, fail) => {
   await HttpJson.post(`auth/refresh`).then(success).catch(fail)
 }
