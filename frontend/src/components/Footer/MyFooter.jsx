@@ -1,6 +1,7 @@
 // 라이브러리
 import { useRecoilState, useRecoilValue } from "recoil"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 // 컴포넌트
 import RoomBtn from "../Button/Room/RoomBtn"
@@ -89,8 +90,12 @@ const MyFooter = (props) => {
     setPopUpStatus(!popUpStatus)
     setEditMode(true)
   }
+
+  const navigate = useNavigate()
+
   const goSingleMap = () => {
-    window.location.replace(`${urlPath}/`)
+    // window.location.replace(`${urlPath}/`)
+    navigate(-1)
   }
 
   // 방명록 리스트 종료 모달 함수
