@@ -50,6 +50,7 @@
 </details> <br/> 
 <details>
 <summary>ERD</summary> 
+<img src="etc/assets/erd.png" width="300px"/>   <br />
 </details> <br/> 
 <details>
 <summary>API 명세서</summary> 
