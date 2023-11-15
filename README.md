@@ -7,21 +7,19 @@
 
 
 ## 목차
-1. [프로젝트 기획 배경](#프로젝트-기획-배경) 
+1. [프로젝트 소개](#프로젝트-소개) 
 2. [성과](#성과) 
-3. [주요 기능](#주요-기능)  
+3. [기능](#기능)  
 4. [마케팅](#마케팅)
 5. [개발 환경 및 기술 스택](#개발-환경-및-기술-스택) 
 6. [프로젝트 산출물](#프로젝트-산출물) 
 7. [팀원](#팀원) 
 
-## 프로젝트 기획 배경 
-
-## 프로젝트 목표
-
+## 프로젝트 소개
+ 
 ## 성과
 
-## 주요 기능
+## 기능
 
 ## 마케팅 
 
@@ -44,6 +42,7 @@
 </details>  
 <details>
 <summary>요구사항 정의서</summary> 
+<img src="etc/assets/Requirements.png"/> 
 </details>  
 <details>
 <summary>시스템 아키텍처</summary> 
@@ -55,6 +54,8 @@
 </details> 
 <details>
 <summary>API 명세서</summary> 
+[Swagger](https://ding-dong.kr/api/swagger-ui/index.html)
+<img src="etc/assets/api.png"/> 
 </details>  
 
 ## 팀원
