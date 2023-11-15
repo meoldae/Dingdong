@@ -1,4 +1,4 @@
-import { HttpJson, HttpForm } from "./Http";
+import { HttpJson } from "./Http";
 
 const sendLetter = async (param, success, fail) => {
     HttpJson.post(`letter`, JSON.stringify(param)).then(success).catch(fail);
