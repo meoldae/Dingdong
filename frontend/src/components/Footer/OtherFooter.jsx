@@ -1,6 +1,7 @@
 // 라이브러리
 import { useEffect, useState } from "react"
 import { useRecoilState } from "recoil"
+import { useNavigate } from "react-router-dom"
 
 // 컴포넌트
 import PostCardBox from "../Modal/Post/PostCardBox"
@@ -100,9 +101,12 @@ const OtherFooter = (props) => {
     )
   }
 
+  const navigate = useNavigate()
+
   // 싱글맵 이동 함수
   const goSingleMap= () =>{
-    window.location.replace(`${urlPath}/`)
+    // window.location.replace(`${urlPath}/`)
+    navigate(-1)
   }
 
   // 방명록 리스트 종료 모달 함수
