@@ -29,6 +29,7 @@ const PostofficeCardBox = () => {
     setCardComment(comment);
   };
 
+  // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
   const handleSelectButtonClick = () => {
     if (selectedPostCardItem) {
