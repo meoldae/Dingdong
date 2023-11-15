@@ -22,6 +22,7 @@ const RefreshToken = async (success, fail) => {
   await HttpJson.post(`auth/refresh`).then(success).catch(fail)
 }
 
+// 유저정보 가져오기
 const fetchUserInfo = async (success, fail) => {
   await HttpJson.get(`member/login`).then(success).catch(fail)
 }
