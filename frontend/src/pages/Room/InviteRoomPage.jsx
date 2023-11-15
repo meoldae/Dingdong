@@ -27,7 +27,7 @@ import InviteHeader from "../../components/Header/InviteHeader"
 // 스타일
 import styles from "./RoomPage.module.css"
 
-function InviteRoomPage() {
+const InviteRoomPage = () => {
   const navigate = useNavigate()
   const [items, setItems] = useRecoilState(ItemsState)
   const canvasRef = useRef()
