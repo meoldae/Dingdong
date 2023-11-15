@@ -1,3 +1,4 @@
+// 라이브러리
 import { useNavigate } from "react-router-dom"
 
 const NotFoundPage = () => {
