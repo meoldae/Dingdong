@@ -41,6 +41,8 @@ const InviteRoomPage = () => {
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
+
+  // 날짜정보
   const today = new Date()
   const [time, setTime] = useState()
   const [roomColor, setRoomColor] = useRecoilState(roomColorState)
