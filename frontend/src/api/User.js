@@ -42,6 +42,7 @@ const fetchLogout = async (success, fail) => {
   await HttpJson.delete(`member/logout`).then(success).catch(fail)
 }
 
+// 유저 세션
 const fetchUserSecession = async (success, fail) => {
   await HttpJson.delete(`member`).then(success).catch(fail)
 }
