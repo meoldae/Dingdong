@@ -601,7 +601,7 @@ const SingleMainPage = () => {
               setPortalVisible={setWorldPortalVisible}
               adjustedAngle={[0, 7, 10]}
               adjustedZoom={0.3}
-              PortalSize={[2, 2]}
+              PortalSize={[1.5, 1.5]}
             />
           ) : (
             <DefaultPortalRing
@@ -780,12 +780,10 @@ const SingleMainPage = () => {
         {confirmEnteringWorld && (
           <div className={styles.confirmModal}>
             <ConfirmEnteringDefaultModal
-              modalContent={
-                "딩동 주민들을 만날 수 있는 멀티 플레이 서비스를 준비중 입니다!"
-              }
+              modalContent={"딩동 광장으로 이동하시겠습니까?[멀티 플레이]"}
               setConfirmEnteringLocation={setConfirmEnteringWorld}
               location={"world"}
-              flag={"0"}
+              flag={"1"}
             />
           </div>
         )}
