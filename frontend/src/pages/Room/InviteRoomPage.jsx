@@ -8,13 +8,19 @@ import { useRecoilState, useRecoilValue } from "recoil"
 
 // API
 import { fetchRoomData } from "../../api/User"
+
+// ATOM
 import {
   ItemsState,
   lightColorState,
   roomColorState,
   draggedItemState,
 } from "../../components/Room/Atom"
+
+// 컴포넌트
 import InviteFooter from "../../components/Footer/InviteFooter"
+
+// 스타일
 import styles from "./RoomPage.module.css"
 import InviteHeader from "../../components/Header/InviteHeader"
 import { userAtom } from "../../atom/UserAtom"
