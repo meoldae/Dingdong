@@ -7,13 +7,12 @@ import { fetchRoomData } from "../../api/User";
 import { getRandomRoom } from "@/api/Room";
 
 // 라이브러리
-import { Suspense, useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 
 // ATOM
 import {
-  ItemRotateState,
   ItemsState,
   buildModeState,
   draggedItemState,
