@@ -17,6 +17,8 @@ const PostofficeReceiveLetter = () => {
 
   // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
+  // 편지 ID
   const { letterId } = useParams(); 
 
   const [letterData, setLetterData] = useState(null);
