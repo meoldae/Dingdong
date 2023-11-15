@@ -5,7 +5,7 @@ const NotFoundPage = () => {
   // 페이지 이동을 위한 navigate
   const navigate = useNavigate()
 
-  
+  // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const posteCardTest = () => {
     navigate(`${urlPath}/`)
