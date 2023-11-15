@@ -12,6 +12,7 @@ const NotFoundPage = () => {
   const posteCardTest = () => {
     navigate(`${urlPath}/`)
   }
+  
   return (
     <div
       style={{
