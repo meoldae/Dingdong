@@ -4,10 +4,12 @@ import Experience from "../../components/Room/Experience";
 
 // API
 import { fetchRoomData } from "../../api/User";
+import { getRandomRoom } from "@/api/Room";
 
 // 라이브러리
 import { Suspense, useState, useEffect, useRef } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { useNavigate } from "react-router-dom";
 
 // ATOM
 import {
@@ -31,15 +33,12 @@ import NeighborRequest from "../../components/Header/NeighborRequest";
 import PopUp from "../../components/Room/RoomCustomPopUp/PopUp";
 import SharePage from "../../components/Modal/Sharing/SharePage";
 import SharingModalList from "../../components/Modal/Sharing/SharingModalList";
+import history from "../../components/UI/history";
+import RandomBtn from "../../components/Button/Room/RandomBtn";
 
 // 스타일
 import styles from "./RoomPage.module.css";
 
-
-import { useNavigate } from "react-router-dom";
-import history from "../../components/UI/history";
-import RandomBtn from "../../components/Button/Room/RandomBtn";
-import { getRandomRoom } from "@/api/Room";
 
 function RandomRoomPage() {
   // 브라우저 뒤로가기 버튼 처리
