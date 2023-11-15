@@ -76,7 +76,7 @@ export const MultiPage = () => {
 
   return (
     <div className={styles.container}>
-      <SingleHeader />
+      <SingleHeader checkMyRoom={"multi"} />
       {roomModalOpen && (
         <div className={styles.confirmModal}>
           <MultiRoomModal
