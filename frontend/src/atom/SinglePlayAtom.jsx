@@ -92,7 +92,7 @@ export const WorldPortalVisibleAtom = atom({
 })
 export const WorldPortalPositionAtom = atom({
   key: "WorldPortalPositionAtom",
-  default: [0, 0.03, 20],
+  default: [0.2, 0.03, 20.5],
 })
 
 export const RankPortalVisibleAtom = atom({
