@@ -162,7 +162,7 @@ const Header = ({ checkMyRoom }) => {
 
   // 문의하기 함수
   const inquiryHandler = () => {
-    if (inquiryText < 5) {
+    if (inquiryText.length < 5) {
       successMsg("❌ 5자 이상 작성해주세요.");
     } else {
       fetchInquiry(
