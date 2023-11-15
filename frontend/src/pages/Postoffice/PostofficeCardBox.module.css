@@ -45,11 +45,6 @@
   width: 70%;
 }
 
-.postCard {
-  /* margin-left: 10px; */
-  /* margin-right: 10px; */
-}
-
 [className$="Selected"] {
   transition: all 0.3s;
   transform: scale(1.05); 
