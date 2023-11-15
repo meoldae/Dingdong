@@ -16,6 +16,7 @@ import styles from "./PostofficeCardBox.module.css";
 import { postofficeSendLetterAtom, selectedPostCardAtom, postofficeCardAtom } from "../../atom/PostAtom";
 
 const PostofficeCardBox = () => {
+  // 상태관리
   const [cardComment, setCardComment] = useState("");
   const setOnPostofficeSendLetter = useSetRecoilState(postofficeSendLetterAtom);
   const setOnPostOfficeCard = useSetRecoilState(postofficeCardAtom)
