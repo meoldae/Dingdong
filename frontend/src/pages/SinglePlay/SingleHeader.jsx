@@ -229,27 +229,22 @@ const SingleHeader = ({ checkMyRoom }) => {
   return (
     <>
       <div className={styles.wrap}>
-        <div
-          className={
-            checkMyRoom === "invite" ? styles.inviteHeader : styles.header
-          }
-        >
-          {checkMyRoom === "invite" ? (
-            <div className={styles.userName}>딩동 마을</div>
-          ) : (
-            <>
-              <img
-                src={hamburger}
-                onClick={() => setIsHamburger(true)}
-                className={styles.HamburgerButton}
-              />
-              <div className={styles.Name}>
-                <RoomNameBtn>딩동 마을</RoomNameBtn>
-              </div>
-              {/* </div> */}
-              <img src={bell} onClick={() => setIsAlarm(true)} />
-            </>
-          )}
+        <div className={styles.header}>
+          <img
+            src={hamburger}
+            onClick={() => setIsHamburger(true)}
+            className={styles.HamburgerButton}
+          />
+          <div className={styles.Name}>
+            {checkMyRoom === "single" ? (
+              <RoomNameBtn>딩동 마을</RoomNameBtn>
+            ) : (
+              <RoomNameBtn>딩동 광장</RoomNameBtn>
+            )}
+            
+          </div>
+          {/* </div> */}
+          <img src={bell} onClick={() => setIsAlarm(true)} />
         </div>
       </div>
 
