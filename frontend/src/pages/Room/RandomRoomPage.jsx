@@ -85,6 +85,8 @@ const RandomRoomPage = () => {
   const [time, setTime] = useState();
   const [roomColor, setRoomColor] = useRecoilState(roomColorState);
   const [lightColor, setLightColor] = useRecoilState(lightColorState);
+
+  // 방 데이터 API
   useEffect(() => {
     const myRoomId = userInfo.roomId;
     setIsMyRoom(roomId == myRoomId);
