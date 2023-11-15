@@ -14,5 +14,5 @@ const getFurnitureDetail = async (furnitureId, success, fail) =>{
 const updateFurnitureList = async (params, success,fail) =>{
     await HttpJson.post(`/room`, params).then(success).catch(fail)
 }
-export { getFurnitureList, getFurnitureDetail, updateFurnitureList };
 
+export { getFurnitureList, getFurnitureDetail, updateFurnitureList };
