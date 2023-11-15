@@ -37,6 +37,7 @@ const fetchLetterData = async (param, success, fail) => {
   await HttpJson.get(`letter?page=${param}`).then(success).catch(fail)
 }
 
+// 로그아웃
 const fetchLogout = async (success, fail) => {
   await HttpJson.delete(`member/logout`).then(success).catch(fail)
 }
