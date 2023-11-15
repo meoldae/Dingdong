@@ -5,6 +5,7 @@ const sendLetter = async (param, success, fail) => {
     HttpJson.post(`letter`, JSON.stringify(param)).then(success).catch(fail);
 }
 
+// 게스트모드 편지 보내기
 const sendGuestLetter = async (param, success, fail) => {
     HttpJson.post(`letter/guest`, JSON.stringify(param)).then(success).catch(fail);
 }
