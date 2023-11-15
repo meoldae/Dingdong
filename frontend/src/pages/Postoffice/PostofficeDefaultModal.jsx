@@ -12,8 +12,10 @@ import styles from "./PostofficeDefaultModal.module.css"
 
 
 const PostDefaultModal = (props) => {
+  // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
+  // 리코일 상태관리
   const setIsFinishPostCard = useSetRecoilState(finishPostofficeCardAtom)
   
   return (
