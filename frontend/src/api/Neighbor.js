@@ -12,6 +12,7 @@ const neighborCheck = async (targetRoomId, success, fail) => {
     .catch(fail)
 }
 
+// 이웃 제거
 const deleteNeighbor = async (param, success, fail) => {
   await HttpJson.post(`/neighbor/delete`, param).then(success).catch(fail)
 }
