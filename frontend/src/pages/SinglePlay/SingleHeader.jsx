@@ -129,6 +129,7 @@ const SingleHeader = ({ checkMyRoom }) => {
       (success) => {
         setIsInquiry(false)
         setIsHamburger(false)
+        setInquiryText("")
         successMsg("✅ 문의하기가 완료됐습니다!")
       },
       (error) => {
