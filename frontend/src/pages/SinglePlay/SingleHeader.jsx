@@ -119,7 +119,6 @@ const SingleHeader = ({ checkMyRoom }) => {
     )
   }
 
-
   // 문의하기 함수
   const inquiryHandler = () => {
     fetchInquiry(
@@ -254,30 +253,6 @@ const SingleHeader = ({ checkMyRoom }) => {
       </div>
 
       {/* 햄버거 바 */}
-      {/* {isHamburger && (
-        <>
-          <div
-            className={styles.Overlay}
-            onClick={() => setIsHamburger(false)}
-          />
-          <div className={styles.HamburgerModal}>
-            <div className={styles.ContentContainer}>
-              <div
-                className={styles.MenuButton}
-                onClick={inquiryCheckHandler}
-              >
-                문의하기
-              </div>
-              <div className={styles.MenuButton} onClick={() => setIsRealLogout(true)}>
-                로그아웃
-              </div>
-              <div className={styles.MenuButton} onClick={() => setIsRealSecession(true)}>
-                회원탈퇴
-              </div>
-            </div>
-          </div>
-        </>
-      )} */}
       {isHamburger && (
         <>
           <div
@@ -307,9 +282,17 @@ const SingleHeader = ({ checkMyRoom }) => {
 
               </div> */}
             </div>
-              <div className={styles.exitButton} onClick={() => setIsRealSecession(true)}>
+            <div className={styles.FooterContainer}>
+              <div className={styles.Version}>
+                v 1.3.0
+              </div>
+              <div
+                className={styles.exitButton}
+                onClick={() => setIsRealSecession(true)}
+              >
                 회원 탈퇴
-              </div> 
+              </div>
+            </div>
           </div>
         </>
       )}
