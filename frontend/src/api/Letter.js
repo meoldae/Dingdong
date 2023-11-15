@@ -24,6 +24,8 @@ const reportLetter = async (param, success, fail) => {
 const sendLetterSNS = async (param, success, fail) =>{
     HttpJson.post(`letter/sns`, JSON.stringify(param)).then(success).catch(fail)
 }
+
+// 편지 상세보기 SNS
 const getLetterSNSDetail = async (param, success, fail) => {
     HttpJson.get(`letter/sns/${param}`).then(success).catch(fail);
 }
