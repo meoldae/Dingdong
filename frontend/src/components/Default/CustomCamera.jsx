@@ -22,6 +22,11 @@ const CustomCamera = () => {
   const defaultCameraPosition = useRecoilValue(DefaultPosition)
   const defaultCameraZoom = useRecoilValue(DefaultZoom)
 
+  const localStorageKey = "characterPosition"
+  const storedPosition = JSON.parse(localStorage.getItem(localStorageKey)) || [
+    0, 0, 0,
+  ]
+
   // 각 건물 포탈에서 움직임 제어
   const isArrived = useRecoilValue(ArriveAtom)
 
@@ -69,17 +74,17 @@ const CustomCamera = () => {
         )
       } else {
         currentPos.current = [
-          characterPosition[0] + defaultCameraPosition[0],
-          characterPosition[1] + defaultCameraPosition[1],
-          characterPosition[2] + defaultCameraPosition[2],
+          storedPosition[0] + defaultCameraPosition[0],
+          storedPosition[1] + defaultCameraPosition[1],
+          storedPosition[2] + defaultCameraPosition[2],
         ]
       }
 
       cameraRef.current.position.set(...currentPos.current)
       cameraRef.current.lookAt(
-        characterPosition[0],
-        characterPosition[1],
-        characterPosition[2]
+        storedPosition[0],
+        storedPosition[1],
+        storedPosition[2]
       )
     }
   })
