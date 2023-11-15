@@ -41,20 +41,20 @@
 ## 프로젝트 산출물 
 <details>
 <summary>화면 정의서 & 와이어프레임</summary> 
-</details> <br/> 
+</details>  
 <details>
 <summary>요구사항 정의서</summary> 
-</details> <br/> 
+</details>  
 <details>
 <summary>시스템 아키텍처</summary> 
-</details> <br/> 
+</details>  
 <details>
 <summary>ERD</summary> 
-<img src="etc/assets/erd.png" width="300px"/>   <br />
-</details> <br/> 
+<img src="etc/assets/erd.png"/>   <br />
+</details> 
 <details>
 <summary>API 명세서</summary> 
-</details> <br/> 
+</details>  
 
 ## 팀원
 <table>
