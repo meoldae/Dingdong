@@ -1,6 +1,6 @@
 // 라이브러리
 import { useEffect, useState } from "react"
-import { useRecoilState } from "recoil"
+import { useRecoilState, useSetRecoilState } from "recoil"
 import { useNavigate } from "react-router-dom"
 
 // 컴포넌트
@@ -29,17 +29,15 @@ import {
 }  from "../../atom/GuestBookAtom"
 
 import { roomHeartAtom } from "../../atom/RoomInfoAtom"
-const OtherFooter = (props) => {
-  // url경로
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
+const OtherFooter = (props) => {
   // 상태관리
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isSendLetterModalVisible, setIsSendLetterModalVisible] =
     useState(false)
   const [selectedPostCard, setSelectedPostCard] = useState(null)
   const [isHeart, setIsHeart] = useState(false)
-  const [heartCount, setHeartCount] = useRecoilState(roomHeartAtom)
+  const setHeartCount = useSetRecoilState(roomHeartAtom)
 
   // 리코일 상태관리
   const [isGuestBookVisible, setIsGuestBookVisible] = useRecoilState(isGuestBookVisibleAtom)
@@ -63,10 +61,6 @@ const OtherFooter = (props) => {
   }, [isHeart])
 
   // 편지 들어내면 삭제할 함수 ---
-  const openModal = () => {
-    setIsModalVisible(true)
-  }
-
   const closeModal = () => {
     setIsModalVisible(false)
   }
