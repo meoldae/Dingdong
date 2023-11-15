@@ -4,9 +4,11 @@ import { HttpJson } from "./Http";
 const fetchWriteGuestBook = async (params, success, fail) => {
     await HttpJson.post(`visitorbook`, params).then(success).catch(fail);
 };
+
 const fetchGuesteWriteGuestBook = async (params, success, fail) => {
     await HttpJson.post(`visitorbook/guest`, params).then(success).catch(fail);
 };
+
 // 방명록 리스트
 const fetchListGuestBook = async (roomId, success, fail) => {
     await HttpJson.get(`visitorbook/list/${roomId}`).then(success).catch(fail);
