@@ -19,6 +19,8 @@ import {
   roomColorState,
 } from "../../components/Room/Atom";
 import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom";
+import { userAtom } from "../../atom/UserAtom";
+import { roomInfoAtom, roomAvatarAtom, roomHeartAtom } from "@/atom/RoomInfoAtom";
 
 // 컴포넌트
 import Header from "../../components/Header/Header";
@@ -26,14 +28,14 @@ import MyFooter from "../../components/Footer/MyFooter";
 import Share from "../../components/Header/Share";
 import OtherFooter from "../../components/Footer/OtherFooter";
 import NeighborRequest from "../../components/Header/NeighborRequest";
-
-// 스타일
-import styles from "./RoomPage.module.css";
 import PopUp from "../../components/Room/RoomCustomPopUp/PopUp";
 import SharePage from "../../components/Modal/Sharing/SharePage";
 import SharingModalList from "../../components/Modal/Sharing/SharingModalList";
-import { userAtom } from "../../atom/UserAtom";
-import { roomInfoAtom, roomAvatarAtom, roomHeartAtom } from "@/atom/RoomInfoAtom";
+
+// 스타일
+import styles from "./RoomPage.module.css";
+
+
 import { useNavigate } from "react-router-dom";
 import history from "../../components/UI/history";
 import RandomBtn from "../../components/Button/Room/RandomBtn";
