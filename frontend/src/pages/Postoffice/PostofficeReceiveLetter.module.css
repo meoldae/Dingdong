@@ -8,15 +8,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  /* font-family: "GangwonEduAll-Light"; */
 }
 
 .PostImage {
-  /* width: 320px;
-  height: 419px;  */
   width: 100%;
   border-radius: 10px;
-  /* margin-top: 10%; */
   text-align: center;
   display: flex;
   align-items: center;
