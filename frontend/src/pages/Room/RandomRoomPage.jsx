@@ -39,7 +39,7 @@ import RandomBtn from "../../components/Button/Room/RandomBtn";
 import styles from "./RoomPage.module.css";
 
 
-function RandomRoomPage() {
+const RandomRoomPage = () => {
   // 브라우저 뒤로가기 버튼 처리
   const [locationKeys, setLocationKeys] = useState([]);
   const navigate = useNavigate();
