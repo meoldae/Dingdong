@@ -1,5 +1,6 @@
 import { HttpJson } from "./Http";
 
+// 좋아요 여부 판단
 const isHeartCheck = async (roomId, success, fail) => {
     await HttpJson.get(`/room/heart/${roomId}`).then(success).catch(fail);
 };
