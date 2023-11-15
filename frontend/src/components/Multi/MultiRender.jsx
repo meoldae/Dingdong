@@ -324,8 +324,8 @@ export const MultiRender = React.forwardRef((props, ref) => {
         object={MultiMapgltf.scene}
         position={[0, 0, 0]}
         rotation={[0, 0, 0]}
-        // onPointerMove={(e) => handleFloorClick(e)}
-        // onPointerLeave={() => setOnFloor(false)}
+        onPointerMove={(e) => handleFloorClick(e)}
+        onPointerLeave={() => setOnFloor(false)}
         onClick={(e) => {
           handleFloorClick2(e)
         }}
