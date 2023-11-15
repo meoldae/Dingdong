@@ -26,6 +26,7 @@ const PostofficeSendLetter = () => {
   // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
+  // 상태관리
   const [content, setContent] = useState("")
   const [contentCount, setContentCount] = useState(0)
 
