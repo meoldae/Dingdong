@@ -43,6 +43,8 @@ const PostofficeReceiveLetter = () => {
   const onHomeHandler = () => {
     navigate(`${urlPath}/`)
   }
+
+  // 초대 방으로 이동
   const onRoomHandler = () => {
     navigate(`${urlPath}/invite/${letterData.roomId}`)
   } 
