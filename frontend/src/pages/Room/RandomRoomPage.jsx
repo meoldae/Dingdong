@@ -42,6 +42,8 @@ import styles from "./RoomPage.module.css";
 const RandomRoomPage = () => {
   // 상태관리
   const [locationKeys, setLocationKeys] = useState([]);
+
+  // navigate함수
   const navigate = useNavigate();
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
 
