@@ -1,8 +1,13 @@
+// Three.js
 import { Canvas } from "@react-three/fiber"
 import Experience from "../../components/Room/Experience"
-import { fetchRoomData } from "../../api/User"
-import { Suspense, useState, useEffect, useRef } from "react"
+
+// 라이브러리
+import { useState, useEffect, useRef } from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
+
+// API
+import { fetchRoomData } from "../../api/User"
 import {
   ItemsState,
   lightColorState,
