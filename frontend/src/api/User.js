@@ -52,6 +52,7 @@ const fetchSerchNickname = async (name, success, fail) => {
   await HttpJson.get(`member/range/${name}`).then(success).catch(fail)
 }
 
+// 멀티 유저
 const fetchMultiUser = async (channelId, success, fail) => {
   await HttpJson.get(`multi/${channelId}`).then(success).catch(fail)
 }
