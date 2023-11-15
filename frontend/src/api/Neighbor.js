@@ -5,6 +5,7 @@ const fetchNeighrborAdd = async (targetId, success, fail) => {
   await HttpJson.post(`/neighbor/${targetId}`).then(success).catch(fail)
 }
 
+// 이웃여부 판단
 const neighborCheck = async (targetRoomId, success, fail) => {
   await HttpJson.get(`/neighbor/check/${targetRoomId}`)
     .then(success)
