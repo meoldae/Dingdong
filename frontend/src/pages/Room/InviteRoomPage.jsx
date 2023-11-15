@@ -5,6 +5,7 @@ import Experience from "../../components/Room/Experience"
 // 라이브러리
 import { useState, useEffect, useRef } from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
+import { useNavigate } from "react-router-dom"
 
 // API
 import { fetchRoomData } from "../../api/User"
@@ -16,16 +17,15 @@ import {
   roomColorState,
   draggedItemState,
 } from "../../components/Room/Atom"
+import { userAtom } from "../../atom/UserAtom"
+import { roomInfoAtom } from "@/atom/RoomInfoAtom"
 
 // 컴포넌트
 import InviteFooter from "../../components/Footer/InviteFooter"
+import InviteHeader from "../../components/Header/InviteHeader"
 
 // 스타일
 import styles from "./RoomPage.module.css"
-import InviteHeader from "../../components/Header/InviteHeader"
-import { userAtom } from "../../atom/UserAtom"
-import { roomInfoAtom } from "@/atom/RoomInfoAtom"
-import { useNavigate } from "react-router-dom"
 
 function InviteRoomPage() {
   const navigate = useNavigate()
