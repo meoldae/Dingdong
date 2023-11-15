@@ -110,6 +110,7 @@ const RandomRoomPage = () => {
     );
   }, [isMyRoom, navigate]);
 
+  // 랜덤 방 방문
   const randomVisit = () => {
     const roomId = window.location.pathname.match(/\d+/g)
       ? Number(window.location.pathname.match(/\d+/g)[0])
