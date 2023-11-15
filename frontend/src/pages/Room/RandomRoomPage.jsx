@@ -45,6 +45,8 @@ const RandomRoomPage = () => {
 
   // navigate함수
   const navigate = useNavigate();
+
+  // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
 
   useEffect(() => {
