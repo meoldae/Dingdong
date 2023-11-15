@@ -17,6 +17,7 @@ const deleteNeighbor = async (param, success, fail) => {
   await HttpJson.post(`/neighbor/delete`, param).then(success).catch(fail)
 }
 
+// 이웃 요청
 const fetchNeighborRequest = async (success, fail) => {
   await HttpJson.get(`/neighbor/request`).then(success).catch(fail)
 }
