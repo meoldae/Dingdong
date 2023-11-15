@@ -35,6 +35,8 @@ const InviteRoomPage = () => {
   // 리코일상태관리
   const [items, setItems] = useRecoilState(ItemsState)
   const [nickName, setNickName] = useRecoilState(roomInfoAtom)
+  const [roomColor, setRoomColor] = useRecoilState(roomColorState)
+  const [lightColor, setLightColor] = useRecoilState(lightColorState)
 
   // 상태관리
   const [time, setTime] = useState()
@@ -47,8 +49,8 @@ const InviteRoomPage = () => {
 
   // 날짜정보
   const today = new Date()
-  const [roomColor, setRoomColor] = useRecoilState(roomColorState)
-  const [lightColor, setLightColor] = useRecoilState(lightColorState)
+  
+  // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const [drag, setDrag] = useRecoilState(draggedItemState)
   const [roomDrag, setRoomDrag] = useState(false)
