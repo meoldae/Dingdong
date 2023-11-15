@@ -54,8 +54,8 @@ const InviteRoomPage = () => {
   
   // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
-  
 
+  // 방 이동 함수
   const onRoomHandler = (e) => {
     navigate(`${urlPath}/room/${roomId}`)
   }
