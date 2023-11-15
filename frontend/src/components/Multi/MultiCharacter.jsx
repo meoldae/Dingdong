@@ -145,32 +145,34 @@ export function MultiCharacter({
 
   return (
     <group ref={group} {...props} dispose={null} position={position}>
-      <Html position-y={1.7} center>
+      <Html position-y={1.7} center style={{ pointerEvents: "none" }}>
         <div className={styles.characterContainer}>
           <div
             className={styles.nicknameBox}
             style={{
-              pointerEvents: "none",
               width: `${nickname.length * 20}px`,
+              pointerEvents: "none",
             }}
           >
             {nickname}
           </div>
           {chat && (
-            <div className={styles.chatBox} style={{ maxWidth: "200px" }}>
+            <div
+              className={styles.chatBox}
+              style={{ maxWidth: "200px", pointerEvents: "none" }}
+            >
               {chat}
             </div>
           )}
-          <div
-            className={styles.roomImgBox}
-            onClick={(e) => {
-              e.stopPropagation()
-              setRoomModal(true)
-              setOtherRoomId(id)
-            }}
-          >
+          <div className={styles.roomImgBox}>
             {closeCharacters[id] && (
               <img
+                style={{ pointerEvents: "auto" }}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setRoomModal(true)
+                  setOtherRoomId(id)
+                }}
                 src={`${urlPath}/assets/icons/location.png`}
                 alt=""
                 className={styles.roomImg}

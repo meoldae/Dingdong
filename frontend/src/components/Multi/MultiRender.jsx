@@ -12,11 +12,23 @@ import {
   userPositionAtom,
 } from "../../atom/MultiAtom"
 import axios from "axios"
-import { useFrame } from "@react-three/fiber"
+import { useFrame, useLoader } from "@react-three/fiber"
 import { useNavigate } from "react-router-dom"
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader"
+
+const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
 export const MultiRender = React.forwardRef((props, ref) => {
   const [isMouseDown, setIsMouseDown] = useState(false)
+
+  const Modelgltf = useLoader(
+    GLTFLoader,
+    `${urlPath}/assets/models/defaultSettings/MultiPostBox.glb`
+  )
+  const MultiMapgltf = useLoader(
+    GLTFLoader,
+    `${urlPath}/assets/models/defaultSettings/MultiDefaultMap.glb`
+  )
   // 맵 클릭 함수
   const [onFloor, setOnFloor] = useState(false)
   useCursor(onFloor)
@@ -286,8 +298,6 @@ export const MultiRender = React.forwardRef((props, ref) => {
 
   const handleFloorClick = (e) => {
     if (isMouseDown) {
-      console.log(e)
-
       publishMove(e.point.x, 0, e.point.z)
     }
   }
@@ -298,10 +308,35 @@ export const MultiRender = React.forwardRef((props, ref) => {
   return (
     <>
       <Environment preset="sunset" />
-      <ambientLight intensity={0.3} />
+      <ambientLight intensity={1.3} />
       <OrbitControls enabled={false} />
+      <primitive
+        object={Modelgltf.scene}
+        position={[-2, 0, -2]}
+        scale={[2, 2, 2]}
+        onClick={(e) => {
+          e.stopPropagation()
+          console.log("click")
+        }}
+      />
 
-      <mesh
+      <primitive
+        object={MultiMapgltf.scene}
+        position={[0, 0, 0]}
+        rotation={[0, 0, 0]}
+        onPointerMove={(e) => handleFloorClick(e)}
+        onPointerLeave={() => setOnFloor(false)}
+        onClick={(e) => {
+          handleFloorClick2(e)
+        }}
+        onPointerDown={() => {
+          setIsMouseDown(true)
+        }}
+        onPointerUp={() => {
+          setIsMouseDown(false)
+        }}
+      />
+      {/* <mesh
         name="floor"
         rotation-x={-Math.PI / 2}
         position-y={-0.001}
@@ -321,7 +356,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
       >
         <planeGeometry args={[60, 60]} />
         <meshStandardMaterial color="F0F0F0" />
-      </mesh>
+      </mesh> */}
 
       {Object.keys(users).map((idx) => (
         <group key={idx}>
