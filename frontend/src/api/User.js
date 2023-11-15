@@ -7,6 +7,7 @@ const CreateUser = async (param, success, fail) => {
     .catch(fail)
 }
 
+// 아바타 리스트 가져오기
 const GetAvatarList = async (success, fail) => {
   await HttpJson.get(`avatar/list`).then(success).catch(fail)
 }
