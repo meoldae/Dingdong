@@ -1,5 +1,6 @@
 import { HttpJson } from "./Http"
 
+// 유저 생성
 const CreateUser = async (param, success, fail) => {
   await HttpJson.post(`member/signup`, JSON.stringify(param))
     .then(success)
