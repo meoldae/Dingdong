@@ -1,6 +1,5 @@
 package com.ssafy.dingdong.domain.multi.repository;
 
-import com.ssafy.dingdong.domain.multi.dto.request.ActionRequest;
 import com.ssafy.dingdong.domain.multi.dto.request.JoinOutRequest;
 import com.ssafy.dingdong.domain.multi.dto.request.UserSession;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +40,7 @@ public class MultiRepository {
         userProperties.put("avatarId", request.getAvatarId().toString());
         userProperties.put("roomId", request.getRoomId().toString());
         userProperties.put("actionId", request.getActionId().toString());
+        userProperties.put("chat", request.getChat());
         userProperties.put("x", String.valueOf(request.getX()));
         userProperties.put("y", String.valueOf(request.getY()));
         userProperties.put("z", String.valueOf(request.getZ()));
@@ -58,6 +58,7 @@ public class MultiRepository {
         userProperties.put("avatarId", userSession.getAvatarId().toString());
         userProperties.put("roomId", userSession.getRoomId().toString());
         userProperties.put("actionId", userSession.getActionId().toString());
+        userProperties.put("chat", userSession.getChat());
         userProperties.put("x", String.valueOf(userSession.getX()));
         userProperties.put("y", String.valueOf(userSession.getY()));
         userProperties.put("z", String.valueOf(userSession.getZ()));

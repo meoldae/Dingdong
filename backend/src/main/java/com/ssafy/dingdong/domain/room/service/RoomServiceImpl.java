@@ -245,7 +245,7 @@ public class RoomServiceImpl implements RoomService {
 		Room room = roomRepository.getRandomRoomId(memberId).orElseThrow(
 			() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
 		);
-		while (room.getRoomFurnitureList().size() <= 3) {
+		while (room.getRoomFurnitureList().size() <= 4) {
 			room = roomRepository.getRandomRoomId(memberId).orElseThrow(
 				() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
 			);

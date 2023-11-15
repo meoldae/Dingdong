@@ -33,7 +33,7 @@ public class MemberRedisRepository {
 		valueOperations = redisTemplate.opsForValue();
 		hashOperations = redisTemplate.opsForHash();
 		// accessTokenExpiration = Duration.ofMinutes(30); // 30분
-		accessTokenExpiration = Duration.ofDays(1); // 테스트용 하루
+		accessTokenExpiration = Duration.ofDays(365); // 테스트용 일년
 		refreshTokenExpiration = Duration.ofDays(7); // 1주일
 	}
 
