@@ -21,6 +21,7 @@ const PostofficeReceiveLetter = () => {
   // 편지 ID
   const { letterId } = useParams(); 
 
+  // 상태관리
   const [letterData, setLetterData] = useState(null);
   const [letterStamp, setLetterStamp] = useState(null);
 
