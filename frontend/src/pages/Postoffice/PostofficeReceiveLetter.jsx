@@ -1,9 +1,14 @@
 // 라이브러리
 import React, { useEffect, useState} from "react"
-import SharingModalList from "@/components/Modal/Sharing/SharingModalList"
 import { useNavigate, useParams } from "react-router-dom" 
+
+// 스타일
 import styles from "./PostofficeReceiveLetter.module.css" 
+
+// 컴포넌트
 import Card from "../../components/UI/Card"
+
+// API
 import { getLetterSNSDetail } from "../../api/Letter"; 
 
 const PostofficeReceiveLetter = () => {
