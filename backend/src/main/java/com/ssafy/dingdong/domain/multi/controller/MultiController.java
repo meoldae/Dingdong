@@ -1,8 +1,9 @@
 package com.ssafy.dingdong.domain.multi.controller;
 
-import com.ssafy.dingdong.domain.multi.dto.request.ActionRequest;
+import com.ssafy.dingdong.domain.multi.dto.response.ActionResponse;
 import com.ssafy.dingdong.domain.multi.dto.request.JoinOutRequest;
 import com.ssafy.dingdong.domain.multi.dto.request.UserSession;
+import com.ssafy.dingdong.domain.multi.dto.response.ChatResponse;
 import com.ssafy.dingdong.domain.multi.repository.MultiRepository;
 import com.ssafy.dingdong.domain.multi.service.MultiService;
 import com.ssafy.dingdong.global.response.DataResponse;
@@ -62,11 +63,19 @@ public class MultiController {
     public void actionChannel(@DestinationVariable Long channelId, UserSession userSession) {
         log.info("Action OK={}", userSession);
 
-        ActionRequest result = new ActionRequest(channelId, userSession.getRoomId(), userSession.getActionId());
+        ActionResponse result = new ActionResponse(channelId, userSession.getRoomId(), userSession.getActionId());
         // Redis에 사용자 정보를 저장
         messagingTemplate.convertAndSend("/sub/action/" + channelId, result);
 
 //        multiRepository.updateAction(userSession);
+    }
+    @MessageMapping("/chat/{channelId}")
+    public void chatChannel(@DestinationVariable Long channelId,
+                            UserSession userSession) {
+
+        ChatResponse result = new ChatResponse(channelId, userSession.getRoomId(), userSession.getChat());
+        // Redis에 사용자 정보를 저장
+        messagingTemplate.convertAndSend("/sub/chat/" + channelId, result);
     }
 
     @GetMapping("/multi/{channelId}")
@@ -75,4 +84,5 @@ public class MultiController {
         Map<String, Object> userList = multiRepository.findMultiUserList(channelId);
         return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, userList);
     }
+
 }
