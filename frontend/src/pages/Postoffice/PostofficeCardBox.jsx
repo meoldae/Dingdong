@@ -31,6 +31,8 @@ const PostofficeCardBox = () => {
 
   // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
+
+  // 우표선택 완료 함수
   const handleSelectButtonClick = () => {
     if (selectedPostCardItem) {
       setOnPostOfficeCard(false)
