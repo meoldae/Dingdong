@@ -2,12 +2,17 @@ import { useEffect } from "react"
 import { useRecoilValue } from "recoil"
 import { CharacterPositionAtom } from "../../../../atom/DefaultSettingAtom"
 
-const DefaultPortalRing = ({ portalPosition, portalVisible }) => {
+const DefaultPortalRing = ({ portalPosition, portalVisible, flag }) => {
   const characterPosition = useRecoilValue(CharacterPositionAtom)
 
   // 포탈 링 속성
-  const boundaryWidth = 1.5
-  const boundaryHeight = 1.1
+
+  let boundaryWidth = 1.5
+  let boundaryHeight = 1.1
+  if (flag === 1) {
+    boundaryWidth = 3.0
+    boundaryHeight = 2.2
+  }
 
   useEffect(() => {
     // 포탈 링 영역 밖 있는지 확인
