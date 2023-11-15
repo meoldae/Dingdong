@@ -12,6 +12,7 @@ import Card from "../../components/UI/Card"
 import { getLetterSNSDetail } from "../../api/Letter"; 
 
 const PostofficeReceiveLetter = () => {
+  // 라우터 함수
   const navigate = useNavigate()
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL 
   const { letterId } = useParams(); 
