@@ -36,4 +36,3 @@ const sendLetterPostOffice = async (params, success, fail) => {
 }
 
 export { sendLetter, sendGuestLetter, getLetterDetail, reportLetter, sendLetterSNS, getLetterSNSDetail, sendLetterPostOffice };
-
