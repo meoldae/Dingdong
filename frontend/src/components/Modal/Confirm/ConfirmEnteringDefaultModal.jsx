@@ -116,11 +116,10 @@ const ConfirmEnteringDefaultModal = ({
     else if (location === "PostBox") {
       setIsPostBoxVisible(true)
       setIsArrived(false)
+    } else if (location === "world") {
+      navigate(`${urlPath}/multiPage`)
+      setIsArrived(false)
     }
-
-    // else if (location === "multiRoom") {
-
-    // }
 
     setConfirmEnteringLocation(false)
   }

@@ -162,7 +162,7 @@ const Header = ({ checkMyRoom }) => {
 
   // 문의하기 함수
   const inquiryHandler = () => {
-    if (inquiryText < 5) {
+    if (inquiryText.length < 5) {
       successMsg("❌ 5자 이상 작성해주세요.");
     } else {
       fetchInquiry(
@@ -443,13 +443,17 @@ const Header = ({ checkMyRoom }) => {
                 </div>
               </div> */}
             </div>
-            <div
+            <div className={styles.FooterContainer}>
+              <div className={styles.Version}>
+                v 1.3.0
+              </div>
+              <div
                 className={styles.exitButton}
                 onClick={() => setIsRealSecession(true)}
-                style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}
               >
                 회원 탈퇴
               </div>
+            </div>
           </div>
         </>
       )}

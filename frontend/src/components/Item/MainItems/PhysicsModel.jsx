@@ -18,7 +18,7 @@ const PhysicsModel = ({ position, rotation, size }) => {
     <mesh ref={meshRef} position={position} rotation={rotation}>
       <planeGeometry args={size} />
       <meshStandardMaterial
-        visible="none"
+        visible={false}
         transparent
         opacity={0.2}
         // color={"red"}

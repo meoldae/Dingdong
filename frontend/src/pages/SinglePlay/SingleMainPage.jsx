@@ -1,47 +1,47 @@
 // React
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import React, { useEffect, useState } from "react"
+import { motion } from "framer-motion"
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 
 // 스타일
-import styles from "./SingleMainPage.module.css";
+import styles from "./SingleMainPage.module.css"
 
 // API
 import { reportLetter } from "../../api/Letter"
 
 // Three.js 기본 세팅
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import CustomCamera from "../../components/Default/CustomCamera";
-import DirectionalLight from "../../components/Default/DirectionLight";
-import Map from "../../components/Default/Map";
+import { Canvas } from "@react-three/fiber"
+import { OrbitControls } from "@react-three/drei"
+import CustomCamera from "../../components/Default/CustomCamera"
+import DirectionalLight from "../../components/Default/DirectionLight"
+import Map from "../../components/Default/Map"
 
 // Three.js
-import Model from "../../components/Item/MainItems/Character";
-import House from "../../components/Item/MainItems/tempItems/House";
-import Spot from "../../components/Item/MainItems/tempItems/Spot";
+import Model from "../../components/Item/MainItems/Character"
+import House from "../../components/Item/MainItems/tempItems/House"
+import Spot from "../../components/Item/MainItems/tempItems/Spot"
 
 // 각 건물 포탈
-import DefaultPortal from "../../components/Item/MainItems/Portals/DefaultPortal";
-import DefaultPortalRing from "../../components/Item/MainItems/Portals/DefaultPortalRing";
+import DefaultPortal from "../../components/Item/MainItems/Portals/DefaultPortal"
+import DefaultPortalRing from "../../components/Item/MainItems/Portals/DefaultPortalRing"
 
 // React 컴포넌트
-import ConfirmEnteringDefaultModal from "../../components/Modal/Confirm/ConfirmEnteringDefaultModal";
-import PhysicsModel from "../../components/Item/MainItems/PhysicsModel";
-import RankingModal from "../../components/Modal/Ranking/RankingModal";
-import PostofficeCardBox from "../Postoffice/PostofficeCardBox";
-import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter";
-import GuidePage from "../../components/UI/GuidePage";
-import SingleHeader from "./SingleHeader";
-import RankingInformation from "../../components/Modal/Ranking/RankingInformation";
-import PostOfficeModal from "../../components/Modal/PostOffice/PostOfficeModal";
-import DefaultModal from "../../components/Modal/Default/DefaultModal";
-import PostBox from "../../components/Modal/Post/PostBox";
-import ReceiveLetter from "../../components/Modal/Post/ReceiveLetter";
-import { successMsg } from "../../utils/customToast";
+import ConfirmEnteringDefaultModal from "../../components/Modal/Confirm/ConfirmEnteringDefaultModal"
+import PhysicsModel from "../../components/Item/MainItems/PhysicsModel"
+import RankingModal from "../../components/Modal/Ranking/RankingModal"
+import PostofficeCardBox from "../Postoffice/PostofficeCardBox"
+import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter"
+import GuidePage from "../../components/UI/GuidePage"
+import SingleHeader from "./SingleHeader"
+import RankingInformation from "../../components/Modal/Ranking/RankingInformation"
+import PostOfficeModal from "../../components/Modal/PostOffice/PostOfficeModal"
+import DefaultModal from "../../components/Modal/Default/DefaultModal"
+import PostBox from "../../components/Modal/Post/PostBox"
+import ReceiveLetter from "../../components/Modal/Post/ReceiveLetter"
+import { successMsg } from "../../utils/customToast"
 
 // Atom
-import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom";
+import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom"
 import {
   postofficeCardAtom,
   postofficeSendLetterAtom,
@@ -51,12 +51,12 @@ import {
   isFinishPostBoxVisibleAtom,
   isReceiveLetterVisibleAtom,
   isFinishReceiveLetterVisibleAtom,
-  reportPostVisibleAtom
-} from "../../atom/PostAtom";
+  reportPostVisibleAtom,
+} from "../../atom/PostAtom"
 import {
   isPostOfficeVisibleAtom,
   isFinishPostOfficeVisibleAtom,
-} from "../../atom/PostOfficeAtom";
+} from "../../atom/PostOfficeAtom"
 import {
   ArriveAtom,
   ConfirmEnteringInstaAtom,
@@ -88,182 +88,183 @@ import {
   TwitterPortalVisibleAtom,
   WorldPortalPositionAtom,
   WorldPortalVisibleAtom,
-} from "../../atom/SinglePlayAtom";
-import { RoomPortalVisibleAtom } from "../../atom/SinglePlayAtom";
+} from "../../atom/SinglePlayAtom"
+import { RoomPortalVisibleAtom } from "../../atom/SinglePlayAtom"
 import { letterIdAtom } from "../../atom/LetterAtom"
 
-
 const SingleMainPage = () => {
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   // 카메라 설정
-  const setDefaultCameraPosition = useSetRecoilState(DefaultPosition);
-  const setDefaultCameraZoom = useSetRecoilState(DefaultZoom);
+  const setDefaultCameraPosition = useSetRecoilState(DefaultPosition)
+  const setDefaultCameraZoom = useSetRecoilState(DefaultZoom)
 
   // 도착 여부
-  const setIsArrived = useSetRecoilState(ArriveAtom);
+  const setIsArrived = useSetRecoilState(ArriveAtom)
 
   // 장소 입장 확인 여부
   const [confirmEnteringRoom, setConfirmEnteringRoom] = useRecoilState(
     ConfirmEnteringRoomAtom
-  );
+  )
   const [confirmEnteringPostOffice, setConfirmEnteringPostOffice] =
-    useRecoilState(ConfirmEnteringPostOfficeAtom);
+    useRecoilState(ConfirmEnteringPostOfficeAtom)
   const [confirmEnteringStore, setConfirmEnteringStore] = useRecoilState(
     ConfirmEnteringStoreAtom
-  );
+  )
   const [confirmEnteringOtherRoom, setConfirmEnteringOtherRoom] =
-    useRecoilState(ConfirmEnteringOtherRoomAtom);
-  // const [confirmEnteringWorld, setConfirmEnteringWorld] = useRecoilState(
-  //   ConfirmEnteringWorldAtom
-  // )
+    useRecoilState(ConfirmEnteringOtherRoomAtom)
+  const [confirmEnteringWorld, setConfirmEnteringWorld] = useRecoilState(
+    ConfirmEnteringWorldAtom
+  )
   const [confirmEnteringRank, setConfirmEnteringRank] = useRecoilState(
     ConfirmEnteringRankAtom
-  );
+  )
 
   const [confirmEnteringTest, setConfirmEnteringTest] = useRecoilState(
     ConfirmEnteringTestAtom
-  );
+  )
 
   const [confirmEnteringInsta, setConfirmEnteringInsta] = useRecoilState(
     ConfirmEnteringInstaAtom
-  );
+  )
 
   const [confirmEnteringTwitter, setConfirmEnteringTwitter] = useRecoilState(
     ConfirmEnteringTwitterAtom
-  );
+  )
 
   const [confirmEnteringPostBox, setConfirmEnteringPostBox] = useRecoilState(
     ConfirmEnteringPostBoxAtom
-  );
+  )
 
   // 포탈 생성 여부
   const [roomPortalVisible, setRoomPortalVisible] = useRecoilState(
     RoomPortalVisibleAtom
-  );
+  )
   const [postOfficePortalVisible, setPostOfficePortalVisible] = useRecoilState(
     PostOfficePortalVisibleAtom
-  );
+  )
   const [storePortalVisible, setStorePortalVisible] = useRecoilState(
     StorePortalVisibleAtom
-  );
+  )
   const [otherRoomPortalVisible, setOtherRoomPortalVisible] = useRecoilState(
     OtherRoomPortalVisibleAtom
-  );
-  // const [worldPortalVisible, setWorldPortalVisible] = useRecoilState(
-  //   WorldPortalVisibleAtom
-  // )
+  )
+  const [worldPortalVisible, setWorldPortalVisible] = useRecoilState(
+    WorldPortalVisibleAtom
+  )
   const [rankPortalVisible, setRankPortalVisible] = useRecoilState(
     RankPortalVisibleAtom
-  );
+  )
   const [testPortalVisible, setTestPortalVisible] = useRecoilState(
     TestPortalVisibleAtom
-  );
+  )
   const [instaPortalVisible, setInstaPortalVisible] = useRecoilState(
     InstaPortalVisibleAtom
-  );
+  )
   const [twitterPortalVisible, setTwitterPortalVisible] = useRecoilState(
     TwitterPortalVisibleAtom
-  );
+  )
 
   const [postBoxPortalVisible, setPostBoxPortalVisible] = useRecoilState(
     PostBoxPortalVisibleAtom
-  );
+  )
 
   // 포탈 위치
-  const roomPortalPosition = useRecoilValue(RoomPortalPositionAtom);
-  const postOfficePortalPosition = useRecoilValue(PostOfficePortalPositionAtom);
-  const storePortalPosition = useRecoilValue(StorePortalPositionAtom);
-  const otherRoomPortalPosition = useRecoilValue(OtherRoomPortalPositionAtom);
-  // const worldPortalPosition = useRecoilValue(WorldPortalPositionAtom)
-  const rankPortalPosition = useRecoilValue(RankPortalPositionAtom);
-  const testPortalPosition = useRecoilValue(TestPortalPositionAtom);
-  const instaPortalPosition = useRecoilValue(InstaPortalPositionAtom);
-  const twitterPortalPosition = useRecoilValue(TwitterPortalPositionAtom);
-  const postBoxPortalPosition = useRecoilValue(PostBoxPortalPositionAtom);
+  const roomPortalPosition = useRecoilValue(RoomPortalPositionAtom)
+  const postOfficePortalPosition = useRecoilValue(PostOfficePortalPositionAtom)
+  const storePortalPosition = useRecoilValue(StorePortalPositionAtom)
+  const otherRoomPortalPosition = useRecoilValue(OtherRoomPortalPositionAtom)
+  const worldPortalPosition = useRecoilValue(WorldPortalPositionAtom)
+  const rankPortalPosition = useRecoilValue(RankPortalPositionAtom)
+  const testPortalPosition = useRecoilValue(TestPortalPositionAtom)
+  const instaPortalPosition = useRecoilValue(InstaPortalPositionAtom)
+  const twitterPortalPosition = useRecoilValue(TwitterPortalPositionAtom)
+  const postBoxPortalPosition = useRecoilValue(PostBoxPortalPositionAtom)
 
   // 랭킹모달 상태관리
   const closeRanking = () => {
-    setIsArrived(false);
-    setConfirmEnteringRank(false);
-    setDefaultCameraPosition([2, 10, 10]);
-    setDefaultCameraZoom(0.18);
-  };
+    setIsArrived(false)
+    setConfirmEnteringRank(false)
+    setDefaultCameraPosition([2, 10, 10])
+    setDefaultCameraZoom(0.18)
+  }
 
   // 우체국 도착 상태관리
   const [isPostOfficeVisible, setIsPostOfficeVisible] = useRecoilState(
     isPostOfficeVisibleAtom
-  );
+  )
   const [isFinishPostOfficeVisible, setIsFinishPostOfficeVisible] =
-    useRecoilState(isFinishPostOfficeVisibleAtom);
+    useRecoilState(isFinishPostOfficeVisibleAtom)
   const [onPostofficeCard, setOnPostOfficeCard] =
-    useRecoilState(postofficeCardAtom);
+    useRecoilState(postofficeCardAtom)
   const [onPostofficeSendLetter, setOnPostofficeSendLetter] = useRecoilState(
     postofficeSendLetterAtom
-  );
+  )
   const [isFinishPostOfficeCard, setIsFinishPostOfficeCard] = useRecoilState(
     finishPostofficeCardAtom
-  );
+  )
   const [isFinishPostOfficeSendLetter, setIsFinishPostOfficeSendLetter] =
-    useRecoilState(finishPostofficeSendLetterAtom);
-  const [guide, setGuide] = useState(false);
+    useRecoilState(finishPostofficeSendLetterAtom)
+  const [guide, setGuide] = useState(false)
 
   // 우체통 도착 상태관리
   const [isPostBoxVisible, setIsPostBoxVisible] =
-    useRecoilState(isPostBoxVisibleAtom);
+    useRecoilState(isPostBoxVisibleAtom)
   const [isFinishPostBoxVisible, setIsFinishPostBoxVisible] = useRecoilState(
     isFinishPostBoxVisibleAtom
-  );
+  )
   const [isReceiveLetterVisible, setIsReceiveLetterVisible] = useRecoilState(
     isReceiveLetterVisibleAtom
-  );
+  )
   const [isFinishReceiveLetterVisible, setIsFinishReceiveLetterVisible] =
-    useRecoilState(isFinishReceiveLetterVisibleAtom);
-  const [isReportPostVisible, setIsReportPostVisible] = useRecoilState(reportPostVisibleAtom)
+    useRecoilState(isFinishReceiveLetterVisibleAtom)
+  const [isReportPostVisible, setIsReportPostVisible] = useRecoilState(
+    reportPostVisibleAtom
+  )
   // 선택된 편지 ID (신고하기 용)
   const selectedLetterId = useRecoilValue(letterIdAtom)
 
   // 가이드 관리
   useEffect(() => {
     if (localStorage.getItem("guideVisible")) {
-      setGuide(false);
+      setGuide(false)
     } else {
-      setGuide(true);
+      setGuide(true)
     }
-  }, []);
+  }, [])
 
   // 랭킹정보 모달 상태관리
-  const [isRankingInformation, setIsRankingInformation] = useState(false);
+  const [isRankingInformation, setIsRankingInformation] = useState(false)
 
   // 우체국 종료 확인 함수
   const finishPostOfficeHandler = () => {
-    setIsFinishPostOfficeVisible(false);
-    setIsPostOfficeVisible(false);
-  };
+    setIsFinishPostOfficeVisible(false)
+    setIsPostOfficeVisible(false)
+  }
 
   // 우표선택 종료 확인 함수
   const finishPostOfficeCardHandler = () => {
-    setIsFinishPostOfficeCard(false);
-    setOnPostOfficeCard(false);
-  };
+    setIsFinishPostOfficeCard(false)
+    setOnPostOfficeCard(false)
+  }
 
   // 편지작성 종료 확인 함수
   const finishPostOfficeSendLetter = () => {
-    setIsFinishPostOfficeSendLetter(false);
-    setOnPostofficeSendLetter(false);
-  };
+    setIsFinishPostOfficeSendLetter(false)
+    setOnPostofficeSendLetter(false)
+  }
 
   // 편지함 종료 확인 함수
   const finishPostBoxHandler = () => {
-    setIsFinishPostBoxVisible(false);
-    setIsPostBoxVisible(false);
-  };
+    setIsFinishPostBoxVisible(false)
+    setIsPostBoxVisible(false)
+  }
 
   // 편지상세 종료 확인 함수
   const finishReceiveLetterHandler = () => {
-    setIsFinishReceiveLetterVisible(false);
-    setIsReceiveLetterVisible(false);
-    setIsPostBoxVisible(true);
-  };
+    setIsFinishReceiveLetterVisible(false)
+    setIsReceiveLetterVisible(false)
+    setIsPostBoxVisible(true)
+  }
 
   // 신고하기 모달 함수
   const reportPostHandler = () => {
@@ -284,7 +285,7 @@ const SingleMainPage = () => {
   return (
     <>
       <div className={styles.canvasContainer}>
-        <SingleHeader />
+        <SingleHeader checkMyRoom={"single"} />
         <Canvas shadows>
           {/* 사용자가 화면을 확대하거나 회전하지 못하도록 설정 */}
           <OrbitControls enableZoom={false} enableRotate={false} />
@@ -396,19 +397,19 @@ const SingleMainPage = () => {
 
           {/* 유령 앞 집 경계 */}
           <PhysicsModel //뒤
-            position={[16.3, 0.005, 17.5]}
+            position={[16.3, 0.005, 17]}
             rotation={[0, 0, 0]}
             size={[6.5, 0.3]}
           />
           <PhysicsModel //앞
-            position={[16.3, 0.005, 23.5]}
+            position={[16.3, 0.005, 24.5]}
             rotation={[0, 0, 0]}
             size={[6.5, 0.3]}
           />
           <PhysicsModel //우
-            position={[19.5, 0.005, 20.5]}
+            position={[20, 0.005, 21]}
             rotation={[0, Math.PI / 2, 0]}
-            size={[5.6, 0.3]}
+            size={[7, 0.3]}
           />
 
           {/* 이웃마을 경계 */}
@@ -453,7 +454,7 @@ const SingleMainPage = () => {
             rotation={[0, Math.PI / 2, 0]}
             size={[8, 0.3]}
           />
-          
+
           {/* 시상대 */}
           <PhysicsModel // 뒤
             position={[-16.3, 0.005, 17.5]}
@@ -487,25 +488,46 @@ const SingleMainPage = () => {
           />
 
           {/* 분수대 */}
+          <PhysicsModel // 상
+            position={[0, 0.005, 11]}
+            rotation={[0, 0, 0]}
+            size={[4, 0.3]}
+          />
           <PhysicsModel // 좌
-            position={[-2, 0.005, 12]}
-            rotation={[0, Math.PI / 3, 0]}
-            size={[4, 0.3]}
+            position={[-3, 0.005, 14.5]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[5, 0.3]}
           />
+
           <PhysicsModel // 우
-            position={[1.7, 0.005, 13]}
-            rotation={[0, Math.PI / -3.5, 0]}
-            size={[4.5, 0.3]}
+            position={[3.3, 0.005, 15]}
+            rotation={[0, Math.PI / 2, 0]}
+            size={[5, 0.3]}
           />
-          <PhysicsModel // 좌 하
-            position={[-1.5, 0.005, 17]}
-            rotation={[0, Math.PI / -4, 0]}
-            size={[4, 0.3]}
-          />
-          <PhysicsModel // 우 하
-            position={[2, 0.005, 17]}
-            rotation={[0, Math.PI / 4, 0]}
+          <PhysicsModel // 하
+            position={[0, 0.005, 18.5]}
+            rotation={[0, 0, 0]}
             size={[4.1, 0.3]}
+          />
+          <PhysicsModel // 좌상
+            position={[-2.3, 0.005, 11.5]}
+            rotation={[0, 0.5, 0]}
+            size={[1.7, 0.3]}
+          />
+          <PhysicsModel // 우상
+            position={[2.5, 0.005, 11.9]}
+            rotation={[0, -0.9, 0]}
+            size={[2, 0.3]}
+          />
+          <PhysicsModel // 좌하
+            position={[-2.4, 0.005, 17.5]}
+            rotation={[0, -0.9, 0]}
+            size={[1.5, 0.3]}
+          />
+          <PhysicsModel // 우하
+            position={[2.6, 0.005, 18]}
+            rotation={[0, 0.5, 0]}
+            size={[2, 0.3]}
           />
 
           {/* 이정표 */}
@@ -528,11 +550,13 @@ const SingleMainPage = () => {
               setPortalVisible={setRoomPortalVisible}
               adjustedAngle={[0, 4, 12]}
               adjustedZoom={0.35}
+              PortalSize={[1, 1]}
             />
           ) : (
             <DefaultPortalRing
               portalPosition={roomPortalPosition}
               portalVisible={setRoomPortalVisible}
+              flag={0}
             />
           )}
 
@@ -543,28 +567,15 @@ const SingleMainPage = () => {
               setPortalVisible={setPostOfficePortalVisible}
               adjustedAngle={[-9, 6, 10]}
               adjustedZoom={0.3}
+              PortalSize={[1, 1]}
             />
           ) : (
             <DefaultPortalRing
               portalPosition={postOfficePortalPosition}
               portalVisible={setPostOfficePortalVisible}
+              flag={0}
             />
           )}
-
-          {/* {storePortalVisible ? (
-            <DefaultPortal
-              setConfirmEnteringLocation={setConfirmEnteringStore}
-              portalPosition={storePortalPosition}
-              setPortalVisible={setStorePortalVisible}
-              adjustedAngle={[2, 4, 4]}
-              adjustedZoom={0.3}
-            />
-          ) : (
-            <DefaultPortalRing
-              portalPosition={storePortalPosition}
-              portalVisible={setStorePortalVisible}
-            />
-          )} */}
 
           {otherRoomPortalVisible ? (
             <DefaultPortal
@@ -573,28 +584,32 @@ const SingleMainPage = () => {
               setPortalVisible={setOtherRoomPortalVisible}
               adjustedAngle={[2, 3, 5]}
               adjustedZoom={0.35}
+              PortalSize={[1, 1]}
             />
           ) : (
             <DefaultPortalRing
               portalPosition={otherRoomPortalPosition}
               portalVisible={setOtherRoomPortalVisible}
+              flag={0}
             />
           )}
 
-          {/* {worldPortalVisible ? (
+          {worldPortalVisible ? (
             <DefaultPortal
               setConfirmEnteringLocation={setConfirmEnteringWorld}
               portalPosition={worldPortalPosition}
               setPortalVisible={setWorldPortalVisible}
-              adjustedAngle={[0, 3, -8]}
+              adjustedAngle={[0, 7, 10]}
               adjustedZoom={0.3}
+              PortalSize={[1.5, 1.5]}
             />
           ) : (
             <DefaultPortalRing
               portalPosition={worldPortalPosition}
               portalVisible={setWorldPortalVisible}
+              flag={1}
             />
-          )} */}
+          )}
 
           {rankPortalVisible ? (
             <DefaultPortal
@@ -603,11 +618,13 @@ const SingleMainPage = () => {
               setPortalVisible={setRankPortalVisible}
               adjustedAngle={[20, 5.5, 5]}
               adjustedZoom={0.37}
+              PortalSize={[1, 1]}
             />
           ) : (
             <DefaultPortalRing
               portalPosition={rankPortalPosition}
               portalVisible={setRankPortalVisible}
+              flag={0}
             />
           )}
 
@@ -618,11 +635,13 @@ const SingleMainPage = () => {
               setPortalVisible={setTestPortalVisible}
               adjustedAngle={[0, 4, 7]}
               adjustedZoom={0.4}
+              PortalSize={[1, 1]}
             />
           ) : (
             <DefaultPortalRing
               portalPosition={testPortalPosition}
               portalVisible={setTestPortalVisible}
+              flag={0}
             />
           )}
 
@@ -633,11 +652,13 @@ const SingleMainPage = () => {
               setPortalVisible={setInstaPortalVisible}
               adjustedAngle={[0, 4, 7]}
               adjustedZoom={0.4}
+              PortalSize={[1, 1]}
             />
           ) : (
             <DefaultPortalRing
               portalPosition={instaPortalPosition}
               portalVisible={setInstaPortalVisible}
+              flag={0}
             />
           )}
 
@@ -648,11 +669,13 @@ const SingleMainPage = () => {
               setPortalVisible={setTwitterPortalVisible}
               adjustedAngle={[0, 4, 7]}
               adjustedZoom={0.4}
+              PortalSize={[1, 1]}
             />
           ) : (
             <DefaultPortalRing
               portalPosition={twitterPortalPosition}
               portalVisible={setTwitterPortalVisible}
+              flag={0}
             />
           )}
 
@@ -663,11 +686,13 @@ const SingleMainPage = () => {
               setPortalVisible={setPostBoxPortalVisible}
               adjustedAngle={[0, 4, 7]}
               adjustedZoom={0.45}
+              PortalSize={[1, 1]}
             />
           ) : (
             <DefaultPortalRing
               portalPosition={postBoxPortalPosition}
               portalVisible={setPostBoxPortalVisible}
+              flag={0}
             />
           )}
         </Canvas>
@@ -675,8 +700,8 @@ const SingleMainPage = () => {
         {guide && (
           <GuidePage
             onClick={() => {
-              localStorage.setItem("guideVisible", true);
-              setGuide(false);
+              localStorage.setItem("guideVisible", true)
+              setGuide(false)
             }}
           />
         )}
@@ -752,21 +777,18 @@ const SingleMainPage = () => {
           </motion.div>
         )}
         {/* 멀티 플레이 포탈 */}
-        {/* {confirmEnteringWorld && (
+        {confirmEnteringWorld && (
           <div className={styles.confirmModal}>
-    
             <ConfirmEnteringDefaultModal
-              modalContent={
-                "딩동 주민들을 만날 수 있는 멀티 플레이 서비스를 준비중 입니다!"
-              }
+              modalContent={"딩동 광장으로 이동하시겠습니까?[멀티 플레이]"}
               setConfirmEnteringLocation={setConfirmEnteringWorld}
               location={"world"}
-              flag={"0"}
+              flag={"1"}
             />
           </div>
         )}
-      
-        {/* 우체국 모달 */}
+
+        {/* 우체국 모달
         {isPostOfficeVisible && (
           <>
             <motion.div
@@ -929,8 +951,8 @@ const SingleMainPage = () => {
               <div
                 className={styles.InformationOverlay}
                 onClick={() => {
-                  setIsReceiveLetterVisible(false);
-                  setIsPostBoxVisible(true);
+                  setIsReceiveLetterVisible(false)
+                  setIsPostBoxVisible(true)
                 }}
               />
               <div className={styles.postofficemodalcontainer}>
@@ -1083,7 +1105,7 @@ const SingleMainPage = () => {
         )}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default SingleMainPage;
+export default SingleMainPage

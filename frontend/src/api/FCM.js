@@ -2,6 +2,7 @@ import { HttpJson } from "./Http"
 // import { initializeApp } from "firebase/app";
 // import { getMessaging, getToken } from "firebase/messaging"
 
+// 토큰생성 API
 const createToken = async (param, success, fail) => {
     await HttpJson.post(`/fcm/login`, JSON.stringify(param)).then(success).catch(fail)
 }

@@ -12,10 +12,23 @@ import {
   userPositionAtom,
 } from "../../atom/MultiAtom"
 import axios from "axios"
-import { useFrame } from "@react-three/fiber"
+import { useFrame, useLoader } from "@react-three/fiber"
 import { useNavigate } from "react-router-dom"
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+
+const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
 export const MultiRender = React.forwardRef((props, ref) => {
+  const [isMouseDown, setIsMouseDown] = useState(false)
+
+  // const Modelgltf = useLoader(
+  //   GLTFLoader,
+  //   `${urlPath}/assets/models/defaultSettings/MultiPostBox.glb`
+  // )
+  const MultiMapgltf = useLoader(
+    GLTFLoader,
+    `${urlPath}/assets/models/defaultSettings/multiMap2.glb`
+  )
   // 맵 클릭 함수
   const [onFloor, setOnFloor] = useState(false)
   useCursor(onFloor)
@@ -31,12 +44,12 @@ export const MultiRender = React.forwardRef((props, ref) => {
     nickname: me.nickname,
     roomId: me.roomId,
     avatarId: me.avatarId,
-    x: 0,
-    y: 0,
-    z: 0,
-    // x: Math.random() * 2,
+    // x: 0,
     // y: 0,
-    // z: Math.random() * 2,
+    // z: 0,
+    x: Math.random() * 2,
+    y: 0,
+    z: Math.random() * 2,
     actionId: 0,
     chat: "",
   }
@@ -284,30 +297,70 @@ export const MultiRender = React.forwardRef((props, ref) => {
   })
 
   const handleFloorClick = (e) => {
+    if (isMouseDown) {
+      publishMove(e.point.x, 0, e.point.z)
+    }
+  }
+  const handleFloorClick2 = (e) => {
     publishMove(e.point.x, 0, e.point.z)
   }
 
   return (
     <>
       <Environment preset="sunset" />
-      <ambientLight intensity={0.3} />
+      <ambientLight intensity={1} />
       <OrbitControls enabled={false} />
+      {/* <primitive
+        object={Modelgltf.scene}
+        position={[-2, 0, -2]}
+        scale={[2, 2, 2]}
+        onClick={(e) => {
+          e.stopPropagation()
+          console.log("click")
+        }}
+      /> */}
 
-      <mesh
+      <primitive
+        object={MultiMapgltf.scene}
+        position={[0, 0, 0]}
+        rotation={[0, 0, 0]}
+        onPointerMove={(e) => handleFloorClick(e)}
+        onPointerLeave={() => setOnFloor(false)}
+        onClick={(e) => {
+          handleFloorClick2(e)
+        }}
+        onPointerDown={() => {
+          setIsMouseDown(true)
+        }}
+        onPointerUp={() => {
+          setIsMouseDown(false)
+        }}
+      />
+      <mesh rotation-x={-Math.PI / 2} position-y={-1}>
+        <planeGeometry args={[60, 60]} />
+        <meshStandardMaterial color="#27c1d9" />
+      </mesh>
+      {/* <mesh
         name="floor"
         rotation-x={-Math.PI / 2}
         position-y={-0.001}
-        onPointerEnter={() => setOnFloor(true)}
+        onPointerMove={(e) => handleFloorClick(e)}
         onPointerLeave={() => setOnFloor(false)}
         position-x={8 / 2}
         position-z={8 / 2}
         onClick={(e) => {
-          handleFloorClick(e)
+          handleFloorClick2(e)
+        }}
+        onPointerDown={() => {
+          setIsMouseDown(true)
+        }}
+        onPointerUp={() => {
+          setIsMouseDown(false)
         }}
       >
         <planeGeometry args={[60, 60]} />
         <meshStandardMaterial color="F0F0F0" />
-      </mesh>
+      </mesh> */}
 
       {Object.keys(users).map((idx) => (
         <group key={idx}>

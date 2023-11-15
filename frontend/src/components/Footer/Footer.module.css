@@ -4,6 +4,7 @@
   width: 100%;
   bottom: 10px;
 }
+
 .textOverlay {
   position: absolute;
   top: 0; /* 상단에 위치시키려면 0, 중앙이나 하단에 위치시키려면 값을 조절하세요 */
@@ -11,7 +12,6 @@
   z-index: 10; /* 이미지 위에 텍스트가 오도록 z-index 값을 조정하세요 */
   /* 기타 스타일링: 글자 색, 크기 등 */
 }
-
 
 .thirdFooter {
   display: flex;
@@ -61,7 +61,6 @@
   box-shadow: 0px 0px 10px 1px rgb(200, 200, 200);
 }
 
-
 .button {
   width: 100%;
   display: flex;
@@ -76,7 +75,6 @@
 .iconImage {
   width: 40px;
 }
-
 
 .buttonContent {
   display: flex;
