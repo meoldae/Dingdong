@@ -42,6 +42,7 @@ const PostofficeCardBox = () => {
     }
   };
 
+  // 숫자 -> 문자열 변환 함수
   const numberToString = (num) => {
     switch (num) {
       case 1: return "one";
