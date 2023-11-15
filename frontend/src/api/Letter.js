@@ -10,6 +10,7 @@ const sendGuestLetter = async (param, success, fail) => {
     HttpJson.post(`letter/guest`, JSON.stringify(param)).then(success).catch(fail);
 }
 
+// 편지 상세보기
 const getLetterDetail = async (param, success, fail) => {
     HttpJson.get(`letter/${param}`).then(success).catch(fail);
 }
