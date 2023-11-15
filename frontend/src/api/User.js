@@ -12,6 +12,7 @@ const GetAvatarList = async (success, fail) => {
   await HttpJson.get(`avatar/list`).then(success).catch(fail)
 }
 
+// 닉네임 중복 체크
 const DoubleCheck = async (param, success, fail) => {
   await HttpJson.get(`member/check/${param}`).then(success).catch(fail)
 }
