@@ -245,14 +245,6 @@
   padding: 15px 0 15px 0;
 }
 
-.exitButton {
-  padding: 10px 0 10px 0;
-  margin-left: auto;
-  margin-right: 10%;
-  color: lightgray;
-  font-size: small;
-}
-
 /* 알림 모달 */
 .AlarmContainer {
   top: 40%;
@@ -459,4 +451,25 @@
   width: 50%;
   height: 50px;
   margin-top: 20px;
+}
+
+.FooterContainer {
+  width: 230px;
+  height: 50px;
+  padding: 0 10px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  
+  color: lightgray;
+}
+
+.Version {
+  font-size: 10px;
+}
+
+.exitButton {
+  font-size: 12px;
 }

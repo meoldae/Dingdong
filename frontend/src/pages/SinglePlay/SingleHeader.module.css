@@ -195,15 +195,6 @@
   padding: 10px 0 10px 0;
 }
 
-.exitButton {
-  padding: 10px 0 10px 0;
-  margin-left: auto;
-  margin-right: 10%;
-  color: gray; 
-  font-size: small;
-  color: lightgray; 
-}
-
 /* 알림 모달 */
 .AlarmContainer {
   top: 40%;
@@ -244,7 +235,6 @@
 
 .NoAlarm {
   color: #fff;
-  /* font-family: "Pretendard-Bold"; */
   font-size: 20px;
   width: 300px;
   display: flex;
@@ -376,9 +366,7 @@
 
 .Name {
   width: 90%;
-
   font-size: 25px;
-  /* font-family: "Pretendard-SemiBold"; */
 }
 
 .toggleSwitch {
@@ -392,8 +380,7 @@
   margin-left: 40px;
 }
 
-.toggleButton 
- {
+.toggleButton {
   width: 20px;
   height: 20px;
   position: absolute;
@@ -420,4 +407,25 @@
 .toggleContainer {
   display: flex;
   align-items: center;
+}
+
+.FooterContainer {
+  width: 230px;
+  height: 50px;
+  padding: 0 10px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  
+  color: lightgray;
+}
+
+.Version {
+  font-size: 10px;
+}
+
+.exitButton {
+  font-size: 12px;
 }
