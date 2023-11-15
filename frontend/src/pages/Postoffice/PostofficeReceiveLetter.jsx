@@ -39,6 +39,7 @@ const PostofficeReceiveLetter = () => {
     );
   }, [letterId]); // letterId가 변경될 때마다 호출
 
+  // 메인페이지 이동
   const onHomeHandler = (e) => {
     navigate(`${urlPath}/`)
   }
