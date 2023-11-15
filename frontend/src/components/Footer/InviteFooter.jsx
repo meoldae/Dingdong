@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react";
-import PostCardBox from "../Modal/Post/PostCardBox";
-import RoomBtn from "../Button/Room/RoomBtn";
-import SendLetter from "../Modal/Post/SendLetter";
 import styles from "./InviteFooter.module.css";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -19,9 +15,7 @@ import DetailGuestBookModal from "../Modal/GuestBook/DetailGuestBookModal";
 import WriteGuestBookModal from "../Modal/GuestBook/WriteGuestBookModal";
 const OtherFooter = (props) => {
   const navigate = useNavigate();
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isSendLetterModalVisible, setIsSendLetterModalVisible] =
-    useState(false);
+
   const [isGuestBookVisible, setIsGuestBookVisible] = useRecoilState(
     isGuestBookVisibleAtom
   );
@@ -60,6 +54,7 @@ const OtherFooter = (props) => {
     setIsWriteGuestBookVisible(false);
     setIsGuestBookVisible(true);
   };
+
   return (
     <>
       <div className={styles.wrap}>
