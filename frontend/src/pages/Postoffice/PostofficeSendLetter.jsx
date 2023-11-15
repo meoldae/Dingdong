@@ -37,6 +37,7 @@ const PostofficeSendLetter = () => {
   const setFinishPostOfficeSendLetter = useSetRecoilState(finishPostofficeSendLetterAtom)
   const setOnPostOfficeSendLetter = useSetRecoilState(postofficeSendLetterAtom)
 
+  // 유저 정보
   const userInfo = useRecoilValue(userAtom)
 
   // 카카오톡 공유하기
