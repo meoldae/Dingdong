@@ -58,6 +58,7 @@ const PostofficeCardBox = () => {
     }
   };
   
+  // 카드 내용 리스트
   const cards = [
     { src: "heart.png", comment: "두근거리는 사랑을 전달해보세요!" },
     { src: "thunder.png", comment: "에너지를 전달해보세요!" },
