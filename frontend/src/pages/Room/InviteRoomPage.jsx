@@ -38,6 +38,8 @@ const InviteRoomPage = () => {
 
   // 방 ID
   const roomId = window.location.pathname.match(/\d+/g)
+
+  // 유저정보
   const userInfo = useRecoilValue(userAtom)
   const today = new Date()
   const [time, setTime] = useState()
