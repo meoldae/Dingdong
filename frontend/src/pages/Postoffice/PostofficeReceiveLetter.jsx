@@ -40,10 +40,10 @@ const PostofficeReceiveLetter = () => {
   }, [letterId]); // letterId가 변경될 때마다 호출
 
   // 메인페이지 이동
-  const onHomeHandler = (e) => {
+  const onHomeHandler = () => {
     navigate(`${urlPath}/`)
   }
-  const onRoomHandler = (e) => {
+  const onRoomHandler = () => {
     navigate(`${urlPath}/invite/${letterData.roomId}`)
   } 
 
