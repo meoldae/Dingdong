@@ -30,6 +30,7 @@ const PostofficeSendLetter = () => {
   const [content, setContent] = useState("")
   const [contentCount, setContentCount] = useState(0)
 
+  // 리코일 상태관리
   const setSelectedPostCardItem = useRecoilValue(selectedPostCardAtom)
   const setSelectedUser = useRecoilValue(selectedUserListAtom)
   const setSelectedUserNickname = useRecoilValue(selectedUserNicknameListAtom)
