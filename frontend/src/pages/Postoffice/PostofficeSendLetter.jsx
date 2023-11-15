@@ -23,6 +23,7 @@ import styles from "./PostofficeSendLetter.module.css"
 
 
 const PostofficeSendLetter = () => {
+  // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   const [content, setContent] = useState("")
