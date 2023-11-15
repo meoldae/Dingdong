@@ -130,6 +130,7 @@ const RandomRoomPage = () => {
     );
   };
 
+  // 시간 체크 함수
   useEffect(() => {
     const checkTime = today.getHours();
 
