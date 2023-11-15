@@ -27,6 +27,7 @@ const responseNeighborRequest = async (param, success, fail) => {
   await HttpJson.post(`/neighbor/response`, param).then(success).catch(fail)
 }
 
+// 이웃 리스트
 const fetchNeighborList = async (success, fail) => {
   await HttpJson.get(`neighbor/list`).then(success).catch(fail)
 }
