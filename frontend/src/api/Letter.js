@@ -1,5 +1,6 @@
 import { HttpJson } from "./Http";
 
+// 편지 보내기
 const sendLetter = async (param, success, fail) => {
     HttpJson.post(`letter`, JSON.stringify(param)).then(success).catch(fail);
 }
