@@ -79,11 +79,7 @@ const PostofficeCardBox = () => {
           {cards.map((card, idx) => (
             <div className={styles.postCardCenter} key={card.src}>
               <img
-                className={
-                  selectedPostCardItem?.src === card.src
-                    ? `${styles.postCard} ${styles.selected} ${styles[`${card.src.split(".")[0]}Selected`]}`
-                    : styles.postCard
-                }
+                className={`${styles.postCard} ${styles.selected} ${styles[`${card.src.split(".")[0]}Selected`]}`}
                 src={`${urlPath}/assets/images/post/${card.src}`}
                 onClick={() => handleCardClick(idx, card.src, card.comment)}
               />
