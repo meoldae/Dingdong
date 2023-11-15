@@ -22,6 +22,7 @@ const fetchNeighborRequest = async (success, fail) => {
   await HttpJson.get(`/neighbor/request`).then(success).catch(fail)
 }
 
+// 이웃 요청 응답
 const responseNeighborRequest = async (param, success, fail) => {
   await HttpJson.post(`/neighbor/response`, param).then(success).catch(fail)
 }
