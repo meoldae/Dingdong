@@ -26,6 +26,8 @@ import MyFooter from "../../components/Footer/MyFooter";
 import Share from "../../components/Header/Share";
 import OtherFooter from "../../components/Footer/OtherFooter";
 import NeighborRequest from "../../components/Header/NeighborRequest";
+
+// 스타일
 import styles from "./RoomPage.module.css";
 import PopUp from "../../components/Room/RoomCustomPopUp/PopUp";
 import SharePage from "../../components/Modal/Sharing/SharePage";
