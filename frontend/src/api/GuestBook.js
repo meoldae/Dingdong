@@ -5,6 +5,7 @@ const fetchWriteGuestBook = async (params, success, fail) => {
     await HttpJson.post(`visitorbook`, params).then(success).catch(fail);
 };
 
+// 게스트모드 방명록 작성
 const fetchGuesteWriteGuestBook = async (params, success, fail) => {
     await HttpJson.post(`visitorbook/guest`, params).then(success).catch(fail);
 };
