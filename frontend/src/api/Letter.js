@@ -30,6 +30,7 @@ const getLetterSNSDetail = async (param, success, fail) => {
     HttpJson.get(`letter/sns/${param}`).then(success).catch(fail);
 }
 
+// 편지 보내기 우체국
 const sendLetterPostOffice = async (params, success, fail) => {
     HttpJson.post(`letter/all`, params).then(success).catch(fail);
 }
