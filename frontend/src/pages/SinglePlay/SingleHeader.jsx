@@ -121,20 +121,25 @@ const SingleHeader = ({ checkMyRoom }) => {
 
   // 문의하기 함수
   const inquiryHandler = () => {
-    fetchInquiry(
-      {
-        category: "3",
-        content: inquiryText,
-      },
-      (success) => {
-        setIsInquiry(false)
-        setIsHamburger(false)
-        successMsg("✅ 문의하기가 완료됐습니다!")
-      },
-      (error) => {
-        "Error at inquiry...", error
-      }
-    )
+    if(inquiryText.length < 5) {
+      successMsg("❌ 5자 이상 작성해주세요.");
+    } else {
+      fetchInquiry(
+        {
+          category: "3",
+          content: inquiryText,
+        },
+        (success) => {
+          setIsInquiry(false)
+          setIsHamburger(false)
+          setInquiryText("")
+          successMsg("✅ 문의하기가 완료됐습니다!")
+        },
+        (error) => {
+          "Error at inquiry...", error
+        }
+      )
+    }
   }
 
   // 로그아웃 함수
