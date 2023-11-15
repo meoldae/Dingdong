@@ -82,6 +82,7 @@ const PostofficeSendLetter = () => {
   //   })
   // }
 
+  // 편지보내기 함수
   const sendClick = () => {
     const params = {
       "description": content,
