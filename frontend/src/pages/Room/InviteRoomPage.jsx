@@ -35,6 +35,8 @@ const InviteRoomPage = () => {
   // 상태관리
   const [items, setItems] = useRecoilState(ItemsState)
   const [nickName, setNickName] = useRecoilState(roomInfoAtom)
+
+  // 방 ID
   const roomId = window.location.pathname.match(/\d+/g)
   const userInfo = useRecoilValue(userAtom)
   const today = new Date()
