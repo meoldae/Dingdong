@@ -26,17 +26,17 @@
 ## 마케팅 
 
 ## 개발 환경 및 기술 스택
-| FrontEnd                | BackEnd                         | DB            | CI/CD                     | 협업툴    |
-| ----------------------- | ------------------------------- | ------------- |-------------------------- | -------- |
-| Node 18.16.1            | Java SE Development Kit 11.0.19 | MySQL 5.7.35  | AWS EC2(Ubuntu 20.04 LTS) | GitLab   |
-| React 18.2.0            | Spring Boot 2.7.15              | Redis 7.0.12  | Nginx 1.18.0              | Jira     |
-| React-Router-Dom 6.16.0 | Gradle 8.0                      |               | Docker 24.0.5             | Notion   |
-| Recoil 0.7.7            | Apache Tomcat 9.0.78            |               |                           | figma    |
-| Axios 1.5.0             | modelmapper 3.1.1               |               |                           | Postman  |
-| sockjs-client 1.6.1     | logstash-logback-encoder 4.1.1  |               |                           | Logstash |
-| stompjs 2.3.5           | jjwt-api 0.11.5                 |               |                           |          |
-| three 0.156.1           | jjwt-impl 0.11.5                |               |                           |          |
-| react-three/fiber 8.14.1| jjwt-jackson 0.11.5             |               |                           |          |
+| FrontEnd                | BackEnd                         | DB                    | Infra                     | 협업툴    |
+| ----------------------- | ------------------------------- | --------------------- |-------------------------- | -------- |
+| React 18.2.0            | Java : Open JDK 17.0.9          | AWS RDS (MySQL 8.0.33)| AWS EC2 (Ubuntu 20.04 LTS)| GitLab   |
+| Recoil 0.7.7            | Spring Boot 2.7.17              | Redis 7.2.2           | Nginx 1.18.0              | Jira     |
+| Axios 1.4.0             | Spring : 5.3.30                 |                       | Docker 24.0.6             | Notion   |
+| CSS3                    | SpringSecurity : 5.7.11         |                       | Jenkins 2.414.3           | figma    |
+| HTML5                   | Gradle : 8.3                    |                       | SonarQube 10.2.1          | Postman  |
+| npm 9.6.7               | jjwt: 0.9.1                     |                       | Grafana                   |          |
+| JavaScript ES6          | Springfox: 3.0.0                |                       | Prometheus                |          |
+| Three.js 0.157.0        | SockJS Client: 1.5.1            |                       |                           |          |
+| Vite 4.4.5              | Stomp WebSocket: 2.3.4          |                       |                           |          |
 
 ## 프로젝트 산출물 
 <details>
@@ -47,10 +47,11 @@
 </details>  
 <details>
 <summary>시스템 아키텍처</summary> 
+<img src="etc/assets/sys_architecture.png"/> 
 </details>  
 <details>
 <summary>ERD</summary> 
-<img src="etc/assets/erd.png"/>   <br />
+<img src="etc/assets/erd.png"/> 
 </details> 
 <details>
 <summary>API 명세서</summary> 
