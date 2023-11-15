@@ -28,9 +28,12 @@ import InviteHeader from "../../components/Header/InviteHeader"
 import styles from "./RoomPage.module.css"
 
 const InviteRoomPage = () => {
+  // use함수
   const navigate = useNavigate()
-  const [items, setItems] = useRecoilState(ItemsState)
   const canvasRef = useRef()
+
+  // 상태관리
+  const [items, setItems] = useRecoilState(ItemsState)
   const [nickName, setNickName] = useRecoilState(roomInfoAtom)
   const roomId = window.location.pathname.match(/\d+/g)
   const userInfo = useRecoilValue(userAtom)
