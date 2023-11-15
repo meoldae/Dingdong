@@ -15,6 +15,7 @@ const getLetterDetail = async (param, success, fail) => {
     HttpJson.get(`letter/${param}`).then(success).catch(fail);
 }
 
+// 편지 신고하기
 const reportLetter = async (param, success, fail) => {
     HttpJson.post(`report/letter/${param}`).then(success).catch(fail)
 }
