@@ -19,6 +19,8 @@ import {
   roomColorState,
 } from "../../components/Room/Atom";
 import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom";
+
+// 컴포넌트
 import Header from "../../components/Header/Header";
 import MyFooter from "../../components/Footer/MyFooter";
 import Share from "../../components/Header/Share";
