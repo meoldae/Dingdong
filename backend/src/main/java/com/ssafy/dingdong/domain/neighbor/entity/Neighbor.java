@@ -46,8 +46,8 @@ public class Neighbor {
 	}
 
 	public void renewal(UUID applicantId, UUID acceptorId){
-		this.applicantId = applicantId;
-		this.acceptorId = acceptorId;
+		this.applicantId = acceptorId;
+		this.acceptorId = applicantId;
 		this.createTime = LocalDateTime.now();
 		this.connectTime = null;
 		this.cancelTime = null;
