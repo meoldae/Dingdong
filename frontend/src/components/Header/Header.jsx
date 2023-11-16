@@ -153,6 +153,7 @@ const Header = ({ checkMyRoom }) => {
         setNeighborList((prev) => prev.filter((item) => item.memberId !== Id));
         setRemoveNeighborList(false);
         setNeighborListLength(neighborListLength - 1);
+        successMsg("✅ 이웃이 정상적으로 삭제되었습니다!")
       },
       (error) => {
         console.log("Error with Delete Neighbor...", error);
