@@ -25,27 +25,27 @@ const messaging = firebase.messaging(app);
 
 // 백그라운드 서비스워커 설정
 // react firebase가 자체 작동
-// messaging.onBackgroundMessage(messaging, (payload) => {
+messaging.onBackgroundMessage(messaging, (payload) => {
   
-//   const notificationTitle = "Background Message Title";
-//   const notificationOptions = {
-//     body: payload,
-//   };
+  const notificationTitle = "Background Message Title";
+  const notificationOptions = {
+    body: payload,
+  };
   
-//   self.registration.showNotification(notificationTitle, notificationOptions);
-// });
+  self.registration.showNotification(notificationTitle, notificationOptions);
+});
 
-// self.addEventListener("push", function (e) {
-//   if (!e.data.json()) return;
+self.addEventListener("push", function (e) {
+  if (!e.data.json()) return;
 
-//   const resultData = e.data.json().notification;
-//   const notificationTitle = resultData.title;
-//   const notificationOptions = {
-//     body: resultData.body,
-//     icon: resultData.image,
-//     tag: resultData.tag,
-//     ...resultData,
-//   };
+  const resultData = e.data.json().notification;
+  const notificationTitle = resultData.title;
+  const notificationOptions = {
+    body: resultData.body,
+    icon: resultData.image,
+    tag: resultData.tag,
+    ...resultData,
+  };
 
-//   self.registration.showNotification(notificationTitle, notificationOptions);
-// });
+  self.registration.showNotification(notificationTitle, notificationOptions);
+});
