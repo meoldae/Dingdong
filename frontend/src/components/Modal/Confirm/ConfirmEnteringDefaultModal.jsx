@@ -16,6 +16,7 @@ import {
   isPostBoxVisibleAtom,
   selectedPostCardAtom,
 } from "../../../atom/PostAtom"
+import { lastUrlPathAtom } from "../../../atom/UrlAtom"
 
 // 스타일
 import styles from "./ConfirmEnteringDefaultModal.module.css"
@@ -64,8 +65,10 @@ const ConfirmEnteringDefaultModal = ({
   const setIsPostBoxVisible = useSetRecoilState(isPostBoxVisibleAtom)
 
   // 멀티 상태 관리
-
   const p = useRecoilValue(userPositionAtom)
+
+  // 이전 URL 상태 관리
+  const setLastURL = useSetRecoilState(lastUrlPathAtom)
 
   // 마이룸으로 이동
   const onConfirm = () => {
@@ -76,6 +79,7 @@ const ConfirmEnteringDefaultModal = ({
     // 초기화
     setIsInitialRender(true)
     if (location === "house") {
+      setLastURL(window.location.pathname)
       const roomId = userInfo.roomId
       navigate(`${urlPath}/room/${roomId}`)
       // 우체국으로 이동
@@ -87,6 +91,7 @@ const ConfirmEnteringDefaultModal = ({
       setConfirmEnteringLocation(false)
       setIsArrived(false)
     } else if (location === "otherRoom") {
+      setLastURL(window.location.pathname)
       // const possibleRooms = [1, 3, 4, 6, 19, 21]
       // let randomRoom
       // do {
