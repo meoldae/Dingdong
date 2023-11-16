@@ -197,10 +197,3 @@ export function MultiCharacter({
     </group>
   )
 }
-
-useGLTF.preload(`${urlPath}/assets/models/characters/1.glb`)
-useGLTF.preload(`${urlPath}/assets/models/characters/2.glb`)
-useGLTF.preload(`${urlPath}/assets/models/characters/3.glb`)
-useGLTF.preload(`${urlPath}/assets/models/characters/4.glb`)
-useGLTF.preload(`${urlPath}/assets/models/characters/5.glb`)
-useGLTF.preload(`${urlPath}/assets/models/characters/6.glb`)
