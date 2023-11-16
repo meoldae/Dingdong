@@ -23,9 +23,9 @@ const CustomCamera = () => {
   const defaultCameraZoom = useRecoilValue(DefaultZoom)
 
   const localStorageKey = "characterPosition"
-  const storedPosition = JSON.parse(localStorage.getItem(localStorageKey)) || [
-    0, 0, 0,
-  ]
+  const storedPosition = JSON.parse(
+    sessionStorage.getItem(localStorageKey)
+  ) || [0, 0, 0]
 
   // 각 건물 포탈에서 움직임 제어
   const isArrived = useRecoilValue(ArriveAtom)
