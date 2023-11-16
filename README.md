@@ -134,7 +134,7 @@
 <details>
     <summary>API 명세서</summary>
     [Swagger](https://ding-dong.kr/api/swagger-ui/index.html) <br/>
-    <img src="etc/assets/api.PNG"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/a3ab7ae3-2f77-4b50-92ee-0f5d52a42b96"/>
 </details>  
 
 ## 팀원
