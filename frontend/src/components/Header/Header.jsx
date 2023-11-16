@@ -284,7 +284,7 @@ const Header = ({ checkMyRoom }) => {
       deleteFCMTokenAtServer();
       localStorage.removeItem("FCMToken");
     }
-  // };
+  };
 
   // 문의하기 200자 체크함수
   const checkMaxLength = (event) => {
