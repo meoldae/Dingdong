@@ -47,16 +47,17 @@ const NeighborRequest = () => {
       roomId,
       (response) => {
         setIsAddNeighbor(false)
-        successMsg("✅ 요청에 성공했습니다!")
+        if (response.data.data === "요청을 보냈습니다.") {
+          successMsg("✅ 요청에 성공했습니다!")
+        } else if (response.data.data === "이미 이웃입니다.") {
+          successMsg("⛔ 이미 이웃입니다.")
+        } else if (response.data.data === "이미 이웃 요청을 보냈습니다.") {
+          successMsg("⛔ 이미 이웃 요청을 보냈습니다.")
+        }
       },
       (error) => {
         setIsAddNeighbor(false)
-        // 1. "이미 요청을 보냈습니다."
-        // 2. "이미 이웃입니다."
-        
-        if (error.response.data.message == "이미 이웃입니다." || error.response.data.message == "이미 요청을 보냈습니다.") {
-          successMsg(`❌ ${error.response.data.message}`)
-        }
+        successMsg("❌ 요청에 실패했습니다.")
       }
     )
   }
