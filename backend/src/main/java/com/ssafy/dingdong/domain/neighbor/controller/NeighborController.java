@@ -34,9 +34,9 @@ public class NeighborController implements NeighborSwagger{
 
 	@Override
 	@PostMapping("/{targetId}")
-	public CommonResponse createNeighborRequest(@PathVariable Long targetId, Authentication authentication){
-		neighborService.createNeighborRequest(targetId, authentication.getName());
-		return responseService.successResponse(ResponseStatus.RESPONSE_SUCCESS);
+	public DataResponse<String> createNeighborRequest(@PathVariable Long targetId, Authentication authentication){
+		String result = neighborService.createNeighborRequest(targetId, authentication.getName());
+		return responseService.successDataResponse(ResponseStatus.RESPONSE_SUCCESS, result);
 	}
 
 	@Override
