@@ -226,18 +226,18 @@ const Header = ({ checkMyRoom }) => {
   };
 
   // 내 방 체크 함수
-  useEffect(() => {
-    const checkMyRoomHandler = () => {
-      const roomCheckId = window.location.pathname.match(/\d+/g)
-      const roomNum = JSON.parse(localStorage.getItem("userAtom"))
-      if (roomCheckId == roomNum.roomId) {
-        setIsMyRoom(true)
-      } else {
-        setIsMyRoom(false)
-      }
-    }
-    checkMyRoomHandler()
-  }, [isHamburger])
+  // useEffect(() => {
+  //   const checkMyRoomHandler = () => {
+  //     const roomCheckId = window.location.pathname.match(/\d+/g)
+  //     const roomNum = JSON.parse(localStorage.getItem("userAtom"))
+  //     if (roomCheckId == roomNum.roomId) {
+  //       setIsMyRoom(true)
+  //     } else {
+  //       setIsMyRoom(false)
+  //     }
+  //   }
+  //   checkMyRoomHandler()
+  // }, [isHamburger])
 
   // 메뉴에 보일 이름
   const menuUserName = JSON.parse(localStorage.getItem("userAtom")).nickname;
