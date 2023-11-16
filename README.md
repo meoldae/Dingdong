@@ -113,24 +113,28 @@
 
 ## 프로젝트 산출물 
 <details>
-<summary>화면 정의서 & 와이어프레임</summary> 
+    <summary>화면 정의서 & 와이어프레임</summary>
+    <img src="etc/assets/wireframe_1.PNG"/>
+    <img src="etc/assets/wireframe_2.PNG"/>
+    <img src="etc/assets/wireframe_3.PNG"/>
+    <img src="etc/assets/wireframe_4.PNG"/>
 </details>  
 <details>
-<summary>요구사항 정의서</summary> 
-<img src="etc/assets/Requirements.PNG"/> 
+    <summary>요구사항 정의서</summary>
+    <img src="etc/assets/Requirements.PNG"/>
 </details>  
 <details>
-<summary>시스템 아키텍처</summary> 
-<img src="etc/assets/sys_architecture.png"/> 
+    <summary>시스템 아키텍처</summary>
+    <img src="etc/assets/sys_architecture.png"/>
 </details>  
 <details>
-<summary>ERD</summary> 
-<img src="etc/assets/erd.png"/> 
+    <summary>ERD</summary>
+    <img src="etc/assets/erd.png"/>
 </details> 
 <details>
-<summary>API 명세서</summary> 
-[Swagger](https://ding-dong.kr/api/swagger-ui/index.html) <br/>
-<img src="etc/assets/api.PNG"/> 
+    <summary>API 명세서</summary>
+    [Swagger](https://ding-dong.kr/api/swagger-ui/index.html) <br/>
+    <img src="etc/assets/api.PNG"/>
 </details>  
 
 ## 팀원
