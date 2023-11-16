@@ -780,7 +780,7 @@ const SingleMainPage = () => {
         {confirmEnteringWorld && (
           <div className={styles.confirmModal}>
             <ConfirmEnteringDefaultModal
-              modalContent={"딩동 광장으로 이동하시겠습니까?[멀티 플레이]"}
+              modalContent={"딩동 광장으로 이동하시겠습니까?"}
               setConfirmEnteringLocation={setConfirmEnteringWorld}
               location={"world"}
               flag={"1"}
