@@ -12,5 +12,5 @@ public interface FCMService {
 
 	String send(String senderId, String targetId, int flag);
 
-	List<String> sendAll(String targetId, List<Letter> letters, int flag);
+	void sendAll(String targetId, List<Letter> letters, int flag);
 }

@@ -68,34 +68,10 @@ public class FCMServiceImpl implements FCMService {
 	}
 
 	@Override
-	public List<String> sendAll(String senderId, List<Letter> letters, int flag) {
+	public void sendAll(String senderId, List<Letter> letters, int flag) {
 
 		List<String> responses = new ArrayList<>();
-		letters.stream().parallel().forEach(letter -> {
+		letters.stream().forEach(letter -> send(senderId, letter.getLetterTo(), flag));
 
-			String nickname = memberService.getMemberById(senderId).nickname();
-			String fcmToken = fcmRedisRepository.findFCMTokenByMemberId(letter.getLetterTo()).orElse("NOT");
-
-			Message message = null;
-			if (!fcmToken.equals("NOT")) {
-				message = Message.builder()
-					.setToken(fcmToken)
-					.setWebpushConfig(WebpushConfig.builder().putHeader("ttl", "300")
-						.setNotification(
-							new WebpushNotification(
-								titles[flag],
-								nickname + contents[flag])).build()
-					).build();
-			}
-			if (message != null) {
-				try {
-					responses.add(FirebaseMessaging.getInstance().sendAsync(message).get());
-				} catch (InterruptedException | ExecutionException e) {
-					throw new RuntimeException(e);
-				}
-			}
-		});
-
-		return responses;
 	}
 }
