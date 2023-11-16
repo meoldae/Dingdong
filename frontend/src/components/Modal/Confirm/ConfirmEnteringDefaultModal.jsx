@@ -48,6 +48,8 @@ const ConfirmEnteringDefaultModal = ({
 
   // 도착 여부
   const setIsArrived = useSetRecoilState(ArriveAtom)
+
+  // 사용자 정보
   const userInfo = useRecoilValue(userAtom)
 
   // 우체국 상태 관리
