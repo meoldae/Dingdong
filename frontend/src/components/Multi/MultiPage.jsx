@@ -16,6 +16,8 @@ import ModeChangeModal from "./ModeChangeModal"
 import { lastUrlPathAtom } from "../../atom/UrlAtom"
 import { useGLTF } from "@react-three/drei"
 
+const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
 export const MultiPage = () => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const navigate = useNavigate()
