@@ -13,7 +13,7 @@ import {
 } from "../../atom/MultiAtom"
 import axios from "axios"
 import { useFrame, useLoader } from "@react-three/fiber"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 
 const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -192,6 +192,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
   }
 
   const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
     const handleBeforeUnload = () => {
@@ -200,20 +201,14 @@ export const MultiRender = React.forwardRef((props, ref) => {
 
     window.addEventListener("beforeunload", handleBeforeUnload)
 
-    // 페이지 전환 감지
-    const unlisten = navigate(() => {
-      disconnect()
-    })
-
     connect()
     fetchUserList()
 
     return () => {
       disconnect()
       window.removeEventListener("beforeunload", handleBeforeUnload)
-      unlisten() // 페이지 전환 리스너 해제
     }
-  }, [])
+  }, [location])
 
   // 위치 정보를 서버로 전송하는 함수
   const publishMove = (x, y, z) => {
