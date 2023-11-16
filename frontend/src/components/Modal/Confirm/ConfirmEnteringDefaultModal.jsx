@@ -92,23 +92,23 @@ const ConfirmEnteringDefaultModal = ({
       setIsArrived(false)
     } else if (location === "otherRoom") {
       setLastURL(window.location.pathname)
-      // const possibleRooms = [1, 3, 4, 6, 19, 21]
-      // let randomRoom
-      // do {
-      //   randomRoom = possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
-      // } while (randomRoom === userInfo.roomId)
-      let randRoomId
+ 
+    const randRoomIds = [3, 4, 6, 1];
+    const selectedRandRoomId = randRoomIds[Math.floor(Math.random() * randRoomIds.length)];
+    window.location.replace(`${urlPath}/random/${selectedRandRoomId}`);
+ 
+      // let randRoomId
+      // getRandomRoom(
+      //   (response) => {
+      //     randRoomId = response.data.data
 
-      getRandomRoom(
-        (response) => {
-          randRoomId = response.data.data
+      //     navigate(`${urlPath}/random/${randRoomId}`)
+      //   },
+      //   (error) => {
+      //     console.log("Error with Random Room...", error)
+      //   }
+      // )
 
-          navigate(`${urlPath}/random/${randRoomId}`)
-        },
-        (error) => {
-          console.log("Error with Random Room...", error)
-        }
-      )
     } else if (location === "Test") {
       navigate(`${urlPath}/yourstamp`)
       setIsArrived(false)

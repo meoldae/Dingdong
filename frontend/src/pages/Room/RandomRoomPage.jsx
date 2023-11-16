@@ -115,19 +115,23 @@ const RandomRoomPage = () => {
     const roomId = window.location.pathname.match(/\d+/g)
       ? Number(window.location.pathname.match(/\d+/g)[0])
       : null; 
-    let randRoomId;
+ 
+    const randRoomIds = [37, 104, 58, 77]; //시연
+    const selectedRandRoomId = randRoomIds[Math.floor(Math.random() * randRoomIds.length)]; //시연
+    window.location.replace(`${urlPath}/random/${selectedRandRoomId}`); //시연
 
-    getRandomRoom(
-      (response) => {
-        randRoomId = response.data.data;
+    //let randRoomId;
+    // getRandomRoom(
+    //   (response) => {
+    //     randRoomId = response.data.data;
 
-        window.location.replace(`${urlPath}/random/${randRoomId}`);
-        // navigate(`${urlPath}/random/${randRoomId}`)
-      },
-      (error) => {
-        console.log("Error with Random Room...", error);
-      }
-    );
+    //     window.location.replace(`${urlPath}/random/${randRoomId}`);
+    //     // navigate(`${urlPath}/random/${randRoomId}`)
+    //   },
+    //   (error) => {
+    //     console.log("Error with Random Room...", error);
+    //   }
+    // );
   };
 
   // 시간 체크 함수
