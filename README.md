@@ -1,17 +1,18 @@
 # :love_letter: 딩동! 편지왔어요. 딩동! 놀러왔어요. :house:
 <div align="center">
-    <img src="etc/assets/Logo_square.png" width="300px"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/16e22552-e8a1-4646-bf49-71bcfed6471e" width="300px"/>
 </div>  
 <br />
 
 ## 목차
-1. [프로젝트 개요](#프로젝트-소개) 
-2. [성과](#성과) 
-3. [기능](#기능)  
-4. [마케팅](#마케팅)
-5. [개발 환경 및 기술 스택](#개발-환경-및-기술-스택) 
-6. [프로젝트 산출물](#프로젝트-산출물) 
-7. [팀원](#팀원)
+1. [프로젝트 개요](#프로젝트-소개)
+2. [성과](#성과)
+3. [기능](#기능)
+4. [버그](#버그)
+5. [마케팅](#마케팅)
+6. [개발 환경 및 기술 스택](#개발-환경-및-기술-스택)
+7. [프로젝트 산출물](#프로젝트-산출물)
+8. [팀원](#팀원)
 <br />
 
 ## 프로젝트 개요
@@ -34,7 +35,10 @@
 ### 나의 방
 
 **방 꾸미기**
-- 가구를 통해 방을 꾸밀 수 있습니다.
+- 다양한 카테고리의 가구들을 통해 방을 꾸밀 수 있습니다.
+- 벽지와 조명 색을 바꿔 자신만의 개성을 표현할 수 있습니다.
+
+<img src="etc/assets/RoomDecorate.gif" width="300px"/><br/>
 
 **공유하기**
 - 현재 방의 모습을 담은 이미지를 저장하거나 방 url과 함께 SNS로 공유할 수 있습니다.
@@ -52,9 +56,13 @@
 
 - 집 앞 편지함에서 주민들이 보낸 편지를 확인 할 수 있습니다.
 
+<img src="etc/assets/ReceiveLetter.gif" width="300px"/><br/>
+
 ### 우체국
 
 - 딩동 주민들의 닉네임을 검색하여 우표를 선택 후 의미를 담은 편지를 보낼 수 있습니다.
+
+<img src="etc/assets/SendLetter.gif" width="300px"/><br/>
 
 ### 주민의 방
 
@@ -77,9 +85,13 @@
 - 광장에서 다양한 사람들을 만나 실시간으로 소통할 수 있습니다.
 - 채팅, 춤추기, 기뻐하기, 슬퍼하기 등의 상호작용이 가능합니다.
 
+<img src="etc/assets/Dance.gif" width="300px"/><br/>
+
 ### 실시간 알람
 
 - 실시간 알람을 통해 나에게 온 편지, 나에게 온 이웃요청 등을 알 수 있습니다.
+
+<img src="etc/assets/Alarm.gif" width="300px"/><br/>
 
 ### 신고하기
 
@@ -89,6 +101,20 @@
 
 - 문의하기를 통해 궁금한 점을 문의하거나 개선할 점을 보낼 수 있습니다.
 <br />
+
+## 버그
+
+### 문제
+
+- 개발자도구의 콘솔을 이용해 다량의 요청을 보내는 문제점 발견
+
+<img src="etc/assets/Bug.gif" width="300px"/><br/>
+
+### 해결
+- Ngnix에서 Rate Limiting으로 해결
+
+<img src="etc/assets/BugFix.gif" width="300px"/><br/>
+<br/>
 
 ## 마케팅
 
@@ -114,27 +140,27 @@
 ## 프로젝트 산출물 
 <details>
     <summary>화면 정의서 & 와이어프레임</summary>
-    <img src="etc/assets/wireframe_1.PNG"/>
-    <img src="etc/assets/wireframe_2.PNG"/>
-    <img src="etc/assets/wireframe_3.PNG"/>
-    <img src="etc/assets/wireframe_4.PNG"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/a95a505c-6c16-4232-a365-cd7fca7a3e8c"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/b378d837-dd32-4e89-a96f-0714f6cba22a"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/81a5b2df-85f9-4ff2-b7e8-c1cd50ba93d2"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/af7476a9-f174-4d46-ab09-90e6ee871ff0"/>
 </details>  
 <details>
     <summary>요구사항 정의서</summary>
-    <img src="etc/assets/Requirements.PNG"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/d4493b73-2180-4d20-9951-4a4de9b98199"/>
 </details>  
 <details>
     <summary>시스템 아키텍처</summary>
-    <img src="etc/assets/sys_architecture.png"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/e4dc1162-d4d5-4eee-bdf0-7dfd1ab7064a"/>
 </details>  
 <details>
     <summary>ERD</summary>
-    <img src="etc/assets/erd.png"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/5489138b-a385-4863-9042-4f58d0dd536d"/>
 </details> 
 <details>
     <summary>API 명세서</summary>
     [Swagger](https://ding-dong.kr/api/swagger-ui/index.html) <br/>
-    <img src="etc/assets/api.PNG"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/a3ab7ae3-2f77-4b50-92ee-0f5d52a42b96"/>
 </details>  
 
 ## 팀원
