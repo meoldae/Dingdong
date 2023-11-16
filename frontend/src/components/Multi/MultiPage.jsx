@@ -7,12 +7,13 @@ import {
   otherRoomId,
 } from "../../atom/MultiAtom"
 import { useRef, useState } from "react"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import { RoomModalOpen } from "../../atom/MultiAtom"
 import { useNavigate } from "react-router-dom"
 import MultiRoomModal from "./MultiRoomModal"
 import SingleHeader from "../../pages/SinglePlay/SingleHeader"
 import ModeChangeModal from "./ModeChangeModal"
+import { lastUrlPathAtom } from "../../atom/UrlAtom"
 
 export const MultiPage = () => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -21,6 +22,7 @@ export const MultiPage = () => {
 
   const [chatInput, setChatInput] = useState("")
   const [roomModalOpen, setRoomModalOpen] = useRecoilState(RoomModalOpen)
+  const setLastURL = useSetRecoilState(lastUrlPathAtom)
 
   const users = useRecoilValue(MultiUsers)
   const otherRoom = useRecoilValue(otherRoomId)
@@ -53,6 +55,7 @@ export const MultiPage = () => {
   }
 
   const okClick = () => {
+    setLastURL(window.location.pathname)
     setRoomModalOpen(false)
     navigate(`${urlPath}/room/${otherRoom}`)
   }

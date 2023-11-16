@@ -17,20 +17,20 @@ import AppRouter from "./router/AppRouter.jsx"
 import { fetchOnSession, fetchOffSession } from "./api/Session.js"
 
 // FCM
-// import { getMessaging, onMessage } from "firebase/messaging";
-// import { successMsg } from "./utils/customToast.jsx"
+import { getMessaging, onMessage } from "firebase/messaging";
+import { successMsg } from "./utils/customToast.jsx"
 
 const AppWrapper = () => {
   // FCM 설정
-  // const messaging = getMessaging();
+  const messaging = getMessaging();
 
-  // onMessage(messaging, (payload) => {
-  //   if (payload.notification.title === "딩동! 편지왔어요") {
-  //     successMsg(`💌 ${payload.notification.body}`)
-  //   } else if (payload.notification.title === "딩동! 놀러왔어요") {
-  //     successMsg(`🔔 ${payload.notification.body}`)
-  //   }
-  // })
+  onMessage(messaging, (payload) => {
+    if (payload.notification.title === "딩동! 편지왔어요") {
+      successMsg(`💌 ${payload.notification.body}`)
+    } else if (payload.notification.title === "딩동! 놀러왔어요") {
+      successMsg(`🔔 ${payload.notification.body}`)
+    }
+  })
 
   // 세션관리
   useEffect(() => {
