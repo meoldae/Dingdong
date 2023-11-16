@@ -230,6 +230,9 @@ const SingleMainPage = () => {
     } else {
       setGuide(true)
     }
+
+    // 시연
+    sessionStorage.setItem("TRI", "0")
   }, [])
 
   // 랭킹정보 모달 상태관리
@@ -489,45 +492,45 @@ const SingleMainPage = () => {
 
           {/* 분수대 */}
           <PhysicsModel // 상
-            position={[0, 0.005, 11]}
+            position={[0, 0.005, 12]}
             rotation={[0, 0, 0]}
-            size={[4, 0.3]}
+            size={[3, 0.3]}
           />
           <PhysicsModel // 좌
-            position={[-3, 0.005, 14.5]}
+            position={[-2.7, 0.005, 14.5]}
             rotation={[0, Math.PI / 2, 0]}
-            size={[5, 0.3]}
+            size={[3, 0.3]}
           />
 
           <PhysicsModel // 우
             position={[3.3, 0.005, 15]}
             rotation={[0, Math.PI / 2, 0]}
-            size={[5, 0.3]}
+            size={[2.4, 0.3]}
           />
           <PhysicsModel // 하
-            position={[0, 0.005, 18.5]}
+            position={[0, 0.005, 17.8]}
             rotation={[0, 0, 0]}
-            size={[4.1, 0.3]}
+            size={[3.7, 0.3]}
           />
           <PhysicsModel // 좌상
-            position={[-2.3, 0.005, 11.5]}
+            position={[-1.3, 0.005, 12]}
             rotation={[0, 0.5, 0]}
             size={[1.7, 0.3]}
           />
           <PhysicsModel // 우상
-            position={[2.5, 0.005, 11.9]}
+            position={[1.4, 0.005, 13.4]}
             rotation={[0, -0.9, 0]}
-            size={[2, 0.3]}
+            size={[3, 0.3]}
           />
           <PhysicsModel // 좌하
-            position={[-2.4, 0.005, 17.5]}
+            position={[-2, 0.005, 17]}
             rotation={[0, -0.9, 0]}
-            size={[1.5, 0.3]}
+            size={[1.3, 0.3]}
           />
           <PhysicsModel // 우하
-            position={[2.6, 0.005, 18]}
+            position={[2.2, 0.005, 17.2]}
             rotation={[0, 0.5, 0]}
-            size={[2, 0.3]}
+            size={[1.5, 0.3]}
           />
 
           {/* 이정표 */}
