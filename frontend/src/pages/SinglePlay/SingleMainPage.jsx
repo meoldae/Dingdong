@@ -230,6 +230,9 @@ const SingleMainPage = () => {
     } else {
       setGuide(true)
     }
+
+    // 시연
+    sessionStorage.setItem("TRI", "0")
   }, [])
 
   // 랭킹정보 모달 상태관리
@@ -489,45 +492,45 @@ const SingleMainPage = () => {
 
           {/* 분수대 */}
           <PhysicsModel // 상
-            position={[0, 0.005, 11]}
+            position={[0, 0.005, 12]}
             rotation={[0, 0, 0]}
-            size={[4, 0.3]}
+            size={[3, 0.3]}
           />
           <PhysicsModel // 좌
-            position={[-3, 0.005, 14.5]}
+            position={[-2.7, 0.005, 14.5]}
             rotation={[0, Math.PI / 2, 0]}
-            size={[5, 0.3]}
+            size={[3, 0.3]}
           />
 
           <PhysicsModel // 우
             position={[3.3, 0.005, 15]}
             rotation={[0, Math.PI / 2, 0]}
-            size={[5, 0.3]}
+            size={[2.4, 0.3]}
           />
           <PhysicsModel // 하
-            position={[0, 0.005, 18.5]}
+            position={[0, 0.005, 17.8]}
             rotation={[0, 0, 0]}
-            size={[4.1, 0.3]}
+            size={[3.7, 0.3]}
           />
           <PhysicsModel // 좌상
-            position={[-2.3, 0.005, 11.5]}
+            position={[-1.3, 0.005, 12]}
             rotation={[0, 0.5, 0]}
             size={[1.7, 0.3]}
           />
           <PhysicsModel // 우상
-            position={[2.5, 0.005, 11.9]}
+            position={[1.4, 0.005, 13.4]}
             rotation={[0, -0.9, 0]}
-            size={[2, 0.3]}
+            size={[3, 0.3]}
           />
           <PhysicsModel // 좌하
-            position={[-2.4, 0.005, 17.5]}
+            position={[-2, 0.005, 17]}
             rotation={[0, -0.9, 0]}
-            size={[1.5, 0.3]}
+            size={[1.3, 0.3]}
           />
           <PhysicsModel // 우하
-            position={[2.6, 0.005, 18]}
+            position={[2.2, 0.005, 17.2]}
             rotation={[0, 0.5, 0]}
-            size={[2, 0.3]}
+            size={[1.5, 0.3]}
           />
 
           {/* 이정표 */}
@@ -548,8 +551,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringRoom}
               portalPosition={roomPortalPosition}
               setPortalVisible={setRoomPortalVisible}
-              adjustedAngle={[0, 4, 12]}
-              adjustedZoom={0.35}
+              adjustedAngle={[0, 5, 12]}
+              adjustedZoom={0.28}
               PortalSize={[1, 1]}
             />
           ) : (
@@ -565,8 +568,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringPostOffice}
               portalPosition={postOfficePortalPosition}
               setPortalVisible={setPostOfficePortalVisible}
-              adjustedAngle={[-9, 6, 10]}
-              adjustedZoom={0.3}
+              adjustedAngle={[-5.5, 3.5, 10]}
+              adjustedZoom={0.28}
               PortalSize={[1, 1]}
             />
           ) : (
@@ -582,8 +585,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringOtherRoom}
               portalPosition={otherRoomPortalPosition}
               setPortalVisible={setOtherRoomPortalVisible}
-              adjustedAngle={[2, 3, 5]}
-              adjustedZoom={0.35}
+              adjustedAngle={[0, 5, 9]}
+              adjustedZoom={0.27}
               PortalSize={[1, 1]}
             />
           ) : (
@@ -599,8 +602,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringWorld}
               portalPosition={worldPortalPosition}
               setPortalVisible={setWorldPortalVisible}
-              adjustedAngle={[0, 7, 10]}
-              adjustedZoom={0.3}
+              adjustedAngle={[0, 5, 11]}
+              adjustedZoom={0.24}
               PortalSize={[1.5, 1.5]}
             />
           ) : (
@@ -633,8 +636,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringTest}
               portalPosition={testPortalPosition}
               setPortalVisible={setTestPortalVisible}
-              adjustedAngle={[0, 4, 7]}
-              adjustedZoom={0.4}
+              adjustedAngle={[0, 5, 8]}
+              adjustedZoom={0.27}
               PortalSize={[1, 1]}
             />
           ) : (
@@ -650,8 +653,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringInsta}
               portalPosition={instaPortalPosition}
               setPortalVisible={setInstaPortalVisible}
-              adjustedAngle={[0, 4, 7]}
-              adjustedZoom={0.4}
+              adjustedAngle={[0, 5, 8]}
+              adjustedZoom={0.27}
               PortalSize={[1, 1]}
             />
           ) : (
@@ -667,8 +670,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringTwitter}
               portalPosition={twitterPortalPosition}
               setPortalVisible={setTwitterPortalVisible}
-              adjustedAngle={[0, 4, 7]}
-              adjustedZoom={0.4}
+              adjustedAngle={[0, 5, 8]}
+              adjustedZoom={0.27}
               PortalSize={[1, 1]}
             />
           ) : (
@@ -684,8 +687,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringPostBox}
               portalPosition={postBoxPortalPosition}
               setPortalVisible={setPostBoxPortalVisible}
-              adjustedAngle={[0, 4, 7]}
-              adjustedZoom={0.45}
+              adjustedAngle={[-6, 2, 6]}
+              adjustedZoom={0.35}
               PortalSize={[1, 1]}
             />
           ) : (

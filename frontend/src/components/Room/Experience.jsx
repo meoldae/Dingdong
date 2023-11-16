@@ -10,13 +10,13 @@ import {
   Stars,
   Sparkles,
   Lightformer,
-} from "@react-three/drei";
-import { useEffect, useState, useRef } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
-import { Item } from "./Item";
-import { Room } from "./Room";
-import { useGrid } from "./UseGrid";
-import { useRecoilState, useRecoilValue } from "recoil";
+} from "@react-three/drei"
+import { useEffect, useState, useRef } from "react"
+import { useFrame, useThree } from "@react-three/fiber"
+import { Item } from "./Item"
+import { Room } from "./Room"
+import { useGrid } from "./UseGrid"
+import { useRecoilState, useRecoilValue } from "recoil"
 import {
   ItemRotateState,
   ItemsState,
@@ -28,23 +28,26 @@ import {
   lightColorState,
   mobileCheckState,
   roomColorState,
-} from "./Atom";
-import { gsap } from "gsap";
-import { DoubleSide, PlaneGeometry } from "three";
+} from "./Atom"
+import { gsap } from "gsap"
+import { DoubleSide, PlaneGeometry } from "three"
 const Experience = ({ setRoomDrag }) => {
-  const buildMode = useRecoilValue(buildModeState);
-  const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState);
-  const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState);
+  const buildMode = useRecoilValue(buildModeState)
+  const [draggedItem, setDraggedItem] = useRecoilState(draggedItemState)
+  const [dragPosition, setDraggPosition] = useRecoilState(dragPositionState)
   const { vector3ToGrid, wallLeftVector3ToGrid, wallRightVector3ToGrid } =
-    useGrid();
-  const [canDrop, setCanDrop] = useRecoilState(canDropState);
-  const [items, setItems] = useRecoilState(ItemsState);
+    useGrid()
+  const [canDrop, setCanDrop] = useRecoilState(canDropState)
+  const [items, setItems] = useRecoilState(ItemsState)
   const [draggedItemRotation, setDraggedItemRotation] =
-    useRecoilState(ItemRotateState);
-  const check = useRecoilValue(checkState);
-  const mobileCheck = useRecoilValue(mobileCheckState);
-  const [roomColor, setRoomColor] = useRecoilState(roomColorState);
-  const [lightColor, setLightColor] = useRecoilState(lightColorState);
+    useRecoilState(ItemRotateState)
+  const check = useRecoilValue(checkState)
+  const mobileCheck =
+    /webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+  const [roomColor, setRoomColor] = useRecoilState(roomColorState)
+  const [lightColor, setLightColor] = useRecoilState(lightColorState)
   // setColor("#D8BFD8")
   // FFDAB9
   // AFEEEE
@@ -52,32 +55,32 @@ const Experience = ({ setRoomDrag }) => {
   // onPlaneClicked 이벤트에 예외처리
   useEffect(() => {
     if (draggedItem === null) {
-      return;
+      return
     }
-    const item = items[draggedItem];
-    let droppable = true;
-    const thick = item.size[1];
+    const item = items[draggedItem]
+    let droppable = true
+    const thick = item.size[1]
     // 바닥 평면 넘어갔을 때 예외처리
     const width =
       draggedItemRotation === 1 || draggedItemRotation === 3
         ? item.size[2]
-        : item.size[0];
+        : item.size[0]
     const height =
       draggedItemRotation === 1 || draggedItemRotation === 3
         ? item.size[0]
-        : item.size[2];
+        : item.size[2]
     if (item.categoryId !== 3) {
       if (
         dragPosition[0] - width / 2 < 0 ||
         dragPosition[0] + width / 2 > 4.8 / 0.24
       ) {
-        droppable = false;
+        droppable = false
       }
       if (
         dragPosition[2] - height / 2 < 0 ||
         dragPosition[2] + height / 2 > 4.8 / 0.24
       ) {
-        droppable = false;
+        droppable = false
       }
     }
     // 벽면이 외부로 넘어갔을 때 예외처리
@@ -87,26 +90,26 @@ const Experience = ({ setRoomDrag }) => {
           dragPosition[1] - thick / 2 < -1 ||
           dragPosition[1] + thick / 2 > 16
         ) {
-          droppable = false;
+          droppable = false
         }
         if (
           dragPosition[2] - height / 2 < 0 ||
           dragPosition[2] + height / 2 > 4.8 / 0.24
         ) {
-          droppable = false;
+          droppable = false
         }
       } else {
         if (
           dragPosition[1] - thick / 2 < -1 ||
           dragPosition[1] + thick / 2 > 16
         ) {
-          droppable = false;
+          droppable = false
         }
         if (
           dragPosition[0] - width / 2 < 0 ||
           dragPosition[0] + width / 2 > 4.8 / 0.24
         ) {
-          droppable = false;
+          droppable = false
         }
       }
     }
@@ -115,22 +118,22 @@ const Experience = ({ setRoomDrag }) => {
     items.forEach((otherItem, idx) => {
       // 드래그 중인 물체면 예외 처리
       if (idx === draggedItem) {
-        return;
+        return
       }
       // 카펫처럼 쌓을 수 있고 다른 아이템이 벽면에 있는 것이 아닐 경우
       if (otherItem.categoryId === 2 && otherItem.categoryId !== 3) {
-        return;
+        return
       }
       // 다른 물체 크기
-      const otherThick = otherItem.size[1];
+      const otherThick = otherItem.size[1]
       const otherWidth =
         otherItem.rotation === 1 || otherItem.rotation === 3
           ? otherItem.size[2]
-          : otherItem.size[0];
+          : otherItem.size[0]
       const otherHeight =
         otherItem.rotation === 1 || otherItem.rotation === 3
           ? otherItem.size[0]
-          : otherItem.size[2];
+          : otherItem.size[2]
 
       // 다른 물체가 왼쪽 벽에 있고, 바닥에 있는 걸 움직일 때
       if (
@@ -146,7 +149,7 @@ const Experience = ({ setRoomDrag }) => {
             dragPosition[2] - height / 2 <
               otherItem.position[2] + otherHeight / 2
           )
-            droppable = false;
+            droppable = false
         }
       }
       // 다른 물체가 오른쪽 벽에 있고, 바닥에 있는 걸 움직일 때
@@ -162,7 +165,7 @@ const Experience = ({ setRoomDrag }) => {
               otherItem.position[0] - otherWidth / 2 &&
             dragPosition[0] - width / 2 < otherItem.position[0] + otherWidth / 2
           )
-            droppable = false;
+            droppable = false
         }
       }
       // 바닥 평면에 있는 다른 물체가 있을 때,
@@ -180,7 +183,7 @@ const Experience = ({ setRoomDrag }) => {
             otherItem.position[2] + otherHeight / 2 &&
           dragPosition[2] + height / 2 > otherItem.position[2] - otherHeight / 2
         ) {
-          droppable = false;
+          droppable = false
         }
       }
 
@@ -197,7 +200,7 @@ const Experience = ({ setRoomDrag }) => {
             dragPosition[2] - height / 2 <
               otherItem.position[2] + otherHeight / 2
           ) {
-            droppable = false;
+            droppable = false
           }
         }
       }
@@ -213,7 +216,7 @@ const Experience = ({ setRoomDrag }) => {
               otherItem.position[0] - otherWidth / 2 &&
             dragPosition[0] - width / 2 < otherItem.position[0] + otherWidth / 2
           ) {
-            droppable = false;
+            droppable = false
           }
         }
       }
@@ -233,7 +236,7 @@ const Experience = ({ setRoomDrag }) => {
             otherItem.position[1] - otherThick / 2 &&
           dragPosition[1] - thick / 2 < otherItem.position[1] + otherThick / 2
         ) {
-          droppable = false;
+          droppable = false
         }
       }
       if (
@@ -251,28 +254,28 @@ const Experience = ({ setRoomDrag }) => {
             otherItem.position[1] - otherThick / 2 &&
           dragPosition[1] - thick / 2 < otherItem.position[1] + otherThick / 2
         ) {
-          droppable = false;
+          droppable = false
         }
       }
-    });
-    setCanDrop(droppable);
-  }, [dragPosition, draggedItem, items, draggedItemRotation]);
+    })
+    setCanDrop(droppable)
+  }, [dragPosition, draggedItem, items, draggedItemRotation])
   // 아이템 클릭 로직
   const renderItem = (item, idx) => {
     const commonProps = {
       key: `${item.furnitureId}-${idx}`,
       item: item,
       categoryId: item.categoryId,
-    };
+    }
 
     if (buildMode) {
       return (
         <Item
           {...commonProps}
           onClick={() => {
-            setDraggedItem((prev) => (prev === null ? idx : prev));
+            setDraggedItem((prev) => (prev === null ? idx : prev))
             if (draggedItemRotation === null) {
-              setDraggedItemRotation(items[idx].rotation);
+              setDraggedItemRotation(items[idx].rotation)
             }
           }}
           isDragging={draggedItem === idx}
@@ -280,50 +283,50 @@ const Experience = ({ setRoomDrag }) => {
           draggedItemRotation={draggedItemRotation}
           canDrop={canDrop}
         />
-      );
+      )
     }
 
-    return <Item {...commonProps} />;
-  };
+    return <Item {...commonProps} />
+  }
 
   // 카메라 관련 로직
-  const controls = useRef();
-  const state = useThree((state) => state);
+  const controls = useRef()
+  const state = useThree((state) => state)
   // 편집 모드일 때 카메라 고정
   useEffect(() => {
     if (buildMode) {
-      state.camera.position.set(15, 10, 15);
+      state.camera.position.set(15, 10, 15)
       if (controls.current) {
-        controls.current.target.set(0, 0, 0);
-        controls.current.update();
+        controls.current.target.set(0, 0, 0)
+        controls.current.update()
       }
     } else {
-      state.camera.position.set(15, 10, 15);
+      state.camera.position.set(15, 10, 15)
     }
-  }, [buildMode]);
+  }, [buildMode])
   // 일반 모드일 때 카메라 회전 후 원상복귀
   const animateCameraPosition = () => {
-    if (buildMode) return;
-    setRoomDrag(true);
+    if (buildMode) return
+    setRoomDrag(true)
     gsap.to(state.camera.position, {
       duration: 0.5,
       x: 15,
       y: 10,
       z: 15,
       onUpdate: () => state.camera.updateProjectionMatrix(),
-    });
+    })
     gsap.to(state.camera, {
       fov: 45,
       duration: 0.5,
       onUpdate: () => state.camera.updateProjectionMatrix(),
-    });
+    })
     setTimeout(() => {
-      setRoomDrag(false);
-    }, 600);
-  };
+      setRoomDrag(false)
+    }, 600)
+  }
   useFrame((state) => {
-    state.camera.lookAt(0, 1, 0);
-  });
+    state.camera.lookAt(0, 1, 0)
+  })
 
   // useEffect(()=>{
 
@@ -426,26 +429,24 @@ const Experience = ({ setRoomDrag }) => {
                         ...item,
                         position: dragPosition,
                         rotation: draggedItemRotation,
-                      };
+                      }
                     }
-                    return item;
-                  });
-                  return newItems;
-                });
-                setDraggedItemRotation(null);
-                setDraggedItem(null);
+                    return item
+                  })
+                  return newItems
+                })
+                setDraggedItemRotation(null)
+                setDraggedItem(null)
               } else {
                 if (
                   check.length !== items.length &&
                   draggedItem === items.length - 1
                 ) {
                   setItems((prevItems) => {
-                    return prevItems.filter(
-                      (_, index) => index !== draggedItem
-                    );
-                  });
-                  setDraggedItemRotation(null);
-                  setDraggedItem(null);
+                    return prevItems.filter((_, index) => index !== draggedItem)
+                  })
+                  setDraggedItemRotation(null)
+                  setDraggedItem(null)
                 }
               }
             }
@@ -453,15 +454,15 @@ const Experience = ({ setRoomDrag }) => {
         }}
         onPointerMove={(e) => {
           if (!buildMode) {
-            return;
+            return
           }
-          const newPosition = vector3ToGrid(e.point);
+          const newPosition = vector3ToGrid(e.point)
           if (
             !dragPosition ||
             newPosition[0] !== dragPosition[0] ||
             newPosition[2] !== dragPosition[2]
           ) {
-            setDraggPosition(newPosition);
+            setDraggPosition(newPosition)
           }
         }}
       >
@@ -491,26 +492,24 @@ const Experience = ({ setRoomDrag }) => {
                         ...item,
                         position: dragPosition,
                         rotation: draggedItemRotation,
-                      };
+                      }
                     }
-                    return item;
-                  });
-                  return newItems;
-                });
-                setDraggedItemRotation(null);
-                setDraggedItem(null);
+                    return item
+                  })
+                  return newItems
+                })
+                setDraggedItemRotation(null)
+                setDraggedItem(null)
               } else {
                 if (
                   check.length !== items.length &&
                   draggedItem === items.length - 1
                 ) {
                   setItems((prevItems) => {
-                    return prevItems.filter(
-                      (_, index) => index !== draggedItem
-                    );
-                  });
-                  setDraggedItemRotation(null);
-                  setDraggedItem(null);
+                    return prevItems.filter((_, index) => index !== draggedItem)
+                  })
+                  setDraggedItemRotation(null)
+                  setDraggedItem(null)
                 }
               }
             }
@@ -518,15 +517,15 @@ const Experience = ({ setRoomDrag }) => {
         }}
         onPointerMove={(e) => {
           if (!buildMode) {
-            return;
+            return
           }
-          const newPosition = wallLeftVector3ToGrid(e.point);
+          const newPosition = wallLeftVector3ToGrid(e.point)
           if (
             !dragPosition ||
             newPosition[1] !== dragPosition[1] ||
             newPosition[2] !== dragPosition[2]
           ) {
-            setDraggPosition(newPosition);
+            setDraggPosition(newPosition)
           }
         }}
       >
@@ -554,26 +553,24 @@ const Experience = ({ setRoomDrag }) => {
                         ...item,
                         position: dragPosition,
                         rotation: draggedItemRotation,
-                      };
+                      }
                     }
-                    return item;
-                  });
-                  return newItems;
-                });
-                setDraggedItemRotation(null);
-                setDraggedItem(null);
+                    return item
+                  })
+                  return newItems
+                })
+                setDraggedItemRotation(null)
+                setDraggedItem(null)
               } else {
                 if (
                   check.length !== items.length &&
                   draggedItem === items.length - 1
                 ) {
                   setItems((prevItems) => {
-                    return prevItems.filter(
-                      (_, index) => index !== draggedItem
-                    );
-                  });
-                  setDraggedItemRotation(null);
-                  setDraggedItem(null);
+                    return prevItems.filter((_, index) => index !== draggedItem)
+                  })
+                  setDraggedItemRotation(null)
+                  setDraggedItem(null)
                 }
               }
             }
@@ -581,15 +578,15 @@ const Experience = ({ setRoomDrag }) => {
         }}
         onPointerMove={(e) => {
           if (!buildMode) {
-            return;
+            return
           }
-          const newPosition = wallRightVector3ToGrid(e.point);
+          const newPosition = wallRightVector3ToGrid(e.point)
           if (
             !dragPosition ||
             newPosition[0] !== dragPosition[0] ||
             newPosition[1] !== dragPosition[1]
           ) {
-            setDraggPosition(newPosition);
+            setDraggPosition(newPosition)
           }
         }}
       >
@@ -626,7 +623,7 @@ const Experience = ({ setRoomDrag }) => {
         </>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Experience;
+export default Experience

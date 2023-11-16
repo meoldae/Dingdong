@@ -38,33 +38,101 @@ const Analytics = () => {
   return null
 }
 
+// Suspense를 사용할 페이지 컴포넌트
+const SuspensePage = ({ children }) => (
+  <Suspense fallback={<LoadingPage content={"잠시만 기다려 주세요"} />}>
+    {children}
+  </Suspense>
+)
+
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <Analytics />
-      <Suspense fallback={<LoadingPage content={"잠시만 기다려 주세요"} />}>
-        <Routes>
-          <Route element={<AuthRoute authentication="user" />}>
-            <Route path={`${urlPath}/`} element={<SingleMainPage />} />
-            {/* <Route path="/single" element={<SingleMainPage />} /> */}
-            <Route path={`${urlPath}/room/:roomId`} element={<AppRoom />} />
-            <Route path={`${urlPath}/random/:roomId`} element={<AppRandomRoom />} />
-            <Route path={`${urlPath}/multiPage`} element={<MultiPage />} />
-          </Route>
+      <Routes>
+        <Route element={<AuthRoute authentication="user" />}>
+          <Route
+            path={`${urlPath}/`}
+            element={
+              <SuspensePage>
+                <SingleMainPage />
+              </SuspensePage>
+            }
+          />
+          {/* <Route path="/single" element={<SingleMainPage />} /> */}
+          <Route
+            path={`${urlPath}/multiPage`}
+            element={
+              <SuspensePage>
+                <MultiPage />
+              </SuspensePage>
+            }
+          />
 
-          <Route element={<AuthRoute authentication="NotUser" />}>
-            <Route path={`${urlPath}/login`} element={<AppLogin />} />
-            <Route path={`${urlPath}/oauth2/redirect`} element={<AppRedirect />} />
-            <Route path={`${urlPath}/signup`} element={<AppSignUp />} />
-            <Route path={`${urlPath}/tutorial`} element={<TutorialPage />} />
-            <Route path={`${urlPath}/yourstamp`} element={<StampTest />} />
-            <Route path={`${urlPath}/yourstamp/result`} element={<StampTestResult />} />
-            <Route path={`${urlPath}/invite/:roomId`} element={<InviteRoomPage />} />
-            <Route path={`${urlPath}/letter/:letterId`} element={<LetterSNSReceivePage />} />
-          </Route>
-          <Route path={`${urlPath}/*`} element={<AppNotFound />} />
-        </Routes>
-      </Suspense>
+          <Route
+            path={`${urlPath}/random/:roomId`}
+            element={<AppRandomRoom />}
+          />
+          <Route path={`${urlPath}/room/:roomId`} element={<AppRoom />} />
+        </Route>
+
+        <Route element={<AuthRoute authentication="NotUser" />}>
+          <Route path={`${urlPath}/login`} element={<AppLogin />} />
+          <Route
+            path={`${urlPath}/oauth2/redirect`}
+            element={<AppRedirect />}
+          />
+          <Route
+            path={`${urlPath}/signup`}
+            element={
+              <SuspensePage>
+                <AppSignUp />
+              </SuspensePage>
+            }
+          />
+          <Route
+            path={`${urlPath}/tutorial`}
+            element={
+              <SuspensePage>
+                <TutorialPage />
+              </SuspensePage>
+            }
+          />
+          <Route
+            path={`${urlPath}/yourstamp`}
+            element={
+              <SuspensePage>
+                <StampTest />
+              </SuspensePage>
+            }
+          />
+          <Route
+            path={`${urlPath}/yourstamp/result`}
+            element={
+              <SuspensePage>
+                <StampTestResult />
+              </SuspensePage>
+            }
+          />
+          <Route
+            path={`${urlPath}/invite/:roomId`}
+            element={
+              <SuspensePage>
+                <InviteRoomPage />
+              </SuspensePage>
+            }
+          />
+          <Route
+            path={`${urlPath}/letter/:letterId`}
+            element={
+              <SuspensePage>
+                <LetterSNSReceivePage />
+              </SuspensePage>
+            }
+          />
+        </Route>
+        <Route path={`${urlPath}/*`} element={<AppNotFound />} />
+      </Routes>
     </BrowserRouter>
   )
 }
