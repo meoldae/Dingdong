@@ -1,6 +1,6 @@
 # :love_letter: 딩동! 편지왔어요. 딩동! 놀러왔어요. :house:
 <div align="center">
-    <img src="etc/assets/Logo_square.png" width="300px"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/16e22552-e8a1-4646-bf49-71bcfed6471e" width="300px"/>
 </div>  
 <br />
 
