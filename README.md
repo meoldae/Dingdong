@@ -102,10 +102,12 @@
 ### 문제
 
 - 개발자도구의 콘솔을 이용해 다량의 요청을 보내는 문제점 발견
+
 <img src="etc/assets/Bug.gif" width="300px"/><br/>
 
 ### 해결
 - Ngnix에서 Rate Limiting으로 해결
+
 <img src="etc/assets/BugFix.gif" width="300px"/><br/>
 <br/>
 
