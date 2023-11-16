@@ -53,10 +53,12 @@
 ### 편지함
 
 - 집 앞 편지함에서 주민들이 보낸 편지를 확인 할 수 있습니다.
+<img src="etc/assets/ReceiveLetter.gif" width="300px"/><br/>
 
 ### 우체국
 
 - 딩동 주민들의 닉네임을 검색하여 우표를 선택 후 의미를 담은 편지를 보낼 수 있습니다.
+<img src="etc/assets/SendLetter.gif" width="300px"/><br/>
 
 ### 주민의 방
 
@@ -78,7 +80,7 @@
 
 - 광장에서 다양한 사람들을 만나 실시간으로 소통할 수 있습니다.
 - 채팅, 춤추기, 기뻐하기, 슬퍼하기 등의 상호작용이 가능합니다.
-<img src="etc/assets/Dance.gif"/><br/>
+<img src="etc/assets/Dance.gif" width="300px"/><br/>
 
 ### 실시간 알람
 
