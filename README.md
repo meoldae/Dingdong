@@ -121,15 +121,15 @@
 </details>  
 <details>
     <summary>요구사항 정의서</summary>
-    <img src="etc/assets/Requirements.PNG"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/d4493b73-2180-4d20-9951-4a4de9b98199"/>
 </details>  
 <details>
     <summary>시스템 아키텍처</summary>
-    <img src="etc/assets/sys_architecture.png"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/e4dc1162-d4d5-4eee-bdf0-7dfd1ab7064a"/>
 </details>  
 <details>
     <summary>ERD</summary>
-    <img src="etc/assets/erd.png"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/5489138b-a385-4863-9042-4f58d0dd536d"/>
 </details> 
 <details>
     <summary>API 명세서</summary>
