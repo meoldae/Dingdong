@@ -48,7 +48,6 @@ public class NeighborServiceImpl implements NeighborService{
 		);
 
 		String acceptorId = room.getMemberId();
-		log.info("acceptor : {}, applicant : {}", acceptorId, applicantId);
 		neighborRepository.isConnectByApplicantIdAndAcceptorId(UUID.fromString(applicantId), UUID.fromString(acceptorId)).ifPresent(
 			neighbor -> {
 				log.info("이미 이웃");
@@ -60,17 +59,6 @@ public class NeighborServiceImpl implements NeighborService{
 		);
 
 		if (result[0].equals("이미 이웃입니다.")) {
-			return result[0];
-		}
-
-		neighborRepository.findByApplicantIdAndAcceptorId(UUID.fromString(acceptorId), UUID.fromString(applicantId)).ifPresent(
-			request -> {
-				log.info("이미 상대가 보낸 요청이 존재");
-				result[0] = "이미 이웃 요청이 존재합니다.";
-			}
-		);
-
-		if (!result[0].equals("이미 이웃 요청이 존재합니다.")) {
 			return result[0];
 		}
 

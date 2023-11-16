@@ -14,6 +14,9 @@ import com.ssafy.dingdong.domain.neighbor.entity.Neighbor;
 @Repository
 public interface NeighborRepository extends JpaRepository<Neighbor, Long> {
 
+	@Query(" SELECT n "
+		 + "   FROM Neighbor n "
+		 + "  WHERE ( (n.acceptorId = :acceptorId AND n.applicantId = :applicantId) OR ( n.applicantId = :acceptorId AND n.acceptorId = :applicantId ) ) ")
 	Optional<Neighbor> findByApplicantIdAndAcceptorId(UUID applicantId, UUID acceptorId);
 
 	@Query("SELECT DISTINCT n "
