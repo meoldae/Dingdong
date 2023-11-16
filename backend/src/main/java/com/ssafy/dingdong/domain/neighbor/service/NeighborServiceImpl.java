@@ -64,8 +64,16 @@ public class NeighborServiceImpl implements NeighborService{
 		neighborRepository.findByApplicantIdAndAcceptorId(UUID.fromString(applicantId), UUID.fromString(acceptorId)).ifPresentOrElse(
 			request -> {
 				if (request.getCancelTime() != null) {
-					log.info("applicant : {}, acceptor: {} ", applicantId, acceptorId);
-					request.renewal(UUID.fromString(applicantId), UUID.fromString(acceptorId));
+					// 더티체킹 미작동...
+					// request.renewal(UUID.fromString(applicantId), UUID.fromString(acceptorId));
+					neighborRepository.deleteByNeighborId(request.getNeighborId());
+					Neighbor newRequest = Neighbor.builder()
+						.applicantId(UUID.fromString(applicantId))
+						.acceptorId(UUID.fromString(acceptorId))
+						.createTime(LocalDateTime.now())
+						.build();
+					neighborRepository.save(newRequest);
+
 				} else {
 					result[0] = "이미 이웃 요청을 보냈습니다.";
 					// throw new CustomException(ExceptionStatus.NEIGHBOR_REQUEST_ALREADY_EXIST);
