@@ -164,7 +164,11 @@ const Character = () => {
           ])
           sessionStorage.setItem(
             localStorageKey,
-            JSON.stringify(position.toArray())
+            JSON.stringify([
+              position.toArray()[0],
+              position.toArray()[1],
+              position.toArray()[2] + 1,
+            ])
           )
         } else {
           actions.current[1].stop()
