@@ -1,5 +1,7 @@
 package com.ssafy.dingdong.domain.FCM.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import com.google.firebase.messaging.WebpushConfig;
 import com.google.firebase.messaging.WebpushNotification;
 import com.ssafy.dingdong.domain.FCM.dto.request.FCMTokenDto;
 import com.ssafy.dingdong.domain.FCM.repository.FCMRedisRepository;
+import com.ssafy.dingdong.domain.letter.entity.Letter;
 import com.ssafy.dingdong.domain.member.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -62,5 +65,37 @@ public class FCMServiceImpl implements FCMService {
 			}
 		}
 		return response;
+	}
+
+	@Override
+	public List<String> sendAll(String senderId, List<Letter> letters, int flag) {
+
+		List<String> responses = new ArrayList<>();
+		letters.stream().parallel().forEach(letter -> {
+
+			String nickname = memberService.getMemberById(senderId).nickname();
+			String fcmToken = fcmRedisRepository.findFCMTokenByMemberId(letter.getLetterTo()).orElse("NOT");
+
+			Message message = null;
+			if (!fcmToken.equals("NOT")) {
+				message = Message.builder()
+					.setToken(fcmToken)
+					.setWebpushConfig(WebpushConfig.builder().putHeader("ttl", "300")
+						.setNotification(
+							new WebpushNotification(
+								titles[flag],
+								nickname + contents[flag])).build()
+					).build();
+			}
+			if (message != null) {
+				try {
+					responses.add(FirebaseMessaging.getInstance().sendAsync(message).get());
+				} catch (InterruptedException | ExecutionException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		});
+
+		return responses;
 	}
 }

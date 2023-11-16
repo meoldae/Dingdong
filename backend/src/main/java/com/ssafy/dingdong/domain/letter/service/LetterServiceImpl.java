@@ -92,6 +92,7 @@ public class LetterServiceImpl implements LetterService {
                         .build())
                 .collect(Collectors.toList());
         letterRepository.saveAll(letters);
+        fcmService.sendAll(memberId, letters, 0);
     }
 
     @Override
