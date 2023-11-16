@@ -116,7 +116,7 @@ const RandomRoomPage = () => {
       ? Number(window.location.pathname.match(/\d+/g)[0])
       : null; 
  
-    const randRoomIds = [37, 104, 58, 77]; //시연
+    const randRoomIds = [104, 77, 58, 37]; //시연
     const selectedRandRoomId = randRoomIds[Math.floor(Math.random() * randRoomIds.length)]; //시연
     window.location.replace(`${urlPath}/random/${selectedRandRoomId}`); //시연
 
