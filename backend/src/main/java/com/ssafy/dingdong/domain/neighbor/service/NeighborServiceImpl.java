@@ -40,7 +40,9 @@ public class NeighborServiceImpl implements NeighborService{
 
 	@Override
 	@Transactional
-	public void createNeighborRequest(Long acceptorRoomId, String applicantId) {
+	public String createNeighborRequest(Long acceptorRoomId, String applicantId) {
+		String[] result = {"요청을 보냈습니다."};
+
 		Room room = roomRepository.findByRoomId(acceptorRoomId).orElseThrow(
 			() -> new CustomException(ExceptionStatus.ROOM_NOT_FOUND)
 		);
@@ -50,7 +52,8 @@ public class NeighborServiceImpl implements NeighborService{
 		neighborRepository.isConnectByApplicantIdAndAcceptorId(UUID.fromString(applicantId), UUID.fromString(acceptorId)).ifPresent(
 			neighbor -> {
 				if (neighbor.getConnectTime() != null && neighbor.getCancelTime() == null) {
-					throw new CustomException(ExceptionStatus.NEIGHBOR_ALREADY_CONNECTED);
+					result[0] = "이미 이웃입니다.";
+					// throw new CustomException(ExceptionStatus.NEIGHBOR_ALREADY_CONNECTED);
 				}
 			}
 		);
@@ -60,7 +63,8 @@ public class NeighborServiceImpl implements NeighborService{
 				if (request.getCancelTime() != null) {
 					request.renewal();
 				} else {
-					throw new CustomException(ExceptionStatus.NEIGHBOR_REQUEST_ALREADY_EXIST);
+					result[0] = "이미 이웃 요청을 보냈습니다.";
+					// throw new CustomException(ExceptionStatus.NEIGHBOR_REQUEST_ALREADY_EXIST);
 				}
 			},
 			() -> {
@@ -73,6 +77,7 @@ public class NeighborServiceImpl implements NeighborService{
 			}
 		);
 		fcmService.send(applicantId, acceptorId, 1);
+		return result[0];
 	}
 
 	@Override

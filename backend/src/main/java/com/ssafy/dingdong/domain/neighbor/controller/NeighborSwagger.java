@@ -19,7 +19,7 @@ import com.ssafy.dingdong.global.response.DataResponse;
 
 public interface NeighborSwagger {
 
-	CommonResponse createNeighborRequest(@PathVariable Long targetId, Authentication authentication);
+	DataResponse<String> createNeighborRequest(@PathVariable Long targetId, Authentication authentication);
 
 	DataResponse<String> isNeighbor(@PathVariable Long targetRoomId, Authentication authentication);
 
