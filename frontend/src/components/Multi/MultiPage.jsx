@@ -14,6 +14,7 @@ import MultiRoomModal from "./MultiRoomModal"
 import SingleHeader from "../../pages/SinglePlay/SingleHeader"
 import ModeChangeModal from "./ModeChangeModal"
 import { lastUrlPathAtom } from "../../atom/UrlAtom"
+import { useGLTF } from "@react-three/drei"
 
 export const MultiPage = () => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
