@@ -36,7 +36,7 @@
 **방 꾸미기**
 - 다양한 카테고리의 가구들을 통해 방을 꾸밀 수 있습니다.
 - 벽지와 조명 색을 바꿔 자신만의 개성을 표현할 수 있습니다.
-<img src="etc/assets/RoomDecorate.gif"/><br/>
+<img src="etc/assets/RoomDecorate.gif" width="300px"/><br/>
 
 **공유하기**
 - 현재 방의 모습을 담은 이미지를 저장하거나 방 url과 함께 SNS로 공유할 수 있습니다.
