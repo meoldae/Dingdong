@@ -50,7 +50,6 @@ public class NeighborServiceImpl implements NeighborService{
 		String acceptorId = room.getMemberId();
 		neighborRepository.isConnectByApplicantIdAndAcceptorId(UUID.fromString(applicantId), UUID.fromString(acceptorId)).ifPresent(
 			neighbor -> {
-				log.info("이미 이웃");
 				if (neighbor.getConnectTime() != null && neighbor.getCancelTime() == null) {
 					result[0] = "이미 이웃입니다.";
 					// throw new CustomException(ExceptionStatus.NEIGHBOR_ALREADY_CONNECTED);
@@ -65,15 +64,13 @@ public class NeighborServiceImpl implements NeighborService{
 		neighborRepository.findByApplicantIdAndAcceptorId(UUID.fromString(applicantId), UUID.fromString(acceptorId)).ifPresentOrElse(
 			request -> {
 				if (request.getCancelTime() != null) {
-					request.renewal();
+					request.renewal(UUID.fromString(applicantId), UUID.fromString(acceptorId));
 				} else {
-					log.info("이미 이웃 요청을 보냄");
 					result[0] = "이미 이웃 요청을 보냈습니다.";
 					// throw new CustomException(ExceptionStatus.NEIGHBOR_REQUEST_ALREADY_EXIST);
 				}
 			},
 			() -> {
-				log.info("이웃 요청 정상 보냄");
 				Neighbor request = Neighbor.builder()
 					.applicantId(UUID.fromString(applicantId))
 					.acceptorId(UUID.fromString(acceptorId))
@@ -82,8 +79,6 @@ public class NeighborServiceImpl implements NeighborService{
 				neighborRepository.save(request);
 			}
 		);
-		
-		log.info("이웃 요청 .. 정상종료");
 
 		fcmService.send(applicantId, acceptorId, 1);
 		return result[0];
