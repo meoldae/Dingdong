@@ -90,7 +90,7 @@ export function MultiCharacter({
           }
           return newUsers
         })
-      }, 2000) // 2000 밀리초 = 2초 (필요에 따라 조절)
+      }, 20000) // 2000 밀리초 = 2초 (필요에 따라 조절)
 
       // 컴포넌트가 언마운트되거나 채팅이 변경될 때 타이머를 취소하기 위해 사용
       return () => clearTimeout(hideChatTimer)
@@ -147,15 +147,6 @@ export function MultiCharacter({
     <group ref={group} {...props} dispose={null} position={position}>
       <Html position-y={1.7} center style={{ pointerEvents: "none" }}>
         <div className={styles.characterContainer}>
-          <div
-            className={styles.nicknameBox}
-            style={{
-              width: `${nickname.length * 20}px`,
-              pointerEvents: "none",
-            }}
-          >
-            {nickname}
-          </div>
           {chat && (
             <div
               className={styles.chatBox}
@@ -164,20 +155,31 @@ export function MultiCharacter({
               {chat}
             </div>
           )}
-          <div className={styles.roomImgBox}>
-            {closeCharacters[id] && (
-              <img
-                style={{ pointerEvents: "auto" }}
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setRoomModal(true)
-                  setOtherRoomId(id)
-                }}
-                src={`${urlPath}/assets/icons/location.png`}
-                alt=""
-                className={styles.roomImg}
-              />
-            )}
+          <div className={styles.bottomBox}>
+            <div
+              className={styles.nicknameBox}
+              style={{
+                width: `${nickname.length * 20}px`,
+                pointerEvents: "none",
+              }}
+            >
+              {nickname}
+            </div>
+            <div className={styles.roomImgBox}>
+              {closeCharacters[id] && (
+                <img
+                  style={{ pointerEvents: "auto" }}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setRoomModal(true)
+                    setOtherRoomId(id)
+                  }}
+                  src={`${urlPath}/assets/icons/location.png`}
+                  alt=""
+                  className={styles.roomImg}
+                />
+              )}
+            </div>
           </div>
         </div>
       </Html>
