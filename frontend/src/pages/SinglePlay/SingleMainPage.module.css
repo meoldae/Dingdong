@@ -16,7 +16,7 @@
 
 .overlay {
   position: absolute;
-  z-index: 2;
+  z-index: 100000005;
   width: 100%;
   height: 100vh;
   height: 100svh;
@@ -30,7 +30,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 3;
+  z-index: 100000006;
 }
 
 .Infromation {
@@ -42,7 +42,7 @@
 
 .InformationOverlay {
   position: absolute;
-  z-index: 5;
+  z-index: 100000005;
   width: 100%;
   height: 100vh;
   height: 100svh;
@@ -56,12 +56,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 5;
+  z-index: 100000007;
 }
 
 .postofficemodalcontainer {
   position: absolute;
-  z-index: 5;
+  z-index: 100000005;
 
   top: 50%;
   left: 50%;
@@ -70,7 +70,7 @@
 
 .OverOverlay {
   position: absolute;
-  z-index: 6;
+  z-index: 100000006;
   width: 100%;
   height: 100vh;
   height: 100svh;
@@ -81,7 +81,7 @@
 
 .FinishOverContainer {
   position: absolute;
-  z-index: 7;
+  z-index: 100000007;
 
   top: 50%;
   left: 50%;

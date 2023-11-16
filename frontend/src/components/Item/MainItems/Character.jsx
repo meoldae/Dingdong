@@ -168,6 +168,7 @@ const Character = () => {
           )
         } else {
           actions.current[1].stop()
+          actions.current[0].play()
         }
         // 충돌로직 끝
       }
