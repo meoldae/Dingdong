@@ -114,10 +114,10 @@
 ## 프로젝트 산출물 
 <details>
     <summary>화면 정의서 & 와이어프레임</summary>
-    <img src="etc/assets/wireframe_1.PNG"/>
-    <img src="etc/assets/wireframe_2.PNG"/>
-    <img src="etc/assets/wireframe_3.PNG"/>
-    <img src="etc/assets/wireframe_4.PNG"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/a95a505c-6c16-4232-a365-cd7fca7a3e8c"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/b378d837-dd32-4e89-a96f-0714f6cba22a"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/81a5b2df-85f9-4ff2-b7e8-c1cd50ba93d2"/>
+    <img src="https://github.com/Semibro/Semibro/assets/71372469/af7476a9-f174-4d46-ab09-90e6ee871ff0"/>
 </details>  
 <details>
     <summary>요구사항 정의서</summary>
