@@ -1,7 +1,6 @@
 // 라이브러리
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 
 // 컴포넌트
 import RoomBtn from "../Button/Room/RoomBtn"
@@ -31,6 +30,7 @@ import {
   reportGuestBookAtom,
   guestBookDetailContentAtom
 }  from "../../atom/GuestBookAtom"
+import { lastUrlPathAtom } from "../../atom/UrlAtom"
 
 // API
 import { fetchReportGuestBook } from "../../api/GuestBook"
@@ -42,6 +42,7 @@ const MyFooter = (props) => {
   const setEditMode = useSetRecoilState(buildModeState)
   const [items, setItems] = useRecoilState(ItemsState)
   const [popUpStatus, setPopUpStatus] = useRecoilState(popUpStatusAtom)
+  const lastURL = useRecoilValue(lastUrlPathAtom)
 
   // 방명록
   const [isGuestBookVisible, setIsGuestBookVisible] = useRecoilState(isGuestBookVisibleAtom)
@@ -72,11 +73,10 @@ const MyFooter = (props) => {
     setEditMode(true)
   }
 
-  const navigate = useNavigate()
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   const goSingleMap = () => {
-    // window.location.replace(`${urlPath}/`)
-    navigate(-1)
+    window.location.replace(`${urlPath}${lastURL}`)
   }
 
   // 방명록 리스트 종료 모달 함수
