@@ -551,8 +551,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringRoom}
               portalPosition={roomPortalPosition}
               setPortalVisible={setRoomPortalVisible}
-              adjustedAngle={[0, 4, 12]}
-              adjustedZoom={0.35}
+              adjustedAngle={[0, 5, 12]}
+              adjustedZoom={0.28}
               PortalSize={[1, 1]}
             />
           ) : (
@@ -568,8 +568,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringPostOffice}
               portalPosition={postOfficePortalPosition}
               setPortalVisible={setPostOfficePortalVisible}
-              adjustedAngle={[-9, 6, 10]}
-              adjustedZoom={0.3}
+              adjustedAngle={[-5.5, 3.5, 10]}
+              adjustedZoom={0.28}
               PortalSize={[1, 1]}
             />
           ) : (
@@ -585,8 +585,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringOtherRoom}
               portalPosition={otherRoomPortalPosition}
               setPortalVisible={setOtherRoomPortalVisible}
-              adjustedAngle={[2, 3, 5]}
-              adjustedZoom={0.35}
+              adjustedAngle={[0, 5, 9]}
+              adjustedZoom={0.27}
               PortalSize={[1, 1]}
             />
           ) : (
@@ -602,8 +602,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringWorld}
               portalPosition={worldPortalPosition}
               setPortalVisible={setWorldPortalVisible}
-              adjustedAngle={[0, 7, 10]}
-              adjustedZoom={0.3}
+              adjustedAngle={[0, 5, 11]}
+              adjustedZoom={0.24}
               PortalSize={[1.5, 1.5]}
             />
           ) : (
@@ -636,8 +636,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringTest}
               portalPosition={testPortalPosition}
               setPortalVisible={setTestPortalVisible}
-              adjustedAngle={[0, 4, 7]}
-              adjustedZoom={0.4}
+              adjustedAngle={[0, 5, 8]}
+              adjustedZoom={0.27}
               PortalSize={[1, 1]}
             />
           ) : (
@@ -653,8 +653,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringInsta}
               portalPosition={instaPortalPosition}
               setPortalVisible={setInstaPortalVisible}
-              adjustedAngle={[0, 4, 7]}
-              adjustedZoom={0.4}
+              adjustedAngle={[0, 5, 8]}
+              adjustedZoom={0.27}
               PortalSize={[1, 1]}
             />
           ) : (
@@ -670,8 +670,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringTwitter}
               portalPosition={twitterPortalPosition}
               setPortalVisible={setTwitterPortalVisible}
-              adjustedAngle={[0, 4, 7]}
-              adjustedZoom={0.4}
+              adjustedAngle={[0, 5, 8]}
+              adjustedZoom={0.27}
               PortalSize={[1, 1]}
             />
           ) : (
@@ -687,8 +687,8 @@ const SingleMainPage = () => {
               setConfirmEnteringLocation={setConfirmEnteringPostBox}
               portalPosition={postBoxPortalPosition}
               setPortalVisible={setPostBoxPortalVisible}
-              adjustedAngle={[0, 4, 7]}
-              adjustedZoom={0.45}
+              adjustedAngle={[-6, 2, 6]}
+              adjustedZoom={0.35}
               PortalSize={[1, 1]}
             />
           ) : (
