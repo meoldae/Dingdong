@@ -147,15 +147,6 @@ export function MultiCharacter({
     <group ref={group} {...props} dispose={null} position={position}>
       <Html position-y={1.7} center style={{ pointerEvents: "none" }}>
         <div className={styles.characterContainer}>
-          <div
-            className={styles.nicknameBox}
-            style={{
-              width: `${nickname.length * 20}px`,
-              pointerEvents: "none",
-            }}
-          >
-            {nickname}
-          </div>
           {chat && (
             <div
               className={styles.chatBox}
@@ -164,20 +155,31 @@ export function MultiCharacter({
               {chat}
             </div>
           )}
-          <div className={styles.roomImgBox}>
-            {closeCharacters[id] && (
-              <img
-                style={{ pointerEvents: "auto" }}
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setRoomModal(true)
-                  setOtherRoomId(id)
-                }}
-                src={`${urlPath}/assets/icons/location.png`}
-                alt=""
-                className={styles.roomImg}
-              />
-            )}
+          <div className={styles.bottomBox}>
+            <div
+              className={styles.nicknameBox}
+              style={{
+                width: `${nickname.length * 20}px`,
+                pointerEvents: "none",
+              }}
+            >
+              {nickname}
+            </div>
+            <div className={styles.roomImgBox}>
+              {closeCharacters[id] && (
+                <img
+                  style={{ pointerEvents: "auto" }}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setRoomModal(true)
+                    setOtherRoomId(id)
+                  }}
+                  src={`${urlPath}/assets/icons/location.png`}
+                  alt=""
+                  className={styles.roomImg}
+                />
+              )}
+            </div>
           </div>
         </div>
       </Html>
