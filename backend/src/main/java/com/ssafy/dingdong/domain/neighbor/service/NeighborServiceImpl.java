@@ -48,7 +48,6 @@ public class NeighborServiceImpl implements NeighborService{
 		);
 
 		String acceptorId = room.getMemberId();
-
 		neighborRepository.isConnectByApplicantIdAndAcceptorId(UUID.fromString(applicantId), UUID.fromString(acceptorId)).ifPresent(
 			neighbor -> {
 				if (neighbor.getConnectTime() != null && neighbor.getCancelTime() == null) {
@@ -58,10 +57,23 @@ public class NeighborServiceImpl implements NeighborService{
 			}
 		);
 
+		if (result[0].equals("이미 이웃입니다.")) {
+			return result[0];
+		}
+
 		neighborRepository.findByApplicantIdAndAcceptorId(UUID.fromString(applicantId), UUID.fromString(acceptorId)).ifPresentOrElse(
 			request -> {
 				if (request.getCancelTime() != null) {
-					request.renewal();
+					// 더티체킹 미작동...
+					// request.renewal(UUID.fromString(applicantId), UUID.fromString(acceptorId));
+					neighborRepository.deleteByNeighborId(request.getNeighborId());
+					Neighbor newRequest = Neighbor.builder()
+						.applicantId(UUID.fromString(applicantId))
+						.acceptorId(UUID.fromString(acceptorId))
+						.createTime(LocalDateTime.now())
+						.build();
+					neighborRepository.save(newRequest);
+
 				} else {
 					result[0] = "이미 이웃 요청을 보냈습니다.";
 					// throw new CustomException(ExceptionStatus.NEIGHBOR_REQUEST_ALREADY_EXIST);
@@ -76,6 +88,7 @@ public class NeighborServiceImpl implements NeighborService{
 				neighborRepository.save(request);
 			}
 		);
+
 		fcmService.send(applicantId, acceptorId, 1);
 		return result[0];
 	}

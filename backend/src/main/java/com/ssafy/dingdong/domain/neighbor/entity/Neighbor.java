@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Type;
 
 import lombok.AccessLevel;
@@ -19,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@DynamicUpdate
 public class Neighbor {
 
 	@Id
@@ -45,7 +47,9 @@ public class Neighbor {
 		this.connectTime = connectTime;
 	}
 
-	public void renewal(){
+	public void renewal(UUID applicantId, UUID acceptorId){
+		this.applicantId = applicantId;
+		this.acceptorId = acceptorId;
 		this.createTime = LocalDateTime.now();
 		this.connectTime = null;
 		this.cancelTime = null;
