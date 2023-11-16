@@ -90,7 +90,7 @@ export function MultiCharacter({
           }
           return newUsers
         })
-      }, 20000) // 2000 밀리초 = 2초 (필요에 따라 조절)
+      }, 2000) // 2000 밀리초 = 2초 (필요에 따라 조절)
 
       // 컴포넌트가 언마운트되거나 채팅이 변경될 때 타이머를 취소하기 위해 사용
       return () => clearTimeout(hideChatTimer)
