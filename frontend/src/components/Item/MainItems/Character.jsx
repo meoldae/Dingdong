@@ -62,7 +62,7 @@ const Character = () => {
     CharacterPositionAtom
   )
 
-  const storedPosition = JSON.parse(localStorage.getItem(localStorageKey))
+  const storedPosition = JSON.parse(sessionStorage.getItem(localStorageKey))
 
   const initialPosition = storedPosition
     ? new THREE.Vector3(storedPosition[0], storedPosition[1], storedPosition[2])
@@ -162,7 +162,7 @@ const Character = () => {
             position.clone().y,
             position.clone().z,
           ])
-          localStorage.setItem(
+          sessionStorage.setItem(
             localStorageKey,
             JSON.stringify(position.toArray())
           )
