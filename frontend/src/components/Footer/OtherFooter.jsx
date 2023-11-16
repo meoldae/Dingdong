@@ -1,7 +1,6 @@
 // 라이브러리
 import { useEffect, useState } from "react"
 import { useRecoilState, useSetRecoilState } from "recoil"
-import { useNavigate } from "react-router-dom"
 
 // 컴포넌트
 import PostCardBox from "../Modal/Post/PostCardBox"
@@ -27,7 +26,6 @@ import {
   isDetailGuestBookVisibleAtom,
   isFinishDetailGuestBookVisibleAtom
 }  from "../../atom/GuestBookAtom"
-
 import { roomHeartAtom } from "../../atom/RoomInfoAtom"
 
 const OtherFooter = (props) => {
@@ -95,12 +93,11 @@ const OtherFooter = (props) => {
     )
   }
 
-  const navigate = useNavigate()
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
   // 싱글맵 이동 함수
   const goSingleMap= () =>{
-    // window.location.replace(`${urlPath}/`)
-    navigate(-1)
+    window.location.replace(`${urlPath}/`)
   }
 
   // 방명록 리스트 종료 모달 함수
