@@ -92,10 +92,10 @@ const ConfirmEnteringDefaultModal = ({
       setIsArrived(false)
     } else if (location === "otherRoom") {
       setLastURL(window.location.pathname)
- 
+
       const randRoomIds = [104, 77, 58, 37]; //시연
-      const selectedRandRoomId = randRoomIds[Math.floor(Math.random() * randRoomIds.length)]; //시연
-      window.location.replace(`${urlPath}/random/${selectedRandRoomId}`); //시연
+      // const selectedRandRoomId = randRoomIds[Math.floor(Math.random() * randRoomIds.length)];
+      window.location.replace(`${urlPath}/random/${randRoomIds[0]}`); //시연
   
       // let randRoomId
       // getRandomRoom(
