@@ -14,6 +14,9 @@ import MultiRoomModal from "./MultiRoomModal"
 import SingleHeader from "../../pages/SinglePlay/SingleHeader"
 import ModeChangeModal from "./ModeChangeModal"
 import { lastUrlPathAtom } from "../../atom/UrlAtom"
+import { useGLTF } from "@react-three/drei"
+
+const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
 export const MultiPage = () => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -184,3 +187,10 @@ export const MultiPage = () => {
     </div>
   )
 }
+
+useGLTF.preload(`${urlPath}/assets/models/characters/1.glb`)
+useGLTF.preload(`${urlPath}/assets/models/characters/2.glb`)
+useGLTF.preload(`${urlPath}/assets/models/characters/3.glb`)
+useGLTF.preload(`${urlPath}/assets/models/characters/4.glb`)
+useGLTF.preload(`${urlPath}/assets/models/characters/5.glb`)
+useGLTF.preload(`${urlPath}/assets/models/characters/6.glb`)
