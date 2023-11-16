@@ -66,6 +66,7 @@ const NeighborRequest = () => {
     deleteNeighbor(
       input,
       (response) => {
+        setIsAddNeighbor(false)
         successMsg("✅ 요청에 성공했습니다!")
       },
       (error) => {
