@@ -27,7 +27,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
   // )
   const MultiMapgltf = useLoader(
     GLTFLoader,
-    `${urlPath}/assets/models/defaultSettings/multiMap2.glb`
+    `${urlPath}/assets/models/defaultSettings/MultiDefaultMap2.glb`
   )
   // 맵 클릭 함수
   const [onFloor, setOnFloor] = useState(false)
