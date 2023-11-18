@@ -42,8 +42,6 @@
   resize: none;
   overflow: auto;
   box-shadow: none;
-  /* font-family: Pretendard-Medium; */
-  /* background-color: wheat;   */
 }
 
 textarea:focus {
@@ -55,12 +53,6 @@ textarea:focus {
   display: flex;
   justify-content: space-between;
   min-width: 280px;
-  /* position: absolute;
-  bottom: 10%;
-  display: flex;
-  flex-direction: row; 
-  justify-content: space-between; 
-  min-width: 280px;             */
 }
 
 .shareRoomSafari {
@@ -75,7 +67,6 @@ textarea:focus {
   padding-bottom: 20px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  /* height: ; */
 }
 
 .shareRoom {
