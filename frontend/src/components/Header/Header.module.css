@@ -86,14 +86,21 @@
 
 .NeighborItemContainer {
   height: 350px;
-  overflow-y: auto;
-  &::-webkit-scrollbar {
-    width: 3px;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    background: #CCCCCC;
-  }
+  overflow-y: scroll;
+}
+
+.NeighborItemContainer::-webkit-scrollbar {
+  height: 100%;
+  width: 0.5vh;
+}
+
+.NeighborItemContainer::-webkit-scrollbar-track {
+  display: none;
+}
+
+.NeighborItemContainer::-webkit-scrollbar-thumb {
+  background: #d2d2d2;
+  border-radius: 30px;
 }
 
 /* 공유하기 이미지 */

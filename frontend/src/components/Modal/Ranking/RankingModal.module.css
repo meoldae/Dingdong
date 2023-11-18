@@ -7,17 +7,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .TitleContainer {
   width: 90%;
   padding-top: 10%;
+  display: flex;
+  justify-content: center;
 }
 
 .Title {
   color: #212529;
-  font-size: 40px;
-  /* font-family: "Pretendard-Bold"; */
+  font-size: 30px;
 }
 
 .ButtonContainer {
@@ -40,7 +42,6 @@
 
   text-align: center;
   line-height: 30px;
-  /* font-family: "Pretendard-Medium"; */
 }
 
 .SelectButton {
@@ -48,12 +49,11 @@
   height: 30px;
   border-radius: 20px;
 
-  color: #e9ecef;
-  background: #212529;
+  color: #ffffff;
+  background: #02C26F;
 
   text-align: center;
   line-height: 30px;
-  /* font-family: "Pretendard-Medium"; */
 }
 
 .TimeContainer {
@@ -64,7 +64,6 @@
 .Time {
   color: #c0c2c5;
   font-size: 15px;
-  /* font-family: "Pretendard-Regular"; */
 }
 
 .TypeContainer {
@@ -86,8 +85,6 @@
   color: #b2b8bd;
   width: 80px;
   text-align: center;
-
-  /* font-family: "Pretendard-SemiBold"; */
 }
 
 .ContentContainer {
@@ -109,7 +106,6 @@
   line-height: 40px;
 
   font-size: 15px;
-  /* font-family: "Pretendard-Medium"; */
 }
 
 .IndexFirst {
@@ -121,7 +117,6 @@
   line-height: 40px;
 
   font-size: 18px;
-  /* font-family: "Pretendard-Medium"; */
 }
 
 .IndexSecond {
@@ -133,7 +128,6 @@
   line-height: 40px;
 
   font-size: 18px;
-  /* font-family: "Pretendard-Medium"; */
 }
 
 .IndexThird {
@@ -145,5 +139,4 @@
   line-height: 40px;
 
   font-size: 18px;
-  /* font-family: "Pretendard-Medium"; */
 }
