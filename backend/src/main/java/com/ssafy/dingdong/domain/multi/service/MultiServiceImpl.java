@@ -34,8 +34,6 @@ public class MultiServiceImpl implements MultiService {
         DailyChatLogs dailyChatLogs = chatLogRepository.findByDate(today) // 오늘 날짜의 로그 검색
                 .orElse(new DailyChatLogs(today, new ArrayList<>())); // 없으면 새 객체 생성
 
-        log.info(dailyChatLogs.getDate());
-        log.info(dailyChatLogs.getChannels());
         // 채널에 맞는 로그 리스트 찾기 또는 생성하기
         ChannelChatLogs channelLogs = dailyChatLogs.getChannels().stream()
                 .filter(c -> c.getChannelId().equals(userSession.getChannelId()))
