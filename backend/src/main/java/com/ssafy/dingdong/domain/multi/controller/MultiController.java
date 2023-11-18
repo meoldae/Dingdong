@@ -74,7 +74,7 @@ public class MultiController {
                             UserSession userSession) {
 
         ChatResponse result = new ChatResponse(channelId, userSession.getRoomId(), userSession.getChat());
-        // Redis에 사용자 정보를 저장
+        multiService.saveChat(userSession);
         messagingTemplate.convertAndSend("/sub/chat/" + channelId, result);
     }
 
