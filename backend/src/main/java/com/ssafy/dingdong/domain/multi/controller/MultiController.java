@@ -74,8 +74,8 @@ public class MultiController {
                             UserSession userSession) {
 
         ChatResponse result = new ChatResponse(channelId, userSession.getRoomId(), userSession.getChat());
-        multiService.saveChat(userSession);
         messagingTemplate.convertAndSend("/sub/chat/" + channelId, result);
+        multiService.saveChat(userSession);
     }
 
     @GetMapping("/multi/{channelId}")
