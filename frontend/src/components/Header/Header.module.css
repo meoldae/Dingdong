@@ -77,7 +77,7 @@
 }
 
 .NeighborListContainer {
-  top: 40%;
+  top: 50%;
   left: 50%;
   z-index: 6;
   position: absolute;
@@ -85,7 +85,7 @@
 }
 
 .NeighborItemContainer {
-  height: 250px;
+  height: 350px;
   overflow-y: auto;
   &::-webkit-scrollbar {
     width: 3px;
