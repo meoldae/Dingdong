@@ -1,6 +1,5 @@
 .CardContainer {
   z-index: 3;
   border-radius: 10px;
-  /* box-shadow: 4px 4px 0px #009152; */
-  /* box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2); */
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
 }
