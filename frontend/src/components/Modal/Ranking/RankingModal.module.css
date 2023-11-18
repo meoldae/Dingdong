@@ -12,11 +12,13 @@
 .TitleContainer {
   width: 90%;
   padding-top: 10%;
+  display: flex;
+  justify-content: center;
 }
 
 .Title {
   color: #212529;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .ButtonContainer {
