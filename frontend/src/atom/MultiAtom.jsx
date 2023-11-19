@@ -31,3 +31,8 @@ export const userPositionAtom = atom({
   key: "userPositionAtom",
   default: new THREE.Vector3(0, 0, 0),
 })
+
+export const chatLogVisibleAtom = atom({
+  key: "chatLogAtom",
+  default: false,
+})
