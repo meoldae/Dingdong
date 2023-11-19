@@ -25,6 +25,8 @@ export function MultiCharacter({
   closeCharacters,
   chat,
   publishCurrentPosition,
+  diceNumber,
+
   ...props
 }) {
   const position = useMemo(() => props.position, [])
@@ -134,7 +136,6 @@ export function MultiCharacter({
       if (isPlay) {
         if (actionId == 4) {
           actions.Run.stop()
-          // actions.Idle.stop()
         } else {
           actions[actionName].play()
           actions.Run.stop()
@@ -157,7 +158,7 @@ export function MultiCharacter({
 
   return (
     <group ref={group} {...props} dispose={null} position={position}>
-      <Dice actionId={actionId} />
+      <Dice actionId={actionId} rollResult={diceNumber} />
       <Html position-y={1.7} center style={{ pointerEvents: "none" }}>
         <div className={styles.characterContainer}>
           {chat && (

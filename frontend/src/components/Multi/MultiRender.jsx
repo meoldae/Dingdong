@@ -53,12 +53,13 @@ export const MultiRender = React.forwardRef((props, ref) => {
     z: Math.random() * 2,
     actionId: 0,
     chat: "",
+    diceNumber: 0,
   }
 
   const fetchUserList = async () => {
     try {
       const response = await axios.get(
-        `https://ding-dong.kr/api/multi/${userParam.channelId}`
+        `https://ding-dong.kr/dev/api/multi/${userParam.channelId}`
       )
       setUsers(response.data.data)
     } catch (error) {
@@ -69,7 +70,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
   // 연결
   const connect = () => {
     client.current = new StompJs.Client({
-      webSocketFactory: () => new SockJS("https://ding-dong.kr/ws"),
+      webSocketFactory: () => new SockJS("https://ding-dong.kr/dev/ws"),
       onConnect: () => {
         console.log("Connected to the WS server")
         subscribe()
@@ -164,6 +165,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
               [jsonBody.roomId]: {
                 ...user,
                 actionId: jsonBody.actionId,
+                diceNumber: jsonBody.diceNumber,
               },
             }
           }
@@ -371,6 +373,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
             actionId={users[idx].actionId}
             closeCharacters={closeCharacters}
             chat={users[idx].chat}
+            diceNumber={users[idx].diceNumber}
           />
         </group>
       ))}
