@@ -166,6 +166,18 @@ export const MultiPage = () => {
           <div className={styles.BtnList}>
             <div
               className={styles.actionsBtn}
+              onClick={() => handleButtonClick(4)}
+            >
+              <div className={styles.FloatContent}>주사위</div>
+              <div className={styles.IconButton}>
+                <img
+                  src={`${urlPath}/assets/icons/smile.png`}
+                  className={styles.FloatIcon}
+                />
+              </div>
+            </div>
+            <div
+              className={styles.actionsBtn}
               onClick={() => handleButtonClick(1)}
             >
               <div className={styles.FloatContent}>기뻐하기</div>
@@ -216,3 +228,4 @@ useGLTF.preload(`${urlPath}/assets/models/characters/3.glb`)
 useGLTF.preload(`${urlPath}/assets/models/characters/4.glb`)
 useGLTF.preload(`${urlPath}/assets/models/characters/5.glb`)
 useGLTF.preload(`${urlPath}/assets/models/characters/6.glb`)
+useGLTF.preload(`${urlPath}/assets/models/tempGlb/dice2.glb`)
