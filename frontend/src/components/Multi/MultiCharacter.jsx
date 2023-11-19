@@ -12,7 +12,7 @@ import {
   userPositionAtom,
 } from "../../atom/MultiAtom"
 import styles from "./MultiCharacter.module.css"
-import Dice from "../Item/MainItems/tempItems/dice"
+import Dice from "../Item/MainItems/tempItems/Dice"
 
 const MOVEMENT_SPEED = 0.06
 const urlPath = import.meta.env.VITE_APP_ROUTER_URL
