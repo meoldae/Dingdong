@@ -1,10 +1,18 @@
+// Three.js
 import { Canvas } from "@react-three/fiber";
 import Experience from "../../components/Room/Experience";
+
+// API
 import { fetchRoomData } from "../../api/User";
-import { Suspense, useState, useEffect, useRef } from "react";
+import { getRandomRoom } from "@/api/Room";
+
+// 라이브러리
+import { useState, useEffect, useRef } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { useNavigate } from "react-router-dom";
+
+// ATOM
 import {
-  ItemRotateState,
   ItemsState,
   buildModeState,
   draggedItemState,
@@ -12,26 +20,33 @@ import {
   roomColorState,
 } from "../../components/Room/Atom";
 import { popUpStatusAtom } from "../../atom/RoomCustomTabAtom";
+import { userAtom } from "../../atom/UserAtom";
+import { roomInfoAtom, roomAvatarAtom, roomHeartAtom } from "@/atom/RoomInfoAtom";
+
+// 컴포넌트
 import Header from "../../components/Header/Header";
 import MyFooter from "../../components/Footer/MyFooter";
 import Share from "../../components/Header/Share";
 import OtherFooter from "../../components/Footer/OtherFooter";
 import NeighborRequest from "../../components/Header/NeighborRequest";
-import styles from "./RoomPage.module.css";
 import PopUp from "../../components/Room/RoomCustomPopUp/PopUp";
 import SharePage from "../../components/Modal/Sharing/SharePage";
 import SharingModalList from "../../components/Modal/Sharing/SharingModalList";
-import { userAtom } from "../../atom/UserAtom";
-import { roomInfoAtom, roomAvatarAtom, roomHeartAtom } from "@/atom/RoomInfoAtom";
-import { useNavigate } from "react-router-dom";
 import history from "../../components/UI/history";
 import RandomBtn from "../../components/Button/Room/RandomBtn";
-import { getRandomRoom } from "@/api/Room";
 
-function RandomRoomPage() {
-  // 브라우저 뒤로가기 버튼 처리
+// 스타일
+import styles from "./RoomPage.module.css";
+
+
+const RandomRoomPage = () => {
+  // 상태관리
   const [locationKeys, setLocationKeys] = useState([]);
+
+  // navigate함수
   const navigate = useNavigate();
+
+  // url 경로
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
 
   useEffect(() => {
@@ -70,6 +85,8 @@ function RandomRoomPage() {
   const [time, setTime] = useState();
   const [roomColor, setRoomColor] = useRecoilState(roomColorState);
   const [lightColor, setLightColor] = useRecoilState(lightColorState);
+
+  // 방 데이터 API
   useEffect(() => {
     const myRoomId = userInfo.roomId;
     setIsMyRoom(roomId == myRoomId);
@@ -93,25 +110,39 @@ function RandomRoomPage() {
     );
   }, [isMyRoom, navigate]);
 
+  // 랜덤 방 방문
   const randomVisit = () => {
     const roomId = window.location.pathname.match(/\d+/g)
       ? Number(window.location.pathname.match(/\d+/g)[0])
       : null; 
-    let randRoomId;
 
-    getRandomRoom(
-      (response) => {
-        randRoomId = response.data.data;
+    const randRoomIds = [104, 77, 58, 37]; //시연
+    // const selectedRandRoomId = randRoomIds[Math.floor(Math.random() * randRoomIds.length)];
+    const TRI = parseInt(sessionStorage.getItem("TRI"))
+    if (TRI <= 2) {
+      sessionStorage.setItem("TRI", (TRI+1).toString())
+      window.location.replace(`${urlPath}/random/${randRoomIds[TRI+1]}`); //시연
+    } else {
+      sessionStorage.setItem("TRI", "0")
+      window.location.replace(`${urlPath}/random/${randRoomIds[0]}`); //시연
+    }
+    
 
-        window.location.replace(`${urlPath}/random/${randRoomId}`);
-        // navigate(`${urlPath}/random/${randRoomId}`)
-      },
-      (error) => {
-        console.log("Error with Random Room...", error);
-      }
-    );
+    //let randRoomId;
+    // getRandomRoom(
+    //   (response) => {
+    //     randRoomId = response.data.data;
+
+    //     window.location.replace(`${urlPath}/random/${randRoomId}`);
+    //     // navigate(`${urlPath}/random/${randRoomId}`)
+    //   },
+    //   (error) => {
+    //     console.log("Error with Random Room...", error);
+    //   }
+    // );
   };
 
+  // 시간 체크 함수
   useEffect(() => {
     const checkTime = today.getHours();
 

@@ -1,36 +1,61 @@
+// Three.js
 import { Canvas } from "@react-three/fiber"
 import Experience from "../../components/Room/Experience"
-import { fetchRoomData } from "../../api/User"
-import { Suspense, useState, useEffect, useRef } from "react"
+
+// 라이브러리
+import { useState, useEffect, useRef } from "react"
 import { useRecoilState, useRecoilValue } from "recoil"
+import { useNavigate } from "react-router-dom"
+
+// API
+import { fetchRoomData } from "../../api/User"
+
+// ATOM
 import {
   ItemsState,
   lightColorState,
   roomColorState,
   draggedItemState,
 } from "../../components/Room/Atom"
-import InviteFooter from "../../components/Footer/InviteFooter"
-import styles from "./RoomPage.module.css"
-import InviteHeader from "../../components/Header/InviteHeader"
 import { userAtom } from "../../atom/UserAtom"
 import { roomInfoAtom } from "@/atom/RoomInfoAtom"
-import { useNavigate } from "react-router-dom"
 
-function InviteRoomPage() {
+// 컴포넌트
+import InviteFooter from "../../components/Footer/InviteFooter"
+import InviteHeader from "../../components/Header/InviteHeader"
+
+// 스타일
+import styles from "./RoomPage.module.css"
+
+const InviteRoomPage = () => {
+  // use함수
   const navigate = useNavigate()
-  const [items, setItems] = useRecoilState(ItemsState)
   const canvasRef = useRef()
+
+  // 리코일상태관리
+  const [items, setItems] = useRecoilState(ItemsState)
   const [nickName, setNickName] = useRecoilState(roomInfoAtom)
-  const roomId = window.location.pathname.match(/\d+/g)
-  const userInfo = useRecoilValue(userAtom)
-  const today = new Date()
-  const [time, setTime] = useState()
   const [roomColor, setRoomColor] = useRecoilState(roomColorState)
   const [lightColor, setLightColor] = useRecoilState(lightColorState)
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   const [drag, setDrag] = useRecoilState(draggedItemState)
+
+  // 상태관리
+  const [time, setTime] = useState()
   const [roomDrag, setRoomDrag] = useState(false)
 
+  // 방 ID
+  const roomId = window.location.pathname.match(/\d+/g)
+
+  // 유저정보
+  const userInfo = useRecoilValue(userAtom)
+
+  // 날짜정보
+  const today = new Date()
+  
+  // url 경로
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
+  // 방 이동 함수
   const onRoomHandler = (e) => {
     navigate(`${urlPath}/room/${roomId}`)
   }
@@ -59,6 +84,7 @@ function InviteRoomPage() {
     )
   }, [])
 
+  // 시간 계산 함수
   useEffect(() => {
     const checkTime = today.getHours()
 

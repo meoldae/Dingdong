@@ -1,5 +1,5 @@
 // 라이브러리
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import { useEffect, useState } from "react"
 
 // 컴포넌트
@@ -14,7 +14,7 @@ import { successMsg } from "../../utils/customToast"
 import styles from "./Footer.module.css"
 
 // API
-import { isHeartCheck, updateHeart } from "@/api/Room"
+import { isHeartCheck } from "@/api/Room"
 
 // 아톰
 import { roomHeartAtom } from "../../atom/RoomInfoAtom"
@@ -30,21 +30,19 @@ import {
   reportGuestBookAtom,
   guestBookDetailContentAtom
 }  from "../../atom/GuestBookAtom"
+import { lastUrlPathAtom } from "../../atom/UrlAtom"
 
 // API
 import { fetchReportGuestBook } from "../../api/GuestBook"
 
 
 const MyFooter = (props) => {
-  // url 경로
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
-
   // 리코일 상태관리
   const [isHeart, setIsHeart] = useState(false)
-  const [editMode, setEditMode] = useRecoilState(buildModeState)
+  const setEditMode = useSetRecoilState(buildModeState)
   const [items, setItems] = useRecoilState(ItemsState)
   const [popUpStatus, setPopUpStatus] = useRecoilState(popUpStatusAtom)
-  const [heartCount, setHeartCount] = useRecoilState(roomHeartAtom)
+  const lastURL = useRecoilValue(lastUrlPathAtom)
 
   // 방명록
   const [isGuestBookVisible, setIsGuestBookVisible] = useRecoilState(isGuestBookVisibleAtom)
@@ -69,28 +67,16 @@ const MyFooter = (props) => {
     )
   }, [isHeart])
 
-  // 방 좋아요 업데이트 함수
-  const updateHeartStatus = () => {
-    updateHeart(
-      props.props,
-      (response) => { 
-        const isHeartNow = response.data.data === "Y";
-        setIsHeart(isHeartNow);
-        setHeartCount(prevCount => isHeartNow ? prevCount + 1 : prevCount - 1);
-      },
-      (error) => {
-        console.log("Error with Room Heart... ", error)
-      }
-    )
-  }
-
   const roomEditClickEvent = () => {
     setItems(items)
     setPopUpStatus(!popUpStatus)
     setEditMode(true)
   }
+
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
   const goSingleMap = () => {
-    window.location.replace(`${urlPath}/`)
+    window.location.replace(`${urlPath}${lastURL}`)
   }
 
   // 방명록 리스트 종료 모달 함수

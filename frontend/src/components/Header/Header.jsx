@@ -31,10 +31,10 @@ import {
 } from "../../api/Neighbor"
 import { fetchLogout, fetchUserSecession } from "../../api/User"
 import { fetchInquiry } from "../../api/Cs"
-// import { setFCMTokenAtServer, deleteFCMTokenAtServer } from "@/api/FCM"
+import { setFCMTokenAtServer, deleteFCMTokenAtServer } from "@/api/FCM"
 
 // FCM 
-// import { getMessaging, getToken} from "firebase/messaging";
+import { getMessaging, getToken} from "firebase/messaging";
 
 const Header = ({ checkMyRoom }) => {
   const navigate = useNavigate();
@@ -98,10 +98,10 @@ const Header = ({ checkMyRoom }) => {
         console.log("Error at neighbor request...", error);
       }
     );
-    // const fcmToken = localStorage.getItem("FCMToken");
-    // if (fcmToken !== null) {
-    //   setIsPossiblePush(true);
-    // }
+    const fcmToken = localStorage.getItem("FCMToken");
+    if (fcmToken !== null) {
+      setIsPossiblePush(true);
+    }
   }, []);
 
   // 이웃요청 수락함수
@@ -153,6 +153,7 @@ const Header = ({ checkMyRoom }) => {
         setNeighborList((prev) => prev.filter((item) => item.memberId !== Id));
         setRemoveNeighborList(false);
         setNeighborListLength(neighborListLength - 1);
+        successMsg("✅ 이웃이 정상적으로 삭제되었습니다!")
       },
       (error) => {
         console.log("Error with Delete Neighbor...", error);
@@ -162,7 +163,7 @@ const Header = ({ checkMyRoom }) => {
 
   // 문의하기 함수
   const inquiryHandler = () => {
-    if (inquiryText < 5) {
+    if (inquiryText.length < 5) {
       successMsg("❌ 5자 이상 작성해주세요.");
     } else {
       fetchInquiry(
@@ -243,48 +244,48 @@ const Header = ({ checkMyRoom }) => {
   const menuUserName = JSON.parse(localStorage.getItem("userAtom")).nickname;
 
   // FCM 설정
-  // const messaging = getMessaging();
+  const messaging = getMessaging();
 
-  // const getPermissionRequest = async () => {
-  //   const permission = await Notification.requestPermission();
-  //   return permission;
-  // };
+  const getPermissionRequest = async () => {
+    const permission = await Notification.requestPermission();
+    return permission;
+  };
 
-  // const pushToggleChange = async () => {
-  //   if (!Notification) {
-  //     return;
-  //   }
+  const pushToggleChange = async () => {
+    if (!Notification) {
+      return;
+    }
 
-  //   if (isPossiblePush === false) {
-  //     setIsPossiblePush(true);
-  //     const permission = await getPermissionRequest();
-  //     if (permission === "denied") {
-  //       setIsPossiblePush(false);
-  //     } else {
-  //       getToken(messaging, { vapidKey: import.meta.env.VITE_APP_VAPID })
-  //         .then((currentToken) => {
-  //           if (currentToken) {
-  //             setFCMTokenAtServer(currentToken);
-  //           } else {
-  //             setIsPossiblePush(false);
-  //             console.log(
-  //               "No registration token available. Request permission to generate one."
-  //             );
-  //             return null;
-  //           }
-  //         })
-  //         .catch((err) => {
-  //           setIsPossiblePush(false);
-  //           console.log("An error occurred while retrieving token. ", err);
-  //           return null;
-  //         });
-  //     }
-  //   } else if (isPossiblePush === true) {
-  //     setIsPossiblePush(false);
-  //     deleteFCMTokenAtServer();
-  //     localStorage.removeItem("FCMToken");
-  //   }
-  // };
+    if (isPossiblePush === false) {
+      setIsPossiblePush(true);
+      const permission = await getPermissionRequest();
+      if (permission === "denied") {
+        setIsPossiblePush(false);
+      } else {
+        getToken(messaging, { vapidKey: import.meta.env.VITE_APP_VAPID })
+          .then((currentToken) => {
+            if (currentToken) {
+              setFCMTokenAtServer(currentToken);
+            } else {
+              setIsPossiblePush(false);
+              console.log(
+                "No registration token available. Request permission to generate one."
+              );
+              return null;
+            }
+          })
+          .catch((err) => {
+            setIsPossiblePush(false);
+            console.log("An error occurred while retrieving token. ", err);
+            return null;
+          });
+      }
+    } else if (isPossiblePush === true) {
+      setIsPossiblePush(false);
+      deleteFCMTokenAtServer();
+      localStorage.removeItem("FCMToken");
+    }
+  };
 
   // 문의하기 200자 체크함수
   const checkMaxLength = (event) => {
@@ -424,7 +425,7 @@ const Header = ({ checkMyRoom }) => {
                 회원탈퇴
               </div> */}
               {/* FCM 설정 */}
-              {/* <div
+              <div
                 className={`${styles.MenuButton} ${styles.toggleContainer} `}
                 style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}
               >
@@ -441,15 +442,19 @@ const Header = ({ checkMyRoom }) => {
                     }`}
                   />
                 </div>
-              </div> */}
+              </div>
             </div>
-            <div
+            <div className={styles.FooterContainer}>
+              <div className={styles.Version}>
+                v 1.3.0
+              </div>
+              <div
                 className={styles.exitButton}
                 onClick={() => setIsRealSecession(true)}
-                style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}
               >
                 회원 탈퇴
               </div>
+            </div>
           </div>
         </>
       )}

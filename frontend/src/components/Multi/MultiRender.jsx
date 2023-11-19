@@ -12,11 +12,23 @@ import {
   userPositionAtom,
 } from "../../atom/MultiAtom"
 import axios from "axios"
-import { useFrame } from "@react-three/fiber"
-import { useNavigate } from "react-router-dom"
+import { useFrame, useLoader } from "@react-three/fiber"
+import { useNavigate, useLocation } from "react-router-dom"
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+
+const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
 export const MultiRender = React.forwardRef((props, ref) => {
   const [isMouseDown, setIsMouseDown] = useState(false)
+
+  // const Modelgltf = useLoader(
+  //   GLTFLoader,
+  //   `${urlPath}/assets/models/defaultSettings/MultiPostBox.glb`
+  // )
+  const MultiMapgltf = useLoader(
+    GLTFLoader,
+    `${urlPath}/assets/models/defaultSettings/MultiDefaultMap2.glb`
+  )
   // 맵 클릭 함수
   const [onFloor, setOnFloor] = useState(false)
   useCursor(onFloor)
@@ -45,7 +57,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
   const fetchUserList = async () => {
     try {
       const response = await axios.get(
-        `https://ding-dong.kr/dev/api/multi/${userParam.channelId}`
+        `https://ding-dong.kr/api/multi/${userParam.channelId}`
       )
       setUsers(response.data.data)
     } catch (error) {
@@ -56,7 +68,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
   // 연결
   const connect = () => {
     client.current = new StompJs.Client({
-      webSocketFactory: () => new SockJS("https://ding-dong.kr/dev/ws"),
+      webSocketFactory: () => new SockJS("https://ding-dong.kr/ws"),
       onConnect: () => {
         console.log("Connected to the WS server")
         subscribe()
@@ -180,6 +192,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
   }
 
   const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
     const handleBeforeUnload = () => {
@@ -188,20 +201,14 @@ export const MultiRender = React.forwardRef((props, ref) => {
 
     window.addEventListener("beforeunload", handleBeforeUnload)
 
-    // 페이지 전환 감지
-    const unlisten = navigate(() => {
-      disconnect()
-    })
-
     connect()
     fetchUserList()
 
     return () => {
       disconnect()
       window.removeEventListener("beforeunload", handleBeforeUnload)
-      unlisten() // 페이지 전환 리스너 해제
     }
-  }, [])
+  }, [location])
 
   // 위치 정보를 서버로 전송하는 함수
   const publishMove = (x, y, z) => {
@@ -286,8 +293,6 @@ export const MultiRender = React.forwardRef((props, ref) => {
 
   const handleFloorClick = (e) => {
     if (isMouseDown) {
-      console.log(e)
-
       publishMove(e.point.x, 0, e.point.z)
     }
   }
@@ -298,10 +303,39 @@ export const MultiRender = React.forwardRef((props, ref) => {
   return (
     <>
       <Environment preset="sunset" />
-      <ambientLight intensity={0.3} />
+      <ambientLight intensity={1} />
       <OrbitControls enabled={false} />
+      {/* <primitive
+        object={Modelgltf.scene}
+        position={[-2, 0, -2]}
+        scale={[2, 2, 2]}
+        onClick={(e) => {
+          e.stopPropagation()
+          console.log("click")
+        }}
+      /> */}
 
-      <mesh
+      <primitive
+        object={MultiMapgltf.scene}
+        position={[0, 0, 0]}
+        rotation={[0, 0, 0]}
+        onPointerMove={(e) => handleFloorClick(e)}
+        onPointerLeave={() => setOnFloor(false)}
+        onClick={(e) => {
+          handleFloorClick2(e)
+        }}
+        onPointerDown={() => {
+          setIsMouseDown(true)
+        }}
+        onPointerUp={() => {
+          setIsMouseDown(false)
+        }}
+      />
+      <mesh rotation-x={-Math.PI / 2} position-y={-1}>
+        <planeGeometry args={[60, 60]} />
+        <meshStandardMaterial color="#27c1d9" />
+      </mesh>
+      {/* <mesh
         name="floor"
         rotation-x={-Math.PI / 2}
         position-y={-0.001}
@@ -321,7 +355,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
       >
         <planeGeometry args={[60, 60]} />
         <meshStandardMaterial color="F0F0F0" />
-      </mesh>
+      </mesh> */}
 
       {Object.keys(users).map((idx) => (
         <group key={idx}>

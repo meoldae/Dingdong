@@ -1,6 +1,6 @@
 .wrap {
   position: absolute;
-  z-index: 3;
+  z-index: 100000003;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -97,7 +97,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: 200000000;
 }
 
 .AddNeighbor {
@@ -168,7 +168,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 6;
+  z-index: 200000001;
   background: #fff;
 
   width: 250px;
@@ -195,20 +195,11 @@
   padding: 10px 0 10px 0;
 }
 
-.exitButton {
-  padding: 10px 0 10px 0;
-  margin-left: auto;
-  margin-right: 10%;
-  color: gray; 
-  font-size: small;
-  color: lightgray; 
-}
-
 /* 알림 모달 */
 .AlarmContainer {
   top: 40%;
   left: 50%;
-  z-index: 6;
+  z-index: 200000001;
   position: absolute;
   transform: translate(-50%, -50%);
 }
@@ -232,8 +223,8 @@
 }
 
 .AlarmX {
-  width: 15px;
-  height: 15px;
+  width: 28px;
+  height: 28px;
 }
 
 .AlarmModal {
@@ -244,7 +235,6 @@
 
 .NoAlarm {
   color: #fff;
-  /* font-family: "Pretendard-Bold"; */
   font-size: 20px;
   width: 300px;
   display: flex;
@@ -258,7 +248,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 7;
+  z-index: 200000002;
 }
 
 .RemoveNeighborContainer {
@@ -266,7 +256,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 8;
+  z-index: 200000003;
 }
 
 .InquiryContainer {
@@ -274,7 +264,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 8;
+  z-index: 200000003;
 
   background: #FFFFFF;
   border-radius: 10px;
@@ -376,9 +366,7 @@
 
 .Name {
   width: 90%;
-
   font-size: 25px;
-  /* font-family: "Pretendard-SemiBold"; */
 }
 
 .toggleSwitch {
@@ -392,8 +380,7 @@
   margin-left: 40px;
 }
 
-.toggleButton 
- {
+.toggleButton {
   width: 20px;
   height: 20px;
   position: absolute;
@@ -420,4 +407,25 @@
 .toggleContainer {
   display: flex;
   align-items: center;
+}
+
+.FooterContainer {
+  width: 230px;
+  height: 50px;
+  padding: 0 10px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  
+  color: lightgray;
+}
+
+.Version {
+  font-size: 10px;
+}
+
+.exitButton {
+  font-size: 12px;
 }

@@ -1,15 +1,15 @@
-import { useCursor, useGLTF } from "@react-three/drei";
-import { SkeletonUtils } from "three-stdlib";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useGrid } from "./UseGrid";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useCursor, useGLTF } from "@react-three/drei"
+import { SkeletonUtils } from "three-stdlib"
+import { useEffect, useMemo, useRef, useState } from "react"
+import { useGrid } from "./UseGrid"
+import { useRecoilState, useRecoilValue } from "recoil"
 import {
   ItemRotateState,
   ItemsState,
   draggedItemState,
   mobileCheckState,
-} from "./Atom";
-import { LinearFilter,MeshToonMaterial,MeshBasicMaterial  } from "three";
+} from "./Atom"
+import { LinearFilter, MeshToonMaterial, MeshBasicMaterial } from "three"
 
 export const Item = ({
   item,
@@ -25,35 +25,38 @@ export const Item = ({
     size,
     rotation: itemRotation,
     categoryId,
-  } = item;
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
-  const rotation = isDragging ? draggedItemRotation : itemRotation;
+  } = item
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+  const rotation = isDragging ? draggedItemRotation : itemRotation
   const { scene } = useGLTF(
-    `${urlPath}/assets/models/furnitureItems/${furnitureId}.glb`,true
-  );
+    `${urlPath}/assets/models/furnitureItems/${furnitureId}.glb`,
+    true
+  )
   scene.children[0].castShadow = true
 
-  const clone = useMemo(() => SkeletonUtils.clone(scene), [scene]);
-  const width = rotation === 1 || rotation === 3 ? size[2] : size[0];
-  const height = rotation === 1 || rotation === 3 ? size[0] : size[2];
-  const thick = size[1];
+  const clone = useMemo(() => SkeletonUtils.clone(scene), [scene])
+  const width = rotation === 1 || rotation === 3 ? size[2] : size[0]
+  const height = rotation === 1 || rotation === 3 ? size[0] : size[2]
+  const thick = size[1]
   const { gridToVector3, wallLeftGridToVector3, wallRightGridToVector3 } =
-    useGrid();
-  const [items, setItems] = useRecoilState(ItemsState);
-  const draggedItem = useRecoilValue(draggedItemState);
-  const value = useRecoilValue(ItemRotateState);
-  const mobileCheck = useRecoilValue(mobileCheckState);
-  useEffect(()=>{
-    scene.traverse((child)=>{
-      if(child.isMesh && child.material && child.material.map){
-
+    useGrid()
+  const [items, setItems] = useRecoilState(ItemsState)
+  const draggedItem = useRecoilValue(draggedItemState)
+  const value = useRecoilValue(ItemRotateState)
+  const mobileCheck =
+    /webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+  useEffect(() => {
+    scene.traverse((child) => {
+      if (child.isMesh && child.material && child.material.map) {
         child.material.map.minFilter = LinearFilter
         child.material.map.magFilter = LinearFilter
-        child.material.map.needsUpdate = true;
+        child.material.map.needsUpdate = true
       }
     })
-  },[scene])
-
+  }, [scene])
+  // 아이템 배친
   useEffect(() => {
     setItems((prev) => {
       const newItems = prev.map((item, index) => {
@@ -63,14 +66,14 @@ export const Item = ({
               ...item,
               position: gridPosition,
               rotation: draggedItemRotation,
-            };
+            }
           }
         }
-        return item;
-      });
-      return newItems;
-    });
-  }, [value]);
+        return item
+      })
+      return newItems
+    })
+  }, [value])
 
   return (
     <>
@@ -141,8 +144,7 @@ export const Item = ({
               position-z={rotation ? 0 : 0.12}
               // 벽에 있는 아이템 관련
               rotation-y={(rotation * Math.PI) / 2}
-            >
-            </primitive>
+            ></primitive>
             {isDragging && (
               <mesh
                 position-x={rotation ? 0.02 : 0}
@@ -225,5 +227,5 @@ export const Item = ({
           </group>
         ))}
     </>
-  );
-};
+  )
+}

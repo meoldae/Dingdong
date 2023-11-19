@@ -1,6 +1,6 @@
 // 라이브러리
 import { useEffect, useState } from "react"
-import { useRecoilState } from "recoil"
+import { useRecoilState, useSetRecoilState, useRecoilValue } from "recoil"
 
 // 컴포넌트
 import PostCardBox from "../Modal/Post/PostCardBox"
@@ -26,19 +26,17 @@ import {
   isDetailGuestBookVisibleAtom,
   isFinishDetailGuestBookVisibleAtom
 }  from "../../atom/GuestBookAtom"
-
 import { roomHeartAtom } from "../../atom/RoomInfoAtom"
-const OtherFooter = (props) => {
-  // url경로
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+import { lastUrlPathAtom } from "../../atom/UrlAtom"
 
+const OtherFooter = (props) => {
   // 상태관리
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [isSendLetterModalVisible, setIsSendLetterModalVisible] =
     useState(false)
   const [selectedPostCard, setSelectedPostCard] = useState(null)
   const [isHeart, setIsHeart] = useState(false)
-  const [heartCount, setHeartCount] = useRecoilState(roomHeartAtom)
+  const setHeartCount = useSetRecoilState(roomHeartAtom)
 
   // 리코일 상태관리
   const [isGuestBookVisible, setIsGuestBookVisible] = useRecoilState(isGuestBookVisibleAtom)
@@ -47,6 +45,7 @@ const OtherFooter = (props) => {
   const [isFinishWriteGuestBookVisible, setIsFinishWriteGuestBookVisible] = useRecoilState(isFinishWriteGuestBookVisibleAtom)
   const [isDetailGuestBookVisible, setIsDetailGuestBookVisible] = useRecoilState(isDetailGuestBookVisibleAtom)
   const [isFinishDetailGuestBookVisible, setIsFinishDetailGuestBookVisible] = useRecoilState(isFinishDetailGuestBookVisibleAtom)
+  const lastURL = useRecoilValue(lastUrlPathAtom)
 
   // 방 좋아요 체크 함수
   useEffect(() => {
@@ -62,10 +61,6 @@ const OtherFooter = (props) => {
   }, [isHeart])
 
   // 편지 들어내면 삭제할 함수 ---
-  const openModal = () => {
-    setIsModalVisible(true)
-  }
-
   const closeModal = () => {
     setIsModalVisible(false)
   }
@@ -100,9 +95,16 @@ const OtherFooter = (props) => {
     )
   }
 
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
   // 싱글맵 이동 함수
   const goSingleMap= () =>{
-    window.location.replace(`${urlPath}/`)
+    console.log(lastURL)
+    if (lastURL === "/multiPage") {
+      window.location.replace(`${urlPath}${lastURL}`)
+    } else {
+      window.location.replace(`${urlPath}/`)
+    }
   }
 
   // 방명록 리스트 종료 모달 함수

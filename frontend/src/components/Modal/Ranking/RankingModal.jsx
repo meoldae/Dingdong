@@ -1,11 +1,15 @@
 // 라이브러리
 import { useEffect, useState } from "react"
+import { useSetRecoilState } from "recoil"
 
 // API
 import { fetchScore } from "../../../api/Score"
 
 // 스타일
 import styles from "./RankingModal.module.css"
+
+// Atom
+import { lastUrlPathAtom } from "../../../atom/UrlAtom"
 
 const RankingModal = () => {
   // URL 이동경로
@@ -21,6 +25,9 @@ const RankingModal = () => {
   const [mostSendLetterList, setMostSendLetterList] = useState([])
   // 랭킹 탭 상태관리
   const [rankingTab, setRankingTab] = useState(1)
+
+  // 리코일 상태관리
+  const setLastURL = useSetRecoilState(lastUrlPathAtom)
 
   // 시간변경함수
   const changeTime = (inputTime) => {
@@ -51,6 +58,7 @@ const RankingModal = () => {
 
   // 방 이동 함수
   const navigateRoom = (roomId) => {
+    setLastURL(window.location.pathname)
     window.location.replace(`${urlPath}/room/${roomId}`)
   }
 
@@ -70,7 +78,7 @@ const RankingModal = () => {
     <>
       <div className={styles.Container}>
         <div className={styles.TitleContainer}>
-          <div className={styles.Title}>실시간 순위</div>
+          <div className={styles.Title}>실시간 순위👑</div>
         </div>
         <div className={styles.ButtonContainer}>
           <div

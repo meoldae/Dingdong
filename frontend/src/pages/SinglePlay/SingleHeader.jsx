@@ -23,14 +23,13 @@ import {
 } from "../../api/Neighbor"
 import { fetchLogout, fetchUserSecession } from "../../api/User"
 import { fetchInquiry } from "../../api/Cs"
-// import { setFCMTokenAtServer, deleteFCMTokenAtServer } from "@/api/FCM"
+import { setFCMTokenAtServer, deleteFCMTokenAtServer } from "@/api/FCM"
 
 // Atom
 import { userAtom } from "../../atom/UserAtom"
 
-// FCM 
-// import { getMessaging, getToken} from "firebase/messaging";
-
+// FCM
+import { getMessaging, getToken} from "firebase/messaging";
 
 const SingleHeader = ({ checkMyRoom }) => {
   // 햄버거메뉴바 상태관리
@@ -83,9 +82,9 @@ const SingleHeader = ({ checkMyRoom }) => {
         console.log("Error at neighbor request...", error)
       }
     )
-    const fcmToken = localStorage.getItem("FCMToken");
+    const fcmToken = localStorage.getItem("FCMToken")
     if (fcmToken !== null) {
-      setIsPossiblePush(true);
+      setIsPossiblePush(true)
     }
   }, [])
 
@@ -119,23 +118,27 @@ const SingleHeader = ({ checkMyRoom }) => {
     )
   }
 
-
   // 문의하기 함수
   const inquiryHandler = () => {
-    fetchInquiry(
-      {
-        category: "3",
-        content: inquiryText,
-      },
-      (success) => {
-        setIsInquiry(false)
-        setIsHamburger(false)
-        successMsg("✅ 문의하기가 완료됐습니다!")
-      },
-      (error) => {
-        "Error at inquiry...", error
-      }
-    )
+    if (inquiryText.length < 5) {
+      successMsg("❌ 5자 이상 작성해주세요.")
+    } else {
+      fetchInquiry(
+        {
+          category: "3",
+          content: inquiryText,
+        },
+        (success) => {
+          setIsInquiry(false)
+          setIsHamburger(false)
+          setInquiryText("")
+          successMsg("✅ 문의하기가 완료됐습니다!")
+        },
+        (error) => {
+          "Error at inquiry...", error
+        }
+      )
+    }
   }
 
   // 로그아웃 함수
@@ -173,51 +176,51 @@ const SingleHeader = ({ checkMyRoom }) => {
   }
 
   // FCM 설정
-  // const messaging = getMessaging();
+  const messaging = getMessaging();
 
-  // const getPermissionRequest = async () => {
-  //   const permission = await Notification.requestPermission();
-  //   return permission;
-  // }
+  const getPermissionRequest = async () => {
+    const permission = await Notification.requestPermission();
+    return permission;
+  }
 
   // FCM 알림 권한 설정
-  // const pushToggleChange = async () => {
-  //   if (!Notification) {
-  //     return;
-  //   }
+  const pushToggleChange = async () => {
+    if (!Notification) {
+      return;
+    }
 
-  //   if (isPossiblePush === false) {
-  //     setIsPossiblePush(true)
-  //     const permission = await getPermissionRequest();
-  //     if (permission === "denied") {
-  //       setIsPossiblePush(false)
-  //     } else {
-  //       getToken(messaging, { vapidKey: import.meta.env.VITE_APP_VAPID })
-  //       .then((currentToken) => {
-  //         if (currentToken) {
-  //           setFCMTokenAtServer(currentToken);
-  //         } else {
-  //           setIsPossiblePush(false);
-  //           console.log('No registration token available. Request permission to generate one.');
-  //           return null;
-  //         }
-  //       }).catch((err) => {
-  //         setIsPossiblePush(false);
-  //         console.log('An error occurred while retrieving token. ', err);
-  //         return null;
-  //       });
-  //     }
-  //   } else if (isPossiblePush === true) {
-  //     setIsPossiblePush(false);
-  //     deleteFCMTokenAtServer();
-  //     localStorage.removeItem("FCMToken");
-  //   }
-  // }
+    if (isPossiblePush === false) {
+      setIsPossiblePush(true)
+      const permission = await getPermissionRequest();
+      if (permission === "denied") {
+        setIsPossiblePush(false)
+      } else {
+        getToken(messaging, { vapidKey: import.meta.env.VITE_APP_VAPID })
+        .then((currentToken) => {
+          if (currentToken) {
+            setFCMTokenAtServer(currentToken);
+          } else {
+            setIsPossiblePush(false);
+            console.log('No registration token available. Request permission to generate one.');
+            return null;
+          }
+        }).catch((err) => {
+          setIsPossiblePush(false);
+          console.log('An error occurred while retrieving token. ', err);
+          return null;
+        });
+      }
+    } else if (isPossiblePush === true) {
+      setIsPossiblePush(false);
+      deleteFCMTokenAtServer();
+      localStorage.removeItem("FCMToken");
+    }
+  }
 
   // 문의하기 200자 체크함수
   const checkMaxLength = (event) => {
     const inputValue = event.target.value
-    
+
     if (inputValue.length <= 200) {
       setInquiryText(event.target.value)
     }
@@ -226,58 +229,26 @@ const SingleHeader = ({ checkMyRoom }) => {
   return (
     <>
       <div className={styles.wrap}>
-        <div
-          className={
-            checkMyRoom === "invite" ? styles.inviteHeader : styles.header
-          }
-        >
-          {checkMyRoom === "invite" ? (
-            <div className={styles.userName}>딩동 마을</div>
-          ) : (
-            <>
-              <img
-                src={hamburger}
-                onClick={() => setIsHamburger(true)}
-                className={styles.HamburgerButton}
-              />
-              <div className={styles.Name}>
-
-              <RoomNameBtn >
-                딩동 마을
-              </RoomNameBtn >
-              </div>
-              {/* </div> */}
-              <img src={bell} onClick={() => setIsAlarm(true)} />
-            </>
-          )}
+        <div className={styles.header}>
+          <img
+            src={hamburger}
+            onClick={() => setIsHamburger(true)}
+            className={styles.HamburgerButton}
+          />
+          <div className={styles.Name}>
+            {checkMyRoom === "single" ? (
+              <RoomNameBtn>딩동 마을</RoomNameBtn>
+            ) : (
+              <RoomNameBtn>딩동 광장</RoomNameBtn>
+            )}
+            
+          </div>
+          {/* </div> */}
+          <img src={bell} onClick={() => setIsAlarm(true)} />
         </div>
       </div>
 
       {/* 햄버거 바 */}
-      {/* {isHamburger && (
-        <>
-          <div
-            className={styles.Overlay}
-            onClick={() => setIsHamburger(false)}
-          />
-          <div className={styles.HamburgerModal}>
-            <div className={styles.ContentContainer}>
-              <div
-                className={styles.MenuButton}
-                onClick={inquiryCheckHandler}
-              >
-                문의하기
-              </div>
-              <div className={styles.MenuButton} onClick={() => setIsRealLogout(true)}>
-                로그아웃
-              </div>
-              <div className={styles.MenuButton} onClick={() => setIsRealSecession(true)}>
-                회원탈퇴
-              </div>
-            </div>
-          </div>
-        </>
-      )} */}
       {isHamburger && (
         <>
           <div
@@ -286,30 +257,48 @@ const SingleHeader = ({ checkMyRoom }) => {
           />
           <div className={styles.HamburgerModal}>
             <div className={styles.XContainer}>
-              <img src={`${urlPath}/assets/icons/Pink_X-mark.png`} className={styles.XImage} onClick={() => setIsHamburger(false)} />
+              <img
+                src={`${urlPath}/assets/icons/Pink_X-mark.png`}
+                className={styles.XImage}
+                onClick={() => setIsHamburger(false)}
+              />
             </div>
             <div className={styles.NameContainer}>
               <div className={styles.Name}>{userInfo.nickname}</div>
             </div>
             <div className={styles.ContentContainer}>
-              <div className={styles.MenuButton} onClick={inquiryCheckHandler} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
+              <div
+                className={styles.MenuButton}
+                onClick={inquiryCheckHandler}
+                style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}
+              >
                 문의하기
               </div>
-              <div className={styles.MenuButton} onClick={() => setIsRealLogout(true)} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
+              <div
+                className={styles.MenuButton}
+                onClick={() => setIsRealLogout(true)}
+                style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}
+              >
                 로그아웃
               </div>
-              {/* <div className={`${styles.MenuButton} ${styles.toggleContainer} `} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
+              <div className={`${styles.MenuButton} ${styles.toggleContainer} `} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
                 푸시 알림
                 
                 <div className={`${styles.toggleSwitch} ${isPossiblePush === true ? styles.checkedToggle : ''}`} onClick={pushToggleChange}>
                   <div className={`${styles.toggleButton} ${isPossiblePush === true ? styles.checkedToggleSwitch : ''}`}/> 
                 </div>
 
-              </div> */}
+              </div>
             </div>
-              <div className={styles.exitButton} onClick={() => setIsRealSecession(true)}>
+            <div className={styles.FooterContainer}>
+              <div className={styles.Version}>v 1.3.0</div>
+              <div
+                className={styles.exitButton}
+                onClick={() => setIsRealSecession(true)}
+              >
                 회원 탈퇴
-              </div> 
+              </div>
+            </div>
           </div>
         </>
       )}
@@ -346,7 +335,6 @@ const SingleHeader = ({ checkMyRoom }) => {
           </div>
         </>
       )}
-
 
       {/* 문의하기 모달 */}
       {isInquiry && (

@@ -1,5 +1,6 @@
 import "./MainPage.css"
-function MainPage() {
+
+const MainPage = () => {
   return <div id="main-container"></div>
 }
 

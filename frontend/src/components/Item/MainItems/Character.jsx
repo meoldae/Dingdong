@@ -14,6 +14,7 @@ import { FenceBoxAtom } from "../../../atom/FenceAtom"
 import { userAtom } from "../../../atom/UserAtom"
 
 const Character = () => {
+  const localStorageKey = "characterPosition"
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
   // 회원의 캐릭터 ID
   const characterID = useRecoilValue(userAtom).avatarId
@@ -57,9 +58,17 @@ const Character = () => {
   })
 
   // 공통
-  const setCharacterPosition = useSetRecoilState(CharacterPositionAtom)
-  const [position, setPosition] = useState(new THREE.Vector3(0, 0, 0))
-  const [destination, setDestination] = useState(new THREE.Vector3(0, 0, 0))
+  const [characterPosition, setCharacterPosition] = useRecoilState(
+    CharacterPositionAtom
+  )
+
+  const storedPosition = JSON.parse(sessionStorage.getItem(localStorageKey))
+
+  const initialPosition = storedPosition
+    ? new THREE.Vector3(storedPosition[0], storedPosition[1], storedPosition[2])
+    : new THREE.Vector3(0, 0, 0)
+  const [position, setPosition] = useState(initialPosition)
+  const [destination, setDestination] = useState(initialPosition)
 
   // 경계 박스
   const fenceBoxes = useRecoilValue(FenceBoxAtom)
@@ -153,8 +162,17 @@ const Character = () => {
             position.clone().y,
             position.clone().z,
           ])
+          sessionStorage.setItem(
+            localStorageKey,
+            JSON.stringify([
+              position.toArray()[0],
+              position.toArray()[1],
+              position.toArray()[2] + 1,
+            ])
+          )
         } else {
           actions.current[1].stop()
+          actions.current[0].play()
         }
         // 충돌로직 끝
       }

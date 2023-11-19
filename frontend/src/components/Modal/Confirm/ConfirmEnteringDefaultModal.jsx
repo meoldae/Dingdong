@@ -16,6 +16,7 @@ import {
   isPostBoxVisibleAtom,
   selectedPostCardAtom,
 } from "../../../atom/PostAtom"
+import { lastUrlPathAtom } from "../../../atom/UrlAtom"
 
 // 스타일
 import styles from "./ConfirmEnteringDefaultModal.module.css"
@@ -48,6 +49,8 @@ const ConfirmEnteringDefaultModal = ({
 
   // 도착 여부
   const setIsArrived = useSetRecoilState(ArriveAtom)
+
+  // 사용자 정보
   const userInfo = useRecoilValue(userAtom)
 
   // 우체국 상태 관리
@@ -62,8 +65,10 @@ const ConfirmEnteringDefaultModal = ({
   const setIsPostBoxVisible = useSetRecoilState(isPostBoxVisibleAtom)
 
   // 멀티 상태 관리
-
   const p = useRecoilValue(userPositionAtom)
+
+  // 이전 URL 상태 관리
+  const setLastURL = useSetRecoilState(lastUrlPathAtom)
 
   // 마이룸으로 이동
   const onConfirm = () => {
@@ -74,6 +79,7 @@ const ConfirmEnteringDefaultModal = ({
     // 초기화
     setIsInitialRender(true)
     if (location === "house") {
+      setLastURL(window.location.pathname)
       const roomId = userInfo.roomId
       navigate(`${urlPath}/room/${roomId}`)
       // 우체국으로 이동
@@ -85,23 +91,24 @@ const ConfirmEnteringDefaultModal = ({
       setConfirmEnteringLocation(false)
       setIsArrived(false)
     } else if (location === "otherRoom") {
-      // const possibleRooms = [1, 3, 4, 6, 19, 21]
-      // let randomRoom
-      // do {
-      //   randomRoom = possibleRooms[Math.floor(Math.random() * possibleRooms.length)]
-      // } while (randomRoom === userInfo.roomId)
-      let randRoomId
+      setLastURL(window.location.pathname)
 
-      getRandomRoom(
-        (response) => {
-          randRoomId = response.data.data
+      const randRoomIds = [104, 77, 58, 37]; //시연
+      // const selectedRandRoomId = randRoomIds[Math.floor(Math.random() * randRoomIds.length)];
+      window.location.replace(`${urlPath}/random/${randRoomIds[0]}`); //시연
+  
+      // let randRoomId
+      // getRandomRoom(
+      //   (response) => {
+      //     randRoomId = response.data.data
 
-          navigate(`${urlPath}/random/${randRoomId}`)
-        },
-        (error) => {
-          console.log("Error with Random Room...", error)
-        }
-      )
+      //     navigate(`${urlPath}/random/${randRoomId}`)
+      //   },
+      //   (error) => {
+      //     console.log("Error with Random Room...", error)
+      //   }
+      // )
+
     } else if (location === "Test") {
       navigate(`${urlPath}/yourstamp`)
       setIsArrived(false)
@@ -116,11 +123,10 @@ const ConfirmEnteringDefaultModal = ({
     else if (location === "PostBox") {
       setIsPostBoxVisible(true)
       setIsArrived(false)
+    } else if (location === "world") {
+      navigate(`${urlPath}/multiPage`)
+      setIsArrived(false)
     }
-
-    // else if (location === "multiRoom") {
-
-    // }
 
     setConfirmEnteringLocation(false)
   }

@@ -7,11 +7,16 @@ import {
   otherRoomId,
 } from "../../atom/MultiAtom"
 import { useRef, useState } from "react"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import { RoomModalOpen } from "../../atom/MultiAtom"
-import DefaultModal from "../Modal/Default/DefaultModal"
 import { useNavigate } from "react-router-dom"
 import MultiRoomModal from "./MultiRoomModal"
+import SingleHeader from "../../pages/SinglePlay/SingleHeader"
+import ModeChangeModal from "./ModeChangeModal"
+import { lastUrlPathAtom } from "../../atom/UrlAtom"
+import { useGLTF } from "@react-three/drei"
+
+const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
 export const MultiPage = () => {
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -20,9 +25,11 @@ export const MultiPage = () => {
 
   const [chatInput, setChatInput] = useState("")
   const [roomModalOpen, setRoomModalOpen] = useRecoilState(RoomModalOpen)
+  const setLastURL = useSetRecoilState(lastUrlPathAtom)
 
   const users = useRecoilValue(MultiUsers)
   const otherRoom = useRecoilValue(otherRoomId)
+  const [changeModalOpen, setChangeModalOpen] = useState(false)
 
   const [isFloatingButtonVisible, setIsFloatingButtonVisible] = useRecoilState(
     isFloatingButtonVisibleAtom
@@ -51,6 +58,7 @@ export const MultiPage = () => {
   }
 
   const okClick = () => {
+    setLastURL(window.location.pathname)
     setRoomModalOpen(false)
     navigate(`${urlPath}/room/${otherRoom}`)
   }
@@ -59,8 +67,22 @@ export const MultiPage = () => {
     setRoomModalOpen(false)
   }
 
+  const onSingleMap = () => {
+    setChangeModalOpen(true)
+  }
+
+  const okClick2 = () => {
+    setChangeModalOpen(false)
+    navigate(`${urlPath}/`)
+  }
+
+  const cancelClick2 = () => {
+    setChangeModalOpen(false)
+  }
+
   return (
     <div className={styles.container}>
+      <SingleHeader checkMyRoom={"multi"} />
       {roomModalOpen && (
         <div className={styles.confirmModal}>
           <MultiRoomModal
@@ -69,6 +91,17 @@ export const MultiPage = () => {
             cancel={"취소"}
             okClick={okClick}
             cancelClick={cancelClick}
+          />
+        </div>
+      )}
+      {changeModalOpen && (
+        <div className={styles.confirmModal}>
+          <ModeChangeModal
+            content={"딩동 마을로 이동하시겠습니까?"}
+            ok={"확인"}
+            cancel={"취소"}
+            okClick={okClick2}
+            cancelClick={cancelClick2}
           />
         </div>
       )}
@@ -84,6 +117,13 @@ export const MultiPage = () => {
           <img src={`${urlPath}/assets/icons/white_paperplane.png`} />
         </div>
       </div>
+      <div className={styles.leftFloatingButton} onClick={onSingleMap}>
+        <img
+          src={`${urlPath}/assets/icons/worldMap.png`}
+          className={styles.FloatIcon}
+        />
+      </div>
+
       <div
         className={styles.FloatingButton}
         onClick={() => setIsFloatingButtonVisible(true)}
@@ -147,3 +187,10 @@ export const MultiPage = () => {
     </div>
   )
 }
+
+useGLTF.preload(`${urlPath}/assets/models/characters/1.glb`)
+useGLTF.preload(`${urlPath}/assets/models/characters/2.glb`)
+useGLTF.preload(`${urlPath}/assets/models/characters/3.glb`)
+useGLTF.preload(`${urlPath}/assets/models/characters/4.glb`)
+useGLTF.preload(`${urlPath}/assets/models/characters/5.glb`)
+useGLTF.preload(`${urlPath}/assets/models/characters/6.glb`)
