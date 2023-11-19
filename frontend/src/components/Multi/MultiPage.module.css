@@ -10,14 +10,14 @@
   height: 50px;
   border-radius: 50%;
 
-  background: rgba(2, 194, 111, 0.5);
+  background: #FFFFFF;
   display: flex;
   justify-content: center;
   align-items: center;
 
   position: absolute;
   bottom: 12%;
-  right: 2%;
+  right: 5%;
 
   z-index: 2;
 }
@@ -33,8 +33,8 @@
 }
 
 .PlusButton {
-  width: 25px;
-  height: 25px;
+  width: 27px;
+  height: 27px;
 }
 
 .Overlay {
@@ -56,8 +56,8 @@
   position: absolute;
 
   z-index: 100000001;
-  right: 3%;
-  bottom: 18%;
+  right: 6%;
+  bottom: 20%;
 }
 
 .actionsBtn {
@@ -159,7 +159,7 @@
   align-items: center;
   position: absolute;
   bottom: 12%;
-  left: 2%;
+  left: 5%;
   z-index: 2;
 }
 
