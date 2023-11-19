@@ -163,6 +163,20 @@
   z-index: 2;
 }
 
+.leftSecondFloatingButton {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 22%;
+  left: 5%;
+  z-index: 2;
+}
+
 .wrap {
   position: absolute;
   z-index: 2;

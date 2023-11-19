@@ -117,6 +117,14 @@ export const MultiPage = () => {
           <img src={`${urlPath}/assets/icons/white_paperplane.png`} />
         </div>
       </div>
+
+      <div className={styles.leftSecondFloatingButton}>
+        <img
+          src={`${urlPath}/assets/icons/ChatLog.png`}
+          style={{ width: "30px", height: "30px" }}
+        />
+      </div>
+
       <div className={styles.leftFloatingButton} onClick={onSingleMap}>
         <img
           src={`${urlPath}/assets/icons/worldMap.png`}
@@ -135,6 +143,7 @@ export const MultiPage = () => {
           }`}
         />
       </div>
+
       {isFloatingButtonVisible && (
         <>
           <div
