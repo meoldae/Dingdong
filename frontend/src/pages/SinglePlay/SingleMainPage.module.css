@@ -87,3 +87,19 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.minimapContainer{
+  z-index: 100;
+  position: absolute;
+  top: 90%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+  width: 195px;
+  height: 138px;
+}
+
+.minimap{
+  width: 100%;
+  border: 2px solid lightgray;
+  /* opacity: ; */
+}
