@@ -129,7 +129,7 @@ export const MultiPage = () => {
         onClick={() => setIsFloatingButtonVisible(true)}
       >
         <img
-          src={`${urlPath}/assets/icons/white_plus.png`}
+          src={`${urlPath}/assets/icons/GreenPlus.png`}
           className={`${styles.PlusButton} ${
             isFloatingButtonVisible ? styles.Rotate : styles.RotateBack
           }`}
