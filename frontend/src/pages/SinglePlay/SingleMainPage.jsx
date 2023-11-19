@@ -284,8 +284,8 @@ const SingleMainPage = () => {
       }
     )
   }
-  const [xPosition, setXPosition] = useState();
-  const [yPosition, setYPosition] = useState();
+  const [xPosition, setXPosition] = useState(0);
+  const [yPosition, setYPosition] = useState(0);
   const [characterPosition, setCharacterPosition] = useRecoilState(
     CharacterPositionAtom
   )  
