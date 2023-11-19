@@ -91,9 +91,9 @@
 .minimapContainer{
   z-index: 100;
   position: absolute;
-  top: 90%;
-  left: 70%;
-  transform: translate(-50%, -50%);
+  bottom: -50px;
+  right: 120px;
+  transform: translate(50%, -50%);
   width: 195px;
   height: 138px;
 }
