@@ -8,7 +8,7 @@ import {
 } from "../../atom/MultiAtom"
 import { useRef, useState } from "react"
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
-import { RoomModalOpen } from "../../atom/MultiAtom"
+import { RoomModalOpen, chatLogVisibleAtom } from "../../atom/MultiAtom"
 import { useNavigate } from "react-router-dom"
 import MultiRoomModal from "./MultiRoomModal"
 import SingleHeader from "../../pages/SinglePlay/SingleHeader"
@@ -34,6 +34,9 @@ export const MultiPage = () => {
   const [isFloatingButtonVisible, setIsFloatingButtonVisible] = useRecoilState(
     isFloatingButtonVisibleAtom
   )
+
+  // 채팅로그 모달 상태관리
+  const [chatLogVisible, setChatLogVisible] = useRecoilState(chatLogVisibleAtom)
 
   const chatButtonClick = () => {
     if (multiRenderRef.current?.publishChat) {
@@ -118,12 +121,22 @@ export const MultiPage = () => {
         </div>
       </div>
 
-      <div className={styles.leftSecondFloatingButton}>
+      <div className={styles.leftSecondFloatingButton} onClick={() => setChatLogVisible(true)}>
         <img
           src={`${urlPath}/assets/icons/ChatLog.png`}
           style={{ width: "30px", height: "30px" }}
         />
       </div>
+
+      {/* 채팅로그 모달 */}
+      {chatLogVisible && (
+        <>
+          <div className={styles.ChatOverlay} onClick={() => setChatLogVisible(false)}/>
+          <div className={styles.ChatLogContainer}>
+            {/* 채팅로그 만들자리! */}
+          </div>
+        </>
+      )}
 
       <div className={styles.leftFloatingButton} onClick={onSingleMap}>
         <img
