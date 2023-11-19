@@ -1,47 +1,51 @@
 // React
-import React, { useEffect, useState } from "react"
-import { motion } from "framer-motion"
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 // 스타일
-import styles from "./SingleMainPage.module.css"
+import styles from "./SingleMainPage.module.css";
 
 // API
-import { reportLetter } from "../../api/Letter"
+import { reportLetter } from "../../api/Letter";
 
 // Three.js 기본 세팅
-import { Canvas } from "@react-three/fiber"
-import { OrbitControls } from "@react-three/drei"
-import CustomCamera from "../../components/Default/CustomCamera"
-import DirectionalLight from "../../components/Default/DirectionLight"
-import Map from "../../components/Default/Map"
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import CustomCamera from "../../components/Default/CustomCamera";
+import DirectionalLight from "../../components/Default/DirectionLight";
+import Map from "../../components/Default/Map";
 
 // Three.js
-import Model from "../../components/Item/MainItems/Character"
-import House from "../../components/Item/MainItems/tempItems/House"
-import Spot from "../../components/Item/MainItems/tempItems/Spot"
+import Model from "../../components/Item/MainItems/Character";
+import House from "../../components/Item/MainItems/tempItems/House";
+import Spot from "../../components/Item/MainItems/tempItems/Spot";
 
 // 각 건물 포탈
-import DefaultPortal from "../../components/Item/MainItems/Portals/DefaultPortal"
-import DefaultPortalRing from "../../components/Item/MainItems/Portals/DefaultPortalRing"
+import DefaultPortal from "../../components/Item/MainItems/Portals/DefaultPortal";
+import DefaultPortalRing from "../../components/Item/MainItems/Portals/DefaultPortalRing";
 
 // React 컴포넌트
-import ConfirmEnteringDefaultModal from "../../components/Modal/Confirm/ConfirmEnteringDefaultModal"
-import PhysicsModel from "../../components/Item/MainItems/PhysicsModel"
-import RankingModal from "../../components/Modal/Ranking/RankingModal"
-import PostofficeCardBox from "../Postoffice/PostofficeCardBox"
-import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter"
-import GuidePage from "../../components/UI/GuidePage"
-import SingleHeader from "./SingleHeader"
-import RankingInformation from "../../components/Modal/Ranking/RankingInformation"
-import PostOfficeModal from "../../components/Modal/PostOffice/PostOfficeModal"
-import DefaultModal from "../../components/Modal/Default/DefaultModal"
-import PostBox from "../../components/Modal/Post/PostBox"
-import ReceiveLetter from "../../components/Modal/Post/ReceiveLetter"
-import { successMsg } from "../../utils/customToast"
+import ConfirmEnteringDefaultModal from "../../components/Modal/Confirm/ConfirmEnteringDefaultModal";
+import PhysicsModel from "../../components/Item/MainItems/PhysicsModel";
+import RankingModal from "../../components/Modal/Ranking/RankingModal";
+import PostofficeCardBox from "../Postoffice/PostofficeCardBox";
+import PostofficeSendLetter from "../Postoffice/PostofficeSendLetter";
+import GuidePage from "../../components/UI/GuidePage";
+import SingleHeader from "./SingleHeader";
+import RankingInformation from "../../components/Modal/Ranking/RankingInformation";
+import PostOfficeModal from "../../components/Modal/PostOffice/PostOfficeModal";
+import DefaultModal from "../../components/Modal/Default/DefaultModal";
+import PostBox from "../../components/Modal/Post/PostBox";
+import ReceiveLetter from "../../components/Modal/Post/ReceiveLetter";
+import { successMsg } from "../../utils/customToast";
 
 // Atom
-import { CharacterPositionAtom, DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom"
+import {
+  CharacterPositionAtom,
+  DefaultPosition,
+  DefaultZoom,
+} from "../../atom/DefaultSettingAtom";
 import {
   postofficeCardAtom,
   postofficeSendLetterAtom,
@@ -52,11 +56,11 @@ import {
   isReceiveLetterVisibleAtom,
   isFinishReceiveLetterVisibleAtom,
   reportPostVisibleAtom,
-} from "../../atom/PostAtom"
+} from "../../atom/PostAtom";
 import {
   isPostOfficeVisibleAtom,
   isFinishPostOfficeVisibleAtom,
-} from "../../atom/PostOfficeAtom"
+} from "../../atom/PostOfficeAtom";
 import {
   ArriveAtom,
   ConfirmEnteringInstaAtom,
@@ -88,214 +92,234 @@ import {
   TwitterPortalVisibleAtom,
   WorldPortalPositionAtom,
   WorldPortalVisibleAtom,
-} from "../../atom/SinglePlayAtom"
-import { RoomPortalVisibleAtom } from "../../atom/SinglePlayAtom"
-import { letterIdAtom } from "../../atom/LetterAtom"
+} from "../../atom/SinglePlayAtom";
+import { RoomPortalVisibleAtom } from "../../atom/SinglePlayAtom";
+import { letterIdAtom } from "../../atom/LetterAtom";
 
 const SingleMainPage = () => {
-  const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+  const urlPath = import.meta.env.VITE_APP_ROUTER_URL;
   // 카메라 설정
-  const setDefaultCameraPosition = useSetRecoilState(DefaultPosition)
-  const setDefaultCameraZoom = useSetRecoilState(DefaultZoom)
+  const setDefaultCameraPosition = useSetRecoilState(DefaultPosition);
+  const setDefaultCameraZoom = useSetRecoilState(DefaultZoom);
 
   // 도착 여부
-  const setIsArrived = useSetRecoilState(ArriveAtom)
+  const setIsArrived = useSetRecoilState(ArriveAtom);
   const isArrived = useRecoilValue(ArriveAtom);
   // 장소 입장 확인 여부
   const [confirmEnteringRoom, setConfirmEnteringRoom] = useRecoilState(
     ConfirmEnteringRoomAtom
-  )
+  );
   const [confirmEnteringPostOffice, setConfirmEnteringPostOffice] =
-    useRecoilState(ConfirmEnteringPostOfficeAtom)
+    useRecoilState(ConfirmEnteringPostOfficeAtom);
   const [confirmEnteringStore, setConfirmEnteringStore] = useRecoilState(
     ConfirmEnteringStoreAtom
-  )
+  );
   const [confirmEnteringOtherRoom, setConfirmEnteringOtherRoom] =
-    useRecoilState(ConfirmEnteringOtherRoomAtom)
+    useRecoilState(ConfirmEnteringOtherRoomAtom);
   const [confirmEnteringWorld, setConfirmEnteringWorld] = useRecoilState(
     ConfirmEnteringWorldAtom
-  )
+  );
   const [confirmEnteringRank, setConfirmEnteringRank] = useRecoilState(
     ConfirmEnteringRankAtom
-  )
+  );
 
   const [confirmEnteringTest, setConfirmEnteringTest] = useRecoilState(
     ConfirmEnteringTestAtom
-  )
+  );
 
   const [confirmEnteringInsta, setConfirmEnteringInsta] = useRecoilState(
     ConfirmEnteringInstaAtom
-  )
+  );
 
   const [confirmEnteringTwitter, setConfirmEnteringTwitter] = useRecoilState(
     ConfirmEnteringTwitterAtom
-  )
+  );
 
   const [confirmEnteringPostBox, setConfirmEnteringPostBox] = useRecoilState(
     ConfirmEnteringPostBoxAtom
-  )
+  );
 
   // 포탈 생성 여부
   const [roomPortalVisible, setRoomPortalVisible] = useRecoilState(
     RoomPortalVisibleAtom
-  )
+  );
   const [postOfficePortalVisible, setPostOfficePortalVisible] = useRecoilState(
     PostOfficePortalVisibleAtom
-  )
+  );
   const [storePortalVisible, setStorePortalVisible] = useRecoilState(
     StorePortalVisibleAtom
-  )
+  );
   const [otherRoomPortalVisible, setOtherRoomPortalVisible] = useRecoilState(
     OtherRoomPortalVisibleAtom
-  )
+  );
   const [worldPortalVisible, setWorldPortalVisible] = useRecoilState(
     WorldPortalVisibleAtom
-  )
+  );
   const [rankPortalVisible, setRankPortalVisible] = useRecoilState(
     RankPortalVisibleAtom
-  )
+  );
   const [testPortalVisible, setTestPortalVisible] = useRecoilState(
     TestPortalVisibleAtom
-  )
+  );
   const [instaPortalVisible, setInstaPortalVisible] = useRecoilState(
     InstaPortalVisibleAtom
-  )
+  );
   const [twitterPortalVisible, setTwitterPortalVisible] = useRecoilState(
     TwitterPortalVisibleAtom
-  )
+  );
 
   const [postBoxPortalVisible, setPostBoxPortalVisible] = useRecoilState(
     PostBoxPortalVisibleAtom
-  )
+  );
 
   // 포탈 위치
-  const roomPortalPosition = useRecoilValue(RoomPortalPositionAtom)
-  const postOfficePortalPosition = useRecoilValue(PostOfficePortalPositionAtom)
-  const storePortalPosition = useRecoilValue(StorePortalPositionAtom)
-  const otherRoomPortalPosition = useRecoilValue(OtherRoomPortalPositionAtom)
-  const worldPortalPosition = useRecoilValue(WorldPortalPositionAtom)
-  const rankPortalPosition = useRecoilValue(RankPortalPositionAtom)
-  const testPortalPosition = useRecoilValue(TestPortalPositionAtom)
-  const instaPortalPosition = useRecoilValue(InstaPortalPositionAtom)
-  const twitterPortalPosition = useRecoilValue(TwitterPortalPositionAtom)
-  const postBoxPortalPosition = useRecoilValue(PostBoxPortalPositionAtom)
+  const roomPortalPosition = useRecoilValue(RoomPortalPositionAtom);
+  const postOfficePortalPosition = useRecoilValue(PostOfficePortalPositionAtom);
+  const storePortalPosition = useRecoilValue(StorePortalPositionAtom);
+  const otherRoomPortalPosition = useRecoilValue(OtherRoomPortalPositionAtom);
+  const worldPortalPosition = useRecoilValue(WorldPortalPositionAtom);
+  const rankPortalPosition = useRecoilValue(RankPortalPositionAtom);
+  const testPortalPosition = useRecoilValue(TestPortalPositionAtom);
+  const instaPortalPosition = useRecoilValue(InstaPortalPositionAtom);
+  const twitterPortalPosition = useRecoilValue(TwitterPortalPositionAtom);
+  const postBoxPortalPosition = useRecoilValue(PostBoxPortalPositionAtom);
 
   // 랭킹모달 상태관리
   const closeRanking = () => {
-    setIsArrived(false)
-    setConfirmEnteringRank(false)
-    setDefaultCameraPosition([2, 10, 10])
-    setDefaultCameraZoom(0.18)
-  }
+    setIsArrived(false);
+    setConfirmEnteringRank(false);
+    setDefaultCameraPosition([2, 10, 10]);
+    setDefaultCameraZoom(0.18);
+  };
 
   // 우체국 도착 상태관리
   const [isPostOfficeVisible, setIsPostOfficeVisible] = useRecoilState(
     isPostOfficeVisibleAtom
-  )
+  );
   const [isFinishPostOfficeVisible, setIsFinishPostOfficeVisible] =
-    useRecoilState(isFinishPostOfficeVisibleAtom)
+    useRecoilState(isFinishPostOfficeVisibleAtom);
   const [onPostofficeCard, setOnPostOfficeCard] =
-    useRecoilState(postofficeCardAtom)
+    useRecoilState(postofficeCardAtom);
   const [onPostofficeSendLetter, setOnPostofficeSendLetter] = useRecoilState(
     postofficeSendLetterAtom
-  )
+  );
   const [isFinishPostOfficeCard, setIsFinishPostOfficeCard] = useRecoilState(
     finishPostofficeCardAtom
-  )
+  );
   const [isFinishPostOfficeSendLetter, setIsFinishPostOfficeSendLetter] =
-    useRecoilState(finishPostofficeSendLetterAtom)
-  const [guide, setGuide] = useState(false)
+    useRecoilState(finishPostofficeSendLetterAtom);
+  const [guide, setGuide] = useState(false);
 
   // 우체통 도착 상태관리
   const [isPostBoxVisible, setIsPostBoxVisible] =
-    useRecoilState(isPostBoxVisibleAtom)
+    useRecoilState(isPostBoxVisibleAtom);
   const [isFinishPostBoxVisible, setIsFinishPostBoxVisible] = useRecoilState(
     isFinishPostBoxVisibleAtom
-  )
+  );
   const [isReceiveLetterVisible, setIsReceiveLetterVisible] = useRecoilState(
     isReceiveLetterVisibleAtom
-  )
+  );
   const [isFinishReceiveLetterVisible, setIsFinishReceiveLetterVisible] =
-    useRecoilState(isFinishReceiveLetterVisibleAtom)
+    useRecoilState(isFinishReceiveLetterVisibleAtom);
   const [isReportPostVisible, setIsReportPostVisible] = useRecoilState(
     reportPostVisibleAtom
-  )
+  );
   // 선택된 편지 ID (신고하기 용)
-  const selectedLetterId = useRecoilValue(letterIdAtom)
+  const selectedLetterId = useRecoilValue(letterIdAtom);
 
   // 가이드 관리
   useEffect(() => {
     if (localStorage.getItem("guideVisible")) {
-      setGuide(false)
+      setGuide(false);
     } else {
-      setGuide(true)
+      setGuide(true);
     }
 
     // 시연
-    sessionStorage.setItem("TRI", "0")
-  }, [])
+    sessionStorage.setItem("TRI", "0");
+  }, []);
 
   // 랭킹정보 모달 상태관리
-  const [isRankingInformation, setIsRankingInformation] = useState(false)
+  const [isRankingInformation, setIsRankingInformation] = useState(false);
+
+  // 미니맵 모달 상태관리
+  const [isMinimap, setIsMinimap] = useState(false);
 
   // 우체국 종료 확인 함수
   const finishPostOfficeHandler = () => {
-    setIsFinishPostOfficeVisible(false)
-    setIsPostOfficeVisible(false)
-  }
+    setIsFinishPostOfficeVisible(false);
+    setIsPostOfficeVisible(false);
+  };
 
   // 우표선택 종료 확인 함수
   const finishPostOfficeCardHandler = () => {
-    setIsFinishPostOfficeCard(false)
-    setOnPostOfficeCard(false)
-  }
+    setIsFinishPostOfficeCard(false);
+    setOnPostOfficeCard(false);
+  };
 
   // 편지작성 종료 확인 함수
   const finishPostOfficeSendLetter = () => {
-    setIsFinishPostOfficeSendLetter(false)
-    setOnPostofficeSendLetter(false)
-  }
+    setIsFinishPostOfficeSendLetter(false);
+    setOnPostofficeSendLetter(false);
+  };
 
   // 편지함 종료 확인 함수
   const finishPostBoxHandler = () => {
-    setIsFinishPostBoxVisible(false)
-    setIsPostBoxVisible(false)
-  }
+    setIsFinishPostBoxVisible(false);
+    setIsPostBoxVisible(false);
+  };
 
   // 편지상세 종료 확인 함수
   const finishReceiveLetterHandler = () => {
-    setIsFinishReceiveLetterVisible(false)
-    setIsReceiveLetterVisible(false)
-    setIsPostBoxVisible(true)
-  }
+    setIsFinishReceiveLetterVisible(false);
+    setIsReceiveLetterVisible(false);
+    setIsPostBoxVisible(true);
+  };
 
   // 신고하기 모달 함수
   const reportPostHandler = () => {
     reportLetter(
       selectedLetterId,
       (success) => {
-        setIsReportPostVisible(false)
-        setIsReceiveLetterVisible(false)
-        successMsg("✅ 신고가 정상적으로 접수됐습니다!")
+        setIsReportPostVisible(false);
+        setIsReceiveLetterVisible(false);
+        successMsg("✅ 신고가 정상적으로 접수됐습니다!");
       },
       (error) => {
-        successMsg("❌ 신고하기에 실패했습니다.")
-        console.log("Error at Report Post...", error)
+        successMsg("❌ 신고하기에 실패했습니다.");
+        console.log("Error at Report Post...", error);
       }
-    )
-  }
+    );
+  };
+
+  // 미니맵 위치 관련 로직
   const [xPosition, setXPosition] = useState(82);
   const [yPosition, setYPosition] = useState(29);
+  const [bigXPosition, setBigXPosition] = useState();
+  const [bigYPosition, setBigYPosition] = useState();
+
   const [characterPosition, setCharacterPosition] = useRecoilState(
     CharacterPositionAtom
-  )  
-  const position = sessionStorage.getItem("characterPosition")
-  useEffect(()=>{
-    if(position){
-      setXPosition((JSON.parse(position)[0]+32) + (JSON.parse(position)[0]+29) * 1.66)
-      setYPosition((JSON.parse(position)[2]+15) + (JSON.parse(position)[2]+ 11) *1.6)
+  );
+  const position = sessionStorage.getItem("characterPosition");
+  useEffect(() => {
+    if (position) {
+      // 작은 미니맵
+      setXPosition(
+        JSON.parse(position)[0] + 32 + (JSON.parse(position)[0] + 29) * 1.66
+      );
+      setYPosition(
+        JSON.parse(position)[2] + 15 + (JSON.parse(position)[2] + 11) * 1.6
+      );
+      // 확대한 미니맵
+      setBigXPosition(
+        JSON.parse(position)[0] + 87 + (JSON.parse(position)[0] + 30) * 3.6
+      );
+      setBigYPosition(
+        JSON.parse(position)[2] + 12 + (JSON.parse(position)[2] + 12) * 3.5
+      );
     }
-  },[position])
+  }, [position]);
   return (
     <>
       <div className={styles.canvasContainer}>
@@ -321,7 +345,7 @@ const SingleMainPage = () => {
           <Model />
           {/* <Spot /> */}
           {/* <House /> */}
-          
+
           {/* 외곽 경계 */}
           <PhysicsModel // 상
             position={[0, 0.005, -12.5]}
@@ -714,8 +738,8 @@ const SingleMainPage = () => {
         {guide && (
           <GuidePage
             onClick={() => {
-              localStorage.setItem("guideVisible", true)
-              setGuide(false)
+              localStorage.setItem("guideVisible", true);
+              setGuide(false);
             }}
           />
         )}
@@ -965,8 +989,8 @@ const SingleMainPage = () => {
               <div
                 className={styles.InformationOverlay}
                 onClick={() => {
-                  setIsReceiveLetterVisible(false)
-                  setIsPostBoxVisible(true)
+                  setIsReceiveLetterVisible(false);
+                  setIsPostBoxVisible(true);
                 }}
               />
               <div className={styles.postofficemodalcontainer}>
@@ -1117,18 +1141,78 @@ const SingleMainPage = () => {
             </div>
           </motion.div>
         )}
-        {isArrived || guide || confirmEnteringRoom || confirmEnteringPostOffice || confirmEnteringStore || confirmEnteringOtherRoom || confirmEnteringWorld || isPostOfficeVisible || isFinishPostOfficeVisible || onPostofficeCard || isFinishPostOfficeCard ||onPostofficeSendLetter || isFinishPostOfficeSendLetter || isPostBoxVisible || isFinishPostBoxVisible || isReceiveLetterVisible || isFinishReceiveLetterVisible || isReportPostVisible || confirmEnteringRank || isRankingInformation || confirmEnteringTest || confirmEnteringInsta || confirmEnteringTwitter || confirmEnteringPostBox
-        ?
-        null
-        :
-        <div className={styles.minimapContainer}>
-          <img src={`${urlPath}/assets/icons/redDot.png`} style={{width:"10px", position:"absolute", top:`${yPosition}px`,left:`${xPosition}px`}}/>
-          <img src={`${urlPath}/assets/images/minimap2.png`} className={styles.minimap} />
-        </div>
-        }
+
+        {/* 확대한 미니맵 */}
+        {isMinimap && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
+            <div className={styles.overlay} onClick={() => setIsMinimap(false)} />
+
+            <div className={styles.bigMinimap}>
+              <img src={`${urlPath}/assets/images/minimap2.png`} alt="" />
+              <img src={`${urlPath}/assets/icons/redDot.png`}           style={{
+                width: "15px",
+                height:"auto",
+                position: "absolute",
+                top: `${bigYPosition}px`,
+                left: `${bigXPosition}px`,
+              }}/>
+            </div>
+          </motion.div>
+        )}
+
+        {isMinimap ||
+        isArrived ||
+        guide ||
+        confirmEnteringRoom ||
+        confirmEnteringPostOffice ||
+        confirmEnteringStore ||
+        confirmEnteringOtherRoom ||
+        confirmEnteringWorld ||
+        isPostOfficeVisible ||
+        isFinishPostOfficeVisible ||
+        onPostofficeCard ||
+        isFinishPostOfficeCard ||
+        onPostofficeSendLetter ||
+        isFinishPostOfficeSendLetter ||
+        isPostBoxVisible ||
+        isFinishPostBoxVisible ||
+        isReceiveLetterVisible ||
+        isFinishReceiveLetterVisible ||
+        isReportPostVisible ||
+        confirmEnteringRank ||
+        isRankingInformation ||
+        confirmEnteringTest ||
+        confirmEnteringInsta ||
+        confirmEnteringTwitter ||
+        confirmEnteringPostBox ? null : (
+          <div
+            className={styles.minimapContainer}
+            onClick={() => {
+              setIsMinimap(true);
+            }}
+          >
+            <img
+              src={`${urlPath}/assets/icons/redDot.png`}
+              style={{
+                width: "10px",
+                position: "absolute",
+                top: `${yPosition}px`,
+                left: `${xPosition}px`,
+              }}
+            />
+            <img
+              src={`${urlPath}/assets/images/minimap2.png`}
+              className={styles.minimap}
+            />
+          </div>
+        )}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default SingleMainPage
+export default SingleMainPage;
