@@ -15,6 +15,7 @@ public class UserSession {
     private Long avatarId;
     private Long roomId;
     private Integer actionId;
+    private Integer diceNumber;
     private String chat;
     private double x;
     private double y;
