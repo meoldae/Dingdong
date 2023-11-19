@@ -429,3 +429,15 @@
 .exitButton {
   font-size: 12px;
 }
+
+.audioContainer {
+
+  width: 60px;
+  height: 30px;
+}
+
+.audioContainer img {
+  position: absolute;
+  left: 50%;
+  height: 30px;
+}

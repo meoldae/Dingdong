@@ -1,5 +1,5 @@
 // 라이브러리
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useRecoilValue } from "recoil"
 
 // 스타일
@@ -54,9 +54,13 @@ const SingleHeader = ({ checkMyRoom }) => {
   const [isRealSecession, setIsRealSecession] = useState(false)
   // Push 알림 토글
   const [isPossiblePush, setIsPossiblePush] = useState(false)
+  // 배경음악 플레이 유무
+  const [isBGM, setIsBGM] = useState(false)
+  const audioRef = useRef(null);
 
   // 유저정보
   const userInfo = useRecoilValue(userAtom)
+
 
   const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
@@ -85,6 +89,10 @@ const SingleHeader = ({ checkMyRoom }) => {
     const fcmToken = localStorage.getItem("FCMToken")
     if (fcmToken !== null) {
       setIsPossiblePush(true)
+    }
+    const localBGMFlag = localStorage.getItem("isBGM")
+    if (localBGMFlag == "true"){
+      setIsBGM(true);
     }
   }, [])
 
@@ -217,6 +225,35 @@ const SingleHeader = ({ checkMyRoom }) => {
     }
   }
 
+  // BGM 재생 관련
+  const playSound = () => {
+    console.log("Play Sound")
+    const audioElement = audioRef.current;
+    audioElement.play();
+  };
+
+  const pauseSound = () => {
+    console.log("Pause Sound ")
+    const audioElement = audioRef.current;
+    audioElement.pause();
+    audioElement.currentTime = 0;
+  }
+
+  const bgmToggleChange = async () => {
+    localStorage.setItem("isBGM", !isBGM);
+    setIsBGM(prev => !prev);
+  };
+
+  useEffect(() => {
+    console.log("isBGM : ", isBGM);
+    if (isBGM) {
+      playSound();
+    } else {
+      pauseSound();
+    }
+  }, [isBGM])
+
+
   // 문의하기 200자 체크함수
   const checkMaxLength = (event) => {
     const inputValue = event.target.value
@@ -229,6 +266,9 @@ const SingleHeader = ({ checkMyRoom }) => {
   return (
     <>
       <div className={styles.wrap}>
+        <audio ref={audioRef} loop>
+          <source src={`${urlPath}/assets/musics/BGM.mp3`} type="audio/mp3" />
+        </audio>
         <div className={styles.header}>
           <img
             src={hamburger}
@@ -286,6 +326,14 @@ const SingleHeader = ({ checkMyRoom }) => {
                 
                 <div className={`${styles.toggleSwitch} ${isPossiblePush === true ? styles.checkedToggle : ''}`} onClick={pushToggleChange}>
                   <div className={`${styles.toggleButton} ${isPossiblePush === true ? styles.checkedToggleSwitch : ''}`}/> 
+                </div>
+
+              </div>
+              <div className={`${styles.MenuButton} ${styles.toggleContainer} `} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
+                배경 음악
+                
+                <div className={`${styles.toggleSwitch} ${isBGM === true ? styles.checkedToggle : ''}`} onClick={bgmToggleChange}>
+                  <div className={`${styles.toggleButton} ${isBGM === true ? styles.checkedToggleSwitch : ''}`}/> 
                 </div>
 
               </div>
