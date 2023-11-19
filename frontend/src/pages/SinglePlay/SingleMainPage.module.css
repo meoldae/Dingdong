@@ -103,3 +103,20 @@
   border: 2px solid lightgray;
   /* opacity: ; */
 }
+
+.bigMinimap{
+  width: 100%;
+  z-index: 100000006;
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bigMinimap img{
+  width: 340px;
+  /* height: 260px; */
+}
