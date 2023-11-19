@@ -15,6 +15,7 @@ import axios from "axios"
 import { useFrame, useLoader } from "@react-three/fiber"
 import { useNavigate, useLocation } from "react-router-dom"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+import Dice from "../Item/MainItems/tempItems/dice"
 
 const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
@@ -305,6 +306,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
       <Environment preset="sunset" />
       <ambientLight intensity={1} />
       <OrbitControls enabled={false} />
+
       {/* <primitive
         object={Modelgltf.scene}
         position={[-2, 0, -2]}

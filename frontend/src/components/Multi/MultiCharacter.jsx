@@ -12,6 +12,7 @@ import {
   userPositionAtom,
 } from "../../atom/MultiAtom"
 import styles from "./MultiCharacter.module.css"
+import Dice from "../Item/MainItems/tempItems/dice"
 
 const MOVEMENT_SPEED = 0.06
 const urlPath = import.meta.env.VITE_APP_ROUTER_URL
@@ -54,7 +55,13 @@ export function MultiCharacter({
 
   const setOtherRoomId = useSetRecoilState(otherRoomId)
 
-  const actionList = [0, { Win: 2800 }, { Sad: 5700 }, { "Song Jump": 6500 }]
+  const actionList = [
+    0,
+    { Win: 2800 },
+    { Sad: 5700 },
+    { "Song Jump": 6500 },
+    { dice: 6000 },
+  ]
 
   const actionName = Object.keys(actionList[actionId])[0]
   const actionTime = Object.values(actionList[actionId])[0]
@@ -125,9 +132,14 @@ export function MultiCharacter({
       // 정지
     } else {
       if (isPlay) {
-        actions[actionName].play()
-        actions.Run.stop()
-        actions.Idle.stop()
+        if (actionId == 4) {
+          actions.Run.stop()
+          // actions.Idle.stop()
+        } else {
+          actions[actionName].play()
+          actions.Run.stop()
+          actions.Idle.stop()
+        }
       } else {
         actions.Run.stop()
         actions.Idle.play()
@@ -145,6 +157,7 @@ export function MultiCharacter({
 
   return (
     <group ref={group} {...props} dispose={null} position={position}>
+      <Dice actionId={actionId} />
       <Html position-y={1.7} center style={{ pointerEvents: "none" }}>
         <div className={styles.characterContainer}>
           {chat && (
@@ -199,3 +212,5 @@ export function MultiCharacter({
     </group>
   )
 }
+
+MultiCharacter.__isStatic = true
