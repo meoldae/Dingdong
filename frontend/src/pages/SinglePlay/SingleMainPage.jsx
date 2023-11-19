@@ -292,8 +292,8 @@ const SingleMainPage = () => {
   const position = sessionStorage.getItem("characterPosition")
   useEffect(()=>{
     if(position){
-      setXPosition((JSON.parse(position)[0]+33) + (JSON.parse(position)[0]+29) * 1.66)
-      setYPosition((JSON.parse(position)[2]+17) + (JSON.parse(position)[2]+ 11) *1.6)
+      setXPosition((JSON.parse(position)[0]+32) + (JSON.parse(position)[0]+29) * 1.66)
+      setYPosition((JSON.parse(position)[2]+15) + (JSON.parse(position)[2]+ 11) *1.6)
     }
   },[position])
   return (
