@@ -95,7 +95,7 @@
   border-radius: 10px;
   margin-right: 7.5px; /* 7.5인 이유 : 50px - 35px (50pxFooter의 중간에 있어서)의 반 값 */
 
-  background: #000000;
+  background: #02C26F;
 
   display: flex;
   align-items: center;
