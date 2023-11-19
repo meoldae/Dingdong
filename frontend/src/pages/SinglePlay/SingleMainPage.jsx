@@ -294,8 +294,6 @@ const SingleMainPage = () => {
     if(position){
       setXPosition((JSON.parse(position)[0]+49) + (JSON.parse(position)[0]+29) * 1.2)
       setYPosition((JSON.parse(position)[2]+ 18) + (JSON.parse(position)[2]+ 11) *1.05)
-      console.log(xPosition)
-      console.log(yPosition)
     }
   },[position])
   return (
