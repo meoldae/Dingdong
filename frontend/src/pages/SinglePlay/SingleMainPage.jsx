@@ -41,7 +41,7 @@ import ReceiveLetter from "../../components/Modal/Post/ReceiveLetter"
 import { successMsg } from "../../utils/customToast"
 
 // Atom
-import { DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom"
+import { CharacterPositionAtom, DefaultPosition, DefaultZoom } from "../../atom/DefaultSettingAtom"
 import {
   postofficeCardAtom,
   postofficeSendLetterAtom,
@@ -100,7 +100,7 @@ const SingleMainPage = () => {
 
   // 도착 여부
   const setIsArrived = useSetRecoilState(ArriveAtom)
-
+  const isArrived = useRecoilValue(ArriveAtom);
   // 장소 입장 확인 여부
   const [confirmEnteringRoom, setConfirmEnteringRoom] = useRecoilState(
     ConfirmEnteringRoomAtom
@@ -284,7 +284,20 @@ const SingleMainPage = () => {
       }
     )
   }
-
+  const [xPosition, setXPosition] = useState();
+  const [yPosition, setYPosition] = useState();
+  const [characterPosition, setCharacterPosition] = useRecoilState(
+    CharacterPositionAtom
+  )  
+  const position = sessionStorage.getItem("characterPosition")
+  useEffect(()=>{
+    if(position){
+      setXPosition((JSON.parse(position)[0]+49) + (JSON.parse(position)[0]+29) * 1.2)
+      setYPosition((JSON.parse(position)[2]+ 18) + (JSON.parse(position)[2]+ 11) *1.05)
+      console.log(xPosition)
+      console.log(yPosition)
+    }
+  },[position])
   return (
     <>
       <div className={styles.canvasContainer}>
@@ -310,7 +323,7 @@ const SingleMainPage = () => {
           <Model />
           {/* <Spot /> */}
           {/* <House /> */}
-
+          
           {/* 외곽 경계 */}
           <PhysicsModel // 상
             position={[0, 0.005, -12.5]}
@@ -1106,6 +1119,15 @@ const SingleMainPage = () => {
             </div>
           </motion.div>
         )}
+        {isArrived || guide || confirmEnteringRoom || confirmEnteringPostOffice || confirmEnteringStore || confirmEnteringOtherRoom || confirmEnteringWorld || isPostOfficeVisible || isFinishPostOfficeVisible || onPostofficeCard || isFinishPostOfficeCard ||onPostofficeSendLetter || isFinishPostOfficeSendLetter || isPostBoxVisible || isFinishPostBoxVisible || isReceiveLetterVisible || isFinishReceiveLetterVisible || isReportPostVisible || confirmEnteringRank || isRankingInformation || confirmEnteringTest || confirmEnteringInsta || confirmEnteringTwitter || confirmEnteringPostBox
+        ?
+        null
+        :
+        <div className={styles.minimapContainer}>
+          <img src={`${urlPath}/assets/icons/redDot.png`} style={{width:"10px", position:"absolute", top:`${yPosition}px`,left:`${xPosition}px`}}/>
+          <img src={`${urlPath}/assets/images/minimap.jpg`} className={styles.minimap} />
+        </div>
+        }
       </div>
     </>
   )
