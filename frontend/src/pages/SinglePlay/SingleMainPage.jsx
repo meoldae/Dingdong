@@ -292,8 +292,8 @@ const SingleMainPage = () => {
   const position = sessionStorage.getItem("characterPosition")
   useEffect(()=>{
     if(position){
-      setXPosition((JSON.parse(position)[0]+49) + (JSON.parse(position)[0]+29) * 1.2)
-      setYPosition((JSON.parse(position)[2]+ 18) + (JSON.parse(position)[2]+ 11) *1.05)
+      setXPosition((JSON.parse(position)[0]+33) + (JSON.parse(position)[0]+29) * 1.66)
+      setYPosition((JSON.parse(position)[2]+17) + (JSON.parse(position)[2]+ 11) *1.6)
     }
   },[position])
   return (
@@ -1123,7 +1123,7 @@ const SingleMainPage = () => {
         :
         <div className={styles.minimapContainer}>
           <img src={`${urlPath}/assets/icons/redDot.png`} style={{width:"10px", position:"absolute", top:`${yPosition}px`,left:`${xPosition}px`}}/>
-          <img src={`${urlPath}/assets/images/minimap.jpg`} className={styles.minimap} />
+          <img src={`${urlPath}/assets/images/minimap2.png`} className={styles.minimap} />
         </div>
         }
       </div>
