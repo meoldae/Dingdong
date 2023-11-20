@@ -62,7 +62,7 @@ export function MultiCharacter({
     { Win: 2800 },
     { Sad: 5700 },
     { "Song Jump": 6500 },
-    { dice: 6000 },
+    { dice: 5000 },
   ]
 
   const actionName = Object.keys(actionList[actionId])[0]
