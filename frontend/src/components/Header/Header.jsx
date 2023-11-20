@@ -22,19 +22,19 @@ import RoomNameBtn from "../Button/Room/RoomNameBtn";
 import { userAtom } from "../../atom/UserAtom";
 import { roomInfoAtom, roomHeartAtom } from "../../atom/RoomInfoAtom";
 
-// API 
+// API
 import {
   fetchNeighborRequest,
   responseNeighborRequest,
   fetchNeighborList,
   deleteNeighbor,
-} from "../../api/Neighbor"
-import { fetchLogout, fetchUserSecession } from "../../api/User"
-import { fetchInquiry } from "../../api/Cs"
-import { setFCMTokenAtServer, deleteFCMTokenAtServer } from "@/api/FCM"
+} from "../../api/Neighbor";
+import { fetchLogout, fetchUserSecession } from "../../api/User";
+import { fetchInquiry } from "../../api/Cs";
+import { setFCMTokenAtServer, deleteFCMTokenAtServer } from "@/api/FCM";
 
-// FCM 
-import { getMessaging, getToken} from "firebase/messaging";
+// FCM
+import { getMessaging, getToken } from "firebase/messaging";
 
 const Header = ({ checkMyRoom }) => {
   const navigate = useNavigate();
@@ -77,7 +77,7 @@ const Header = ({ checkMyRoom }) => {
   const [heartCount, setHeartCount] = useRecoilState(roomHeartAtom);
 
   // 유저요청 가져오기
-  useEffect(() => { 
+  useEffect(() => {
     // 이웃 리스트
     fetchNeighborList(
       (success) => {
@@ -153,7 +153,7 @@ const Header = ({ checkMyRoom }) => {
         setNeighborList((prev) => prev.filter((item) => item.memberId !== Id));
         setRemoveNeighborList(false);
         setNeighborListLength(neighborListLength - 1);
-        successMsg("✅ 이웃이 정상적으로 삭제되었습니다!")
+        successMsg("✅ 이웃이 정상적으로 삭제되었습니다!");
       },
       (error) => {
         console.log("Error with Delete Neighbor...", error);
@@ -289,13 +289,24 @@ const Header = ({ checkMyRoom }) => {
 
   // 문의하기 200자 체크함수
   const checkMaxLength = (event) => {
-    const inputValue = event.target.value
-    
-    if (inputValue.length <= 200) {
-      setInquiryText(event.target.value)
-    }
-  }
+    const inputValue = event.target.value;
 
+    if (inputValue.length <= 200) {
+      setInquiryText(event.target.value);
+    }
+  };
+
+  const [doubleClickHeartSave, setDoubleClickHeartSave] = useState(false);
+  // 내방 하트 클릭 시 토스트 메세지
+  const myRoomClickHeartToastMsg = () => {
+    if (!doubleClickHeartSave) {
+      successMsg("💌 딩동 ! 당그니 님이 편지를 보냈어요 !");
+      setDoubleClickHeartSave(true);
+    }
+    setTimeout(() => {
+      setDoubleClickHeartSave(false);
+    }, 3000);
+  };
   return (
     <>
       <div className={styles.wrap}>
@@ -320,7 +331,14 @@ const Header = ({ checkMyRoom }) => {
                   {checkMyRoom === "my" ? userInfo.nickname : roomInfo}
                 </RoomNameBtn>
                 <div className={styles.heartPosition}>
-                  <img src={`${urlPath}/assets/icons/fullHeart.png`}/>
+                  {checkMyRoom === "my" ? (
+                    <img
+                      src={`${urlPath}/assets/icons/fullHeart.png`}
+                      onClick={myRoomClickHeartToastMsg}
+                    />
+                  ) : (
+                    <img src={`${urlPath}/assets/icons/fullHeart.png`} />
+                  )}
                   <p>{heartCount}</p>
                 </div>
               </div>
@@ -408,14 +426,14 @@ const Header = ({ checkMyRoom }) => {
                 onClick={inquiryCheckHandler}
                 style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}
               >
-                <div style={{height: "18px"}}>문의하기</div>
+                <div style={{ height: "18px" }}>문의하기</div>
               </div>
               <div
                 className={styles.MenuButton}
                 onClick={() => setIsRealLogout(true)}
-                style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)"}}
+                style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}
               >
-                <div style={{height: "18px"}}>로그아웃</div>
+                <div style={{ height: "18px" }}>로그아웃</div>
               </div>
               {/* <div
                 className={styles.MenuButton}
@@ -429,7 +447,7 @@ const Header = ({ checkMyRoom }) => {
                 className={`${styles.MenuButton} ${styles.toggleContainer} `}
                 style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}
               >
-                <div style={{height: "18px"}}>푸시알림</div>
+                <div style={{ height: "18px" }}>푸시알림</div>
                 <div
                   className={`${styles.toggleSwitch} ${
                     isPossiblePush === true ? styles.checkedToggle : ""
@@ -445,14 +463,12 @@ const Header = ({ checkMyRoom }) => {
               </div>
             </div>
             <div className={styles.FooterContainer}>
-              <div className={styles.Version}>
-                v 1.3.0
-              </div>
+              <div className={styles.Version}>v 1.3.0</div>
               <div
                 className={styles.exitButton}
                 onClick={() => setIsRealSecession(true)}
               >
-                <div style={{height: "18px"}}>배경음악</div>
+                <div style={{ height: "18px" }}>배경음악</div>
               </div>
             </div>
           </div>

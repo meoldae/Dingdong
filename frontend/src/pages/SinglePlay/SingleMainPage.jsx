@@ -1152,7 +1152,7 @@ const SingleMainPage = () => {
             <div className={styles.overlay} onClick={() => setIsMinimap(false)} />
 
             <div className={styles.bigMinimap}>
-              <img src={`${urlPath}/assets/images/minimap2.png`} alt="" />
+              <img src={`${urlPath}/assets/images/bigbackground.png`} alt="" />
               <img src={`${urlPath}/assets/icons/redDot.png`}           style={{
                 width: "15px",
                 height:"auto",
