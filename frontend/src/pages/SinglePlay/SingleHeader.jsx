@@ -308,16 +308,15 @@ const SingleHeader = ({ checkMyRoom }) => {
             </div>
             <div className={styles.ContentContainer}>
               <div
-                className={styles.MenuButton}
                 onClick={inquiryCheckHandler}
-                style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}
+                style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)", padding: "13.4px 0 13.4px 0" }}
               >
                 문의하기
               </div>
               <div
                 className={styles.MenuButton}
                 onClick={() => setIsRealLogout(true)}
-                style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}
+                style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)", padding: "13.4px 0 13.4px 0" }}
               >
                 로그아웃
               </div>
