@@ -1,13 +1,18 @@
 .Container {
-  width: 300px;
+  width: 303.5px;
   height: 450px;
   border-radius: 10px;
+  padding: 10px;
 
   background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .Title {
-  width: 300px;
+  width: 320px;
   height: 50px;
 
   text-align: center;
@@ -18,7 +23,7 @@
 }
 
 .ContentContainer {
-  width: 300px;
+  width: 303.5px;
   height: 300px;
   margin: 25px 0px;
 
@@ -28,12 +33,21 @@
   justify-content: flex-start;
   align-items: flex-start;
 
-  overflow: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  overflow-y: scroll;
+}
+
+.ContentContainer::-webkit-scrollbar {
+  height: 100%;
+  width: 3.5px;
+}
+
+.ContentContainer::-webkit-scrollbar-track {
+  display: none;
+}
+
+.ContentContainer::-webkit-scrollbar-thumb {
+  background: #d2d2d2;
+  border-radius: 30px;
 }
 
 .Item {
@@ -81,7 +95,7 @@
   border-radius: 10px;
   margin-right: 7.5px; /* 7.5인 이유 : 50px - 35px (50pxFooter의 중간에 있어서)의 반 값 */
 
-  background: #000000;
+  background: #02C26F;
 
   display: flex;
   align-items: center;

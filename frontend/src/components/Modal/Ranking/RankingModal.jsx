@@ -78,7 +78,7 @@ const RankingModal = () => {
     <>
       <div className={styles.Container}>
         <div className={styles.TitleContainer}>
-          <div className={styles.Title}>실시간 순위</div>
+          <div className={styles.Title}>실시간 순위👑</div>
         </div>
         <div className={styles.ButtonContainer}>
           <div

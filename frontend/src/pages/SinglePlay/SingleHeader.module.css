@@ -183,8 +183,6 @@
 .ContentContainer {
   width: 90%;
   height: 90%;
-  font-size: 15px;
-  /* font-family: "Pretendard-Medium"; */
   font-size: 18px;
   color: #2c2c2c;
   display: flex;
@@ -223,8 +221,8 @@
 }
 
 .AlarmX {
-  width: 15px;
-  height: 15px;
+  width: 28px;
+  height: 28px;
 }
 
 .AlarmModal {
@@ -428,4 +426,15 @@
 
 .exitButton {
   font-size: 12px;
+}
+
+.audioContainer {
+  width: 60px;
+  height: 30px;
+}
+
+.audioContainer img {
+  position: absolute;
+  left: 50%;
+  height: 30px;
 }
