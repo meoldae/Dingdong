@@ -18,7 +18,7 @@
 .containerMy {
   display: flex;
   min-height: 400px;
-  min-width: 80%;
+  min-width: 60%;
   padding: 15px;
 
   position: absolute;
@@ -52,7 +52,7 @@
 }
 
 .horizontalRule {
-  width: 90%;
+  width: 272px;
   height: 2px;
   background-color: #02C26F;
   border-radius: 5px;
