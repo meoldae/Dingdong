@@ -171,8 +171,8 @@ export const MultiPage = () => {
               <div className={styles.FloatContent}>주사위</div>
               <div className={styles.IconButton}>
                 <img
-                  src={`${urlPath}/assets/icons/smile.png`}
-                  className={styles.FloatIcon}
+                  src={`${urlPath}/assets/icons/dice.png`}
+                  style={{ width: "30px", height: "30px" }}
                 />
               </div>
             </div>
