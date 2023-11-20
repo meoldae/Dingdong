@@ -4,6 +4,8 @@ import { Html } from "@react-three/drei"
 import useDiceClone from "./useDiceClone"
 import styles from "./Dice.module.css"
 
+const urlPath = import.meta.env.VITE_APP_ROUTER_URL
+
 const Dice = ({ actionId, rollResult }) => {
   if (actionId != 4) {
     return null
@@ -16,6 +18,7 @@ const Dice = ({ actionId, rollResult }) => {
     // 회전 시작 시간
     const rotationStartTime = useRef(0)
     const [isRolling, setIsRolling] = useState(true)
+    const [showResult, setShowResult] = useState(true)
 
     //  회전 시작 시간 초기화
     useEffect(() => {
@@ -53,19 +56,29 @@ const Dice = ({ actionId, rollResult }) => {
           } else if (rollResult === 6) {
             meshRef.current.rotation.x = Math.PI
           }
+
+          // 결과를 1.5초 동안 보여준 후 숨김
+          setTimeout(() => {
+            setShowResult(false)
+          }, 1800)
         }
       }
     })
 
     return (
       <>
-        {!isRolling && (
+        {!isRolling && showResult && (
           <Html
             position={[dicePosition[0], dicePosition[1] + 0.6, dicePosition[2]]}
             center
             style={{ pointerEvents: "none" }}
           >
-            <div className={styles.resultText}>{rollResult}</div>
+            {/* <div className={styles.resultText}>{rollResult}</div> */}
+            <img
+              className={styles.rollResultImg}
+              src={`${urlPath}/assets/images/${rollResult}.gif`}
+              alt=""
+            />
           </Html>
         )}
         <primitive

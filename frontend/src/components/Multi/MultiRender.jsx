@@ -51,7 +51,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
   const fetchUserList = async () => {
     try {
       const response = await axios.get(
-        `https://ding-dong.kr/dev/api/multi/${userParam.channelId}`
+        `https://ding-dong.kr/api/multi/${userParam.channelId}`
       )
       setUsers(response.data.data)
     } catch (error) {
@@ -62,7 +62,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
   // 연결
   const connect = () => {
     client.current = new StompJs.Client({
-      webSocketFactory: () => new SockJS("https://ding-dong.kr/dev/ws"),
+      webSocketFactory: () => new SockJS("https://ding-dong.kr/ws"),
       onConnect: () => {
         console.log("Connected to the WS server")
         subscribe()
