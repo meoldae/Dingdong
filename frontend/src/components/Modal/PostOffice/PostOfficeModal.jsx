@@ -69,7 +69,7 @@ const PostOfficeModal = () => {
         <div className={styles.ItemAvatar}>
           <img src={`${urlPath}/assets/icons/${avatarId}_crop.png`} />
         </div>
-        <div className={styles.Nickname} style={{ fontFamily: "GmarketSansMedium" }}>{nickname}</div>
+        <div className={styles.Nickname} style={{ fontFamily: "GmarketSansMedium", height: "15px"}}>{nickname}</div>
         <div className={styles.CheckButton} >
           {tempMemberList.some(item => item.memberId === memberId && item.nickname === nickname) ? (
             <img src={`${urlPath}/assets/icons/postOffice_check.png`} />
@@ -113,7 +113,7 @@ const PostOfficeModal = () => {
           </div>
           <div
             className={styles.Cancel}
-            style={{ fontFamily: "GmarketSansMedium" }}
+            style={{ fontFamily: "GmarketSansMedium", height: "10px" }}
             onClick={() => setSearchText("")}
           >
             취소
@@ -150,7 +150,7 @@ const PostOfficeModal = () => {
           style={{ fontFamily: "GmarketSansMedium" }}
           onClick={() => finishCheckUser()}
         >
-          선택완료
+          <div style={{height: "20px"}}>선택완료</div>
         </div>
       </div>
     </>
