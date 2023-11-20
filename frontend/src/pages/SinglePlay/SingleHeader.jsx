@@ -310,19 +310,20 @@ const SingleHeader = ({ checkMyRoom }) => {
               <div
                 className={styles.MenuButton}
                 onClick={inquiryCheckHandler}
-                style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}
+                style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)"}}
               >
-                문의하기
+                <div style={{height: "18px"}}>문의하기</div>
+                
               </div>
               <div
                 className={styles.MenuButton}
                 onClick={() => setIsRealLogout(true)}
-                style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}
+                style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)"}}
               >
-                로그아웃
+                <div style={{height: "18px"}}>로그아웃</div>
               </div>
               <div className={`${styles.MenuButton} ${styles.toggleContainer} `} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
-                푸시 알림
+                <div style={{height: "18px"}}>푸시알림</div>
                 
                 <div className={`${styles.toggleSwitch} ${isPossiblePush === true ? styles.checkedToggle : ''}`} onClick={pushToggleChange}>
                   <div className={`${styles.toggleButton} ${isPossiblePush === true ? styles.checkedToggleSwitch : ''}`}/> 
@@ -330,7 +331,7 @@ const SingleHeader = ({ checkMyRoom }) => {
 
               </div>
               <div className={`${styles.MenuButton} ${styles.toggleContainer} `} style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}>
-                배경 음악
+                <div style={{height: "18px"}}>배경음악</div>
                 
                 <div className={`${styles.toggleSwitch} ${isBGM === true ? styles.checkedToggle : ''}`} onClick={bgmToggleChange}>
                   <div className={`${styles.toggleButton} ${isBGM === true ? styles.checkedToggleSwitch : ''}`}/> 

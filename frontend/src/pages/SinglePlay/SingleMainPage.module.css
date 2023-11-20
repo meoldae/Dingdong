@@ -92,7 +92,7 @@
   z-index: 100;
   position: absolute;
   bottom: -50px;
-  right: 120px;
+  left: -75px;
   transform: translate(50%, -50%);
   width: 195px;
   height: 138px;

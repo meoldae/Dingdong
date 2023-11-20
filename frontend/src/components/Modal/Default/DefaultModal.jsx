@@ -5,7 +5,6 @@ const DefaultModal = ({ content, ok, cancel, okClick, cancelClick }) => {
 
   return (
     <div className={styles.Container}>
-      <img src={`${urlPath}/assets/icons/x.png`} className={styles.xButton} onClick={cancelClick} />
       <div className={styles.ContentContainer}>{content}</div>
       <div className={styles.ButtonContainer}>
         <div

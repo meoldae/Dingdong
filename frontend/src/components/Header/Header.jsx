@@ -408,14 +408,14 @@ const Header = ({ checkMyRoom }) => {
                 onClick={inquiryCheckHandler}
                 style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}
               >
-                문의하기
+                <div style={{height: "18px"}}>문의하기</div>
               </div>
               <div
                 className={styles.MenuButton}
                 onClick={() => setIsRealLogout(true)}
-                style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}
+                style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)"}}
               >
-                로그아웃
+                <div style={{height: "18px"}}>로그아웃</div>
               </div>
               {/* <div
                 className={styles.MenuButton}
@@ -429,7 +429,7 @@ const Header = ({ checkMyRoom }) => {
                 className={`${styles.MenuButton} ${styles.toggleContainer} `}
                 style={{ borderBottom: "1px solid rgba(194, 194, 194, 0.5)" }}
               >
-                푸시 알림
+                <div style={{height: "18px"}}>푸시알림</div>
                 <div
                   className={`${styles.toggleSwitch} ${
                     isPossiblePush === true ? styles.checkedToggle : ""
@@ -452,7 +452,7 @@ const Header = ({ checkMyRoom }) => {
                 className={styles.exitButton}
                 onClick={() => setIsRealSecession(true)}
               >
-                회원 탈퇴
+                <div style={{height: "18px"}}>배경음악</div>
               </div>
             </div>
           </div>

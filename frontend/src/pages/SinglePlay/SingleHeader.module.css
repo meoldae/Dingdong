@@ -183,8 +183,6 @@
 .ContentContainer {
   width: 90%;
   height: 90%;
-  font-size: 15px;
-  /* font-family: "Pretendard-Medium"; */
   font-size: 18px;
   color: #2c2c2c;
   display: flex;
@@ -193,6 +191,9 @@
 
 .MenuButton {
   padding: 10px 0 10px 0;
+  height: 30px;
+  display: flex;
+  align-items: center;
 }
 
 /* 알림 모달 */
@@ -431,7 +432,6 @@
 }
 
 .audioContainer {
-
   width: 60px;
   height: 30px;
 }
