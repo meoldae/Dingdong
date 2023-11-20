@@ -293,10 +293,10 @@ const SingleMainPage = () => {
   };
 
   // 미니맵 위치 관련 로직
-  const [xPosition, setXPosition] = useState(82);
-  const [yPosition, setYPosition] = useState(29);
-  const [bigXPosition, setBigXPosition] = useState();
-  const [bigYPosition, setBigYPosition] = useState();
+  const [xPosition, setXPosition] = useState(81);
+  const [yPosition, setYPosition] = useState(35);
+  const [bigXPosition, setBigXPosition] = useState(194);
+  const [bigYPosition, setBigYPosition] = useState(56);
 
   const [characterPosition, setCharacterPosition] = useRecoilState(
     CharacterPositionAtom
@@ -313,7 +313,7 @@ const SingleMainPage = () => {
       );
       // 확대한 미니맵
       setBigXPosition(
-        JSON.parse(position)[0] + 87 + (JSON.parse(position)[0] + 30) * 3.6
+        JSON.parse(position)[0] + 87 + (JSON.parse(position)[0] + 25) * 4.1
       );
       setBigYPosition(
         JSON.parse(position)[2] + 12 + (JSON.parse(position)[2] + 12) * 3.5
@@ -1152,7 +1152,7 @@ const SingleMainPage = () => {
             <div className={styles.overlay} onClick={() => setIsMinimap(false)} />
 
             <div className={styles.bigMinimap}>
-              <img src={`${urlPath}/assets/images/minimap2.png`} alt="" />
+              <img src={`${urlPath}/assets/images/bigbackground.png`} alt="" />
               <img src={`${urlPath}/assets/icons/redDot.png`}           style={{
                 width: "15px",
                 height:"auto",
