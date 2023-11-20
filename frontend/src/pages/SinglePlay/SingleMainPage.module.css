@@ -105,7 +105,7 @@
 }
 
 .bigMinimap{
-  width: 100%;
+  width: 340px;
   z-index: 100000006;
   position: absolute;
   top: 50%;
@@ -116,7 +116,16 @@
   justify-content: center;
 }
 
-.bigMinimap img{
+.redDotContainer{
+  width: 340px;
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  z-index:100000007 ;
+  height: 234.04px;
+}
+.bigMinimapImg{
   width: 340px;
   /* height: 260px; */
 }
