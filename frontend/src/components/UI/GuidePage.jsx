@@ -14,7 +14,7 @@ const GuidePage = ({ onClick }) => {
         {`Tip! 길을 따라가며 딩동 마을의\n 다양한 컨텐츠를 즐겨보세요! `}
       </div>
       <div className={styles.guideButton} onClick={onClick}>
-        <div>시작하기</div>
+        <div style={{height: "20px"}}>시작하기</div>
       </div>
     </div>
   )
