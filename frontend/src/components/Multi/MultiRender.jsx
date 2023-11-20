@@ -1,33 +1,26 @@
 import React, { useRef, useEffect, useState, useImperativeHandle } from "react"
+import { useNavigate, useLocation } from "react-router-dom"
+import axios from "axios"
+import * as THREE from "three"
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { Environment, OrbitControls, useCursor } from "@react-three/drei"
-import { MultiCharacter } from "./MultiCharacter"
+import { useFrame, useLoader } from "@react-three/fiber"
 import * as StompJs from "@stomp/stompjs"
 import SockJS from "sockjs-client"
-import * as THREE from "three"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState } from "recoil"
 import { userAtom } from "../../atom/UserAtom"
-import {
-  MultiUsers,
-  RoomModalOpen,
-  userPositionAtom,
-} from "../../atom/MultiAtom"
-import axios from "axios"
-import { useFrame, useLoader } from "@react-three/fiber"
-import { useNavigate, useLocation } from "react-router-dom"
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+import { MultiUsers, userPositionAtom } from "../../atom/MultiAtom"
+
+import { MultiCharacter } from "./MultiCharacter"
 
 const urlPath = import.meta.env.VITE_APP_ROUTER_URL
 
 export const MultiRender = React.forwardRef((props, ref) => {
   const [isMouseDown, setIsMouseDown] = useState(false)
 
-  // const Modelgltf = useLoader(
-  //   GLTFLoader,
-  //   `${urlPath}/assets/models/defaultSettings/MultiPostBox.glb`
-  // )
   const MultiMapgltf = useLoader(
     GLTFLoader,
-    `${urlPath}/assets/models/defaultSettings/multiMap2.glb`
+    `${urlPath}/assets/models/defaultSettings/MultiDefaultMap2.glb`
   )
   // 맵 클릭 함수
   const [onFloor, setOnFloor] = useState(false)
@@ -52,6 +45,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
     z: Math.random() * 2,
     actionId: 0,
     chat: "",
+    diceNumber: 0,
   }
 
   const fetchUserList = async () => {
@@ -163,6 +157,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
               [jsonBody.roomId]: {
                 ...user,
                 actionId: jsonBody.actionId,
+                diceNumber: jsonBody.diceNumber,
               },
             }
           }
@@ -305,15 +300,6 @@ export const MultiRender = React.forwardRef((props, ref) => {
       <Environment preset="sunset" />
       <ambientLight intensity={1} />
       <OrbitControls enabled={false} />
-      {/* <primitive
-        object={Modelgltf.scene}
-        position={[-2, 0, -2]}
-        scale={[2, 2, 2]}
-        onClick={(e) => {
-          e.stopPropagation()
-          console.log("click")
-        }}
-      /> */}
 
       <primitive
         object={MultiMapgltf.scene}
@@ -335,27 +321,6 @@ export const MultiRender = React.forwardRef((props, ref) => {
         <planeGeometry args={[60, 60]} />
         <meshStandardMaterial color="#27c1d9" />
       </mesh>
-      {/* <mesh
-        name="floor"
-        rotation-x={-Math.PI / 2}
-        position-y={-0.001}
-        onPointerMove={(e) => handleFloorClick(e)}
-        onPointerLeave={() => setOnFloor(false)}
-        position-x={8 / 2}
-        position-z={8 / 2}
-        onClick={(e) => {
-          handleFloorClick2(e)
-        }}
-        onPointerDown={() => {
-          setIsMouseDown(true)
-        }}
-        onPointerUp={() => {
-          setIsMouseDown(false)
-        }}
-      >
-        <planeGeometry args={[60, 60]} />
-        <meshStandardMaterial color="F0F0F0" />
-      </mesh> */}
 
       {Object.keys(users).map((idx) => (
         <group key={idx}>
@@ -369,6 +334,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
             actionId={users[idx].actionId}
             closeCharacters={closeCharacters}
             chat={users[idx].chat}
+            diceNumber={users[idx].diceNumber}
           />
         </group>
       ))}
