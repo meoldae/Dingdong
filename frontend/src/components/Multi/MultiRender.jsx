@@ -53,6 +53,7 @@ export const MultiRender = React.forwardRef((props, ref) => {
       const response = await axios.get(
         `https://ding-dong.kr/api/multi/${userParam.channelId}`
       )
+      // console.log(response.data.data)
       setUsers(response.data.data)
     } catch (error) {
       console.error("There was an error fetching users!", error)
@@ -169,6 +170,8 @@ export const MultiRender = React.forwardRef((props, ref) => {
     client.current.subscribe("/sub/chat/1", (message) => {
       if (message.body) {
         const jsonBody = JSON.parse(message.body)
+
+        props.updatedChatLog([jsonBody.nickname, jsonBody.message])
         setUsers((currentList) => {
           const user = currentList[jsonBody.roomId]
           if (user) {

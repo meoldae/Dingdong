@@ -23,6 +23,9 @@ export const MultiPage = () => {
   const navigate = useNavigate()
   const multiRenderRef = useRef()
 
+  // 채팅 리스트
+  const [chatList, setChatList] = useState([])
+
   const [chatInput, setChatInput] = useState("")
   const [roomModalOpen, setRoomModalOpen] = useRecoilState(RoomModalOpen)
   const setLastURL = useSetRecoilState(lastUrlPathAtom)
@@ -35,12 +38,18 @@ export const MultiPage = () => {
     isFloatingButtonVisibleAtom
   )
 
+  const updatedChatLog = (multiChat) => {
+    const chatLog = [multiChat[0], multiChat[1]]
+    setChatList((currentArray) => [chatLog, ...currentArray])
+  }
+
   // 채팅로그 모달 상태관리
-  const [chatLogVisible, setChatLogVisible] = useRecoilState(chatLogVisibleAtom)
+  // const [chatLogVisible, setChatLogVisible] = useRecoilState(chatLogVisibleAtom)
 
   const chatButtonClick = () => {
     if (multiRenderRef.current?.publishChat) {
       multiRenderRef.current.publishChat(chatInput)
+
       setChatInput("")
     }
   }
@@ -108,41 +117,28 @@ export const MultiPage = () => {
           />
         </div>
       )}
-      <div className={styles.chatInputContainer}>
-        <input
-          type="text"
-          placeholder="채팅을 입력하세요"
-          value={chatInput}
-          onChange={(e) => setChatInput(e.target.value)}
-          onKeyDown={handleInputKeyDown}
-        />
-        <div onClick={chatButtonClick} className={styles.SendButton}>
-          <img src={`${urlPath}/assets/icons/white_paperplane.png`} />
+      <div className={styles.chatContainer}>
+        <div className={styles.chatList}>
+          {chatList.map((chat, idx) => (
+            <div key={idx}>
+              <span>{chat[0]} : </span>
+              <span>{chat[1]}</span>
+            </div>
+          ))}
+        </div>
+        <div className={styles.chatInputContainer}>
+          <input
+            type="text"
+            placeholder="채팅을 입력하세요"
+            value={chatInput}
+            onChange={(e) => setChatInput(e.target.value)}
+            onKeyDown={handleInputKeyDown}
+          />
+          <div onClick={chatButtonClick} className={styles.SendButton}>
+            <img src={`${urlPath}/assets/icons/white_paperplane.png`} />
+          </div>
         </div>
       </div>
-
-      <div
-        className={styles.leftSecondFloatingButton}
-        onClick={() => setChatLogVisible(true)}
-      >
-        <img
-          src={`${urlPath}/assets/icons/ChatLog.png`}
-          style={{ width: "30px", height: "30px" }}
-        />
-      </div>
-
-      {/* 채팅로그 모달 */}
-      {chatLogVisible && (
-        <>
-          <div
-            className={styles.ChatOverlay}
-            onClick={() => setChatLogVisible(false)}
-          />
-          <div className={styles.ChatLogContainer}>
-            {/* 채팅로그 만들자리! */}
-          </div>
-        </>
-      )}
 
       <div className={styles.leftFloatingButton} onClick={onSingleMap}>
         <img
@@ -222,7 +218,7 @@ export const MultiPage = () => {
         </>
       )}
       <Canvas shadows camera={{ position: [2, 8, 15], fov: 30, zoom: 0.72 }}>
-        <MultiRender ref={multiRenderRef} />
+        <MultiRender ref={multiRenderRef} updatedChatLog={updatedChatLog} />
       </Canvas>
     </div>
   )
