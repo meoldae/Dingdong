@@ -9,4 +9,5 @@ public class ChatResponse {
     private Long channelId;
     private Long roomId;
     private String message;
+    private String nickname;
 }

@@ -69,7 +69,7 @@ public class MultiController {
     public void chatChannel(@DestinationVariable Long channelId,
                             UserSession userSession) {
 
-        ChatResponse result = new ChatResponse(channelId, userSession.getRoomId(), userSession.getChat());
+        ChatResponse result = new ChatResponse(channelId, userSession.getRoomId(), userSession.getChat(), userSession.getNickname());
         messagingTemplate.convertAndSend("/sub/chat/" + channelId, result);
         multiService.saveChat(userSession);
     }
