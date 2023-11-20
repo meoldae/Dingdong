@@ -121,7 +121,10 @@ export const MultiPage = () => {
         </div>
       </div>
 
-      <div className={styles.leftSecondFloatingButton} onClick={() => setChatLogVisible(true)}>
+      <div
+        className={styles.leftSecondFloatingButton}
+        onClick={() => setChatLogVisible(true)}
+      >
         <img
           src={`${urlPath}/assets/icons/ChatLog.png`}
           style={{ width: "30px", height: "30px" }}
@@ -131,7 +134,10 @@ export const MultiPage = () => {
       {/* 채팅로그 모달 */}
       {chatLogVisible && (
         <>
-          <div className={styles.ChatOverlay} onClick={() => setChatLogVisible(false)}/>
+          <div
+            className={styles.ChatOverlay}
+            onClick={() => setChatLogVisible(false)}
+          />
           <div className={styles.ChatLogContainer}>
             {/* 채팅로그 만들자리! */}
           </div>
@@ -172,7 +178,7 @@ export const MultiPage = () => {
               <div className={styles.IconButton}>
                 <img
                   src={`${urlPath}/assets/icons/dice.png`}
-                  style={{ width: "30px", height: "30px" }}
+                  style={{ width: "65px", height: "40px" }}
                 />
               </div>
             </div>
