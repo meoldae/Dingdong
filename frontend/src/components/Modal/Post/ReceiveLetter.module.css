@@ -1,5 +1,5 @@
 .receiveLetterContainer {
-  width: 330px;
+  width: 300px;
   min-width: 300px;
   height: 400px;
   position: relative;
@@ -28,8 +28,8 @@
 .topPostCardImg {
   width: 25%;
   position: absolute;
-  top : 20px;
-  right: 20px;
+  top : 25px;
+  right: 25px;
 }
 
 .poststampFrame {
