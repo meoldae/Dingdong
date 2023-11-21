@@ -37,9 +37,9 @@ const Dice = ({ actionId, rollResult }) => {
 
         // 주사위 정지(2초)
         if (rotationStopTime > 2000) {
+          setIsRolling(false)
           meshRef.current.rotation.x = 0
           meshRef.current.rotation.z = 0
-          setIsRolling(false)
 
           // 주사위 눈에 따라 회전 방향 설정
           if (rollResult === 1) {
