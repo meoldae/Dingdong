@@ -300,8 +300,10 @@ const Header = ({ checkMyRoom }) => {
   // 내방 하트 클릭 시 토스트 메세지
   const myRoomClickHeartToastMsg = () => {
     if (!doubleClickHeartSave) {
-      successMsg("💌 딩동 ! 당그니 님이 편지를 보냈어요 !");
+      if (userInfo.roomId == 0) {
+        successMsg("💌 딩동 ! 당그니 님이 편지를 보냈어요 !");
       setDoubleClickHeartSave(true);
+      }
     }
     setTimeout(() => {
       setDoubleClickHeartSave(false);
