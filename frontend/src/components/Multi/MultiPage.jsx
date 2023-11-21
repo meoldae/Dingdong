@@ -55,10 +55,10 @@ export const MultiPage = () => {
 
   const chatButtonClick = () => {
     if (multiRenderRef.current?.publishChat) {
-      if (chatInput.length >= 1) {
-        multiRenderRef.current.publishChat(chatInput)
-        setChatInput("")
+      if (chatInput.trim().length >= 1) {
+        multiRenderRef.current.publishChat(chatInput.trim())
       }
+      setChatInput("")
     }
   }
 
