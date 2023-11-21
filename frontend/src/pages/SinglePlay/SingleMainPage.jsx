@@ -293,10 +293,10 @@ const SingleMainPage = () => {
   };
 
   // 미니맵 위치 관련 로직
-  const [xPosition, setXPosition] = useState(82);
-  const [yPosition, setYPosition] = useState(29);
-  const [bigXPosition, setBigXPosition] = useState();
-  const [bigYPosition, setBigYPosition] = useState();
+  const [xPosition, setXPosition] = useState(81);
+  const [yPosition, setYPosition] = useState(35);
+  const [bigXPosition, setBigXPosition] = useState(139);
+  const [bigYPosition, setBigYPosition] = useState(56);
 
   const [characterPosition, setCharacterPosition] = useRecoilState(
     CharacterPositionAtom
@@ -313,10 +313,10 @@ const SingleMainPage = () => {
       );
       // 확대한 미니맵
       setBigXPosition(
-        JSON.parse(position)[0] + 87 + (JSON.parse(position)[0] + 30) * 3.6
+        JSON.parse(position)[0] + 47 + (JSON.parse(position)[0] + 25) * 3.6
       );
       setBigYPosition(
-        JSON.parse(position)[2] + 12 + (JSON.parse(position)[2] + 12) * 3.5
+        JSON.parse(position)[2] + 12.1 + (JSON.parse(position)[2] + 12) * 3.56
       );
     }
   }, [position]);
@@ -1149,17 +1149,29 @@ const SingleMainPage = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.5 }}
           >
-            <div className={styles.overlay} onClick={() => setIsMinimap(false)} />
+            <div
+              className={styles.overlay}
+              onClick={() => setIsMinimap(false)}
+            />
 
             <div className={styles.bigMinimap}>
-              <img src={`${urlPath}/assets/images/minimap2.png`} alt="" />
-              <img src={`${urlPath}/assets/icons/redDot.png`}           style={{
-                width: "15px",
-                height:"auto",
-                position: "absolute",
-                top: `${bigYPosition}px`,
-                left: `${bigXPosition}px`,
-              }}/>
+              <img
+                src={`${urlPath}/assets/images/bigbackground.png`}
+                alt=""
+                className={styles.bigMinimapImg}
+              />
+            </div>
+            <div className={styles.redDotContainer}>
+              <img
+                src={`${urlPath}/assets/icons/redDot.png`}
+                style={{
+                  width: "15px",
+                  height: "auto",
+                  position: "absolute",
+                  top: `${bigYPosition}px`,
+                  left: `${bigXPosition}px`,
+                }}
+              />
             </div>
           </motion.div>
         )}
