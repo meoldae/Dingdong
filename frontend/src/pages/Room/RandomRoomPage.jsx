@@ -116,7 +116,7 @@ const RandomRoomPage = () => {
       ? Number(window.location.pathname.match(/\d+/g)[0])
       : null; 
 
-    const randRoomIds = [104, 77, 58, 37]; //시연
+    const randRoomIds = [37, 3, 58, 37]; //시연
     // const selectedRandRoomId = randRoomIds[Math.floor(Math.random() * randRoomIds.length)];
     const TRI = parseInt(sessionStorage.getItem("TRI"))
     if (TRI <= 2) {
