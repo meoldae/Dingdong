@@ -55,9 +55,10 @@ export const MultiPage = () => {
 
   const chatButtonClick = () => {
     if (multiRenderRef.current?.publishChat) {
-      multiRenderRef.current.publishChat(chatInput)
-
-      setChatInput("")
+      if (chatInput.length >= 1) {
+        multiRenderRef.current.publishChat(chatInput)
+        setChatInput("")
+      }
     }
   }
 
@@ -218,7 +219,11 @@ export const MultiPage = () => {
               type="text"
               placeholder="채팅을 입력하세요"
               value={chatInput}
-              onChange={(e) => setChatInput(e.target.value)}
+              onChange={(e) => {
+                if (e.target.value.length <= 30) {
+                  setChatInput(e.target.value)
+                }
+              }}
               onKeyDown={handleInputKeyDown}
             />
             <div onClick={chatButtonClick} className={styles.SendButton}>
