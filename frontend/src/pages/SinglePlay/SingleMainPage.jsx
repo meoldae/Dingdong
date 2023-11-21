@@ -1156,7 +1156,7 @@ const SingleMainPage = () => {
 
             <div className={styles.bigMinimap}>
               <img
-                src={`${urlPath}/assets/images/bigbackground_1.png`}
+                src={`${urlPath}/assets/images/bigbackground.png`}
                 alt=""
                 className={styles.bigMinimapImg}
               />
