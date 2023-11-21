@@ -32,8 +32,8 @@ const Dice = ({ actionId, rollResult }) => {
 
       if (meshRef.current) {
         // 회전 속도(숫자)로 회전
-        meshRef.current.rotation.x += 0.15
-        meshRef.current.rotation.z -= 0.15
+        meshRef.current.rotation.x += 0.4
+        meshRef.current.rotation.z -= 0.4
 
         // 주사위 정지(2초)
         if (rotationStopTime > 2000) {
