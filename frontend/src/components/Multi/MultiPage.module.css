@@ -4,7 +4,23 @@
   height: 100vh;
   height: 100svh;
 }
+.bottomFix {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 210px;
+}
 
+.circleBtnList {
+  display: flex;
+  width: 97%;
+  justify-content: space-between;
+}
 .FloatingButton {
   width: 50px;
   height: 50px;
@@ -14,12 +30,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  /* position: absolute;
+  bottom: 10%; */
+  /* right: 5%; */
 
-  position: absolute;
-  bottom: 26%;
-  right: 5%;
-
-  z-index: 2;
+  z-index: 100000000;
 }
 
 .leftFloatingButton {
@@ -30,10 +46,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  bottom: 26%;
+  /* position: absolute; */
+  /* bottom: 26%; */
   left: 5%;
-  z-index: 2;
+  z-index: 100000000;
 }
 
 .Rotate {
@@ -53,12 +69,10 @@
 
 .Overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-
   width: 100%;
   height: 100%;
-
+  top: 0;
+  left: 0;
   z-index: 100000000;
 }
 
@@ -66,12 +80,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   position: absolute;
-
   z-index: 100000001;
-  right: 6%;
-  bottom: 32%;
+  right: 9%;
+  bottom: 90%;
 }
 
 .actionsBtn {
@@ -83,10 +95,9 @@
 }
 
 .FloatContent {
-  width: 100px;
+  width: 60px;
   height: 35px;
   margin-right: 10px;
-
   text-align: end;
   font-size: 12px;
   line-height: 40px;
@@ -125,7 +136,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 180px;
+  height: 150px;
   z-index: 100000000;
   background: rgba(255, 255, 255, 0.5);
   display: flex;
@@ -163,7 +174,7 @@
 
 .chatInputContainer input {
   width: 70%;
-  height: 50px;
+  height: 40px;
   border: none;
   border-radius: 10px;
   padding-left: 15px;
@@ -176,7 +187,7 @@
 
 .SendButton {
   width: 50px;
-  height: 50px;
+  height: 40px;
   border-radius: 10px;
 
   display: flex;
