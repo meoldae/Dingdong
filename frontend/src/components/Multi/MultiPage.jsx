@@ -135,7 +135,9 @@ export const MultiPage = () => {
 
           <div
             className={styles.FloatingButton}
-            onClick={() => setIsFloatingButtonVisible(true)}
+            onClick={() =>
+              setIsFloatingButtonVisible((prevState) => !prevState)
+            }
           >
             <img
               src={`${urlPath}/assets/icons/GreenPlus.png`}
@@ -145,10 +147,6 @@ export const MultiPage = () => {
             />
             {isFloatingButtonVisible && (
               <>
-                <div
-                  className={styles.Overlay}
-                  onClick={() => setIsFloatingButtonVisible(false)}
-                />
                 <div className={styles.BtnList}>
                   <div
                     className={styles.actionsBtn}
@@ -164,7 +162,9 @@ export const MultiPage = () => {
                   </div>
                   <div
                     className={styles.actionsBtn}
-                    onClick={() => handleButtonClick(1)}
+                    onClick={() => {
+                      handleButtonClick(1)
+                    }}
                   >
                     <div className={styles.FloatContent}>기뻐하기</div>
                     <div className={styles.IconButton}>
