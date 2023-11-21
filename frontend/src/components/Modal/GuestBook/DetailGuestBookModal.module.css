@@ -29,14 +29,15 @@
 
 .Content {
   width: 220px;
-  height: 200px;
+  height: 185px;
   border-radius: 10px;
 
   text-align: center;
-  font-size: 15px;
+  font-size: 20px;
   padding-top: 50px;
   padding-left: 15px;
   padding-right: 15px;
+  padding-bottom: 15px;
 }
 
 .TimeContainer {
