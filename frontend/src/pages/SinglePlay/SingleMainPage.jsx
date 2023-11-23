@@ -234,9 +234,6 @@ const SingleMainPage = () => {
     } else {
       setGuide(true);
     }
-
-    // 시연
-    sessionStorage.setItem("TRI", "0");
   }, []);
 
   // 랭킹정보 모달 상태관리
