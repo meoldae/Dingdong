@@ -296,19 +296,6 @@ const Header = ({ checkMyRoom }) => {
     }
   };
 
-  const [doubleClickHeartSave, setDoubleClickHeartSave] = useState(false);
-  // 내방 하트 클릭 시 토스트 메세지
-  const myRoomClickHeartToastMsg = () => {
-    if (!doubleClickHeartSave) {
-      if (userInfo.roomId == 0) {
-        successMsg("💌 딩동 ! 당그니 님이 편지를 보냈어요 !");
-      setDoubleClickHeartSave(true);
-      }
-    }
-    setTimeout(() => {
-      setDoubleClickHeartSave(false);
-    }, 3000);
-  };
   return (
     <>
       <div className={styles.wrap}>
@@ -326,8 +313,6 @@ const Header = ({ checkMyRoom }) => {
                 onClick={() => setIsHamburger(true)}
                 className={styles.HamburgerButton}
               />
-              {/* <div className={styles.userName}> */}
-              {/* {checkMyRoom === "my" ? userInfo.nickname : roomInfo} */}
               <div className={styles.heartRoom}>
                 <RoomNameBtn>
                   {checkMyRoom === "my" ? userInfo.nickname : roomInfo}
@@ -336,7 +321,6 @@ const Header = ({ checkMyRoom }) => {
                   {checkMyRoom === "my" ? (
                     <img
                       src={`${urlPath}/assets/icons/fullHeart.png`}
-                      onClick={myRoomClickHeartToastMsg}
                     />
                   ) : (
                     <img src={`${urlPath}/assets/icons/fullHeart.png`} />
