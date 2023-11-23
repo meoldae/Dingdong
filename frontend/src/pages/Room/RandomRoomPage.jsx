@@ -112,34 +112,17 @@ const RandomRoomPage = () => {
 
   // 랜덤 방 방문
   const randomVisit = () => {
-    const roomId = window.location.pathname.match(/\d+/g)
-      ? Number(window.location.pathname.match(/\d+/g)[0])
-      : null; 
-
-    const randRoomIds = [37, 3, 58, 37]; //시연
-    // const selectedRandRoomId = randRoomIds[Math.floor(Math.random() * randRoomIds.length)];
-    const TRI = parseInt(sessionStorage.getItem("TRI"))
-    if (TRI <= 2) {
-      sessionStorage.setItem("TRI", (TRI+1).toString())
-      window.location.replace(`${urlPath}/random/${randRoomIds[TRI+1]}`); //시연
-    } else {
-      sessionStorage.setItem("TRI", "0")
-      window.location.replace(`${urlPath}/random/${randRoomIds[0]}`); //시연
-    }
-    
-
-    //let randRoomId;
-    // getRandomRoom(
-    //   (response) => {
-    //     randRoomId = response.data.data;
-
-    //     window.location.replace(`${urlPath}/random/${randRoomId}`);
-    //     // navigate(`${urlPath}/random/${randRoomId}`)
-    //   },
-    //   (error) => {
-    //     console.log("Error with Random Room...", error);
-    //   }
-    // );
+    let randRoomId;
+    getRandomRoom(
+      (response) => {
+        randRoomId = response.data.data;
+        window.location.replace(`${urlPath}/random/${randRoomId}`);
+        // navigate(`${urlPath}/random/${randRoomId}`)
+      },
+      (error) => {
+        console.log("Error with Random Room...", error);
+      }
+    );
   };
 
   // 시간 체크 함수
