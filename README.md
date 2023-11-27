@@ -22,8 +22,10 @@
 
 ## 성과
 - 운영 기간: 2023.11.02 ~ 2023.11.17 (**16일**)
-- 발생 이벤트 수: 약 **60,000**회+
-- 총 사용자 수: 약 **1,000**명+ (_Google Analytics 기준_)
+- 발생 이벤트 수: 약 **70,000**회+
+- 총 사용자 수: 약 **1,200**명+ (_Google Analytics 기준_) 
+
+
 <br />
 
 ## 기능
@@ -119,7 +121,7 @@
 ## 마케팅
 
 ### 우표 유형 테스트
-
+<img src="etc/assets/stamp_test_result.png" width="600px"/><br/>
 
 ### 공식 SNS 운영
 <img src="etc/assets/dingdong_instagram.jpg" width="300px"/>
