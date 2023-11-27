@@ -30,7 +30,7 @@
 
 # 기능
 ### 딩동 마을 
-- 나의 방, 우체통, 우체국, 주민 방, 딩동 스코어 보드, 딩동 광장으로 이동 할 수 있습니다.
+- 나의 방, 우체통, 우체국, 주민 방, 딩동 스코어 보드, 딩동 광장으로 이동 할 수 있습니다. <br/>
 <img src="etc/assets/1_login.gif" width="200px"/> 
 
 ***
@@ -66,7 +66,8 @@
 
 #### 좋아요
 - 나의 방에 받은 좋아요 수를 확인할 수 있습니다.
-<img src="etc/assets/like.jpg" width="200px"/><br/>
+<img src="etc/assets/like.jpg" width="200px"/> 
+
 ***
 
 ### 편지함
@@ -90,9 +91,11 @@
 ***
 
 ### 주민의 방 
+
 #### 입장하기 
 - 딩동 마을에서 주민의 방으로 이동할 수 있습니다. 
 <img src="etc/assets/5_1.gif" width="200px"/>
+
 #### 주민의 방 둘러보기
 - 주민의 방을 랜덤으로 방문 할 수 있습니다.
 - 방문한 방에서 좋아요, 방명록을 남기거나 이웃 신청을 할 수 있습니다.
@@ -102,15 +105,7 @@
 
 ### 딩동 스코어보드
 - 현 시점 기준 방꾸왕, 인기왕, 소통왕을 확인하고 해당 주민의 방을 방문할 수 있습니다.
-<img src="etc/assets/6.gif" width="200px"/>
-**방꾸왕**
-- 현 시점 기준 가장 많이 좋아요를 받은 주민을 확인하고 방을 방문할 수 있습니다.
-
-**인기왕**
-- 현 시점 기준 가장 많은 편지를 받은 주민을 확인하고 방을 방문할 수 있습니다.
-
-**소통왕** 
-- 현 시점 기준 가장 많이 편지를 보낸 주민을 확인하고 방을 방문할 수 있습니다.
+<img src="etc/assets/6.gif" width="200px"/> 
 
 ***
 
@@ -129,29 +124,25 @@
 
 ### 메뉴
 - 메뉴에서 관리자에게 문의, 로그아웃, 푸시 알림을 ON/OFF, 배경 음악을 ON/OFF 할 수 있습니다.
-<img src="etc/assets/menu.jpg" width="200px"/><br/>
+<img src="etc/assets/menu.jpg" width="200px"/> 
 
 #### 문의하기
 - 관리자에게 문의 할 수 있습니다.
-<img src="etc/assets/cs.jpg" width="200px"/><br/>
+<img src="etc/assets/cs.jpg" width="200px"/> 
 
 #### 푸시 알림
 - 푸시 알림을 통해 나에게 온 편지, 나에게 온 이웃요청 등을 알 수 있습니다.
-<img src="etc/assets/Alarm.gif" width="200px"/><br/>
+<img src="etc/assets/Alarm.gif" width="200px"/> 
 
-***
 
 ## 버그
-### 문제
-
+#### 문제
 - 개발자도구의 콘솔을 이용해 다량의 요청을 보내는 문제점 발견
+<img src="etc/assets/Bug.gif" width="300px"/> 
 
-<img src="etc/assets/Bug.gif" width="300px"/><br/>
-
-### 해결
+#### 해결
 - Ngnix에서 Rate Limiting으로 해결
-
-<img src="etc/assets/BugFix.gif" width="300px"/><br/>
+<img src="etc/assets/BugFix.gif" width="300px"/> 
 <br/>
 
 ## 마케팅
