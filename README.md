@@ -15,112 +15,152 @@
 8. [팀원](#팀원)
 <br />
 
-## 프로젝트 개요
+# 프로젝트 개요
 - SSAFY 9기 2학기 자율 프로젝트 <br/>
 - 2023.10.10 ~ 2023.11.17 (39일)
 <br />
 
-## 성과
+# 성과
 - 운영 기간: 2023.11.02 ~ 2023.11.17 (**16일**)
-- 발생 이벤트 수: 약 **60,000**회+
-- 총 사용자 수: 약 **1,000**명+ (_Google Analytics 기준_)
+- 발생 이벤트 수: 약 **70,000**회+
+- 총 사용자 수: 약 **1,200**명+ (_Google Analytics 기준_) <br/><br/>
+<img src="etc/assets/google_analytics.png" width="800px"/> <br/>
+
 <br />
 
-## 기능
-
+# 기능 
 ### 딩동 마을 
+- 나의 방, 우체통, 우체국, 주민 방, 딩동 스코어 보드, 딩동 광장으로 이동 할 수 있습니다. <br/>
+<img src="etc/assets/1_login.gif" width="200px"/> 
 
-- 나의 방, 우체통, 우체국, 주민 방, 딩동 스코어 보드, 딩동 광장으로 이동 할 수 있습니다.
+***
 
 ### 나의 방
+#### 입장하기
+- 딩동 마을에서 나의 방으로 이동할 수 있습니다.
+<img src="etc/assets/2_0.gif" width="200px"/>    
 
-**방 꾸미기**
+#### 방 꾸미기 
 - 다양한 카테고리의 가구들을 통해 방을 꾸밀 수 있습니다.
 - 벽지와 조명 색을 바꿔 자신만의 개성을 표현할 수 있습니다.
+<img src="etc/assets/2_1_2.gif" width="200px"/> 
+<img src="etc/assets/2_1_3.gif" width="200px"/> 
+<img src="etc/assets/2_1_4.gif" width="200px"/> 
+<img src="etc/assets/2_1_5.gif" width="200px"/> 
 
-<img src="etc/assets/RoomDecorate.gif" width="300px"/><br/>
-
-**공유하기**
+ 
+#### 공유하기 
 - 현재 방의 모습을 담은 이미지를 저장하거나 방 url과 함께 SNS로 공유할 수 있습니다.
+<img src="etc/assets/2_2.gif" width="200px"/>  
+<img src="etc/assets/kakao_room.jpg" width="200px"/> 
 
-**방명록**
-- 방에 방문한 사람들의 방명록을 확인, 신고 할 수 있습니다.
+#### 방명록
+- 방명록을 확인, 작성, 신고 할 수 있습니다.
+<img src="etc/assets/2_4_1.gif" width="200px"/>   
+<img src="etc/assets/2_4_2.gif" width="200px"/> 
+<img src="etc/assets/2_4_3.gif" width="200px"/> 
 
-**이웃**
+#### 이웃
 - 이웃 목록을 통해 이웃의 방에 방문학거나, 이웃을 취소 할 수 있습니다.
+<img src="etc/assets/2_3.gif" width="200px"/>  
 
-**좋아요**
+#### 좋아요
 - 나의 방에 받은 좋아요 수를 확인할 수 있습니다.
+<img src="etc/assets/like.jpg" width="200px"/> 
+
+***
 
 ### 편지함
+- 집 앞 편지함에서 주민들이 보낸 편지를 확인, 신고 할 수 있습니다.
+<img src="etc/assets/3_1.gif" width="200px"/>
+<img src="etc/assets/3_2.gif" width="200px"/>
 
-- 집 앞 편지함에서 주민들이 보낸 편지를 확인 할 수 있습니다.
-
-<img src="etc/assets/ReceiveLetter.gif" width="300px"/><br/>
+***
 
 ### 우체국
+#### 입장하기 
+- 딩동 마을에서 우체국으로 이동할 수 있습니다.
+<img src="etc/assets/4_1.gif" width="200px"/>
 
+#### 편지 보내기 
 - 딩동 주민들의 닉네임을 검색하여 우표를 선택 후 의미를 담은 편지를 보낼 수 있습니다.
+<img src="etc/assets/4_2.gif" width="200px"/>
+<img src="etc/assets/4_3.gif" width="200px"/>
+<img src="etc/assets/4_4.gif" width="200px"/>
 
-<img src="etc/assets/SendLetter.gif" width="300px"/><br/>
+***
 
-### 주민의 방
+### 주민의 방 
 
+#### 입장하기 
+- 딩동 마을에서 주민의 방으로 이동할 수 있습니다. 
+<img src="etc/assets/5_1.gif" width="200px"/>
+
+#### 주민의 방 둘러보기
 - 주민의 방을 랜덤으로 방문 할 수 있습니다.
 - 방문한 방에서 좋아요, 방명록을 남기거나 이웃 신청을 할 수 있습니다.
+<img src="etc/assets/5_2.gif" width="200px"/>
+
+***
 
 ### 딩동 스코어보드
+- 현 시점 기준 방꾸왕, 인기왕, 소통왕을 확인하고 해당 주민의 방을 방문할 수 있습니다.
+<img src="etc/assets/6.gif" width="200px"/> 
 
-**방꾸왕**
-- 현 시점 기준 가장 많이 좋아요를 받은 주민을 확인하고 방을 방문할 수 있습니다.
-
-**인기왕**
-- 현 시점 기준 가장 많은 편지를 받은 주민을 확인하고 방을 방문할 수 있습니다.
-
-**소통왕** 
-- 현 시점 기준 가장 많이 편지를 보낸 주민을 확인하고 방을 방문할 수 있습니다.
+***
 
 ### 딩동 광장
+#### 입장하기 
+- 딩동 마을에서 광장으로 이동할 수 있습니다.
+<img src="etc/assets/7_1.gif" width="200px"/>
 
 - 광장에서 다양한 사람들을 만나 실시간으로 소통할 수 있습니다.
-- 채팅, 춤추기, 기뻐하기, 슬퍼하기 등의 상호작용이 가능합니다.
+- 채팅, 춤추기, 기뻐하기, 슬퍼하기, 주사위 게임 등의 상호작용이 가능합니다.
+<img src="etc/assets/7_2.gif" width="200px"/>
+<img src="etc/assets/7_3.gif" width="200px"/>
+<img src="etc/assets/7_4.gif" width="200px"/> 
 
-<img src="etc/assets/Dance.gif" width="300px"/><br/>
+***
 
-### 실시간 알람
+### 메뉴
+- 메뉴에서 관리자에게 문의, 로그아웃, 푸시 알림을 ON/OFF, 배경 음악을 ON/OFF 할 수 있습니다.
+<img src="etc/assets/menu.jpg" width="200px"/> 
 
-- 실시간 알람을 통해 나에게 온 편지, 나에게 온 이웃요청 등을 알 수 있습니다.
+#### 문의하기
+- 관리자에게 문의 할 수 있습니다.
+<img src="etc/assets/cs.jpg" width="200px"/> 
 
-<img src="etc/assets/Alarm.gif" width="300px"/><br/>
+#### 푸시 알림
+- 푸시 알림을 통해 나에게 온 편지, 나에게 온 이웃요청 등을 알 수 있습니다.
+<img src="etc/assets/Alarm.gif" width="200px"/> 
 
-### 신고하기
-
-- 나에게 온 편지, 내 방에 남겨진 방명록의 내용 중 부적절한 내용이 포함된 편지/방명록에 대해서 신고를 할 수 있습니다.
-
-### 문의하기
-
-- 문의하기를 통해 궁금한 점을 문의하거나 개선할 점을 보낼 수 있습니다.
-<br />
 
 ## 버그
-
-### 문제
-
+#### 문제
 - 개발자도구의 콘솔을 이용해 다량의 요청을 보내는 문제점 발견
+<img src="etc/assets/Bug.gif" width="300px"/> 
 
-<img src="etc/assets/Bug.gif" width="300px"/><br/>
-
-### 해결
+#### 해결
 - Ngnix에서 Rate Limiting으로 해결
-
-<img src="etc/assets/BugFix.gif" width="300px"/><br/>
+<img src="etc/assets/BugFix.gif" width="300px"/> 
 <br/>
 
 ## 마케팅
 
-### 우표 유형 테스트
+### 우표 유형 테스트 (우표 MBTI)
+유행하는 MBTI 성격 유형 검사를 응용해, 우표 유형 검사 페이지를 제작했습니다. 우표에 대한 흥미를 높이고, 결과 공유를 통해 홍보가 될 수 있도록 하였습니다. 
+정적 페이지로서, 서버와의 통신 없이 JSON 데이터로 관리하여 구현했습니다.
+<br/><br/>
+<img src="etc/assets/stamptest_1.jpg" width="200px"/>
+<img src="etc/assets/stamptest_2.jpg" width="200px"/>
+<img src="etc/assets/stamptest_3.jpg" width="200px"/>
+<img src="etc/assets/kakao_stamptest.jpg" width="200px"/><br/>
+<img src="etc/assets/stamp_test_result.png" width="500px"/><br/>
 
 ### 공식 SNS 운영
+인스타그램, 트위터, Mattermost 등 SNS 공식 계정을 운영하며 서비스를 홍보하는 동시에 유저와의 소통 창구를 마련하였습니다. <br/><br/>
+<img src="etc/assets/dingdong_instagram.jpg" width="200px"/>
+<img src="etc/assets/dingdong_x.jpg" width="200px"/><br/>
 <br />
 
 
