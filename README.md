@@ -53,29 +53,37 @@
 <img src="etc/assets/2_2.gif" width="200px"/>  
 <img src="etc/assets/kakao_room.jpg" width="200px"/> 
 
-**방명록**
-- 방에 방문한 사람들의 방명록을 확인, 신고 할 수 있습니다.
+#### 방명록
+- 방명록을 확인, 작성, 신고 할 수 있습니다.
+<img src="etc/assets/2_4_1.gif" width="200px"/>   
+<img src="etc/assets/2_4_2.gif" width="200px"/> 
+<img src="etc/assets/2_4_3.gif" width="200px"/> 
 
-**이웃**
+#### 이웃
 - 이웃 목록을 통해 이웃의 방에 방문학거나, 이웃을 취소 할 수 있습니다.
+<img src="etc/assets/2_3.gif" width="200px"/>  
 
-**좋아요**
+#### 좋아요
 - 나의 방에 받은 좋아요 수를 확인할 수 있습니다.
 
 ### 편지함
-
-- 집 앞 편지함에서 주민들이 보낸 편지를 확인 할 수 있습니다.
-
-<img src="etc/assets/ReceiveLetter.gif" width="300px"/><br/>
+- 집 앞 편지함에서 주민들이 보낸 편지를 확인, 신고 할 수 있습니다.
+<img src="etc/assets/3_1.gif" width="200px"/>
+<img src="etc/assets/3_2.gif" width="200px"/>
 
 ### 우체국
+#### 우체국 입장 
+- 딩동 마을에서 우체국으로 이동할 수 있습니다.
+<img src="etc/assets/4_1.gif" width="200px"/>
 
+
+#### 편지 보내기 
 - 딩동 주민들의 닉네임을 검색하여 우표를 선택 후 의미를 담은 편지를 보낼 수 있습니다.
-
-<img src="etc/assets/SendLetter.gif" width="300px"/><br/>
+<img src="etc/assets/4_2.gif" width="200px"/>
+<img src="etc/assets/4_3.gif" width="200px"/>
+<img src="etc/assets/4_4.gif" width="200px"/>
 
 ### 주민의 방
-
 - 주민의 방을 랜덤으로 방문 할 수 있습니다.
 - 방문한 방에서 좋아요, 방명록을 남기거나 이웃 신청을 할 수 있습니다.
 
