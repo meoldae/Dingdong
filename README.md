@@ -23,8 +23,8 @@
 ## 성과
 - 운영 기간: 2023.11.02 ~ 2023.11.17 (**16일**)
 - 발생 이벤트 수: 약 **70,000**회+
-- 총 사용자 수: 약 **1,200**명+ (_Google Analytics 기준_) 
-
+- 총 사용자 수: 약 **1,200**명+ (_Google Analytics 기준_) <br/><br/>
+<img src="etc/assets/google_analytics.png" width="800px"/> <br/>
 
 <br />
 
