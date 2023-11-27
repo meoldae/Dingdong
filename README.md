@@ -31,27 +31,27 @@
 ## 기능
 
 ### 딩동 마을 
-<img src="etc/assets/1_login.gif" width="300px"/> <br/>
+<img src="etc/assets/1_login.gif" width="200px"/> <br/>
 - 나의 방, 우체통, 우체국, 주민 방, 딩동 스코어 보드, 딩동 광장으로 이동 할 수 있습니다.
 
 ### 나의 방
-**방 꾸미기** 
-<img src="etc/assets/2_0.gif" width="200px"/>    
+#### 방 입장 
 - 딩동 마을에서 나의 방으로 이동할 수 있습니다.
+<img src="etc/assets/2_0.gif" width="200px"/>    
 
-**방 꾸미기** 
-<img src="etc/assets/2_1_1.gif" width="200px"/> 
+#### 방 꾸미기 
+- 다양한 카테고리의 가구들을 통해 방을 꾸밀 수 있습니다.
+- 벽지와 조명 색을 바꿔 자신만의 개성을 표현할 수 있습니다.
 <img src="etc/assets/2_1_2.gif" width="200px"/> 
 <img src="etc/assets/2_1_3.gif" width="200px"/> 
 <img src="etc/assets/2_1_4.gif" width="200px"/> 
 <img src="etc/assets/2_1_5.gif" width="200px"/> 
-- 다양한 카테고리의 가구들을 통해 방을 꾸밀 수 있습니다.
-- 벽지와 조명 색을 바꿔 자신만의 개성을 표현할 수 있습니다.
 
-<img src="etc/assets/RoomDecorate.gif" width="300px"/><br/>
-
-**공유하기**
+ 
+#### 공유하기 
 - 현재 방의 모습을 담은 이미지를 저장하거나 방 url과 함께 SNS로 공유할 수 있습니다.
+<img src="etc/assets/2_2.gif" width="200px"/>  
+<img src="etc/assets/kakao_room.jpg" width="200px"/> 
 
 **방명록**
 - 방에 방문한 사람들의 방명록을 확인, 신고 할 수 있습니다.
