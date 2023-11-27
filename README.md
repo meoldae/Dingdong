@@ -120,12 +120,20 @@
 
 ## 마케팅
 
-### 우표 유형 테스트
-<img src="etc/assets/stamp_test_result.png" width="600px"/><br/>
+### 우표 유형 테스트 (우표 MBTI)
+유행하는 MBTI 성격 유형 검사를 응용해, 우표 유형 검사 페이지를 제작했습니다. 우표에 대한 흥미를 높이고, 결과 공유를 통해 홍보가 될 수 있도록 하였습니다. 
+정적 페이지로서, 서버와의 통신 없이 JSON 데이터로 관리하여 구현했습니다.
+<br/><br/>
+<img src="etc/assets/stamptest_1.jpg" width="200px"/>
+<img src="etc/assets/stamptest_2.jpg" width="200px"/>
+<img src="etc/assets/stamptest_3.jpg" width="200px"/>
+<img src="etc/assets/kakao_stamptest.jpg" width="200px"/><br/>
+<img src="etc/assets/stamp_test_result.png" width="500px"/><br/>
 
 ### 공식 SNS 운영
-<img src="etc/assets/dingdong_instagram.jpg" width="300px"/>
-<img src="etc/assets/dingdong_x.jpg" width="300px"/><br/>
+인스타그램, 트위터, Mattermost 등 SNS 공식 계정을 운영하며 서비스를 홍보하는 동시에 유저와의 소통 창구를 마련하였습니다. <br/><br/>
+<img src="etc/assets/dingdong_instagram.jpg" width="200px"/>
+<img src="etc/assets/dingdong_x.jpg" width="200px"/><br/>
 <br />
 
 
