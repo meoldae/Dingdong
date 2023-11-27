@@ -120,8 +120,9 @@
 
 ### 우표 유형 테스트
 
+
 ### 공식 SNS 운영
-<img src="etc/assets/dingdong_instagram.jpg" width="300px"/><br/>
+<img src="etc/assets/dingdong_instagram.jpg" width="300px"/>
 <img src="etc/assets/dingdong_x.jpg" width="300px"/><br/>
 <br />
 
