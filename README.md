@@ -1,4 +1,4 @@
-# :love_letter: 딩동! 편지왔어요. 딩동! 놀러왔어요. :house:
+# 💌 딩동! 편지왔어요. 딩동! 놀러왔어요. 🏠
 <div align="center">
     <img src="https://github.com/Semibro/Semibro/assets/71372469/16e22552-e8a1-4646-bf49-71bcfed6471e" width="300px"/>
 </div>  
@@ -43,22 +43,28 @@
 #### 방 꾸미기 
 - 다양한 카테고리의 가구들을 통해 방을 꾸밀 수 있습니다.
 - 벽지와 조명 색을 바꿔 자신만의 개성을 표현할 수 있습니다.
-<img src="etc/assets/2_1_2.gif" width="200px"/> 
-<img src="etc/assets/2_1_3.gif" width="200px"/> 
-<img src="etc/assets/2_1_4.gif" width="200px"/> 
-<img src="etc/assets/2_1_5.gif" width="200px"/> 
+<div>
+    <img src="etc/assets/2_1_2.gif" width="200px"/> 
+    <img src="etc/assets/2_1_3.gif" width="200px"/> 
+    <img src="etc/assets/2_1_4.gif" width="200px"/> 
+    <img src="etc/assets/2_1_5.gif" width="200px"/> 
+</div>
 
  
 #### 공유하기 
 - 현재 방의 모습을 담은 이미지를 저장하거나 방 url과 함께 SNS로 공유할 수 있습니다.
-<img src="etc/assets/2_2.gif" width="200px"/>  
-<img src="etc/assets/kakao_room.jpg" width="200px"/> 
+<div>
+    <img src="etc/assets/2_2.gif" width="200px"/>  
+    <img src="etc/assets/kakao_room.jpg" width="200px"/> 
+</div>
 
 #### 방명록
 - 방명록을 확인, 작성, 신고 할 수 있습니다.
-<img src="etc/assets/2_4_1.gif" width="200px"/>   
-<img src="etc/assets/2_4_2.gif" width="200px"/> 
-<img src="etc/assets/2_4_3.gif" width="200px"/> 
+<div>
+    <img src="etc/assets/2_4_1.gif" width="200px"/>   
+    <img src="etc/assets/2_4_2.gif" width="200px"/> 
+    <img src="etc/assets/2_4_3.gif" width="200px"/> 
+</div>
 
 #### 이웃
 - 이웃 목록을 통해 이웃의 방에 방문하거나, 이웃을 취소 할 수 있습니다.
@@ -72,8 +78,10 @@
 
 ### 편지함
 - 집 앞 편지함에서 주민들이 보낸 편지를 확인, 신고 할 수 있습니다.
-<img src="etc/assets/3_1.gif" width="200px"/>
-<img src="etc/assets/3_2.gif" width="200px"/>
+<div>
+    <img src="etc/assets/3_1.gif" width="200px"/>
+    <img src="etc/assets/3_2.gif" width="200px"/>
+</div>
 
 ***
 
@@ -84,9 +92,11 @@
 
 #### 편지 보내기 
 - 딩동 주민들의 닉네임을 검색하여 우표를 선택 후 의미를 담은 편지를 보낼 수 있습니다.
-<img src="etc/assets/4_2.gif" width="200px"/>
-<img src="etc/assets/4_3.gif" width="200px"/>
-<img src="etc/assets/4_4.gif" width="200px"/>
+<div>
+    <img src="etc/assets/4_2.gif" width="200px"/>
+    <img src="etc/assets/4_3.gif" width="200px"/>
+    <img src="etc/assets/4_4.gif" width="200px"/>
+</div>
 
 ***
 
@@ -116,9 +126,13 @@
 
 - 광장에서 다양한 사람들을 만나 실시간으로 소통할 수 있습니다.
 - 채팅, 춤추기, 기뻐하기, 슬퍼하기, 주사위 게임 등의 상호작용이 가능합니다.
-<img src="etc/assets/7_2.gif" width="200px"/>
-<img src="etc/assets/7_3.gif" width="200px"/>
-<img src="etc/assets/7_4.gif" width="200px"/> 
+<div>
+    <img src="etc/assets/7_2.gif" width="200px"/>
+    <img src="etc/assets/7_4.gif" width="200px"/>  
+    <img src="etc/assets/multi_chat.gif" width="200px"/>
+    <img src="etc/assets/multi_action.gif" width="200px"/>
+
+</div>
 
 ***
 
@@ -151,16 +165,20 @@
 유행하는 MBTI 성격 유형 검사를 응용해, 우표 유형 검사 페이지를 제작했습니다. 우표에 대한 흥미를 높이고, 결과 공유를 통해 홍보가 될 수 있도록 하였습니다. 
 정적 페이지로서, 서버와의 통신 없이 JSON 데이터로 관리하여 구현했습니다.
 <br/><br/>
-<img src="etc/assets/stamptest_1.jpg" width="200px"/>
-<img src="etc/assets/stamptest_2.jpg" width="200px"/>
-<img src="etc/assets/stamptest_3.jpg" width="200px"/>
-<img src="etc/assets/kakao_stamptest.jpg" width="200px"/><br/>
-<img src="etc/assets/stamp_test_result.png" width="500px"/><br/>
+<div>
+    <img src="etc/assets/stamptest_1.jpg" width="200px"/>
+    <img src="etc/assets/stamptest_2.jpg" width="200px"/>
+    <img src="etc/assets/stamptest_3.jpg" width="200px"/>
+    <img src="etc/assets/kakao_stamptest.jpg" width="200px"/><br/>
+    <img src="etc/assets/stamp_test_result.png" width="500px"/><br/>
+</div>
 
 ### 공식 SNS 운영
 인스타그램, 트위터, Mattermost 등 SNS 공식 계정을 운영하며 서비스를 홍보하는 동시에 유저와의 소통 창구를 마련하였습니다. <br/><br/>
-<img src="etc/assets/dingdong_instagram.jpg" width="200px"/>
-<img src="etc/assets/dingdong_x.jpg" width="200px"/><br/>
+<div>
+    <img src="etc/assets/dingdong_instagram.jpg" width="200px"/>
+    <img src="etc/assets/dingdong_x.jpg" width="200px"/><br/>
+</div>
 <br />
 
 
